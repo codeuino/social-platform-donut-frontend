@@ -1,0 +1,60 @@
+body{
+	zoom:80%;
+}
+
+.nav-container{
+
+	border-top: 2px solid red;
+	box-shadow: 4px 4px 4px #888888;
+	background-color: #fff;
+
+}
+
+
+@font-face
+{
+font-family: myFancyFont;
+src: url('myFancyFont.ttf'),
+url('myFancyFont.eot');
+}
+
+.donut{
+	font-weight: bold;
+	font-size: 5rem;
+	color:#BD3733;
+	font-family: 'myFancyFont', Times, serif;
+}
+.dropdown-self{
+	border-bottom-right-radius: 5%;
+	border-bottom-left-radius: 5%;
+	box-shadow: 4px 4px 4px #888888; 
+}
+
+.icon-color{
+	color:#BD3733;
+}
+
+.blog-post{
+	border-top: 1px solid #E2E2E2;
+	border-bottom: 1px solid #E2E2E2;
+}
+.lead{
+	font-size:1.5rem;
+}
+
+.margin{
+	margin-left:2rem;
+	letter-spacing: .2rem;
+	color: blue;
+}
+.blog-header{
+	margin-top: 10%;
+}
+.write{
+	border: 1px solid #E2E2E2;
+	box-shadow: 2px 2px 2px #888888;
+	color:#BD3733;
+}
+#writelogo{
+	color:#BD3733;
+}
