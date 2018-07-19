@@ -1,0 +1,25 @@
+{
+  "name": "codeuino",
+  "version": "1.0.0",
+  "description": "A social plateform by codeuino",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Capedcrusader23",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cookie-session": "^2.0.0-beta.3",
+    "ejs": "^2.6.1",
+    "express": "^4.16.3",
+    "mongo": "^0.1.0",
+    "mongodb": "^3.1.0",
+    "mongoose": "^5.1.7",
+    "node": "^10.5.0",
+    "nodemon": "^1.17.5",
+    "passport": "^0.4.0",
+    "passport-google-oauth20": "^1.0.0",
+    "passport-local": "^1.0.0"
+  }
+}
