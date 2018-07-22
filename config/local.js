@@ -40,6 +40,7 @@ passport.use(
         newUser.follower = 0;
         newUser.following = 0;
         newUser.status = 'idle';
+        newUser.Eid = newUser.id;
 
         newUser.save(err => {
           if (err) {
