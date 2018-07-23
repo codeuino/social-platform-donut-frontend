@@ -8,6 +8,7 @@ const cookie = require('cookie-session');
 const url = require('body-parser').urlencoded({ extended: false });
 
 const User = require('./schema/user');
+const Project = require('./schema/project');
 
 require('./config/google');
 require('./config/local');
@@ -38,9 +39,19 @@ app.post('/autocomplete', url, (req, res) => {
     res.send('');
   } else {
     let regex = new RegExp(req.body.value, 'i');
-    User.find({ username: regex }, (err, user) => {
-      res.send(user);
-    });
+    let item = req.body.item;
+    let query = {};
+    query[item] = regex;
+
+    if (req.body.item == 'pname') {
+      Project.find(query, (err, project) => {
+        res.send(project);
+      });
+    } else if (req.body.item == 'username' || req.body.item == 'email') {
+      User.find(query, (err, user) => {
+        res.send(user);
+      });
+    }
   }
 });
 
