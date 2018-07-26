@@ -1,3 +1,4 @@
+Donut
 The social plateform of codeuino is based on nodejs and mongoose database.
 To run this project clone it and in cmd reach to the directory where the project is present.run following commands in succession
 npm install node
