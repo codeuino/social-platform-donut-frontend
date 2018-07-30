@@ -1,0 +1,100 @@
+
+header nav#part2{
+  background-color: #22262F !important;
+  margin-top: 56px;
+}
+header nav#part3{
+  background-color: #22262F !important;
+  margin-top: 95px;
+}
+header nav#part4{
+  background-color: #22262F !important;
+  margin-top: 130px;
+}
+main{
+  margin-top: 150px;
+}
+header div.phrase-p2{
+  width: 100%;
+}
+form{
+  margin-left: 6vw;
+}
+form input.form-control{
+  height: 21px;
+}
+.pr-text{
+  white-space: nowrap;
+  overflow-x: hidden;
+}
+.ev-text{
+  line-height: 35px;
+  white-space: nowrap;
+  overflow-x: hidden;
+}
+.projects{
+  position: fixed;
+  width: 255px;
+}
+.active-cyan-4 .fa {
+    background-color: #2196f3;
+    border-radius: 2px;
+    border: none;
+    height: 21px;
+    font-size: 10px;
+}
+.user-nm{
+  font-size: 20px;
+}
+.hr-danger{
+  border-top: 3px solid #f44336;
+}
+.user{
+  margin-left: 10px;
+  height: 35px;
+  border-radius: 50%;
+}
+.event{
+  height: 30px;
+}
+.card-subtitle{
+  font-size: 1.5vh;
+  margin-top: -20px;
+  margin-left: 50px;
+}
+.btn-blue-grey{
+  box-shadow: none;
+  font-size: .63rem;
+  padding: .4rem 1.2rem;
+}
+.btn-outline-grey{
+  box-shadow: none;
+  font-size: .55rem;
+  padding: .2rem 1.2rem;
+}
+.btn-rounded{
+  border-width: 2px 4px;
+  border-radius: 40px;
+}
+.grey-border textarea {
+    margin-left: 5px;
+    border: 2px solid #616161;
+    height: 45px;
+}
+@media (max-width: 990px){
+  main{
+    margin-top: 45px;;
+  }
+  header nav#part2{
+    display: none;
+  }
+  header nav#part3{
+    display: none;
+  }
+  header nav#part4{
+    display: none;
+  }
+  #phrase{
+    display: none;
+  }
+}
