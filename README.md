@@ -1,20 +1,61 @@
-Donut
-The social plateform of codeuino is based on nodejs and mongoose database.<br>
-To run this project clone it and in cmd reach to the directory where the project is present.run following commands in succession<br>
-'''npm install node'''<br>
-'''npm install express --save'''<br>
-'''npm install body-parser --save'''<br>
-'''npm install ejs --save'''<br>
-'''npm install mongo --save'''<br>
-'''npm install mongod --save'''<br>
-'''npm install nodemon --save'''<br>
-'''npm install passport-google-oauth20 --save'''<br>
-'''npm install passport --save'''<br>
-'''npm install passport-local --save'''<br>
-and then run this command<br> 
-'''nodemon server.js'''<br>
-in url type http://localhost:3000 to continue viewing project
+# Donut
 
+[![Slack Status](https://img.shields.io/badge/slack-chat-yellow.svg)](https://codeuino.slack.com)    [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+
+![codeuino](READMEassets/codeuino.png)
+
+
+---
+## What is Donut??
+
+#### Donut is a social platform from Codeuino, built on Node.js and utilizing mongoose as database.
+
+Installation
+------------
+To get this project running locally on your machine follows the steps below in order:
+
+1. fork this repo
+2. clone the forked repo from your github using the command `git clone https://github.com/username/Social-Platform-Donut.git` dont forget to replace the username in the URL
+
+![fork-and-clone](READMEassets/forking-the-repo.gif)
+
+3. Setting up the project locally.
+
+```shell
+npm install --save
+```
+
+and then run this command
+
+```shell
+nodemon server.js
+```
+
+Now open your browser and type the link `http://localhost:3000` to continue viewing project.
+
+![local-setup-gif](READMEassets/running-locally.gif)
+
+## Contributions Best Practices
+
+**Commits**
+* Write clear meaningful git commit messages (Do read http://chris.beams.io/posts/git-commit/)
+* Make sure your PR's description contains GitHub's special keyword references that automatically close the related issue when the PR is merged. (More info at https://github.com/blog/1506-closing-issues-via-pull-requests )
+* When you make very very minor changes to a PR of yours (like for example fixing a failing travis build or some small style corrections or minor changes requested by reviewers) make sure you squash your commits afterwards so that you don't have an absurd number of commits for a very small fix. (Learn how to squash at https://davidwalsh.name/squash-commits-git )
+* When you're submitting a PR for a UI-related issue, it would be really awesome if you add a screenshot of your change or a link to a deployment where it can be tested out along with your PR. It makes it very easy for the reviewers and you'll also get reviews quicker.
+
+## Community
+
+All feedback and suggestions are welcome!
+
+* 💬 Join the community on [Slack](https://codeuino.slack.com)
+* 📣 Stay up to date on new features and announcements on [@codeuino](https://twitter.com/codeuino).
+
+
+## Sponsors
+
+Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://codeuino.org/)]
+
+<a href="#" target="_blank"><img src="https://secure.meetupstatic.com/photos/event/2/6/d/b/600_456849947.jpeg" width="200" height="100" /></a>
 
 ## Licensing
 
