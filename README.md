@@ -6,9 +6,28 @@
 
 
 ---
-## What is Donut??
+## What is Donut?
 
 #### Donut is a social platform from Codeuino, built on Node.js and utilizing mongoose as database.
+#### A Social Networking Platform provided to bridge between various Developers, Organisations and Open Source aspirants to elaborate on various things like #Projects, #Events, #Discussion on various researches, #Scholarships, #Coding release and various other things updates
+
+## Technical Features
+--------------------
+* Sign Up / Login Authentication
+* Node.js basic Password Authentication ( Uses Unique email and Password
+* Third party access login\
+* Sign Up as a User and Organisation SIgn Up
+* Write any Post that act as a Feed ( with various formatting tools, tags effect, etc )
+* Propose any project that a person wants to raise as a researched under various organisations and experts.
+* Write Events and Be updated of various Events happening around with forms
+* Scholarship Raiser, OPen Source Internships.
+* Open up the environment for the discussion through integrated Discussion platform
+* Act with Open Stat
+* Appropriate Dashboard with most APIs Activities log of projects and other things.
+* Sourced Packaged, Custom made software ( can be change according to needs after downloading it.
+* Provides various opportunities to integrate many other Open Source projects recognised by organisations
+
+
 
 Installation
 ------------
