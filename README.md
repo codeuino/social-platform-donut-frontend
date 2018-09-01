@@ -66,15 +66,23 @@ Now open your browser and type the link `http://localhost:3000` to continue view
 
 All feedback and suggestions are welcome!
 
-* 💬 Join the community on [Slack](https://codeuino.slack.com)
-* 📣 Stay up to date on new features and announcements on [@codeuino](https://twitter.com/codeuino).
+* 💬 Join the community on [Slack](https://join.slack.com/t/codeuino/shared_invite/enQtMzcxOTQwNzE4NzcxLWEyNzUxYjI0ZThiNWUyYWI5MzJlMTNmODMxN2NjMTcxODJkZmFhNTVkYmUyOTQ1YzgzNTlmMTVkYzVhMzdmNTQ )
+* 📣 Stay up to date on new features and announcements on the following
+1.[@Mailing List](codeuino-devel@googlegroups.com).
+1.[@Discussion Portal](https://groups.google.com/d/forum/codeuino-devel).
+1.[@Codeuino Wiki](wiki.codeuino.org).
 
 
-## Sponsors
+## Sponsors/Partners
 
-Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://codeuino.org/)]
+Support this project by becoming a sponsor/collaborator/partner/contributors. 
+[[Become a sponsor](https://codeuino.org/)]
+
+#### Current
 
 <a href="#" target="_blank"><img src="https://secure.meetupstatic.com/photos/event/2/6/d/b/600_456849947.jpeg" width="200" height="100" /></a>
+<a href="#" target="_blank"><img src="https://commons.wikimedia.org/wiki/File:DigitalOcean_logo.svg#/media/File:DigitalOcean_logo.svg" width="200" height="100" /></a>
+
 
 ## Licensing
 
