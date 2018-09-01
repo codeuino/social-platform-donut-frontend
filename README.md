@@ -80,7 +80,7 @@ Support this project by becoming a sponsor. Your logo will show up here with a l
 
 <b>Donut An Open Source Social Collaborating platform is a web Based framework Software,
   
-   Copyright (C) <2018 Codeuino Contributors>
+   Copyright (C) < 2018 Codeuino Contributors >
 This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License V3 as published by
     the Free Software Foundation, either version 3 of the License, or
