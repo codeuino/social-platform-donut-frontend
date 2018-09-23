@@ -10,7 +10,8 @@ const socket=require('socket.io');
 const user=require('./schema/user.js');
 const proj=require('./schema/project.js');
 const notification=require('./schema/notification.js')
-mongoose.connect('mongodb://uphaar:caped23@ds121461.mlab.com:21461/codeuino',function(){
+const secret=require('./config/secret.js')
+mongoose.connect(secret.database,function(){
   console.log('connected');
 })
 
@@ -21,7 +22,7 @@ app.use(express.static('views'));
 
 app.use(cookie({
   maxAge:24*60*60*1000,
-  keys:['CAPEDCRUSADER']
+  keys:[secret.secret]
 }));
 
 app.use(passport.initialize());
@@ -55,4 +56,3 @@ user.find().then(function (out) {
 })
 })
 })
-
