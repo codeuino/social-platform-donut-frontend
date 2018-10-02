@@ -1,62 +1,63 @@
 const express=require('express');
 const route=express.Router();
 const bodyparser=require('body-parser')
-var url=bodyparser.urlencoded({extended:false});
+const url=bodyparser.urlencoded({extended:false});
 const user=require('../schema/user.js');
 const proj=require('../schema/project.js');
-var jsonParser = bodyparser.json()
-const auth=function(req,res,next){
-  if(req.user==null)
-  {
-  res.redirect('/')
-  }
-  else {
+const jsonParser = bodyparser.json()
+
+const auth = function(req,res,next){
+  if (req.user==null) {
+    res.redirect('/')
+  } else {
     next();
   }
 };
 
 route.get("/search",url,jsonParser,function(req,res){
   console.log(req.body);
-});
+})
 
 route.post('/check',url,jsonParser,function(req,res){
   console.log(req.body);
 })
+
 route.get('/profile/:id',auth,function(req,res){
   user.findOne({Eid:req.user.Eid}).then(function(us){
     req.params.id=us.Eid;
     res.redirect('/profileview/'+req.params.id);
   })
-
-});
-
-route.get('/profileview/:sd',auth,url,function(req,res){
-proj.find({pid:req.params.sd}).then(function(ques){
-user.findOne({Eid:req.params.sd}).then(function(use){
-    res.render('other-landing',{use:use,ques:ques,sign:req.user});
 })
 
-
-});
-
+route.get('/profileview/:sd',auth,url,function(req,res){
+    proj.find({ pid: req.params.sd }).then(function(ques){
+        user.findOne({ Eid: req.params.sd }).then(function(use){
+            res.render('other-landing', { use:use, ques:ques, sign:req.user });
+        })
+    });
 })
 
 
 
 route.post('/publish',url,function(req,res){
-
-new proj({
-"pname":req.body.contentname,"pid":req.user.Eid,"github":req.body.git,"Lang":req.body.genre,"content":req.body.cont,"upvote":'',"downvote":'',"proid":Math.floor(Math.random()*100000)
-}).save().then(function(){
-  res.redirect('/profileview/'+req.user.Eid);
-})
+    new proj({
+        "pname": req.body.contentname,
+        "pid": req.user.Eid,
+        "github": req.body.git,
+        "Lang": req.body.genre,
+        "content": req.body.cont,
+        "upvote": '',
+        "downvote": '',
+        "proid": Math.floor(Math.random()*100000)
+    })
+    .save()
+    .then(function(){
+        res.redirect('/profileview/'+req.user.Eid);
+    })
 })
 
 route.post('/upvote',url,jsonParser,function(req,res){
-
-
   proj.findOne({proid:req.body.project}).then(function(proj){
-
 
 var p=0;
 
@@ -140,17 +141,15 @@ res.send({comment,proj});
 
       res.send({comment,proj});
   }
-  });
-
-
-});
+  })
+})
 
 route.get('/ch2',function(req,res){
-    res.render('main-landing',{sign:req.user});
+    res.render('main-landing', { sign:req.user });
 })
-
 
 route.get('/up',function(req,res){
-res.send("success")
+    res.send("success")
 })
-module.exports=route;
+
+module.exports = route;

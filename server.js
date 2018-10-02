@@ -11,11 +11,12 @@ const user=require('./schema/user.js');
 const proj=require('./schema/project.js');
 const notification=require('./schema/notification.js')
 const secret=require('./config/secret.js')
+
 mongoose.connect(secret.database,function(){
   console.log('connected');
 })
 
-var loged=[];
+var loged = [];
 
 app.set('view engine','ejs');
 app.use(express.static('views'));
@@ -31,28 +32,23 @@ app.use(route);
 app.use(profile);
 
 
-var ser=app.listen(3000,function(){
+var ser = app.listen(3000,function(){
   console.log('Running');
 });
 
-const io=socket(ser);
+const io = socket(ser);
 
 io.on('connection',function(socket){
-
-socket.on('downvote',function(data){
-
-user.find().then(function (out) {
-
-    out.forEach(function(x){
-        if(x['Eid']==data.sign)
-        {
-            new notification({"fname":x['fname'],"lname":x['lname'],"upvoteId":x['Eid'],"proid":data.pro['proid'],"userid":data.pro['pid']}).save().then(function(noti){
-                console.log(notif);
+    socket.on('downvote',function(data){
+        user.find().then(function (out) {
+            out.forEach(function(x){
+                if(x['Eid']==data.sign)
+                {
+                    new notification({"fname":x['fname'],"lname":x['lname'],"upvoteId":x['Eid'],"proid":data.pro['proid'],"userid":data.pro['pid']}).save().then(function(noti){
+                        console.log(notif);
+                    })
+                }
             })
-
-
-        }
+        })
     })
-})
-})
 })
