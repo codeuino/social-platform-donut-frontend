@@ -9,7 +9,7 @@
 ## What is <strong>Donut</strong>?
 
 #### Donut is a social platform by Codeuino, built on node.js and utilizing mongoose as database.
-#### A social networking platform provided to bridge gaps between various developers, organisations and open source aspirants to elaborate various things like #projects, #events, #discussion on various researches, #scholarships, #coding release and various other updates
+#### A social networking platform provided to bridge gaps between various developers, organisations and open source aspirants to elaborate various things like #projects, #events, #discussion on various researches, #scholarships, #coding release and various other updates.
 
 ## Technical Features
 --------------------
@@ -58,7 +58,7 @@ _Dont forget to replace the username in the URL_
 ## Contributions best practices
 
 **Commits**
-* Write clear meaningful git commit messages (Do read <http://chris.beams.io/posts/git-commit/>)
+* Write clear meaningful git commit messages. (Do read <http://chris.beams.io/posts/git-commit/>)
 * Make sure that the description of your pull request contains github's special keyword references that automatically close the related issue when the pull request is merged. (More info at <https://github.com/blog/1506-closing-issues-via-pull-requests>)
 * When you make minor changes to your pull request (for example fixing a failing travis build or some small style corrections or minor changes requested by reviewers) make sure you squash your commits afterwards so that you don't have an absurd number of commits for a very small fix. (learn how to squash at <https://davidwalsh.name/squash-commits-git>)
 * When you're submitting a pull request for a UI related issue, it will be appreciated if you add a screenshot of your change or a link of the deployment where it can be tested along with your pull request. It makes it very easy for the reviewers and you'll also get reviews quicker.
