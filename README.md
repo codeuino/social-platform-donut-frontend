@@ -77,7 +77,7 @@ All feedback and suggestions are welcome!
 ## Sponsors/Partners
 
 Support this project by becoming a sponsor/collaborator/partner/contributors. 
-[[Become a sponsor](https://codeuino.org/)]
+[[Become a sponsor](http://codeuino.org/)]
 
 #### Current
 
