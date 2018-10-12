@@ -83,6 +83,17 @@
       position: absolute;
       left: 580px;
       right: 500px;
+      height:30px;
+      width:40px;
+    }
+
+    .cyan{
+      position: absolute;
+      left: 800px;
+      right: 400px;
+      background-color:black;
+      color:white;
+      width:120px;
     }
   </style>
 </head>
@@ -140,10 +151,17 @@
       <button class="button sign_up" onclick="showsignup()">SIGN UP</button>
     </div>
     <div class="butshif">
-      <a href="/google" class="loginBtn loginBtn--google">
+      <a href="/auth/google" class="loginBtn loginBtn--google">
         Login with Google
       </a>
     </div>
+    <div class="butshif2">
+      <a href="/auth/github" class="cyan">
+        Login with github
+      </a>
+    </div>
+
+
   </div>
   <!-- Sign up -->
   <div class="signup">
@@ -171,7 +189,7 @@
       </ul>
       <div class="tab-content">
         <div id="signup">
-          <form action="/userlogin" method="post" name="myForm" onsubmit="return(validate());">
+          <form action="/auth/userlogin" method="post" name="myForm" onsubmit="return(validate());">
             <div class="top-row">
               <div class="field-wrap">
                 <input type="text" placeholder="First Name" required autocomplete="off" name="fname" />
@@ -289,14 +307,14 @@
     </div>
     <div class="form">
 
-      <form action="/login" method="post" name="loginForm" onsubmit="return(validate());">
+      <form action="/auth/login" method="post">
         <div class="field-wrap">
           <input type="email" placeholder="Email Address" required autocomplete="off" name="email" />
         </div>
         <div class="field-wrap">
           <input type="password" id="pass" placeholder="Password" required autocomplete="off" name="pass" />
         </div>
-        <button type="submit" class="button-block">Sign In</button>
+        <button type="submit" class="button-block">Login</button>
       </form>
     </div>
 

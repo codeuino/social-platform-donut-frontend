@@ -1,0 +1,349 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Codeuino</title>
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+        <!-- Bootstrap core CSS -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Material Design Bootstrap -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.4/css/mdb.min.css" rel="stylesheet">
+        <!-- Your custom styles (optional) -->
+      <style>
+      main{
+        margin-top: 50px;
+      }
+
+      .avatar-image-full {
+        border: none;
+        display: flex;
+        position: relative;
+        align-items: center;
+        justify-content: center;
+        width: 150px;
+        height: 150px;
+        margin: auto;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: background 0.25s;
+      }
+
+      .avatar-image {
+        height: 150px;
+        width: 150px;
+        object-fit: cover;
+        border-radius: 50%;
+        position: absolute;
+      }
+
+      .avatar-overlay {
+        transition: all 0.3s ease;
+        border-radius: 50%;
+      }
+
+      .avatar-overlay:hover {
+        background-color: rgba(0, 0, 0, 0.5);
+        transition: all 0.3s ease;
+      }
+
+      .avatar-overlay:hover:before {
+        opacity: 1;
+        transition: all 0.3s ease;
+      }
+
+      .image-camera {
+        width: 150px;
+        height: 150px;
+        padding: 53px;
+        z-index: 10;
+      }
+
+      .avatar-overlay:before {
+        opacity: 0;
+        transition: all 0.3s ease;
+      }
+
+      .image-camera:before {
+        content: "";
+        background: url("https://svgshare.com/i/8An.svg") no-repeat 50%;
+        background-size: contain;
+        width: 40px;
+        height: 100%;
+        display: block;
+      }
+
+      .avatar-image-invisible-input {
+        display: none;
+      }
+
+      .tab-style.nav-link:hover {
+        background-color: #4285f4;
+        color: white !important;
+      }
+      .tab-style.nav-link {
+        border-bottom-left-radius: 0 !important;
+        border-bottom-right-radius: 0 !important;
+      }
+      .wid{
+        width:260px;
+      }
+      .buton
+      {
+      width:70px;
+      height:38px;
+      background-color:goldenrod;
+      border: 0px groove;
+      }
+
+      </style>
+        <!-- Favicon-->
+	    <link rel="shortcut icon" href="images/codeunio.jpeg" type="image/x-icon">
+    </head>
+    <body>
+        <!-- Start your project here-->
+        <!--Main Navigation-->
+        <header>
+            <!--Navbar-->
+            <nav class="navbar navbar-expand-lg navbar-dark elegant-color-dark fixed-top">
+                <div class="container">
+                <!-- Navbar brand -->
+                <a class="navbar-brand font-weight-bold text-uppercase blue-text" href="#">DONUT</a>
+                <span id="phrase" class="align-middle white-text">Codeuino's Open Source Social Platform</span>
+                <!-- Collapse button -->
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav" aria-controls="basicExampleNav"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+                <!-- Collapsible content -->
+                <div class="collapse navbar-collapse justify-content-end" id="basicExampleNav">
+                  <ul class="navbar-nav nav-flex-icons">
+                    <!-- Links -->
+                    <ul class="navbar-nav mr-auto">
+                      <li class="nav-item active">
+                        <a class="nav-link" href="#">Home
+                          <span class="sr-only">(current)</span>
+                        </a>
+                        </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#">Community</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#">Help</a>
+                      </li>
+                    </ul>
+                  </ul>
+                </div>
+                <!-- Collapsible content -->
+              </div>
+            </nav>
+            <!--/.Navbar-->
+        </header>
+        <!--Main Navigation-->
+        <!--Main Layout-->
+        <main>
+          <!-- Intro Section -->
+          <div class="container mx-auto">
+            <div class="row pt-5 mt-3 justify-content-center">
+              <div class="col-12">
+                <label for="avatar-input" class="avatar-image-full">
+                  <div class="image-camera avatar-overlay"></div>
+                  <img src="http://unmr-nl.science.uu.nl/sites/default/files/styles/large/public/user_placeholder_man_0.jpg?itok=SP4qotPF" alt="userprofile" class="avatar-image">
+                </label>
+                <input type="file" id="avatar-input" accept=".jpg,.png" class="avatar-image-invisible-input">
+              </div>
+              <!--Grid column-->
+            </div>
+            <!--Main Info row-->
+            <div class="row mt-3 pt-2">
+              <div class="col-12 text-center">
+                <h3><%=user.fname%> <%=user.lname%></h3>
+                <p><em>Full Stack Developer</em></p>
+              </div>
+            </div>
+
+            <div class="row mt-3 pt-4">
+              <div class="col-11 col-sm-12 mx-auto">
+                <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+                  <li class="nav-item">
+                    <a class="tab-style nav-link text-primary py-3 px-2 active" id="info-tab" data-toggle="tab" href="#info" role="tab" aria-controls="info" aria-selected="true">Personal Info</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="tab-style nav-link text-primary py-3 px-2" id="timeline-tab" data-toggle="tab" href="#timeline" role="tab" aria-controls="timeline" aria-selected="false">Timeline</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="tab-style nav-link text-primary py-3 px-2" id="activity-tab" data-toggle="tab" href="#activity" role="tab" aria-controls="activity" aria-selected="false">Activity</a>
+                  </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                  <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="info-tab">
+                    <!--Form Row-->
+                    <div class="row mt-3 pt-3">
+                      <div class="col-12">
+
+                          <!--Form Header-->
+                          <div class="form-row mt-3">
+                            <div class="form-group col-6">
+                              <h3>Personal Information</h3>
+                              <p><em>Seconday text if needed</em></p>
+                            </div>
+
+                          </div>
+                          <!--row 1-->
+                          <div class="form-row">
+                            <div class="form-group col-11 col-sm-6 p-2 mx-auto">
+                                <span>
+                                  <label>Name</label>
+                                </span>
+
+<form id="namech">
+                                <div class="row">
+
+                                  <div class="col-md-6">
+                                <input class="well well-sm form-control wid"  type="name" placeholder="CAPED CRUSADER" name="name" id="name"/>
+                              </div>
+                              <div class="col-md-6">
+                            <input type="submit" class="buton" value="change"></button>
+                          </div>
+</form>
+                            </div>
+                            </div>
+                            <div class="form-group col-11 col-sm-6 p-2 mx-auto">
+                                <span>
+                                  <label>Bio</label>
+                                </span>
+                                <input class="well well-sm form-control"  type="name" placeholder="Full Stack Developer,GEEK,NATURE LOVER"/>
+                            </div>
+                          </div>
+                          <!--row 2-->
+                          <div class="form-row">
+                            <div class="form-group col-11 col-sm-6 p-2 mx-auto">
+                                <span>
+                                  <label>School/College</label>
+                                </span>
+                                <input class="well well-sm form-control"  type="text" placeholder="HARVARD UNIVERSITY"/>
+                            </div>
+                            <div class="form-group col-11 col-sm-6 p-2 mx-auto">
+                                <span>
+                                  <label>Email</label>
+                                </span>
+                                <input class="well well-sm form-control"  type="email" placeholder="abc@gmail.com"/>
+                            </div>
+                          </div>
+                          <!-- row 3 -->
+                          <div class="form-row">
+                            <div class="form-group col-11 col-sm-6 p-2 mx-auto">
+                                <span>
+                                  <label>Github</label>
+                                </span>
+                                <input class="well well-sm form-control"  type="text" placeholder="https://wwww.github.com/test_user"/>
+                            </div>
+                            <div class="form-group col-11 col-sm-6 p-2 mx-auto">
+                                <span>
+                                  <label>LinkedIn</label>
+                                </span>
+                                <input class="well well-sm form-control"  type="text" placeholder="http://linkedin.com/in/test"/>
+                            </div>
+                          </div>
+                          <!-- row 4 -->
+                          <div class="form-row">
+                            <div class="form-group col-11 col-sm-6 p-2 mx-auto">
+                                <span>
+                                  <label>City</label>
+                                </span>
+                                <input class="well well-sm form-control"  type="text" placeholder="Delhi"/>
+                            </div>
+                            <div class="form-group col-11 col-sm-6 p-2 mx-auto">
+                              <label for="inputState">Country</label>
+                                  <select id="inputState"  class="form-control">
+                                    <option selected>Choose...</option>
+                                    <option>India</option>
+                                    <option>USA</option>
+                                    <option>China</option>
+                                  </select>
+                            </div>
+                          </div>
+                          <!-- row 5 -->
+                          <div class="form-row">
+                            <div class="form-group col-11 col-sm-6 p-2 mx-auto">
+                                <span>
+                                  <label>Languages</label>
+                                </span>
+                                <input class="well well-sm form-control"  type="text" placeholder="Type lan with spae between them"/>
+                            </div>
+
+                            <div class="form-group col-11 col-sm-6 p-2 mx-auto">
+                                <span>
+                                  <label>Facebook</label>
+                                </span>
+                                <input class="well well-sm form-control"  type="text" placeholder="www.facebook.com/caped23"/>
+                            </div>
+
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="tab-pane fade" id="timeline" role="tabpanel" aria-labelledby="timeline-tab">
+
+                  </div>
+                  <div class="tab-pane fade" id="activity" role="tabpanel" aria-labelledby="activity-tab">
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row mt-3 pt-5"></div>
+        </div>
+        </main>
+        <!--Main Layout-->
+
+        <!-- SCRIPTS -->
+        <!-- JQuery -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <!-- Bootstrap tooltips -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
+        <!-- Bootstrap core JavaScript -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <!-- MDB core JavaScript -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.4/js/mdb.min.js"></script>
+        <script>
+        $('#namech').submit(function(){
+            event.preventDefault();
+            var k=$(this)['0']['0'].value;
+            console.log(k);
+            $.ajax({
+                url:'/profile/updatename',
+                method:'POST',
+                contentType:'application/json',
+                data:JSON.stringify({name:k}),
+                success:function(res)
+                {
+
+                }
+            })
+
+        })
+        $('#bioch').submit(function(){
+            event.preventDefault();
+            var k=$(this)['0']['0'].value;
+            console.log(k);
+            $.ajax({
+                url:'/profile/updatename',
+                method:'POST',
+                contentType:'application/json',
+                data:JSON.stringify({bio:k}),
+                success:function(res)
+                {
+
+                }
+            })
+
+        })
+        </script>
+    </body>
+</html>

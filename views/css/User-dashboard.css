@@ -1,0 +1,296 @@
+html,body {
+    margin: 0;
+    padding: 0;
+     width: 100%;
+}
+
+body {
+    font-family: Quicksand;
+}
+
+
+
+header {
+    width: 100%;
+    height: 70px;
+    background-color: black;
+}
+
+.logo {
+    position: fixed;
+    float: left;
+    margin: 20px 36px;
+    color: darkturquoise;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+nav {
+    position: fixed;
+    width: 100%;
+}
+
+nav ul {
+    list-style: none;
+    background: rgba(0,0,0,0);
+    overflow: hidden;
+    color: #fff;
+    padding: 0;
+    text-align: center;
+    margin: 0;
+    transition: 1s;
+}
+
+nav.black ul {
+    background: #000;
+    height: 63px;
+}
+
+nav .menu ul li{
+    display: inline;
+}
+
+nav .menu ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 20px;
+    line-height: 3.5em;
+    padding: 8px;
+}
+
+.menu ul li a:hover {
+    background-color: darkturquoise;
+    color: black;
+}
+
+.menu-icon{
+    width: 100%;
+    background: #000;
+    text-align: right;
+    box-sizing: border-box;
+    padding: 15px 24px;
+    cursor: pointer;
+    color: #fff;
+    display: none;
+}
+
+.search input[type=text] {
+    height: 30px;
+    display: inline-block;
+    float: right;
+    border: none;
+    margin-top: -3.3%;
+    margin-right: 2%;
+    font-size: 17px;
+    overflow: hidden;
+}
+
+@media(max-width: 750px) {
+    .logo {
+        position: fixed;
+        top: 0;
+        margin-top: 16px;
+    }
+
+    nav ul {
+        max-height: 10px;
+        background: #000;
+    }
+
+    nav.black ul {
+        background: #000;
+    }
+
+    .showing {
+        max-height: 20em;
+    }
+
+    nav ul li {
+        box-sizing: border-box;
+        width: 100%;
+        padding: 24px 0;
+        text-align: center;
+    }
+    nav .menu ul li a {
+        line-height: 2em;
+        display:grid;
+    }
+    .menu-icon {
+        display: block;
+    }
+    .search input[type=text] {
+        float: none;
+        display: block;
+        font-size: 23px;
+        text-align: left;
+        width: 100%;
+        margin: 0;
+        padding: 14px;
+    }
+    .search input[type=text] {
+        border: 1px solid #ccc;
+    }
+}
+    }
+     nav .black{
+        height: 60px;
+     }
+}
+
+
+.content {
+    margin-left: 20px;
+}
+
+.profile {
+    max-width: 300px;
+    margin: 20px 0 0 20px;
+}
+
+
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    text-align: center;
+}
+
+
+.card img{
+    max-width: 300px;
+}
+.card h1 {
+    text-align: center;
+}
+
+.card .title {
+    color: grey;
+    font-size: 18px;
+    text-align: center;
+}
+.card .intro {
+    text-align: center;
+}
+
+ .card a {
+    text-decoration: none;
+    font-size: 22px;
+    color: black;
+    padding-left: 12px;
+
+}
+.icon {
+    padding-bottom: 7px;
+}
+
+
+
+
+.project {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    margin: 20px 0 0 0;
+    max-width: 300px;
+
+}
+.project h1 {
+    text-align: center;
+
+}
+.project ul li {
+    list-style-type: none;
+     text-align: center;
+    padding-right: 30px;
+    padding-bottom: 5px;
+}
+
+
+.comp-feed{
+    width:60%;
+    margin-left:30%;
+    margin-top: -37%;
+
+}
+.comp-feed .feed{
+    float: right;
+}
+.feed {
+    width: 700px;
+    float: right;
+     box-shadow: 0 4px 8px 4px rgba(0, 0.2, 0, 0.2);
+    margin-right: 25%;
+    margin-bottom: 2%;
+
+}
+
+.feed h2 {
+    padding-left: 5%;
+}
+
+.feed hr {
+    margin-left: 4%;
+    margin-right: 4%;
+    margin-top: -1%;
+    height: 3px;
+    background-color: cornflowerblue;
+}
+.feed h5 {
+    padding-left: 5%;
+    margin-top: -2%;
+    color: grey;
+}
+
+.description {
+    margin-left: 4%;
+    height: 100px;
+    font-size: 20px;
+}
+
+.feed ul li {
+    list-style-type: none;
+    display: inline;
+}
+
+.feed ul li i {
+    font-size: 20px;
+    padding-right: 4%;
+    color: black;
+}
+
+
+@media(max-width: 750px) {
+    .card {
+        margin-top: 25%;
+        margin-left: 0;
+        float: none;
+
+    }
+    .profile {
+        margin-left: 10%;
+    }
+
+    .comp-feed{
+        margin-top: 0;
+        width: 20%;
+        margin-left: 10%;
+    }
+    .feed {
+        width: 300px;
+        margin-right: 0;
+        float: none;
+    }
+    .comp-feed .feed{
+        float: none;
+    }
+    .feed ul li i {
+        font-size: 20px;
+        padding-right: 4%;
+        color: black;
+        padding-bottom: 5%
+    }
+
+    .feed h2 {
+        padding-left: 5%;
+        padding-top: 3%;
+    }
+
+}
