@@ -62,7 +62,7 @@ Now open your browser and type the link `http://localhost:3000` to continue view
 
 Setting Up Database
 ------------
-Make sure you have MongoDB installed on your computer. If not get it here [MongoDB Community Server][https://www.mongodb.com/download-center/community]
+Make sure you have MongoDB installed on your computer. If not get it here [MongoDB Community Server](https://www.mongodb.com/download-center/community)
 
 1- Open the terminal, locate the "scripts" folder and run the dbcreater.sh
 
@@ -70,12 +70,8 @@ Make sure you have MongoDB installed on your computer. If not get it here [Mongo
 bash dbcreater.sh
 ```
 
-For windows user, run this command using [git bash][https://git-scm.com/download/win]
+For windows user, run this command using [git bash](https://git-scm.com/download/win)
 
-
-
-
-![local-setup-gif](READMEassets/running-locally.gif)
 
 ## Contributions Best Practices
 
