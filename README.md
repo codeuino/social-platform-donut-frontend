@@ -38,19 +38,42 @@ To get this project running locally on your machine follows the steps below in o
 
 ![fork-and-clone](READMEassets/forking-the-repo.gif)
 
-3. Setting up the project locally.
+3. Checkout to development branch
+
+```shell
+    git checkout development
+```
+
+4. Setting up the project locally.
 
 ```shell
 npm install --save
 ```
 
-and then run this command
+and then run this command to run on local
 
 ```shell
 nodemon server.js
 ```
 
+HURRAY! you have done it just start contributing to the project..
+
 Now open your browser and type the link `http://localhost:3000` to continue viewing project.
+
+Setting Up Database
+------------
+Make sure you have MongoDB installed on your computer. If not get it here [MongoDB Community Server][https://www.mongodb.com/download-center/community]
+
+1- Open the terminal, locate the "scripts" folder and run the dbcreater.sh
+
+```shell
+bash dbcreater.sh
+```
+
+For windows user, run this command using [git bash][https://git-scm.com/download/win]
+
+
+
 
 ![local-setup-gif](READMEassets/running-locally.gif)
 
