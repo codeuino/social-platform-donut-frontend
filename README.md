@@ -44,9 +44,10 @@ To get this project running locally on your machine follows the steps below in o
 npm install --save
 ```
 
-and then run this command
+and then run the following commands
 
 ```shell
+npm install -g nodemon
 nodemon server.js
 ```
 
