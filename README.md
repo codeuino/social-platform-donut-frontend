@@ -1,3 +1,5 @@
+## For frontend of this repo move to this repository https://github.com/codeuino/frontened
+
 # Donut
 
 [![Slack Status](https://img.shields.io/badge/slack-chat-yellow.svg)](https://codeuino.slack.com)    [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
