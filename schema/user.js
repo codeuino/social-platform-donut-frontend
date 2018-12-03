@@ -3,56 +3,53 @@ const Schema=mongoose.Schema;
 const bycrypt=require('bcrypt-nodejs')
 
 const user=new Schema({
-
-fname:{
-  type:String
-},
-lname:{
-  type:String
-},
-email:{
-  type:String
-},
-dob:{
-  type:String
-},
-gen:{
-  type:Number
-},
-github:{
-  type:String
-},
-username:{
-  type:String
-},
-pass:{
-  type:String
-},
-Eid:{
-  type:Number
-},
-follower:{
-
-  type:Number
-},
-following:{
-  type:Number
-},
-status:{
-
-  type:String
-},
-Eid:{
-  type:String
-},
-bio:{
-  type:String
-},
-lang:{
-  type:[String]
-}
-
+  fname:{
+    type:String
+  },
+  lname:{
+    type:String
+  },
+  email:{
+    type:String
+  },
+  dob:{
+    type:String
+  },
+  gen:{
+    type:Number
+  },
+  github:{
+    type:String
+  },
+  username:{
+    type:String
+  },
+  pass:{
+    type:String
+  },
+  Eid:{
+    type:Number
+  },
+  follower:{
+    type:Number
+  },
+  following:{
+    type:Number
+  },
+  status:{
+    type:String
+  },
+  Eid:{
+    type:String
+  },
+  bio:{
+    type:String
+  },
+  lang:{
+    type:[String]
+  }
 });
+
 user.pre('save',function(next){
   var user=this;
   if(!user.isModified('pass')) return next();
