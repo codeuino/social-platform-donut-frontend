@@ -5,7 +5,11 @@ oauth:{
 },
 database:'mongodb://Uphaar:uphaar12@ds125693.mlab.com:25693/donut1',
 github:{
-clientID:'c9afdb238ed98b213912',
-clientSecret:'3031efea8badea1381da682fd5f21e88e5a15d2f'
+  clientID:'c9afdb238ed98b213912',
+  clientSecret:'3031efea8badea1381da682fd5f21e88e5a15d2f'
+}
+facebook:{
+  clientID: '964705373739826',
+  clientSecret: '80fffda7927f246c1c6c78cca3895827'
 }
 }
