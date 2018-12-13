@@ -12,6 +12,8 @@ const user = require('./schema/user.js');
 const secret=require('./config/credential.js');
 const notification = require('./schema/notification.js');
 const indexRoutes = require('./routes/index.routes');
+const facebook = require('./config/facebook.js');
+
 mongoose.connect(secret.database, function () {
     console.log('connected');
 })

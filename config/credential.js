@@ -7,5 +7,9 @@ module.exports = {
   github: {
     clientID: 'c9afdb238ed98b213912',
     clientSecret: '3031efea8badea1381da682fd5f21e88e5a15d2f'
+  },
+  facebook: {
+    clientID: '383717979035587',
+    clientSecret: '82bd80d286ef6e45606da6d53a97efbc'
   }
 }
