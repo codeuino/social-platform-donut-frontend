@@ -1,43 +1,42 @@
-const passport = require('passport');
-const facebook = require('passport-facebook-token');
-const user=require('../schema/user.js');
-const secret=require('./credential.js');
+
+const FacebookStrategy = require('passport-facebook').Strategy;
+const credentials = require('./credential.js');
+const user = require('../schema/user.js');
 
 passport.serializeUser(function(user, done) {
-  done(null, user.id);
+    done(null, user.id);
 });
+
 passport.deserializeUser(function(id, done) {
-  user.findById(id).then(function(user) {
-    done(null, user);
-  });
+    user.findById(id).then(function(user) {
+      done(null, user);
+    });
 });
 
-passport.use('facebookToken', new facebook({
-  clientID: secret.facebook.clientID,
-  clientSecret: secret.facebook.clientSecret,
-  callbackURL: '/auth/facebook/redirect'
-}, async (accessToken, refreshToken, profile, done) => {
-  try {
-    console.log('profile', profile);
-    console.log('accessToken', accessToken);
-    console.log('refreshToken', refreshToken);
-    
-    const existingUser = await User.findOne({ "facebook.id": profile.id });
-    if (existingUser) {
-      return done(null, existingUser);
-    }
-
-    const newUser = new User({
-      method: 'facebook',
-      facebook: {
-        id: profile.id,
-        email: profile.emails[0].value
-      }
+passport.use(new FacebookStrategy({
+    clientID: credentials.facebook.clientID,
+    clientSecret: credentials.facebook.clientSecret,
+    callbackURL: '/auth/facebook/redirect'
+}, (accessToken,refreshToken,profile,done) => {
+    user.findOne({Eid:profile.id}).then( (data) => {
+        if(data)
+        {
+            console.log("Already in Database");
+            done(null,data);
+        }
+        else
+        {
+            new user({
+                fname: profile.name.givenName,
+                lname: profile.name.familyName,
+                username: profile.name.givenName + ' ' + profile.name.familyName,
+                Eid: profile.id
+            })
+            .save()
+            .then( (us) => {
+                done(null,us);
+            });
+        }
     });
 
-    await newUser.save();
-    done(null, newUser);
-  } catch(error) {
-    done(error, false, error.message);
-  }
 }));
