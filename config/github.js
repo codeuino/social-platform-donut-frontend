@@ -2,6 +2,7 @@ const passport=require('passport');
 const github=require('passport-github');
 const user=require('../schema/user.js');
 const secret=require('./credential.js');
+
 passport.serializeUser(function(user, done) {
   done(null, user.id);
 });

@@ -12,8 +12,9 @@
 ---
 ## What is Donut?
 
-#### Donut is a social platform from Codeuino, built on Node.js and utilizing mongoose as database.
-#### A Social Networking Platform provided to bridge between various Developers, Organisations and Open Source aspirants to elaborate on various things like #Projects, #Events, #Discussion on various researches, #Scholarships, #Coding release and various other things updates
+Being Inspired from the Cornucopia of various Social hub this project has been developed taking into consideration about open Ource. Well this is an Open Source Socia networking hub which act as a bridge between various Developers, Organisations and Open Source aspirants to elaborate on various things like #Projects, #Events, #Discussion on various researches, #Scholarships, #Coding release and various other things updates. 
+The more priority of this project has been that this platform allows users to make their project "Open Sourced" and relesed them under various open SOurce Organisations, Experst which holds up a ring plate on this portal. This platform also make users to introduce and develops various olutions in the form of FOSS softwares to publish them for people use by integrating them with their social cause. Moreover this project can be doenloaded by any User, Organisation and can be used by them in their own custom way , making it run on their servers. 
+It is built on Node.js and utilizing mongoose as database.
 
 ## Technical Features
 --------------------
@@ -42,21 +43,40 @@ To get this project running locally on your machine follows the steps below in o
 
 ![fork-and-clone](READMEassets/forking-the-repo.gif)
 
-3. Setting up the project locally.
+3. Checkout to development branch
+
+```shell
+    git checkout development
+```
+
+4. Setting up the project locally.
 
 ```shell
 npm install --save
 ```
 
-and then run this command
+and then run this command to run on local
 
 ```shell
 nodemon server.js
 ```
 
+HURRAY! you have done it just start contributing to the project..
+
 Now open your browser and type the link `http://localhost:3000` to continue viewing project.
 
-![local-setup-gif](READMEassets/running-locally.gif)
+Setting Up Database
+------------
+Make sure you have MongoDB installed on your computer. If not get it here [MongoDB Community Server](https://www.mongodb.com/download-center/community)
+
+1- Open the terminal, locate the "scripts" folder and run the dbcreater.sh
+
+```shell
+bash dbcreater.sh
+```
+
+For windows user, run this command using [git bash](https://git-scm.com/download/win)
+
 
 ## Contributions Best Practices
 
