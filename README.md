@@ -4,10 +4,10 @@
 
 [![Slack Status](https://img.shields.io/badge/slack-chat-yellow.svg)](https://codeuino.slack.com)    [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
-![codeuino](READMEassets/0th_landing.png)
-![codeuino](READMEassets/1st_landing.png)
-![codeuino](READMEassets/2nd_landing.png)
-![codeuino](READMEassets/3rd_landing.png)
+![codeuino](READMEassets/landing1.png)
+![codeuino](READMEassets/landing2.jpg)
+![codeuino](READMEassets/landing3.jpg)
+![codeuino](READMEassets/landing4.png)
 
 
 ---
