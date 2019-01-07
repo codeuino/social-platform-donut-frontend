@@ -14,13 +14,19 @@ route.get('/google', passport.authenticate('google', { scope: ['profile'] }));
 
 route.get('/google/redirect', passport.authenticate('google'), function (req, res) {
   res.redirect('/profile/profile/:id');
-
-})
+});
 
 route.get('/github', passport.authenticate('github'));
 route.get('/github/redirect', passport.authenticate('github'), function (req, res) {
   res.redirect('/profile/profile/:id');
-})
+});
+
+route.get('/facebook',passport.authenticate('facebook'));
+
+route.get('/facebook/redirect',passport.authenticate('facebook'), (req,res) => {
+  res.redirect('/profile/profile/:id');
+});
+
 //post request
 
 route.post('/userlogin', url, function (req, res) {
