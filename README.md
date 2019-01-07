@@ -4,7 +4,10 @@
 
 [![Slack Status](https://img.shields.io/badge/slack-chat-yellow.svg)](https://codeuino.slack.com)    [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
-![codeuino](READMEassets/codeuino.png)
+![codeuino](READMEassets/landing1.png)
+![codeuino1](READMEassets/landing2.png)
+![codeuino2](READMEassets/landing3.png)
+![codeuino3](READMEassets/landing4.png)
 
 
 ---
