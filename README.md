@@ -7,7 +7,10 @@
 ![codeuino](READMEassets/landing.png)
 
 
-
+![codeuino](READMEassets/landing1.png)
+![codeuino](READMEassets/landing2.jpg)
+![codeuino](READMEassets/landing3.jpg)
+![codeuino](READMEassets/landing4.png)
 
 ---
 ## What is Donut?
