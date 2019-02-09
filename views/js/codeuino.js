@@ -36,6 +36,27 @@
   };
   
   navbarCollapse();
+
+  /* Toggle active class on login/signup modal */
+  function removeActiveClass(element) {
+    while(element.hasClass("active")){
+      console.log(element);
+      element.removeClass("active");
+    }
+  }
+  $("#userSignuptab").on('click', (e) => {
+    e.preventDefault();
+    removeActiveClass($("#userSignuptab"));
+    removeActiveClass($("#commSignuptab"));
+    $("#userSignuptab").addClass("active");
+  })
+
+  $("#commSignuptab").on('click', (e) => {
+    e.preventDefault();
+    removeActiveClass($("#userSignuptab"));
+    removeActiveClass($("#commSignuptab"));
+    $("#commSignuptab").addClass("active");
+  })
   
   $(window).scroll(navbarCollapse);
 

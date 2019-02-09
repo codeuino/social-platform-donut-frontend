@@ -7,25 +7,28 @@
 ![codeuino](READMEassets/landing.png)
 
 
-
+![codeuino](READMEassets/landing1.png)
+![codeuino](READMEassets/landing2.jpg)
+![codeuino](READMEassets/landing3.jpg)
+![codeuino](READMEassets/landing4.png)
 
 ---
 ## What is Donut?
 
-Being Inspired from the Cornucopia of various Social hub this project has been developed taking into consideration about open Ource. Well this is an Open Source Socia networking hub which act as a bridge between various Developers, Organisations and Open Source aspirants to elaborate on various things like #Projects, #Events, #Discussion on various researches, #Scholarships, #Coding release and various other things updates. 
-The more priority of this project has been that this platform allows users to make their project "Open Sourced" and relesed them under various open SOurce Organisations, Experst which holds up a ring plate on this portal. This platform also make users to introduce and develops various olutions in the form of FOSS softwares to publish them for people use by integrating them with their social cause. Moreover this project can be doenloaded by any User, Organisation and can be used by them in their own custom way , making it run on their servers. 
+Being inspired from the Cornucopia of various social hub this project has been developed taking into consideration about open source. Well this is an Open Source Social networking hub which act as a bridge between various Developers, Organisations and Open Source aspirants to elaborate on various things like #Projects, #Events, #Discussion on various researches, #Scholarships, #Coding release and various other things updates. 
+The major priority of this project has been that this platform allows users to make their project "Open Sourced" and relesed them under various open source Organisations, experts which holds up a ring plate on this portal. This platform also make users to introduce and develops various solutions in the form of FOSS softwares to publish them for public use by integrating them with their social cause. Moreover this project can be downloaded by any user, organisation and can be used by them in their own custom way , making it run on their servers. 
 It is built on Node.js and utilizing mongoose as database.
 
 ## Technical Features
 --------------------
 * Sign Up / Login Authentication
-* Node.js basic Password Authentication ( Uses Unique email and Password
-* Third party access login\
-* Sign Up as a User and Organisation SIgn Up
+* Node.js basic Password Authentication ( Uses Unique email and Password )
+* Third party access login
+* Sign Up as a User and Organisation
 * Write any Post that act as a Feed ( with various formatting tools, tags effect, etc )
 * Propose any project that a person wants to raise as a researched under various organisations and experts.
-* Write Events and Be updated of various Events happening around with forms
-* Scholarship Raiser, OPen Source Internships.
+* Write Events and get updates of various Events happening around.
+* Scholarship Raiser, Open Source Internships.
 * Open up the environment for the discussion through integrated Discussion platform
 * Act with Open Stat
 * Appropriate Dashboard with most APIs Activities log of projects and other things.
