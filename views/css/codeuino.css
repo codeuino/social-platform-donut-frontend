@@ -7,7 +7,7 @@ body {
     background: #07051a;
 }
 
-form{
+.form-search{
     position: absolute;
     top: 50%;
     left: 50%;
@@ -22,7 +22,7 @@ form{
     padding: 5px;
 }
 
-input{
+.form-search input{
     position: absolute;
     top: 0;
     left: 0;
@@ -37,7 +37,7 @@ input{
     padding: 0 20px;
 }
 
-.fa{
+.form-search .fa{
     box-sizing: border-box;
     padding: 10px;
     width: 42.5px;
@@ -52,16 +52,16 @@ input{
     transition: all 1s;
 }
 
-form:hover{
+.form-search:hover{
     width: 200px;
     cursor: pointer;
 }
 
-form:hover input{
+.form-search:hover input{
     display: block;
 }
 
-form:hover .fa{
+.form-search:hover .fa{
     background: #07051a;
     color: white;
 }
@@ -366,4 +366,43 @@ a:focus, a:hover {
 
 footer {
   padding: 5rem 0;
+}
+
+/* Login Sign up tabs */
+.signup-tabs {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+}
+
+.signup-tabs li {
+  flex: 1;
+}
+
+.signup-tabs li p{
+  font-size: 1.25rem;
+  margin: 0.5rem 0;
+  text-decoration: none;  
+  color: #000;
+}
+
+.signup-tabs li:hover,
+.signup-tabs li:active,
+.signup-tabs li.active {
+  background: rgb(202, 198, 198);
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-color: rgb(202, 198, 198);
+}
+
+.signupform {
+  margin: 1rem 0.5rem;
+}
+
+.signup-btn {
+  display: flex;
+  justify-content: space-around;
+  margin: 1rem 0;
 }
