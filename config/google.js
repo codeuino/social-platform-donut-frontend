@@ -13,11 +13,13 @@ passport.deserializeUser(function(id, done) {
 });
 
 passport.use(
-  new google({
-      callbackURL: '/google/redirect',
+  new google(
+    {
+      callbackURL: '/auth/google/redirect',
       clientID: key.oauth.clientID,
       clientSecret: key.oauth.clientSecret
-    }, function(acc, ref, pro, done) {
+    },
+    function(acc, ref, pro, done) {
       user.findOne({ Eid: pro.id }).then(function(use) {
         if (use != null) {
           console.log('Already in database');

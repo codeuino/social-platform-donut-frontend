@@ -1,83 +1,109 @@
-# Donut
+## For frontend of this repo move to this repository https://github.com/codeuino/frontened
 
-[![Slack Status](https://img.shields.io/badge/slack-chat-yellow.svg)](https://codeuino.slack.com)    [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+# Donut-
 
-![codeuino](READMEassets/codeuino.png)
+[![Slack Status](https://img.shields.io/badge/slack-chat-yellow.svg)](https://codeuino.slack.com)    [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
+![codeuino](READMEassets/landing.png)
+
+
+![codeuino](READMEassets/landing1.png)
+![codeuino](READMEassets/landing2.jpg)
+![codeuino](READMEassets/landing3.jpg)
+![codeuino](READMEassets/landing4.png)
 
 ---
-## What is <strong>Donut</strong>?
+## What is Donut?
 
-#### Donut is a social platform by Codeuino, built on node.js and utilizing mongoose as database.
-#### A social networking platform provided to bridge gaps between various developers, organisations and open source aspirants to elaborate various things like #projects, #events, #discussion on various researches, #scholarships, #coding release and various other updates.
+Being inspired from the Cornucopia of various social hub this project has been developed taking into consideration about open source. Well this is an Open Source Social networking hub which act as a bridge between various Developers, Organisations and Open Source aspirants to elaborate on various things like #Projects, #Events, #Discussion on various researches, #Scholarships, #Coding release and various other things updates. 
+The major priority of this project has been that this platform allows users to make their project "Open Sourced" and relesed them under various open source Organisations, experts which holds up a ring plate on this portal. This platform also make users to introduce and develops various solutions in the form of FOSS softwares to publish them for public use by integrating them with their social cause. Moreover this project can be downloaded by any user, organisation and can be used by them in their own custom way , making it run on their servers. 
+It is built on Node.js and utilizing mongoose as database.
 
 ## Technical Features
 --------------------
-* Sign up / login authentication
-* Node.js basic password authentication (uses unique email and password)
-* Third party login access
-* Sign up as a user and organisation sign up
-* Write any post that act as a feed (with various formatting tools, tags effect, etc.)
-* Propose any research-project under various organisations or experts
-* Write events and get updates on various events happening around
-* Scholarship raiser, open source internships.
-* Open up the environment for the discussion through integrated discussion platform
-* Act with open stats
-* Appropriate dashboard with most API, activity-log of projects and other things.
-* Sourced packaged, custom made software (can be change according to needs after downloading it).
+* Sign Up / Login Authentication
+* Node.js basic Password Authentication ( Uses Unique email and Password )
+* Third party access login
+* Sign Up as a User and Organisation
+* Write any Post that act as a Feed ( with various formatting tools, tags effect, etc )
+* Propose any project that a person wants to raise as a researched under various organisations and experts.
+* Write Events and get updates of various Events happening around.
+* Scholarship Raiser, Open Source Internships.
+* Open up the environment for the discussion through integrated Discussion platform
+* Act with Open Stat
+* Appropriate Dashboard with most APIs Activities log of projects and other things.
+* Sourced Packaged, Custom made software ( can be change according to needs after downloading it.
 * Provides various opportunities to integrate many other Open Source projects recognised by organisations
 
 
 
 Installation
 ------------
-To get this project running locally on your machine follow the steps below in order:
+To get this project running locally on your machine follows the steps below in order:
 
-1. Fork this repo
-2. Clone the forked repo from your github using the command `git clone https://github.com/username/Social-Platform-Donut.git` 
-_Dont forget to replace the username in the URL_
+1. fork this repo
+2. clone the forked repo from your github using the command `git clone https://github.com/username/Social-Platform-Donut.git` dont forget to replace the username in the URL
 
 ![fork-and-clone](READMEassets/forking-the-repo.gif)
 
-3. Set up the project locally.
+3. Checkout to development branch
 
-    ```shell
-    npm install --save
-    ```
+```shell
+    git checkout development
+```
 
-    and then run this command
+4. Setting up the project locally.
 
-    ```shell
-    nodemon server.js
-    ```
+```shell
+npm install --save
+```
 
-4. Go to `http://localhost:3000` to view the project.
+and then run this command to run on local
 
-![local-setup-gif](READMEassets/running-locally.gif)
+```shell
+nodemon server.js
+```
 
-## Contributions best practices
+HURRAY! you have done it just start contributing to the project..
+
+Now open your browser and type the link `http://localhost:3000` to continue viewing project.
+
+Setting Up Database
+------------
+Make sure you have MongoDB installed on your computer. If not get it here [MongoDB Community Server](https://www.mongodb.com/download-center/community)
+
+1- Open the terminal, locate the "scripts" folder and run the dbcreater.sh
+
+```shell
+bash dbcreater.sh
+```
+
+For windows user, run this command using [git bash](https://git-scm.com/download/win)
+
+
+## Contributions Best Practices
 
 **Commits**
-* Write clear meaningful git commit messages. (Do read <http://chris.beams.io/posts/git-commit/>)
-* Make sure that the description of your pull request contains github's special keyword references that automatically close the related issue when the pull request is merged. (More info at <https://github.com/blog/1506-closing-issues-via-pull-requests>)
-* When you make minor changes to your pull request (for example fixing a failing travis build or some small style corrections or minor changes requested by reviewers) make sure you squash your commits afterwards so that you don't have an absurd number of commits for a very small fix. (learn how to squash at <https://davidwalsh.name/squash-commits-git>)
-* When you're submitting a pull request for a UI related issue, it will be appreciated if you add a screenshot of your change or a link of the deployment where it can be tested along with your pull request. It makes it very easy for the reviewers and you'll also get reviews quicker.
+* Write clear meaningful git commit messages (Do read http://chris.beams.io/posts/git-commit/)
+* Make sure your PR's description contains GitHub's special keyword references that automatically close the related issue when the PR is merged. (More info at https://github.com/blog/1506-closing-issues-via-pull-requests )
+* When you make very very minor changes to a PR of yours (like for example fixing a failing travis build or some small style corrections or minor changes requested by reviewers) make sure you squash your commits afterwards so that you don't have an absurd number of commits for a very small fix. (Learn how to squash at https://davidwalsh.name/squash-commits-git )
+* When you're submitting a PR for a UI-related issue, it would be really awesome if you add a screenshot of your change or a link to a deployment where it can be tested out along with your PR. It makes it very easy for the reviewers and you'll also get reviews quicker.
 
 ## Community
 
 All feedback and suggestions are welcome!
 
 * 💬 Join the community on [Slack](https://join.slack.com/t/codeuino/shared_invite/enQtMzcxOTQwNzE4NzcxLWEyNzUxYjI0ZThiNWUyYWI5MzJlMTNmODMxN2NjMTcxODJkZmFhNTVkYmUyOTQ1YzgzNTlmMTVkYzVhMzdmNTQ )
-* 📣 Stay updated on new features and announcements on the following:
-  1. [@Mailing List](codeuino-devel@googlegroups.com)
-  2. [@Discussion Portal](https://groups.google.com/d/forum/codeuino-devel)
-  3. [@Codeuino Wiki](wiki.codeuino.org)
+* 📣 Stay up to date on new features and announcements on the following
+1.[@Mailing List](codeuino-devel@googlegroups.com).
+1.[@Discussion Portal](https://groups.google.com/d/forum/codeuino-devel).
+1.[@Codeuino Wiki](wiki.codeuino.org).
 
 
 ## Sponsors/Partners
 
 Support this project by becoming a sponsor/collaborator/partner/contributors. 
-[[Become a sponsor](http://codeuino.org/)]
+[[Become a sponsor](https://codeuino.org/)]
 
 #### Current
 
@@ -87,12 +113,12 @@ Support this project by becoming a sponsor/collaborator/partner/contributors.
 
 ## Licensing
 
-<b>Donut an Open Source social collaborating platform is a web based framework software,
+<b>Donut An Open Source Social Collaborating platform is a web Based framework Software,
   
    Copyright (C) < 2018 Codeuino Contributors >
 This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License v3 as published by
-    the Free Software Foundation, either version 3 of the license, or
+    it under the terms of the GNU General Public License V3 as published by
+    the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
 
 This program is distributed in the hope that it will be useful,

@@ -37,18 +37,27 @@
                     <!-- Links -->
                     <ul class="navbar-nav mr-auto">
                       <li class="nav-item active">
+                        <form class="form-inline active-cyan-4 flex-center">
+                          <input class="form-control form-control-sm mr-3" type="text" aria-label="Search">
+                          <button type="submit" class="fa font-weight-bold btn-search">Search</button>
+                        </form>
+                      </li>
+                      <li class="nav-item ">
                         <a class="nav-link" href="#">Home
                           <span class="sr-only">(current)</span>
                         </a>
                         </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="/ch2">Community</a>
+                        <a class="nav-link" href="/profile/ch2">Community</a>
                       </li>
                       <li class="nav-item">
                         <a class="nav-link" href="#">Help</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="#"><%=use.fname %><%=use.lname%></a>
+                        <a class="nav-link" href="/profile/setting"><%=use.fname %><%=use.lname%></a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="/profile/dashBoard">DashBoard</a>
                       </li>
                     </ul>
                   </ul>

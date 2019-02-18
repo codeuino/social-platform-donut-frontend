@@ -1,0 +1,74 @@
+main{
+  margin-top: 50px;
+}
+
+.avatar-image-full {
+  border: none;
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  height: 150px;
+  margin: auto;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.25s;
+}
+
+.avatar-image {
+  height: 150px;
+  width: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.avatar-overlay {
+  transition: all 0.3s ease;
+  border-radius: 50%;
+}
+
+.avatar-overlay:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease;
+}
+
+.avatar-overlay:hover:before {
+  opacity: 1;
+  transition: all 0.3s ease;
+}
+
+.image-camera {
+  width: 150px;
+  height: 150px;
+  padding: 53px;
+  z-index: 10;
+}
+
+.avatar-overlay:before {
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.image-camera:before {
+  content: "";
+  background: url("https://svgshare.com/i/8An.svg") no-repeat 50%;
+  background-size: contain;
+  width: 40px;
+  height: 100%;
+  display: block;
+}
+
+.avatar-image-invisible-input {
+  display: none;
+}
+
+.tab-style.nav-link:hover {
+  background-color: #4285f4;
+  color: white !important;
+}
+.tab-style.nav-link {
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
