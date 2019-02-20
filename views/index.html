@@ -66,14 +66,47 @@
         <div class="mx-auto text-center">
           <h1 class="mx-auto my-0 text-uppercase">CODUEINO'S</h1>
           <h2 class="text-white-50 mx-auto mt-2 mb-5">OPEN SOURCE SOCIAL PLATFORM.</h2>
-          <a href="#about" class="btn btn-primary js-scroll-trigger">Let's Get Started</a>
-          <div class="mt-3">
-            <a href="#about" class="btn btn-dark js-scroll-trigger">Login Using <i class="fab fa-github" style="font-size: 24px;"></i></a>
-            <a href="#about" class="btn btn-danger js-scroll-trigger">Login Using <i class="fab fa-google" style="font-size: 24px;"></i></a>
+          <a href="#about" class="btn btn-primary js-scroll-trigger" data-toggle="modal" data-target="#exampleModalCenter">Let's Get Started</a>
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header row d-flex justify-content-between">
+                  <div class="col-md-6">
+                    <button class="btn btn-lg " id="loginButton">Login</button>
+                  </div>
+                  <div class="col-md-6">
+                    <button class="btn btn-lg" id="signupButton">Sign up</button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                </div>
+                <div class="modal-body" id="loginModal">
+                  <div class="container d-flex flex-column justify-content-center w-75">
+                    <a href="#" class="btn btn-dark js-scroll-trigger mb-2">Login Using <i class="fab fa-github" style="font-size: 24px;"></i></a>
+                    <a href="#" class="btn btn-danger js-scroll-trigger mb-2">Login Using <i class="fab fa-google" style="font-size: 24px;"></i></a>
+                    <a href="#" class="btn btn-primary js-scroll-trigger">Login Using <i class="fas fa-envelope" style="font-size: 24px;"></i></a>
+                  </div>
+                </div>
+                 <div class="modal-body displayOff" id="signupModal">
+                  <div class="container d-flex flex-column justify-content-center w-75">
+                    <a href="#" class="btn btn-dark js-scroll-trigger mb-2">Sign Up Using <i class="fab fa-github" style="font-size: 24px;"></i></a>
+                    <a href="#" class="btn btn-danger js-scroll-trigger mb-2">Sign Up Using <i class="fab fa-google" style="font-size: 24px;"></i></a>
+                    <a href="#" class="btn btn-primary js-scroll-trigger">Sign Up Using <i class="fas fa-envelope" style="font-size: 24px;"></i></a>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  Are you a Organisation? <a href="#">Click Here</a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+      
       <!-- Login/SignUp Modal -->
+      <!--
       <div class="modal fade" id="loginSignup" tabindex="-1" role="dialog" aria-labelledby="loginSignupLabel" aria-hidden="true">
           <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -159,7 +192,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div>-->
     </header>
 
    
