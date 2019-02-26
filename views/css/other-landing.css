@@ -64,12 +64,12 @@ form input.form-control{
 }
 .btn-blue-grey{
   box-shadow: none;
-  font-size: .63rem;
+  font-size: 1 rem;
   padding: .4rem 1.2rem;
 }
 .btn-outline-grey{
   box-shadow: none;
-  font-size: .55rem;
+  font-size: 1 rem;
   padding: .2rem 1.2rem;
 }
 .btn-rounded{
@@ -97,4 +97,7 @@ form input.form-control{
   #phrase{
     display: none;
   }
+}.body-text{
+  font-size: 1rem  !important;
 }
+
