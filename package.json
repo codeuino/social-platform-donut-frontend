@@ -5,16 +5,18 @@
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha tests/*.js"
   },
   "author": "Capedcrusader23",
   "license": "MIT",
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.3",
+    "chai": "^4.2.0",
     "cookie-session": "^2.0.0-beta.3",
     "ejs": "^2.6.1",
     "express": "^4.16.3",
+    "mocha": "^6.0.2",
     "mongo": "^0.1.0",
     "mongodb": "^3.1.0",
     "mongoose": "^5.1.7",
@@ -26,6 +28,7 @@
     "passport-google-oauth20": "^1.0.0",
     "passport-local": "^1.0.0",
     "path": "^0.12.7",
+    "request": "^2.88.0",
     "socket.io": "^2.1.1"
   }
 }
