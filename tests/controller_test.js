@@ -37,12 +37,6 @@ lname:'goel',dob:'29/08/1999',github:'TG1999',username:'TG1999',pass:'test'}).th
     done()
         }).catch((err)=>console.log(err))
     })
-    it('should login user',(done)=>{
-        request(server).post('/auth/login').send({
-            email:'tushar.goel.dav@gmail.com',password:'test'
-        }).then(()=>{
-            done();
-        }).catch((err)=>console.log(err))
-    })
+    
 })
 
