@@ -55,7 +55,7 @@ To get this project running locally on your machine follows the steps below in o
 4. Setting up the project locally.
 
 ```shell
-npm install --save
+npm install
 ```
 
 and then run this command to run on local

@@ -406,3 +406,11 @@ footer {
   justify-content: space-around;
   margin: 1rem 0;
 }
+
+.displayOn{
+  display: block;
+}
+
+.displayOff{
+  display: none;
+}

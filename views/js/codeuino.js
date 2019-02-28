@@ -57,6 +57,25 @@
     removeActiveClass($("#commSignuptab"));
     $("#commSignuptab").addClass("active");
   })
+
+
+  $("#loginButton").on('click',()=>{
+    $("#signupModal").removeClass("displayOn");
+    $("#signupModal").addClass("displayOff");
+    $("#loginModal").removeClass("displayOff");
+    $("#loginModal").addClass("displayOn");
+  
+  })
+  $("#signupButton").on('click',()=>{
+    $("#signupModal").removeClass("displayOff");
+    $("#signupModal").addClass("displayOn");
+    $("#loginModal").removeClass("displayOn");
+    $("#loginModal").addClass("displayOff");
+  
+  })
+
+
+
   
   $(window).scroll(navbarCollapse);
 
