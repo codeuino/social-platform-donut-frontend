@@ -61,7 +61,7 @@ npm install
       You need to have a mongodb atlas account to create local
       https://www.youtube.com/watch?v=KKyag6t98g8
       Check out the above link to setup mongodb atlas.
-      The mongodb URL should be pasted in secret.js files.
+      The mongodb URL should be pasted in credential.js files.
       
  6. run this command to run on local
 
