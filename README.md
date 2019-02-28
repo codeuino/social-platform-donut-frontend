@@ -57,11 +57,20 @@ To get this project running locally on your machine follows the steps below in o
 ```shell
 npm install
 ```
-
-and then run this command to run on local
+5.Setting up local database instance 
+      You need to have a mongodb atlas account to create local
+      https://www.youtube.com/watch?v=KKyag6t98g8
+      Check out the above link to setup mongodb atlas.
+      The mongodb URL should be pasted in secret.js files.
+      
+ 6. run this command to run on local
 
 ```shell
 nodemon server.js
+```
+or
+```shell
+node server.js
 ```
 
 HURRAY! you have done it just start contributing to the project..
