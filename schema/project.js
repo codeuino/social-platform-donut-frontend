@@ -20,15 +20,14 @@ Lang:{
 content:{
   type:String
 },
-upvote:{
-  type:[String]
-},
-downvote:{
-  type:[String]
+updownvote:{
+  type: Map,
+  of:String
 },
 proid:{
   type:Number
-}
+},
+
 
 });
 
