@@ -33,9 +33,8 @@ describe('controllers',()=>{
       })
     it('should add user',(done)=>{
     request(server).post('/auth/userlogin').send({fname:'tushar',
-lname:'goel',dob:'29/08/1999',github:'TG1999',username:'TG1999',pass:'test'}).then((res)=>{
-    done()
-        }).catch((err)=>console.log(err))
+lname:'goel',dob:'29/08/1999',github:'TG1999',username:'TG1999',pass:'test'})
+.expect(200).expect(/Codeuino/,done)
     })
     
 })
