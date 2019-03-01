@@ -15,9 +15,9 @@
 ---
 ## What is Donut?
 
-Being inspired from the Cornucopia of various social hub this project has been developed taking into consideration about open source. Well this is an Open Source Social networking hub which act as a bridge between various Developers, Organisations and Open Source aspirants to elaborate on various things like #Projects, #Events, #Discussion on various researches, #Scholarships, #Coding release and various other things updates. 
-The major priority of this project has been that this platform allows users to make their project "Open Sourced" and relesed them under various open source Organisations, experts which holds up a ring plate on this portal. This platform also make users to introduce and develops various solutions in the form of FOSS softwares to publish them for public use by integrating them with their social cause. Moreover this project can be downloaded by any user, organisation and can be used by them in their own custom way , making it run on their servers. 
-It is built on Node.js and utilizing mongoose as database.
+Being inspired by the Cornucopia of various social hub this project has been developed taking into consideration about open source. Well, this is an Open Source Social networking hub which acts as a bridge between various Developers, Organisations and Open Source aspirants to elaborate on various things like #Projects, #Events, #Discussion on various researches, #Scholarships, #Coding release and various other things updates. 
+The major priority of this project has been that this platform allows users to make their project "Open Sourced" and released them under various open source Organisations, experts which hold up a ring plate on this portal. This platform also makes users introduce and develops various solutions in the form of FOSS software to publish them for public use by integrating them with their social cause. Moreover, this project can be downloaded by any user, organization and can be used by them in their own custom way, making it run on their servers. 
+It is built on Node.js and utilizing mongoose as a database.
 
 ## Technical Features
 --------------------
@@ -25,15 +25,15 @@ It is built on Node.js and utilizing mongoose as database.
 * Node.js basic Password Authentication ( Uses Unique email and Password )
 * Third party access login
 * Sign Up as a User and Organisation
-* Write any Post that act as a Feed ( with various formatting tools, tags effect, etc )
-* Propose any project that a person wants to raise as a researched under various organisations and experts.
+* Write any Post that acts as a Feed ( with various formatting tools, tags effect, etc )
+* Propose any project that a person wants to raise as researched under various organizations and experts.
 * Write Events and get updates of various Events happening around.
 * Scholarship Raiser, Open Source Internships.
 * Open up the environment for the discussion through integrated Discussion platform
 * Act with Open Stat
 * Appropriate Dashboard with most APIs Activities log of projects and other things.
-* Sourced Packaged, Custom made software ( can be change according to needs after downloading it.
-* Provides various opportunities to integrate many other Open Source projects recognised by organisations
+* Sourced Packaged, Custom made software ( can be changed according to needs after downloading it.
+* Provides various opportunities to integrate many other Open Source projects recognized by organizations
 
 
 
@@ -42,11 +42,11 @@ Installation
 To get this project running locally on your machine follows the steps below in order:
 
 1. fork this repo
-2. clone the forked repo from your github using the command `git clone https://github.com/username/Social-Platform-Donut.git` dont forget to replace the username in the URL
+2. clone the forked repo from your GitHub using the command `git clone https://github.com/username/Social-Platform-Donut.git` don't forget to replace the username in the URL
 
 ![fork-and-clone](READMEassets/forking-the-repo.gif)
 
-3. Checkout to development branch
+3. Checkout to the development branch
 
 ```shell
     git checkout development
@@ -57,14 +57,23 @@ To get this project running locally on your machine follows the steps below in o
 ```shell
 npm install
 ```
-
-and then run this command to run on local
+5.Setting up the local database instance 
+      You need to have a MongoDB atlas account to create local
+      https://www.youtube.com/watch?v=KKyag6t98g8
+      Check out the above link to setup MongoDB atlas.
+      The mongodb URL should be pasted in credential.js files.
+      
+ 6. run this command to run on local
 
 ```shell
 nodemon server.js
 ```
+or
+```shell
+node server.js
+```
 
-HURRAY! you have done it just start contributing to the project..
+HURRAY! you have done it just start contributing to the project.
 
 Now open your browser and type the link `http://localhost:3000` to continue viewing project.
 
@@ -86,7 +95,7 @@ For windows user, run this command using [git bash](https://git-scm.com/download
 **Commits**
 * Write clear meaningful git commit messages (Do read http://chris.beams.io/posts/git-commit/)
 * Make sure your PR's description contains GitHub's special keyword references that automatically close the related issue when the PR is merged. (More info at https://github.com/blog/1506-closing-issues-via-pull-requests )
-* When you make very very minor changes to a PR of yours (like for example fixing a failing travis build or some small style corrections or minor changes requested by reviewers) make sure you squash your commits afterwards so that you don't have an absurd number of commits for a very small fix. (Learn how to squash at https://davidwalsh.name/squash-commits-git )
+* When you make very very minor changes to a PR of yours (like for example fixing a failing Travis build or some small style corrections or minor changes requested by reviewers) make sure you squash your commits afterward so that you don't have an absurd number of commits for a very small fix. (Learn how to squash at https://davidwalsh.name/squash-commits-git )
 * When you're submitting a PR for a UI-related issue, it would be really awesome if you add a screenshot of your change or a link to a deployment where it can be tested out along with your PR. It makes it very easy for the reviewers and you'll also get reviews quicker.
 
 ## Community
