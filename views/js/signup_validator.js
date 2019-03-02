@@ -1,8 +1,8 @@
 function validate()
 {
    var emailID = document.myForm.EMail.value;
-   atpos = emailID.indexOf("@");
-   dotpos = emailID.lastIndexOf(".");
+   var atpos = emailID.indexOf("@");
+   var dotpos = emailID.lastIndexOf(".");
 
    if (atpos < 1 || ( dotpos - atpos < 2 ))
    {
@@ -18,7 +18,7 @@ function validate()
    }
    var pass = document.getElementById('pass');
    var cpass = document.getElementById('cpass');
-   if(pass!=cpass){
+   if(pass!==cpass){
      alert("Password error. Retype Password.")
      return false;
    }
