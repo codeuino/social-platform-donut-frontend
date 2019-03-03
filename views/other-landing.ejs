@@ -166,8 +166,8 @@
                   </div>
                   <div class="container">
                     <div class="row">
-                      <a href="#" class="btn btn-outline-grey btn-rounded"></a>
-                      <a href="#" class="btn btn-outline-grey btn-rounded">-1</a>
+                      <a href="#" class="btn btn-outline-grey btn-rounded ch1">+1</a>
+                      <a href="#" class="btn btn-outline-grey btn-rounded ch2">-1</a>
                       <a href="#" class="btn btn-outline-grey btn-rounded">Comment</a>
                       <a href="#" class="btn btn-outline-grey btn-rounded">Share</a>
                     </div>
@@ -236,20 +236,52 @@
         <script>
         $(document).ready(function(){
 
-          $('.ch').click(function(e){
+          $('.ch1').click(function(e){
             e.preventDefault();
             var z=$(this).attr('id');
-            alert(z);
             $.ajax({
 
-                url:'/profile/upvote',
+                url:'/profile/upDownVote',
                 method:'POST',
                 contentType:'application/json',
-                data:JSON.stringify({'project':z,client:'<%=sign.Eid%>'}),
+                data:JSON.stringify({'project':z,client:'<%=sign.Eid%>','vote':'+1'}),
                 success:function(res){
-                    console.log(res);
+                  console.log("Sucess")
+                  //Frontend code can be implemented
+                },
+                error:function (res) {
+                  console.log(res)
+                  console.log("Error")
+                  //Frontend code can be implemented
+
                 }
             })
+
+
+
+
+          });
+
+
+          $('.ch2').click(function(e){
+            e.preventDefault();
+            var z=$(this).attr('id');
+            $.ajax({
+
+                url:'/profile/upDownVote',
+                method:'POST',
+                contentType:'application/json',
+                data:JSON.stringify({'project':z,client:'<%=sign.Eid%>','vote':'-1'}),
+                success:function(res){
+                  console.log("Sucess")
+                  //Frontend code can be implemented
+                },
+                error:function (res) {
+                  console.log(res)
+                  console.log("Error")
+                  //Frontend code can be implemented
+
+                }
 
 
 
