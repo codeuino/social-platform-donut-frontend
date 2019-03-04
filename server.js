@@ -13,7 +13,7 @@ const secret=require('./config/credential.js');
 const notification = require('./schema/notification.js');
 const indexRoutes = require('./routes/index.routes');
 const facebook = require('./config/facebook.js');
-var memwatch = require('memwatch-next');
+var memwatch = require('node-memwatch');
 //Snapshot at start
 var hd = new memwatch.HeapDiff();
 
@@ -41,11 +41,17 @@ var diff = hd.end();
 console.log(diff)
 //checking for leak in memory
 memwatch.on('leak',(info)=>{
-console.log(info)
+    for(x in info)
+    {
+        console.log(x+':'+info[x]);
+    }
 });
 //Stats of memory leakage
 memwatch.on('stats',(info)=>{
-    console.log(info);
+    for(x in info)
+    {
+        console.log(x+':'+info[x]);
+    }
 });
 
 
