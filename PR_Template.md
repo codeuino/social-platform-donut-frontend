@@ -5,8 +5,9 @@ _Describe the problem you are trying to achieve. Please provide in detail_
 _How did you solve this problem? Please provide in detail_
 
 ### **Before and After Screenshots**
-_Before [How was it earlier, add it here]_
-_After [How it looks now, add it here]_
+_**Before** [How was it earlier, add it here]_
+
+_**After** [How it looks now, add it here]_
 
 ### **Type of Change**
 - [ ] Bug fix
