@@ -34,7 +34,7 @@ app.use(passport.session());
 app.use(indexRoutes);
 
 
-var ser = app.listen(3000, function () {
+const ser = app.listen(3000, function () {
     console.log('Running');
 });
 

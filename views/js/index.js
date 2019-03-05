@@ -9,7 +9,7 @@ $('.tab a').on('click', function(e) {
         .siblings()
         .removeClass('active');
 
-    var target = $(this).attr('href');
+    const target = $(this).attr('href');
 
     $('.tab-content > div')
         .not(target)

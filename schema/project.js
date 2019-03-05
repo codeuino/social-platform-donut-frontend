@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
-const schema = mongoose.Schema;
-const project = new schema({
+const mongoose=require('mongoose');
+const schema=mongoose.Schema;
+const project=new schema({
     pname:{
         type:String
     },
@@ -16,11 +16,9 @@ const project = new schema({
     content:{
         type:String
     },
-    upvote:{
-        type:[String]
-    },
-    downvote:{
-        type:[String]
+    upDownVote:{
+        type:Map,
+        of: String,
     },
     proid:{
         type:Number

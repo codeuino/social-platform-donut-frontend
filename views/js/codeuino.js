@@ -73,10 +73,7 @@
         $('#loginModal').addClass('displayOff');
   
     });
-
-
-
-  
+      
     $(window).scroll(navbarCollapse);
 
 })(jQuery); 

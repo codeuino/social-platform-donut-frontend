@@ -8,8 +8,6 @@ const route = express.Router();
 
 //get request
 
-
-
 route.get('/google', passport.authenticate('google', { scope: ['profile'] }));
 
 route.get('/google/redirect', passport.authenticate('google'), function (req, res) {
@@ -46,7 +44,6 @@ route.post('/login', url, function (req, res) {
             res.redirect('/');
         }
     });
-
 
 });
 route.get('/logout', function (req, res) {
