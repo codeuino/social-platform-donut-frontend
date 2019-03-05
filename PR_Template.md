@@ -9,14 +9,14 @@ _Before [How was it earlier, add it here]_
 _After [How it looks now, add it here]_
 
 ### **Type of Change**
--[ ] Bug fix
--[ ] New Feature
--[ ] Development of UI/UX prototypes
--[ ] Small refactor
--[ ] Change in Documentation
+- [ ] Bug fix
+- [ ] New Feature
+- [ ] Development of UI/UX prototypes
+- [ ] Small refactor
+- [ ] Change in Documentation
 
 ### **Checklist**
--[ ] My code follow the same style as the codebase
--[ ] My Code changed required change in documentation
--[ ] I have updated the Readme accordingly
--[ ] I made PR within development branch only
+- [ ] My code follow the same style as the codebase
+- [ ] My Code changed required change in documentation
+- [ ] I have updated the Readme accordingly
+- [ ] I made PR within **development branch only**
