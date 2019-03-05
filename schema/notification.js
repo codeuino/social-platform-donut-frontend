@@ -1,25 +1,24 @@
-var mongoose=require('mongoose');
-var schema=mongoose.Schema;
+const mongoose=require('mongoose');
+const schema=mongoose.Schema;
+const notificationSchema = new schema({
 
-var notification=new schema({
-
- fname:{
-     type:String
- }  ,
- lname:{
-     type:String
- },
- upvoteId:{
-     type:String
- },
- proid:{
-     type:Number
- }   ,
-  userid:{
-     type:String
-  }
+    fname:{
+        type:String
+    }  ,
+    lname:{
+        type:String
+    },
+    upvoteId:{
+        type:String
+    },
+    proid:{
+        type:Number
+    }   ,
+    userid:{
+        type:String
+    }
 });
 
 
-var notification=mongoose.model('notificaiton',notification);
+const notification = mongoose.model('notificaiton',notificationSchema);
 module.exports=notification;

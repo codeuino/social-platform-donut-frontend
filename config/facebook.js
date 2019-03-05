@@ -9,7 +9,7 @@ passport.serializeUser(function(user, done) {
 
 passport.deserializeUser(function(id, done) {
     user.findById(id).then(function(user) {
-      done(null, user);
+        done(null, user);
     });
 });
 
@@ -21,7 +21,7 @@ passport.use(new FacebookStrategy({
     user.findOne({Eid:profile.id}).then( (data) => {
         if(data)
         {
-            console.log("Already in Database");
+            console.log('Already in Database');
             done(null,data);
         }
         else
@@ -32,10 +32,10 @@ passport.use(new FacebookStrategy({
                 username: profile.name.givenName + ' ' + profile.name.familyName,
                 Eid: profile.id
             })
-            .save()
-            .then( (us) => {
-                done(null,us);
-            });
+                .save()
+                .then( (us) => {
+                    done(null,us);
+                });
         }
     });
 }));

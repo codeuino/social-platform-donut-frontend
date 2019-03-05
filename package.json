@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",
-    "test": "mocha tests/*.js"
+    "test": "mocha tests/*.js",
+    "lint": "eslint ./views/**/**.js ./tests/**/**.js ./schema/**/**.js ./routes/**/**.js ./controller/**/**.js ./config/**/**.js ./server.js ./run.js --fix"
   },
   "author": "Capedcrusader23",
   "license": "MIT",

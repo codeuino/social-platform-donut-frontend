@@ -1,11 +1,11 @@
-process.env.TESTING = true
-const {expect} = require('chai')
+process.env.TESTING = true;
+const {expect} = require('chai');
 const secret=require('.././config/credential.js');
 const mongoose = require('mongoose');
-const request = require('supertest')
+const request = require('supertest');
 const passport = require('passport');
 const indexRoutes = require('../routes/index.routes');
-const express=require('express')
+const express=require('express');
 const app=express();
 const path=require('path');
 const cookie = require('cookie-session');
@@ -23,19 +23,19 @@ describe('controllers',()=>{
     before((done) => {
         mongoose.connect(secret.database, function () {
             server=app.listen(5000,()=>{
-                console.log('running at 5000')
-                done()
-            })
-        })
-      })
-      after(() => {
-        server.close()
-      })
+                console.log('running at 5000');
+                done();
+            });
+        });
+    });
+    after(() => {
+        server.close();
+    });
     it('should add user',(done)=>{
-    request(server).post('/auth/userlogin').send({fname:'tushar',
-lname:'goel',dob:'29/08/1999',github:'TG1999',username:'TG1999',pass:'test'})
-.expect(200).expect(/Codeuino/,done)
-    })
+        request(server).post('/auth/userlogin').send({fname:'tushar',
+            lname:'goel',dob:'29/08/1999',github:'TG1999',username:'TG1999',pass:'test'})
+            .expect(200).expect(/Codeuino/,done);
+    });
     
-})
+});
 

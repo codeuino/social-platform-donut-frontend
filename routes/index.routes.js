@@ -1,20 +1,18 @@
-var express = require('express');
-var router = express.Router();
-var profileRoutes = require('./profile.routes');
-var loginRoutes = require('./login.routes');
+const express = require('express');
+const router = express.Router();
+const profileRoutes = require('./profile.routes');
+const loginRoutes = require('./login.routes');
 
-  router.get('/',function(req,res){
-
-
+router.get('/',function(req,res){
     if(req.user==null)
     {
-      res.render('all');
+        res.render('all');
     }
     else
     {
-      res.redirect('/profile/profile/'+req.user.Eid);
+        res.redirect('/profile/profile/'+req.user.Eid);
     }
-    })
+});
 
 
 router.use('/profile',profileRoutes);

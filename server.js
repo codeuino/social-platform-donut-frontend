@@ -1,5 +1,5 @@
 const express = require('express');
-const route = require('./routes/login.routes.js')
+const route = require('./routes/login.routes.js');
 const google = require('./config/google.js');
 const github=require('./config/github.js');
 const mongoose = require('mongoose');
@@ -16,7 +16,7 @@ const facebook = require('./config/facebook.js');
 
 mongoose.connect(secret.database, function () {
     console.log('connected');
-})
+});
 
 var loged = [];
 
@@ -34,8 +34,6 @@ app.use(passport.session());
 app.use(indexRoutes);
 
 
-
-
 var ser = app.listen(3000, function () {
     console.log('Running');
 });
@@ -50,11 +48,11 @@ io.on('connection', function (socket) {
 
             out.forEach(function (x) {
                 if (x['Eid'] == data.sign) {
-                    new notification({ "fname": x['fname'], "lname": x['lname'], "upvoteId": x['Eid'], "proid": data.pro['proid'], "userid": data.pro['pid'] }).save().then(function (noti) {
+                    new notification({ 'fname': x['fname'], 'lname': x['lname'], 'upvoteId': x['Eid'], 'proid': data.pro['proid'], 'userid': data.pro['pid'] }).save().then(function (notif) {
                         console.log(notif);
-                    })
+                    });
                 }
-            })
-        })
-    })
-})
+            });
+        });
+    });
+});

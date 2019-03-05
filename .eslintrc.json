@@ -1,0 +1,37 @@
+{
+    "env": {
+        "node": true,
+        "commonjs": true,
+        "es6": true,
+        "jasmine": true,
+        "jquery": true,
+        "browser": true,
+        "mocha": true
+    },
+    "extends": "eslint:recommended",
+    "parserOptions": {
+        "ecmaVersion": 2016
+    },
+    "rules": {
+        "indent": [
+            "error",
+            4
+        ],
+        "linebreak-style": [
+            "error",
+            "windows"
+        ],
+        "quotes": [
+            "error",
+            "single"
+        ],
+        "semi": [
+            "error",
+            "always"
+        ],
+        "no-unused-vars": 1,
+        "no-console": 1,
+        "no-redeclare" : 1
+
+    }
+}
