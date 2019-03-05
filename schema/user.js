@@ -1,6 +1,6 @@
-const mongoose=require('mongoose');
-const Schema=mongoose.Schema;
-const bycrypt=require('bcrypt-nodejs');
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+const bycrypt = require('bcrypt-nodejs');
 const user=new Schema({
     fname:{
         type:String
@@ -62,9 +62,9 @@ user.pre('save',function(next){
     });
 });
 
-user.methods.compare=function(pass){
+user.methods.compare = function(pass){
     return bycrypt.compareSync(pass,this.password);
 };
 
-const use=mongoose.model('user',user);
-module.exports=use;
+const use = mongoose.model('user',user);
+module.exports = use;

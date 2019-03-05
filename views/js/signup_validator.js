@@ -1,8 +1,8 @@
 function validate()
 {
-    var emailID = document.myForm.EMail.value;
-    var atpos = emailID.indexOf('@');
-    var dotpos = emailID.lastIndexOf('.');
+    const emailID = document.myForm.EMail.value;
+    const atpos = emailID.indexOf('@');
+    const dotpos = emailID.lastIndexOf('.');
 
     if (atpos < 1 || ( dotpos - atpos < 2 ))
     {
@@ -10,14 +10,14 @@ function validate()
         document.myForm.EMail.focus() ;
         return false;
     }
-    var isChecked= document.getElementById('check').checked;
+    const isChecked= document.getElementById('check').checked;
     if(!isChecked){
         alert('Please accept the Code of Conduct to Sign Up');
         document.myForm.check.focus() ;
         return false;
     }
-    var pass = document.getElementById('pass');
-    var cpass = document.getElementById('cpass');
+    const pass = document.getElementById('pass');
+    const cpass = document.getElementById('cpass');
     if(pass!=cpass){
         alert('Password error. Retype Password.');
         return false;

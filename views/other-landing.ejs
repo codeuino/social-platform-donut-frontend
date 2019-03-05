@@ -15,6 +15,15 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.4/css/mdb.min.css" rel="stylesheet">
         <!-- Your custom styles (optional) -->
         <link href="css/other-landing.css" rel="stylesheet">
+
+        <style>
+        .ch{
+
+        },
+        .ch2{
+
+        }
+        </style>
     </head>
     <body>
         <!-- Start your project here-->
@@ -85,13 +94,63 @@
               <!--Grid column-->
               <div class="col-lg-6 col-md-8">
 
+                  <% ques.forEach(function(x){%>
+
+                    <div class="card mb-4">
+                      <!--Card content-->
+                      <div class="card-body">
+                        <!--Title-->
+                        <h4 class="card-title"><img src="./images/prof.jpg" class="user" alt=""><%=x.result[0].username%></h4>
+                        <h6 class="card-subtitle mb-2 text-muted">Backend Developer</h6>
+                        <hr class="hr-danger wow">
+                        <!--Text-->
+                        <div class="container">
+                          <div class="row">
+
+                            <%for(var q=0;q<x.Lang.length;q++){%>
+                              <a href="#" class="btn btn-blue-grey btn-rounded"><%=x.Lang[q]%></a>
+                            <%}%>
+                          </div>
+                        </div>
+                        <p class="card-text"><%=x.content%></p>
+                        <p class="card-text">Visit <a class="blue-text" href="<%=x.github%>"><%=x.github%></a></p>
+                      </div>
+                      <div class="container">
+                        <div class="row">
+                          <a href="#" class="btn btn-outline-grey btn-rounded ch1" id="<%=x.proid%>"><%=x.upvote.length%></a>
+                          <a href="#" class="btn btn-outline-grey btn-rounded ch2" id="<%=x.proid%>"><%=x.downvote.length%></a>
+                          <a href="#" class="btn btn-outline-grey btn-rounded">Comment</a>
+                          <a href="#" class="btn btn-outline-grey btn-rounded">Share</a>
+                        </div>
+                      </div>
+                      <div class="container">
+                        <div class="row">
+                          <div class="form-group grey-border btn-rounded">
+                            <textarea class="form-control z-depth-1 btn-rounded" rows="3" placeholder="Reply"></textarea>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+
+                  <%})%>
+                <!--Card-->
+                <!--/.Card-->
+
+                <!--Card-->
+                <!--/.Card-->
+
+                <!--Card-->
+
+                <!--/.Card-->
+
                 <!--Card-->
                 <div class="card mb-4">
                   <!--Card content-->
                   <div class="card-body">
                     <!--Title-->
-                    <h4 class="card-title"><img src="./images/prof.jpg" class="user" alt=""><span class="pl-2">User Name</span></h4>
-                    <h6 class="card-subtitle pt-1 pl-1 mb-2 text-muted">Backend Developer</h6>
+                    <h4 class="card-title"><img src="./images/prof.jpg" class="user" alt="">User Name</h4>
+                    <h6 class="card-subtitle mb-2 text-muted">Backend Developer</h6>
                     <hr class="hr-danger wow">
                     <!--Text-->
                     <div class="container">
@@ -102,29 +161,27 @@
                         <a href="#" class="btn btn-blue-grey btn-rounded">Codeuino</a>
                       </div>
                     </div>
-                    <p class="card-text body-text ">This platform has been Example. Add shadows to different elements: #example1 { Example. Add a blur effect to the shadow: #example1 { Example. Define the spread radius of the shadow: #example1 { Example. Define multiple shadows: #example</p>
-                    <p class="card-text body-text">Visit <a class="blue-text">Codeuino.org</a></p>
+                    <p class="card-text">This platform has been Example. Add shadows to different elements: #example1 { Example. Add a blur effect to the shadow: #example1 { Example. Define the spread radius of the shadow: #example1 { Example. Define multiple shadows: #example</p>
+                    <p class="card-text">Visit <a class="blue-text">Codeuino.org</a></p>
                   </div>
                   <div class="container">
                     <div class="row">
-                      <a href="#" class="btn btn-outline-grey btn-rounded ">+1</a>
-                      <a href="#" class="btn btn-outline-grey btn-rounded ">-1</a>
-                      <a href="#" class="btn btn-outline-grey btn-rounded ">Comment</a>
-                      <a href="#" class="btn btn-outline-grey btn-rounded ">Share</a>
+                      <a href="#" class="btn btn-outline-grey btn-rounded ch1">+1</a>
+                      <a href="#" class="btn btn-outline-grey btn-rounded ch2">-1</a>
+                      <a href="#" class="btn btn-outline-grey btn-rounded">Comment</a>
+                      <a href="#" class="btn btn-outline-grey btn-rounded">Share</a>
                     </div>
                   </div>
                   <div class="container">
                     <div class="row">
-                      <div class="form-group grey-border btn-rounded w-100 pr-2 mt-2">
-                        <textarea class="form-control z-depth-1 btn-rounded" rows="3" placeholder="Reply" style="resize:none"></textarea>
+                      <div class="form-group grey-border btn-rounded">
+                        <textarea class="form-control z-depth-1 btn-rounded" rows="3" placeholder="Reply"></textarea>
                       </div>
                     </div>
                   </div>
 
                 </div>
                 <!--/.Card-->
-
-                
               </div>
               <!--Grid column-->
 
@@ -174,6 +231,68 @@
 
         <!-- SCRIPTS -->
         <!-- JQuery -->
+
+        <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+        <script>
+        $(document).ready(function(){
+
+          $('.ch1').click(function(e){
+            e.preventDefault();
+            var z=$(this).attr('id');
+            $.ajax({
+
+                url:'/profile/upDownVote',
+                method:'POST',
+                contentType:'application/json',
+                data:JSON.stringify({'project':z,client:'<%=sign.Eid%>','vote':'+1'}),
+                success:function(res){
+                  console.log("Sucess")
+                  //Frontend code can be implemented
+                },
+                error:function (res) {
+                  console.log(res)
+                  console.log("Error")
+                  //Frontend code can be implemented
+
+                }
+            })
+
+
+
+
+          });
+
+
+          $('.ch2').click(function(e){
+            e.preventDefault();
+            var z=$(this).attr('id');
+            $.ajax({
+
+                url:'/profile/upDownVote',
+                method:'POST',
+                contentType:'application/json',
+                data:JSON.stringify({'project':z,client:'<%=sign.Eid%>','vote':'-1'}),
+                success:function(res){
+                  console.log("Sucess")
+                  //Frontend code can be implemented
+                },
+                error:function (res) {
+                  console.log(res)
+                  console.log("Error")
+                  //Frontend code can be implemented
+
+                }
+
+
+
+
+          });
+
+        })
+
+
+
+        </script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <!-- Bootstrap tooltips -->
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
