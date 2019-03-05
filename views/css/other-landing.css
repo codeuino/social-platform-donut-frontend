@@ -36,6 +36,15 @@ form input.form-control{
   position: fixed;
   width: 255px;
 }
+.project-img{
+  width: 15px;
+  height: 15px;
+  display: inline-block;
+  margin-right: 5px;
+
+  background-image: url('/img/eventcd (2).jpg');
+  border-radius: 12px;
+}
 .active-cyan-4 .fa {
     background-color: #2196f3;
     border-radius: 2px;
