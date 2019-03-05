@@ -141,11 +141,6 @@ module.exports = {
 			res.send(data);
 		});
 	}
-	/*updatebio: function(req, res) {
-		console.log(req);
-		user.findOne({ Eid: req.user.Eid }).then(function(data) {
-			data.fname = req.body.bio;
-			data.save();
-		});
-    }*/
+
 };
+    

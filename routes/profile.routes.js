@@ -25,8 +25,8 @@ route.get('/profileview/:sd', auth, url, profileController.profileViewSd);
 route.post('/publish', auth, url, profileController.publish);
 
 route.post('/upvote', auth, url, jsonParser, profileController.upvote);
+route.post('/downvote',auth,url,jsonParser,profileController.downvote);
 
-route.post('/downvote', url, jsonParser, profileController.downvote);
 
 route.get('/ch2', auth, profileController.ch2);
 

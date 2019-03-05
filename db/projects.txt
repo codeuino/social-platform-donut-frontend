@@ -1,11 +1,6 @@
 {
     "_id" : ObjectId("5b5201258bf7024f24e85126"),
-    "upvote" : [ 
-        ""
-    ],
-    "downvote" : [ 
-        ""
-    ],
+    "upDownVote":{},
     "pname" : "My first project",
     "pid" : "104495411584749551646",
     "github" : "xyz",
@@ -16,13 +11,7 @@
 },
 {
     "_id" : ObjectId("5b4f8beb7186aa40844df9b2"),
-    "upvote" : [ 
-        "", 
-        "104495411584749551646"
-    ],
-    "downvote" : [ 
-        ""
-    ],
+    "upDownVote" :{},
     "pname" : "My first project",
     "pid" : "104495411584749551646",
     "github" : "xyz",
@@ -33,13 +22,7 @@
 },
 {
     "_id" : ObjectId("5b5c2a66bb47f62b54a8ee40"),
-    "upvote" : [ 
-        ""
-    ],
-    "downvote" : [ 
-        "", 
-        "104495411584749551646"
-    ],
+    "upDownVote":{},
     "pname" : "My first project",
     "pid" : "115169838008905885474",
     "github" : "xyz",
@@ -50,13 +33,7 @@
 },
 {
     "_id" : ObjectId("5b5c83880380e426bce91822"),
-    "upvote" : [ 
-        ""
-    ],
-    "downvote" : [ 
-        "", 
-        "104495411584749551646"
-    ],
+    "upDownVote":{},
     "pname" : "My first ",
     "pid" : "104495411584749551646",
     "github" : "",
