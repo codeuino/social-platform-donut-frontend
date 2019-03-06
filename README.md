@@ -1,25 +1,39 @@
-## For frontend of this repo move to this repository https://github.com/codeuino/frontened
+<div align="center">
 
-# Donut-
+<img height=200px src="./READMEassets/doughnut.png">
 
-[![Slack Status](https://img.shields.io/badge/slack-chat-yellow.svg)](https://codeuino.slack.com)    [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+<h1>DONUT</h1>
 
-![codeuino](READMEassets/landing.png)
+codeuino's open source social platform <br><br>
+
+[![Slack Status](https://img.shields.io/badge/slack-chat-yellow.svg)](https://codeuino.slack.com)    [![PRs Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)](http://makeapullrequest.com) [![Issues Open](https://img.shields.io/github/issues-raw/codeuino/Social-Platform-Donut.svg?color=orange)](https://github.com/codeuino/Social-Platform-Donut/issues) [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+
+</div>
+
+#### For frontend of this repo move to this repository https://github.com/codeuino/frontened
+
+<div align='center'>
+<img style="border:1px black solid;" height=165px src="READMEassets/signup_community.png">
+<img style="border:1px black solid;" height=165px src="READMEassets/landing.gif">
+<img style="border:1px black solid;" height=165px src="READMEassets/signup_user.png">
+<img style="border:1px black solid;" height=165px src="READMEassets/feeds.png">
+<img style="border:1px black solid;" height=165px src="READMEassets/edit_profile.png">
+<img style="border:1px black solid;" height=165px src="READMEassets/dashboard.png">
+</div>
 
 
-![codeuino](READMEassets/landing1.png)
-![codeuino](READMEassets/landing2.jpg)
-![codeuino](READMEassets/landing3.jpg)
-![codeuino](READMEassets/landing4.png)
+What is Donut?
+--------
+Being inspired by the Cornucopia of various social hub this project has been developed taking into consideration about open source.
+ 
+ Well, this is an Open Source Social networking hub which acts as a bridge between various Developers, Organisations and Open Source aspirants to elaborate on various things like #Projects, #Events, #Discussion on various researches, #Scholarships, #Coding release and various other things updates. 
 
----
-## What is Donut?
+The major priority of this project has been that this platform allows users to make their project "Open Sourced" and released them under various open source Organisations, experts which hold up a ring plate on this portal. 
 
-Being inspired by the Cornucopia of various social hub this project has been developed taking into consideration about open source. Well, this is an Open Source Social networking hub which acts as a bridge between various Developers, Organisations and Open Source aspirants to elaborate on various things like #Projects, #Events, #Discussion on various researches, #Scholarships, #Coding release and various other things updates. 
-The major priority of this project has been that this platform allows users to make their project "Open Sourced" and released them under various open source Organisations, experts which hold up a ring plate on this portal. This platform also makes users introduce and develops various solutions in the form of FOSS software to publish them for public use by integrating them with their social cause. Moreover, this project can be downloaded by any user, organization and can be used by them in their own custom way, making it run on their servers. 
+This platform also makes users introduce and develops various solutions in the form of FOSS software to publish them for public use by integrating them with their social cause. Moreover, this project can be downloaded by any user, organization and can be used by them in their own custom way, making it run on their servers. 
 It is built on Node.js and utilizing mongoose as a database.
 
-## Technical Features
+Technical Features
 --------------------
 * Sign Up / Login Authentication
 * Node.js basic Password Authentication ( Uses Unique email and Password )
@@ -42,36 +56,41 @@ Installation
 To get this project running locally on your machine follows the steps below in order:
 
 1. fork this repo
-2. clone the forked repo from your GitHub using the command `git clone https://github.com/username/Social-Platform-Donut.git` don't forget to replace the username in the URL
+2. clone the forked repo from your GitHub 
+using the command `git clone https://github.com/username/Social-Platform-Donut.git` don't forget to replace the username in the URL
 
-![fork-and-clone](READMEassets/forking-the-repo.gif)
+    ![fork-and-clone](READMEassets/forking-the-repo.gif)
 
 3. Checkout to the development branch
 
-```shell
-    git checkout development
-```
+    ```shell
+        git checkout development
+    ```
 
 4. Setting up the project locally.
 
-```shell
-npm install
-```
-5.Setting up the local database instance 
+    ```shell
+    npm install
+    ```
+
+5. Setting up the local database instance 
+      
       You need to have a MongoDB atlas account to create local
       https://www.youtube.com/watch?v=KKyag6t98g8
       Check out the above link to setup MongoDB atlas.
       The mongodb URL should be pasted in credential.js files.
-      
- 6. run this command to run on local
 
-```shell
-nodemon server.js
-```
-or
-```shell
-node server.js
-```
+
+
+6. run this command to run on local
+
+    ```shell
+    nodemon server.js
+    ```
+    or
+    ```shell
+    node server.js
+    ```
 
 HURRAY! you have done it just start contributing to the project.
 
@@ -81,13 +100,13 @@ Setting Up Database
 ------------
 Make sure you have MongoDB installed on your computer. If not get it here [MongoDB Community Server](https://www.mongodb.com/download-center/community)
 
-1- Open the terminal, locate the "scripts" folder and run the dbcreater.sh
+1. Open the terminal, locate the "scripts" folder and run the dbcreater.sh
 
-```shell
-bash dbcreater.sh
-```
+    ```shell
+    bash dbcreater.sh
+    ```
 
-For windows user, run this command using [git bash](https://git-scm.com/download/win)
+Note: For windows user, run this command using [git bash](https://git-scm.com/download/win)
 
 
 ## Contributions Best Practices
