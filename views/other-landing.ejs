@@ -14,16 +14,7 @@
         <!-- Material Design Bootstrap -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.4/css/mdb.min.css" rel="stylesheet">
         <!-- Your custom styles (optional) -->
-        <link href="css/other-landing.css" rel="stylesheet">
-
-        <style>
-        .ch{
-
-        },
-        .ch2{
-
-        }
-        </style>
+        <link href="../../css/other-landing.css" type="text/css" rel="stylesheet">
     </head>
     <body>
         <!-- Start your project here-->
@@ -46,9 +37,15 @@
                     <!-- Links -->
                     <ul class="navbar-nav mr-auto">
                       <li class="nav-item active">
-                        <form class="form-inline active-cyan-4 flex-center">
-                          <input class="form-control form-control-sm mr-3" type="text" aria-label="Search">
-                          <button type="submit" class="fa font-weight-bold btn-search">Search</button>
+                        <form class="form-inline">
+                            <div class="input-group col-12 pl-0">
+                                <input type="text" id="search-input" class="form-control form-control-lg py-2 border-right-0 border" placeholder="Search">
+                                <span class="input-group-append">
+                                  <button id="search-btn" class="btn-outline border-left-0 border" type="button">
+                                    <i class="fa fa-search"></i>
+                                  </button>
+                                </span>
+                              </div>
                         </form>
                       </li>
                       <li class="nav-item ">

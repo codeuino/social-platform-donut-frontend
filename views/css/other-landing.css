@@ -18,7 +18,7 @@ header div.phrase-p2{
   width: 100%;
 }
 form{
-  margin-left: 6vw;
+  margin-top: 4px;
 }
 form input.form-control{
   height: 21px;
@@ -100,4 +100,12 @@ form input.form-control{
 }.body-text{
   font-size: 1rem  !important;
 }
+#search-btn {
+  background-color: blanchedalmond !important;
+  border-color: blanchedalmond !important;
+  height: 29px;
+}
 
+#search-input {
+  height: 29px;
+}
