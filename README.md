@@ -12,11 +12,14 @@ codeuino's open source social platform <br><br>
 
 #### For frontend of this repo move to this repository https://github.com/codeuino/frontened
 
-![codeuino](READMEassets/landing.png)
-![codeuino](READMEassets/landing2.jpg)
-![codeuino](READMEassets/landing3.jpg)
-![codeuino](READMEassets/landing4.png)
-
+<div align='center'>
+<img style="border:1px black solid;" height=165px src="READMEassets/signup_community.png">
+<img style="border:1px black solid;" height=165px src="READMEassets/landing.gif">
+<img style="border:1px black solid;" height=165px src="READMEassets/signup_user.png">
+<img style="border:1px black solid;" height=165px src="READMEassets/feeds.png">
+<img style="border:1px black solid;" height=165px src="READMEassets/edit_profile.png">
+<img style="border:1px black solid;" height=165px src="READMEassets/dashboard.png">
+</div>
 
 
 What is Donut?
