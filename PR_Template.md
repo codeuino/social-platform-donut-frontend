@@ -1,6 +1,9 @@
 ### **Problem**
 _Describe the problem you are trying to achieve. Please provide in detail_
 
+### **Issue this PR referred to**
+_Please refer to the issue this PR is referred to write in this format `Fixes #<issue number>`, Refer to this [link](https://help.github.com/en/articles/closing-issues-using-keywords) for more details_
+
 ### **Solution of problem**
 _How did you solve this problem? Please provide in detail_
 
