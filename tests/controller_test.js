@@ -1,18 +1,29 @@
 process.env.TESTING = true
 const {expect} = require('chai')
-const profilecontroller=require('../controller/profile.controller');
 const secret=require('.././config/credential.js');
 const mongoose = require('mongoose');
-const request = require('request')
-const BASE_URL = 'http://localhost:3000/'
-const express = require('express');
-app=express();
-
+const request = require('supertest')
+const passport = require('passport');
+const indexRoutes = require('../routes/index.routes');
+const express=require('express')
+const app=express();
+const path=require('path');
+const cookie = require('cookie-session');
+app.use(cookie({
+    maxAge: 24 * 60 * 60 * 1000,
+    keys: ['CAPEDCRUSADER']
+}));
+app.use(express.static(path.join('..',path.join(__dirname,'views'))));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(indexRoutes);
+app.set('view engine', 'ejs');
 describe('controllers',()=>{
     let server;
     before((done) => {
         mongoose.connect(secret.database, function () {
-            server=app.listen(3000,()=>{
+            server=app.listen(5000,()=>{
+                console.log('running at 5000')
                 done()
             })
         })
@@ -20,21 +31,11 @@ describe('controllers',()=>{
       after(() => {
         server.close()
       })
-      describe('users',()=>{
     it('should add user',(done)=>{
-      request.post(`${BASE_URL}/auth/userlogin`,
-      {
-          fname:'tushar',lname:'goel',email:'tushar.goel.dav@gmail.com',dob:'29/08/1999',github:'TG1999',username:'TG1999',pass:'test'
-      },(err,res,body)=>{
-          if(err){
-              console.log(err)
-          }
-          else{
-              console.log(res)
-              done()
-          }
-      })
+    request(server).post('/auth/userlogin').send({fname:'tushar',
+lname:'goel',dob:'29/08/1999',github:'TG1999',username:'TG1999',pass:'test'})
+.expect(200).expect(/Codeuino/,done)
     })
-})
+    
 })
 

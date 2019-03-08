@@ -1,354 +1,362 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
-<head>
-  <title>Codeuino</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel=stylesheet type=text/css href="css/bootstrap4/bootstrap.min.css">
-  <link rel=stylesheet type=text/css href="css/home.css">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
-  <!--Calender-->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
-    crossorigin="anonymous">
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Codeuino Landing Page</title>
 
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-  <script>
-    $(document).ready(function () {
-      $("#datepicker").datepicker();
-    });
-  </script>
-  <script src="js/signup_validator.js"></script>
-  <style>
-    .loginBtn {
-      box-sizing: border-box;
-      position: relative;
-      /* width: 13em;  - apply for fixed size */
-      margin: 0.2em;
-      padding: 0 15px 0 46px;
-      border: none;
-      text-align: left;
-      line-height: 34px;
-      white-space: nowrap;
-      border-radius: 0.2em;
-      font-size: 16px;
-      color: #FFF;
-      cursor: pointer;
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-    }
 
-    .loginBtn:before {
-      content: "";
-      box-sizing: border-box;
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 34px;
-      height: 100%;
-    }
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
-    .loginBtn:focus {
-      outline: none;
-    }
-
-    .loginBtn:active {
-      box-shadow: inset 0 0 0 32px rgba(0, 0, 0, 0.1);
-    }
+    <link href="css/codeuino.css" rel="stylesheet">
 
 
 
+  </head>
 
-    /* Google */
+  <body id="page-top">
 
-    .loginBtn--google {
-      /*font-family: "Roboto", Roboto, arial, sans-serif;*/
-      background: #DD4B39;
-    }
-
-    .loginBtn--google:before {
-      border-right: #BB3F30 1px solid;
-      background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/14082/icon_google.png') 6px 6px no-repeat;
-    }
-
-    .loginBtn--google:hover,
-    .loginBtn--google:focus {
-      background: #E74B37;
-    }
-
-    .butshif {
-      position: absolute;
-      left: 580px;
-      right: 500px;
-      height:30px;
-      width:40px;
-    }
-
-    .cyan{
-      position: absolute;
-      left: 800px;
-      right: 400px;
-      background-color:black;
-      color:white;
-      width:120px;
-    }
-
-    /* Facebook */
-    .loginBtn--facebook {
-      background-color: #4C69BA;
-      background-image: linear-gradient(#4C69BA, #3B55A0);
-      /*font-family: "Helvetica neue", Helvetica Neue, Helvetica, Arial, sans-serif;*/
-      text-shadow: 0 -1px 0 #354C8C;
-    }
-    .loginBtn--facebook:before {
-      border-right: #364e92 1px solid;
-      background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/14082/icon_facebook.png') 6px 6px no-repeat;
-    }
-    .loginBtn--facebook:hover,
-    .loginBtn--facebook:focus {
-      background-color: #5B7BD5;
-      background-image: linear-gradient(#5B7BD5, #4864B1);
-    }
-  </style>
-</head>
-
-<body>
-  <!-- Header -->
-  <header class="header d-flex flex-row justify-content-end align-items-center">
-    <!-- Logo -->
-    <div class="logo">
-      <a href="/">DONUT</a>
-    </div>
-    <div class="line">
-      <p>Codeuino's Open Source Social Platform</p>
-    </div>
     <!-- Navigation -->
-    <nav class="main_nav justify-self-end">
-      <ul class="nav_items">
-        <li class="hide">
-          <span>DONUT</span>
-        </li>
-        <li>
-          <a href="/">
-            <span>Home</span>
-          </a>
-        </li>
-        <li>
-          <a href="/">
-            <span>Community</span>
-          </a>
-        </li>
-        <li>
-          <a href="/">
-            <span>Help</span>
-          </a>
-        </li>
-      </ul>
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">DONUT</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fas fa-bars"></i>
+        </button>
+
+        <form action="" class="form-search">
+          <input type="search">
+          <i class="fa fa-search"></i>
+        </form>
+
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#page-top">HOME</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#projects">ABOUT</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#signup">INFO</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+
+
     </nav>
-  </header>
-  <!-- Main -->
-  <div class="main_content">
-    <div class="l1">
-      <p>Welcome to Codeuino</p>
-    </div>
-    <div class="l2">
-      <p>Connect, Share & Build</p>
-    </div>
-    <div class="l3">
-      <p>It is an Open Source Social platform which connects every contributor to other open source organizations </br> and
-        work upon various projects of them by following up there feeds.</p>
-    </div>
-    <div class="desc">
-      <button class="button login" onclick="showlogin()">LOGIN</button>
 
 
-      <button class="button sign_up" onclick="showsignup()">SIGN UP</button>
-    </div>
-    
-    <div class="butshif">
-      <a href="/auth/google" class="loginBtn loginBtn--google">
-        Login with Google
-      </a>
-    </div>
-
-    <div class="butshif2">
-      <a href="/auth/github" class="loginBtn cyan">
-        Login with github
-      </a>
-    </div>
-
-    <div class="butshif3">
-      <a href="/auth/facebook" class="loginBtn loginBtn--facebook">
-        Login with Facebook
-      </a>
-    </div>
-
-
-  </div>
-  <!-- Sign up -->
-  <div class="signup">
-    <div class="phrase l1" id="user">
-      <p>
-        SIGNING UP AS A
-        <n>USER</n>!
-
-      </p>
-    </div>
-    <div class="phrase l1" id="comm">
-      <p>
-        SIGNING UP AS A
-        <n class="org">COMMUNITY</n>!
-      </p>
-    </div>
-    <div class="form">
-      <ul class="tab-group">
-        <li class="tab active">
-          <a href="#signup">User Sign Up</a>
-        </li>
-        <li class="tab">
-          <a href="#signup_comm">Community Sign Up</a>
-        </li>
-      </ul>
-      <div class="tab-content">
-        <div id="signup">
-          <form action="/auth/userlogin" method="post" name="myForm" onsubmit="return(validate());">
-            <div class="top-row">
-              <div class="field-wrap">
-                <input type="text" placeholder="First Name" required autocomplete="off" name="fname" />
-              </div>
-              <div class="field-wrap">
-                <input type="text" placeholder="Last Name" required autocomplete="off" name="lname" />
+    <header class="masthead">
+      <div class="container d-flex h-100 align-items-center">
+        <div class="mx-auto text-center">
+          <h1 class="mx-auto my-0 text-uppercase">CODUEINO'S</h1>
+          <h2 class="text-white-50 mx-auto mt-2 mb-5">OPEN SOURCE SOCIAL PLATFORM.</h2>
+          <a href="#about" class="btn btn-primary js-scroll-trigger" data-toggle="modal" data-target="#exampleModalCenter">Let's Get Started</a>
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header row d-flex justify-content-between">
+                  <div class="col-md-6">
+                    <button class="btn btn-lg " id="loginButton">Login</button>
+                  </div>
+                  <div class="col-md-6">
+                    <button class="btn btn-lg" id="signupButton">Sign up</button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                </div>
+                <div class="modal-body" id="loginModal">
+                  <div class="container d-flex flex-column justify-content-center w-75">
+                    <a href="/auth/github" class="btn btn-dark js-scroll-trigger mb-2">Login Using <i class="fab fa-github" style="font-size: 24px;"></i></a>
+                    <a href="/auth/google" class="btn btn-danger js-scroll-trigger mb-2">Login Using <i class="fab fa-google" style="font-size: 24px;"></i></a>
+                    <a href="#" class="btn btn-primary js-scroll-trigger">Login Using <i class="fas fa-envelope" style="font-size: 24px;"></i></a>
+                  </div>
+                </div>
+                 <div class="modal-body displayOff" id="signupModal">
+                  <div class="container d-flex flex-column justify-content-center w-75">
+                    <a href="/auth/github" class="btn btn-dark js-scroll-trigger mb-2">Sign Up Using <i class="fab fa-github" style="font-size: 24px;"></i></a>
+                    <a href="/auth/google" class="btn btn-danger js-scroll-trigger mb-2">Sign Up Using <i class="fab fa-google" style="font-size: 24px;"></i></a>
+                    <a href="#" class="btn btn-primary js-scroll-trigger">Sign Up Using <i class="fas fa-envelope" style="font-size: 24px;"></i></a>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  Are you a Organisation? <a href="#">Click Here</a>
+                </div>
               </div>
             </div>
-            <div class="field-wrap">
-              <input type="email" placeholder="Email Address" required autocomplete="off" name="email" />
-            </div>
-            <div class="top-row">
-              <div class="field-wrap">
-                <input id="datepicker" placeholder="Date of Birth- DD/MM/YY" required autocomplete="off" name="dob" />
-              </div>
-              <div class="field-wrap">
-                <select name="Gender" id="drop" required>
-                  <option value="" disabled selected>Gender M/F/Other</option>
-                  <option value="1" name="unknown">Don't want to tell</option>
-                  <option value="2" name="male">Male</option>
-                  <option value="3" name="female">Female</option>
-                  <option value="4" name="other">Other</option>
-                </select>
-              </div>
-            </div>
-            <div class="field-wrap">
-              <input type="text" placeholder="Github Handle Link" required autocomplete="off" name="github" />
-            </div>
-            <div class="field-wrap">
-              <input type="text" placeholder="Username" required autocomplete="off" name="username" />
-            </div>
-            <div class="top-row">
-              <div class="field-wrap">
-                <input type="password" id="pass" placeholder="Password" required autocomplete="off" name="pass" />
-              </div>
-              <div class="field-wrap">
-                <input type="password" id="cpass" placeholder="Confirm Password" required autocomplete="off" />
-              </div>
-            </div>
-            <div class="field-wrap">
-              <label class="container">I accept the
-                <i>Code of Conduct</i> of this community
-                <input type="checkbox" checked="checked" name="check" id="check">
-                <span class="checkmark"></span>
-              </label>
-            </div>
-            <button type="submit" class="button-block">Sign In</button>
-          </form>
+          </div>
+        </div>
+      </div>
 
+      <!-- Login/SignUp Modal -->
+      <!--
+      <div class="modal fade" id="loginSignup" tabindex="-1" role="dialog" aria-labelledby="loginSignupLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-body">
+                  <div id="SignUp" class="container">
+                      <ul class="nav nav-tabs signup-tabs text-center">
+                        <li class="active" id="userSignuptab">
+                          <a href="#userSignUp" data-toggle="tab"><p>User Sign Up</p></a>
+                        </li>
+                        <li id="commSignuptab">
+                          <a href="#commSignUp" data-toggle="tab"><p>Community Sign Up</p></a>
+                        </li>
+                      </ul>
+
+                      <div class="tab-content">
+                        <div class="tab-pane active" id="userSignUp">
+                          <form action="/auth/userlogin" class="signupform" method="post" onsubmit="return(validate());">
+                            <div class="form-row">
+                              <div class="form-group col-md-6">
+                                <label for="fname">First Name</label>
+                                <input type="text" class="form-control" id="fname" name="fname" placeholder="First Name" required autocomplete="off">
+                              </div>
+                              <div class="form-group col-md-6">
+                                <label for="lname">Last Name</label>
+                                <input type="text" class="form-control" id="lname" placeholder="Last Name" name="lanme" required autocomplete="off">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label for="email">Email address</label>
+                              <input type="email" class="form-control" id="email" placeholder="Email Address" required autocomplete="off" name="email" />
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                  <label for="dob">Date of Birth</label>
+                                  <input type="date" class="form-control" id="dob" placeholder="Date of Birth- DD/MM/YY" name="dob" required autocomplete="off">
+                                </div>
+                                <div class="form-group col-md-6">
+                                  <label for="drop">Gender</label><br>
+                                  <select name="Gender" id="drop" class="form-control" required>
+                                      <option value="" disabled selected>Gender M/F/Other</option>
+                                      <option value="1" name="unknown">Don't want to tell</option>
+                                      <option value="2" name="male">Male</option>
+                                      <option value="3" name="female">Female</option>
+                                      <option value="4" name="other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                              <label for="github">Github Profile</label>
+                              <input type="text" class="form-control" id="github" placeholder="Github Handle link" required autocomplete="off" name="github" />
+                            </div>
+                            <div class="form-group">
+                              <label for="username">Username</label>
+                              <input type="text" class="form-control" id="username" placeholder="Email username" required autocomplete="off" name="username" />
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                  <label for="pass">First Name</label>
+                                  <input type="password" class="form-control" id="pass" name="pass" placeholder="Enter Password" required autocomplete="off">
+                                </div>
+                                <div class="form-group col-md-6">
+                                  <label for="cpass">Last Name</label>
+                                  <input type="password" class="form-control" id="cpass" placeholder="Confirm Password" required autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" value="" name="check" id="check">
+                              <label class="form-check-label" for="check">
+                                  I accept the<small>Code of Conduct</small> of this community
+                              </label>
+                            </div>
+                            <div class="signup-btn">
+                              <button type="submit" class="btn btn-primary submit-btn">Submit</button>
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            </div>
+                          </form>
+                        </div>
+                        <div class="tab-pane" id="commSignUp">
+                          <h3>Notice the gap between the content and tab after applying a background color</h3>
+                        </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>-->
+    </header>
+
+
+
+
+    <section id="projects" class="projects-section bg-light">
+      <div class="container">
+
+
+        <div class="row align-items-center no-gutters mb-4 mb-lg-5">
+          <div class="col-xl-8 col-lg-7">
+            <img class="img-fluid mb-3 mb-lg-0" src="img/back.jpg" alt="">
+          </div>
+          <div class="col-xl-4 col-lg-5">
+            <div class="featured-text text-center text-lg-left">
+              <h4>ABOUT DONUT</h4>
+              <p class="text-black-50 mb-0">This is an Open Source social Platform where people can interact with Open Source expertise around the globe and work on different projects.</p>
+            </div>
+          </div>
         </div>
 
-        <div id="signup_comm">
 
-          <form action="/" method="post" name="myForm" onsubmit="return(validate());">
-            <div class="field-wrap">
-              <input type="text" placeholder="Organization's Full Name" required autocomplete="off" />
-            </div>
-            <div class="field-wrap">
-              <input type="email" name="EMail" placeholder="Email Address" required autocomplete="off" />
-            </div>
-            <div class="top-row">
-              <div class="field-wrap">
-                <input type="text" placeholder="Admin's Full Name" required autocomplete="off" />
-              </div>
-              <div class="field-wrap">
-                <select name="Organiztion Type" id="drop" required>
-                  <option value="" disabled selected>Organization Type</option>
-                  <option value="1">Type A</option>
-                  <option value="2">Type B</option>
-                  <option value="3">Type C</option>
-                  <option value="4">Other</option>
-                </select>
+        <div class="row justify-content-center no-gutters mb-5 mb-lg-0">
+          <div class="col-lg-6">
+            <img class="img-fluid" src="img/thumb-1920-587777%20(3).jpg" alt="">
+          </div>
+          <div class="col-lg-6">
+            <div class="bg-black text-center h-100 project">
+              <div class="d-flex h-100">
+                <div class="project-text w-100 my-auto text-center text-lg-left">
+                  <h4 class="text-white">WELCOME TO CODEUINO</h4>
+                  <p class="mb-0 text-white-50">READY FOR SOME OPEN SOURCE?</p>
+                  <hr class="d-none d-lg-block mb-0 ml-0">
+                </div>
               </div>
             </div>
-            <div class="field-wrap">
-              <input type="text" placeholder="Github Handle Link" required autocomplete="off" />
-            </div>
-            <div class="field-wrap">
-              <input type="text" placeholder="Organization Website Link" required autocomplete="off" />
-            </div>
-            <div class="top-row">
-              <div class="field-wrap">
-                <input type="password" id="pass" placeholder="Password" required autocomplete="off" />
-              </div>
-              <div class="field-wrap">
-                <input type="password" id="cpass" placeholder="Confirm Password" required autocomplete="off" />
-              </div>
-            </div>
-            <div class="field-wrap">
-              <label class="container">I accept the
-                <i>Code of Conduct</i> of this community
-                <input type="checkbox" checked="checked" name="check" id="check">
-                <span class="checkorg"></span>
-              </label>
-            </div>
-            <button type="submit" class="button-block org_sign">Sign In</button>
-          </form>
+          </div>
+        </div>
 
+        <!-- Project Two Row -->
+        <div class="row justify-content-center no-gutters">
+          <div class="col-lg-6">
+            <img class="img-fluid" src="img/keyboard-966308_960_720%20(2).jpg" alt="">
+          </div>
+          <div class="col-lg-6 order-lg-first">
+            <div class="bg-black text-center h-100 project">
+              <div class="d-flex h-100">
+                <div class="project-text w-100 my-auto text-center text-lg-right">
+                  <h4 class="text-white">ABOUT THE PROJECTS</h4>
+                  <p class="mb-0 text-white-50">Projects filler text.</p>
+
+
+                  <a href="#projects" class="btn btn-primary js-scroll-trigger">PROJECTS</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+		 <div class="row justify-content-center no-gutters mb-5 mb-lg-0">
+          <div class="col-lg-6">
+            <img class="img-fluid" src="img/eventcd%20(2).jpg" alt="">
+          </div>
+          <div class="col-lg-6">
+            <div class="bg-black text-center h-100 project">
+              <div class="d-flex h-100">
+                <div class="project-text w-100 my-auto text-center text-lg-left">
+                  <h4 class="text-white">ABOUT THE EVENTS</h4>
+                  <p class="mb-0 text-white-50">Events filler text.</p>
+					<a href="#about" class="btn btn-primary js-scroll-trigger">EVENTS</a>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+		<div class="row justify-content-center no-gutters">
+          <div class="col-lg-6">
+            <img class="img-fluid" src="img/coding-dark-computer-bokeh-illustration%20(2).jpg" alt="">
+          </div>
+          <div class="col-lg-6 order-lg-first">
+            <div class="bg-black text-center h-100 project">
+              <div class="d-flex h-100">
+                <div class="project-text w-100 my-auto text-center text-lg-right">
+                  <h4 class="text-white">ABOUT THE SCHOLARSHIPS</h4>
+                  <p class="mb-0 text-white-50">Scholarships filler text.</p>
+                  <a href="#about" class="btn btn-primary js-scroll-trigger">SCHOLARSHIPS</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+		 <div class="row justify-content-center no-gutters mb-5 mb-lg-0">
+          <div class="col-lg-6">
+            <img class="img-fluid" src="img/different%20(2).jpg" alt="">
+          </div>
+          <div class="col-lg-6">
+            <div class="bg-black text-center h-100 project">
+              <div class="d-flex h-100">
+                <div class="project-text w-100 my-auto text-center text-lg-left">
+                  <h4 class="text-white">ABOUT DIFFERENT</h4>
+                  <p class="mb-0 text-white-50">Different filler text.</p>
+                  <a href="#about" class="btn btn-primary js-scroll-trigger">DIFFERENT</a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
       </div>
-      <!-- tab-content -->
+    </section>
 
-    </div>
-    <!-- /form -->
-  </div>
 
-  <div class="log_in">
-    <div class="phrase l1" id="user">
-      <p>
-        LOG IN AS A
-        <n>USER</n>!
+    <section id="signup" class="signup-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-10 col-lg-8 mx-auto text-center">
 
-      </p>
-    </div>
-    <div class="form">
 
-      <form action="/auth/login" method="post">
-        <div class="field-wrap">
-          <input type="email" placeholder="Email Address" required autocomplete="off" name="email" />
+            <h2 class="text-white mb-5">Thank you for visiting!</h2>
+
+
+
+          </div>
         </div>
-        <div class="field-wrap">
-          <input type="password" id="pass" placeholder="Password" required autocomplete="off" name="pass" />
+      </div>
+    </section>
+
+
+    <section class="contact-section bg-black">
+      <div class="container">
+
+
+
+
+        <div class="social d-flex justify-content-center">
+
+          <a href="https://github.com/codeuino/Social-Platform-Donut" class="mx-2">
+            <i class="fab fa-github"></i>
+          </a>
         </div>
-        <button type="submit" class="button-block">Login</button>
-      </form>
-    </div>
 
-    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+      </div>
+    </section>
 
 
+    <footer class="bg-black small text-center text-white-50">
+      <div class="container">
+        DONUT: Codeuino's Social Platform
+      </div>
+    </footer>
 
-    <script src="js/index.js"></script>
-</body>
-<script src="js/signup.js"></script>
+
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+
+    <script src="js/codeuino.js"></script>
+
+  </body>
 
 </html>
