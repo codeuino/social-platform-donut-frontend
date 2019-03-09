@@ -21,7 +21,7 @@ mongoose.connect(secret.database, function () {
 var loged = [];
 
 app.set('view engine', 'ejs');
-app.use(express.static(path.join(__dirname,'views')));
+app.use(express.static(path.join(__dirname,'/views')));
 
 app.use(cookie({
     maxAge: 24 * 60 * 60 * 1000,
