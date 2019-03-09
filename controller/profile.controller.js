@@ -2,6 +2,9 @@ const user = require('../schema/user.js');
 const proj = require('../schema/project.js');
 
 module.exports = {
+  SubmitprojectForm:function(req,res){
+    res.render('projectForm')
+  },
   search: function(req, res) {
     console.log(req.body);
   },
@@ -18,28 +21,30 @@ module.exports = {
       });
   },
   profileViewSd: function(req, res) {
-    proj
-      .find({ pid: req.params.sd })
-      .lean()
-      .then(function(ques) {
-        user
-          .findOne({ Eid: req.params.sd })
-          .lean()
-          .then(function(use) {
-            res.render('other-landing', {
-              use: use,
-              ques: ques,
-              sign: req.user
-            });
-          });
-      });
+    proj.aggregate([
+      {
+        $lookup:{
+          from:'users',
+          localField:'pid',
+          foreignField:'Eid',
+          as:'result'
+        }
+      }
+    ]).sort({createdAt:-1}).then((da)=>{
+      console.log(req.user);
+      user.findOne({ Eid: req.params.sd }).then(function (use) {
+          res.render('other-landing', { use: use, ques: da, sign: req.user});
+      })
+    })
   },
   publish: function(req, res) {
+      var lan=req.body.genre.split(',');
     new proj({
+      createdAt:Date.now(),
       pname: req.body.contentname,
       pid: req.user.Eid,
       github: req.body.git,
-      Lang: req.body.genre,
+      Lang:lan,
       content: req.body.cont,
       upvote: '',
       downvote: '',
