@@ -1,4 +1,8 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> b881016c9b3157ef94f9993d0e518a0002ade795
 const user = require('../schema/user.js');
 const proj = require('../schema/project.js');
 
@@ -79,6 +83,7 @@ module.exports = {
       })
     }
 }
+<<<<<<< HEAD
 =======
 const user = require('../schema/user.js');
 const proj = require('../schema/project.js');
@@ -227,3 +232,5 @@ module.exports = {
 };
     
 >>>>>>> ef290da7bb59ca9e89e4c3a99f6962ae404a69d3
+=======
+>>>>>>> b881016c9b3157ef94f9993d0e518a0002ade795
