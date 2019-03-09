@@ -1,7 +1,8 @@
 module.exports = {
   oauth: {
-    clientID: "192695093229-kf95jtdv1jge25d86ak99e68dkrpu33o.apps.googleusercontent.com",
-    clientSecret: "rXvfxBahDlJF1ORk7y660XM8"
+    clientID:
+      '192695093229-kf95jtdv1jge25d86ak99e68dkrpu33o.apps.googleusercontent.com',
+    clientSecret: 'rXvfxBahDlJF1ORk7y660XM8'
   },
   database: 'mongodb://localhost:27017/donut1',
   github: {
@@ -12,4 +13,4 @@ module.exports = {
     clientID: '383717979035587',
     clientSecret: '82bd80d286ef6e45606da6d53a97efbc'
   }
-}
+};
