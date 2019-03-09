@@ -13,13 +13,11 @@
         <link href="/vendor/bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet">
         <!-- Material Design Bootstrap -->
         <link href="/vendor/mdbootstrap/mdb.min.css" type="text/css" rel="stylesheet">
+
         <!-- Your custom styles (optional) -->
-        <link href="/css/other-landing.css" rel="stylesheet">
+        <link href="css/other-landing.css" rel="stylesheet">
 
         <style>
-        .reply{
-          resize: none;
-        }
         .ch{
 
         },
@@ -71,6 +69,9 @@
                       <li class="nav-item">
                         <a class="nav-link" href="/profile/dashBoard">DashBoard</a>
                       </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="/profile/submitProject">Publish</a>
+                      </li>
                     </ul>
                   </ul>
                 </div>
@@ -120,7 +121,7 @@
                       </div>
                       <div class="container">
                         <div class="row">
-                          <a href="#" class="btn btn-outline-grey btn-rounded ch1" id="<%=x.proid%>"><%=x.upvote.length%></a>
+                          <a href="#" class="btn btn-outline-grey btn-rounded ch" id="<%=x.proid%>"><%=x.upvote.length%></a>
                           <a href="#" class="btn btn-outline-grey btn-rounded ch2" id="<%=x.proid%>"><%=x.downvote.length%></a>
                           <a href="#" class="btn btn-outline-grey btn-rounded">Comment</a>
                           <a href="#" class="btn btn-outline-grey btn-rounded">Share</a>
@@ -128,8 +129,8 @@
                       </div>
                       <div class="container">
                         <div class="row">
-                          <div class="form-group grey-border btn-rounded w-100 pr-2">
-                            <textarea class="form-control z-depth-1 btn-rounded reply" rows="3" placeholder="Reply"></textarea>
+                          <div class="form-group grey-border btn-rounded">
+                            <textarea class="form-control z-depth-1 btn-rounded" rows="3" placeholder="Reply"></textarea>
                           </div>
                         </div>
                       </div>
@@ -169,8 +170,8 @@
                   </div>
                   <div class="container">
                     <div class="row">
-                      <a href="#" class="btn btn-outline-grey btn-rounded ch1">+1</a>
-                      <a href="#" class="btn btn-outline-grey btn-rounded ch2">-1</a>
+                      <a href="#" class="btn btn-outline-grey btn-rounded"></a>
+                      <a href="#" class="btn btn-outline-grey btn-rounded">-1</a>
                       <a href="#" class="btn btn-outline-grey btn-rounded">Comment</a>
                       <a href="#" class="btn btn-outline-grey btn-rounded">Share</a>
                     </div>
@@ -235,27 +236,22 @@
         <script>
         $(document).ready(function(){
 
-          $('.ch1').click(function(e){
+          $('.ch').click(function(e){
             e.preventDefault();
             var z=$(this).attr('id');
+            alert(z);
             $.ajax({
 
-                url:'/profile/upDownVote',
+                url:'/profile/upvote',
                 method:'POST',
                 contentType:'application/json',
-                data:JSON.stringify({'project':z,client:'<%=sign.Eid%>','vote':'+1'}),
+                data:JSON.stringify({'project':z,client:'<%=sign.Eid%>'}),
                 success:function(res){
-                  console.log("Sucess")
-                  //Frontend code can be implemented
-                },
-                error:function (res) {
-                  console.log(res)
-                  console.log("Error")
-                  //Frontend code can be implemented
-
+                    console.log(res);
                 }
             })
               });
+
 
 
           $('.ch2').click(function(e){
@@ -275,7 +271,6 @@
                   console.log(res)
                   console.log("Error")
                   //Frontend code can be implemented
-
                 }
            });
           })

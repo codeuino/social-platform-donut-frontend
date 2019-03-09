@@ -31,7 +31,7 @@
         position: absolute;
         bottom: -200px;
         max-width: 600px;
-    
+
     }
     footer{
         min-height: 200px;
@@ -48,24 +48,24 @@
         <div class="container"  id="mainCard">
             <div class="card card-body">
                 <h2 class="card-title">Submit your project</h2>
-                <form>
+                <form  method="POST" action="/profile/publish">
                     <div class="form-group">
                       <label>Project Name</label>
-                      <input name="pname" type="type" class="form-control"  placeholder="Enter Project Name">
+                      <input name="contentname"  type="type" class="form-control"  placeholder="Enter Project Name">
                     </div>
                     <div class="form-group">
                         <label>Github URL</label>
-                        <input name="github" type="text" class="form-control" placeholder="Enter Github URL of your project">
+                        <input name="git"type="text" class="form-control" placeholder="Enter Github URL of your project">
                     </div>
                     <div class="form-group">
                       <label >Languages Used</label>
-                      <input name="Lang" class="form-control" type="text" class="form-control" placeholder="Write languages used separate by commas . Eg 'Python, Java'">
+                      <input name="genre" class="form-control" type="text" class="form-control" placeholder="Write languages used separate by commas . Eg 'Python, Java'">
                     </div>
                     <div class="form-group">
                         <label>Description</label>
                     </div>
                     <div class="form-group">
-                        <textarea name="content" placeholder="Describe about your project " cols="55" rows="3"></textarea>
+                        <textarea  name="cont" placeholder="Describe about your project " cols="55" rows="3"></textarea>
                       </div>
                     <button type="submit" class="btn btn-primary btn-block">Submit</button>
                   </form>
@@ -73,10 +73,10 @@
         </div>
     </div>
     <footer class="bg-dark small text-center text-white-10">
-            
+
             <div class="container pt-5 text-white">
                 <div class="social d-flex justify-content-center">
-          
+
                     <a href="https://github.com/codeuino/Social-Platform-Donut" class="mx-2">
                       <i class="fab fa-github text-white mb-3 " style="font-size:32px"></i>
                     </a>
@@ -84,7 +84,7 @@
               DONUT: Codeuino's Social Platform
             </div>
     </footer>
-      
+
 
 
   </body>
