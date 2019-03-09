@@ -1,89 +1,88 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
-const bycrypt = require('bcrypt-nodejs');
+const mongoose=require('mongoose');
+const Schema=mongoose.Schema;
+const bycrypt=require('bcrypt-nodejs')
 
-const user = new Schema({
-  fname: {
-    type: String
+const user=new Schema({
+  name:{
+    type:String,
+    required:[true,'Name is mandatory']
+    //Name cant be blank
   },
-  lname: {
-    type: String
+  email:{
+    type:String
+    //Email can be blank in case the user signs up using facebook or github and
+    //we dont have email in the scope
   },
-  email: {
-    type: String
+  dob:{
+    type:Date
+    //Date for Dob, as on string the query Cannot be performed
   },
-  dob: {
-    type: String
+  gen:{
+    type:Number,
+    enum:[1,2] //male : 1,female : 2
   },
-  gen: {
-    type: Number
+  github:{
+    type:String
+    //url for github profile query
   },
-  github: {
-    type: String
+  username:{
+    type:String,
+    unique:true
+    // username has to be unique
   },
-  username: {
-    type: String
+  pass:{
+    type:String
   },
-  pass: {
-    type: String
+  Eid:{
+    type:Number
   },
-  Eid: {
-    type: Number
+  followers:{
+    type:Object
+    /*
+    [
+    {username:"abcd"},{username:"bcsa"}
+    The benifit of using a object rather than the earlier string is beacuse there
+    will be just one query for finding the number of followers and people
+    following
+     */
   },
-  follower: {
-    type: Number
+  following:{
+    type:Object
+    //same logic as in case above
   },
-  following: {
-    type: Number
+  status:{
+    type:String
   },
-  status: {
-    type: String
+  Eid:{
+    type:String
   },
-/*eslint-disable */
-  Eid: {
-    type: String
+  bio:{
+    type:String
   },
-  /*eslint-enable*/
-  bio: {
-    type: String
-  },
-  lang: {
-    type: [String]
-  },
-  linkedin: {
-    type: String
-  },
-  facebook: {
-    type: String
-  },
-  country: {
-    type: String
-  },
-  city: {
-    type: String
-  },
-  college: {
-    type: String
+  lang:{
+    type:Object
   }
 });
 
-user.pre('save', function(next) {
-  var user = this;
-  if (!user.isModified('pass')) return next();
-  bycrypt.genSalt(10, function(err, salt) {
-    if (err) {
+user.pre('save',function(next){
+  var user=this;
+  if(!user.isModified('pass')) return next();
+  bycrypt.genSalt(10,function(err,salt){
+
+    if(err)
+    {
       return next(err);
     }
-    bycrypt.hash(user.password, salt, null, function(err, hash) {
-      user.pass = hash;
+    bycrypt.hash(user.password,salt,null,function(err,hash){
+      user.pass=hash;
       next();
-    });
-  });
+    })
+  })
 });
 
-user.methods.compare = function(pass) {
-  return bycrypt.compareSync(pass, this.password);
-};
+user.methods.compare=function(pass){
+return bycrypt.compareSync(pass,this.password);
+}
 
-const use = mongoose.model('user', user);
-module.exports = use;
+const use=mongoose.model('user',user);
+module.exports=use;
