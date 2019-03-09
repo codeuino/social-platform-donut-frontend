@@ -1,0 +1,32 @@
+
+body{
+    background-image: url(../img/back.jpg);
+    background-size: cover;
+    font-size: 15px;
+    line-height: 2;
+    font-weight: 400;
+    color: #6e6e6e;
+}
+
+h2{
+  text-align: center;
+}
+
+.phrase{
+     margin-top: 15vw;
+     margin-right: 50px;
+     width: 30%;
+     color: #eee;
+     position: fixed;
+     display: inline-block;
+}
+
+.l1{
+    margin-right: 50px;
+    font-size: 50px;
+    font-family: "Gill Sans", sans-serif;
+    letter-spacing: -0.2vw;
+    color: #eee;
+    text-align: center;
+    font-weight: bold;
+}

@@ -74,7 +74,7 @@ user.pre('save', function(next) {
     if (err) {
       return next(err);
     }
-    bycrypt.hash(user.password, salt, null, function(err, hash) {
+    bycrypt.hash(user.pass, salt, null, function(err, hash) {
       user.pass = hash;
       next();
     });
@@ -82,7 +82,7 @@ user.pre('save', function(next) {
 });
 
 user.methods.compare = function(pass) {
-  return bycrypt.compareSync(pass, this.password);
+  return bycrypt.compareSync(pass, this.pass);
 };
 
 const use = mongoose.model('user', user);

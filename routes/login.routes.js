@@ -34,9 +34,25 @@ route.get(
   }
 );
 
+route.get('/login-page', function(req, res) {
+  if (req.user == null) {
+    res.render('login');
+  } else {
+    res.redirect('/profile/profile/' + req.user.Eid);
+  }
+});
+
+route.get('/signup-page', function(req, res) {
+  if (req.user == null) {
+    res.render('signup');
+  } else {
+    res.redirect('/profile/profile/' + req.user.Eid);
+  }
+});
+
 //post request
 
-route.post('/userlogin', url, function(req, res) {
+route.post('/signup', url, function(req, res) {
   new user({
     fname: req.body.fname,
     lname: req.body.lname,
@@ -59,10 +75,9 @@ route.post('/userlogin', url, function(req, res) {
 route.post('/login', url, function(req, res) {
   user
     .findOne({ email: req.body.email })
-    .lean()
     .then(function(data) {
-      if (data.compare(req.body.password)) {
-        res.redirect('/profile/profile/' + data.eid);
+      if (data.compare(req.body.pass)) {
+        res.render('feed_page');
       } else {
         res.redirect('/');
       }
