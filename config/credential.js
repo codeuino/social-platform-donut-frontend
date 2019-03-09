@@ -3,7 +3,7 @@ module.exports = {
     clientID: "192695093229-kf95jtdv1jge25d86ak99e68dkrpu33o.apps.googleusercontent.com",
     clientSecret: "rXvfxBahDlJF1ORk7y660XM8"
   },
-  database: 'mongodb://uphaar:uphaar23@test-shard-00-00-mpfvn.mongodb.net:27017,test-shard-00-01-mpfvn.mongodb.net:27017,test-shard-00-02-mpfvn.mongodb.net:27017/test?ssl=true&replicaSet=test-shard-0&authSource=admin&retryWrites=true',
+  database: 'YOUR MONGODB URL',
   github: {
     clientID: 'c9afdb238ed98b213912',
     clientSecret: '3031efea8badea1381da682fd5f21e88e5a15d2f'
