@@ -8,7 +8,6 @@
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title>Codeuino</title>
         <!-- Font Awesome -->
-        <link rel="stylesheet" type="text/css" href="/vendor/fontawesome-free/css/fontawesome.min.css">
         <!-- Bootstrap core CSS -->
         <link href="/vendor/bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet">
         <!-- Material Design Bootstrap -->
@@ -231,13 +230,14 @@
         </div>
         </main>
         
-
+        <script type="text/javascript" src="/vendor/jquery/jquery.min.js"></script>
         <script>
         $(document).ready(function(){
 
           $('.ch1').click(function(e){
             e.preventDefault();
             var z=$(this).attr('id');
+            console.log($(this))
             $.ajax({
 
                 url:'/profile/upDownVote',
@@ -281,7 +281,6 @@
           })
         })
 </script>
-        <script type="text/javascript" src="/vendor/jquery/jquery.min.js"></script>
         <!-- Bootstrap tooltips -->
         <script type="text/javascript" src="/vendor/bootstrap/js/popper.min.js"></script>
         <!-- Bootstrap core JavaScript -->
