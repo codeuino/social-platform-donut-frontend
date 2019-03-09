@@ -271,6 +271,12 @@ body {
     width: 30%;
   }
 }
+@media (max-width: 768px) {
+  .masthead h1 {
+    font-size: 3rem;
+    line-height: unset;
+  }
+}
 
 .signup-section {
   padding: 10rem 0;
