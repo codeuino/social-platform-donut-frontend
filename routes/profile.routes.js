@@ -14,6 +14,7 @@ const auth = function(req, res, next) {
   }
 };
 
+route.get('/submitProject',auth,profileController.SubmitprojectForm)
 route.get('/search', url, jsonParser, profileController.search);
 
 route.post('/check', url, jsonParser, profileController.check);
