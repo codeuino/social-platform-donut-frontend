@@ -1,0 +1,46 @@
+{
+    "env": {
+        "node": true,
+        "commonjs": true,
+        "es6": true,
+        "jasmine": true,
+        "jquery": true,
+        "browser": true,
+        "mocha": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "prettier"
+    ],
+    "parserOptions": {
+        "ecmaVersion": 2016
+    },
+    "plugins": ["prettier"],
+    "rules": {
+        "indent": [
+            "error",
+            2
+        ],
+        "linebreak-style": [
+            "error",
+            "windows"
+        ],
+        "quotes": [
+            "error",
+            "single"
+        ],
+        "semi": [
+            "error",
+            "always"
+        ],
+        "prettier/prettier": [
+            "error",
+          {
+            "singleQuote": true
+          }
+          ],
+        "no-unused-vars": 1,
+        "no-console": 1,
+        "no-redeclare" : 1
+    }
+}

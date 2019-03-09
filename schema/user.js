@@ -1,74 +1,89 @@
-const mongoose=require('mongoose');
-const Schema=mongoose.Schema;
-const bycrypt=require('bcrypt-nodejs')
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+const bycrypt = require('bcrypt-nodejs');
 
-const user=new Schema({
-  fname:{
-    type:String
+const user = new Schema({
+  fname: {
+    type: String
   },
-  lname:{
-    type:String
+  lname: {
+    type: String
   },
-  email:{
-    type:String
+  email: {
+    type: String
   },
-  dob:{
-    type:String
+  dob: {
+    type: String
   },
-  gen:{
-    type:Number
+  gen: {
+    type: Number
   },
-  github:{
-    type:String
+  github: {
+    type: String
   },
-  username:{
-    type:String
+  username: {
+    type: String
   },
-  pass:{
-    type:String
+  pass: {
+    type: String
   },
-  Eid:{
-    type:Number
+  Eid: {
+    type: Number
   },
-  follower:{
-    type:Number
+  follower: {
+    type: Number
   },
-  following:{
-    type:Number
+  following: {
+    type: Number
   },
-  status:{
-    type:String
+  status: {
+    type: String
   },
-  Eid:{
-    type:String
+/*eslint-disable */
+  Eid: {
+    type: String
   },
-  bio:{
-    type:String
+  /*eslint-enable*/
+  bio: {
+    type: String
   },
-  lang:{
-    type:[String]
+  lang: {
+    type: [String]
+  },
+  linkedin: {
+    type: String
+  },
+  facebook: {
+    type: String
+  },
+  country: {
+    type: String
+  },
+  city: {
+    type: String
+  },
+  college: {
+    type: String
   }
 });
 
-user.pre('save',function(next){
-  var user=this;
-  if(!user.isModified('pass')) return next();
-  bycrypt.genSalt(10,function(err,salt){
-
-    if(err)
-    {
+user.pre('save', function(next) {
+  var user = this;
+  if (!user.isModified('pass')) return next();
+  bycrypt.genSalt(10, function(err, salt) {
+    if (err) {
       return next(err);
     }
-    bycrypt.hash(user.password,salt,null,function(err,hash){
-      user.pass=hash;
+    bycrypt.hash(user.password, salt, null, function(err, hash) {
+      user.pass = hash;
       next();
-    })
-  })
+    });
+  });
 });
 
-user.methods.compare=function(pass){
-return bycrypt.compareSync(pass,this.password);
-}
+user.methods.compare = function(pass) {
+  return bycrypt.compareSync(pass, this.password);
+};
 
-const use=mongoose.model('user',user);
-module.exports=use;
+const use = mongoose.model('user', user);
+module.exports = use;
