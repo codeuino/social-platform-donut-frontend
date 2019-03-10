@@ -1,4 +1,4 @@
-process.env.TESTING = true;
+// process.env.TESTING = true;
 const { expect } = require('chai');
 const secret = require('.././config/credential.js');
 const mongoose = require('mongoose');
