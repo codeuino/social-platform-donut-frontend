@@ -37,6 +37,11 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(indexRoutes);
+
+app.get('**',(req,res)=>{
+  res.render('error');
+});
+
 //Snapshot after routing
 const diff = hd.end();
 //Diff between both snapshots
