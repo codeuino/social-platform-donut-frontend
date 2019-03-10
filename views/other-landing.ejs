@@ -8,11 +8,11 @@
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title>Codeuino</title>
         <!-- Font Awesome -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <!-- Bootstrap core CSS -->
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/vendor/bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet">
         <!-- Material Design Bootstrap -->
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.4/css/mdb.min.css" rel="stylesheet">
+        <link href="/vendor/mdbootstrap/mdb.min.css" type="text/css" rel="stylesheet">
+
         <!-- Your custom styles (optional) -->
         <link href="../../css/other-landing.css" type="text/css" rel="stylesheet">
     </head>
@@ -174,8 +174,8 @@
                   </div>
                   <div class="container">
                     <div class="row">
-                      <div class="form-group grey-border btn-rounded">
-                        <textarea class="form-control z-depth-1 btn-rounded" rows="3" placeholder="Reply"></textarea>
+                      <div class="form-group grey-border btn-rounded w-100 pr-2">
+                        <textarea class="form-control z-depth-1 btn-rounded reply" rows="3" placeholder="Reply"></textarea>
                       </div>
                     </div>
                   </div>
@@ -227,19 +227,15 @@
             </div>
         </div>
         </main>
-        <!--Main Layout-->
-
-        <!-- SCRIPTS -->
-        <!-- JQuery -->
-
-        <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+        
+        <script type="text/javascript" src="/vendor/jquery/jquery.min.js"></script>
         <script>
         $(document).ready(function(){
 
           $('.ch').click(function(e){
             e.preventDefault();
             var z=$(this).attr('id');
-            alert(z);
+
             $.ajax({
 
                 url:'/profile/upvote',
@@ -250,23 +246,36 @@
                     console.log(res);
                 }
             })
+              });
 
 
 
+          $('.ch2').click(function(e){
+            e.preventDefault();
+            var z=$(this).attr('id');
+            $.ajax({
 
-          });
-
+                url:'/profile/upDownVote',
+                method:'POST',
+                contentType:'application/json',
+                data:JSON.stringify({'project':z,client:'<%=sign.Eid%>','vote':'-1'}),
+                success:function(res){
+                  console.log("Sucess")
+                  //Frontend code can be implemented
+                },
+                error:function (res) {
+                  console.log(res)
+                  console.log("Error")
+                  //Frontend code can be implemented
+                }
+           });
+          })
         })
-
-
-
-        </script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</script>
         <!-- Bootstrap tooltips -->
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
+        <script type="text/javascript" src="/vendor/bootstrap/js/popper.min.js"></script>
         <!-- Bootstrap core JavaScript -->
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
-        <!-- MDB core JavaScript -->
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.4/js/mdb.min.js"></script>
+        <script type="text/javascript" src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
     </body>
 </html>

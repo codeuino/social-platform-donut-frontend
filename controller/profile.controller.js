@@ -55,76 +55,26 @@ module.exports = {
         res.redirect('/profile/profileview/' + req.user.Eid);
       });
   },
-  upvote: function(req, res) {
-    var p = 0;
-
-    var check = 0;
-    var comment = ' ';
-    for (var q = 0; q < proj.downvote.length; q++) {
-      if (req.body.client == proj.downvote[q]) {
-        comment = 'Cannot upvote and downvote a post ';
-        check = 1;
-        break;
-      }
-    }
-
-    if (check == 1) {
-      res.send({ proj, comment });
-    } else {
-      for (var v = 0; v < proj.upvote.length; v++) {
-        if (req.body.client == proj.upvote[v]) {
-          p = 1;
-          proj.upvote.pop(req.body.client);
-          proj.save();
-          console.log('already present');
-          break;
+  upDownVote: function (req,res) {
+    proj.findOne({proid: req.body.project}).then((pro)=>{
+        if(pro.upDownVote.get(req.body.client)){
+            if(pro.upDownVote.get(req.body.client)=="-1"){
+                pro.upDownVote.set(req.body.client,"+1")
+                return pro.save()
+                
+            }else{
+                pro.upDownVote.set(req.body.client,"-1")
+                return pro.save()
+                
+            }
+        }else{
+            pro.upDownVote.set(req.body.client,req.body.vote)
+            return pro.save()
         }
-      }
-
-      if (p == 0) {
-        proj.upvote.push(req.body.client);
-        proj.save();
-      }
-
-      res.send({ comment, proj });
-    }
-  },
-  downvote: function(req, res) {
-    proj.findOne({ proid: req.body.project }).then(function(proj) {
-      var p = 0;
-      var check = 0;
-      var comment = '';
-
-      for (var q = 0; q < proj.upvote.length; q++) {
-        if (req.body.client == proj.upvote[q]) {
-          comment = 'Cannot do upvote downvote at same post';
-          check = 1;
-          break;
-        }
-      }
-
-      if (check == 1) {
-        res.send({ comment, proj });
-      } else {
-        for (var v = 0; v < proj.downvote.length; v++) {
-          if (req.body.client == proj.downvote[v]) {
-            p = 1;
-            proj.downvote.pop(req.body.client);
-            proj.save();
-            console.log('already present');
-            break;
-          }
-        }
-
-        if (p == 0) {
-          proj.downvote.push(req.body.client);
-          proj.save();
-        }
-
-        res.send({ comment, proj });
-      }
-    });
-  },
+    }).catch((err)=>{
+        return err
+    })
+  }, 
   ch2: function(req, res) {
     res.render('main-landing', { sign: req.user });
   },
