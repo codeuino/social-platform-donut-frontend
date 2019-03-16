@@ -14,6 +14,8 @@ const notification = require('./schema/notification.js');
 const indexRoutes = require('./routes/index.routes');
 const facebook = require('./config/facebook.js');
 const memwatch = require('node-memwatch');
+const expressValidator = require('express-validator');
+
 //Snapshot at start
 const hd = new memwatch.HeapDiff();
 
@@ -35,7 +37,7 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
-
+app.use(expressValidator());
 app.use(indexRoutes);
 
 app.get('**',(req,res)=>{

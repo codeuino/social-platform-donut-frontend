@@ -1,5 +1,6 @@
 const user = require('../schema/user.js');
 const proj = require('../schema/project.js');
+const expressValidator = require('express-validator');
 
 module.exports = {
   SubmitprojectForm:function(req,res){
@@ -38,23 +39,40 @@ module.exports = {
     })
   },
   publish: function(req, res) {
-      var lan=req.body.genre.split(',');
-    new proj({
-      createdAt:Date.now(),
-      pname: req.body.contentname,
-      pid: req.user.Eid,
-      github: req.body.git,
-      Lang:lan,
-      content: req.body.cont,
-      upvote: '',
-      downvote: '',
-      proid: Math.floor(Math.random() * 100000)
-    })
-      .save()
-      .then(function() {
-        res.redirect('/profile/profileview/' + req.user.Eid);
-      });
-  },
+    var lan=req.body.genre.split(',');
+    req.check('contentname','Project name is required !!').notEmpty();
+    req.check('git','Github url is required !!').isURL();
+    req.check('cont','Description is required !!').notEmpty();
+    req.check('genre','Language used is required !!').notEmpty();
+    req.getValidationResult(req)
+      .then((result)=>{
+        if(result.isEmpty() === false){
+          result.array().forEach((error)=>{
+            console.log(error.msg);
+            res.redirect('/profile/submitProject');
+          });
+        } else {
+          new proj({
+            createdAt:Date.now(),
+            pname: req.body.contentname,
+            pid: req.user.Eid,
+            github: req.body.git,
+            Lang:lan,
+            content: req.body.cont,
+            upvote: '',
+            downvote: '',
+            proid: Math.floor(Math.random() * 100000)
+          })
+            .save()
+            .then(function() {
+              res.redirect('/profile/profileview/' + req.user.Eid);
+            });
+        }
+       })
+       .catch((err)=>{
+         console.log(`${err}`);
+       });
+},
   upDownVote: function (req,res) {
     proj.findOne({proid: req.body.project}).then((pro)=>{
         if(pro.upDownVote.get(req.body.client)){
