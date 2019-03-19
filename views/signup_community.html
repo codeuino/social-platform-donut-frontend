@@ -11,8 +11,11 @@
     <link rel="stylesheet" href="css/style.css">
     <style>
       .signup{
-      display: block;
+        display: block;
+        background: url('./img/back.jpg');
+        height: 756px;
       }
+      
     </style>
     <script src="js/signup_validator.js"></script>
   </head>
@@ -46,17 +49,17 @@
       <div class="form">
         <form action="/" method="post" name="myForm" onsubmit="return(validate());">
           <div class="field-wrap">
-            <input type="text" placeholder="Organization's Full Name" required autocomplete="off" />
+            <input type="text" class='form-control' placeholder="Organization's Full Name" required autocomplete="off" />
           </div>
           <div class="field-wrap">
-            <input type="email" name="EMail" placeholder="Email Address" required autocomplete="off"/>
+            <input type="email" name="EMail" class='form-control' placeholder="Email Address" required autocomplete="off"/>
           </div>
           <div class="top-row">
             <div class="field-wrap">
-              <input type="text" placeholder="Admin's Full Name" required autocomplete="off" />
+              <input type="text" class='form-control' placeholder="Admin's Full Name" required autocomplete="off" />
             </div>
             <div class="field-wrap">
-              <select name="Organiztion Type" id="drop" required>
+              <select name="Organiztion Type" class='form-control' required>
                 <option value="" disabled selected>Organization Type</option>
                 <option value="1">Type A</option>
                 <option value="2">Type B</option>
@@ -66,26 +69,27 @@
             </div>
           </div>
           <div class="field-wrap">
-            <input type="text" placeholder="Github Handle Link" required autocomplete="off"/>
+            <input type="text" class='form-control' placeholder="Github Handle Link" required autocomplete="off"/>
           </div>
           <div class="field-wrap">
-            <input type="text" placeholder="Organization Website Link" required autocomplete="off"/>
+            <input type="text" class='form-control' placeholder="Organization Website Link" required autocomplete="off"/>
           </div>
           <div class="top-row">
             <div class="field-wrap">
-              <input type="password" id="pass" placeholder="Password" required autocomplete="off" />
+              <input type="password" class='form-control' id="pass" placeholder="Password" required autocomplete="off" />
             </div>
             <div class="field-wrap">
-              <input type="password" id="cpass" placeholder="Confirm Password" required autocomplete="off"/>
+              <input type="password" class='form-control' id="cpass" placeholder="Confirm Password" required autocomplete="off"/>
             </div>
           </div>
           <div class="field-wrap">
             <label class="container">I accept the <i>Code of Conduct</i> of this community
-            <input type="checkbox" checked="checked" name="check" id="check">
+            <input type="checkbox" class='form-control' checked="checked" name="check" id="check">
             <span class="checkorg"></span>
             </label>
           </div>
-          <button type="submit" class="button-block org_sign">Sign In</button>
+          <div style='text-align: center'><button type="submit" class="btn btn-success" style='width : 30%'>Sign In</button></div>
+          </form>
         </form>
       </div>
     </div>

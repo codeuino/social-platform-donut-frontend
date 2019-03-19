@@ -15,17 +15,22 @@ github:{
   type:String
 },
 Lang:{
-  type:String
+  type:[String]
 },
 content:{
   type:String
 },
-upDownVote:{
-  type:Map,
-  of: String,
+upvote:{
+  type:[String]
+},
+downvote:{
+  type:[String]
 },
 proid:{
   type:Number
+},
+createdAt:{
+  type:Date
 }
 
 });
