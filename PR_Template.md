@@ -21,26 +21,12 @@ I added some new fields to the schema of the user.js, project.js and notificatio
 - added field linkedUser(type:\[Number]) for all the people linked with project.
 
 ### **Before and After Screenshots**
-# Before
-![Alt text](/7.jpg?raw=true "Optional Title")
-![Alt text](/8.jpg?raw=true "Optional Title")
-![Alt text](/9.jpg?raw=true "Optional Title")
-![Alt text](/10.jpg?raw=true "Optional Title")
-
-
-# After
-![Alt text](/1.jpg?raw=true "Optional Title")
-![Alt text](/2.jpg?raw=true "Optional Title")
-![Alt text](/3.jpg?raw=true "Optional Title")
-![Alt text](/4.jpg?raw=true "Optional Title")
-![Alt text](/5.jpg?raw=true "Optional Title")
-![Alt text](/6.jpg?raw=true "Optional Title")
 
 ### **Type of Change**
 - Small refactor
 
 ### **Checklist**
-- [ ] My code follow the same style as the codebase
-- [ ] My Code changed required change in documentation
-- [ ] I have updated the Readme accordingly
-- [ ] I made PR within **development branch only**
+- My code follow the same style as the codebase
+- My Code changed required change in documentation
+- I have updated the Readme accordingly
+- I made PR within **development branch only**
