@@ -15,6 +15,7 @@ const indexRoutes = require('./routes/index.routes');
 const facebook = require('./config/facebook.js');
 const memwatch = require('node-memwatch');
 const expressValidator = require('express-validator');
+const methodOverride = require('method-override');
 
 //Snapshot at start
 const hd = new memwatch.HeapDiff();
@@ -27,6 +28,7 @@ const loged = [];
 
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'views')));
+app.use(methodOverride('_method'));
 
 app.use(
   cookie({
