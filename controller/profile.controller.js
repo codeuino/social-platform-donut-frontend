@@ -1,6 +1,7 @@
 const user = require('../schema/user.js');
 const proj = require('../schema/project.js');
 const expressValidator = require('express-validator');
+const { check, validationResult } = require('express-validator/check');
 
 module.exports = {
   SubmitprojectForm:function(req,res){
@@ -108,19 +109,48 @@ module.exports = {
   updateDetails: function(req, res) {
     user.findOne({ Eid: req.user.Eid }).then(function(data) {
       // prettier-ignore
-      (data.fname = req.body.fname),
-      (data.lname = req.body.lname),
-      (data.bio = req.body.bio),
-      (data.college = req.body.college),
-      (data.email = req.body.email),
-      (data.github = req.body.githubUrl),
-      (data.linkedin = req.body.linkedinUrl),
-      (data.city = req.body.city),
-      (data.country = req.body.country),
-      (data.lang = req.body.languages),
-      (data.facebook = req.body.facebookUrl);
-      data.save();
-      res.send('success');
+      req.check('fname','First name is required !').notEmpty();
+      req.check('lname','Last name is required !').notEmpty();
+      req.check('bio','Bio is required !').notEmpty();
+      req.check('college','College name is required !').notEmpty();
+      req.check('email','Email is required !').isEmail();
+      req.check('githubUrl','Github url is required !').isURL();
+      req.check('linkedinUrl','Linkedin url is required !').isURL();
+      req.check('facebookUrl','Facebook url is required !').isURL();
+      req.check('city','City name is required !').notEmpty();
+      req.check('country','Country name is required !').notEmpty();
+      req.check('languages','Language is required !').notEmpty();
+      req.getValidationResult(req)
+      .then((result)=>{
+        if(result.isEmpty() === true){
+          result.array().forEach((error)=>{
+            console.log(error.msg);
+            res.redirect('/profile/setting');
+          });
+        } 
+      })
+      .catch((err)=>{
+        console.log(`${err}`);
+      });       
+          (data.fname = req.body.fname),
+          (data.lname = req.body.lname),
+          (data.bio = req.body.bio),
+          (data.college = req.body.college),
+          (data.email = req.body.email),
+          (data.github = req.body.githubUrl),
+          (data.linkedin = req.body.linkedinUrl),
+          (data.city = req.body.city),
+          (data.country = req.body.country),
+          (data.lang = req.body.languages),
+          (data.facebook = req.body.facebookUrl);
+          data.save()
+            .then(()=>{
+              console.log('profile updated !');
+              // res.send('success');
+            })
+            .catch((err)=>{
+              console.log(`${err}`);
+            });
     });
   },
   getDetails: function(req, res) {

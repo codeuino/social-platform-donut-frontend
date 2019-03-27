@@ -17,6 +17,7 @@
     "ejs": "^2.6.1",
     "express": "^4.16.3",
     "express-validator": "^5.3.1",
+    "method-override": "^3.0.0",
     "mongo": "^0.1.0",
     "mongodb": "^3.1.0",
     "mongoose": "^5.1.7",
