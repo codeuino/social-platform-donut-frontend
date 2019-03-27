@@ -19,7 +19,7 @@
     "express-validator": "^5.3.1",
     "mongo": "^0.1.0",
     "mongodb": "^3.1.0",
-    "mongoose": "^5.1.7",
+    "mongoose": "^5.4.19",
     "node": "^10.5.0",
     "node-memwatch": "^1.0.1",
     "nodemon": "^1.18.8",
