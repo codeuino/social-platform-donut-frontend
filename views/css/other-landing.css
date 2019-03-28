@@ -109,3 +109,15 @@ form input.form-control{
 #search-input {
   height: 29px;
 }
+
+.notification {
+  padding: 5px 10px;
+}
+.notification-name {
+  font-size: 1.5vh;
+  font-weight: bold;
+}
+.notification:hover {
+  cursor: pointer;
+  background-color: #FAFAFA;
+}

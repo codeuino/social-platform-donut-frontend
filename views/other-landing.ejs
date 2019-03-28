@@ -19,10 +19,8 @@
         <!-- Socket.io -->
         <script src="/socket.io/socket.io.js"></script>
 
-        <!-- Notification Handler -->
-        <script src="js/notify.js"></script>
-        <style>
-        .ch{
+        <!-- Vue.js -->
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 
         <link href="/vendor/mdbootstrap/mdb.min.css" type="text/css" rel="stylesheet">
 
@@ -81,6 +79,19 @@
                       <li class="nav-item">
                         <a class="nav-link" href="/profile/submitProject">Publish</a>
                       </li>
+                      <li class="nav-item">
+                        <div class="dropdown">
+                          <button class="btn btn-primary btn-sm dropdown nav-item" type="button" data-toggle="dropdown">Notifications</button>
+                          <ul class="dropdown-menu" id="notification-list">
+                           <li href="#" v-for="notification in notificationList">
+                              <div class="notification">
+                                <div class="notification-name"> {{ notification.fname + ' ' + notification.lname }}</div>
+                                <div class="notification-body">Sample Message</div>
+                              </div>
+                           </li>
+                          </ul>
+                        </div>
+                      </li>
                     </ul>
                   </ul>
                 </div>
@@ -96,7 +107,6 @@
             <!--Navbar-->
 
             <!--/.Navbar-->
-
         </header>
         <!--Main Navigation-->
         <!--Main Layout-->
@@ -289,6 +299,9 @@
         <script type="text/javascript" src="/vendor/bootstrap/js/popper.min.js"></script>
         <!-- Bootstrap core JavaScript -->
         <script type="text/javascript" src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  
+        <!-- Notification Handler -->
+        <script src="/js/notify.js"></script>
 
     </body>
 </html>
