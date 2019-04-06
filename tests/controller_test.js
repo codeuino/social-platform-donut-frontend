@@ -38,6 +38,7 @@ describe('controllers', () => {
       .post('/auth/userlogin')
       .send({
         fname: 'tushar',
+        email:'tushar.goel.dav@gmail.com',
         lname: 'goel',
         dob: '29/08/1999',
         github: 'TG1999',
@@ -47,4 +48,11 @@ describe('controllers', () => {
       .expect(200)
       .expect(/Codeuino/, done);
   });
+  it('logout user', done => {
+    request(server)
+      .get('/auth/logout')
+      .expect(302)
+      .expect('Found. Redirecting to /', done);
+  });
+  
 });
