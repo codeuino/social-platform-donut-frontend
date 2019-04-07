@@ -88,6 +88,9 @@ const user = new Schema({
   },
   blockedUser : {
     type : [Number]
+  },
+  profilePicture:{
+    type: String
   }
 });
 
