@@ -59,7 +59,7 @@ passport.use(
         
         upload(req,res,(err)=>{
           if(err){
-            let img=oldMan.jpeg
+            let img="oldMan.jpeg"
           }else{
             let img=req.file.filename
           }
