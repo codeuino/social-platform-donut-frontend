@@ -22,6 +22,7 @@
     "mongo": "^0.1.0",
     "mongodb": "^3.1.0",
     "mongoose": "^5.1.7",
+    "multer": "^1.4.1",
     "node": "^10.5.0",
     "node-memwatch": "^1.0.1",
     "nodemon": "^1.18.8",
