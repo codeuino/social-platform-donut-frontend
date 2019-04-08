@@ -5,14 +5,13 @@ const passport = require('passport');
 const user = require('../schema/user.js');
 const route = express.Router();
 const multer=require('multer')
-
+const path=require('path')
 //MULTER
 const storage=multer.diskStorage({
-  dest: (req, file, cb) => {
+  destination: (req, file, cb) => {
     cb(null, './views/uploads/profilePics')
   },
   filename:function(req,file,cb){
-      console.log(file)
       cb(null,file.fieldname+"-"+Date.now()+path.extname(file.originalname))
   }
 })
@@ -56,7 +55,12 @@ route.get('/signup',url,function(req,res){
 //post request
 //SIGNUP ROUTE
 route.post('/userlogin',upload.single('profilepic'), function(req, res) {
-  console.log(req.file)
+  let img=""
+  if(req.file){
+    img=req.file.filename
+  }else{
+    img="oldMan.jpeg"
+  }
   new user({
     fname: req.body.fname,
     lname: req.body.lname,
@@ -69,7 +73,7 @@ route.post('/userlogin',upload.single('profilepic'), function(req, res) {
     following: 0,
     status: 'idle',
     Eid: Math.floor(Math.random() * 1000000),
-    profilePicture:"oldMan.jpeg",
+    profilePicture:img,
 
   })
     .save()
