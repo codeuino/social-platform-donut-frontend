@@ -33,9 +33,12 @@ route.get(
     res.redirect('/profile/profile/:id');
   }
 );
+route.get('/signup',url,function(req,res){
+  res.render('user.ejs')
+})
 
 //post request
-
+//SIGNUP ROUTE
 route.post('/userlogin', url, function(req, res) {
   new user({
     fname: req.body.fname,
@@ -51,11 +54,15 @@ route.post('/userlogin', url, function(req, res) {
     Eid: Math.floor(Math.random() * 1000000)
   })
     .save()
+    .catch((err)=>{
+      res.send("ERROR")
+    })
     .then(function(use) {
-      res.render('user', { user: use });
+      //Right now it render index page because no login page is created yet so 
+      res.send("YOU CAN LOGIN NOW")
     });
 });
-
+//LOGIN ROUTE
 route.post('/login', url, function(req, res) {
   user
     .findOne({ email: req.body.email })
@@ -68,6 +75,7 @@ route.post('/login', url, function(req, res) {
       }
     });
 });
+
 route.get('/logout', function(req, res) {
   req.logout();
   res.redirect('/');

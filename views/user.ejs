@@ -6,9 +6,9 @@
     <title>Codeuino</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel=stylesheet type=text/css href="css/bootstrap4/bootstrap.min.css">
-    <link rel=stylesheet type=text/css href="css/home.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel=stylesheet type=text/css href="/css/bootstrap4/bootstrap.min.css">
+    <link rel=stylesheet type=text/css href="/css/home.css">
+    <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
     <style>
       .signup{
@@ -47,14 +47,9 @@
     </header>
     <!-- Sign Up -->
     <div class="signup">
-      <div class="phrase l1">
-        <p>
-          SIGNING UP AS A <n>USER</n>!
-        <p style="font-size:40px"> Thanks for signing up  <%= user.fname %> you can now log in</p>
-        </p>
-      </div>
+      
       <div class="form">
-        <form action="/" method="post"  name="myForm" onsubmit="return(validate());">
+        <form action="/auth/userlogin" method="post"  name="myForm" onsubmit="return(validate());">
           <div class="top-row">
             <div class="field-wrap">
               <input type="text" placeholder="First Name" required autocomplete="off" />
