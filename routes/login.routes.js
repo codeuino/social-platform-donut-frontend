@@ -8,30 +8,19 @@ const multer=require('multer')
 
 //MULTER
 const storage=multer.diskStorage({
-  destination:'./public/profilePics',
+  dest: (req, file, cb) => {
+    cb(null, './views/uploads/profilePics')
+  },
   filename:function(req,file,cb){
+      console.log(file)
       cb(null,file.fieldname+"-"+Date.now()+path.extname(file.originalname))
   }
 })
 const upload=multer({
-  storage:storage,
-  limits:{fileSize:1000000},
-  fileFilter:function(req,res,cb){
-    checkFileType(file,cb);
-  }
-}).single('myImage')
+  storage:storage
+});
 
-function checkFileType(file,cb){
-  const fileTypes=/jpeg|jpg|png|gif/;
-  const extname=fileTypes.test(path.extname(file.originalname).toLowerCase())
-  const mimetype=fileTypes.test(file.mimetype);
 
-  if(mimetype && extname){
-    return cb(null,true);
-  }else{
-    cb('Error:Images only')
-  }
-}
 //get request
 
 route.get('/google', passport.authenticate('google', { scope: ['profile'] }));
@@ -66,15 +55,8 @@ route.get('/signup',url,function(req,res){
 
 //post request
 //SIGNUP ROUTE
-route.post('/userlogin', url, function(req, res) {
-  let img=""
-  upload(req,res,(err)=>{
-    if(req.file===undefined){
-      img="oldMan.jpeg"
-    }else{
-      img=req.file.filename
-    }
-  })
+route.post('/userlogin',upload.single('profilepic'), function(req, res) {
+  console.log(req.file)
   new user({
     fname: req.body.fname,
     lname: req.body.lname,
@@ -87,7 +69,7 @@ route.post('/userlogin', url, function(req, res) {
     following: 0,
     status: 'idle',
     Eid: Math.floor(Math.random() * 1000000),
-    profilePicture:img,
+    profilePicture:"oldMan.jpeg",
 
   })
     .save()
@@ -96,7 +78,8 @@ route.post('/userlogin', url, function(req, res) {
     })
     .then(function(use) {
       //Right now it render index page because no login page is created yet so 
-      res.send("WELCOME TO CODEUINO, you can now login")
+      res.send(use)
+      //res.send("WELCOME TO CODEUINO, you can now login")
     });
 });
 //LOGIN ROUTE
