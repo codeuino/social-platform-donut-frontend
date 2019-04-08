@@ -4,7 +4,34 @@ const url = bodyparser.urlencoded({ extended: false });
 const passport = require('passport');
 const user = require('../schema/user.js');
 const route = express.Router();
+const multer=require('multer')
 
+//MULTER
+const storage=multer.diskStorage({
+  destination:'./public/uploads',
+  filename:function(req,file,cb){
+      cb(null,file.fieldname+"-"+Date.now()+path.extname(file.originalname))
+  }
+})
+const upload=multer({
+  storage:storage,
+  limits:{fileSize:1000000},
+  fileFilter:function(req,res,cb){
+    checkFileType(file,cb);
+  }
+}).single('myImage')
+
+function checkFileType(file,cb){
+  const fileTypes=/jpeg|jpg|png|gif/;
+  const extname=fileTypes.test(path.extname(file.originalname).toLowerCase())
+  const mimetype=fileTypes.test(file.mimetype);
+
+  if(mimetype && extname){
+    return cb(null,true);
+  }else{
+    cb('Error:Images only')
+  }
+}
 //get request
 
 route.get('/google', passport.authenticate('google', { scope: ['profile'] }));
@@ -40,6 +67,15 @@ route.get('/signup',url,function(req,res){
 //post request
 //SIGNUP ROUTE
 route.post('/userlogin', url, function(req, res) {
+  console.log(req.file)
+  let img=""
+  upload(req,res,(err)=>{
+    if(req.file===undefined){
+      img="oldMan.jpeg"
+    }else{
+      img=req.file.filename
+    }
+  })
   new user({
     fname: req.body.fname,
     lname: req.body.lname,
@@ -51,7 +87,9 @@ route.post('/userlogin', url, function(req, res) {
     follower: 0,
     following: 0,
     status: 'idle',
-    Eid: Math.floor(Math.random() * 1000000)
+    Eid: Math.floor(Math.random() * 1000000),
+    profilePicture:img,
+
   })
     .save()
     .catch((err)=>{
@@ -59,7 +97,7 @@ route.post('/userlogin', url, function(req, res) {
     })
     .then(function(use) {
       //Right now it render index page because no login page is created yet so 
-      res.send("YOU CAN LOGIN NOW")
+      res.send({use})
     });
 });
 //LOGIN ROUTE
