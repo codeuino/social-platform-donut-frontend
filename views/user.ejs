@@ -6,9 +6,9 @@
     <title>Codeuino</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel=stylesheet type=text/css href="css/bootstrap4/bootstrap.min.css">
-    <link rel=stylesheet type=text/css href="css/home.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel=stylesheet type=text/css href="/css/bootstrap4/bootstrap.min.css">
+    <link rel=stylesheet type=text/css href="/css/home.css">
+    <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
     <style>
       .signup{
@@ -47,28 +47,23 @@
     </header>
     <!-- Sign Up -->
     <div class="signup">
-      <div class="phrase l1">
-        <p>
-          SIGNING UP AS A <n>USER</n>!
-        <p style="font-size:40px"> Thanks for signing up  <%= user.fname %> you can now log in</p>
-        </p>
-      </div>
-      <div class="form">
-        <form action="/" method="post"  name="myForm" onsubmit="return(validate());">
+      
+      <div class="form" >
+        <form action="/auth/userlogin" enctype="multipart/form-data" method="post"  name="myForm" onsubmit="return(validate());">
           <div class="top-row">
             <div class="field-wrap">
-              <input type="text" placeholder="First Name" required autocomplete="off" />
+              <input type="text" name="fname" placeholder="First Name" required autocomplete="off" />
             </div>
             <div class="field-wrap">
-              <input type="text" placeholder="Last Name" required autocomplete="off"/>
+              <input type="text" name="lname" placeholder="Last Name" required autocomplete="off"/>
             </div>
           </div>
           <div class="field-wrap">
-            <input type="email" name="EMail" placeholder="Email Address" required autocomplete="off"/>
+            <input type="email" name="email" placeholder="Email Address" required autocomplete="off"/>
           </div>
           <div class="top-row">
             <div class="field-wrap">
-              <input id="datepicker" placeholder="Date of Birth- DD/MM/YY" required autocomplete="off"/>
+              <input id="datepicker" name="dob" placeholder="Date of Birth- DD/MM/YY" required autocomplete="off"/>
             </div>
             <div class="field-wrap">
               <select name="Gender" id="drop" required>
@@ -81,18 +76,22 @@
             </div>
           </div>
           <div class="field-wrap">
-            <input type="text" placeholder="Github Handle Link" required autocomplete="off"/>
+            <input type="text" name="github" placeholder="Github Handle Link" required autocomplete="off"/>
           </div>
           <div class="field-wrap">
-            <input type="text" placeholder="Username" required autocomplete="off"/>
+            <input type="text" name="username" placeholder="Username" required autocomplete="off"/>
           </div>
           <div class="top-row">
             <div class="field-wrap">
-              <input type="password" id="pass" placeholder="Password" required autocomplete="off" />
+              <input type="password" name="pass" id="pass" placeholder="Password" required autocomplete="off" />
             </div>
             <div class="field-wrap">
               <input type="password" id="cpass" placeholder="Confirm Password" required autocomplete="off"/>
             </div>
+          </div>
+          <div class="top-row ">
+            <label>Upload A Profile Picture</label>
+            <input type="file" name="profilepic" id="" class="mb-2">
           </div>
           <div class="field-wrap">
             <label class="container">I accept the <i>Code of Conduct</i> of this community
