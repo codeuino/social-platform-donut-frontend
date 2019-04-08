@@ -8,7 +8,7 @@ const multer=require('multer')
 
 //MULTER
 const storage=multer.diskStorage({
-  destination:'./public/uploads',
+  destination:'./public/profilePics',
   filename:function(req,file,cb){
       cb(null,file.fieldname+"-"+Date.now()+path.extname(file.originalname))
   }
@@ -67,7 +67,6 @@ route.get('/signup',url,function(req,res){
 //post request
 //SIGNUP ROUTE
 route.post('/userlogin', url, function(req, res) {
-  console.log(req.file)
   let img=""
   upload(req,res,(err)=>{
     if(req.file===undefined){
@@ -97,7 +96,7 @@ route.post('/userlogin', url, function(req, res) {
     })
     .then(function(use) {
       //Right now it render index page because no login page is created yet so 
-      res.send({use})
+      res.send("WELCOME TO CODEUINO, you can now login")
     });
 });
 //LOGIN ROUTE
