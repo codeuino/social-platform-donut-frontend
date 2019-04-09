@@ -2,7 +2,16 @@ const user = require('../schema/user.js');
 const proj = require('../schema/project.js');
 const expressValidator = require('express-validator');
 const { check, validationResult } = require('express-validator/check');
-
+// var multer = require('multer');
+// var storage = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     cb(null, 'public/images/uploads')
+//   },
+//   filename: (req, file, cb) => {
+//     cb(null, file.fieldname + '-' + Date.now())
+//   }
+// });
+// var upload = multer({storage: storage});
 module.exports = {
   SubmitprojectForm:function(req,res){
     res.render('projectForm')
@@ -35,6 +44,7 @@ module.exports = {
     ]).sort({createdAt:-1}).then((da)=>{
       console.log(req.user);
       user.findOne({ Eid: req.params.sd }).then(function (use) {
+        console.log(da)
           res.render('other-landing', { use: use, ques: da, sign: req.user});
       })
     })
@@ -62,7 +72,8 @@ module.exports = {
             content: req.body.cont,
             upvote: '',
             downvote: '',
-            proid: Math.floor(Math.random() * 100000)
+            proid: Math.floor(Math.random() * 100000),
+            image:'/images/uploads/'+req.file.filename
           })
             .save()
             .then(function() {

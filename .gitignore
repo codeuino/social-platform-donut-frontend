@@ -80,3 +80,5 @@ typings/
 # Config files
 credential.js
 secret.js
+
+views/images/uploads
