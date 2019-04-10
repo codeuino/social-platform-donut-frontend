@@ -41,7 +41,9 @@ createdAt:{
 endAt:{
   type:Date
 },
-
+image:{
+type:String
+}
 });
 
 const proj=mongoose.model('project',project);

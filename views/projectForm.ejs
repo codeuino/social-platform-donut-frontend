@@ -48,7 +48,7 @@
         <div class="container"  id="mainCard">
             <div class="card card-body">
                 <h2 class="card-title">Submit your project</h2>
-                <form  method="POST" action="/profile/publish">
+                <form  method="POST" action="/profile/publish" enctype="multipart/form-data">
                     <div class="form-group">
                       <label>Project Name</label>
                       <input name="contentname"  type="type" class="form-control"  placeholder="Enter Project Name">
@@ -66,6 +66,10 @@
                     </div>
                     <div class="form-group">
                         <textarea  name="cont" placeholder="Describe about your project " cols="55" rows="3"></textarea>
+                      </div>
+                      <div class="form-group">
+                        <label>Project Image</label>
+                        <input name="image"  type="file" class="form-control"  placeholder="Enter Project Image">
                       </div>
                     <button type="submit" class="btn btn-primary btn-block">Submit</button>
                   </form>
