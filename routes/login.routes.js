@@ -7,6 +7,7 @@ const route = express.Router();
 const multer=require('multer')
 const path=require('path')
 const Jimp=require('jimp')
+const imagecontroller=require('../controller/image.controller')
 
 //MULTER
 const storage=multer.diskStorage({
@@ -21,17 +22,7 @@ const upload=multer({
   storage:storage
 });
 
-ppResize=function(img,height,width){
-  imgDir="./views/uploads/profilePics/"+img
-  console.log(typeof(imgDir))
-  Jimp.read(imgDir, (err, img) => {
-      if (err) throw err;
-      img
-        .resize(width,height) 
-        .quality(60) 
-        .write(imgDir)
-    });
-  }
+
 //get request
 
 route.get('/google', passport.authenticate('google', { scope: ['profile'] }));
@@ -93,7 +84,7 @@ route.post('/userlogin',upload.single('profilepic'), function(req, res) {
       res.send("ERROR")
     })
     .then(function(use) {
-      ppResize(img,300,300)
+      imagecontroller.ppResize(img,300,300)
       res.send(use)
     });
 });
