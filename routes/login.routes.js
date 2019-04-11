@@ -6,6 +6,8 @@ const user = require('../schema/user.js');
 const route = express.Router();
 const multer=require('multer')
 const path=require('path')
+const Jimp=require('jimp')
+
 //MULTER
 const storage=multer.diskStorage({
   destination: (req, file, cb) => {
@@ -19,7 +21,17 @@ const upload=multer({
   storage:storage
 });
 
-
+ppResize=function(img,height,width){
+  imgDir="./views/uploads/profilePics/"+img
+  console.log(typeof(imgDir))
+  Jimp.read(imgDir, (err, img) => {
+      if (err) throw err;
+      img
+        .resize(width,height) 
+        .quality(60) 
+        .write(imgDir)
+    });
+  }
 //get request
 
 route.get('/google', passport.authenticate('google', { scope: ['profile'] }));
@@ -81,9 +93,8 @@ route.post('/userlogin',upload.single('profilepic'), function(req, res) {
       res.send("ERROR")
     })
     .then(function(use) {
-      //Right now it render index page because no login page is created yet so 
+      ppResize(img,300,300)
       res.send(use)
-      //res.send("WELCOME TO CODEUINO, you can now login")
     });
 });
 //LOGIN ROUTE
