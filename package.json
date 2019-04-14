@@ -6,7 +6,11 @@
   "scripts": {
     "start": "nodemon server.js",
     "test": "mocha tests/*.js",
-    "lint": "eslint ./tests/**/**.js ./schema/**/**.js ./routes/**/**.js ./controller/**/**.js ./config/**/**.js ./server.js  --fix"
+    "lint": "eslint ./tests/**/**.js ./schema/**/**.js ./routes/**/**.js ./controller/**/**.js ./config/**/**.js ./server.js --fix",
+    "build": "babel src/ -d lib/",
+    "prepublish": "npm run build",
+    "flow": "flow",
+    "flow:check": "flow check ./"
   },
   "author": "Capedcrusader23",
   "license": "MIT",
@@ -32,9 +36,12 @@
     "socket.io": "^2.1.1"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-flow": "^6.23.0",
     "chai": "^4.2.0",
     "eslint-config-prettier": "^4.1.0",
     "eslint-plugin-prettier": "^3.0.1",
+    "flow-bin": "^0.97.0",
     "mocha": "^6.0.2",
     "prettier": "^1.16.4",
     "supertest": "^3.4.2"
