@@ -14,8 +14,8 @@ function validate() {
     document.myForm.check.focus();
     return false;
   }
-  const pass = document.getElementById('pass');
-  const cpass = document.getElementById('cpass');
+  const pass = document.getElementById('pass').innerHTML;
+  const cpass = document.getElementById('cpass').innerHTML;
   if (pass != cpass) {
     alert('Password error. Retype Password.');
     return false;
