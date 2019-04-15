@@ -68,6 +68,9 @@
                       <li class="nav-item">
                         <a class="nav-link" href="/profile/submitProject">Publish</a>
                       </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="/auth/logout">Logout</a>
+                      </li>
                     </ul>
                   </ul>
                 </div>
@@ -106,7 +109,7 @@
                         <!--Text-->
                         <div class="container">
                           <div class="row">
-
+                            <img src='<%=x.image%>' style="max-height:100%;max-width:100%">
                             <%for(var q=0;q<x.Lang.length;q++){%>
                               <a href="#" class="btn btn-blue-grey btn-rounded"><%=x.Lang[q]%></a>
                             <%}%>

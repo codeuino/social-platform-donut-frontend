@@ -1,6 +1,7 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('../schema/user');
+const path=require('path')
 
 passport.serializeUser(function(user, done) {
   done(null, user.id);
@@ -28,7 +29,14 @@ passport.use(
         if (user) {
           return done(null, false);
         }
-
+        
+        upload(req,res,(err)=>{
+          if(err){
+            let img="oldMan.jpeg"
+          }else{
+            let img=req.file.filename
+          }
+        })
         let newUser = new User();
         newUser.fname = req.body.fname;
         newUser.lname = req.body.lname;
@@ -41,6 +49,7 @@ passport.use(
         newUser.following = 0;
         newUser.status = 'idle';
         newUser.Eid = newUser.id;
+        newUser.profilePicture=img;
 
         newUser.save(err => {
           if (err) {

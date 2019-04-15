@@ -13,7 +13,16 @@ const auth = function(req, res, next) {
     next();
   }
 };
-
+var multer = require('multer');
+var storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'views/images/uploads')
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.fieldname + '-' + Date.now())
+  }
+});
+var upload = multer({storage: storage});
 route.get('/submitProject',auth,profileController.SubmitprojectForm)
 route.get('/search', url, jsonParser, profileController.search);
 
@@ -23,7 +32,7 @@ route.get('/profile/:id', auth, profileController.profileId);
 
 route.get('/profileview/:sd', auth, url, profileController.profileViewSd);
 
-route.post('/publish', auth, url, profileController.publish);
+route.post('/publish', auth, url,upload.single('image'), profileController.publish);
 
 route.post('/upDownVote', auth,url, jsonParser,profileController.upDownVote);
 
