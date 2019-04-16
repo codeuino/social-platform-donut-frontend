@@ -6,6 +6,9 @@ const user = require('../schema/user.js');
 const route = express.Router();
 const multer=require('multer')
 const path=require('path')
+const Jimp=require('jimp')
+const imagecontroller=require('../controller/image.controller')
+
 //MULTER
 const storage=multer.diskStorage({
   destination: (req, file, cb) => {
@@ -81,9 +84,10 @@ route.post('/userlogin',upload.single('profilepic'), function(req, res) {
       res.send("ERROR")
     })
     .then(function(use) {
-      //Right now it render index page because no login page is created yet so 
+      var default_height=300
+      var default_width=300
+      imagecontroller.ppResize(img,default_height,default_width)
       res.send(use)
-      //res.send("WELCOME TO CODEUINO, you can now login")
     });
 });
 //LOGIN ROUTE
