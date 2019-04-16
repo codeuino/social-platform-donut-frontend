@@ -84,7 +84,9 @@ route.post('/userlogin',upload.single('profilepic'), function(req, res) {
       res.send("ERROR")
     })
     .then(function(use) {
-      imagecontroller.ppResize(img,300,300)
+      var default_height=300
+      var default_width=300
+      imagecontroller.ppResize(img,default_height,default_width)
       res.send(use)
     });
 });
