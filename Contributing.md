@@ -18,6 +18,6 @@ Learn more about contributing to Codeuino code projects on these pages:
 
 ## Bug reports & troubleshooting
 
-If you are submitting a bug, please go to https://github.com/codeuino/Social-Platform-Donut/issues/new?assignees=&labels=&template=issue-template.md&title=
+If you are submitting a bug, please go to https://github.com/codeuino/Social-Platform-Donut/issues/new
 
 ## Make sure to follow templates for the same 
