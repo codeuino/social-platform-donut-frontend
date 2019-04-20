@@ -20,4 +20,4 @@ Learn more about contributing to Codeuino code projects on these pages:
 
 If you are submitting a bug, please go to https://github.com/codeuino/Social-Platform-Donut/issues/new?assignees=&labels=&template=issue-template.md&title=
 
-##Make sure to follow templates for the same 
+## Make sure to follow templates for the same 
