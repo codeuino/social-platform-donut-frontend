@@ -43,7 +43,8 @@ module.exports = {
       }
     ]).sort({createdAt:-1}).then((da)=>{
       console.log(req.user);
-      user.findOne({ Eid: req.params.sd }).then(function (use) {
+      // console.log('req.params fro other-landing.ejs -', req.params);
+      user.findOne({ Eid: req.params.id }).lean().then(function (use) {
         console.log(da)
           res.render('other-landing', { use: use, ques: da, sign: req.user});
       })
