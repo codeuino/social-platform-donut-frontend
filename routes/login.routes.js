@@ -96,10 +96,12 @@ route.post('/login', url, function(req, res) {
     .findOne({ email: req.body.email })
     .lean()
     .then(function(data) {
-      if (data.compare(req.body.password)) {
+      if (data.password == req.body.password) {
         res.redirect('/profile/profile/' + data.eid);
+        // console.log('pass matched');
       } else {
         res.redirect('/');
+        // console.log('did not match');
       }
     });
 });
