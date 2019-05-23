@@ -21,6 +21,9 @@ const user = new Schema({
   github: {
     type: String
   },
+  website : {
+    type : String
+  },
   username: {
     type: String
   },
@@ -33,8 +36,14 @@ const user = new Schema({
   follower: {
     type: Number
   },
+  followersList: {
+    type : [Number]
+  },
   following: {
     type: Number
+  },
+  followingList: {
+    type : [Number]
   },
   status: {
     type: String
@@ -62,7 +71,25 @@ const user = new Schema({
   city: {
     type: String
   },
+  status : {
+    type: String
+  },
   college: {
+    type: String
+  },
+  collegeTimeperiod : {
+    type : [Date]
+  },
+  school: {
+    type: String
+  },
+  schoolTimeperiod : {
+    type : [Date]
+  },
+  blockedUser : {
+    type : [Number]
+  },
+  profilePicture:{
     type: String
   }
 });

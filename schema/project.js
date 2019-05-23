@@ -17,8 +17,14 @@ github:{
 Lang:{
   type:[String]
 },
+shortDesc:{
+  type:String
+},
 content:{
   type:String
+},
+linkedUsers:{
+  type : [Number]
 },
 upvote:{
   type:[String]
@@ -31,8 +37,13 @@ proid:{
 },
 createdAt:{
   type:Date
+},
+endAt:{
+  type:Date
+},
+image:{
+type:String
 }
-
 });
 
 const proj=mongoose.model('project',project);

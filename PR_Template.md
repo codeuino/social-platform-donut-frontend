@@ -1,26 +1,32 @@
 ### **Problem**
-_Describe the problem you are trying to achieve. Please provide in detail_
-
+new and robust schema needed for users, project and notification.
 ### **Issue this PR referred to**
-_Please refer to the issue this PR is referred to write in this format `Fixes #<issue number>`, Refer to this [link](https://help.github.com/en/articles/closing-issues-using-keywords) for more details_
+Fixes issue number 146, Refer to this [link](https://github.com/codeuino/Social-Platform-Donut/issues/146) for more details_
 
 ### **Solution of problem**
-_How did you solve this problem? Please provide in detail_
+I added some new fields to the schema of the user.js, project.js and notification.js
+
+# in notification.js
+- added field shortinfo(type:string) for short description about notification.
+# in user.js
+- added field website(type:string) for any personal website user has.
+- added followerList and followingList(type:\[number]) to include the name of all the followers and following.
+- add field status(type:string) for status of user.
+- added field school(type:string) for user's schoolname.
+- added field collegeTimeperiod and schoolTimeperiod (type:\[Date]) for time period of college and school respectively.
+- added field blockedUser(type:\[Number]) for keeping track of all users blocked.
+# in project.js
+- added field endAt(type:\[Date]) as to when is the deadline.
+- added field shortDesc(type:String) for one liner description of the project.
+- added field linkedUser(type:\[Number]) for all the people linked with project.
 
 ### **Before and After Screenshots**
-_**Before** [How was it earlier, add it here]_
-
-_**After** [How it looks now, add it here]_
 
 ### **Type of Change**
-- [ ] Bug fix
-- [ ] New Feature
-- [ ] Development of UI/UX prototypes
-- [ ] Small refactor
-- [ ] Change in Documentation
+- Small refactor
 
 ### **Checklist**
-- [ ] My code follow the same style as the codebase
-- [ ] My Code changed required change in documentation
-- [ ] I have updated the Readme accordingly
-- [ ] I made PR within **development branch only**
+- My code follow the same style as the codebase
+- My Code changed required change in documentation
+- I have updated the Readme accordingly
+- I made PR within **development branch only**
