@@ -1,0 +1,75 @@
+body{
+  background-color: #fff;
+  letter-spacing: 0.8px;
+}
+main{
+  margin-top: -53px;
+}
+.btn-rounded{
+  border-width: 2px 4px;
+  border-radius: 40px;
+}
+.btn-group{
+  display: block;
+  white-space: nowrap;
+  overflow-x: hidden;
+  color: black;
+}
+.card{
+    box-shadow: none !important;
+}
+.card-bod{
+    border: solid 1px #ccc;
+}
+.col-nopadding{
+    padding-left: -15px;
+    background-color: #ddd;
+}
+.active .btn-group{
+  color: indigo;
+}
+.form-inline{
+  margin-bottom: 4px;
+}
+.btn-rt{
+  margin-top: 0;
+  float: right;
+}
+.btn-drop{
+  z-index: 10;
+}
+.btn-group:hover{
+  color: indigo;
+}
+.us-badge{
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+}
+.line{
+  text-align: center;
+  line-height: 40px;
+}
+.no-collapse{
+  position: relative;
+}
+.on-collapse{
+  display: none;
+}
+#mostLikedProjects{
+  display: none;
+}
+#newProjects{
+  display: none;
+}
+#eventsNearYou{
+  display: none;
+}
+@media (max-width: 767px) {
+  .no-collapse{
+    display: none;
+  }
+  .on-collapse{
+    display: block;
+  }
+}
