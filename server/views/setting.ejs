@@ -1,0 +1,330 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Codeuino</title>
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+        <!-- Bootstrap core CSS -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Material Design Bootstrap -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.4/css/mdb.min.css" rel="stylesheet">
+        <!-- Your custom styles (optional) -->
+        <link href="/css/settings.css" type="text/css" rel="stylesheet">
+      <style>
+
+      </style>
+        <!-- Favicon-->
+	    <link rel="shortcut icon" href="images/codeunio.jpeg" type="image/x-icon">
+    </head>
+    <body>
+        <!-- Start your project here-->
+        <!--Main Navigation-->
+        <header>
+            <!--Navbar-->
+            <nav class="navbar navbar-expand-lg navbar-dark elegant-color-dark fixed-top">
+                <div class="container">
+                <!-- Navbar brand -->
+                <a class="navbar-brand font-weight-bold text-uppercase blue-text" href="#">DONUT</a>
+                <span id="phrase" class="align-middle white-text">Codeuino's Open Source Social Platform</span>
+                <!-- Collapse button -->
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav" aria-controls="basicExampleNav"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+                <!-- Collapsible content -->
+                <div class="collapse navbar-collapse justify-content-end" id="basicExampleNav">
+                  <ul class="navbar-nav nav-flex-icons">
+                    <!-- Links -->
+                    <ul class="navbar-nav mr-auto">
+                      <li class="nav-item active">
+                        <a class="nav-link" href="#">Home
+                          <span class="sr-only">(current)</span>
+                        </a>
+                        </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#">Community</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#">Help</a>
+                      </li>
+                    </ul>
+                  </ul>
+                </div>
+                <!-- Collapsible content -->
+              </div>
+            </nav>
+            <!--/.Navbar-->
+
+            <!-- alert message-->
+            <div id="alert" class="alert alert-success text-center mt-2 d-none" style="position:fixed;top:40px;left:0px;right:0px">
+              <h4>Your profile has been updated</h4>
+            </div>
+        </header>
+        <!--Main Navigation-->
+        <!--Main Layout-->
+        <main>
+          <!-- Intro Section -->
+          <div class="container mx-auto">
+            <div class="row pt-5 mt-3 justify-content-center">
+              <div class="col-12">
+                <label for="avatar-input" class="avatar-image-full">
+                  <div class="image-camera avatar-overlay"></div>
+                  <img src="http://unmr-nl.science.uu.nl/sites/default/files/styles/large/public/user_placeholder_man_0.jpg?itok=SP4qotPF" alt="userprofile" class="avatar-image">
+                </label>
+                <input type="file" id="avatar-input" accept=".jpg,.png" class="avatar-image-invisible-input">
+              </div>
+              <!--Grid column-->
+            </div>
+            <!--Main Info row-->
+            <div class="row mt-3 pt-2">
+              <div class="col-12 text-center">
+                <h3><%=user.fname%> <%=user.lname%></h3>
+                <p><em>Full Stack Developer</em></p>
+              </div>
+            </div>
+
+           
+            <div class="row mt-3 pt-4">
+              <div class="col-11 col-sm-12 mx-auto">
+                <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+                  <li class="nav-item">
+                    <a class="tab-style nav-link text-primary py-3 px-2 active" id="info-tab" data-toggle="tab" href="#info" role="tab" aria-controls="info" aria-selected="true">Personal Info</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="tab-style nav-link text-primary py-3 px-2" id="timeline-tab" data-toggle="tab" href="#timeline" role="tab" aria-controls="timeline" aria-selected="false">Timeline</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="tab-style nav-link text-primary py-3 px-2" id="activity-tab" data-toggle="tab" href="#activity" role="tab" aria-controls="activity" aria-selected="false">Activity</a>
+                  </li>
+                </ul>
+              <div class="tab-content" id="myTabContent">
+              <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="info-tab">
+                    <!--Form Row-->
+                  <form method="POST" action="/profile/updateDetails?_method=PUT" id="edit">
+                    <input type="hidden" name="_method" value="PUT">
+                  <div class="row mt-3 pt-3">
+                      <div class="col-12">
+                          <!--Form Header-->
+                          <div class="form-row mt-3">
+                            <div class="form-group col-6">
+                              <h3>Personal Information</h3>
+                              <p><em>Seconday text if needed</em></p>
+                            </div>
+
+                        </div>
+                          <!--row 1-->   
+                          <div class="form-row">
+                              <div class="p-2 col-sm-3">
+                                  <span>
+                                    <label>First Name</label>
+                                  </span>
+                                  <input type="text" class="form-control" name="fname" id="fname" placeholder="CAPED CRUSADER" required>
+                              </div>
+                              
+                            <div class="col-sm-3 p-2">
+                                <span>
+                                  <label>last Name</label>
+                                </span>
+                                <input type="text" class="form-control" name="lname" id="lname" placeholder="CAPED CRUSADER" required>
+                              </div>
+                              <!--<form id="namech">
+                                <div class="row">
+                                  <div class="col-md-6">
+                                <input class="well well-sm form-control wid"  type="name" placeholder="CAPED CRUSADER" name="name" id="name"/>
+                              </div>
+                            <div class="col-md-6">
+                              <input type="submit" class="buton" value="change"></button>
+                            </div>
+                            </form>-->
+                            <div class="form-group col-11 col-sm-6 p-2 mx-auto">
+                              <span>
+                                <label>Bio</label>
+                              </span>
+                              <input class="well well-sm form-control" type="name" name="bio" id="bio" placeholder="Full Stack Developer,GEEK,NATURE LOVER" required/>
+                            </div>
+                            </div>
+                           
+                          <!--row 2-->
+                          <div class="form-row">
+                            <div class="form-group col-11 col-sm-6 p-2 mx-auto">
+                                <span>
+                                  <label>School/College</label>
+                                </span>
+                                <input class="well well-sm form-control" name="college" id="college" type="text" placeholder="HARVARD UNIVERSITY" required/>
+                            </div>
+                            <div class="form-group col-11 col-sm-6 p-2 mx-auto">
+                                <span>
+                                  <label>Email</label>
+                                </span>
+                                <input class="well well-sm form-control"  type="email" name="email" id="email" placeholder="abc@gmail.com" required/>
+                            </div>
+                          </div>
+                          <!-- row 3 -->
+                          <div class="form-row">
+                            <div class="form-group col-11 col-sm-6 p-2 mx-auto">
+                                <span>
+                                  <label>Github</label>
+                                </span>
+                                <input class="well well-sm form-control"  type="text" name="githubUrl" id="githubUrl" placeholder="https://wwww.github.com/test_user" required/>
+                            </div>
+                            <div class="form-group col-11 col-sm-6 p-2 mx-auto">
+                                <span>
+                                  <label>LinkedIn</label>
+                                </span>
+                                <input class="well well-sm form-control"  type="text" name="linkedinUrl" id="linkedinUrl" placeholder="http://linkedin.com/in/test" required/>
+                            </div>
+                          </div>
+                          <!-- row 4 -->
+                          <div class="form-row">
+                            <div class="form-group col-11 col-sm-6 p-2 mx-auto">
+                                <span>
+                                  <label>City</label>
+                                </span>
+                                <input class="well well-sm form-control"  type="text" name="city" id="city" placeholder="Delhi" required/>
+                            </div>
+                            <div class="form-group col-11 col-sm-6 p-2 mx-auto">
+                              <label for="inputState">Country</label>
+                                  <select id="country"  class="form-control" name="country" required >
+                                    <option selected>Choose...</option>
+                                    <option>India</option>
+                                    <option>USA</option>
+                                    <option>China</option>
+                                  </select>
+                            </div>
+                          </div>
+                          <!-- row 5 -->
+                          <div class="form-row">
+                            <div class="form-group col-11 col-sm-6 p-2 mx-auto">
+                                <span>
+                                  <label>Languages</label>
+                                </span>
+                                <input class="well well-sm form-control"  type="text" name="languages" id="languages" placeholder="Type lan with space between them" required/>
+                            </div>
+
+                            <div class="form-group col-11 col-sm-6 p-2 mx-auto">
+                                <span>
+                                  <label>Facebook</label>
+                                </span>
+                                <input class="well well-sm form-control"  type="text" name="facebookUrl" id="facebookUrl" placeholder="www.facebook.com/caped23" required/>
+                              </div>
+                          </div>
+                      </div>
+                    </div>
+                    <input type="submit" value="Save" class="btn btn-block btn-primary">
+                    </form>
+                  </div>
+                  <div class="tab-pane fade" id="timeline" role="tabpanel" aria-labelledby="timeline-tab">
+
+                  </div>
+                  <div class="tab-pane fade" id="activity" role="tabpanel" aria-labelledby="activity-tab">
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row mt-3 pt-5"></div>
+        </div>
+        </main>
+        <!--Main Layout-->
+
+        <!-- SCRIPTS -->
+        <!-- JQuery -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <!-- Bootstrap tooltips -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
+        <!-- Bootstrap core JavaScript -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <!-- MDB core JavaScript -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.4/js/mdb.min.js"></script>
+        <!-- axios to make ajax requests-->
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script>
+      
+        user = {
+          fname:document.getElementById('fname'),
+          lname : document.getElementById('lname'),
+          bio : document.getElementById('bio'),         
+          college : document.getElementById('college'),
+          email : document.getElementById('email'),
+          githubUrl : document.getElementById('githubUrl'),
+          linkedinUrl : document.getElementById('linkedinUrl'),
+          city : document.getElementById('city'),
+          country : document.getElementById('country'),
+          languages : document.getElementById('languages'),
+          facebookUrl : document.getElementById('facebookUrl')
+        }
+
+        document.addEventListener('DOMContentLoaded',function(e){
+            axios.get('/profile/getDetails').then(function(response){
+                if(response.data.fname){
+                user.fname.value = response.data.fname;
+                }
+                if(response.data.lname){
+                user.lname.value = response.data.lname;
+                }
+                if(response.data.bio){
+                user.bio.value = response.data.bio;
+                }
+                if(response.data.college){
+                user.college.value = response.data.college;}
+                if(response.data.email){
+                user.email.value = response.data.email;
+                }
+                if(response.data.github){
+                user.githubUrl.value = response.data.github;
+                }
+                if(response.data.linkedin){
+                user.linkedinUrl.value = response.data.linkedin;
+                }
+                if(response.data.city){
+                user.city.value = response.data.city;}
+                if(response.data.country){
+                user.country.value = response.data.country;
+                }
+                if(response.data.lang){
+                user.languages.value = response.data.lang;
+                }
+                if(response.data.facebook){
+                user.facebookUrl.value = response.data.facebook;
+                }
+;            })
+        })
+        function notification(){
+            var alert = document.getElementById('alert');
+            alert.classList.remove('d-none');
+            setTimeout(() => {
+              alert.classList.add('d-none');
+            },2000);
+        }
+        document.getElementById('edit').addEventListener('submit',action);
+        function action(e){
+          e.preventDefault();
+          axios.post('/profile/updateDetails', {
+              fname:user.fname.value,
+              lname:user.lname.value,
+              bio:user.bio.value,
+              college:user.college.value,
+              email:user.email.value,
+              githubUrl:user.githubUrl.value,
+              linkedinUrl:user.linkedinUrl.value,
+              city:user.city.value,
+              country:user.country.value,
+              languages:user.languages.value,
+              facebookUrl:user.facebookUrl.value
+          })
+            .then(function (response) {
+              notification();
+            })
+            .catch(function(error){
+              console.log(error);
+            });
+
+        }
+        </script>
+    </body>
+</html>

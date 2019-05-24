@@ -1,0 +1,755 @@
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    <?php echo $username; ?>
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="../css/main.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=n0agidhz3ts8rcb2cj1000d93gcubpwioedyrxocls2izdiu"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+
+  <link rel="stylesheet" href="/css/autocomplete.css" />
+
+
+  <style>
+    .loader {
+      border: 5px solid #f3f3f3;
+      border-radius: 50%;
+      border-top: 5px solid #3498db;
+      width: 50px;
+      height: 50px;
+      -webkit-animation: spin 2s linear infinite;
+      animation: spin 2s linear infinite;
+    }
+
+    @-webkit-keyframes spin {
+      0% {
+        -webkit-transform: rotate(0deg);
+      }
+      100% {
+        -webkit-transform: rotate(360deg);
+      }
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .test {
+
+      width: 5%;
+      height: 5%;
+    }
+
+    .test ul {
+
+
+      list-style: none;
+      margin: 0;
+      padding: 12px 10px;
+      height: 5%;
+    }
+
+    .test ul li {
+      float: left;
+      font: 13px helvetica;
+      font-weight: bold;
+      margin: 3px 0;
+    }
+
+    .test ul li a {
+      color: #FFF;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .test ul li a:hover {
+      background: #425B90;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    #noti_Container {
+      position: relative;
+
+
+
+    }
+
+    /* A CIRCLE LIKE BUTTON IN THE TOP MENU. */
+
+    #noti_Button {
+      width: 5%;
+      height: 5%;
+      border-radius: 50%;
+      -moz-border-radius: 50%;
+      -webkit-border-radius: 50%;
+      background: #FFF;
+      cursor: pointer;
+    }
+
+    /* THE POPULAR RED NOTIFICATIONS COUNTER. */
+
+    #noti_Counter {
+      display: block;
+      position: absolute;
+      background: #E1141E;
+      color: #FFF;
+      font-size: 12px;
+      font-weight: normal;
+      padding: 1px 3px;
+      margin: -8px 0 0 25px;
+      border-radius: 2px;
+      -moz-border-radius: 2px;
+      -webkit-border-radius: 2px;
+      z-index: 1;
+    }
+
+    /* THE NOTIFICAIONS WINDOW. THIS REMAINS HIDDEN WHEN THE PAGE LOADS. */
+
+    #notifications {
+      display: none;
+      width: 430px;
+      position: absolute;
+      top: 60px;
+      left: 0;
+      background: #FFF;
+      border: solid 1px rgba(100, 100, 100, .20);
+      -webkit-box-shadow: 0 3px 8px rgba(0, 0, 0, .20);
+      z-index: 0;
+    }
+
+    /* AN ARROW LIKE STRUCTURE JUST OVER THE NOTIFICATIONS WINDOW */
+
+    #notifications:before {
+      content: '';
+      display: block;
+      width: 0;
+      height: 0;
+      color: transparent;
+      margin-top: -20px;
+      margin-left: 10px;
+    }
+
+    h3 {
+      display: block;
+      color: #333;
+      background: #FFF;
+      font-weight: bold;
+      font-size: 13px;
+      padding: 8px;
+      margin: 0;
+      border-bottom: solid 1px rgba(100, 100, 100, .30);
+    }
+
+    .seeAll {
+      background: #F6F7F8;
+      padding: 8px;
+      font-size: 12px;
+      color: black;
+      font-weight: bold;
+      border-top: solid 1px rgba(100, 100, 100, .30);
+      text-align: center;
+    }
+
+    .seeAll a {
+      z-index: 2;
+      color: black;
+      font-weight: bold;
+    }
+
+    .seeAll a:hover {
+
+      color: black;
+      text-decoration: underline;
+    }
+
+    .seeallspan {
+      color: black;
+    }
+  </style>
+
+
+</head>
+
+
+<body>
+  <nav class="nav-container navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+          aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../donut.php">
+          <span class="donut">
+            <i class="material-icons">book</i>Donut </span>
+        </a>
+      </div>
+
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              <?php echo $username?>
+              <span>
+                <img src="<?php echo $avatar;?>" alt="profile.png" class="img-circle" width="20" height="20">
+              </span>
+            </a>
+            <ul class="dropdown-menu dropdown-self">
+              <li>
+                <a href="../donut.php">Home</a>
+              </li>
+              <li>
+                <a href="settings.php?u=<?php echo $user_name;?>">Settings</a>
+              </li>
+              <li>
+                <a href="profile.php?u=<?php echo $user_name;?>">Profile</a>
+              </li>
+              <li>
+                <a href="#" data-toggle="modal" data-target="#myModaleditor">Write</a>
+              </li>
+              <li role="separator" class="divider"></li>
+              <li>
+                <a href="contact.php">Contact Us</a>
+                <a href="../logout.php">Logout</a>
+                <a href="advertise.php">Advertise with us</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+
+        <form class="navbar-form navbar-right" autocomplete="off" onsubmit="return false;">
+          <div class="form-group autocomplete">
+            <input type="text" class="form-control autocomplete-input" placeholder="Search">
+            <div class="autocomplete-item">
+              <ul>
+
+              </ul>
+            </div>
+            <select class="form-control autocomplete-select">
+              <option value="username">Username</option>
+              <option value="email">Email</option>
+              <option value="pname">Projects</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-default">Search</button>
+        </form>
+
+        <ul class="nav navbar-nav navbar-right test">
+
+          <ul>
+
+            <li id="noti_Container">
+              <div id="noti_Counter"></div>
+              <!--SHOW NOTIFICATIONS COUNT.-->
+
+              <!--A CIRCLE LIKE BUTTON TO DISPLAY NOTIFICATION DROPDOWN.-->
+              <div id="noti_Button">
+                <i style="color:#e2e2e2;font-size:3rem;" class="material-icons">add_alert</i>
+                </span>
+              </div>
+
+              <!--THE NOTIFICAIONS DROPDOWN BOX.-->
+              <div id="notifications">
+                <h3>Notifications</h3>
+                <div style="height:300px;">
+                  <div style="margin-top:30%; margin-left: 30%;" class="notificationscontent">
+                    <p class="lead">No new Notifications</p>
+                  </div>
+                </div>
+                <div class="seeAll">
+                  <a href="#">
+                    <span class="seeallspan">See All</span>
+                  </a>
+                </div>
+              </div>
+            </li>
+
+          </ul>
+      </div>
+
+      </ul>
+    </div>
+    <!-- /.navbar-collapse -->
+    </div>
+  </nav>
+  <!-- Content-->
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <div class="blog-header">
+    <div class="container">
+      welcome
+      <%= use.fname %>
+        <%= use.lname%>
+
+          <h1 class="blog-title">Readers Feed
+            <button type="button" class="btn btn-default btn-lg write" data-toggle="modal" data-target="#myModaleditor">
+              <span id="writelogo" class="glyphicon glyphicon-pencil"></span> Start Writing</button>
+          </h1>
+          <p class="lead blog-description">It was never easier to call yourself a writer, just write and leave the rest to us.</p>
+    </div>
+  </div>
+  <div id="ques">
+
+
+
+    <ul v-for='x in ques' style="list-style-type:none">
+
+      <li class="jumbotron" style="width:300px">
+        <div>
+          <p>{{x.pname}}</p>
+          <p> {{x.content}}</p>
+          <p>GIT LINK:{{x.git}}</p>
+          <div class="row">
+            <div class="col-sm-4">
+              <form method="post" action="/upvote">
+                <input type="text" v-bind:value="x.pro" v-show="sh" name="project">
+                <input type="text" v-bind:value="x.pid" v-show="sh" name="client">
+
+                <button type="submit" class="btn btn-primary">upvotes {{x.upvote}}</button>
+              </form>
+            </div>
+
+            <div class="col-sm-4">
+              <form method="post" action="/downvote">
+                <input type="text" v-bind:value="x.pro" v-show="sh" name="project">
+                <input type="text" v-bind:value="x.pid" v-show="sh" name="client">
+
+                <button type="submit" class="btn btn-primary">Downvote{{x.downvote}}</button>
+              </form>
+            </div>
+
+          </div>
+        </div>
+      </li>
+
+    </ul>
+
+
+
+  </div>
+  <div class="container">
+
+    <div class="row">
+
+
+      <div class="col-sm-9 blog-main">
+
+
+
+
+
+
+
+
+
+
+      </div>
+      <!-- /.blog-main -->
+
+      <div class="col-sm-3 offset-sm-1 blog-sidebar">
+        <div class="sidebar-module sidebar-module-inset ">
+          <h4>Trending
+            <i class="material-icons icon-color">trending_up</i>
+          </h4>
+          <ol class="list-unstyled">
+            <li>
+              <a href="#">No, Not Again </a>
+            </li>
+            <li>
+              <a href="#" class="text-info">By Shubham Tripathi</a>
+            </li>
+            <li>
+              <a href="#">The immortals of meluha</a>
+            </li>
+            <li>
+              <a href="#" class="text-info">By Shashank Ahuja </a>
+            </li>
+          </ol>
+        </div>
+
+        <div class="sidebar-module">
+          <h4>Social Connects
+            <i class="material-icons icon-color">supervisor_account</i>
+          </h4>
+          <ol class="list-unstyled">
+            <li>
+              <a href="#">No, Not Again </a>
+            </li>
+            <li>
+              <a href="#" class="text-info">By Shubham Tripathi</a>
+            </li>
+            <li>
+              <a href="#">The immortals of meluha</a>
+            </li>
+            <li>
+              <a href="#" class="text-info">By Shashank Ahuja </a>
+            </li>
+          </ol>
+
+        </div>
+        <div class="sidebar-module">
+
+        </div>
+      </div>
+      <!-- /.blog-sidebar -->
+
+    </div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container -->
+
+
+
+  <!-- Trigger the modal with a button -->
+
+  <div class="container">
+    <!-- Modal -->
+    <div class="modal fade" id="myModaleditor" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Donut: Bringing Literature to lives</h4>
+          </div>
+          <div class="modal-body">
+            <form method="post" action="/publish">
+
+              <div class="form-group">
+                <label for="contentname">Title of your project</label>
+                <input type="text" class="form-control" name="contentname" id="contentname" placeholder="Not more than 50 Characters">
+              </div>
+              <div class="form-group">
+                <label for="tagline">github link</label>
+                <input type="text" class="form-control" name="git" id="tagline" placeholder="Not more than 100 Characters">
+              </div>
+              <div class="form-group">
+                <label for="genre">Language used</label>
+                <input type="text" class="form-control" name="genre" id="lang" placeholder="Not more than 30 characters">
+              </div>
+              <script>tinymce.init({ selector: 'textarea#editor1', height: 300, entity_encoding: "raw" });</script>
+
+              <textarea id="editor1" name="cont"></textarea>
+
+
+          </div>
+          <div class="modal-footer">
+            <span class="label label-success" id="published"></span>
+            <button type="submit" class="btn btn-info">submit</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  </div>
+  <script>
+
+    function ajaxObj(meth, url) {
+      var x = new XMLHttpRequest();
+      x.open(meth, url, true);
+      x.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      return x;
+    }
+
+    function ajaxReturn(x) {
+      if (x.readyState == 4 && x.status == 200) {
+        return true;
+      }
+    }
+
+    function reply_click(clicked_id) {
+
+      var article = clicked_id;
+      var username = "<?php echo $user_name; ?>";
+      var ajax = ajaxObj("POST", "like.php");
+      ajax.onreadystatechange = function () {
+        if (ajaxReturn(ajax) == true) {
+          document.getElementById(clicked_id + 'likes').innerHTML = " " + ajax.responseText;
+
+
+
+        }
+      }
+      ajax.send("article=" + article + "&username=" + username);
+    }
+
+    function reply_click_dislikes(clicked_id) {
+
+      var articledislikes = clicked_id;
+      var username = "<?php echo $user_name; ?>";
+      var ajax = ajaxObj("POST", "dislikes.php");
+      ajax.onreadystatechange = function () {
+        if (ajaxReturn(ajax) == true) {
+          document.getElementById(clicked_id + 'dislikes').innerHTML = " " + ajax.responseText;
+
+
+
+        }
+      }
+      ajax.send("articledislikes=" + articledislikes + "&username=" + username);
+    }
+
+
+
+    function publish() {
+
+      var contentname = document.getElementById("contentname").value;
+      var temp = tinymce.activeEditor.getContent({ format: 'html' });
+      var content = new tinymce.html.Serializer().serialize(new tinymce.html.DomParser().parse(temp));
+      var genre = document.getElementById("genre").value;
+      var username = "<?php echo $user_name ; ?>";
+      var tagline = document.getElementById("tagline").value;
+
+      if (contentname == "" || content == "" || genre == "" || tagline == "") {
+        document.getElementById("published").innerHTML = "Fill all the feilds";
+      }
+      else if (contentname.length > 50) {
+        document.getElementById("published").innerHTML = "Content Title should be less than 50 characters";
+      }
+      else if (tagline.length > 100) {
+        document.getElementById("published").innerHTML = "Tagline should be less than 100 characters";
+      }
+      else {
+
+        if (username != "") {
+          document.getElementById("published").innerHTML = 'checking ...';
+          var ajax = ajaxObj("POST", "publish.php");
+          ajax.onreadystatechange = function () {
+            if (ajaxReturn(ajax) == true) {
+              document.getElementById("published").innerHTML = ajax.responseText;
+              location.reload();
+
+            }
+          }
+          ajax.send("username=" + username + "&content=" + content + "&contentname=" + contentname + "&tagline=" + tagline + "&genre=" + genre);
+        }
+      }
+    }
+  </script>
+
+
+  <div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Modal Header</h4>
+        </div>
+        <div class="modal-body">
+          <p>
+            <?php   getcontent();?> </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    function zoom() {
+      document.body.style.zoom = "80%";
+    }
+
+    function showcommentbutton(commentid) {
+
+      var rx = new RegExp;
+      rx = /[^0-9]/g;
+      var buttonid = commentid.replace(rx, "");
+
+      document.getElementById("commentbutton" + buttonid).style.visibility = "visible";
+    }
+
+    function comment(buttonid) {
+
+      var rx = new RegExp;
+      rx = /[^0-9]/g;
+      var articleid = buttonid.replace(rx, "");
+      var username = "<?php echo $user_name; ?>";
+      var commentid = "comment" + articleid;
+      var isOwner = "<?php echo $isOwner;?>";
+      var comment = document.getElementById(commentid).value;
+
+      if (comment == "") { alert("Please write something"); }
+
+      else if (comment != "" && articleid != "" && isOwner == "yes") {
+
+        var ajax = ajaxObj("POST", "comment.php");
+        ajax.onreadystatechange = function () {
+          if (ajaxReturn(ajax) == true) {
+
+            var rx = new RegExp;
+            rx = /[^0-9]/g;
+            var buttonid = commentid.replace(rx, "");
+
+            document.getElementById("commentbutton" + buttonid).className = "btn btn-success";
+            document.getElementById("commentbutton" + buttonid).innerHTML = "Commented";
+            setTimeout(function () {
+              document.getElementById("commentbutton" + buttonid).style.visibility = "hidden";
+              document.getElementById("commentbutton" + buttonid).className = "btn btn btn-primary";
+              document.getElementById("commentbutton" + buttonid).innerHTML = "Comment";
+            }, 1000);
+            document.getElementById(commentid).value = "";
+            document.getElementById("commentlogo" + buttonid).innerHTML = "<span class='glyphicon glyphicon-comment margin'>" + "  " + ajax.responseText + "</span>";
+          }
+        }
+        ajax.send("username=" + username + "&articleid=" + articleid + "&comment=" + comment);
+      }
+
+
+
+    }
+
+
+    function fetchcomments(comment_buttonid) {
+
+      var rx = new RegExp;
+      rx = /[^0-9]/g;
+      var article_id = comment_buttonid.replace(rx, "");
+
+
+      if (article_id != "") {
+        document.getElementById("loader").innerHTML = '<div class="loader"></div>';
+        var ajax = ajaxObj("POST", "fetchcomments.php");
+        ajax.onreadystatechange = function () {
+          if (ajaxReturn(ajax) == true) {
+            document.getElementById("commentsmodal").innerHTML = ajax.responseText;
+
+          }
+        }
+        ajax.send("article_id=" + article_id);
+      }
+
+
+
+    }
+
+  </script>
+
+  <script type="text/javascript">
+    function zoom() {
+      document.body.style.zoom = "80%";
+
+    }
+  </script>
+
+
+  <!-- Modal -->
+  <div id="commentsmodal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Comments</h4>
+        </div>
+        <div class="modal-body">
+          <div style="margin:50%;" id="loader"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    $(document).ready(function () {
+
+      // ANIMATEDLY DISPLAY THE NOTIFICATION COUNTER.
+      $('#noti_Counter')
+        .css({ opacity: 0 })
+        .text('0')              // ADD DYNAMIC VALUE (YOU CAN EXTRACT DATA FROM DATABASE OR XML).
+        .css({ top: '-10px' })
+        .animate({ top: '-2px', opacity: 1 }, 500);
+
+      $('#noti_Button').click(function () {
+
+        // TOGGLE (SHOW OR HIDE) NOTIFICATION WINDOW.
+        $('#notifications').fadeToggle('fast', 'linear', function () {
+          if ($('#notifications').is(':hidden')) {
+            $('#noti_Button').css('background-color', '#FFF');
+          }
+          else $('#noti_Button').css('background-color', '#FFF');        // CHANGE BACKGROUND COLOR OF THE BUTTON.
+        });
+
+        $('#noti_Counter').fadeOut('slow');                 // HIDE THE COUNTER.
+
+        return false;
+      });
+
+      // HIDE NOTIFICATIONS WHEN CLICKED ANYWHERE ON THE PAGE.
+      $(document).click(function () {
+        $('#notifications').hide();
+
+        // CHECK IF NOTIFICATION COUNTER IS HIDDEN.
+        if ($('#noti_Counter').is(':hidden')) {
+          // CHANGE BACKGROUND COLOR OF THE BUTTON.
+          $('#noti_Button').css('background-color', '#FFF');
+        }
+      });
+
+      $('#notifications').click(function () {
+        return false;       // DO NOTHING WHEN CONTAINER IS CLICKED.
+      });
+    });
+
+
+    new Vue({
+      el: "#ques",
+      data: {
+        sh: false,
+        ques: [<% ques.forEach(function (x) { %>
+          { git: '<%=x["github"] %>', content: '<%=x["content"].substr(3,x["content"].length-7)%>', pid: '<%=x["pid"]%>', upvote: '<%=x["upvote"].length%>', downvote: '<%=x["downvote"].length%>', pname: '<%= x["pname"] %>', pro: "<%=x['proid']%>" },
+  <% }) %>]
+      },
+      methods: {
+        add: function () {
+          console.log("clicked");
+        }
+      }
+
+
+
+    });
+  </script>
+
+  <script src="/js/autocomplete.js"></script>
+
+</body>
+
+</html>

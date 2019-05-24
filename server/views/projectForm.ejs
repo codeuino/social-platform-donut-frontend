@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link rel=stylesheet type=text/css href="/css/bootstrap4/bootstrap.min.css">
+    <style>
+        textarea{
+        resize:none;
+    }
+    html,body{
+        height:100%;
+        margin:0;
+        padding: 0;
+    }
+    #main{
+        background-image: url("img/back.jpg");
+        background-size: cover;
+        z-index: 1;
+        height:40%;
+        position: relative;
+        display: flex;
+        justify-content: center;
+    }
+    #mainCard{
+        z-index: 2;
+        position: absolute;
+        bottom: -200px;
+        max-width: 600px;
+
+    }
+    footer{
+        min-height: 200px;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+    }
+
+    </style>
+    <title>Project Registration</title>
+  </head>
+  <body>
+    <div id="main" class="bg-dark">
+        <div class="container"  id="mainCard">
+            <div class="card card-body">
+                <h2 class="card-title">Submit your project</h2>
+                <form  method="POST" action="/profile/publish" enctype="multipart/form-data">
+                    <div class="form-group">
+                      <label>Project Name</label>
+                      <input name="contentname"  type="type" class="form-control"  placeholder="Enter Project Name">
+                    </div>
+                    <div class="form-group">
+                        <label>Github URL</label>
+                        <input name="git"type="text" class="form-control" placeholder="Enter Github URL of your project">
+                    </div>
+                    <div class="form-group">
+                      <label >Languages Used</label>
+                      <input name="genre" class="form-control" type="text" class="form-control" placeholder="Write languages used separate by commas . Eg 'Python, Java'">
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                    </div>
+                    <div class="form-group">
+                        <textarea  name="cont" placeholder="Describe about your project " cols="55" rows="3"></textarea>
+                      </div>
+                      <div class="form-group">
+                        <label>Project Image</label>
+                        <input name="image"  type="file" class="form-control"  placeholder="Enter Project Image">
+                      </div>
+                    <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                  </form>
+            </div>
+        </div>
+    </div>
+    <footer class="bg-dark small text-center text-white-10">
+
+            <div class="container pt-5 text-white">
+                <div class="social d-flex justify-content-center">
+
+                    <a href="https://github.com/codeuino/Social-Platform-Donut" class="mx-2">
+                      <i class="fab fa-github text-white mb-3 " style="font-size:32px"></i>
+                    </a>
+                  </div>
+              DONUT: Codeuino's Social Platform
+            </div>
+    </footer>
+
+
+
+  </body>
+</html>

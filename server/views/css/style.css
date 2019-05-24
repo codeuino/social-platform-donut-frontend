@@ -1,0 +1,227 @@
+.phrase{
+     margin-top: 15vw;
+     margin-left: 10%;
+     width: 30%;
+     color: #eee;
+     position: fixed;
+     display: inline-block;
+}
+ .form {
+     background: #ddd;
+     padding: 3%;
+     width: 40%;
+     margin-top: 15vh;
+     margin-bottom: 3vh;
+     margin-left: 50%;
+     border-radius: 4px;
+     display: inline-block;
+}
+ input, textarea {
+     letter-spacing: 0.1vh;
+     word-spacing: 0.3vh;
+     font-size: 2vh;
+     color: #000;
+     display: block;
+     width: 100%;
+     height: 5vh;
+     padding: 2% 4%;
+     background: none;
+     border: 1px solid #000;
+     border-radius: 5%;
+}
+ input:focus, textarea:focus {
+     outline: 0;
+     border-color: #1ab188;
+}
+ textarea {
+     border: 2px solid #a0b3b0;
+     resize: vertical;
+}
+ .field-wrap {
+     position: relative;
+     margin-bottom: 5%;
+}
+ .top-row:after {
+     content: "";
+     display: table;
+     clear: both;
+}
+ .top-row > div {
+     float: left;
+     width: 48%;
+     margin-right: 4%;
+}
+ .top-row > div:last-child {
+     margin: 0;
+}
+ n{
+     color: #008080;
+}
+ i{
+     color: #f44177;
+}
+#comm{
+  display: none;
+}
+ .button-block {
+     font-size: 2.5vh;
+     font-weight: 600;
+     letter-spacing: .1em;
+     color: #ffffff;
+     background: #008080;
+     display: block;
+     margin-left: 30%;
+     width: 40%;
+}
+/* The container */
+ .container {
+     display: block;
+     position: relative;
+     padding-left: 35px;
+     margin-bottom: -3vh;
+     cursor: pointer;
+}
+/* Hide the browser's default checkbox */
+ .container input {
+     position: relative;
+     opacity: 0;
+     cursor: pointer;
+}
+/* Create a custom checkbox */
+ .checkmark {
+     position: absolute;
+     top: 0;
+     left: 0;
+     height: 25px;
+     width: 25px;
+     background-color: transparent;
+     border: 1px solid #000;
+}
+ .checkorg {
+     position: absolute;
+     top: 0;
+     left: 0;
+     height: 25px;
+     width: 25px;
+     background-color: transparent;
+     border: 1px solid #000;
+}
+/* When the checkbox is checked, add a blue background */
+ .container input:checked ~ .checkmark {
+     background: #008080;
+}
+ .container input:checked ~ .checkorg {
+     background-color: #10c144;
+}
+/* Create the checkmark/indicator (hidden when not checked) */
+ .checkmark:after {
+     content: "";
+     position: absolute;
+     display: none;
+}
+ .checkorg:after {
+     content: "";
+     position: absolute;
+     display: none;
+}
+/* Show the checkmark when checked */
+ .container input:checked ~ .checkmark:after {
+     display: block;
+}
+ .container input:checked ~ .checkorg:after {
+     display: block;
+}
+/* Style the checkmark/indicator */
+ .container .checkmark:after {
+     left: 9px;
+     top: 5px;
+     width: 5px;
+     height: 10px;
+     border: solid white;
+     border-width: 0 3px 3px 0;
+     -webkit-transform: rotate(45deg);
+     -ms-transform: rotate(45deg);
+     -o-transform: rotate(45deg);
+     -moz-transform: rotate(45deg);
+     transform: rotate(45deg);
+}
+ .container .checkorg:after {
+     left: 9px;
+     top: 5px;
+     width: 5px;
+     height: 10px;
+     border: solid white;
+     border-width: 0 3px 3px 0;
+     -webkit-transform: rotate(45deg);
+     -ms-transform: rotate(45deg);
+     -o-transform: rotate(45deg);
+     -moz-transform: rotate(45deg);
+     transform: rotate(45deg);
+}
+ .org_sign{
+     background-color: #10c144;
+}
+ .org{
+     color: #10c144;
+}
+.tab-group {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 40px 0;
+}
+.tab-group:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.tab-group li a {
+  display: block;
+  text-decoration: none;
+  padding: 15px;
+  background: #eee;
+  color: #809190;
+  font-size: 1.1vw;
+  float: left;
+  width: 50%;
+  text-align: center;
+  cursor: pointer;
+  transition: .5s ease;
+}
+.tab-group li a:hover {
+  background: #000;
+  color: #fff;
+}
+.tab-group .active a {
+  background: #111;
+  color: #fff;
+}
+
+.tab-content > div:last-child {
+  display: none;
+}
+ #drop{
+     letter-spacing: 0.1vh;
+     word-spacing: 0.3vh;
+     font-size: 2vh;
+     color: #000;
+     display: block;
+     width: 100%;
+     height: 5vh;
+     padding: 2% 4%;
+     background: none;
+     border: 1px solid #000;
+     border-radius: 5%;
+}
+ @media screen and (max-width: 850px) {
+     .phrase{
+         display: none;
+    }
+     .form{
+         margin-top: 50vh;
+         margin-left: 2.5%;
+         width: 95%
+    }
+    .tab-group li a {
+      font-size: 3.8vw;
+    }
+}
