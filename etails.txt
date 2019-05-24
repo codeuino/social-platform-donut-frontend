@@ -1,2 +1,0 @@
-sign:The person logged in
-use:the person whose profile is  being view
