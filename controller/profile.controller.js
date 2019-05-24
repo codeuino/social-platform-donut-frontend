@@ -1,3 +1,7 @@
+// status 1 : FOR SUCCESS
+// status 0 :FOR FAIL
+
+
 const user = require('../schema/user.js');
 const proj = require('../schema/project.js');
 const expressValidator = require('express-validator');
@@ -28,7 +32,10 @@ module.exports = {
       .lean()
       .then(function(us) {
         req.params.id = us.Eid;
-        res.redirect('/profile/profileview/' + req.params.id);
+        res.send({
+          status:1,
+          id:req.params.id
+        });
       });
   },
   profileViewSd: function(req, res) {
@@ -42,10 +49,9 @@ module.exports = {
         }
       }
     ]).sort({createdAt:-1}).then((da)=>{
-      console.log(req.user);
       user.findOne({ Eid: req.params.sd }).then(function (use) {
         console.log(da)
-          res.render('other-landing', { use: use, ques: da, sign: req.user});
+          res.send({ use: use, ques: da, sign: req.user});
       })
     })
   },
@@ -82,7 +88,10 @@ module.exports = {
         }
        })
        .catch((err)=>{
-         console.log(`${err}`);
+         res.status(400).send({
+           err,
+           status:0
+         })
        });
 },
   upDownVote: function (req,res) {
@@ -106,20 +115,21 @@ module.exports = {
     })
   }, 
   ch2: function(req, res) {
-    res.render('main-landing', { sign: req.user });
+    res.send({ sign: req.user }); // Main LANDING PAGE
   },
   up: function(req, res) {
-    res.send('success');
+    res.send({
+      msg:"UPVOTE SUCCESS"
+    });
   },
   dashBoard: function(req, res) {
-    res.render('dashboard', { user: req.user });
+    res.send({ user: req.user }); // DASHBOARD 
   },
   setting: function(req, res) {
-    res.render('setting', { user: req.user });
+    res.send({ user: req.user }); //SETTING
   },
   updateDetails: function(req, res) {
     user.findOne({ Eid: req.user.Eid }).then(function(data) {
-      // prettier-ignore
       req.check('fname','First name is required !').notEmpty();
       req.check('lname','Last name is required !').notEmpty();
       req.check('bio','Bio is required !').notEmpty();
@@ -135,13 +145,12 @@ module.exports = {
       .then((result)=>{
         if(result.isEmpty() === true){
           result.array().forEach((error)=>{
-            console.log(error.msg);
-            res.redirect('/profile/setting');
+            res.status(400).send(error)
           });
         } 
       })
       .catch((err)=>{
-        console.log(`${err}`);
+        res.status(400).send(error)
       });       
           (data.fname = req.body.fname),
           (data.lname = req.body.lname),
@@ -156,11 +165,17 @@ module.exports = {
           (data.facebook = req.body.facebookUrl);
           data.save()
             .then(()=>{
-              console.log('profile updated !');
+              res.send({
+                msg:"Success",
+                status:1 
+              })
               // res.send('success');
             })
             .catch((err)=>{
-              console.log(`${err}`);
+              res.send({
+                msg:"FAIURE",
+                status:0
+              })
             });
     });
   },
@@ -169,7 +184,10 @@ module.exports = {
       .findOne({ Eid: req.user.Eid })
       .lean()
       .then(function(data) {
-        res.send(data);
+        res.send({
+          status:1,
+          data
+        });
       });
   }
 };
