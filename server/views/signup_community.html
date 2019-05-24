@@ -1,0 +1,97 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Codeuino</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel=stylesheet type=text/css href="css/bootstrap4/bootstrap.min.css">
+    <link rel=stylesheet type=text/css href="css/home.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+      .signup{
+        display: block;
+        background: url('./img/back.jpg');
+        height: 756px;
+      }
+      
+    </style>
+    <script src="js/signup_validator.js"></script>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header d-flex flex-row justify-content-end align-items-center">
+      <!-- Logo -->
+      <div class="logo">
+        <a href="/">DONUT</a>
+      </div>
+      <div class="line">
+        <p>Codeuino's Open Source Social Platform</p>
+      </div>
+      <!-- Navigation -->
+      <nav class="main_nav justify-self-end">
+        <ul class="nav_items">
+          <li class="hide"><span>DONUT</span></li>
+          <li><a href="/"><span>Home</span></a></li>
+          <li><a href="/"><span>Community</span></a></li>
+          <li><a href="/"><span>Help</span></a></li>
+        </ul>
+      </nav>
+    </header>
+    <!-- Sign Up -->
+    <div class="signup">
+      <div class="phrase l1">
+        <p>
+          SIGNING UP AS A <n class="org">COMMUNITY</n>!
+        </p>
+      </div>
+      <div class="form">
+        <form action="/" method="post" name="myForm" onsubmit="return(validate());">
+          <div class="field-wrap">
+            <input type="text" class='form-control' placeholder="Organization's Full Name" required autocomplete="off" />
+          </div>
+          <div class="field-wrap">
+            <input type="email" name="EMail" class='form-control' placeholder="Email Address" required autocomplete="off"/>
+          </div>
+          <div class="top-row">
+            <div class="field-wrap">
+              <input type="text" class='form-control' placeholder="Admin's Full Name" required autocomplete="off" />
+            </div>
+            <div class="field-wrap">
+              <select name="Organiztion Type" class='form-control' required>
+                <option value="" disabled selected>Organization Type</option>
+                <option value="1">Type A</option>
+                <option value="2">Type B</option>
+                <option value="3">Type C</option>
+                <option value="4">Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="field-wrap">
+            <input type="text" class='form-control' placeholder="Github Handle Link" required autocomplete="off"/>
+          </div>
+          <div class="field-wrap">
+            <input type="text" class='form-control' placeholder="Organization Website Link" required autocomplete="off"/>
+          </div>
+          <div class="top-row">
+            <div class="field-wrap">
+              <input type="password" class='form-control' id="pass" placeholder="Password" required autocomplete="off" />
+            </div>
+            <div class="field-wrap">
+              <input type="password" class='form-control' id="cpass" placeholder="Confirm Password" required autocomplete="off"/>
+            </div>
+          </div>
+          <div class="field-wrap">
+            <label class="container">I accept the <i>Code of Conduct</i> of this community
+            <input type="checkbox" class='form-control' checked="checked" name="check" id="check">
+            <span class="checkorg"></span>
+            </label>
+          </div>
+          <div style='text-align: center'><button type="submit" class="btn btn-success" style='width : 30%'>Sign In</button></div>
+          </form>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

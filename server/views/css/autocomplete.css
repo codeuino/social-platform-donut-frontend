@@ -1,0 +1,26 @@
+.autocomplete {
+  position: relative;
+}
+
+.autocomplete-item {
+  position: absolute;
+  width: 100%;
+}
+
+.autocomplete-item ul {
+  padding: 0px;
+}
+
+.autocomplete-item ul li {
+  height: 30px;
+  background-color: #dddddd;
+  border-bottom: 2px solid #000000;
+  list-style-type: none;
+  text-align: center;
+}
+
+.autocomplete-item ul li a {
+  font-size: 20px;
+  color: #333333;
+  text-decoration: none;
+}
