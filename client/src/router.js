@@ -43,11 +43,6 @@ export default new Router({
       path: '/search',
       name: 'Search', // Use $route.query to fetch queries
       component: SearchResult
-    },
-    {
-      path: '/',
-      name: 'home',
-      component: Home
     }
 
   ]
