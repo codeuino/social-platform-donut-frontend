@@ -1,6 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
+import Settings from './views/Settings.vue'
+import SearchResult from './views/SearchResult.vue'
+import ProfileView from './views/ProfileView.vue'
+import Dashboard from './views/Dashboard.vue'
+import About from './views/About.vue'
 
 Vue.use(Router)
 
@@ -10,16 +15,35 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
+      name: 'Home',
       component: Home
+
+    },
+    {
+      path: '/dashboard',
+      name: 'Dashboard',
+      component: Dashboard
     },
     {
       path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+      name: 'About',
+      component: About
+    },
+    {
+      path: '/settings/:id',
+      name: 'Settings',
+      component: Settings
+    },
+    {
+      path: '/profile/:id',
+      name: 'ProfileView',
+      component: ProfileView
+    },
+    {
+      path: '/search',
+      name: 'Search', // Use $route.query to fetch queries
+      component: SearchResult
     }
+
   ]
 })
