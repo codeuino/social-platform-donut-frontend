@@ -12,8 +12,8 @@ const multer=require('multer')
 const path=require('path')
 const Jimp=require('jimp')
 const imagecontroller=require('../controller/image.controller')
-
-
+const bcrypt=require('bcrypt')
+const jwt=require('jsonwebtoken')
 
 //MULTER
 const storage=multer.diskStorage({
@@ -105,24 +105,36 @@ route.post('/userlogin',upload.single('profilepic'), function(req, res) {
 });
 //LOGIN ROUTE
 route.post('/login', url, function(req, res) {
-  user
-    .findOne({ email: req.body.email })
-    .lean()
-    .then(function(data) {
-      if (data.password == req.body.password) {
-        console.log(data)
-        res.send({
-          msg:"User Logged In",
-          Eid:data.eid,
-          status:1
-        })
-      } else {
-        res.status(200).send({
-          msg:"Authentication Failed",
-          status:0
-        })
-      }
-    });
+  user.findOne({email:req.body.email}).then((use)=>{
+    if(!use)
+    {
+    return  res.status(400).json({err:"USER NOT PRESENT"})
+    }
+    if(use)
+    {
+    console.log(typeof(use))
+    console.log(use)
+    const k=JSON.parse(JSON.stringify(use)).password
+
+      bcrypt.compare(req.body.password,k).then((val)=>{
+        if(val==false)
+        {
+          return res.status(400).json({err:"Password is wrong"})
+        }
+        else
+        {
+          const payload={id:use.Eid,name:use.first_name}
+            jwt.sign(payload,'blabla',{expiresIn:3600},(err,token)=>{
+              res.json({
+                success:true,
+                token:'Bearer'+token
+              })
+          })
+        }
+      })
+
+    }
+  })
 });
 
 route.get('/logout', function(req, res) {
