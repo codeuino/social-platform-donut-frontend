@@ -1,4 +1,6 @@
 export default {
   id: 2,
-  isLogged: true
+  isLogged: true,
+  username: 'Lakshya Khera',
+  position: null
 }

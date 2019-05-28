@@ -9,6 +9,7 @@ import store from './store/index'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import '@mdi/font/css/materialdesignicons.css'
+import './registerServiceWorker'
 
 Vue.use(Vuetify, {
   iconfront: 'mdi'

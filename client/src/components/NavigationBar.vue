@@ -2,7 +2,7 @@
 
     <div>
         
-        <b-navbar fixed="top" v-if="this.isLogged" toggleable="sm" type="dark" variant="dark">
+        <b-navbar v-if="this.isLogged" toggleable="sm" type="dark" variant="dark">
             <b-navbar-brand href="/">DONUT</b-navbar-brand>
 
             <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -49,7 +49,6 @@ export default {
 
     },
     props:{
-        isLogged:Boolean,
         
     },
     data(){
