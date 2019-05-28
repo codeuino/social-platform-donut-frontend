@@ -1,24 +1,46 @@
 <template>
-  <v-app>
-    <NavigationBar v-bind:isLogged="isLogged"  class="mb-4"/> <!--- Hardcoded margin-bottom , as the navbar is stciky so the it covers the content in first line -->
-    <v-content class="mt-5"> <!-- Hardcoded margin-top 5 for same reason -->
+  <offline @detected-condition="handleConnectivityChange">
+    
+    <div slot="online">
+    <v-app>
+    <NavigationBar  /> 
+    <v-content > 
       <router-view></router-view>
     </v-content>
   </v-app>
+    </div>
+    <div slot="offline">
+      This is when you're offline
+    </div>
+
+  </offline>
+  
 </template>
 
 <script>
+import offline from 'v-offline';
 import NavigationBar from './components/NavigationBar.vue'
 export default {
   name: 'App',
   components: {
     NavigationBar,
+    offline,
   },
   
   data () {
     return {
       isLogged:true,
+
     }
+  },
+  methods:{
+    handleConnectivityChange(status) {
+      console.log(status);
+    }   
+  },
+  mounted(){
+    console.log(window)
   }
+  
 }
 </script>
