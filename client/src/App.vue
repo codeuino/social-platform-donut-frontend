@@ -15,7 +15,6 @@ export default {
   name: 'App',
   components: {
     NavigationBar,
-    offline,
   },
   
   data () {
