@@ -14,7 +14,6 @@
     "bootstrap-vue": "^2.0.0-rc.20",
     "core-js": "^2.6.5",
     "register-service-worker": "^1.6.2",
-    "v-offline": "^1.1.0",
     "vue": "^2.6.10",
     "vue-router": "^3.0.3",
     "vuetify": "^1.5.5",
