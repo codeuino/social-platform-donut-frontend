@@ -14,14 +14,15 @@
                             </b-card-header>
                             <br>
                             <vue-editor id="editor"  v-model="newPost.content" :editorToolbar="customToolbar"> </vue-editor>  
-                            <b-card-footer class="bg-primary text-white mt-2">
+                            <b-card-footer class="bg-light text-white mt-2">
                                 <b-row >
-                                    <b-col cols="7">  
+                                    <b-col cols="6">  
                                           <b-form-file v-model="newPost.image" class="mt-1" plain></b-form-file>
                                     </b-col>
-                                    <b-col cols="5">
-                                        <button @click="reset" class="btn btn-danger mr-2">Reset</button>
-                                        <button @click="makePreviewPost" class="btn btn-success">Preview</button>
+                                    <b-col cols="6">
+                                        <button @click="reset" class="btn btn-danger mr-1">Reset</button>
+                                        <button @click="makePreviewPost" class="btn btn-success mr-1">Preview</button>
+                                        <button @click="addPost" class="btn btn-primary">Submit</button>
                                     </b-col>
                                 </b-row>
                                 
