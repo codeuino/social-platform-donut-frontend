@@ -61,7 +61,8 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
+@import url('https://fonts.googleapis.com/css?family=Raleway&display=swap');
 #offCard {
   display: none;
 }
