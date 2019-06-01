@@ -26,11 +26,12 @@ content:{
 linkedUsers:{
   type : [Number]
 },
-upvote:{
-  type:[String]
+upvote:
+{
+type:Object
 },
 downvote:{
-  type:[String]
+  type:Object
 },
 proid:{
   type:Number

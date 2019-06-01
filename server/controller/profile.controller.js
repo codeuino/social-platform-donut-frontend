@@ -27,16 +27,26 @@ module.exports = {
     console.log(req.body);
   },
   profileId: function(req, res) {
-    user
-      .findOne({ Eid: req.user.Eid })
-      .lean()
-      .then(function(us) {
-        req.params.id = us.Eid;
-        res.send({
-          status:1,
-          id:req.params.id
+
+    if(req.user.id==req.params.id)
+    {
+      user
+        .findOne({Eid:req.user.Eid })
+        .lean()
+        .then(function(us) {
+          req.params.id = us.Eid;
+          proj.find().then((proj)=>{
+            res.send({proje:proj,user:req.user});
+          })
         });
-      });
+    }
+    else
+    {
+    proj.findOne({pid:req.params.id}).then((proj)=>{
+      res.send({proje:proj,user:req.params.id})
+    })
+    }
+
   },
   profileViewSd: function(req, res) {
     proj.aggregate([
@@ -56,64 +66,34 @@ module.exports = {
     })
   },
   publish: function(req, res) {
-    var lan=req.body.genre.split(',');
+
     req.check('contentname','Project name is required !!').notEmpty();
     req.check('git','Github url is required !!').isURL();
     req.check('cont','Description is required !!').notEmpty();
     req.check('genre','Language used is required !!').notEmpty();
-    req.getValidationResult(req)
-      .then((result)=>{
-        if(result.isEmpty() === false){
-          result.array().forEach((error)=>{
-            console.log(error.msg);
-            res.redirect('/profile/submitProject');
-          });
-        } else {
+
           new proj({
             createdAt:Date.now(),
             pname: req.body.contentname,
             pid: req.user.Eid,
             github: req.body.git,
-            Lang:lan,
+            Lang:req.body.lan,
             content: req.body.cont,
-            upvote: '',
-            downvote: '',
+            upvote:{},
+            downvote:{},
             proid: Math.floor(Math.random() * 100000),
-            image:'/images/uploads/'+req.file.filename
-          })
+      })
             .save()
-            .then(function() {
-              res.redirect('/profile/profileview/' + req.user.Eid);
-            });
-        }
-       })
-       .catch((err)=>{
-         res.status(400).send({
-           err,
-           status:0
-         })
+            .then((re)=>{
+              res.send(re).status(200);
+
        });
 },
-  upDownVote: function (req,res) {
-    proj.findOne({proid: req.body.project}).then((pro)=>{
-        if(pro.upDownVote.get(req.body.client)){
-            if(pro.upDownVote.get(req.body.client)=="-1"){
-                pro.upDownVote.set(req.body.client,"+1")
-                return pro.save()
-                
-            }else{
-                pro.upDownVote.set(req.body.client,"-1")
-                return pro.save()
-                
-            }
-        }else{
-            pro.upDownVote.set(req.body.client,req.body.vote)
-            return pro.save()
-        }
-    }).catch((err)=>{
-        return err
+  upVote: function (req,res) {
+    proj.findOne({proid:req.body.id}).then((pro)=>{
+    console.log(pro)
     })
-  }, 
+  },
   ch2: function(req, res) {
     res.send({ sign: req.user }); // Main LANDING PAGE
   },
@@ -123,7 +103,7 @@ module.exports = {
     });
   },
   dashBoard: function(req, res) {
-    res.send({ user: req.user }); // DASHBOARD 
+    res.send({ user: req.user }); // DASHBOARD
   },
   setting: function(req, res) {
     res.send({ user: req.user }); //SETTING
@@ -147,11 +127,11 @@ module.exports = {
           result.array().forEach((error)=>{
             res.status(400).send(error)
           });
-        } 
+        }
       })
       .catch((err)=>{
         res.status(400).send(error)
-      });       
+      });
           (data.fname = req.body.fname),
           (data.lname = req.body.lname),
           (data.bio = req.body.bio),
@@ -167,7 +147,7 @@ module.exports = {
             .then(()=>{
               res.send({
                 msg:"Success",
-                status:1 
+                status:1
               })
               // res.send('success');
             })
