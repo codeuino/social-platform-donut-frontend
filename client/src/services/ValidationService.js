@@ -18,18 +18,7 @@ export default {
       return false
     }
   },
-  isAgeBetween: (age, lower, upper) => {
-    if (lower <= age && age <= upper) {
-      return true
-    } else {
-      return false
-    }
-  },
-  isAddressUnderLimit: (addr, max) => {
-    if (length(addr) > max) {
-      return false
-    } else {
-      return true
-    }
-  }
+  isAgeBetween: (age, lower, upper) => lower <= age && age <= upper
+  ,
+  isAddressUnderLimit: (addr, max) => addr.length() < max
 }

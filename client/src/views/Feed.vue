@@ -4,6 +4,17 @@
         <b-jumbotron  :header="Welcome">
         </b-jumbotron>
         </div>
+
+        <!-- div for create post button -->
+        <div>
+            <b-container>
+                <b-button v-b-modal.modal-1 class="bg-primary btn-lg">Create a Post </b-button>
+                <b-modal size="xl" id="modal-1"  title="Create A Post">
+                    <CreatePost />
+                </b-modal>
+            </b-container>
+        </div>
+
         <b-container >
         <b-row v-for="(group , index ) in posts" v-bind:key="index">
             <b-col class="mt-3" cols md="6">
@@ -19,11 +30,13 @@
 </template>
 
 <script>
+import CreatePost from '@/components/CreatePost.vue'
 import Post from '@/components/Post.vue'
 export default {
     name:'Feed',
     components:{
-        Post
+        Post,
+        CreatePost
     },
     data(){
         return {
@@ -147,8 +160,3 @@ export default {
 }
 </script>
 
-<style scoped>
-
-
-
-</style>

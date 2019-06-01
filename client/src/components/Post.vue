@@ -6,7 +6,10 @@
                 <div>
                     <h3 class="headline mb-1">{{post.card_title}}</h3>
                     <hr>
-                    <div class="cardText "> {{ post.card_text }} </div>
+                    <div class="cardText " v-html="post.card_text"></div>
+                    <div class="my-2 text-right">
+                        <a :href=" `/profile/${post.card_author_id}` ">{{post.card_author}}</a>
+                    </div>
                 </div>
                 </v-card-title>
 
@@ -15,7 +18,7 @@
                 aspect-ratio="2.75"
                 ></v-img>
 
-                <v-card-actions class="mt-3">
+                <v-card-actions v-if="!preview" class="mt-3">
                 <v-form @submit="addComment" class="w-100">
                     <b-row align-h="between">
                     <b-col cols="8">
@@ -56,7 +59,8 @@
 export default {
     name:"Post",
     props:{
-        post:Object,
+        post:Object, // This object must have card_title , card_text, [comments {author_id, author, comment}] and card_img ,
+        preview:Boolean
     },
     data(){
         return {

@@ -6,7 +6,6 @@ import ProfileView from './views/ProfileView.vue'
 import Dashboard from './views/Dashboard.vue'
 import About from './views/About.vue'
 import Feed from './views/Feed.vue'
-import Form from './views/Form.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -18,11 +17,6 @@ export default new Router({
       name: 'Home',
       component: Feed
 
-    },
-    {
-      path: '/form',
-      name: 'Form',
-      component: Form
     },
     {
       path: '/dashboard',

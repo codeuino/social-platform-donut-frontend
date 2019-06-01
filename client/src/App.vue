@@ -17,14 +17,12 @@
 </template>
 
 <script>
-import offline from 'v-offline'
 import NavigationBar from './components/NavigationBar.vue'
+
 export default {
   name: 'App',
-  
   components: {  
     NavigationBar,
-    offline
   },
   
   data () {
@@ -36,6 +34,7 @@ export default {
   mounted(){
   },
   created(){
+    
     window.addEventListener('offline', function(e) { 
       var offlineCard = document.getElementById('offCard')
       offlineCard.style.display="block"
@@ -69,5 +68,6 @@ export default {
 #onCard {
   display: none;
 }
+
 </style>
 
