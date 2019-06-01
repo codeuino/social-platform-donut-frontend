@@ -17,7 +17,7 @@
                             <b-card-footer class="bg-light text-white mt-2">
                                 <b-row >
                                     <b-col cols="6">  
-                                          <b-form-file v-model="newPost.image" class="mt-1" plain></b-form-file>
+                                          <b-form-file v-model="image" class="mt-1" plain></b-form-file>
                                     </b-col>
                                     <b-col cols="6">
                                         <button @click="reset" class="btn btn-danger mr-1">Reset</button>
@@ -61,9 +61,13 @@ export default {
     },
     data(){
         return {
+            image:'',
             newPost:{
                 card_title:'', // So changes can only be seen on clicking preview
                 content:'',
+                card_author: this.$store.state.username,
+                card_author_id: this.$store.state.id,
+                card_image:''
             },
             customToolbar: [
                     ['bold', 'italic', 'underline', 'strike'],
@@ -76,7 +80,7 @@ export default {
 
                 ],
             showPreview:true, // This variable is imp, have a look in Post module doc to understand 
-            test:{ // This object goes to Post module
+            test:{ // This object goes to Post module, we can't send newPost directly to Post module cause first we need to render the file send via form using Reader()
                     card_title:"",
                     card_text:"",
                     card_img:"",
@@ -92,9 +96,10 @@ export default {
             this.test.card_text=this.newPost.content
             this.test.card_title=this.newPost.card_title
             var reader= new FileReader()
-            reader.readAsDataURL(this.newPost.image)
+            reader.readAsDataURL(this.image)
             reader.addEventListener('loadend', ()=> {  
              this.test.card_img= reader.result
+             this.newPost.card_image= reader.result
         },false)
             
         },
@@ -104,12 +109,10 @@ export default {
             this.test.card_title=""
             this.test.card_text=""
             this.test.card_img=""
-            this.test.card_author=""
-            this.test.card_author_id=""
 
         },
         addPost(){
-            // Here We can add axios call to add post and reload the page :)
+            console.log(this.newPost)
         }
     },
 }

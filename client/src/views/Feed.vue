@@ -8,8 +8,8 @@
         <!-- div for create post button -->
         <div>
             <b-container>
-                <b-button v-b-modal.modal-1 class="bg-primary btn-lg">Create a Post </b-button>
-                <b-modal size="xl" id="modal-1"  title="Create A Post">
+                <b-button v-b-modal.modal-1  class="bg-primary btn-lg">Create a Post </b-button>
+                <b-modal size="xl" ok-only ok-variant="secondary" ok-title="Cancel"  id="modal-1"  title="Create A Post">
                     <CreatePost />
                 </b-modal>
             </b-container>
