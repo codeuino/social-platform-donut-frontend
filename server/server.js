@@ -41,6 +41,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(expressValidator());
+require('./config/local.js')(passport)
 app.use(indexRoutes);
 
 app.get('**',(req,res)=>{
