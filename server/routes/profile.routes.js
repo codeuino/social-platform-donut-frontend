@@ -6,13 +6,8 @@ const user = require('../schema/user.js');
 const proj = require('../schema/project.js');
 const profileController = require('../controller/profile.controller');
 const jsonParser = bodyparser.json();
-const auth = function(req, res, next) {
-  if (req.user == null) {
-    res.redirect('/');
-  } else {
-    next();
-  }
-};
+
+const passport=require('passport');
 var multer = require('multer');
 var storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -23,26 +18,26 @@ var storage = multer.diskStorage({
   }
 });
 var upload = multer({storage: storage});
-route.get('/submitProject',auth,profileController.SubmitprojectForm)
+route.get('/submitProject',passport.authenticate('jwt',{session:false}),profileController.SubmitprojectForm)
 route.get('/search', url, jsonParser, profileController.search);
 
 route.post('/check', url, jsonParser, profileController.check);
 
-route.get('/profile/:id', auth, profileController.profileId);
+route.get('/profile/:id',passport.authenticate('jwt',{session:false}), profileController.profileId);
 
-route.get('/profileview/:sd', auth, url, profileController.profileViewSd);
+route.get('/profileview/:sd',passport.authenticate('jwt',{session:false}), url, profileController.profileViewSd);
 
-route.post('/publish', auth, url,upload.single('image'), profileController.publish);
+route.post('/publish', passport.authenticate('jwt',{session:false}),url,upload.single('image'), profileController.publish);
 
-route.post('/upDownVote', auth,url, jsonParser,profileController.upDownVote);
+route.post('/upVote',url,passport.authenticate('jwt',{session:false}), jsonParser,profileController.upVote);
 
 
 
-route.get('/ch2', auth, profileController.ch2);
+route.get('/ch2',passport.authenticate('jwt',{session:false}),profileController.ch2);
 
-route.get('/up', auth, profileController.up);
-route.get('/dashBoard', auth, url, profileController.dashBoard);
-route.get('/setting', auth, url, profileController.setting);
-route.get('/getDetails', auth, url, profileController.getDetails);
-route.post('/updateDetails', auth, jsonParser, profileController.updateDetails);
+route.get('/up', profileController.up);
+route.get('/dashBoard', url, profileController.dashBoard);
+route.get('/setting', url, profileController.setting);
+route.get('/getDetails', url, profileController.getDetails);
+route.post('/updateDetails', jsonParser, profileController.updateDetails);
 module.exports = route;

@@ -4,10 +4,10 @@ const User = require('../schema/user');
 const path=require('path')
 const opts={};
 opts.jwtFromRequest=ExtractJwt.fromAuthHeaderAsBearerToken();
-opts.secret='blabla';
+opts.secretOrKey='blabla';
 
 module.exports=passport=>{
-  passport.use(new Strategy(opts,function(opts,(jwt_payload,done)=>{
+  passport.use(new Strategy(opts,(opts,(jwt_payload,done)=>{
 
     User.findOne(jwt_payload.id).then((us)=>{
       if(us)
@@ -18,7 +18,7 @@ module.exports=passport=>{
       return   done(null,false)
       }
     })
+})))
 
-  }))
 
 }

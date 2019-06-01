@@ -14,7 +14,6 @@ const Jimp=require('jimp')
 const imagecontroller=require('../controller/image.controller')
 const bcrypt=require('bcrypt')
 const jwt=require('jsonwebtoken')
-
 //MULTER
 const storage=multer.diskStorage({
   destination: (req, file, cb) => {
@@ -114,6 +113,7 @@ route.post('/login', url, function(req, res) {
     {
     console.log(typeof(use))
     console.log(use)
+    //have to convert object to string then access keys
     const k=JSON.parse(JSON.stringify(use)).password
 
       bcrypt.compare(req.body.password,k).then((val)=>{
@@ -127,7 +127,7 @@ route.post('/login', url, function(req, res) {
             jwt.sign(payload,'blabla',{expiresIn:3600},(err,token)=>{
               res.json({
                 success:true,
-                token:'Bearer'+token
+                token:'Bearer '+token
               })
           })
         }
@@ -136,7 +136,10 @@ route.post('/login', url, function(req, res) {
     }
   })
 });
-
+//test route for jwt
+route.get('/check',passport.authenticate('jwt',{session:false}),(req,res)=>{
+  console.log(req.user)
+})
 route.get('/logout', function(req, res) {
   req.logout();
   res.send({
