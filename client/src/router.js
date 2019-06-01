@@ -6,6 +6,7 @@ import ProfileView from './views/ProfileView.vue'
 import Dashboard from './views/Dashboard.vue'
 import About from './views/About.vue'
 import Feed from './views/Feed.vue'
+import Welcome from './views/Welcome.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -17,6 +18,11 @@ export default new Router({
       name: 'Home',
       component: Feed
 
+    },
+    {
+      path: '/welcome', // Query source=login for login page, source=signuo for Signup page
+      name: 'Welcome',
+      component: Welcome
     },
     {
       path: '/dashboard',
