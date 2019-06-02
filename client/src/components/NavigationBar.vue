@@ -34,8 +34,8 @@
         <b-navbar v-else variant="dark" type="dark">
             <b-navbar-brand href="#">DONUT</b-navbar-brand>
             <b-navbar-nav class="ml-auto pr-2">
-                <b-nav-item href="#">SignUp</b-nav-item>
-                <b-nav-item href="#">LogIn</b-nav-item>
+                <b-nav-item href="/welcome?source=signup">SignUp</b-nav-item>
+                <b-nav-item href="/welcome?source=login">LogIn</b-nav-item>
 
             </b-navbar-nav>
         </b-navbar>

@@ -10,9 +10,9 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import '@mdi/font/css/materialdesignicons.css'
 import './registerServiceWorker'
-
+import '@fortawesome/fontawesome-free/css/all.css'
 Vue.use(Vuetify, {
-  iconfront: 'mdi'
+  iconfront: 'mdi' || 'fa' || 'fa4'
 })
 Vue.use(BootstrapVue)
 
