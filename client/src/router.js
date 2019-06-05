@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Settings from './views/Settings.vue'
-import SearchResult from './views/SearchResult.vue'
+import Search from './views/SearchResult.vue'
 import ProfileView from './views/ProfileView.vue'
 import Dashboard from './views/Dashboard.vue'
 import About from './views/About.vue'
@@ -47,7 +47,7 @@ export default new Router({
     {
       path: '/search',
       name: 'Search', // Use $route.query to fetch queries
-      component: SearchResult
+      component: Search
     }
 
   ]

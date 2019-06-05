@@ -1,8 +1,7 @@
 <template>
     <div>
         <div>
-        <b-jumbotron  :header="Welcome">
-        </b-jumbotron>
+        <b-jumbotron  :header="Welcome" bg-variant="info"  text-variant="white" />>
         </div>
 
         <!-- div for create post button -->

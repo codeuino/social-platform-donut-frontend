@@ -88,7 +88,7 @@
                                 label="Country"
                                 >
                                     <b-form-input
-                                    v-model="form.country"
+                                    v-model="form.location.country"
                                     type="text"
                                     size="lg"
                                     placeholder="Country Name"
@@ -102,7 +102,7 @@
                                 >
                                     <b-form-input
                                     type="text"
-                                    v-model="form.city"
+                                    v-model="form.location.city"
                                     size="lg"
                                     placeholder="City Name"
                                     required
@@ -219,8 +219,10 @@ export default {
             password:"",
             repassword:"",
             type:null, // 0 for user and 1 for org :)
-            country:"",
-            city:"",
+            location:{
+                country:"",
+                city:""
+            },
             admin_name:"", // only for org type
             gender:null,  // only for user type 
             social:{
