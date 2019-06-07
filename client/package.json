@@ -9,6 +9,7 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
+    "@fortawesome/vue-fontawesome": "^0.1.6",
     "axios": "^0.18.0",
     "bootstrap": "^4.3.1",
     "bootstrap-vue": "^2.0.0-rc.20",
@@ -22,6 +23,7 @@
     "vuex": "^3.0.1"
   },
   "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.8.2",
     "@mdi/font": "^3.6.95",
     "@vue/cli-plugin-babel": "^3.7.0",
     "@vue/cli-plugin-eslint": "^3.7.0",
@@ -34,6 +36,7 @@
     "chai": "^4.1.2",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
+    "font-awesome": "^4.7.0",
     "material-design-icons-iconfont": "^5.0.1",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
