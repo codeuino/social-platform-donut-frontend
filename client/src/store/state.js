@@ -1,8 +1,11 @@
 export default {
-  id: 2,
   isLogged: true,
-  username: 'Lakshya Khera',
-  position: null,
+  userDetails: {
+    id: 2,
+    username: 'Lakshya Khera',
+    position: null,
+    token: {}
+  },
   SettingState: {
     isPActive: true,
     isIActive: false

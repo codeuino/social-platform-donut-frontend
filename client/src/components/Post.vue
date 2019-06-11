@@ -1,14 +1,19 @@
 <template>
-    <v-layout>
+    <v-layout> 
         <div xs12 sm6  class="w-100 ">
-            <v-card class="p-3">
+            <div v-if="isloading">
+                <v-card>
+                    <b-spinner style="width: 3rem; height: 3rem;" label="Large Spinner" type="grow"></b-spinner>
+                </v-card>
+            </div>
+            <v-card v-if="!isloading" class="p-3">
                 <v-card-title primary-title>
                 <div>
-                    <h3 class="headline mb-1">{{post.card_title}}</h3>
+                    <h3 class="headline mb-1">{{Currentpost.card_title}}</h3>
                     <hr>
-                    <div class="cardText " v-html="post.card_text"></div>
+                    <div class="cardText " v-html="Currentpost.card_text"></div>
                     <div class="my-2 text-right">
-                        <a :href=" `/profile/${post.card_author_id}` ">{{post.card_author}}</a>
+                        <a :href=" `/profile/${Currentpost.card_author_id}` ">{{Currentpost.card_author}}</a>
                     </div>
                 </div>
                 </v-card-title>
@@ -64,13 +69,16 @@ export default {
     },
     data(){
         return {
+            isloading:true,
+            Currentpost: {
+            },
             comments:[],
             Currentcomment:''
         }
     },
     methods: {
       addComment(e){
-           // I will add validation, on making validation module so don't panic :)
+           // I will add validation, on making validation module so don't panic 
           if(this.Currentcomment==""){
               alert("Please Add Comment")
               e.preventDefault()
@@ -92,6 +100,8 @@ export default {
     },
     mounted() {
         this.comments=this.post.comments
+        this.Currentpost=this.post
+        this.isloading=false
     },
 }
 </script>

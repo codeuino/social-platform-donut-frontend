@@ -7,6 +7,7 @@ import Dashboard from './views/Dashboard.vue'
 import About from './views/About.vue'
 import Feed from './views/Feed.vue'
 import Welcome from './views/Welcome.vue'
+import Portfolio from './views/Portfolio.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -25,7 +26,7 @@ export default new Router({
       component: Welcome
     },
     {
-      path: '/dashboard',
+      path: '/dashboard/:id',
       name: 'Dashboard',
       component: Dashboard
     },
@@ -48,6 +49,11 @@ export default new Router({
       path: '/search',
       name: 'Search', // Use $route.query to fetch queries
       component: Search
+    },
+    {
+      path: '/portfolio/:id',
+      name: 'Portfolio',
+      component: Portfolio
     }
 
   ]

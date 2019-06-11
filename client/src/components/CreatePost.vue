@@ -65,8 +65,8 @@ export default {
             newPost:{
                 card_title:'', // So changes can only be seen on clicking preview
                 content:'',
-                card_author: this.$store.state.username,
-                card_author_id: this.$store.state.id,
+                card_author: this.$store.state.userDetails.username,
+                card_author_id: this.$store.state.userDetails.id,
                 card_image:''
             },
             customToolbar: [
@@ -84,8 +84,8 @@ export default {
                     card_title:"",
                     card_text:"",
                     card_img:"",
-                    card_author: this.$store.state.username,
-                    card_author_id: this.$store.state.id,
+                    card_author: this.$store.state.userDetails.username,
+                    card_author_id: this.$store.state.userDetails.id,
                     
             }
         }

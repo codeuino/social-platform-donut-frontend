@@ -1,7 +1,7 @@
 <template>
     <div>
         <div>
-        <b-jumbotron  :header="Welcome" bg-variant="info"  text-variant="white" />>
+        <b-jumbotron  :header="Welcome" bg-variant="info"  text-variant="white" />
         </div>
 
         <!-- div for create post button -->
@@ -14,28 +14,21 @@
             </b-container>
         </div>
 
-        <b-container >
-        <b-row v-for="(group , index ) in posts" v-bind:key="index">
-            <b-col class="mt-3" cols md="6">
-                <Post v-bind:post="group[0]" />
-            </b-col >
-            <b-col class="mt-3" cols md="6">
-                <Post v-bind:post="group[1]" />
-            </b-col>
-        </b-row>
-        </b-container>
+        <FeedGroup v-bind:postsArray="posts" />
         
     </div>
 </template>
 
 <script>
+import FeedGroup from '@/components/FeedGroup.vue'
 import CreatePost from '@/components/CreatePost.vue'
 import Post from '@/components/Post.vue'
 export default {
     name:'Feed',
     components:{
         Post,
-        CreatePost
+        CreatePost,
+        FeedGroup
     },
     data(){
         return {
@@ -48,7 +41,7 @@ export default {
             return "Welcome, " + this.username
         }
     },
-    mounted() {
+    created() {
         let myarr=[
                 {
                     card_title:"Project 1",
@@ -141,21 +134,8 @@ export default {
 
                 }
             ]
-            var index=0
-            var groups=[]
-            var group=[]
-            myarr.forEach(function(i){
-            if(index%2==0){
-                group=[]
-                group.push(i)
-                groups.push(group)
-            }else{
-                group.push(i)
-            }
-            index++
-            })
-            this.posts=groups // in the above code i took a array of objects (posts), and grouped them into group of two, so I can inject them as props easily. Grid issues in Vue bootstrap :)
-    },
+            this.posts=myarr
+        },
 }
 </script>
 
