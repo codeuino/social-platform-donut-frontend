@@ -14,7 +14,7 @@
                         <b-card-body class="my-3">
                             <b-form @submit="register">
                                 <!-- Account Type -->
-    
+
                                 <b-form-group>
                                     <b-form-select
                                     class="mb-2 mr-sm-2 mb-sm-0"
@@ -39,7 +39,7 @@
                                 type="email"
                                 placeholder="Enter email"
                                 ></b-form-input>
-                                <span v-if="emailCheck" class="err">Invalid Email</span>           
+                                <span v-if="emailCheck" class="err">Invalid Email</span>
 
                                 </b-form-group>
 
@@ -61,13 +61,13 @@
                                 <b-form-group
                                 label="Password"
                                 >
-                                
+
                                 <b-form-input
                                 size="lg"
                                 v-model="form.password"
                                 type="password"
                                 placeholder="Enter Password"
-                                ></b-form-input> 
+                                ></b-form-input>
                                 </b-form-group>
 
                                 <b-form-group
@@ -78,8 +78,8 @@
                                 v-model="form.repassword"
                                 type="password"
                                 placeholder="Re-Enter Password"
-                                ></b-form-input>  
-                                <span v-if="passCheck" class="err">Passwords doesn't match</span>           
+                                ></b-form-input>
+                                <span v-if="passCheck" class="err">Passwords doesn't match</span>
                                 </b-form-group>
 
                                 <!-- Location -->
@@ -107,7 +107,6 @@
                                     placeholder="City Name"
                                     required
                                     >
-                                    
 
                                     </b-form-input>
                                 </b-form-group>
@@ -134,7 +133,7 @@
                                 <b-form-group
                                 label="Gender"
                                 >
-                                    
+
                                     <b-form-select
                                     :disabled="isOrg"
                                     class="mb-2 mr-sm-2 mb-sm-0"
@@ -191,15 +190,13 @@
                                     </b-form-input>
                                 </b-form-group>
 
-
-
                                 <b-form-group class="text-center mt-5">
                                     <b-button type="submit" variant="primary" :disabled="isdisabled" class="mr-2 btn-lg btn-block">Register</b-button>
                                 </b-form-group>
 
                                 <b-form-group class="text-right">
                                     <div>
-                                        Already a member? <a href="/welcome?source=login">Click Here</a>
+                                        Already a member? <a href="/login">Click Here</a>
                                     </div>
                                 </b-form-group>
                             </b-form>
@@ -209,53 +206,73 @@
 </template>
 
 <script>
+import LocationService from '@/services/LocationService'
 import FrontendValidation from '@/services/ValidationService'
+import User from '@/assets/test_data/users'
+import { mapActions } from 'vuex'
 export default {
-    data () {
-        return {
-            form:{
-            email:"",
-            name:"", 
-            password:"",
-            repassword:"",
-            type:null, // 0 for user and 1 for org :)
-            location:{
-                country:"",
-                city:""
-            },
-            admin_name:"", // only for org type
-            gender:null,  // only for user type 
-            social:{
-                facebook:null,
-                github:null,
-                twitter:null
-            }
-            }
-        }
-    },
-    methods: {
-        register(e){
-            console.log(this.form)
-            e.preventDefault();
-            
-        }
-    },
-    computed: {
-        passCheck(){
-            return !FrontendValidation.isSamePassword(this.form.password,this.form.repassword)
+  data () {
+    return {
+      form: {
+        email: '',
+        name: '',
+        password: '',
+        repassword: '',
+        type: null, // 0 for user and 1 for org :)
+        location: {
+          country: '',
+          city: ''
         },
-        emailCheck(){
-            return !FrontendValidation.isValidEmail(this.form.email)
-        },
-        isdisabled ()
-        {
-            return this.emailCheck || this.passCheck
-        },
-        isOrg(){
-            return this.form.type==1
+        admin_name: '', // only for org type
+        gender: null, // only for user type
+        social: {
+          facebook: null,
+          github: null,
+          twitter: null
         }
-        
+      }
     }
+  },
+  methods: {
+    ...mapActions({
+      addToken: 'addToken',
+      addUser: 'addUser'
+    }),
+    register (e) {
+      LocationService.getLocation()
+        .then((position) => {
+          this.form.currentPosition = position
+          this.$store.state.position = position
+        })
+        .then(() => {
+          // Now we can send form details to and fetch tokens if logged in and then redirect to feed page
+          // if login failed use this.$router.push({path: 'welcome', query:{source: 'login' , error:'true'}})
+          // We also need to update Last login location !
+          // We will also update this.$store.state.userDetails.token and add token in it if successful XD
+          this.addToken({
+            test: 'Test Token'
+          })
+          this.addUser(User)
+          this.$router.push({ path: '/' })
+        })
+      e.preventDefault()
+    }
+  },
+  computed: {
+    passCheck () {
+      return !FrontendValidation.isSamePassword(this.form.password, this.form.repassword)
+    },
+    emailCheck () {
+      return !FrontendValidation.isValidEmail(this.form.email)
+    },
+    isdisabled () {
+      return this.emailCheck || this.passCheck
+    },
+    isOrg () {
+      return this.form.type === 1
+    }
+
+  }
 }
 </script>
 

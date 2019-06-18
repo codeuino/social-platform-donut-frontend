@@ -13,7 +13,7 @@
       background="#ababab"
       style="text-shadow: 1px 1px 2px #333;"
     >
-      <b-carousel-slide v-for="news in news" >
+      <b-carousel-slide v-bind:key="index" v-for="(news,index) in news" >
           <img
           slot="img"
           class="d-block img-fluid w-100"
@@ -23,14 +23,10 @@
           alt="image slot"
         >
         <div class="cardData px-3 py-1">
-            <p>
-            <h3>
-                <a :href="news.url" class="text-white">{{news.title}}</a>
-            </h3>
-            </p>
+            <h3><a :href="news.url" class="text-white">{{news.title}}</a></h3>
             <p class="text-right"><b>- {{news.source.name}}</b></p>
         </div>
-        
+
       </b-carousel-slide>
     </b-carousel>
     </div>
@@ -38,24 +34,25 @@
 </template>
 
 <script>
+import keys from '@/assets/config.js'
 import axios from 'axios'
-name:'News'
+
 export default {
-    data(){
-        return {
-            news:[],
-            isloading:true
-        }
-        
-    },
-    mounted(){
-        axios.get(`https://newsapi.org/v2/top-headlines?language=en&apiKey=9ad299f940c94a938272d3c3b5d94363`)
-        .then((response)=>{
-            console.log(response.data.articles)
-            this.news=response.data.articles.slice(0,5)
-            this.isloading=false
-        })
+  name: 'News',
+  data () {
+    return {
+      news: [],
+      isloading: true
     }
+  },
+  mounted () {
+    axios.get(`https://newsapi.org/v2/top-headlines?language=en&apiKey=${keys.NEWS_API}`)
+      .then((response) => {
+        console.log(response.data.articles)
+        this.news = response.data.articles.slice(0, 5)
+        this.isloading = false
+      })
+  }
 }
 </script>
 

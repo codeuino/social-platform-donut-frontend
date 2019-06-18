@@ -5,40 +5,37 @@
                 <h1 id="head" class="text-center text-white">Welcome To DONUT</h1>
             </b-container>
         </div>
-        <div v-if="$route.query.source==='login'">
-                <Login />
-        </div> 
-        <div v-if="$route.query.source==='signup'">
+
+        <div>
             <b-container>
                 <Signup/>
             </b-container>
         </div>
     </div>
 </template>
-    
 
 <script>
 import TypeWriter from 'typewriter-effect/dist/core'
-import Login from '@/components/Login.vue'
 import Signup from '@/components/Signup.vue'
 
 export default {
-    name:'Welcome',
-    components: {
-        Login,
-        Signup
-    },
-    data(){
-        return {
+  name: 'SignupView',
+  components: {
+    Signup
+  },
+  data () {
+    return {
 
-        }
-    },mounted() {
-        new TypeWriter('#head',{
-            strings:['Welcome','Welcome to','Welcome to Donut'],
-            autoStart:true,
-            loop:true
-        })
-    },
+    }
+  },
+  mounted () {
+    // eslint-disable-next-line
+    new TypeWriter('#head', {
+      strings: ['Welcome', 'Welcome to', 'Welcome to Donut'],
+      autoStart: true,
+      loop: true
+    })
+  }
 }
 </script>
 
@@ -48,5 +45,4 @@ export default {
     font-family: 'Raleway', sans-serif;
 
 }
-
 </style>

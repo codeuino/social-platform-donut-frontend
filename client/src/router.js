@@ -6,8 +6,10 @@ import ProfileView from './views/ProfileView.vue'
 import Dashboard from './views/Dashboard.vue'
 import About from './views/About.vue'
 import Feed from './views/Feed.vue'
-import Welcome from './views/Welcome.vue'
+import SignupView from './views/SignupView.vue'
+import LoginView from './views/LoginView.vue'
 import Portfolio from './views/Portfolio.vue'
+import PostView from './views/PostView.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -21,9 +23,14 @@ export default new Router({
 
     },
     {
-      path: '/welcome', // Query source=login for login page, source=signuo for Signup page
-      name: 'Welcome',
-      component: Welcome
+      path: '/signup',
+      name: 'Signup',
+      component: SignupView
+    },
+    {
+      path: '/login',
+      name: 'LoginView',
+      component: LoginView
     },
     {
       path: '/dashboard/:id',
@@ -54,7 +61,11 @@ export default new Router({
       path: '/portfolio/:id',
       name: 'Portfolio',
       component: Portfolio
+    },
+    {
+      path: '/post/:post_id',
+      name: 'PostView',
+      component: PostView
     }
-
   ]
 })

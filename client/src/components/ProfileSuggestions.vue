@@ -1,7 +1,7 @@
 <template>
-   <div>
+    <div>
        <b-card>
-            <b-card-title>Popular Projectse</b-card-title>
+            <b-card-title>Profile You May Like</b-card-title>
             <b-card-text>
                 <b-list-group>
                     <b-list-group-item>test</b-list-group-item>
@@ -16,7 +16,7 @@
 </template>
 <script>
 export default {
-  name: 'Popularprojects',
+  name: 'ProfileSuggestions',
   data () {
     return {
       projects: []
