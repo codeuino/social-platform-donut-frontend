@@ -3,5 +3,5 @@ export default {
   isSamePassword: (first, second) => first.trim() === second.trim(),
   isAgeBetween: (age, lower, upper) => lower <= age && age <= upper,
   isTextUnderLimit: (text, max) => text.length <= max,
-  isValidText: (text) =>(/[ 1234567890!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(text.trim()))
+  isValidText: (text) =>(/[1234567890!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(text.trim()))
 }

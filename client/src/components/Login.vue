@@ -53,6 +53,7 @@
 <script>
 import LocationService from '@/services/LocationService'
 import FrontendValidation from '@/services/ValidationService'
+import {mapActions} from 'vuex'
 export default {
     data () {
         return {
@@ -65,14 +66,25 @@ export default {
         }
     },
     methods: {
+        ...mapActions({
+            addToken:'addToken'
+        }),
         login(e){
             e.preventDefault()
             LocationService.getLocation()
             .then((position) => {
                 this.form.currentPosition=position
+                this.$store.state.position=position
             })
             .then(()=>{
-                console.log(this.form)
+                // Now we can send form details to and fetch tokens if logged in and then redirect to feed page
+                // if login failed use this.$router.push({path: 'welcome', query:{source: 'login' , error:'true'}})
+                // We also need to update Last login location !
+                // We will also update this.$store.state.userDetails.token and add token in it if successful XD
+                this.addToken({
+                    test:'Test Token'
+                })
+                this.$router.push({path: '/'})
             })
 
             
@@ -97,5 +109,9 @@ export default {
     position: relative;
     top:70px;
 
+}
+.err {
+    color: red;
+    
 }
 </style>

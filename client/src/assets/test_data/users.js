@@ -2,6 +2,7 @@ export default {
   id: 1,
   profilePicture: 'https://placekitten.com/g/300/450',
   name: 'Lakshya Khera',
+  dob: '22/12/1997',
   bio: 'Test bio here, this all is a data make sure you configure things properly',
   email: 'lakshya.khera@gmail.com',
   password: 'iambatman',
@@ -26,6 +27,7 @@ export default {
   posts: [
     {
       card_title: 'Project 1',
+      pid: 10,
       card_text: 'This is project 1, a simple machine which fetches news according to time.',
       card_img: 'https://cdn.vuetifyjs.com/images/cards/desert.jpg',
       card_author: 'User 12321',
@@ -51,11 +53,18 @@ export default {
           comment: "JIITians don't pm me",
           date: '3/12/25'
         }
-      ]
+      ],
+      upAnddown: {
+        12: 1,
+        1: 0,
+        3: 1,
+        5: 0
+      }
 
     },
     {
       card_title: 'Project 2',
+      pid: 16,
       card_text: 'This is project 2, a simple machine which fetches news according to time.',
       card_img: 'https://cdn.vuetifyjs.com/images/cards/desert.jpg',
       card_author: 'User 12321',
@@ -81,10 +90,16 @@ export default {
           comment: "JIITians don't pm me",
           date: '3/12/25'
         }
-      ]
-
+      ],
+      upAnddown: {
+        12: 1,
+        1: 0,
+        3: 1,
+        5: 0
+      }
     },
     {
+      pid: 14,
       card_title: 'Project 3',
       card_text: 'This is project 3, a simple machine which fetches news according to time.',
       card_img: 'https://cdn.vuetifyjs.com/images/cards/desert.jpg',
@@ -111,7 +126,13 @@ export default {
           comment: "JIITians don't pm me",
           date: '3/12/25'
         }
-      ]
+      ],
+      upAnddown: {
+        12: 1,
+        1: 0,
+        3: 1,
+        5: 0
+      }
     }
   ],
   followings: [

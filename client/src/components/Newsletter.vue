@@ -13,7 +13,7 @@
       background="#ababab"
       style="text-shadow: 1px 1px 2px #333;"
     >
-      <b-carousel-slide v-for="news in news" >
+      <b-carousel-slide v-bind:key="index" v-for="(news,index) in news" >
           <img
           slot="img"
           class="d-block img-fluid w-100"
@@ -38,9 +38,11 @@
 </template>
 
 <script>
+import keys from '@/assets/config.js'
 import axios from 'axios'
-name:'News'
+
 export default {
+    name:'News',
     data(){
         return {
             news:[],
@@ -49,7 +51,7 @@ export default {
         
     },
     mounted(){
-        axios.get(`https://newsapi.org/v2/top-headlines?language=en&apiKey=9ad299f940c94a938272d3c3b5d94363`)
+        axios.get(`https://newsapi.org/v2/top-headlines?language=en&apiKey=${keys.NEWS_API}`)
         .then((response)=>{
             console.log(response.data.articles)
             this.news=response.data.articles.slice(0,5)

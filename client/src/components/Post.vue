@@ -1,5 +1,5 @@
 <template>
-    <v-layout> 
+    <v-layout class="shadow-lg myCard"> 
         <div xs12 sm6  class="w-100 ">
             <div v-if="isloading">
                 <v-card>
@@ -9,11 +9,12 @@
             <v-card v-if="!isloading" class="p-3">
                 <v-card-title primary-title>
                 <div>
-                    <h3 class="headline mb-1">{{Currentpost.card_title}}</h3>
+                    <h3 class="headline mb-1"><router-link :to="`/post/${Currentpost.pid}`"><b-navbar-brand >{{Currentpost.card_title}}</b-navbar-brand></router-link>
+</h3>
                     <hr>
                     <div class="cardText " v-html="Currentpost.card_text"></div>
                     <div class="my-2 text-right">
-                        <a :href=" `/profile/${Currentpost.card_author_id}` ">{{Currentpost.card_author}}</a>
+                        <router-link class="text-dark" :to="`/profile/${Currentpost.card_author_id}`">{{Currentpost.card_author}}</router-link>
                     </div>
                 </div>
                 </v-card-title>
@@ -35,11 +36,11 @@
                     </v-text-field>
                     </b-col>
                     <b-col cols="4">
-                    <v-btn fab dark small color="pink">
-                    <v-icon dark>thumb_up</v-icon>
+                    <v-btn fab dark small color="pink" >
+                    <v-icon dark :style="currentUserLikes" @click="toggleVote">thumb_up</v-icon>
                     </v-btn>
                     <v-btn fab dark small color="pink">
-                    <v-icon dark>thumb_down</v-icon>
+                    <v-icon dark :style="currentUserDisikes" @click="toggleVote">thumb_down</v-icon>
                     </v-btn><v-btn fab dark small color="blue">
                     <v-icon dark>mdi-share</v-icon>
                     </v-btn>
@@ -52,7 +53,8 @@
                 <v-container>
 
                     <b-list-group>
-                    <b-list-group-item v-for="(comment, index) in this.comments" :key="index"  class="b-row"><a :href=" `/profile/${comment.author_id}` ">{{comment.author}}</a> : {{comment.comment}}</b-list-group-item>
+                    <b-list-group-item v-for="(comment, index) in this.comments" :key="index"  class="b-row"><router-link class="text-dark" :to="`/profile/${comment.author_id}`">{{comment.author}}</router-link>
+: {{comment.comment}}</b-list-group-item>
                     </b-list-group>
                 </v-container>
             </v-card>
@@ -69,6 +71,7 @@ export default {
     },
     data(){
         return {
+            currentUserId:null,
             isloading:true,
             Currentpost: {
             },
@@ -77,7 +80,29 @@ export default {
         }
     },
     methods: {
-      addComment(e){
+        toggleVote(e){
+            if(e.target.innerHTML=='thumb_up'){
+                if(this.Currentpost.upAnddown[this.currentUserId]==1){
+                    this.Currentpost.upAnddown[this.currentUserId]=null
+                    //Here he undo his/her like, so now value to be null and sends to backend
+                }
+                else{
+                    this.Currentpost.upAnddown[this.currentUserId]=1
+                    // He now likes the post and we should send this to backend
+                }
+            }
+            if(e.target.innerHTML=='thumb_down'){
+                if(this.Currentpost.upAnddown[this.currentUserId]==0){
+                    this.Currentpost.upAnddown[this.currentUserId]=null
+                    //Here he undo his/her dislike, so now value to be null or we can just remove user from map and sends to backend
+                }
+                else{
+                    this.Currentpost.upAnddown[this.currentUserId]=0
+                    // User now dislikes the post and we should send this to backend
+                }
+            }
+        },
+        addComment(e){
            // I will add validation, on making validation module so don't panic 
           if(this.Currentcomment==""){
               alert("Please Add Comment")
@@ -85,15 +110,15 @@ export default {
           }else{
           var today = new Date();
           let temp_comment={
-          author:this.$store.state.username,
-          author_id:this.$store.state.id,
+          author:this.$store.state.userDetails.name,
+          author_id:this.$store.state.userDetails.id,
           comment:this.Currentcomment,
           date: today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate()
           }
           this.comments=[...this.comments,temp_comment]
           this.Currentcomment=''
           }
-          
+          // We will also need to send comment to backend
           e.preventDefault();
           
       }  
@@ -102,16 +127,46 @@ export default {
         this.comments=this.post.comments
         this.Currentpost=this.post
         this.isloading=false
+        this.currentUserId=this.$store.state.userDetails.id
     },
+    computed:{
+        currentUserLikes(){
+            if(this.Currentpost.upAnddown[this.currentUserId]==1){
+                return "color:black"
+            }
+            return "color:white"
+        },
+        currentUserDisikes(){
+            if(this.Currentpost.upAnddown[this.currentUserId]==0){
+                return "color:black"  
+            }
+            return "color:white"
+    	}
+		}
 }
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
 .cardText{
     word-wrap: break-word;
 }
 .list-group{
     max-height: 140px;
     overflow-y: scroll;
+}
+.v-btn:focus {
+    outline: none
+}
+.myCard{
+    font-family: 'Lato', sans-serif;
+}
+.myCard:hover {
+    animation: increaseSize 0.6s forwards;
+}
+@keyframes increaseSize {
+    100%{
+        transform: scale(1.03)
+    }
 }
 </style>

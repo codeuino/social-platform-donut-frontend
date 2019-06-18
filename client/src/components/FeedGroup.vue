@@ -3,6 +3,7 @@
             <b-container >
             <div v-if="isloading" class="text-center">
                 <b-spinner style="width: 3rem; height: 3rem;" label="Large Spinner" type="grow"></b-spinner>
+                <h4>Please Wait Do not Refresh</h4>
             </div>
             <div v-if="!isloading">
                 <b-row  v-for="(group , index ) in postsGroups" v-bind:key="index">

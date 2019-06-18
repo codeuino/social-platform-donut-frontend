@@ -20,9 +20,9 @@
                                           <b-form-file v-model="image" class="mt-1" plain></b-form-file>
                                     </b-col>
                                     <b-col cols="6">
-                                        <button @click="reset" class="btn btn-danger mr-1">Reset</button>
-                                        <button @click="makePreviewPost" class="btn btn-success mr-1">Preview</button>
-                                        <button @click="addPost" class="btn btn-primary">Submit</button>
+                                        <button  @click="reset" class="btn btn-danger mr-1">Reset</button>
+                                        <button :disabled="checkText" @click="makePreviewPost" class="btn btn-success mr-1">Preview</button>
+                                        <button :disabled="checkText" @click="addPost" class="btn btn-primary">Submit</button>
                                     </b-col>
                                 </b-row>
                                 
@@ -51,7 +51,7 @@
 
 <script>
 import { VueEditor } from "vue2-editor";
-
+import FrontendValidation from '@/services/ValidationService'
 import Post from './Post.vue'
 export default {
     name:'CreatePost',
@@ -91,16 +91,24 @@ export default {
         }
 
     },
+    computed:{
+        checkText(){
+            return (this.newPost.card_title=='' || this.newPost.content=='')
+        }
+    },
     methods: {
         makePreviewPost(){
             this.test.card_text=this.newPost.content
             this.test.card_title=this.newPost.card_title
             var reader= new FileReader()
-            reader.readAsDataURL(this.image)
-            reader.addEventListener('loadend', ()=> {  
-             this.test.card_img= reader.result
-             this.newPost.card_image= reader.result
-        },false)
+            if(this.image){
+                reader.readAsDataURL(this.image)
+                reader.addEventListener('loadend', ()=> {  
+                this.test.card_img= reader.result
+                this.newPost.card_image= reader.result
+            },false)    
+            }
+            
             
         },
         reset(){
@@ -113,6 +121,7 @@ export default {
         },
         addPost(){
             console.log(this.newPost)
+            //Here we will send to backend XD
         }
     },
 }

@@ -14,12 +14,17 @@
             </b-container>
         </div>
 
-        <FeedGroup v-bind:postsArray="posts" />
-        
+        <FeedGroup v-if="posts" v-bind:postsArray="posts" />
+        <b-container v-if="posts.length==0">
+            <h5>No Posts Yet, Go Make One!</h5>
+        </b-container>
     </div>
 </template>
 
 <script>
+// here I'm importing a test datat okay ;)
+import User from '@/assets/test_data/users'
+import {mapActions} from 'vuex';
 import FeedGroup from '@/components/FeedGroup.vue'
 import CreatePost from '@/components/CreatePost.vue'
 import Post from '@/components/Post.vue'
@@ -32,109 +37,32 @@ export default {
     },
     data(){
         return {
-            username:"Batman",
             posts:[], // in future it will be replaces by a empty array, and first data will be fetched from server then grouped in twos :) , then added to this state.
         }
     },
+    methods:{
+        ...mapActions({
+            LoginOrout:'LoginOrout',
+            addUser:'addUser'
+        }),
+    },
     computed: {
         Welcome(){
-            return "Welcome, " + this.username
+            return "Welcome, " + this.$store.state.userDetails.name
         }
     },
     created() {
-        let myarr=[
-                {
-                    card_title:"Project 1",
-                    card_text:"This is project 1, a simple machine which fetches news according to time.",
-                    card_img:"https://cdn.vuetifyjs.com/images/cards/desert.jpg",
-                    card_author:"User 12321",
-                    card_author_id:"12232323",
-                    comments:[
-                        {
-                    
-                            author:"User 1",
-                            author_id:1,
-                            comment:"Nice project!",
-                            date:'1/22/12', // We can change into date() but for now keep it a string :)
-
-                        },
-                        {
-                            author:"User 2",
-                            author_id:2,
-                            comment:"Can you repair my printer",
-                            date:'1/22/12', 
-                        },
-                        {
-                            author:"User 3",
-                            author_id:3,
-                            comment:"JIITians don't pm me",
-                            date:"3/12/25"
-                        }
-                    ]
-
-                },
-                {
-                    card_title:"Project 2",
-                    card_text:"This is project 2, a simple machine which fetches news according to time.",
-                    card_img:"https://cdn.vuetifyjs.com/images/cards/desert.jpg",
-                    card_author:"User 12321",
-                    card_author_id:12232323,
-                    comments:[
-                        {
-                    
-                            author:"User 2",
-                            author_id:1,
-                            comment:"Nice project!",
-                            date:'1/22/12', // We can change into date() but for now keep it a string :)
-
-                        },
-                        {
-                            author:"User 2",
-                            author_id:2,
-                            comment:"Can you repair my printer",
-                            date:'1/22/12', 
-                        },
-                        {
-                            author:"User 3",
-                            author_id:3,
-                            comment:"JIITians don't pm me",
-                            date:"3/12/25"
-                        }
-                    ]
-
-                },
-                {
-                    card_title:"Project 3",
-                    card_text:"This is project 3, a simple machine which fetches news according to time.",
-                    card_img:"https://cdn.vuetifyjs.com/images/cards/desert.jpg",
-                    card_author:"User 12321",
-                    card_author_id:12232323,
-                    comments:[
-                        {
-                    
-                            author:"User 1",
-                            author_id:1,
-                            comment:"Nice project!",
-                            date:'1/22/12', // We can change into date() but for now keep it a string :)
-
-                        },
-                        {
-                            author:"User 2",
-                            author_id:2,
-                            comment:"Can you repair my printer",
-                            date:'1/22/12', 
-                        },
-                        {
-                            author:"User 3",
-                            author_id:3,
-                            comment:"JIITians don't pm me",
-                            date:"3/12/25"
-                        }
-                    ]
-
-                }
-            ]
-            this.posts=myarr
+            // First we need to check whether the token exist then backedn can check and if some error comes, it will send back to login page
+            if(this.$store.state.token) {
+                // Here we'll send request if it works Huuray!
+                this.LoginOrout(true)
+                console.log(User)
+                this.addUser(User)
+                // Now we updated the userDetails in state
+                //We should now fetch posts 
+            }else {
+                this.$router.push({path: 'welcome', query:{source: 'login' , error:'true'}})
+            }
         },
 }
 </script>

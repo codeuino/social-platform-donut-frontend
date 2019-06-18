@@ -3,14 +3,14 @@
     <div>
         
         <b-navbar v-if="this.isLogged" toggleable="sm" type="dark" variant="dark">
-            <b-navbar-brand href="/">DONUT</b-navbar-brand>
+            <router-link :to="`/`"><b-navbar-brand >DONUT</b-navbar-brand></router-link>
 
             <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
             <b-collapse id="nav-collapse" is-nav>
             <b-navbar-nav>
-                <b-nav-item href="/dashboard">DashBoard</b-nav-item>
-                <b-nav-item v-bind:href="'/profile/' +this.id">Profile</b-nav-item>
+                <router-link class="text-white" :to="`/dashboard/${id}`"> DashBoard</router-link>
+                <router-link class="text-white ml-1" :to="`/profile/${id}`">Profile</router-link>
 
             </b-navbar-nav>
 
@@ -25,8 +25,8 @@
 
                 <b-nav-item-dropdown right>
                 <template slot="button-content"><v-icon color="white">mdi-account</v-icon></template>
-                <b-dropdown-item v-bind:href="'/settings/' +this.id">Setting</b-dropdown-item>
-                <b-dropdown-item href="">Sign Out</b-dropdown-item>
+                <router-link class="text-dark ml-4" :to="`/settings/${id}`">Setting</router-link>
+                <b-dropdown-item href="/welcome?source=login">Sign Out</b-dropdown-item>
                 </b-nav-item-dropdown>
             </b-navbar-nav>
             </b-collapse>
@@ -43,6 +43,7 @@
 </template>
 
 <script>
+import {mapState} from 'vuex';
 export default {
     name:"NavigationBar",
     components:{
@@ -57,8 +58,11 @@ export default {
         }
     },
     computed: {
+        ...mapState({
+            id:'userDetails.id'
+        }),
         id(){
-            return this.$store.state.id
+            return this.$store.state.userDetails.id
         
         },
         isLogged(){

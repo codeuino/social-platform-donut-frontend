@@ -7,8 +7,13 @@
                 <SettingsMenu />
             </b-col>
             <b-col sm="9">
-                <div v-if='$store.state.SettingState.isPactive'><ProfileSettings/></div>      
-                <div v-if='$store.state.SettingState.isIactive'><IntegrationSettings/></div>       
+                <div>
+                    <b-alert v-model="showDismissibleAlert" variant="success" dismissible>
+                    Successfully Updated Profile
+                    </b-alert>
+                </div>
+                <div v-if='$store.state.SettingState.isPactive' ><ProfileSettings @showAlert='showAlert'/></div>      
+                <div v-if='$store.state.SettingState.isIactive'  ><IntegrationSettings @showAlert='showAlert'/></div>       
  
             </b-col>
         </b-row>
@@ -29,7 +34,21 @@ export default {
     },
     data () {
         return {
-
+            showDismissibleAlert:false
+        }
+    },
+    created(){
+        if(this.$store.state.token) {
+                //so for test we will use test data
+                this.profile.posts=this.$store.state.userDetails.posts
+            }else {
+                this.$router.push({path: '/welcome', query:{source: 'login' , error:'true'}})
+            }
+    },
+    methods:{
+        showAlert(arg){
+            this.showDismissibleAlert=true
+            
         }
     }
 }

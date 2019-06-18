@@ -8,6 +8,7 @@ import About from './views/About.vue'
 import Feed from './views/Feed.vue'
 import Welcome from './views/Welcome.vue'
 import Portfolio from './views/Portfolio.vue'
+import PostView from './views/PostView.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -54,7 +55,11 @@ export default new Router({
       path: '/portfolio/:id',
       name: 'Portfolio',
       component: Portfolio
+    },
+    {
+      path: '/post/:post_id',
+      name: 'PostView',
+      component: PostView
     }
-
   ]
 })
