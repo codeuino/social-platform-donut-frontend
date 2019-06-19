@@ -10,6 +10,6 @@
 
 <script>
 export default {
-    name:'IntegrationSettings'
+  name: 'IntegrationSettings'
 }
 </script>

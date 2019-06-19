@@ -1,7 +1,7 @@
 <template>
 
     <div>
-        
+
         <b-navbar v-if="this.isLogged" toggleable="sm" type="dark" variant="dark">
             <router-link :to="`/`"><b-navbar-brand >DONUT</b-navbar-brand></router-link>
 
@@ -21,12 +21,11 @@
                 </b-nav-form>
             </b-navbar-nav>
             <b-navbar-nav>
-                
 
                 <b-nav-item-dropdown right>
                 <template slot="button-content"><v-icon color="white">mdi-account</v-icon></template>
                 <router-link class="text-dark ml-4" :to="`/settings/${id}`">Setting</router-link>
-                <b-dropdown-item href="/welcome?source=login">Sign Out</b-dropdown-item>
+                <b-dropdown-item href="/login">Sign Out</b-dropdown-item>
                 </b-nav-item-dropdown>
             </b-navbar-nav>
             </b-collapse>
@@ -34,8 +33,8 @@
         <b-navbar v-else variant="dark" type="dark">
             <b-navbar-brand href="#">DONUT</b-navbar-brand>
             <b-navbar-nav class="ml-auto pr-2">
-                <b-nav-item href="/welcome?source=signup">SignUp</b-nav-item>
-                <b-nav-item href="/welcome?source=login">LogIn</b-nav-item>
+                <b-nav-item href="/signup">SignUp</b-nav-item>
+                <b-nav-item href="/login">LogIn</b-nav-item>
 
             </b-navbar-nav>
         </b-navbar>
@@ -43,32 +42,31 @@
 </template>
 
 <script>
-import {mapState} from 'vuex';
+import { mapState } from 'vuex'
 export default {
-    name:"NavigationBar",
-    components:{
+  name: 'NavigationBar',
+  components: {
 
+  },
+  props: {
+
+  },
+  data () {
+    return {
+
+    }
+  },
+  computed: {
+    ...mapState({
+      id: 'userDetails.id'
+    }),
+    id () {
+      return this.$store.state.userDetails.id
     },
-    props:{
-        
-    },
-    data(){
-        return{
-        
-        }
-    },
-    computed: {
-        ...mapState({
-            id:'userDetails.id'
-        }),
-        id(){
-            return this.$store.state.userDetails.id
-        
-        },
-        isLogged(){
-            return this.$store.state.isLogged
-        }
-    },
-    
+    isLogged () {
+      return this.$store.state.isLogged
+    }
+  }
+
 }
 </script>

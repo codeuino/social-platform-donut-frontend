@@ -1,5 +1,7 @@
 <template>
-    <v-layout class="shadow-lg myCard"> 
+    <div>
+
+    <v-layout class="shadow-lg myCard">
         <div xs12 sm6  class="w-100 ">
             <div v-if="isloading">
                 <v-card>
@@ -41,13 +43,14 @@
                     </v-btn>
                     <v-btn fab dark small color="pink">
                     <v-icon dark :style="currentUserDisikes" @click="toggleVote">thumb_down</v-icon>
-                    </v-btn><v-btn fab dark small color="blue">
+                    </v-btn>
+                    <v-btn @click="SETID" fab dark small color="blue" v-b-modal.modal-1>
                     <v-icon dark>mdi-share</v-icon>
                     </v-btn>
                     </b-col>
-                    
+
                     </b-row>
-                    
+
                 </v-form>
                 </v-card-actions>
                 <v-container>
@@ -60,89 +63,97 @@
             </v-card>
         </div>
     </v-layout>
+    </div>
+
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
-    name:"Post",
-    props:{
-        post:Object, // This object must have card_title , card_text, [comments {author_id, author, comment}] and card_img ,
-        preview:Boolean
-    },
-    data(){
-        return {
-            currentUserId:null,
-            isloading:true,
-            Currentpost: {
-            },
-            comments:[],
-            Currentcomment:''
+  name: 'Post',
+  components: {
+  },
+  props: {
+    post: Object, // This object must have card_title , card_text, [comments {author_id, author, comment}] and card_img ,
+    preview: Boolean
+  },
+  data () {
+    return {
+      currentUserId: null,
+      isloading: true,
+      Currentpost: {
+      },
+      comments: [],
+      Currentcomment: ''
+    }
+  },
+  methods: {
+    ...mapActions({
+      addPostID: 'addPostID'
+    }),
+    toggleVote (e) {
+      if (e.target.innerHTML === 'thumb_up') {
+        if (this.Currentpost.upAnddown[this.currentUserId] === 1) {
+          this.Currentpost.upAnddown[this.currentUserId] = null
+          // Here he undo his/her like, so now value to be null and sends to backend
+        } else {
+          this.Currentpost.upAnddown[this.currentUserId] = 1
+          // He now likes the post and we should send this to backend
         }
+      }
+      if (e.target.innerHTML === 'thumb_down') {
+        if (this.Currentpost.upAnddown[this.currentUserId] === 0) {
+          this.Currentpost.upAnddown[this.currentUserId] = null
+          // Here he undo his/her dislike, so now value to be null or we can just remove user from map and sends to backend
+        } else {
+          this.Currentpost.upAnddown[this.currentUserId] = 0
+          // User now dislikes the post and we should send this to backend
+        }
+      }
     },
-    methods: {
-        toggleVote(e){
-            if(e.target.innerHTML=='thumb_up'){
-                if(this.Currentpost.upAnddown[this.currentUserId]==1){
-                    this.Currentpost.upAnddown[this.currentUserId]=null
-                    //Here he undo his/her like, so now value to be null and sends to backend
-                }
-                else{
-                    this.Currentpost.upAnddown[this.currentUserId]=1
-                    // He now likes the post and we should send this to backend
-                }
-            }
-            if(e.target.innerHTML=='thumb_down'){
-                if(this.Currentpost.upAnddown[this.currentUserId]==0){
-                    this.Currentpost.upAnddown[this.currentUserId]=null
-                    //Here he undo his/her dislike, so now value to be null or we can just remove user from map and sends to backend
-                }
-                else{
-                    this.Currentpost.upAnddown[this.currentUserId]=0
-                    // User now dislikes the post and we should send this to backend
-                }
-            }
-        },
-        addComment(e){
-           // I will add validation, on making validation module so don't panic 
-          if(this.Currentcomment==""){
-              alert("Please Add Comment")
-              e.preventDefault()
-          }else{
-          var today = new Date();
-          let temp_comment={
-          author:this.$store.state.userDetails.name,
-          author_id:this.$store.state.userDetails.id,
-          comment:this.Currentcomment,
-          date: today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate()
-          }
-          this.comments=[...this.comments,temp_comment]
-          this.Currentcomment=''
-          }
-          // We will also need to send comment to backend
-          e.preventDefault();
-          
-      }  
+    addComment (e) {
+      // I will add validation, on making validation module so don't panic
+      if (this.Currentcomment === '') {
+        alert('Please Add Comment')
+        e.preventDefault()
+      } else {
+        var today = new Date()
+        let tempComment = {
+          author: this.$store.state.userDetails.name,
+          author_id: this.$store.state.userDetails.id,
+          comment: this.Currentcomment,
+          date: today.getFullYear() + '/' + (today.getMonth() + 1) + '/' + today.getDate()
+        }
+        this.comments = [...this.comments, tempComment]
+        this.Currentcomment = ''
+      }
+      // We will also need to send comment to backend
+      e.preventDefault()
     },
-    mounted() {
-        this.comments=this.post.comments
-        this.Currentpost=this.post
-        this.isloading=false
-        this.currentUserId=this.$store.state.userDetails.id
+    SETID () {
+      this.addPostID(this.post.pid)
+    }
+  },
+  mounted () {
+    this.comments = this.post.comments
+    this.Currentpost = this.post
+    this.isloading = false
+    this.currentUserId = this.$store.state.userDetails.id
+  },
+  computed: {
+    currentUserLikes () {
+      if (this.Currentpost.upAnddown[this.currentUserId] === 1) {
+        return 'color:black'
+      }
+      return 'color:white'
     },
-    computed:{
-        currentUserLikes(){
-            if(this.Currentpost.upAnddown[this.currentUserId]==1){
-                return "color:black"
-            }
-            return "color:white"
-        },
-        currentUserDisikes(){
-            if(this.Currentpost.upAnddown[this.currentUserId]==0){
-                return "color:black"  
-            }
-            return "color:white"
-    	}
-		}
+    currentUserDisikes () {
+      if (this.Currentpost.upAnddown[this.currentUserId] === 0) {
+        return 'color:black'
+      }
+      return 'color:white'
+    }
+  }
 }
 </script>
 
@@ -169,4 +180,5 @@ export default {
         transform: scale(1.03)
     }
 }
+
 </style>

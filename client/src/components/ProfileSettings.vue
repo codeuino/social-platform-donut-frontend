@@ -1,6 +1,6 @@
 <template>
     <div>
-        <b-card 
+        <b-card
         class="pb-5 pt-2 px-3"
         title="Profile Setting"
         >
@@ -14,7 +14,7 @@
                                 <button  class="btn btn-block mt-2 btn-primary">Add A New Photo</button>
                                 <b-form-file v-model="userData.image" class="mt-1" plain></b-form-file>
                             </div>
-                            
+
                         </b-col>
                         <b-col>
                             <b-form-group
@@ -26,7 +26,7 @@
                             placeholder="Enter Name"
                             required
                             />
-                            <span v-if="nameCheck" class="err">No Special Characters!</span>           
+                            <span v-if="nameCheck" class="err">No Special Characters!</span>
                             </b-form-group>
                             <b-form-group
                             label="Date Of Birth"
@@ -67,7 +67,7 @@
                     rows="3"
                     no-resize
                     ></b-form-textarea>
-                    <span v-if="countCheck" class="err">Bios are supposed to be short! And yours look too long</span>           
+                    <span v-if="countCheck" class="err">Bios are supposed to be short! And yours look too long</span>
                     </b-form-group>
                     <b-form-group>
                         <b-button type="submit" :disabled="nameCheck || countCheck || isSubmitting" variant="primary" @click="formSubmit" class="btn-block btn-lg"><span v-if="!isSubmitting">Save Changes</span> <span v-if="isSubmitting">Submitting<b-spinner small varient="light" label="Small Spinner"></b-spinner>
@@ -79,79 +79,76 @@
     </div>
 </template>
 <script>
-import {mapActions} from 'vuex';
+import { mapActions } from 'vuex'
 import ValidationService from '@/services/ValidationService'
 export default {
-    name:'ProfileSettings',
-    data () {
-        return {
-            isSubmitting:false,
-            userData:{
-                image:"",
-                name:"",
-                dob:"",
-                location:{
-                    country:"",
-                    city:""
-                },
-                bio:""
-
-            }
-        }
-    },
-    methods: {
-        ...mapActions({
-            updateUser:'updateUser'
-        }),
-        formSubmit(e){
-            this.isSubmitting=true
-            console.log(this.userData)
-            e.preventDefault();
-            this.updateUser(this.userData)
-            this.userData={
-                image:null,
-                name:"",
-                dob:"",
-                location:{
-                    country:"",
-                    city:"",
-                },
-                bio:""
-            }
-            this.$emit('showAlert',true)
-            this.isSubmitting=false // TO remove spinner :)
-            // Now here we will update our user data on backend
-            //and also update our local data
-
-        }
-    },
-    computed: {
-        nameCheck() {
-            return ValidationService.isValidText(this.userData.name) 
+  name: 'ProfileSettings',
+  data () {
+    return {
+      isSubmitting: false,
+      userData: {
+        image: '',
+        name: '',
+        dob: '',
+        location: {
+          country: '',
+          city: ''
         },
-        countCheck() {
-            return !ValidationService.isTextUnderLimit(this.userData.bio,150)
+        bio: ''
+
+      }
+    }
+  },
+  methods: {
+    ...mapActions({
+      updateUser: 'updateUser'
+    }),
+    formSubmit (e) {
+      this.isSubmitting = true
+      console.log(this.userData)
+      e.preventDefault()
+      this.updateUser(this.userData)
+      this.userData = {
+        image: null,
+        name: '',
+        dob: '',
+        location: {
+          country: '',
+          city: ''
         },
-        newPhoto(){
-            if(this.userData.image){
-
-               return this.userData.image.name
-            }else {
-                return "No Photo Selected"
-            }
-        }
+        bio: ''
+      }
+      this.$emit('showAlert', true)
+      this.isSubmitting = false // TO remove spinner :)
+      // Now here we will update our user data on backend
+      // and also update our local data
+    }
+  },
+  computed: {
+    nameCheck () {
+      return ValidationService.isValidText(this.userData.name)
     },
-    mounted() {
-        // We'll fetch from user database from here using JWT and $route.params.id
-        // and we will fetch current userDetails
-        this.userData.name=this.$store.state.userDetails.name
-        this.userData.dob=this.$store.state.userDetails.dob
-        this.userData.image=this.$store.state.userDetails.profilePicture
-        this.userData.location=this.$store.state.userDetails.location
-        this.userData.bio=this.$store.state.userDetails.bio 
+    countCheck () {
+      return !ValidationService.isTextUnderLimit(this.userData.bio, 150)
     },
+    newPhoto () {
+      if (this.userData.image) {
+        return this.userData.image.name
+      } else {
+        return 'No Photo Selected'
+      }
+    }
+  },
+  mounted () {
+    // We'll fetch from user database from here using JWT and $route.params.id
+    // and we will fetch current userDetails
+    this.userData.name = this.$store.state.userDetails.name
+    this.userData.dob = this.$store.state.userDetails.dob
+    this.userData.image = this.$store.state.userDetails.profilePicture
+    this.userData.location = this.$store.state.userDetails.location
+    this.userData.bio = this.$store.state.userDetails.bio
+  }
 
-    
 }
 </script>
 

@@ -20,7 +20,7 @@
                                 type="email"
                                 placeholder="Enter email"
                                 ></b-form-input>
-                                <span v-if="emailCheck" class="err">Invalid Email</span>           
+                                <span v-if="emailCheck" class="err">Invalid Email</span>
                                 </b-form-group>
                                 <b-form-group
                                 label="Password"
@@ -32,7 +32,6 @@
                                 placeholder="Enter Password"
                                 ></b-form-input>
 
-                                
                                 </b-form-group>
 
                                 <b-form-group class="text-center mt-5">
@@ -41,7 +40,7 @@
 
                                 <b-form-group class="text-right">
                                     <div>
-                                        Not a member? <a href="/welcome?source=signup">Click Here</a>
+                                        Not a member? <a href="/signup">Click Here</a>
                                     </div>
                                 </b-form-group>
                             </b-form>
@@ -53,53 +52,50 @@
 <script>
 import LocationService from '@/services/LocationService'
 import FrontendValidation from '@/services/ValidationService'
-import {mapActions} from 'vuex'
+import { mapActions } from 'vuex'
 export default {
-    data () {
-        return {
-            form:{
-                email:"",
-                password:"",
-                currentPosition:null,
-            }
-            
-        }
-    },
-    methods: {
-        ...mapActions({
-            addToken:'addToken'
-        }),
-        login(e){
-            e.preventDefault()
-            LocationService.getLocation()
-            .then((position) => {
-                this.form.currentPosition=position
-                this.$store.state.position=position
-            })
-            .then(()=>{
-                // Now we can send form details to and fetch tokens if logged in and then redirect to feed page
-                // if login failed use this.$router.push({path: 'welcome', query:{source: 'login' , error:'true'}})
-                // We also need to update Last login location !
-                // We will also update this.$store.state.userDetails.token and add token in it if successful XD
-                this.addToken({
-                    test:'Test Token'
-                })
-                this.$router.push({path: '/'})
-            })
+  data () {
+    return {
+      form: {
+        email: '',
+        password: '',
+        currentPosition: null
+      }
 
-            
-        }
-    },
-    computed: {
-        emailCheck(){
-            return !FrontendValidation.isValidEmail(this.form.email)
-        },
-        isdisabled ()
-        {
-            return this.emailCheck || this.passCheck
-        },
-        
     }
+  },
+  methods: {
+    ...mapActions({
+      addToken: 'addToken'
+    }),
+    login (e) {
+      e.preventDefault()
+      LocationService.getLocation()
+        .then((position) => {
+          this.form.currentPosition = position
+          this.$store.state.position = position
+        })
+        .then(() => {
+          // Now we can send form details to and fetch tokens if logged in and then redirect to feed page
+          // if login failed use this.$router.push({path: 'welcome', query:{source: 'login' , error:'true'}})
+          // We also need to update Last login location !
+          // We will also update this.$store.state.userDetails.token and add token in it if successful XD
+          this.addToken({
+            test: 'Test Token'
+          })
+          this.$router.push({ path: '/' })
+        })
+    }
+  },
+  computed: {
+    emailCheck () {
+      return !FrontendValidation.isValidEmail(this.form.email)
+    },
+    isdisabled () {
+      return this.emailCheck || this.passCheck
+    }
+
+  }
 }
 </script>
 
@@ -112,6 +108,6 @@ export default {
 }
 .err {
     color: red;
-    
+
 }
 </style>

@@ -23,46 +23,45 @@
 import FeedGroup from '@/components/FeedGroup.vue'
 import UserDetail from '@/components/Userdetail.vue'
 export default {
-    name:"ProfileView",
-    components:{
-        UserDetail,
-        FeedGroup
-    },
-    data(){
-        return {
-            isloading:true,
-            profile:{
-                userDetails:null,
-                posts:null
-            },
-            
-        }
-    },
-    mounted() {
-        this.profile.userDetails=this.$store.state.userDetails
-        this.isloading=false
+  name: 'ProfileView',
+  components: {
+    UserDetail,
+    FeedGroup
+  },
+  data () {
+    return {
+      isloading: true,
+      profile: {
+        userDetails: null,
+        posts: null
+      }
 
-    },
-    methods: {
-        toggleFollower(arg1) {
-            if(arg1==0) {
-                //user doesn't wants to follow the profile anymore, we can add backend calls and remove user for follower list using the id
-                console.log(arg1)
-            }else {
-                // User wanna follow this profile 
-                console.log(arg1)
-            }
-        }
-    },
-    created(){
-        if(this.$store.state.token) {
-                // Now here we can fetch the user posts XD
-                //so for test we will use test data
-                this.profile.posts=this.$store.state.userDetails.posts
-            }else {
-                this.$router.push({path: '/welcome', query:{source: 'login' , error:'true'}})
-            }
     }
+  },
+  mounted () {
+    this.profile.userDetails = this.$store.state.userDetails
+    this.isloading = false
+  },
+  methods: {
+    toggleFollower (arg1) {
+      if (arg1 === 0) {
+        // user doesn't wants to follow the profile anymore, we can add backend calls and remove user for follower list using the id
+        console.log(arg1)
+      } else {
+        // User wanna follow this profile
+        console.log(arg1)
+      }
+    }
+  },
+  created () {
+    if (this.$store.state.token) {
+      // Now here we can fetch the user posts XD
+      // so for test we will use test data
+      this.profile.posts = this.$store.state.userDetails.posts
+    } else {
+      this.$router.push({ path: '/login', query: { error: 'true' } })
+    }
+  }
 }
 </script>
 

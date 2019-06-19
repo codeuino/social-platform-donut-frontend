@@ -10,11 +10,10 @@
 
 <script>
 export default {
-    name:"MiniProjectCard",
-    data(){
-        return {}
-
-    }
+  name: 'MiniProjectCard',
+  data () {
+    return {}
+  }
 }
 </script>
 

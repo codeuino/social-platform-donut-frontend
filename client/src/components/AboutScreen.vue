@@ -19,19 +19,18 @@
                     <div><img :src="images[2]" class="shadow-lg" alt=""></div>
                 </div>
             </div>
-        </b-container>  
+        </b-container>
     </div>
-    
-    
+
 </template>
 
 <script>
 export default {
-    name:'AboutScreen',
-    props:{
-        description:String,
-        images:Array
-    }
+  name: 'AboutScreen',
+  props: {
+    description: String,
+    images: Array
+  }
 }
 </script>
 
@@ -72,6 +71,6 @@ export default {
         100% {
             transform: scale(1.06)
         }
-        
+
     }
 </style>

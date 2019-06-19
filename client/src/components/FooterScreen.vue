@@ -10,14 +10,14 @@
 </template>
 <script>
 export default {
-    name:'FooterScreen'
+  name: 'FooterScreen'
 }
 </script>
 
 <style scoped>
 .FooterScreen {
     padding-top:5vh;
-    padding-bottom:5vh; 
+    padding-bottom:5vh;
     font-weight: 200;
 }
 .FooterScreen >p {

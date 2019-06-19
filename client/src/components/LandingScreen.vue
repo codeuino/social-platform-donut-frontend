@@ -27,30 +27,30 @@
         </div>
     </div>
 </template>
-    
+
 <script>
 export default {
-    name:"LandingScreen",
-    props:{
-        title:String,
-        tagline:String,
-        cover_img:String,
-        social:Object,
-        profilePicture:String
-    },
-    data () {
-        return {
+  name: 'LandingScreen',
+  props: {
+    title: String,
+    tagline: String,
+    cover_img: String,
+    social: Object,
+    profilePicture: String
+  },
+  data () {
+    return {
 
-        }
-    },
-    computed:{
-        backgroundImage(){
-            return `background:linear-gradient(0deg,rgba(0, 67, 200,0.5),rgba(0, 67, 200,0.5)),url(${this.cover_img});background-size:cover`
-        }
-    },
-    mounted(){
-        console.log(this.cover_img)
     }
+  },
+  computed: {
+    backgroundImage () {
+      return `background:linear-gradient(0deg,rgba(0, 67, 200,0.5),rgba(0, 67, 200,0.5)),url(${this.cover_img});background-size:cover`
+    }
+  },
+  mounted () {
+    console.log(this.cover_img)
+  }
 }
 </script>
 

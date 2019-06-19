@@ -17,6 +17,8 @@ export default {
     state.userDetails.profilePicture = payload.image
     state.userDetails.location = payload.location
     state.userDetails.bio = payload.bio
- 
+  },
+  addPostID: (state,payload) => {
+    state.IDofShare=payload
   }
 }

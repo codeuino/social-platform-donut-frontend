@@ -1,5 +1,8 @@
 <template>
         <div class="content">
+            <b-modal id="modal-1" cancel-disabled  ok-only centered >
+            <SocialMedia/>
+            </b-modal>
             <b-container >
             <div v-if="isloading" class="text-center">
                 <b-spinner style="width: 3rem; height: 3rem;" label="Large Spinner" type="grow"></b-spinner>
@@ -15,44 +18,47 @@
                 </b-col>
                 </b-row>
             </div>
-            </b-container> 
+            </b-container>
         </div>
-         
+
 </template>
 
 <script>
+import SocialMedia from '@/components/SocialMedia.vue'
+
 import Post from './Post'
 export default {
-    name:'FeedGroup',
-    props:{
-        postsArray: Array
-    },
-    components:{
-        Post
-    },
-    data () {
-        return {
-            isloading:true,
-            postsGroups:[]
-        }
-    },
-    created() {
-            var index=0
-            var groups=[]
-            var group=[]
-            this.postsArray.forEach(function(i){
-            if(index%2==0){
-                group=[]
-                group.push(i)
-                groups.push(group)
-            }else{
-                group.push(i)
-            }
-            index++
-            })
-            this.postsGroups=groups  // in the above code i took a array of objects (posts), and grouped them into group of two, so I can inject them as props easily. Grid issues in Vue bootstrap :)
-            this.isloading=false
-    },
+  name: 'FeedGroup',
+  props: {
+    postsArray: Array
+  },
+  components: {
+    Post,
+    SocialMedia
+  },
+  data () {
+    return {
+      isloading: true,
+      postsGroups: []
+    }
+  },
+  created () {
+    var index = 0
+    var groups = []
+    var group = []
+    this.postsArray.forEach(function (i) {
+      if (index % 2 === 0) {
+        group = []
+        group.push(i)
+        groups.push(group)
+      } else {
+        group.push(i)
+      }
+      index++
+    })
+    this.postsGroups = groups // in the above code i took a array of objects (posts), and grouped them into group of two, so I can inject them as props easily. Grid issues in Vue bootstrap :)
+    this.isloading = false
+  }
 }
 </script>
 

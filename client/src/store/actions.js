@@ -13,5 +13,8 @@ export default {
   },
   updateUser: ({ commit }, payload) => {
     commit('updateUser', payload)
+  },
+  addPostID: ({ commit },payload) => {
+    commit('addPostID',payload)
   }
 }

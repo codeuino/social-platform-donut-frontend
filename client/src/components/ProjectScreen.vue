@@ -13,10 +13,9 @@
                 <MiniProjectCard />
                 <MiniProjectCard />
                 <MiniProjectCard />
-
             </div>
         </b-container>
-            
+
     </div>
 </template>
 
@@ -24,25 +23,25 @@
 import MiniProjectCard from '@/components/MiniProjectCard.vue'
 export default {
 
-    name:'ProjectScreen',
-    props:{
-        
-    },
-    components:{
-        MiniProjectCard,
-    },
-    data(){
-        return {
+  name: 'ProjectScreen',
+  props: {
 
-        }
-    },
-    computed:{
-        
-    },
-    mounted(){
-        console.log(this.innerWidth)
+  },
+  components: {
+    MiniProjectCard
+  },
+  data () {
+    return {
+
     }
-    
+  },
+  computed: {
+
+  },
+  mounted () {
+    console.log(this.innerWidth)
+  }
+
 }
 </script>
 
@@ -53,7 +52,7 @@ export default {
         font-family: 'Raleway', sans-serif;
         font-size:40px;
         padding-top: 4vh;
-    
+
     }
     .ProjectScreen {
         min-height: 100vh;
@@ -69,12 +68,12 @@ export default {
         .Projects{
             grid-template-columns: auto auto;
         }
-        
+
     }
     @media screen and (max-width:470px) {
         .Projects{
             grid-template-columns: auto;
         }
-        
+
     }
 </style>

@@ -16,7 +16,7 @@
                 v-model="form.email"
                 >
                 </b-form-input>
-                <span v-if="emailCheck" class="err">Invalid Email</span>           
+                <span v-if="emailCheck" class="err">Invalid Email</span>
                 </b-form-group>
                 <b-form-group
                 label="Enter Message"
@@ -30,7 +30,7 @@
                 </b-form-group>
                 <b-button type="submit" :disabled="emailCheck" variant="primary">Submit</b-button>
                 </b-form>
-                
+
             </b-container>
         </div>
     </div>
@@ -40,22 +40,22 @@
 import FrontendValidation from '@/services/ValidationService'
 
 export default {
-    name:'ContactScreen',
-    data() {
-        return {
-            form :{
-                email:'',
-                message:''
-                
-            }
-        }   
-    },
-    computed: {
-        emailCheck(){
-            return !FrontendValidation.isValidEmail(this.form.email)
-        },
-        
+  name: 'ContactScreen',
+  data () {
+    return {
+      form: {
+        email: '',
+        message: ''
+
+      }
     }
+  },
+  computed: {
+    emailCheck () {
+      return !FrontendValidation.isValidEmail(this.form.email)
+    }
+
+  }
 }
 </script>
 
@@ -75,6 +75,6 @@ export default {
 }
 .err {
     color: red;
-    
+
 }
 </style>

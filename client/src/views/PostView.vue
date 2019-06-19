@@ -9,9 +9,9 @@
                     <ProfileSuggestions class="ProfileSuggestions"/>
                 </div>
             </div>
-            
+
         </b-container>
-    </div>    
+    </div>
 </template>
 
 <script>
@@ -20,12 +20,12 @@ import PopularProjects from '@/components/PopularProjects.vue'
 import ProfileSuggestions from '@/components/ProfileSuggestions.vue'
 
 export default {
-    name : 'PostView',
-    components:{
-        singlePost,
-        PopularProjects,
-        ProfileSuggestions
-    }
+  name: 'PostView',
+  components: {
+    singlePost,
+    PopularProjects,
+    ProfileSuggestions
+  }
 }
 </script>
 
@@ -37,7 +37,7 @@ export default {
     grid-gap: 10px;
 }
 .singlePost {
-    grid-row: 1/3; 
+    grid-row: 1/3;
 }
 
 </style>

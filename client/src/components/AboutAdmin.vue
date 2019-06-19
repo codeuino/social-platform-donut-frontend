@@ -9,24 +9,23 @@
                         <div class="text-center mb-4">
                             <img class="profilePic mb-3" :src="Aboutadmin.profilePic" alt="">
                             <h3>{{Aboutadmin.name}}</h3>
-                        </div>                    
+                        </div>
                         <div class="content" v-html="Aboutadmin.about">
                         </div>
                     </b-container>
                 </div>
             </div>
-     
+
     </div>
-    
-    
+
 </template>
 
 <script>
 export default {
-    name:'AboutAdmin',
-    props:{
-        Aboutadmin:Object
-    }
+  name: 'AboutAdmin',
+  props: {
+    Aboutadmin: Object
+  }
 }
 </script>
 
@@ -42,7 +41,7 @@ export default {
         font-size:46px;
     }
     .content {
-    
+
         word-wrap: break-word;
         font-size: 20px;
         font-family: 'Raleway', sans-serif;

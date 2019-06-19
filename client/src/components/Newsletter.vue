@@ -23,14 +23,10 @@
           alt="image slot"
         >
         <div class="cardData px-3 py-1">
-            <p>
-            <h3>
-                <a :href="news.url" class="text-white">{{news.title}}</a>
-            </h3>
-            </p>
+            <h3><a :href="news.url" class="text-white">{{news.title}}</a></h3>
             <p class="text-right"><b>- {{news.source.name}}</b></p>
         </div>
-        
+
       </b-carousel-slide>
     </b-carousel>
     </div>
@@ -42,22 +38,21 @@ import keys from '@/assets/config.js'
 import axios from 'axios'
 
 export default {
-    name:'News',
-    data(){
-        return {
-            news:[],
-            isloading:true
-        }
-        
-    },
-    mounted(){
-        axios.get(`https://newsapi.org/v2/top-headlines?language=en&apiKey=${keys.NEWS_API}`)
-        .then((response)=>{
-            console.log(response.data.articles)
-            this.news=response.data.articles.slice(0,5)
-            this.isloading=false
-        })
+  name: 'News',
+  data () {
+    return {
+      news: [],
+      isloading: true
     }
+  },
+  mounted () {
+    axios.get(`https://newsapi.org/v2/top-headlines?language=en&apiKey=${keys.NEWS_API}`)
+      .then((response) => {
+        console.log(response.data.articles)
+        this.news = response.data.articles.slice(0, 5)
+        this.isloading = false
+      })
+  }
 }
 </script>
 

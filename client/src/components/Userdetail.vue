@@ -14,7 +14,7 @@
                     {{user.bio}}
                 </p>
             </div>
-            
+
             <hr>
         </div>
         <div>
@@ -30,51 +30,48 @@
                     <div><a :href="user.website"><button class="btn btn-light">Website</button></a></div>
                 </b-col>
                  </b-row>
-        
-            
-        </div>                  
+
+        </div>
     </div>
 </template>
 
 <script>
 export default {
-    name:"UserDetail",
-    props: {
-        user:Object,
-    },
-    data () {
-        return {
-            Userfollowing:false
-        }
-    },
-    methods: {
-        toggleFollowing() {
-            //Emit so Parent Component can manipulate it ;D
-            if(this.Userfollowing) {
-                this.$emit('FollowerIncoming',0) // Decrease Follower List and remove the currentUSer
-                this.Userfollowing= !this.Userfollowing
-            }
-            else{
-                this.$emit('FollowerIncoming',1) // Decrease Follower List and remove the currentUSer
-                this.Userfollowing= !this.Userfollowing
-
-            }
-        }
-    },
-    computed:{
-        followingCount() {
-            return this.user.followings.length
-        },
-        followerCount() {
-            return this.user.followers.length
-        },
-        differentPerson() {
-            return this.$route.params.id!=this.user.id
-        },
-        isUserFollowing() {
-            return this.Userfollowing
-        }
+  name: 'UserDetail',
+  props: {
+    user: Object
+  },
+  data () {
+    return {
+      Userfollowing: false
     }
+  },
+  methods: {
+    toggleFollowing () {
+      // Emit so Parent Component can manipulate it ;D
+      if (this.Userfollowing) {
+        this.$emit('FollowerIncoming', 0) // Decrease Follower List and remove the currentUSer
+        this.Userfollowing = !this.Userfollowing
+      } else {
+        this.$emit('FollowerIncoming', 1) // Decrease Follower List and remove the currentUSer
+        this.Userfollowing = !this.Userfollowing
+      }
+    }
+  },
+  computed: {
+    followingCount () {
+      return this.user.followings.length
+    },
+    followerCount () {
+      return this.user.followers.length
+    },
+    differentPerson () {
+      return this.$route.params.id !== this.user.id
+    },
+    isUserFollowing () {
+      return this.Userfollowing
+    }
+  }
 }
 </script>
 
@@ -85,7 +82,7 @@ export default {
     width:200px;
     border: 5px solid skyblue;
     border-radius: 50%;
-    
+
 }
 .header{
     font-family:'Raleway', sans-serif;

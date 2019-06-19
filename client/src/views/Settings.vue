@@ -12,14 +12,14 @@
                     Successfully Updated Profile
                     </b-alert>
                 </div>
-                <div v-if='$store.state.SettingState.isPactive' ><ProfileSettings @showAlert='showAlert'/></div>      
-                <div v-if='$store.state.SettingState.isIactive'  ><IntegrationSettings @showAlert='showAlert'/></div>       
- 
+                <div v-if='$store.state.SettingState.isPactive' ><ProfileSettings @showAlert='showAlert'/></div>
+                <div v-if='$store.state.SettingState.isIactive'  ><IntegrationSettings @showAlert='showAlert'/></div>
+
             </b-col>
         </b-row>
     </b-container>
     </div>
-    
+
 </template>
 
 <script>
@@ -27,30 +27,29 @@ import IntegrationSettings from '@/components/IntegrationSettings'
 import ProfileSettings from '@/components/ProfileSettings.vue'
 import SettingsMenu from '@/components/SettingsMenu.vue'
 export default {
-    components : {
-        SettingsMenu,
-        ProfileSettings,
-        IntegrationSettings
-    },
-    data () {
-        return {
-            showDismissibleAlert:false
-        }
-    },
-    created(){
-        if(this.$store.state.token) {
-                //so for test we will use test data
-                this.profile.posts=this.$store.state.userDetails.posts
-            }else {
-                this.$router.push({path: '/welcome', query:{source: 'login' , error:'true'}})
-            }
-    },
-    methods:{
-        showAlert(arg){
-            this.showDismissibleAlert=true
-            
-        }
+  components: {
+    SettingsMenu,
+    ProfileSettings,
+    IntegrationSettings
+  },
+  data () {
+    return {
+      showDismissibleAlert: false
     }
+  },
+  created () {
+    if (this.$store.state.token) {
+      // so for test we will use test data
+      this.profile.posts = this.$store.state.userDetails.posts
+    } else {
+      this.$router.push({ path: 'login', query: { error: 'true' } })
+    }
+  },
+  methods: {
+    showAlert (arg) {
+      this.showDismissibleAlert = true
+    }
+  }
 }
 </script>
 
