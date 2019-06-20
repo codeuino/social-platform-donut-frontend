@@ -7,5 +7,6 @@ export default {
     isPActive: true,
     isIActive: false
   },
-  IDofShare:null,
+  IDofShare: null,
+  Portfolio: {}
 }

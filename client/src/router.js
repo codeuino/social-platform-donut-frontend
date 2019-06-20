@@ -28,9 +28,9 @@ export default new Router({
       component: SignupView
     },
     {
-      path:'/login',
-      name:'LoginView',
-      component:LoginView
+      path: '/login',
+      name: 'LoginView',
+      component: LoginView
     },
     {
       path: '/dashboard/:id',
