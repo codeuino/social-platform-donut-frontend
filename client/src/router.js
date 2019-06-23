@@ -1,12 +1,15 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Settings from './views/Settings.vue'
-import SearchResult from './views/SearchResult.vue'
+import Search from './views/SearchResult.vue'
 import ProfileView from './views/ProfileView.vue'
 import Dashboard from './views/Dashboard.vue'
 import About from './views/About.vue'
 import Feed from './views/Feed.vue'
-import Welcome from './views/Welcome.vue'
+import SignupView from './views/SignupView.vue'
+import LoginView from './views/LoginView.vue'
+import Portfolio from './views/Portfolio.vue'
+import PostView from './views/PostView.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -20,12 +23,17 @@ export default new Router({
 
     },
     {
-      path: '/welcome', // Query source=login for login page, source=signuo for Signup page
-      name: 'Welcome',
-      component: Welcome
+      path: '/signup',
+      name: 'Signup',
+      component: SignupView
     },
     {
-      path: '/dashboard',
+      path: '/login',
+      name: 'LoginView',
+      component: LoginView
+    },
+    {
+      path: '/dashboard/:id',
       name: 'Dashboard',
       component: Dashboard
     },
@@ -47,8 +55,17 @@ export default new Router({
     {
       path: '/search',
       name: 'Search', // Use $route.query to fetch queries
-      component: SearchResult
+      component: Search
+    },
+    {
+      path: '/portfolio/:id',
+      name: 'Portfolio',
+      component: Portfolio
+    },
+    {
+      path: '/post/:post_id',
+      name: 'PostView',
+      component: PostView
     }
-
   ]
 })

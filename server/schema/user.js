@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const bycrypt = require('bcrypt-nodejs');
-
 const user = new Schema({
   fname: {
     type: String
@@ -90,7 +89,7 @@ const user = new Schema({
     type : [Number]
   },
   profilePicture:{
-    type: String
+    type: String // Make sure the image is of 300 * 450
   }
 });
 
