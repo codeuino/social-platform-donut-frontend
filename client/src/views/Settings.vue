@@ -1,6 +1,6 @@
 <template>
-    <div >
-    <b-jumbotron header="Settings" bg-variant="info"  text-variant="white" />
+    <div class="setting-wrapper" :class="$store.state.darkMode ? 'dark' : ''">
+    <b-jumbotron header="Settings" :bg-variant="$store.state.darkMode ? 'dark' :'info'"  text-variant="white" />
     <b-container >
         <b-row class="SettingBox">
             <b-col sm="3" class="mb-3">
@@ -54,7 +54,13 @@ export default {
 </script>
 
 <style scoped>
+.setting-wrapper {
+  min-height: 95vh;
+}
 .SettingBox{
     margin-top:4vh;
+}
+.dark {
+  background-color: #121212;
 }
 </style>

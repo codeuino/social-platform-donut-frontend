@@ -1,6 +1,6 @@
 <template>
-    <div class="userDetail-wrapper w-100 text-center text-white bg-info">
-        <b-jumbotron></b-jumbotron>
+    <div class="userDetail-wrapper w-100 text-center text-white" :class="$store.state.darkMode ? 'bg-dark' : 'bg-info'">
+        <b-jumbotron :class="$store.state.darkMode ? 'dark' : ''"></b-jumbotron>
         <div class="header">
             <img class="profilePic" :src="user.profilePicture" alt="">
             <h3 class="mt-2 ">{{user.name}}</h3>
@@ -28,6 +28,7 @@
                     <div><a :href="user.social.github"><button class="btn btn-success">Github</button></a></div>
                     <div><a :href="user.social.twitter"><button class="btn btn-dark">Twitter</button></a></div>
                     <div><a :href="user.website"><button class="btn btn-light">Website</button></a></div>
+                    <div> <router-link class="btn btn-danger" :to="`/portfolio/${user.id}`">View Portfolio</router-link></div>
                 </b-col>
                  </b-row>
 
@@ -119,5 +120,7 @@ export default {
 .bio {
     font-size:18px;
 }
-
+.dark {
+  background-color: #121212;
+}
 </style>

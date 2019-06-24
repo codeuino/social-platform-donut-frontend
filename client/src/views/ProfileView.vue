@@ -46,10 +46,10 @@ export default {
     toggleFollower (arg1) {
       if (arg1 === 0) {
         // user doesn't wants to follow the profile anymore, we can add backend calls and remove user for follower list using the id
-        console.log(arg1)
+        // console.log(arg1)
       } else {
         // User wanna follow this profile
-        console.log(arg1)
+        // console.log(arg1)
       }
     }
   },

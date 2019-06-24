@@ -192,7 +192,7 @@ export default {
   },
   created () {
     if (this.$store.state.token) {
-      console.log("HI, Looks like you're a developer! Wanna Contribute ? Visit Our Github")
+      // console.log("HI, Looks like you're a developer! Wanna Contribute ? Visit Our Github")
     } else {
       this.$router.push({ path: 'login', query: { error: 'true' } })
     }

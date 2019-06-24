@@ -1,7 +1,8 @@
 <template>
     <div>
         <b-card
-        class="pb-5 pt-2 px-3"
+        class="pb-5 pt-2 px-3 "
+        :class="$store.state.darkMode ? 'bg-dark ' : ''"
         title="Profile Setting"
         >
         <hr>
@@ -105,7 +106,6 @@ export default {
     }),
     formSubmit (e) {
       this.isSubmitting = true
-      console.log(this.userData)
       e.preventDefault()
       this.updateUser(this.userData)
       this.userData = {
@@ -164,5 +164,12 @@ export default {
   left: 0;
   top: 0;
   opacity: 0;
+}
+input , textarea{
+  background-color:transparent;
+
+}
+white-text {
+  color:white;
 }
 </style>

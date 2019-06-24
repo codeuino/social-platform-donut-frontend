@@ -10,6 +10,7 @@ import SignupView from './views/SignupView.vue'
 import LoginView from './views/LoginView.vue'
 import Portfolio from './views/Portfolio.vue'
 import PostView from './views/PostView.vue'
+import Home from './views/Home.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -19,6 +20,11 @@ export default new Router({
     {
       path: '/',
       name: 'Home',
+      component: Home
+    },
+    {
+      path: '/feed/:id',
+      name: 'Feed',
       component: Feed
 
     },
