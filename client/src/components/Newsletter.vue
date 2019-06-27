@@ -48,7 +48,6 @@ export default {
   mounted () {
     axios.get(`https://newsapi.org/v2/top-headlines?language=en&apiKey=${keys.NEWS_API}`)
       .then((response) => {
-        console.log(response.data.articles)
         this.news = response.data.articles.slice(0, 5)
         this.isloading = false
       })

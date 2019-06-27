@@ -239,7 +239,6 @@ export default {
   },
   methods: {
     SetupPortfolio (e) {
-      console.log(this.Portfolio)
       e.preventDefault()
     }
   }

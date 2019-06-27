@@ -8,7 +8,7 @@
             You're Online, Welcome Back
          </h3>
         <NavigationBar  />
-        <v-content >
+        <v-content class="content">
           <router-view></router-view>
         </v-content>
       </div>
@@ -68,5 +68,7 @@ export default {
 #onCard {
   display: none;
 }
-
+.content {
+  margin-top: 55px;
+}
 </style>
