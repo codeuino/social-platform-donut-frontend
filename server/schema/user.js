@@ -8,17 +8,17 @@ const user = new Schema({
   lname: {
     type: String
   },
+  profilepic:{
+    type:String
+  },
   email: {
     type: String
   },
   dob: {
-    type: String
+    type:Date
   },
-  gen: {
+  gender: {
     type: Number
-  },
-  github: {
-    type: String
   },
   website : {
     type : String
@@ -32,14 +32,8 @@ const user = new Schema({
   Eid: {
     type: Number
   },
-  follower: {
-    type: Number
-  },
   followersList: {
     type : [Number]
-  },
-  following: {
-    type: Number
   },
   followingList: {
     type : [Number]
@@ -47,49 +41,31 @@ const user = new Schema({
   status: {
     type: String
   },
-/*eslint-disable */
-  Eid: {
-    type: String
-  },
-  /*eslint-enable*/
   bio: {
     type: String
   },
   lang: {
     type: [String]
   },
-  linkedin: {
-    type: String
+  location:{
+    lat:{
+      type:String
+    },
+    long:{
+      type:String
+    }
   },
-  facebook: {
-    type: String
+  last_login:{
+    lat:{
+      type:String
+    },
+    long:{
+      type:String
+    }
   },
-  country: {
-    type: String
-  },
-  city: {
-    type: String
-  },
-  status : {
-    type: String
-  },
-  college: {
-    type: String
-  },
-  collegeTimeperiod : {
-    type : [Date]
-  },
-  school: {
-    type: String
-  },
-  schoolTimeperiod : {
-    type : [Date]
-  },
-  blockedUser : {
-    type : [Number]
-  },
-  profilePicture:{
-    type: String // Make sure the image is of 300 * 450
+  social:{
+    type:Schema.Types.ObjectId,
+    ref:'social'
   }
 });
 

@@ -20,7 +20,7 @@ const methodOverride = require('method-override');
 //Snapshot at start
 const hd = new memwatch.HeapDiff();
 
-mongoose.connect(secret.database, function() {
+mongoose.connect(secret.db, function() {
   console.log('connected');
 });
 
