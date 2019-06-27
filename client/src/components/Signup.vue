@@ -39,7 +39,7 @@
                                 type="email"
                                 placeholder="Enter email"
                                 ></b-form-input>
-                                <span v-if="emailCheck" class="err">Invalid Email</span>
+                                <span v-if="!emailCheck" class="err">Invalid Email</span>
 
                                 </b-form-group>
 
@@ -253,7 +253,7 @@ export default {
             test: 'Test Token'
           })
           this.addUser(User)
-          this.$router.push({ path: '/' })
+          this.$router.push({ path: `/feed${User.id}` })
         })
       e.preventDefault()
     }
@@ -263,10 +263,10 @@ export default {
       return !FrontendValidation.isSamePassword(this.form.password, this.form.repassword)
     },
     emailCheck () {
-      return !FrontendValidation.isValidEmail(this.form.email)
+      return FrontendValidation.isValidEmail(this.form.email) || this.form.email.length === 0
     },
     isdisabled () {
-      return this.emailCheck || this.passCheck
+      return this.emailCheck || this.passCheck || this.form.email.length === 0
     },
     isOrg () {
       return this.form.type === 1

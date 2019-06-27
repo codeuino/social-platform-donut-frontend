@@ -20,7 +20,7 @@
                                 type="email"
                                 placeholder="Enter email"
                                 ></b-form-input>
-                                <span v-if="emailCheck" class="err">Invalid Email</span>
+                                <span v-if="!emailCheck" class="err">Invalid Email</span>
                                 </b-form-group>
                                 <b-form-group
                                 label="Password"
@@ -86,16 +86,16 @@ export default {
             test: 'Test Token'
           })
           this.addUser(User)
-          this.$router.push({ path: '/' })
+          this.$router.push({ path: `/feed/${User.id}` })
         })
     }
   },
   computed: {
     emailCheck () {
-      return !FrontendValidation.isValidEmail(this.form.email)
+      return FrontendValidation.isValidEmail(this.form.email) || this.form.email.length === 0
     },
     isdisabled () {
-      return this.emailCheck || this.passCheck
+      return !this.emailCheck || this.form.email.length === 0
     }
 
   }

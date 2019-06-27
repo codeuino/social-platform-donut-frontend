@@ -1,9 +1,7 @@
 <template>
-
-    <div>
-
+    <div >
         <b-navbar v-if="this.isLogged" toggleable="sm" type="dark" variant="dark">
-            <router-link :to="`/`"><b-navbar-brand >DONUT</b-navbar-brand></router-link>
+            <router-link :to="`/feed/${id}`"><b-navbar-brand >DONUT</b-navbar-brand></router-link>
             <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
             <b-collapse id="nav-collapse" is-nav>
             <b-navbar-nav>
@@ -20,6 +18,7 @@
             <b-nav-item-dropdown right>
                 <template slot="button-content"><v-icon color="white">mdi-account</v-icon></template>
                 <b-dropdown-item><router-link class="text-dark" :to="`/settings/${id}`">Setting</router-link></b-dropdown-item>
+                <b-dropdown-item><router-link class="text-dark" :to="`/portfolio/${id}`">Portfolio</router-link></b-dropdown-item>
                 <b-dropdown-item @click="toggleView">{{$store.state.darkMode ? 'Disable' : 'Enable'}} Dark Mode</b-dropdown-item>
                 <b-dropdown-item href="/login">Sign Out</b-dropdown-item>
                 </b-nav-item-dropdown>
@@ -68,3 +67,11 @@ export default {
 
 }
 </script>
+<style scoped>
+nav {
+  position: fixed;
+  width: 100%;
+  min-height:55px;
+  z-index: 2;
+}
+</style>

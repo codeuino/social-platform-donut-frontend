@@ -1,7 +1,7 @@
 <template>
     <div>
             <b-row>
-                <b-col>
+                <b-col cols="6" class="editor">
                     <div>
                         <b-card>
                             <b-card-header>
@@ -13,7 +13,7 @@
                                 ></b-form-input>
                             </b-card-header>
                             <br>
-                            <vue-editor id="editor"  v-model="newPost.content" :editorToolbar="customToolbar"> </vue-editor>
+                            <vue-editor id="editor"  v-model="newPost.content" :editorToolbar="customToolbar"></vue-editor>
                             <b-card-footer class="bg-light text-white mt-2">
                                 <b-row >
                                     <b-col cols="6">
@@ -29,7 +29,7 @@
                         </b-card>
                     </div>
                 </b-col>
-                <b-col>
+                <b-col cols="6">
                     <b-card>
                     <div class="my-2">
                     <h1>Preview</h1>
@@ -111,7 +111,6 @@ export default {
       this.test.card_img = ''
     },
     addPost () {
-      console.log(this.newPost)
       // Here we will send to backend XD
     }
   }
@@ -119,5 +118,7 @@ export default {
 </script>
 
 <style scoped>
-
+.editor {
+  max-width: 50%;
+}
 </style>

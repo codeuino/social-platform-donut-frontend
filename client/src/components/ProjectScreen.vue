@@ -32,14 +32,11 @@ export default {
   },
   data () {
     return {
-
     }
   },
   computed: {
-
   },
   mounted () {
-    console.log(this.innerWidth)
   }
 
 }

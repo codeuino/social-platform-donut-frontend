@@ -49,7 +49,6 @@ export default {
     }
   },
   mounted () {
-    console.log(this.cover_img)
   }
 }
 </script>

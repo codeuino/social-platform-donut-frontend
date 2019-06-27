@@ -18,7 +18,6 @@
                     </div>
                 </div>
                 </v-card-title>
-
                 <v-img
                 :src="post.card_img"
                 aspect-ratio="2.75"
@@ -69,8 +68,8 @@ export default {
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
-.cardText{
-    word-wrap: break-word;
+.cardText > p{
+    word-break: break-all;
 }
 .list-group{
     max-height: 140px;
@@ -91,5 +90,4 @@ export default {
         transform: scale(1.03)
     }
 }
-
 </style>
