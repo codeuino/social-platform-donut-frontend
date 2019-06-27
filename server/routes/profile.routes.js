@@ -2,8 +2,6 @@ const express = require('express');
 const route = express.Router();
 const bodyparser = require('body-parser');
 const url = bodyparser.urlencoded({ extended: false });
-const user = require('../schema/user.js');
-const proj = require('../schema/project.js');
 const profileController = require('../controller/profile.controller');
 const jsonParser = bodyparser.json();
 
@@ -18,7 +16,7 @@ var storage = multer.diskStorage({
   }
 });
 var upload = multer({storage: storage});
-route.get('/submitProject',passport.authenticate('jwt',{session:false}),profileController.SubmitprojectForm)
+
 route.get('/search', url, jsonParser, profileController.search);
 
 route.post('/check', url, jsonParser, profileController.check);
@@ -29,15 +27,14 @@ route.get('/profileview/:sd',passport.authenticate('jwt',{session:false}), url, 
 
 route.post('/publish', passport.authenticate('jwt',{session:false}),url,upload.single('image'), profileController.publish);
 
-route.post('/upVote',url,passport.authenticate('jwt',{session:false}), jsonParser,profileController.upVote);
-
-
-
 route.get('/ch2',passport.authenticate('jwt',{session:false}),profileController.ch2);
 
-route.get('/up', profileController.up);
 route.get('/dashBoard', url, profileController.dashBoard);
+
 route.get('/setting', url, profileController.setting);
+
 route.get('/getDetails', url, profileController.getDetails);
+
 route.post('/updateDetails', jsonParser, profileController.updateDetails);
+
 module.exports = route;

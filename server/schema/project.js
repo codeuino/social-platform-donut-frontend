@@ -1,11 +1,7 @@
 var mongoose=require('mongoose');
 var schema=mongoose.Schema;
-
-
-
-
 var project=new schema({
-  pname:{
+pname:{
     type:String
   },
 pid:{
@@ -23,23 +19,11 @@ shortDesc:{
 content:{
   type:String
 },
-linkedUsers:{
-  type : [Number]
-},
-upvote:
-{
-type:Object
-},
-downvote:{
-  type:Object
-},
-proid:{
-  type:Number
+upDownVote : {
+  type: Map,
+  of:String
 },
 createdAt:{
-  type:Date
-},
-endAt:{
   type:Date
 },
 image:{

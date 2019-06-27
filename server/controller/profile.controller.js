@@ -17,14 +17,11 @@ const { check, validationResult } = require('express-validator/check');
 // });
 // var upload = multer({storage: storage});
 module.exports = {
-  SubmitprojectForm:function(req,res){
-    res.render('projectForm')
-  },
   search: function(req, res) {
-    console.log(req.body);
+    console.log(req.body); // So here we need to fetch data from query instead of body, and then need to return array of result :)
   },
   check: function(req, res) {
-    console.log(req.body);
+    console.log(req.body); // I have no idea abou this function!
   },
   profileId: function(req, res) {
 
@@ -36,14 +33,14 @@ module.exports = {
         .then(function(us) {
           req.params.id = us.Eid;
           proj.find().then((proj)=>{
-            res.send({proje:proj,user:req.user});
+            res.json({proje:proj,user:req.user});
           })
         });
     }
     else
     {
     proj.findOne({pid:req.params.id}).then((proj)=>{
-      res.send({proje:proj,user:req.params.id})
+      res.json({proje:proj,user:req.params.id})
     })
     }
 
@@ -79,34 +76,42 @@ module.exports = {
             github: req.body.git,
             Lang:req.body.lan,
             content: req.body.cont,
-            upvote:{},
-            downvote:{},
+            upDownVote : {},
             proid: Math.floor(Math.random() * 100000),
       })
             .save()
-            .then((re)=>{
-              res.send(re).status(200);
-
+            .then((e)=>{
+              res.send(e).status(200);
        });
 },
-  upVote: function (req,res) {
-    proj.findOne({proid:req.body.id}).then((pro)=>{
-    console.log(pro)
+  upDownVote: function (req,res) {
+    proj.findOne({proid: req.body.project}).then((pro)=>{
+      if(pro.upDownVote.get(req.body.client)){
+          if(pro.upDownVote.get(req.body.client)=="-1"){
+              pro.upDownVote.set(req.body.client,"+1")
+              return pro.save()
+
+          }else{
+              pro.upDownVote.set(req.body.client,"-1")
+              return pro.save()
+
+          }
+      }else{
+          pro.upDownVote.set(req.body.client,req.body.vote)
+          return pro.save()
+      }
+  }).catch((err)=>{
+      return err
     })
-  },
+  }, 
   ch2: function(req, res) {
-    res.send({ sign: req.user }); // Main LANDING PAGE
-  },
-  up: function(req, res) {
-    res.send({
-      msg:"UPVOTE SUCCESS"
-    });
+    res.json({ sign: req.user }); // Main LANDING PAGE , NEW COMMENT => Landing page should be only for organisation which will return portfolio of the org
   },
   dashBoard: function(req, res) {
-    res.send({ user: req.user }); // DASHBOARD
+    res.json({ user: req.user }); // DASHBOARD
   },
   setting: function(req, res) {
-    res.send({ user: req.user }); //SETTING
+    res.json({ user: req.user }); //SETTING
   },
   updateDetails: function(req, res) {
     user.findOne({ Eid: req.user.Eid }).then(function(data) {
@@ -145,14 +150,14 @@ module.exports = {
           (data.facebook = req.body.facebookUrl);
           data.save()
             .then(()=>{
-              res.send({
+              res.json({
                 msg:"Success",
                 status:1
               })
               // res.send('success');
             })
             .catch((err)=>{
-              res.send({
+              res.json({
                 msg:"FAIURE",
                 status:0
               })
@@ -164,7 +169,7 @@ module.exports = {
       .findOne({ Eid: req.user.Eid })
       .lean()
       .then(function(data) {
-        res.send({
+        res.json({
           status:1,
           data
         });
