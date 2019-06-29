@@ -11,8 +11,9 @@ const notification = require('./schema/notification.js');
 const indexRoutes = require('./routes/index.routes');
 const expressValidator = require('express-validator');
 const methodOverride = require('method-override');
+const url=require('./config/db').url
 app.use(express.urlencoded({extended:true}))
-mongoose.connect('mongodb://localhost:27017/donut',{useNewUrlParser:true}, function() {
+mongoose.connect(url,{useNewUrlParser:true}, function() {
   console.log('db connected');
 });
 

@@ -91,7 +91,13 @@ using the command `git clone https://github.com/username/Social-Platform-Donut.g
     ```shell
     node server.js
     ```
+7. To use DB make db.js file inside config folder and export the mongourl that you want to use their
 
+```javascript
+module.exports={
+    url:'mongodb://localhost:27017' //example URL
+}
+```
 HURRAY! you have done it just start contributing to the project.
 
 Now open your browser and type the link `http://localhost:3000` to continue viewing project.
