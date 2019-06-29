@@ -6,13 +6,13 @@ const app = express();
 const cookie = require('cookie-session');
 const socket = require('socket.io');
 const user = require('./schema/user.js');
-const secret = require('./config/credential.js');
+// const secret = require('./config/credential.js');
 const notification = require('./schema/notification.js');
 const indexRoutes = require('./routes/index.routes');
 const expressValidator = require('express-validator');
 const methodOverride = require('method-override');
-
-mongoose.connect(secret.db,{useNewUrlParser:true}, function() {
+app.use(express.urlencoded({extended:true}))
+mongoose.connect('mongodb://localhost:27017/donut',{useNewUrlParser:true}, function() {
   console.log('db connected');
 });
 

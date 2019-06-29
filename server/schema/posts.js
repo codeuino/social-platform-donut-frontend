@@ -1,7 +1,7 @@
 var mongoose=require('mongoose');
 var schema=mongoose.Schema;
 ObjectId=schema.ObjectId
-var post=new schema({
+var postSchema=new schema({
   user:{
     type:ObjectId
   },
@@ -29,14 +29,11 @@ var post=new schema({
       type:[{user:ObjectId,
       content:String}]
   },
-  CreatedAt:{
-    type:Date
-  },
-  UpdatedAt:{
-    type:Date
-  },
   //Type will be Posts,Project,Scholarship
   type:{
     type:String
   }
 })
+postSchema.set('timestamps', true); // this will add createdAt and updatedAt timestamps
+const Post = mongoose.model('post', postSchema);
+module.exports = Post;
