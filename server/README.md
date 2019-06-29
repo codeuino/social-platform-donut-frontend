@@ -95,7 +95,7 @@ using the command `git clone https://github.com/username/Social-Platform-Donut.g
 
 ```javascript
 module.exports={
-    url:'mongodb://localhost:27017' //example URL
+    url:'mongodb://localhost:27017/donut' //example URL
 }
 ```
 HURRAY! you have done it just start contributing to the project.

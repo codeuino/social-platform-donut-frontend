@@ -1,5 +1,5 @@
 const Posts=require('../schema/posts')
-const MongoClient=require('mongodb').MongoClient
+const {MongoClient,ObjectId}=require('mongodb')
 const {MongoCron}= require('mongodb-cron');
 const url=require('../config/db').url
 MongoClient.connect(url,{useNewUrlParser:true}).then((mongo)=>{
@@ -54,5 +54,19 @@ module.exports={
         ...req.body
 });
 res.status(200).json({'success':'Post Scheduled'})
+    },
+    update:async(req,res)=>{
+        const mongo = await MongoClient.connect(url,{useNewUrlParser:true});
+        const db= mongo.db('donut');
+        const posts = db.collection('posts');   
+        var new_post={}
+        for (x in req.body){
+            if(x!='updateId'){
+                new_post[x]=req.body[x]
+            }
+        }
+        const result=await posts.update({_id:ObjectId(req.body.updateId)},{$set:{...new_post}})
+        console.log(result)
+        res.status(200).json({'success':'Post Updated'})
     }
 }

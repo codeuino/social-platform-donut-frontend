@@ -80,5 +80,5 @@ typings/
 # Config files
 credential.js
 secret.js
-config/db.js
+server/config/db.js
 views/images/uploads
