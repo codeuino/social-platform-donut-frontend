@@ -1,7 +1,4 @@
 const express = require('express');
-const route = require('./routes/login.routes.js');
-const google = require('./config/google.js');
-const github = require('./config/github.js');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const path = require('path');
@@ -9,19 +6,14 @@ const app = express();
 const cookie = require('cookie-session');
 const socket = require('socket.io');
 const user = require('./schema/user.js');
-const secret = require('./config/credential.js');
+// const secret = require('./config/credential.js');
 const notification = require('./schema/notification.js');
 const indexRoutes = require('./routes/index.routes');
-const facebook = require('./config/facebook.js');
-const memwatch = require('node-memwatch');
 const expressValidator = require('express-validator');
 const methodOverride = require('method-override');
 
-//Snapshot at start
-const hd = new memwatch.HeapDiff();
-
-mongoose.connect(secret.db, function() {
-  console.log('connected');
+mongoose.connect(secret.db,{useNewUrlParser:true}, function() {
+  console.log('db connected');
 });
 
 const loged = [];
@@ -48,25 +40,10 @@ app.get('**',(req,res)=>{
   res.render('error');
 });
 
-//Snapshot after routing
-const diff = hd.end();
-//Diff between both snapshots
-console.log(diff);
-//checking for leak in memory
-memwatch.on('leak', info => {
-  for (var x in info) {
-    console.log(x + ':' + info[x]);
-  }
-});
-//Stats of memory leakage
-memwatch.on('stats', info => {
-  for (var x in info) {
-    console.log(x + ':' + info[x]);
-  }
-});
+const PORT = process.env.PORT || 3000
 
-const ser = app.listen(3000, function() {
-  console.log('Running');
+const ser = app.listen(PORT, function() {
+  console.log(`Running at ${PORT}`);
 });
 
 const io = socket(ser);
