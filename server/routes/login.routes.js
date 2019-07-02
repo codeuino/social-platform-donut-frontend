@@ -29,7 +29,7 @@ route.get('/facebook/redirect',passport.authenticate('facebook'),(req, res) => {
   }
 );
 
-route.post('/userlogin',url,Authcontroller.signup);
+route.post('/signup',url,Authcontroller.signup);
 route.post('/login', url,Authcontroller.login);
 route.get('/check',passport.authenticate('jwt',{session:false}),(req,res)=>{
   console.log(req.user)

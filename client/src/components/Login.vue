@@ -50,6 +50,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import LocationService from '@/services/LocationService'
 import FrontendValidation from '@/services/ValidationService'
 import User from '@/assets/test_data/users'
@@ -74,10 +75,22 @@ export default {
       e.preventDefault()
       LocationService.getLocation()
         .then((position) => {
-          this.form.currentPosition = position
-          this.$store.state.position = position
+          var pos = {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude
+          }
+          this.form.currentPosition = pos
+          this.$store.state.position = pos
         })
         .then(() => {
+          axios.post(
+            '/api/auth/login',
+            {
+              email: this.email,
+              pass: this.pass
+            }
+          )
+            .then((data) => console.log(data))
           // Now we can send form details to and fetch tokens if logged in and then redirect to feed page
           // if login failed use this.$router.push({path: 'welcome', query:{source: 'login' , error:'true'}})
           // We also need to update Last login location !
@@ -86,7 +99,7 @@ export default {
             test: 'Test Token'
           })
           this.addUser(User)
-          this.$router.push({ path: `/feed/${User.id}` })
+          // this.$router.push({ path: `/feed/${User.id}` })
         })
     }
   },

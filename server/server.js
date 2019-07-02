@@ -2,12 +2,10 @@ const express = require('express');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const path = require('path');
+const cors = require('cors')
 const app = express();
 const cookie = require('cookie-session');
-const socket = require('socket.io');
-const user = require('./schema/user.js');
 const secret = require('./config/credential.js');
-const notification = require('./schema/notification.js');
 const indexRoutes = require('./routes/index.routes');
 const expressValidator = require('express-validator');
 const methodOverride = require('method-override');
@@ -16,11 +14,7 @@ mongoose.connect(secret.db,{useNewUrlParser:true}, function() {
   console.log('db connected');
 });
 
-const loged = [];
-
-app.set('view engine', 'ejs');
-app.use(express.static(path.join(__dirname, 'views')));
-app.set('views',path.join(__dirname+"/views"));
+app.use(cors())
 app.use(methodOverride('_method'));
 
 app.use(
@@ -37,7 +31,7 @@ require('./config/local.js')(passport)
 app.use(indexRoutes);
 
 app.get('**',(req,res)=>{
-  res.render('error');
+  res.status(404).json({error,status:0})
 });
 
 const PORT = process.env.PORT || 3000
@@ -46,26 +40,26 @@ const ser = app.listen(PORT, function() {
   console.log(`Running at ${PORT}`);
 });
 
-const io = socket(ser);
+// const io = socket(ser);
 
-io.on('connection', function(socket) {
-  socket.on('downvote', function(data) {
-    user.find().then(function(out) {
-      out.forEach(function(x) {
-        if (x['Eid'] == data.sign) {
-          new notification({
-            fname: x['fname'],
-            lname: x['lname'],
-            upvoteId: x['Eid'],
-            proid: data.pro['proid'],
-            userid: data.pro['pid']
-          })
-            .save()
-            .then(function(notif) {
-              console.log(notif);
-            });
-        }
-      });
-    });
-  });
-});
+// io.on('connection', function(socket) {
+//   socket.on('downvote', function(data) {
+//     user.find().then(function(out) {
+//       out.forEach(function(x) {
+//         if (x['Eid'] == data.sign) {
+//           new notification({
+//             fname: x['fname'],
+//             lname: x['lname'],
+//             upvoteId: x['Eid'],
+//             proid: data.pro['proid'],
+//             userid: data.pro['pid']
+//           })
+//             .save()
+//             .then(function(notif) {
+//               console.log(notif);
+//             });
+//         }
+//       });
+//     });
+//   });
+// });
