@@ -78,7 +78,7 @@ typings/
 .fusebox/
 
 # Config files
-credential.js
+scredential.js
 secret.js
-
+config/credential.js
 views/images/uploads

@@ -15,6 +15,8 @@ mongoose.connect(secret.db,{useNewUrlParser:true}, function() {
 });
 
 app.use(cors())
+app.use(express.urlencoded({extended:true}));
+app.use(express.json());
 app.use(methodOverride('_method'));
 
 app.use(
