@@ -1,8 +1,6 @@
 module.exports = {
-  dev: {
-    proxyTable: {
-      '/api': 'http://localhost:300'
-    }
+  devServer: {
+    proxy: 'http://localhost:300'
   }
 
 }
