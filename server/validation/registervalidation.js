@@ -4,7 +4,7 @@ module.exports=function validateRegisterInput(data){
 let error={};
 data.name=!isempty(data.name)?data.name:'';
 data.email=!isempty(data.email)?data.email:'';
-data.pass=!isempty(data.pass)?data.pass:'';
+data.password=!isempty(data.password)?data.password:'';
 
 
 if(Validator.isEmpty(data.name))
@@ -20,10 +20,7 @@ if(!Validator.isEmail(data.email))
 {
   error.email="Invalid email"
 }
-if(!Validator.isLength(data.pass,{min:6,max:30}))
-{
-  error.pass="Password must be of 6 digit";
-}
+
 
 return{
   error,

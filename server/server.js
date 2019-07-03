@@ -9,14 +9,17 @@ const secret = require('./config/credential.js');
 const indexRoutes = require('./routes/index.routes');
 const expressValidator = require('express-validator');
 const methodOverride = require('method-override');
-
+const bodyParser = require('body-parser')
 mongoose.connect(secret.db,{useNewUrlParser:true}, function() {
   console.log('db connected');
 });
-
 app.use(cors())
-app.use(express.urlencoded({extended:true}));
-app.use(express.json());
+
+app.use(function(req, res, next) {
+  next();
+});
+app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.json());
 app.use(methodOverride('_method'));
 
 app.use(
@@ -25,7 +28,10 @@ app.use(
     keys: ['CAPEDCRUSADER']
   })
 );
-
+app.post("/",(req,res)=>{
+  console.log(req.body)
+  res.json({msg:'HI'})
+})
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(expressValidator());
