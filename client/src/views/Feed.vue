@@ -22,6 +22,7 @@
 
 <script>
 // here I'm importing a test datat okay ;)
+import User from '@/assets/test_data/users'
 import { mapActions } from 'vuex'
 import FeedGroup from '@/components/FeedGroup.vue'
 import CreatePost from '@/components/CreatePost.vue'
@@ -49,7 +50,7 @@ export default {
   created () {
     // First we need to check whether the token exist then backedn can check and if some error comes, it will send back to login page
     if (this.$store.state.token) {
-      this.posts = this.$store.state.userDetails.posts
+      this.posts = User.posts
       this.LoginOrout(true)
       // Now we updated the userDetails in state. We should now fetch posts
     } else {

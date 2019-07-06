@@ -34,6 +34,10 @@
 
                                 </b-form-group>
 
+                                <b-form-group>
+                                      <b-form-select v-model="type" :options="options"></b-form-select>
+                                </b-form-group>
+
                                 <b-form-group class="text-center mt-5">
                                     <b-button type="submit" :disabled="isdisabled" variant="primary" class="mr-2 btn-lg btn-block">Login</b-button>
                                 </b-form-group>
@@ -50,19 +54,22 @@
 </template>
 
 <script>
-import axios from 'axios'
 import LocationService from '@/services/LocationService'
 import FrontendValidation from '@/services/ValidationService'
-import User from '@/assets/test_data/users'
 import { mapActions } from 'vuex'
 export default {
   data () {
     return {
+      options: [
+        { value: 0, text: 'Individual' },
+        { value: 1, text: 'Organisation' }
+      ],
       form: {
         email: '',
         password: '',
         currentPosition: null
-      }
+      },
+      type: 0
 
     }
   },
@@ -82,23 +89,34 @@ export default {
           this.form.currentPosition = pos
           this.$store.state.position = pos
         })
-        .then(() => {
-          axios.post(
-            '/api/auth/login',
-            {
-              email: this.email,
-              pass: this.pass
+        .then(async () => {
+          const response = await fetch('http://localhost:3000/auth/login', {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email: this.form.email, pass: this.form.password, type: this.type })
+          })
+          const content = await response.json()
+          try {
+            if (content.status === 0) {
+              this.$router.push({ path: `/login?err=true?msg=${content.error}` })
+            } else {
+              this.addToken({
+                secret_token: content.token
+              })
+              this.addUser(content.user)
+              this.$router.push({ path: `/feed/${content.user._id}` })
             }
-          )
-            .then((data) => console.log(data))
+          } catch (err) {
+            console.log('Network Error')
+          }
+
           // Now we can send form details to and fetch tokens if logged in and then redirect to feed page
           // if login failed use this.$router.push({path: 'welcome', query:{source: 'login' , error:'true'}})
           // We also need to update Last login location !
           // We will also update this.$store.state.userDetails.token and add token in it if successful XD
-          this.addToken({
-            test: 'Test Token'
-          })
-          this.addUser(User)
           // this.$router.push({ path: `/feed/${User.id}` })
         })
     }

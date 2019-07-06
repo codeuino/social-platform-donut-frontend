@@ -139,7 +139,7 @@
                                     class="mb-2 mr-sm-2 mb-sm-0"
                                     :value="null"
                                     v-model="form.gender"
-                                    :options="{ 'male': 'Male', 'female': 'Female','other':'Other' }"
+                                    :options="{ 0: 'Male', 1: 'Female',2:'Other' }"
                                     required
                                     >
                                     <option slot="first" :value="null">Gender</option>
@@ -234,27 +234,40 @@ export default {
     }
   },
   methods: {
-    ...mapActions({
-      addToken: 'addToken',
-      addUser: 'addUser'
-    }),
     register (e) {
       LocationService.getLocation()
         .then((position) => {
           this.form.currentPosition = position
           this.$store.state.position = position
         })
-        .then(() => {
-          // Now we can send form details to and fetch tokens if logged in and then redirect to feed page
-          // if login failed use this.$router.push({path: 'welcome', query:{source: 'login' , error:'true'}})
-          // We also need to update Last login location !
-          // We will also update this.$store.state.userDetails.token and add token in it if successful XD
-          this.addToken({
-            test: 'Test Token'
+        .then(async () => {
+          const response = await fetch('http://localhost:3000/auth/signup', {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email: this.form.email, name: this.form.name, password: this.form.password, type: this.form.type, location: this.form.location, adminName: this.form.admin_name, social: this.form.social })
           })
-          this.addUser(User)
-          this.$router.push({ path: `/feed${User.id}` })
+          const content = await response.json()
+          if (parseInt(content.status) === 0) {
+            this.$router.push({ path: `/signup?err=true?msg=${content.err}` })
+          } else {
+            alert('You have signed up successfully, please login.')
+            this.$router.push({ path: `/feed/${content.user._id}` })
+          }
         })
+      // Now we can send form details to and fetch tokens if logged in and then redirect to feed page
+      // if login failed use this.$router.push({path: 'welcome', query:{source: 'login' , error:'true'}})
+      // We also need to update Last login location !
+      // We will also update this.$store.state.userDetails.token and add token in it if successful XD
+
+      //   this.addToken({
+      //     test: 'Test Token'
+      //   })
+      //   this.addUser(User)
+      //   this.$router.push({ path: `/feed${User.id}` })
+      // })
       e.preventDefault()
     }
   },
@@ -266,10 +279,12 @@ export default {
       return FrontendValidation.isValidEmail(this.form.email) || this.form.email.length === 0
     },
     isdisabled () {
-      return this.emailCheck || this.passCheck || this.form.email.length === 0
+      console.log(this.emailCheck)
+      console.log(this.passCheck)
+      return (!(this.emailCheck) && this.passCheck) || this.form.email.length === 0 || this.form.password === 0
     },
     isOrg () {
-      return this.form.type === 1
+      return parseInt(this.form.type) === 1
     }
 
   }

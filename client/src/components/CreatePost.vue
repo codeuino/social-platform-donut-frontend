@@ -62,7 +62,8 @@ export default {
         content: '',
         card_author: this.$store.state.userDetails.username,
         card_author_id: this.$store.state.userDetails.id,
-        card_image: ''
+        card_image: '',
+        description: ''
       },
       customToolbar: [
         ['bold', 'italic', 'underline', 'strike'],
@@ -80,20 +81,21 @@ export default {
         card_text: '',
         card_img: '',
         card_author: this.$store.state.userDetails.username,
-        card_author_id: this.$store.state.userDetails.id
-
+        card_author_id: this.$store.state.userDetails.id,
+        description: ''
       }
     }
   },
   computed: {
     checkText () {
-      return (this.newPost.card_title === '' || this.newPost.content === '')
+      return (this.newPost.card_title === '' || this.newPost.content === '') // || this.newPost.description === ''
     }
   },
   methods: {
     makePreviewPost () {
       this.test.card_text = this.newPost.content
       this.test.card_title = this.newPost.card_title
+      this.test.description = this.newPost.description
       var reader = new FileReader()
       if (this.image) {
         reader.readAsDataURL(this.image)
@@ -109,9 +111,39 @@ export default {
       this.test.card_title = ''
       this.test.card_text = ''
       this.test.card_img = ''
+      this.test.description = ''
     },
     addPost () {
-      // Here we will send to backend XD
+      // Here we will send to backend.
+      // const response = await fetch('http://localhost:3000/projects/addPost',
+      //   {
+      //     method: 'POST',
+      //     headers: {
+      //       'Authorization': 'Bearer ' + this.$store.state.token
+      //     }
+      //     // body: JSON.stringify({
+      //     //   card_title: this.newPost.card_title,
+      //     //   description: this.newPost.description,
+      //     //   content: this.newPost.content,
+      //     //   // lang:this.newPost.lang,
+      //     //   image: this.newPost.card_img
+      //     // // We'll take author details from JWT ;)
+      //     // })
+      //   })
+      // console.log(response.json())
+      fetch('http://localhost:3000/projects/addPost', {
+        method: 'POST',
+        body: JSON.stringify({
+          name: 'Lakshya'
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'auth': 'Bearer ' + this.$store.state.token.secret_token
+        }
+      })
+        .then(response => response.json())
+        .then(content => console.log(content))
     }
   }
 }

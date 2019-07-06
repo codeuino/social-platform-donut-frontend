@@ -31,9 +31,7 @@ route.get('/facebook/redirect',passport.authenticate('facebook'),(req, res) => {
 
 route.post('/signup',url,Authcontroller.signup);
 route.post('/login', url,Authcontroller.login);
-route.get('/check',passport.authenticate('jwt',{session:false}),(req,res)=>{
-  console.log(req.user)
-})
+
 route.get('/logout', function(req, res) {
   req.logout();
   res.send({

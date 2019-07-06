@@ -16,11 +16,20 @@ else if(Validator.isEmpty(data.email))
 {
   error.email="Email is required";
 }
+
 if(!Validator.isEmail(data.email))
 {
   error.email="Invalid email"
 }
 
+if(Validator.isEmpty(data.type))
+{
+  error.type = 'Type is required'
+}
+
+if(Validator.isEmpty(data.pass)) {
+  error.password = 'Password is required'
+}
 
 return{
   error,

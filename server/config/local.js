@@ -3,22 +3,18 @@ const Strategy = require('passport-jwt').Strategy;
 const User = require('../schema/user');
 const path=require('path')
 const opts={};
-opts.jwtFromRequest=ExtractJwt.fromAuthHeaderAsBearerToken();
-opts.secretOrKey='blabla';
+opts.jwtFromRequest=ExtractJwt.fromHeader('auth');
+const {secret} = require('../config/credential')
+opts.secretOrKey=secret;
 
 module.exports=passport=>{
-  passport.use(new Strategy(opts,(opts,(jwt_payload,done)=>{
-
-    User.findOne(jwt_payload.id).then((us)=>{
-      if(us)
-      {
-      return  done(null,us);
-      }
-      else {
-      return   done(null,false)
-      }
-    })
-})))
+  passport.use(new Strategy(opts,(jwt_payload,done)=>{
+    try {
+      done(null,jwt_payload.user)
+    } catch (error) {
+      done(error)
+    }}
+))
 
 
 }
