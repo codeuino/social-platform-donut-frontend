@@ -5,7 +5,7 @@ const validateRegisterInput=require('../validation/registervalidation.js')
 const validateLoginInput=require('../validation/loginvalidation.js')
 const jwt=require('jsonwebtoken')
 const bcrypt = require('bcrypt')
-const {secret} = require('../config/credential')
+const secret ='mySecret'
 const _ =require('lodash')
 module.exports={
     signup:async(req,res)=>{
@@ -78,12 +78,12 @@ module.exports={
                     } catch (error) {
                         res.status(400).json({message:'Please Write Password',status:0})
                     }
-                    const payload={id:user._id,email:user.email};
-                        const tok=await jwt.sign(payload,secret)
-                        var u = await _.pick(user,['name','_id','type'])
-                        res.json({
+                    const payload={id:user._id,email:user.email,type:1};
+                    const tok=await jwt.sign(payload,secret)
+                    var u = await _.pick(user,['name','_id','type'])
+                    res.json({
                             status:1,
-                            token:tok,
+                            token:'Bearer  ' + tok,
                             user:u
                             })
                     
@@ -100,12 +100,12 @@ module.exports={
                     } catch (error) {
                         res.status(400).json({message:'Please Write Password',status:0})
                     }
-                    const payload={id:user._id,email:user.email};
-                        const tok=await jwt.sign(payload,secret,{expiresIn:3600})
-                        var u = await _.pick(user,['name','_id','type'])
-                        res.json({
+                    const payload={id:user._id,email:user.email,type:0};
+                    const tok=await jwt.sign(payload,secret)
+                    var u = await _.pick(user,['name','_id','type'])
+                    res.json({
                             status:1,
-                            token:tok,
+                            token:'Bearer ' + tok,
                             user:u
                         })
                     

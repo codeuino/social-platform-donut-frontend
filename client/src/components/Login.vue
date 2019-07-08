@@ -57,6 +57,7 @@
 import LocationService from '@/services/LocationService'
 import FrontendValidation from '@/services/ValidationService'
 import { mapActions } from 'vuex'
+import Subscription from '@/services/Subscription'
 export default {
   data () {
     return {
@@ -103,6 +104,25 @@ export default {
             if (content.status === 0) {
               this.$router.push({ path: `/login?err=true?msg=${content.error}` })
             } else {
+              console.log('Login Successful')
+              if ('serviceWorker' in navigator) {
+                console.log('Service worker is there')
+                const sub = await Subscription.createSubscription()
+                const body = JSON.stringify(sub)
+                const response = await fetch('http://localhost:3000/profile/addDevice', {
+                  method: 'POST',
+                  headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': content.token
+                  },
+                  body: body
+                })
+                var resp = await response.json()
+                console.log(resp)
+              } else {
+                console.log('NOOO')
+              }
               this.addToken({
                 secret_token: content.token
               })

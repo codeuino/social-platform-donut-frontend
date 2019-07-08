@@ -113,37 +113,25 @@ export default {
       this.test.card_img = ''
       this.test.description = ''
     },
-    addPost () {
+    async addPost () {
       // Here we will send to backend.
-      // const response = await fetch('http://localhost:3000/projects/addPost',
-      //   {
-      //     method: 'POST',
-      //     headers: {
-      //       'Authorization': 'Bearer ' + this.$store.state.token
-      //     }
-      //     // body: JSON.stringify({
-      //     //   card_title: this.newPost.card_title,
-      //     //   description: this.newPost.description,
-      //     //   content: this.newPost.content,
-      //     //   // lang:this.newPost.lang,
-      //     //   image: this.newPost.card_img
-      //     // // We'll take author details from JWT ;)
-      //     // })
-      //   })
-      // console.log(response.json())
-      fetch('http://localhost:3000/projects/addPost', {
-        method: 'POST',
-        body: JSON.stringify({
-          name: 'Lakshya'
-        }),
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          'auth': 'Bearer ' + this.$store.state.token.secret_token
-        }
-      })
-        .then(response => response.json())
-        .then(content => console.log(content))
+      console.log(this.$store.state.token.secret_token)
+      const response = await fetch('http://localhost:3000/projects/addProject',
+        {
+          method: 'POST',
+          headers: {
+            'Authorization': this.$store.state.token.secret_token
+          },
+          body: JSON.stringify({
+            card_title: this.newPost.card_title,
+            description: this.newPost.description,
+            content: this.newPost.content,
+            // lang:this.newPost.lang,
+            image: this.newPost.card_img
+          // We'll take author details from JWT ;)
+          })
+        })
+      console.log(response)
     }
   }
 }

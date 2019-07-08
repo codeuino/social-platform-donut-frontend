@@ -40,7 +40,8 @@
     "path": "^0.12.7",
     "request": "^2.88.0",
     "socket.io": "^2.1.1",
-    "validator": "^11.0.0"
+    "validator": "^11.0.0",
+    "web-push": "^3.3.5"
   },
   "devDependencies": {
     "chai": "^4.2.0",

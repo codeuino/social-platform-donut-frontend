@@ -1,20 +1,18 @@
 const ExtractJwt = require('passport-jwt').ExtractJwt;
-const Strategy = require('passport-jwt').Strategy;
-const User = require('../schema/user');
-const path=require('path')
+const JWTStrategy = require('passport-jwt').Strategy;
 const opts={};
-opts.jwtFromRequest=ExtractJwt.fromHeader('auth');
+opts.jwtFromRequest=ExtractJwt.fromAuthHeaderAsBearerToken();
 const {secret} = require('../config/credential')
-opts.secretOrKey=secret;
+opts.secretOrKey='mySecret'
 
-module.exports=passport=>{
-  passport.use(new Strategy(opts,(jwt_payload,done)=>{
-    try {
-      done(null,jwt_payload.user)
-    } catch (error) {
-      done(error)
-    }}
-))
-
-
+module.exports= passport => {
+  passport.use(new JWTStrategy(opts,(token, next) => {
+      try {
+        next(null,token)
+      } catch (err) {
+        next(err)
+      }
+    }
+  ))
+  
 }

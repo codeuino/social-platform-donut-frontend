@@ -5,16 +5,17 @@ const path = require('path');
 const cors = require('cors')
 const app = express();
 const cookie = require('cookie-session');
-const secret = require('./config/credential.js');
+const {secret,db, VAPID_KEYS} = require('./config/credential.js');
 const indexRoutes = require('./routes/index.routes');
 const expressValidator = require('express-validator');
 const methodOverride = require('method-override');
 const bodyParser = require('body-parser')
-mongoose.connect(secret.db,{useNewUrlParser:true}, function() {
+const webPush = require('web-push')
+mongoose.connect(db,{useNewUrlParser:true}, function() {
   console.log('db connected');
 });
 app.use(cors())
-
+webPush.setVapidDetails('mailto:test@test.com',VAPID_KEYS.Public,VAPID_KEYS.Private)
 app.use(function(req, res, next) {
   next();
 });
@@ -32,8 +33,6 @@ app.post("/",(req,res)=>{
   console.log(req.body)
   res.json({msg:'HI'})
 })
-app.use(passport.initialize());
-app.use(passport.session());
 app.use(expressValidator());
 require('./config/local.js')(passport)
 app.use(indexRoutes);

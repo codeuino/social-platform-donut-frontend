@@ -4,14 +4,7 @@ const express = require('express');
 const bodyparser = require('body-parser');
 const url = bodyparser.urlencoded({ extended: false });
 const passport = require('passport');
-const user = require('../schema/user.js');
 const route = express.Router();
-const multer=require('multer')
-const path=require('path')
-const Jimp=require('jimp')
-const imagecontroller=require('../controller/image.controller')
-const bcrypt=require('bcrypt')
-const jwt=require('jsonwebtoken')
 const Authcontroller=require('../controller/authcontroller.js')
 route.get('/google', passport.authenticate('google', { scope: ['profile'] }));
 route.get('/google/redirect', passport.authenticate('google'), function(req,res){

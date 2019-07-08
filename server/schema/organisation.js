@@ -23,13 +23,20 @@ const OrgSchema = new Schema({
         type : String
       },
       pass: {
-        type: String
+        type: String,
+        required:true
       },
       followersList: {
-        type : [Number]
+        type : [Schema.Types.ObjectId],
+        default:[]
       },
       followingList: {
-        type : [Number]
+        type : [Schema.Types.ObjectId],
+        default:[]
+      },
+      devices:{
+        type : [Schema.Types.ObjectId],
+        default:[]
       },
       bio: {
         type: String
