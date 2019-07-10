@@ -71,7 +71,13 @@ const UserSchema = new Schema({
   contributorUnder : {
     type: [String],
     default:[]
-  }
+  },
+  Todos: [
+    {
+    type: [Schema.Types.ObjectId],
+    ref:'Todo'
+    }
+  ]
 });
 
 UserSchema.pre('save', function(next) {

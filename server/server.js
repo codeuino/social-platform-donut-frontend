@@ -38,7 +38,7 @@ require('./config/local.js')(passport)
 app.use(indexRoutes);
 
 app.get('**',(req,res)=>{
-  res.status(404).json({error,status:0})
+  res.status(404).json({status:0})
 });
 
 const PORT = process.env.PORT || 3000
