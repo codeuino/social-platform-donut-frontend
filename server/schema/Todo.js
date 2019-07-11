@@ -9,6 +9,10 @@ const TodoSchema = new Schema ({
     completedAt : {
         type:String,
         default: null
+    },
+    id:{
+        type:String,
+        unique:true
     }
 })
 const TodoModel = mongoose.model('Todo',TodoSchema)

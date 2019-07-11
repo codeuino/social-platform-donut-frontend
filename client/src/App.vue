@@ -1,6 +1,6 @@
 <template>
     <v-app>
-       <div>
+       <div class="main">
          <h3 class="bg-primary text-center text-white py-2" id="offCard">
             You're Offline, You Can Use Donut, but any changes won't be saved
          </h3>
@@ -10,6 +10,7 @@
         <NavigationBar  />
         <v-content class="content">
           <router-view></router-view>
+          <Todos v-if="$store.state.isLogged"/>
         </v-content>
       </div>
   </v-app>
@@ -18,20 +19,19 @@
 
 <script>
 import NavigationBar from './components/NavigationBar.vue'
-
+import Todos from './components/Todos'
 export default {
   name: 'App',
   components: {
-    NavigationBar
+    NavigationBar,
+    Todos
   },
 
   data () {
-    return {
-      isLogged: false
-
-    }
   },
   mounted () {
+  },
+  computed: {
   },
   created () {
     window.addEventListener('offline', function (e) {
@@ -71,4 +71,5 @@ export default {
 .content {
   margin-top: 55px;
 }
+
 </style>

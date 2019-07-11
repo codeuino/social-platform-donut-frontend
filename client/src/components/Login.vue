@@ -139,6 +139,9 @@ export default {
           // We will also update this.$store.state.userDetails.token and add token in it if successful XD
           // this.$router.push({ path: `/feed/${User.id}` })
         })
+        .catch(() => {
+          alert('Please Connect To internet to login and allow location access for better results')
+        })
     }
   },
   computed: {

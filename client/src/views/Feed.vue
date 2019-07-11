@@ -5,7 +5,7 @@
         </div>
         <hr v-if="$store.state.darkMode" class="mb-0 mt-0">
         <!-- div for create post button -->
-        <div :class="$store.state.darkMode ? 'bg-dark' : '' ">
+        <div :class="$store.state.darkMode ? 'bg-dark' : 'light' ">
             <b-container>
                 <b-button v-b-modal.modal-2  class="bg-primary btn-lg">Create a Post </b-button>
                 <b-modal size="xl" ok-only ok-variant="secondary" ok-title="Cancel"  id="modal-2"  title="Create A Post">
@@ -62,4 +62,7 @@ export default {
 
 <style scoped>
 #feed {min-height:100vh;}
+.light {
+  background-color: #e9ecef
+}
 </style>

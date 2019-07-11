@@ -74,10 +74,17 @@ const UserSchema = new Schema({
   },
   Todos: [
     {
-    type: [Schema.Types.ObjectId],
+    type: Schema.Types.ObjectId,
     ref:'Todo'
     }
+  ],
+  Events : [
+    {
+      type:Schema.Types.ObjectId,
+      ref:'Event'
+    }
   ]
+
 });
 
 UserSchema.pre('save', function(next) {

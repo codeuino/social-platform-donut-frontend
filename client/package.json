@@ -17,6 +17,7 @@
     "lodash": "^4.17.11",
     "register-service-worker": "^1.6.2",
     "typewriter-effect": "^2.5.3",
+    "uuid": "^3.3.2",
     "vue": "^2.6.10",
     "vue-awesome": "^3.5.4",
     "vue-breakpoints": "^1.1.0",
