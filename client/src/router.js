@@ -11,6 +11,10 @@ import LoginView from './views/LoginView.vue'
 import Portfolio from './views/Portfolio.vue'
 import PostView from './views/PostView.vue'
 import Home from './views/Home.vue'
+import Event from './views/Event.vue'
+import EventFeed from './views/EventFeed.vue'
+import EventForm from './views/EventForm.vue'
+
 Vue.use(Router)
 
 export default new Router({
@@ -72,6 +76,21 @@ export default new Router({
       path: '/post/:post_id',
       name: 'PostView',
       component: PostView
+    },
+    {
+      path: '/events/event/:id',
+      name: 'Events',
+      component: Event
+    },
+    {
+      path: '/events/feed',
+      name: 'EventFeed',
+      component: EventFeed
+    },
+    {
+      path: '/events/create',
+      name: 'EventForm',
+      component: EventForm
     }
   ]
 })

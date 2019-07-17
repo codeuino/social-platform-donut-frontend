@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import VuePlaceAutocomplete from 'vue-place-autocomplete'
 import BootstrapVue from 'bootstrap-vue'
 import Vuetify from 'vuetify'
 import './plugins/vuetify'
@@ -10,6 +11,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import '@mdi/font/css/materialdesignicons.css'
 import './registerServiceWorker'
 import '@fortawesome/fontawesome-free/css/all.css'
+Vue.use(VuePlaceAutocomplete)
 Vue.use(Vuetify, {
   iconfront: 'mdi' || 'fa' || 'fa4'
 })

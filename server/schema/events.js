@@ -6,10 +6,25 @@ const EventSchema = new Schema({
         type:String,
         required:true
     },
+    status:{
+        type:Number, //0 => upcoming, 1 => going on , 2 => done , 3 => cancelled
+        default:0
+    },
+    attendees :[
+        {
+            type:Schema.Types.ObjectId,
+            ref:'user',
+            unique:true
+        }
+    ],
     venue: {
         location:{
-            type:String,
-            required:true
+            latitute : {
+                type:String
+            },
+            longitute: {
+                type:String
+            }
         },
         time: {
             type:String,
@@ -23,23 +38,10 @@ const EventSchema = new Schema({
     members: [
         {
             type:Schema.Types.ObjectId,
-            ref:'user'
+            ref:'user',
+            unique:true
         }
     ],
-    stats : {
-        going :[
-            {
-                type: Schema.Types.ObjectId,
-                ref:'user'
-            }
-        ],
-        interested :[
-            {
-                type: Schema.Types.ObjectId,
-                ref:'user'
-            }
-        ]
-    },
     description : {
         type:String,
         required:true
@@ -47,8 +49,23 @@ const EventSchema = new Schema({
     createdAt : {
         type:Date,
         default:Date.now
+    },
+    organiserDetails :{
+        phone:{
+            type:String,
+        },
+        email : {
+            type:String,
+            
+        }
+    },
+    coverImg:{
+        type:String
     }
 })
+
+
+
 
 const EventModel = mongoose.model('Event',EventSchema)
 module.exports = EventModel

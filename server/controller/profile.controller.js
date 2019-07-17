@@ -133,51 +133,44 @@ module.exports = {
     // Now Le'ts update the subscribed user
     // NOTE: MAKE THIS ASYNC/AWAIT
     if(req.body.user.type === 1 ){
-      OrganisationModel.findById(SubscribingTo).then(User => {
-        if(User.followersList.indexOf(SubscribingBy.toString()) !== -1 ) {
-          return res.send({status:1,msg:'User Already Follows'})
-        }
-      })
+      const User = await OrganisationModel.findById(SubscribingTo)
+      if(User.followersList.indexOf(SubscribingBy.toString()) !== -1 ) {
+        return res.json({status:1,msg:'User Already Follows'})
+      }
       
-      OrganisationModel.findByIdAndUpdate(SubscribingTo,{$push: {'followersList' : SubscribingBy}})
-      .then(()=> {
-        return res.send({status:1, msg:'Success'})
-      })
-      .catch (err => {
+      try {
+        await OrganisationModel.findByIdAndUpdate(SubscribingTo,{$push: {'followersList' : SubscribingBy}})
+        return res.json({status:1,msg:'Success'})
+      }catch (err) {
         console.log(err)
-        return res.send({status:0,msg:'Some Error Occured'})
-      })
+        return res.json({status:0,msg:'Some Error Occured'})
+      }
     }else {
-      user.findById(SubscribingTo).then(User => {
-        if(User.followersList.indexOf(SubscribingBy.toString()) !== -1 ) {
-          return res.send({
+      const User = await user.findById(SubscribingTo)
+      if(User.followersList.indexOf(SubscribingBy.toString()) !== -1 ) {
+          return res.json({
             status:1,
             msg:'User Already Follows'
           })
         }
-      })
-      user.findByIdAndUpdate(SubscribingTo,{
-        $push: {
-          'followersList' : SubscribingBy
-        }
-      })
-      .then(()=> {
-        return res.send({
+      
+      try {
+        await user.findByIdAndUpdate(SubscribingTo,{$push: {'followersList' : SubscribingBy}})
+        console.log('Subscribed User Updated')
+        return res.json({
           status:1,
           msg:'Success'
         })
-      })
-      .catch (err => {
+      }catch (err) {
         console.log(err)
         return res.send({
           status:0,
           msg:'Some Error Occured'
-        })
       })
     } 
-    console.log('Subscribed User Updated')
     //END
-  },
+  }
+},
   search: function(req, res) {
     console.log(req.body); // So here we need to fetch data from query instead of body, and then need to return array of result :)
   },

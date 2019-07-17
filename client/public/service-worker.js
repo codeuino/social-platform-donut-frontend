@@ -2,7 +2,6 @@ if (workbox) {
   console.log(`Workbox is loaded`)
 
   workbox.precaching.precacheAndRoute(self.__precacheManifest)
-  console.log('HI HI GHI HIH IHIHIH')
   self.addEventListener('push', event => {
     const data = event.data.json()
     console.log(data.notification)

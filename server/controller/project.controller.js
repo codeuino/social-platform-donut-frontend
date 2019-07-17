@@ -56,7 +56,7 @@ module.exports = {
 
            res.json({Project,status:1})
         } catch (err) {
-            res.status(200).json({err,status:0})
+            res.status(400).json({err,status:0})
         }
     }
 }
