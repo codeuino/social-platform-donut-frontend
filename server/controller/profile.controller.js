@@ -1,8 +1,9 @@
 // status 1 : FOR SUCCESS
 // status 0 :FOR FAIL
 
-
+const Subscription = require('../schema/subscription')
 const user = require('../schema/user.js');
+const OrganisationModel = require('../schema/organisation')
 const proj = require('../schema/project.js');
 const expressValidator = require('express-validator');
 const { check, validationResult } = require('express-validator/check');
@@ -17,6 +18,159 @@ const { check, validationResult } = require('express-validator/check');
 // });
 // var upload = multer({storage: storage});
 module.exports = {
+  addDevice: async function(req,res) {
+      const subscription = req.body // Here it goes subscription obj
+      // We'll check whether subscription exists or not
+      Subscription.findOne({endpoint:subscription.endpoint})
+      .then(sub => {
+          if(sub) {
+            res.json({
+              status:1,
+              msg:'Success'
+            })
+          }else {
+            // Now we have to create new subscription :)
+            Subscription.create(subscription)
+            .then(sub => {
+              console.log(sub)
+              if(req.user.type == 1) {
+                OrganisationModel.findByIdAndUpdate(req.user.id,{
+                  $push:{
+                    'devices' : sub._id,
+                  }
+                }).then(
+                  user=> {
+                    console.log(user)
+                    res.json({
+                      status:1,
+                      msg:'Success'
+                    })
+                  })
+                .catch(err => {
+                  console.log(err)
+                  res.status(400).json({
+                    status:0,
+                    msg: 'Fail'
+                  })
+                }) 
+              }else {
+                // type == individual
+                user.findByIdAndUpdate(req.user.id,{
+                  $push:{
+                    'devices' : sub._id,
+                  }
+                }).then(
+                  user=> {
+                    console.log(user)
+                    res.json({
+                      status:1,
+                      msg:'Success'
+                    })
+                  })
+                .catch(err => {
+                  console.log(err)
+                  res.status(400).json({
+                    status:0,
+                    msg: 'Fail'
+                  })
+                }) 
+              }
+              
+            })
+            
+          }
+        })
+      .catch (err => {
+        console.log(err)
+        res.status(400).json({
+          status:0,
+          msg: 'Fail'
+        })
+      })
+       
+      
+  },
+  follow: async function(req,res) {
+    const SubscribingTo = req.body.user.id // User who's getting a follower
+    const SubscribingBy = req.user.id // User who will subscribe
+    let tempUser
+    let tempOrg
+    // Check if both users are same 
+    if(SubscribingBy===SubscribingTo) {
+      return res.json({
+        status:0,
+        msg: "You can't follow yourself"
+      })
+    }
+    // Now We Must check whether subscribingto is already in the listl, if YES we'll send failure response
+    // First Let's update subscribing user 
+    if(req.user.type === 1 ){
+
+      tempOrg = await OrganisationModel.findById(SubscribingBy)
+      if(tempOrg.followingList.indexOf(SubscribingTo.toString()) !== -1) {
+        return res.send({status:1,msg:'User Already Follows'})
+      }
+      try {
+        await OrganisationModel.findByIdAndUpdate(SubscribingBy,{ $push: {'followingList' : SubscribingTo}})
+      } catch(err) {
+        return res.json({status:0, msg:'Some Error Occured'})
+      }
+    }else {
+      tempUser = await user.findById(SubscribingBy)
+      console.log(tempUser)
+      if(tempUser.followingList.indexOf(SubscribingTo) !==-1 ) {
+        return res.send({status:1, msg:'User Already Follows'})
+      }
+      try {
+        await user.findByIdAndUpdate(SubscribingBy,{$push: {'followingList' : SubscribingTo }})
+      }
+      catch(err) {
+        console.log(err)
+        return res.send({status:0,msg:'Some Error Occured'})
+      }
+    } 
+    console.log('Subscribing User UPDATED')
+    // Now Le'ts update the subscribed user
+    // NOTE: MAKE THIS ASYNC/AWAIT
+    if(req.body.user.type === 1 ){
+      const User = await OrganisationModel.findById(SubscribingTo)
+      if(User.followersList.indexOf(SubscribingBy.toString()) !== -1 ) {
+        return res.json({status:1,msg:'User Already Follows'})
+      }
+      
+      try {
+        await OrganisationModel.findByIdAndUpdate(SubscribingTo,{$push: {'followersList' : SubscribingBy}})
+        return res.json({status:1,msg:'Success'})
+      }catch (err) {
+        console.log(err)
+        return res.json({status:0,msg:'Some Error Occured'})
+      }
+    }else {
+      const User = await user.findById(SubscribingTo)
+      if(User.followersList.indexOf(SubscribingBy.toString()) !== -1 ) {
+          return res.json({
+            status:1,
+            msg:'User Already Follows'
+          })
+        }
+      
+      try {
+        await user.findByIdAndUpdate(SubscribingTo,{$push: {'followersList' : SubscribingBy}})
+        console.log('Subscribed User Updated')
+        return res.json({
+          status:1,
+          msg:'Success'
+        })
+      }catch (err) {
+        console.log(err)
+        return res.send({
+          status:0,
+          msg:'Some Error Occured'
+      })
+    } 
+    //END
+  }
+},
   search: function(req, res) {
     console.log(req.body); // So here we need to fetch data from query instead of body, and then need to return array of result :)
   },

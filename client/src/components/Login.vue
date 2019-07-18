@@ -34,6 +34,10 @@
 
                                 </b-form-group>
 
+                                <b-form-group>
+                                      <b-form-select v-model="type" :options="options"></b-form-select>
+                                </b-form-group>
+
                                 <b-form-group class="text-center mt-5">
                                     <b-button type="submit" :disabled="isdisabled" variant="primary" class="mr-2 btn-lg btn-block">Login</b-button>
                                 </b-form-group>
@@ -52,16 +56,21 @@
 <script>
 import LocationService from '@/services/LocationService'
 import FrontendValidation from '@/services/ValidationService'
-import User from '@/assets/test_data/users'
 import { mapActions } from 'vuex'
+import Subscription from '@/services/Subscription'
 export default {
   data () {
     return {
+      options: [
+        { value: 0, text: 'Individual' },
+        { value: 1, text: 'Organisation' }
+      ],
       form: {
         email: '',
         password: '',
         currentPosition: null
-      }
+      },
+      type: 0
 
     }
   },
@@ -74,19 +83,64 @@ export default {
       e.preventDefault()
       LocationService.getLocation()
         .then((position) => {
-          this.form.currentPosition = position
-          this.$store.state.position = position
+          var pos = {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude
+          }
+          this.form.currentPosition = pos
+          this.$store.state.position = pos
         })
-        .then(() => {
+        .then(async () => {
+          const response = await fetch('http://localhost:3000/auth/login', {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email: this.form.email, pass: this.form.password, type: this.type })
+          })
+          const content = await response.json()
+          try {
+            if (content.status === 0) {
+              this.$router.push({ path: `/login?err=true?msg=${content.error}` })
+            } else {
+              console.log('Login Successful')
+              if ('serviceWorker' in navigator) {
+                console.log('Service worker is there')
+                const sub = await Subscription.createSubscription()
+                const body = JSON.stringify(sub)
+                const response = await fetch('http://localhost:3000/profile/addDevice', {
+                  method: 'POST',
+                  headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': content.token
+                  },
+                  body: body
+                })
+                var resp = await response.json()
+                console.log(resp)
+              } else {
+                console.log('NOOO')
+              }
+              this.addToken({
+                secret_token: content.token
+              })
+              this.addUser(content.user)
+              this.$router.push({ path: `/feed/${content.user._id}` })
+            }
+          } catch (err) {
+            console.log('Network Error')
+          }
+
           // Now we can send form details to and fetch tokens if logged in and then redirect to feed page
           // if login failed use this.$router.push({path: 'welcome', query:{source: 'login' , error:'true'}})
           // We also need to update Last login location !
           // We will also update this.$store.state.userDetails.token and add token in it if successful XD
-          this.addToken({
-            test: 'Test Token'
-          })
-          this.addUser(User)
-          this.$router.push({ path: `/feed/${User.id}` })
+          // this.$router.push({ path: `/feed/${User.id}` })
+        })
+        .catch(() => {
+          alert('Please Connect To internet to login and allow location access for better results')
         })
     }
   },

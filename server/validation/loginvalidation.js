@@ -3,7 +3,7 @@ const isempty=require('./is-empty.js')
 module.exports=function validateRegisterInput(data){
 let error={};
 data.email=!isempty(data.email)?data.email:'';
-data.password=!isempty(data.password)?data.password:'';
+data.password=!isempty(data.pass)?data.pass:'';
 
 
 

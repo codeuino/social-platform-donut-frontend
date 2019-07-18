@@ -4,8 +4,8 @@ var project=new schema({
 pname:{
     type:String
   },
-pid:{
-  type:String
+authorId:{
+  type:schema.Types.ObjectId,
 },
 github:{
   type:String
@@ -13,7 +13,7 @@ github:{
 Lang:{
   type:[String]
 },
-shortDesc:{
+description:{
   type:String
 },
 content:{
@@ -21,15 +21,16 @@ content:{
 },
 upDownVote : {
   type: Map,
-  of:String
+  of:String,
+  default:{}
 },
 createdAt:{
-  type:Date
+  type:String
 },
 image:{
 type:String
 }
 });
 
-const proj=mongoose.model('project',project);
-module.exports=proj
+const ProjectModel=mongoose.model('project',project);
+module.exports= ProjectModel

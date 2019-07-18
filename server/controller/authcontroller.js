@@ -1,74 +1,117 @@
 const User=require('../schema/user.js')
+const Organisation=require('../schema/organisation.js')
 const Social=require('../schema/social.js')
-const commonController=require('./commoncontroller.js')
 const validateRegisterInput=require('../validation/registervalidation.js')
 const validateLoginInput=require('../validation/loginvalidation.js')
 const jwt=require('jsonwebtoken')
+const bcrypt = require('bcrypt')
+const secret ='mySecret'
+const _ =require('lodash')
 module.exports={
     signup:async(req,res)=>{
         const {error,isValid}=validateRegisterInput(req.body);
         if(!isValid)
         {
-        return res.status(400).json(error);
+        return res.status(400).json({error,status: 0});
         }
-
+        let socialId
         const us=await User.findOne({email:req.body.email})
-        console.log(us)
         if(us)
         {
-            res.status(200).json({"error":"User with this email already exist"})
+            res.status(200).json({"error":"User with this email already exist", status: 0})
         }
         else
         {
-            const user=new User()
-            user.fname=req.body.fname;
-            user.lname=req.body.lname;   
-            user.dob=Date.now();
-            user.gender=req.body.gender;
-            user.website=(req.body.website?req.body.website:'')
-            user.username=req.body.username;
-            user.pass=await commonController.hashpassword(req.body.password);
-            user.followingList=[]
-            user.followersList=[]
-            user.email=req.body.email
-            const us=await user.save();
-            console.log(us)
-            res.status(200).json({"success":"Successfully registered"})
+            const social = await new Social(req.body.social)
+            social.save().then((social)=>{
+                socialId = social._id
+            })
+            if(parseInt(req.body.type)===1)
+            {
+                const user = new Organisation()
+                user.type = 1
+                user.name = req.body.name
+                user.adminName = req.body.adminName
+                user.website=(req.body.website?req.body.website:'')
+                user.pass = req.body.pass
+                user.followingList=[]
+                user.followersList=[]
+                user.email=req.body.email
+                user.location = req.body.location
+                user.social = socialId
+                const data=await user.save();
+                res.status(200).json({"success":"Successfully registered", status:1})
+            }
+            else {
+                const user=new User()
+                user.type = 0
+                user.name = req.body.name
+                user.dob=Date(req.body.dob);
+                user.gender=req.body.gender;
+                user.website=(req.body.website?req.body.website:'')
+                user.pass = req.body.pass
+                user.followingList=[]
+                user.followersList=[]
+                user.email=req.body.email
+                user.location = req.body.location
+                user.social = socialId
+                const data=await user.save();
+                res.status(200).json({
+                    "success":"Successfully registered",
+                    status:1
+                })
+            }
+            
         }
     },
 
     login:async(req,res)=>{
         const {error,isValid}=validateLoginInput(req.body);
-        if(!isValid)
-        {
-        return res.status(400).json(error);
-        }
-
-            const us=await User.findOne({email:req.body.email})
-              if(!us)
-              {
-              return  res.status(400).json({err:"USER NOT FOUND"})
-              }
-              else (us)
-              {
-              console.log(typeof(us))
-              console.log(us)
-              const k=JSON.parse(JSON.stringify(us))
-              let res2=await commonController.compare(req.body.password,k.pass)
-                if(res2==false)
-                {
-                    return res.status(400).json({"error":"Wrong password"})
-                }
-                else
-                {
-                    const payload={id:us._id};
-                    const tok=await jwt.sign(payload,secret,{expiresIn:3600})
-                      res.json({
-                        sucess:true,
-                        token:'Bearer '+tok
-                      })
-                }
-            } 
+        if(!isValid) return res.status(400).json({error, status:0});        
+        if(parseInt(req.body.type)===1) {
+                const user = await Organisation.findOne({email:req.body.email})
+                if(!user) return  res.status(400).json({err:"USER NOT FOUND", status : 0})                  
+                else {
+                    try {
+                        var res2 = await bcrypt.compare(req.body.pass,user.pass)
+                        if(res2===false) return res.status(400).json({"error":"Wrong password", status: 0})
+                    } catch (error) {
+                        res.status(400).json({message:'Please Write Password',status:0})
+                    }
+                    const payload={id:user._id,email:user.email,type:1};
+                    const tok=await jwt.sign(payload,secret)
+                    var u = await _.pick(user,['name','_id','type'])
+                    res.json({
+                            status:1,
+                            token:'Bearer  ' + tok,
+                            user:u
+                            })
+                    
+                } 
+            }
+            else {
+                const user=await User.findOne({email:req.body.email})
+                if(!user) return  res.status(400).json({err:"USER NOT FOUND", status : 0})
+                else {
+                    try {
+                        var res2 = await bcrypt.compare(req.body.pass,user.pass)
+                        console.log(res2)
+                        if(res2==false) return res.status(400).json({"error":"Wrong password", status: 0})
+                    } catch (error) {
+                        res.status(400).json({message:'Please Write Password',status:0})
+                    }
+                    const payload={id:user._id,email:user.email,type:0};
+                    const tok=await jwt.sign(payload,secret)
+                    var u = await _.pick(user,['name','_id','type'])
+                    res.json({
+                            status:1,
+                            token:'Bearer ' + tok,
+                            user:u
+                        })
+                    
+                } 
+            }
+            
     }
 
 }
