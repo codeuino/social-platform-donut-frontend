@@ -30,14 +30,22 @@ const UserSchema = new Schema({
     type: String,
     required:true
   },
-  followersList: {
-    type : [Schema.Types.ObjectId],
-    default:[]
-  },
-  followingList: {
-    type : [Schema.Types.ObjectId],
-    default:[]
-  },
+  followersList: [{
+    id:{
+      type:Schema.Types.ObjectId
+    },
+    type:{
+      type:Number
+    }
+  }],
+  followingList: [{
+    id:{
+      type:Schema.Types.ObjectId
+    },
+    type:{
+      type:Number
+    }
+  }],
   devices :{
     type: [Schema.Types.ObjectId],
     default:[]
@@ -80,8 +88,13 @@ const UserSchema = new Schema({
   ],
   Events : [
     {
+      type:String,
+    }
+  ],
+  Projects :[
+    {
       type:Schema.Types.ObjectId,
-      ref:'Event'
+      ref:'project'
     }
   ]
 

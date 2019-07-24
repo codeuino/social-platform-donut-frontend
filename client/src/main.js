@@ -11,7 +11,9 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import '@mdi/font/css/materialdesignicons.css'
 import './registerServiceWorker'
 import '@fortawesome/fontawesome-free/css/all.css'
+import VueSession from 'vue-session'
 Vue.use(VuePlaceAutocomplete)
+Vue.use(VueSession)
 Vue.use(Vuetify, {
   iconfront: 'mdi' || 'fa' || 'fa4'
 })

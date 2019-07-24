@@ -7,6 +7,7 @@
             <b-navbar-nav>
                 <router-link class="text-white" :to="`/dashboard/${id}`"> DashBoard</router-link>
                 <router-link class="text-white ml-2" :to="`/profile/${id}`">Profile</router-link>
+                <router-link class="text-white ml-2" :to="`/events/feed`">Events</router-link>
             </b-navbar-nav>
             <b-navbar-nav class="ml-auto mr-auto">
                 <b-nav-form>
@@ -50,10 +51,10 @@ export default {
   },
   computed: {
     id () {
-      return this.$store.state.userDetails.id
+      return this.$session.get('UserID')
     },
     isLogged () {
-      return this.$store.state.isLogged
+      return this.$session.get('isLogged')
     }
   },
   methods: {

@@ -3,13 +3,14 @@
         <b-container>
             <h1>Create Event</h1>
             <hr>
-            <b-form @submit="addEvent">
+            <b-form @submit="addEvent" enctype='multipart/form-data'>
                 <b-form-group
                 label="Title"
                 >
                     <b-form-input
                     placeholder= "Enter titile of the event"
                     v-model="title"
+                    required
                     ></b-form-input>
                 </b-form-group>
                 <b-form-group
@@ -27,6 +28,7 @@
                         <b-form-input
                         type="date"
                         v-model="date"
+                        required
                         >
                         </b-form-input>
                         </b-form-group>
@@ -37,6 +39,7 @@
                         >
                         <b-form-input
                         type="time"
+                        required
                         v-model="time"
                         >
                         </b-form-input>
@@ -54,7 +57,8 @@
                     label="Phone Number"
                     >
                       <b-form-input
-                      v-model="organiser.phone"
+                      v-model="phone"
+                      required
                       placeholder="Write Phone Number"
                       >
 
@@ -67,7 +71,8 @@
                     >
                       <b-form-input
                       type="email"
-                      v-model="organiser.email"
+                      v-model="email"
+                      required
                       placeholder="Write Email Address"
                       >
 
@@ -75,6 +80,15 @@
                     </b-form-group>
                   </b-col>
                 </b-row>
+                <b-form-group>
+                       <b-form-file
+                        v-model="coverImg"
+                        name='file'
+                        :state="Boolean(coverImg)"
+                        placeholder="Choose a file..."
+                        drop-placeholder="Drop file here..."
+                      ></b-form-file>
+                    </b-form-group>
                 <div class="Submit">
                   <button class="btn-lg btn-primary btn-primary ">Add Event</button>
                 </div>
@@ -84,6 +98,7 @@
 </template>
 
 <script>
+
 import { VueEditor } from 'vue2-editor'
 export default {
   name: 'EventForm',
@@ -96,11 +111,10 @@ export default {
       title: '',
       date: null,
       time: null,
+      coverImg: '',
       location: null,
-      organiser: {
-        phone: '',
-        email: ''
-      },
+      phone: '',
+      email: '',
       customToolbar: [
         ['bold', 'italic', 'underline', 'strike'],
         [{ list: 'ordered' }, { list: 'bullet' }],
@@ -113,9 +127,35 @@ export default {
     }
   },
   methods: {
-    addEvent (e) {
-      console.log(this.description, this.title, this.date, this.time, this.location)
+    async addEvent (e) {
       e.preventDefault()
+
+      const body = {
+        title: this.title,
+        location: this.location,
+        date: this.date,
+        time: this.time,
+        description: this.description,
+        coverImg: this.coverImg,
+        phone: this.phone,
+        email: this.email
+      }
+      const response = await fetch('http://localhost:3000/events/addEvent', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': this.$session.get('token')
+        },
+        body: JSON.stringify(body)
+      })
+      const content = await response.json()
+      console.log(content)
+    }
+  },
+  mounted () {
+    if (!this.$session.exists()) {
+      this.$router.push('/login')
     }
   }
 }

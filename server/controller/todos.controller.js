@@ -118,9 +118,9 @@ module.exports= {
         
     },
     getTodos : async function(req,res) {
+        let todos=[]
         if(req.user.type===1) {
             //it's a org
-            try {
                 OrgModel.findById(req.user.id)
                 .populate('Todos')
                 .exec((err,doc)=> {
@@ -137,17 +137,8 @@ module.exports= {
                         })
                     }
                 })
-                    
-            } catch (err) {
-                console.log(err)
-                res.status(400).json({
-                    status:0,
-                    msg:'Fail To fetch Todo'
-                })
-            }
             
-        } else {
-            try {
+        }else {
                 UserModel.findById(req.user.id)
                 .populate('Todos')
                 .exec(function(err,doc) {
@@ -164,12 +155,7 @@ module.exports= {
                         })
                     }
                 })
-            } catch (err) {
-                res.status(400).json({
-                    status:0,
-                    msg:'Fail To fetch Todo'
-                })
-            }
+            
         }
     }
 }

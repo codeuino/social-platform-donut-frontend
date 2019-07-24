@@ -6,11 +6,17 @@ module.exports ={
     addEvent : async function(req,res) {
         //Note : We have to have validate date, they should be of future XD
         console.log(req.body)
+        console.log(req.file)
         const Venue = {
             location: req.body.location,
-            time: req.body.time
+            time: req.body.time,
+            date:req.body.date
         }
-        const organiserDetails = await JSON.parse(req.body.organiserDetails)   
+        const organiserDetails = {
+            phone:req.body.phone,
+            email:req.body.email
+        }
+        //Add image to mongoose and save filename in events collection
         let event
         try {
             event = await Event.create({
@@ -20,7 +26,8 @@ module.exports ={
                 organiser : req.user.id,
                 description: req.body.description,
                 organiserDetails : organiserDetails,
-                coverImg : req.body.coverImg
+                //NEed to add gridfs to upload image
+                coverImg : ''
             })
         } catch(err) {
             console.log(err)
@@ -263,7 +270,7 @@ module.exports ={
     },
     fetchEvent :async function( req,res) {
         Event.findById(req.body.id)
-        .populate('organiser attendees members')
+        .populate('organiser members')
         .exec((err,doc)=>{
             if(err) return res.status(400).json({status:0,msg:'Failed to fetch event'})
             const eventDetails = _.pick(doc,['venue','status','_id','title','organiser.name','description','organiserDetails','members','attendees'])
@@ -278,9 +285,11 @@ module.exports ={
             Event.find()
             .populate('organiser')
             .exec((err,doc) => {
-                if (err) return res.status(400).json({status:0,msg:'Failed to fetch event'})       
+                if (err) return res.status(400).json({status:0,msg:'Failed to fetch event'})    
+                console.log(doc)   
                 doc.forEach(event => {
-                    var temp = _.pick(event,['venue','status', '._id','title','organiser.name','description','organiserDetails'])
+                    var temp = _.pick(event,['venue','status', '_id','title','description','organiserDetails'])
+                    temp.organiser = event.organiser.name
                     Events.push(temp)
                 } )
                 res.json({

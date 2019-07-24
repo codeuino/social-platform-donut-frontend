@@ -19,7 +19,7 @@
                                     <b-form-select
                                     class="mb-2 mr-sm-2 mb-sm-0"
                                     :value="null"
-                                    v-model="form.type"
+                                    v-model="type"
                                     :options="{ '0': 'Individual', '1': 'Organisation' }"
                                     id="inline-form-custom-select-pref"
                                     required
@@ -35,7 +35,7 @@
                                 >
                                 <b-form-input
                                 size="lg"
-                                v-model="form.email"
+                                v-model="email"
                                 type="email"
                                 placeholder="Enter email"
                                 ></b-form-input>
@@ -50,7 +50,7 @@
                                 >
                                 <b-form-input
                                 size="lg"
-                                v-model="form.name"
+                                v-model="name"
                                 type="text"
                                 placeholder="Enter Name"
                                 ></b-form-input>
@@ -64,7 +64,7 @@
 
                                 <b-form-input
                                 size="lg"
-                                v-model="form.password"
+                                v-model="password"
                                 type="password"
                                 placeholder="Enter Password"
                                 ></b-form-input>
@@ -75,7 +75,7 @@
                                 >
                                 <b-form-input
                                 size="lg"
-                                v-model="form.repassword"
+                                v-model="repassword"
                                 type="password"
                                 placeholder="Re-Enter Password"
                                 ></b-form-input>
@@ -88,7 +88,7 @@
                                 label="Country"
                                 >
                                     <b-form-input
-                                    v-model="form.location.country"
+                                    v-model="location.country"
                                     type="text"
                                     size="lg"
                                     placeholder="Country Name"
@@ -102,7 +102,7 @@
                                 >
                                     <b-form-input
                                     type="text"
-                                    v-model="form.location.city"
+                                    v-model="location.city"
                                     size="lg"
                                     placeholder="City Name"
                                     required
@@ -118,7 +118,7 @@
                                 >
                                     <b-form-input
                                     type="text"
-                                    v-model="form.admin_name"
+                                    v-model="admin_name"
                                     size="lg"
                                     :disabled="!isOrg"
                                     placeholder="Admin's Name"
@@ -138,7 +138,7 @@
                                     :disabled="isOrg"
                                     class="mb-2 mr-sm-2 mb-sm-0"
                                     :value="null"
-                                    v-model="form.gender"
+                                    v-model="gender"
                                     :options="{ 0: 'Male', 1: 'Female',2:'Other' }"
                                     required
                                     >
@@ -153,7 +153,7 @@
                                 >
                                     <b-form-input
                                     type="text"
-                                    v-model="form.social.github"
+                                    v-model="social.github"
                                     size="lg"
                                     required
                                     placeholder="Github Account "
@@ -167,7 +167,7 @@
                                 >
                                     <b-form-input
                                     type="text"
-                                    v-model="form.social.facebook"
+                                    v-model="social.facebook"
                                     size="lg"
                                     placeholder="Facebook Account "
                                     required
@@ -181,7 +181,7 @@
                                 >
                                     <b-form-input
                                     type="text"
-                                    v-model="form.social.twitter"
+                                    v-model="social.twitter"
                                     size="lg"
                                     placeholder="Twitter Account "
                                     required
@@ -208,28 +208,24 @@
 <script>
 import LocationService from '@/services/LocationService'
 import FrontendValidation from '@/services/ValidationService'
-import User from '@/assets/test_data/users'
-import { mapActions } from 'vuex'
 export default {
   data () {
     return {
-      form: {
-        email: '',
-        name: '',
-        password: '',
-        repassword: '',
-        type: null, // 0 for user and 1 for org :)
-        location: {
-          country: '',
-          city: ''
-        },
-        admin_name: '', // only for org type
-        gender: null, // only for user type
-        social: {
-          facebook: null,
-          github: null,
-          twitter: null
-        }
+      email: '',
+      name: '',
+      password: '',
+      repassword: '',
+      type: null, // 0 for user and 1 for org :)
+      location: {
+        country: '',
+        city: ''
+      },
+      admin_name: '', // only for org type
+      gender: null, // only for user type
+      social: {
+        facebook: null,
+        github: null,
+        twitter: null
       }
     }
   },
@@ -237,7 +233,7 @@ export default {
     register (e) {
       LocationService.getLocation()
         .then((position) => {
-          this.form.currentPosition = position
+          this.currentPosition = position
           this.$store.state.position = position
         })
         .then(async () => {
@@ -247,14 +243,15 @@ export default {
               'Accept': 'application/json',
               'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ email: this.form.email, name: this.form.name, password: this.form.password, type: this.form.type, location: this.form.location, adminName: this.form.admin_name, social: this.form.social })
+            body: JSON.stringify({ email: this.email, name: this.name, pass: this.password, type: this.type, location: this.location, adminName: this.admin_name, social: this.social, gender: this.gender })
           })
           const content = await response.json()
+          console.log(content)
           if (parseInt(content.status) === 0) {
-            this.$router.push({ path: `/signup?err=true?msg=${content.err}` })
+            this.$router.push({ path: `/signup?err=true` })
           } else {
             alert('You have signed up successfully, please login.')
-            this.$router.push({ path: `/feed/${content.user._id}` })
+            this.$router.push({ path: `/login` })
           }
         })
       // Now we can send form details to and fetch tokens if logged in and then redirect to feed page
@@ -273,18 +270,16 @@ export default {
   },
   computed: {
     passCheck () {
-      return !FrontendValidation.isSamePassword(this.form.password, this.form.repassword)
+      return !FrontendValidation.isSamePassword(this.password, this.repassword)
     },
     emailCheck () {
-      return FrontendValidation.isValidEmail(this.form.email) || this.form.email.length === 0
+      return FrontendValidation.isValidEmail(this.email) || this.email.length === 0
     },
     isdisabled () {
-      console.log(this.emailCheck)
-      console.log(this.passCheck)
-      return (!(this.emailCheck) && this.passCheck) || this.form.email.length === 0 || this.form.password === 0
+      return (!(this.emailCheck) && this.passCheck) || this.email.length === 0 || this.password === 0
     },
     isOrg () {
-      return parseInt(this.form.type) === 1
+      return parseInt(this.type) === 1
     }
 
   }

@@ -37,6 +37,13 @@ app.use(expressValidator());
 require('./config/local.js')(passport)
 app.use(indexRoutes);
 
+
+
+
+
+
+
+
 app.get('**',(req,res)=>{
   res.status(404).json({status:0})
 });

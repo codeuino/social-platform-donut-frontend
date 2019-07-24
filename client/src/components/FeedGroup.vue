@@ -7,14 +7,12 @@
                 <h4>Please Wait Do not Refresh</h4>
             </div>
             <div v-if="!isloading">
-                <b-row  v-for="(group , index ) in postsGroups" v-bind:key="index">
-                <b-col class="mt-3" cols md="6">
-                    <Post :post="group[0]" />
-                </b-col >
-                <b-col v-if="group[1]" class="mt-3" cols md="6">
-                    <Post  :post="group[1]" />
-                </b-col>
-                </b-row>
+                <b-container>
+                  <div class="feed-group">
+                    <Post v-for="(project, index) in postsArray" v-bind:key="index" :post="project" />
+                  </div>
+                </b-container>
+
             </div>
             </b-container>
         </div>
@@ -38,7 +36,8 @@ export default {
       postsGroups: []
     }
   },
-  created () {
+  mounted () {
+    console.log(this.postsArray)
     var index = 0
     var groups = []
     var group = []
@@ -64,5 +63,10 @@ export default {
 }
 .content-dark {
   background-color: #121212;
+}
+.feed-group {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-gap: 10px;
 }
 </style>

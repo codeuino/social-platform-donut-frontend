@@ -10,16 +10,19 @@
             <v-card v-if="!isloading" :class="$store.state.darkMode ? 'bg-dark p-3 text-white' : 'p-3' ">
                 <v-card-title primary-title>
                 <div>
-                    <h2 class="headline mb-1"><router-link :to="`/post/${Currentpost.pid}`" ><b-navbar-brand  style="font-size:28px;">{{Currentpost.card_title}}</b-navbar-brand></router-link></h2>
+                    <h2 class="headline mb-1"><router-link :to="`/post/${Currentpost._id}`" ><b-navbar-brand  style="font-size:28px;">{{Currentpost.pname}}</b-navbar-brand></router-link></h2>
                     <hr>
-                    <div class="cardText " v-html="Currentpost.card_text"></div>
-                    <div class="my-2 text-right">
-                        <router-link  :to="`/profile/${Currentpost.card_author_id}`">{{Currentpost.card_author}}</router-link>
-                    </div>
+                    <div class="cardText " v-html="Currentpost.description"></div>
+
                 </div>
                 </v-card-title>
+                <v-card-text>
+                  <div class="my-2 text-right">
+                        <router-link  :to="`/profile/${Currentpost.authorId}`">{{Currentpost.authorName}}</router-link>
+                    </div>
+                </v-card-text>
                 <v-img
-                :src="post.card_img"
+                :src="post.image"
                 aspect-ratio="2.75"
                 ></v-img>
 
@@ -60,7 +63,7 @@ export default {
   mounted () {
     this.Currentpost = this.post
     this.isloading = false
-    this.currentUserId = this.$store.state.userDetails.id
+    this.currentUserId = this.$session.get('UserID')
   }
 
 }
@@ -68,7 +71,7 @@ export default {
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
-.cardText > p{
+.cardText {
     word-break: break-all;
 }
 .list-group{

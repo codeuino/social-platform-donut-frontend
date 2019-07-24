@@ -10,7 +10,7 @@
         <NavigationBar  />
         <v-content class="content">
           <router-view></router-view>
-          <Todos v-if="$store.state.isLogged"/>
+          <Todos v-if="$session.get('token')"/>
         </v-content>
       </div>
   </v-app>

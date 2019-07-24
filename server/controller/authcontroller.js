@@ -40,7 +40,7 @@ module.exports={
                 user.location = req.body.location
                 user.social = socialId
                 const data=await user.save();
-                res.status(200).json({"success":"Successfully registered", status:1})
+                res.status(200).json({"success":"Successfully registered", status:1,id:data._id})
             }
             else {
                 const user=new User()
@@ -58,7 +58,8 @@ module.exports={
                 const data=await user.save();
                 res.status(200).json({
                     "success":"Successfully registered",
-                    status:1
+                    status:1,
+                    id:data._id
                 })
             }
             

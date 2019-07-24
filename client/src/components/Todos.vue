@@ -38,17 +38,17 @@ export default {
   },
   async mounted () {
     const response = await fetch('http://localhost:3000/todos/getTodos', {
-      method: 'GET',
+      method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-        'Authorization': this.$store.state.token.secret_token
+        'Authorization': this.$session.get('token')
       }
     })
     const data = await response.json()
     console.log(data)
     if (data.status !== 0) {
-      this.todos = data
+      this.todos = data.todos
     } else {
       console.log('Some Error Occured')
     }
@@ -71,7 +71,7 @@ export default {
           headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'Authorization': this.$store.state.token.secret_token
+            'Authorization': this.$session.get('token')
           },
           body: JSON.stringify(newtodo)
         })

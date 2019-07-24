@@ -19,14 +19,14 @@ const EventSchema = new Schema({
     ],
     venue: {
         location:{
-            latitute : {
-                type:String
-            },
-            longitute: {
-                type:String
-            }
+            type:String,
+            required:true
         },
         time: {
+            type:String,
+            required:true
+        },
+        date: {
             type:String,
             required:true
         }

@@ -26,14 +26,22 @@ const OrgSchema = new Schema({
         type: String,
         required:true
       },
-      followersList: {
-        type : [Schema.Types.ObjectId],
-        default:[]
-      },
-      followingList: {
-        type : [Schema.Types.ObjectId],
-        default:[]
-      },
+      followersList: [{
+        id:{
+          type:Schema.Types.ObjectId
+        },
+        type:{
+          type:Number
+        }
+      }],
+      followingList: [{
+        id:{
+          type:Schema.Types.ObjectId
+        },
+        type:{
+          type:Number
+        }
+      }],
       devices:{
         type : [Schema.Types.ObjectId],
         default:[]
@@ -67,7 +75,13 @@ const OrgSchema = new Schema({
       contributors:{
           type:[String],
           default : []
-      }
+      },
+      Todos: [
+        {
+          type: Schema.Types.ObjectId,
+          ref:'Todo'
+          }
+      ]
 })
 OrgSchema.pre('save', function(next) {
     var user = this;

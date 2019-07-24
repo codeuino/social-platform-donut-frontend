@@ -91,6 +91,7 @@ module.exports = {
       
   },
   follow: async function(req,res) {
+    let returnFLag
     const SubscribingTo = req.body.user.id // User who's getting a follower
     const SubscribingBy = req.user.id // User who will subscribe
     let tempUser
@@ -107,22 +108,33 @@ module.exports = {
     if(req.user.type === 1 ){
 
       tempOrg = await OrganisationModel.findById(SubscribingBy)
-      if(tempOrg.followingList.indexOf(SubscribingTo.toString()) !== -1) {
-        return res.send({status:1,msg:'User Already Follows'})
-      }
+      
+      tempOrg.followingList.forEach(user => {
+        if(user.id == SubscribingTo) {
+          returnFLag = true
+          return res.send({status:1, msg:'User Already Follows'})
+          
+        }
+      })
+      if(returnFLag) return 
       try {
-        await OrganisationModel.findByIdAndUpdate(SubscribingBy,{ $push: {'followingList' : SubscribingTo}})
+        await OrganisationModel.findByIdAndUpdate(SubscribingBy,{ $push: {'followingList' : {id:SubscribingTo,type:req.body.user.type}}})
       } catch(err) {
         return res.json({status:0, msg:'Some Error Occured'})
       }
     }else {
       tempUser = await user.findById(SubscribingBy)
       console.log(tempUser)
-      if(tempUser.followingList.indexOf(SubscribingTo) !==-1 ) {
-        return res.send({status:1, msg:'User Already Follows'})
-      }
+      
+      tempUser.followingList.forEach(user => {
+        if(user.id == SubscribingTo) {
+          returnFLag = true
+          return res.send({status:1, msg:'User Already Follows'})
+        }
+      })
+      if(returnFLag) return
       try {
-        await user.findByIdAndUpdate(SubscribingBy,{$push: {'followingList' : SubscribingTo }})
+        await user.findByIdAndUpdate(SubscribingBy,{$push: {'followingList' :{id:SubscribingTo,type:req.body.user.type} }})
       }
       catch(err) {
         console.log(err)
@@ -134,12 +146,8 @@ module.exports = {
     // NOTE: MAKE THIS ASYNC/AWAIT
     if(req.body.user.type === 1 ){
       const User = await OrganisationModel.findById(SubscribingTo)
-      if(User.followersList.indexOf(SubscribingBy.toString()) !== -1 ) {
-        return res.json({status:1,msg:'User Already Follows'})
-      }
-      
       try {
-        await OrganisationModel.findByIdAndUpdate(SubscribingTo,{$push: {'followersList' : SubscribingBy}})
+        await OrganisationModel.findByIdAndUpdate(SubscribingTo,{$push: {'followersList' : {id:SubscribingBy,type:req.user.type}}})
         return res.json({status:1,msg:'Success'})
       }catch (err) {
         console.log(err)
@@ -147,15 +155,8 @@ module.exports = {
       }
     }else {
       const User = await user.findById(SubscribingTo)
-      if(User.followersList.indexOf(SubscribingBy.toString()) !== -1 ) {
-          return res.json({
-            status:1,
-            msg:'User Already Follows'
-          })
-        }
-      
       try {
-        await user.findByIdAndUpdate(SubscribingTo,{$push: {'followersList' : SubscribingBy}})
+        await user.findByIdAndUpdate(SubscribingTo,{$push: {'followersList' : {id:SubscribingBy,type:req.user.type}}})
         console.log('Subscribed User Updated')
         return res.json({
           status:1,
@@ -238,26 +239,6 @@ module.exports = {
               res.send(e).status(200);
        });
 },
-  upDownVote: function (req,res) {
-    proj.findOne({proid: req.body.project}).then((pro)=>{
-      if(pro.upDownVote.get(req.body.client)){
-          if(pro.upDownVote.get(req.body.client)=="-1"){
-              pro.upDownVote.set(req.body.client,"+1")
-              return pro.save()
-
-          }else{
-              pro.upDownVote.set(req.body.client,"-1")
-              return pro.save()
-
-          }
-      }else{
-          pro.upDownVote.set(req.body.client,req.body.vote)
-          return pro.save()
-      }
-  }).catch((err)=>{
-      return err
-    })
-  }, 
   ch2: function(req, res) {
     res.json({ sign: req.user }); // Main LANDING PAGE , NEW COMMENT => Landing page should be only for organisation which will return portfolio of the org
   },

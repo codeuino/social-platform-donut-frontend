@@ -126,7 +126,12 @@ export default {
               this.addToken({
                 secret_token: content.token
               })
-              this.addUser(content.user)
+              this.$session.start()
+              this.$session.set('token', content.token)
+              this.$session.set('isLogged', true)
+              this.$session.set('User', content.user.name)
+              this.$session.set('UserID', content.user._id)
+              console.log(this.$session.get('User'))
               this.$router.push({ path: `/feed/${content.user._id}` })
             }
           } catch (err) {

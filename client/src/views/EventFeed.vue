@@ -1,116 +1,56 @@
 <template>
     <div class="feed-wrapper">
-        <b-container>
+        <b-container v-if="isLoading">
+            <center><b-spinner style="width: 3rem; height: 3rem;" label="Large Spinner"></b-spinner></center>
+        </b-container>
+        <b-container v-else>
             <h1 class="feed-heading">Events for you</h1>
             <hr>
+            <router-link :to="`/events/create`"><button class="btn btn-primary btn-lg text-white">Create Event</button></router-link>
+            <b-container v-if="events.length===0">
+            <center><h5>0 Events</h5></center>
+            </b-container>
             <div class="feed-content">
-                <div class="event-card">
-                    <span>Thu, 26 July 2018</span>
-                    <h3>Event Name</h3>
-                    <h5>By Organiser Name</h5>
-                    <hr>
-                    <p>
-                    <v-icon class="mr-2">fa-map-marker</v-icon> XYZ Road, Delhi
-                    </p>
-                    <div class="detail-btn bg-primary">
-                        <center>
-                            <button>View</button>
-                        </center>
-                    </div>
-                </div>
-                <div class="event-card">
-                    <span>Thu, 26 July 2018</span>
-                    <h3>Event Name</h3>
-                    <h5>By Organiser Name</h5>
-                    <hr>
-                    <p>
-                    <v-icon class="mr-2">fa-map-marker</v-icon> XYZ Road, Delhi
-                    </p>
-                    <div class="detail-btn bg-primary">
-                        <center>
-                            <button>View</button>
-                        </center>
-                    </div>
-                </div>
-                <div class="event-card">
-                    <span>Thu, 26 July 2018</span>
-                    <h3>Event Name</h3>
-                    <h5>By Organiser Name</h5>
-                    <hr>
-                    <p>
-                    <v-icon class="mr-2">fa-map-marker</v-icon> XYZ Road, Delhi
-                    </p>
-                    <div class="detail-btn bg-primary">
-                        <center>
-                            <button>View</button>
-                        </center>
-                    </div>
-                </div>
-                <div class="event-card">
-                    <span>Thu, 26 July 2018</span>
-                    <h3>Event Name</h3>
-                    <h5>By Organiser Name</h5>
-                    <hr>
-                    <p>
-                    <v-icon class="mr-2">fa-map-marker</v-icon> XYZ Road, Delhi
-                    </p>
-                    <div class="detail-btn bg-primary">
-                        <center>
-                            <button>View</button>
-                        </center>
-                    </div>
-                </div>
-                <div class="event-card">
-                    <span>Thu, 26 July 2018</span>
-                    <h3>Event Name</h3>
-                    <h5>By Organiser Name</h5>
-                    <hr>
-                    <p>
-                    <v-icon class="mr-2">fa-map-marker</v-icon> XYZ Road, Delhi
-                    </p>
-                    <div class="detail-btn bg-primary">
-                        <center>
-                            <button>View</button>
-                        </center>
-                    </div>
-                </div>
-                <div class="event-card">
-                    <span>Thu, 26 July 2018</span>
-                    <h3>Event Name</h3>
-                    <h5>By Organiser Name</h5>
-                    <hr>
-                    <p>
-                    <v-icon class="mr-2">fa-map-marker</v-icon> XYZ Road, Delhi
-                    </p>
-                    <div class="detail-btn bg-primary">
-                        <center>
-                            <button>View</button>
-                        </center>
-                    </div>
-                </div>
-                <div class="event-card">
-                    <span>Thu, 26 July 2018</span>
-                    <h3>Event Name</h3>
-                    <h5>By Organiser Name</h5>
-                    <hr>
-                    <p>
-                    <v-icon class="mr-2">fa-map-marker</v-icon> XYZ Road, Delhi
-                    </p>
-                    <div class="detail-btn bg-primary">
-                        <center>
-                            <button>View</button>
-                        </center>
-                    </div>
-                </div>
-
+                <EventsMiniCard  v-for="(event, index) in events" v-bind:key="index" :event="event"/>
             </div>
         </b-container>
     </div>
 </template>
 
 <script>
+import EventsMiniCard from '@/components/EventsMiniCard.vue'
 export default {
-  name: 'EventFeed'
+  name: 'EventFeed',
+  data () {
+    return {
+      events: [],
+      isLoading: true
+    }
+  },
+  components: {
+    EventsMiniCard
+  },
+  async mounted () {
+    if (!this.$session.exists()) {
+      this.$router.push('/login')
+    }
+    try {
+      const resp = await fetch('http://localhost:3000/events/fetchEvents', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': this.$session.get('token')
+        }
+      })
+      const content = await resp.json()
+
+      this.events = content.events
+    } catch (error) {
+
+    }
+    this.isLoading = false
+  }
 }
 </script>
 
@@ -123,35 +63,5 @@ h1 {
     display: grid;
     grid-template-columns: auto auto auto;
     grid-row-gap: 20px;
-}
-.event-card {
-    position: relative;
-    width: 350px;
-    padding: 5px;
-    border: 1px solid rgb(50, 50, 231);
-    border-radius: 10px;
-    min-height: 250px;
-    max-height: 250px;
-}
-.event-card > h5 {
-    font-weight: 200;
-    font-size: 14px;
-}
-.event-card > p {
-    margin-top: 30px;
-}
-.detail-btn {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    padding: 20px 0;
-    left: 0;
-    color:white;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-}
-.event-card > span {
-    color:grey;
-    font-weight: 900;
 }
 </style>
