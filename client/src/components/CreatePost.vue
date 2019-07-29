@@ -31,12 +31,11 @@
 
                               </b-form-input>
                             </b-form-group>
-                            <b-form-group>
                               <label class="typo__label">Choose Languages</label>
                               <multiselect v-model="newPost.Lang" :options="options" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Pick some" :preselect-first="true">
                                 <template slot="selection" slot-scope="{ values, search, isOpen }"><span class="multiselect__single" v-if="newPost.Lang.length &amp;&amp; !isOpen">{{ newPost.Lang.length }} options selected</span></template>
                               </multiselect>
-                            </b-form-group>
+
                             <b-card-footer class="bg-light text-white mt-2">
                                 <b-row >
                                     <b-col cols="6">
@@ -57,7 +56,7 @@
                     <div class="my-2">
                     <h1>Preview</h1>
                     <br>
-                    <Post v-if="showPreview" v-bind:preview="true" :post="test"/>
+                    <Post v-if="showPreview" v-bind:preview="true" :post="PostTest"/>
                     </div>
                     </b-card>
                 </b-col>
@@ -82,7 +81,7 @@ export default {
   data () {
     return {
       options: [
-        'Vue.JS', 'Node.JS', 'React.JS', 'Python', 'PHP'
+        'Vue.JS', 'Node.JS', 'React.JS', 'Python', 'PHP', 'C++', 'C', 'MongoDB'
       ],
       image: '',
       newPost: {
@@ -106,7 +105,7 @@ export default {
 
       ],
       showPreview: true, // This variable is imp, have a look in Post module doc to understand
-      test: { // This object goes to Post module, we can't send newPost directly to Post module cause first we need to render the file send via form using Reader()
+      PostTest: { // This object goes to Post module, we can't send newPost directly to Post module cause first we need to render the file send via form using Reader()
         pname: '',
         card_text: '',
         card_img: '',
@@ -123,14 +122,14 @@ export default {
   },
   methods: {
     makePreviewPost () {
-      this.test.card_text = this.newPost.content
-      this.test.pname = this.newPost.card_title
-      this.test.description = this.newPost.description
+      this.PostTest.card_text = this.newPost.content
+      this.PostTest.pname = this.newPost.card_title
+      this.PostTest.description = this.newPost.description
       var reader = new FileReader()
       if (this.image) {
         reader.readAsDataURL(this.image)
         reader.addEventListener('loadend', () => {
-          this.test.card_img = reader.result
+          this.PostTest.card_img = reader.result
           this.newPost.card_image = reader.result
         }, false)
       }
@@ -138,10 +137,10 @@ export default {
     reset () {
       this.newPost.card_title = ''
       this.newPost.content = ''
-      this.test.pname = ''
-      this.test.card_text = ''
-      this.test.card_img = ''
-      this.test.description = ''
+      this.PostTest.pname = ''
+      this.PostTest.card_text = ''
+      this.PostTest.card_img = ''
+      this.PostTest.description = ''
     },
     async addPost () {
       console.log(this.$session.get('token'))
@@ -172,6 +171,7 @@ export default {
   }
 }
 </script>
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 
 <style scoped>
 .editor {

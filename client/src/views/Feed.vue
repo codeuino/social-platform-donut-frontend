@@ -8,6 +8,7 @@
         <div :class="$store.state.darkMode ? 'bg-dark' : 'light' ">
             <b-container>
                 <b-button v-b-modal.modal-2  class="bg-primary btn-lg">Create a Post </b-button>
+                <router-link :to="getLikedProjectsLink" ><a href="" class="float-right">Liked Projects</a></router-link>
                 <b-modal size="xl" ok-only ok-variant="secondary" ok-title="Cancel"  id="modal-2"  title="Create A Post">
                     <CreatePost />
                 </b-modal>
@@ -44,6 +45,9 @@ export default {
   computed: {
     Welcome () {
       return 'Welcome, ' + this.$session.get('User')
+    },
+    getLikedProjectsLink () {
+      return `/projects/liked/${this.$session.get('UserID')}`
     }
   },
   async created () {

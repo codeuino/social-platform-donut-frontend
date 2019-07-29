@@ -6,6 +6,12 @@ const OrgSchema = new Schema({
         type: Number,
         required: true
       },
+      googleId:{
+        type:String,
+      },
+      githubId:{
+        type:String
+      },
     name: {
         type: String
       },
@@ -81,6 +87,12 @@ const OrgSchema = new Schema({
           type: Schema.Types.ObjectId,
           ref:'Todo'
           }
+      ],
+      LikedProjects:[
+        {
+          type:Schema.Types.ObjectId,
+          ref:'project'
+        }
       ]
 })
 OrgSchema.pre('save', function(next) {

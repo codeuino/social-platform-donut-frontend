@@ -33,6 +33,7 @@ module.exports = {
             Subscription.create(subscription)
             .then(sub => {
               console.log(sub)
+              // We have to add device id to user
               if(req.user.type == 1) {
                 OrganisationModel.findByIdAndUpdate(req.user.id,{
                   $push:{

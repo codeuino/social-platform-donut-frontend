@@ -1,6 +1,6 @@
 <template>
     <div >
-        <b-navbar v-if="this.isLogged" toggleable="sm" type="dark" variant="dark">
+        <b-navbar v-if="this.$store.state.isLogged" toggleable="sm" type="dark" variant="dark">
             <router-link :to="`/feed/${id}`"><b-navbar-brand >DONUT</b-navbar-brand></router-link>
             <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
             <b-collapse id="nav-collapse" is-nav>
@@ -21,7 +21,7 @@
                 <b-dropdown-item><router-link class="text-dark" :to="`/settings/${id}`">Setting</router-link></b-dropdown-item>
                 <b-dropdown-item><router-link class="text-dark" :to="`/portfolio/${id}`">Portfolio</router-link></b-dropdown-item>
                 <b-dropdown-item @click="toggleView">{{$store.state.darkMode ? 'Disable' : 'Enable'}} Dark Mode</b-dropdown-item>
-                <b-dropdown-item href="/login">Sign Out</b-dropdown-item>
+                <b-dropdown-item @click="SignOut">Sign Out</b-dropdown-item>
                 </b-nav-item-dropdown>
             </b-navbar-nav>
             </b-collapse>
@@ -47,14 +47,12 @@ export default {
   },
   data () {
     return {
+      isLogged: true
     }
   },
   computed: {
     id () {
       return this.$session.get('UserID')
-    },
-    isLogged () {
-      return this.$session.get('isLogged')
     }
   },
   methods: {
@@ -63,6 +61,13 @@ export default {
     }),
     toggleView () {
       this.toggleDarkMode(!this.$store.state.darkMode)
+    },
+    SignOut () {
+      console.log(this.$session.get('isLogged'))
+      this.$session.destroy()
+      console.log(this.$session.get('isLogged'))
+      this.$store.state.isLogged = false
+      this.$router.push('/login')
     }
   }
 

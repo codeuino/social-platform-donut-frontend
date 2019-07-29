@@ -5,8 +5,8 @@
                                 <h5 class="card-head mb-2">
                                     Too Lazy? We got you :)
                                 </h5>
-                                <a href="#" class="btn btn-dark mr-2 p-2 ">Login Using <v-icon class="text-white ml-1"> fab fa-github</v-icon> </a>
-                                <a href="#" class="btn btn-danger mr-2 p-2">Login Using <v-icon class="text-white ml-1"> fab fa-google</v-icon></a>
+                                <!-- <a href="#" class="btn btn-dark mr-2 p-2 ">Login Using <v-icon class="text-white ml-1"> fab fa-github</v-icon> </a> -->
+                                <a href="#" class="btn btn-danger mr-2 p-2" @click="googleLogin">Login Using <v-icon class="text-white ml-1"> fab fa-google</v-icon></a>
                             <h3 class="card-head mt-5">Login</h3>
                             </b-card-header>
                         <b-card-body class="my-3">
@@ -132,6 +132,7 @@ export default {
               this.$session.set('User', content.user.name)
               this.$session.set('UserID', content.user._id)
               console.log(this.$session.get('User'))
+              console.log('hi')
               this.$router.push({ path: `/feed/${content.user._id}` })
             }
           } catch (err) {
@@ -146,6 +147,51 @@ export default {
         })
         .catch(() => {
           alert('Please Connect To internet to login and allow location access for better results')
+        })
+    },
+    googleLogin () {
+      this.$gAuth.signIn()
+        .then(async GoogleUser => {
+          // On success do something, refer to https://developers.google.com/api-client-library/javascript/reference/referencedocs#googleusergetid
+          console.log('user', GoogleUser)
+          // GoogleUser.getId() : Get the user's unique ID string.
+          // GoogleUser.getBasicProfile() : Get the user's basic profile information.
+          // GoogleUser.getAuthResponse() : Get the response object from the user's auth session. access_token and so on
+          this.isSignIn = this.$gAuth.isAuthorized
+          return GoogleUser
+        })
+        .then(GoogleUser => {
+          fetch('http://localhost:3000/auth/googleLogin', {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              email: GoogleUser.w3.U3,
+              googleID: GoogleUser.w3.Eea
+            })
+          }).then(response => {
+            const content = response.json()
+            return content
+          })
+            .then(content => {
+              console.log(content)
+              if (content.status === 1) {
+                this.$session.start()
+                this.$session.set('token', content.token)
+                this.$session.set('isLogged', true)
+                this.$session.set('User', content.user.name)
+                this.$session.set('UserID', content.user._id)
+                console.log(this.$session.get('User'))
+                this.$store.state.isLogged = true
+                this.$router.push({ path: `/feed/${content.user._id}` })
+              }
+            })
+        })
+        .catch(error => {
+          // on fail do something
+          console.log(error)
         })
     }
   },

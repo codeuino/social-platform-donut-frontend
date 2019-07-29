@@ -5,6 +5,7 @@ const path = require('path');
 const cors = require('cors')
 const app = express();
 const cookie = require('cookie-session');
+const GoogleStrategy = require('./config/google')
 const {secret,db, VAPID_KEYS} = require('./config/credential.js');
 const indexRoutes = require('./routes/index.routes');
 const expressValidator = require('express-validator');
@@ -19,6 +20,8 @@ webPush.setVapidDetails('mailto:test@test.com',VAPID_KEYS.Public,VAPID_KEYS.Priv
 app.use(function(req, res, next) {
   next();
 });
+app.use(passport.initialize());
+
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 app.use(methodOverride('_method'));

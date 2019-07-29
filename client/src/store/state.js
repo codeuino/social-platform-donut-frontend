@@ -10,5 +10,6 @@ export default {
   IDofShare: null,
   Portfolio: {},
   darkMode: false,
-  Todos: []
+  Todos: [],
+  temp: {}
 }

@@ -119,6 +119,7 @@ module.exports= {
     },
     getTodos : async function(req,res) {
         let todos=[]
+        console.log(req.user)
         if(req.user.type===1) {
             //it's a org
                 OrgModel.findById(req.user.id)

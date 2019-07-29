@@ -39,6 +39,8 @@ module.exports={
                 user.email=req.body.email
                 user.location = req.body.location
                 user.social = socialId
+                user.googleId = req.body.googleID
+                user.githubId = req.body.githubID
                 const data=await user.save();
                 res.status(200).json({"success":"Successfully registered", status:1,id:data._id})
             }
@@ -55,6 +57,8 @@ module.exports={
                 user.email=req.body.email
                 user.location = req.body.location
                 user.social = socialId
+                user.googleId = req.body.googleID
+                user.githubId = req.body.githubID
                 const data=await user.save();
                 res.status(200).json({
                     "success":"Successfully registered",
@@ -71,24 +75,24 @@ module.exports={
         if(!isValid) return res.status(400).json({error, status:0});        
         if(parseInt(req.body.type)===1) {
                 const user = await Organisation.findOne({email:req.body.email})
-                if(!user) return  res.status(400).json({err:"USER NOT FOUND", status : 0})                  
-                else {
-                    try {
+                if(!user) return  res.status(400).json({err:"USER NOT FOUND", status : 0}) 
+                if(user.googleId!=='' || user.githubId!=='') return res.status({status:0,msg:'Github or Google Account exist, use that!'})                 
+                try {
                         var res2 = await bcrypt.compare(req.body.pass,user.pass)
                         if(res2===false) return res.status(400).json({"error":"Wrong password", status: 0})
-                    } catch (error) {
+                } catch (error) {
                         res.status(400).json({message:'Please Write Password',status:0})
-                    }
-                    const payload={id:user._id,email:user.email,type:1};
-                    const tok=await jwt.sign(payload,secret)
-                    var u = await _.pick(user,['name','_id','type'])
-                    res.json({
-                            status:1,
-                            token:'Bearer  ' + tok,
-                            user:u
-                            })
+                }
+                const payload={id:user._id,email:user.email,type:1};
+                const tok=await jwt.sign(payload,secret)
+                var u = await _.pick(user,['name','_id','type'])
+                res.json({
+                        status:1,
+                        token:'Bearer  ' + tok,
+                        user:u
+                        })
                     
-                } 
+                
             }
             else {
                 const user=await User.findOne({email:req.body.email})

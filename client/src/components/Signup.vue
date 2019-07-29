@@ -1,33 +1,26 @@
 <template>
             <b-container>
+                    <div v-if="isLoading" class="w-100 p-3 bg-light">
+                      <center>
+                          <b-spinner style="width: 3rem; height: 3rem;" label="Large Spinner" ></b-spinner>
+                          <br>
+                          <br>
+                          Please Wait
+                      </center>
+                    </div>
                     <b-card class="shadow-lg">
 
                         <b-card-header class="text-center bg-transparent">
                                 <h5 class="card-head mb-2">
                                     Too Lazy? We got you :)
                                 </h5>
-                                <a href="#" class="btn btn-dark mr-2 p-2 ">Signup Using <v-icon class="text-white ml-1"> fab fa-github</v-icon> </a>
-                                <a href="#" class="btn btn-danger mr-2 p-2">Signup Using <v-icon class="text-white ml-1"> fab fa-google</v-icon></a>
+                                <!-- <a href="#" class="btn btn-dark mr-2 p-2 ">Signup Using <v-icon class="text-white ml-1"> fab fa-github</v-icon> </a> -->
+                                <a href="#" @click="googleSignup" class="btn btn-danger mr-2 p-2">Signup Using <v-icon class="text-white ml-1"> fab fa-google</v-icon></a>
                                 <h2 class="card-head mt-5"> Or Signup</h2>
                         </b-card-header>
 
                         <b-card-body class="my-3">
-                            <b-form @submit="register">
-                                <!-- Account Type -->
-
-                                <b-form-group>
-                                    <b-form-select
-                                    class="mb-2 mr-sm-2 mb-sm-0"
-                                    :value="null"
-                                    v-model="type"
-                                    :options="{ '0': 'Individual', '1': 'Organisation' }"
-                                    id="inline-form-custom-select-pref"
-                                    required
-                                    >
-                                    <option slot="first" :value="null">Choose Account Type...</option>
-                                    </b-form-select>
-                                </b-form-group>
-
+                            <b-form v-if="!isLoading" @submit="register">
                                 <!-- Email -->
 
                                 <b-form-group
@@ -82,114 +75,6 @@
                                 <span v-if="passCheck" class="err">Passwords doesn't match</span>
                                 </b-form-group>
 
-                                <!-- Location -->
-
-                                <b-form-group
-                                label="Country"
-                                >
-                                    <b-form-input
-                                    v-model="location.country"
-                                    type="text"
-                                    size="lg"
-                                    placeholder="Country Name"
-                                    required
-                                    >
-                                    </b-form-input>
-                                </b-form-group>
-
-                                <b-form-group
-                                label="City"
-                                >
-                                    <b-form-input
-                                    type="text"
-                                    v-model="location.city"
-                                    size="lg"
-                                    placeholder="City Name"
-                                    required
-                                    >
-
-                                    </b-form-input>
-                                </b-form-group>
-
-                                <!-- Admin Name -->
-
-                                <b-form-group
-                                label="Admin's Name"
-                                >
-                                    <b-form-input
-                                    type="text"
-                                    v-model="admin_name"
-                                    size="lg"
-                                    :disabled="!isOrg"
-                                    placeholder="Admin's Name"
-                                    required
-                                    >
-
-                                    </b-form-input>
-                                </b-form-group>
-
-                                <!-- Gender -->
-
-                                <b-form-group
-                                label="Gender"
-                                >
-
-                                    <b-form-select
-                                    :disabled="isOrg"
-                                    class="mb-2 mr-sm-2 mb-sm-0"
-                                    :value="null"
-                                    v-model="gender"
-                                    :options="{ 0: 'Male', 1: 'Female',2:'Other' }"
-                                    required
-                                    >
-                                    <option slot="first" :value="null">Gender</option>
-                                    </b-form-select>
-                                </b-form-group>
-
-                                <!-- Social Media Handles -->
-
-                                <b-form-group
-                                label="Github Handle"
-                                >
-                                    <b-form-input
-                                    type="text"
-                                    v-model="social.github"
-                                    size="lg"
-                                    required
-                                    placeholder="Github Account "
-                                    >
-
-                                    </b-form-input>
-                                </b-form-group>
-
-                                <b-form-group
-                                label="Facebook Profile Link"
-                                >
-                                    <b-form-input
-                                    type="text"
-                                    v-model="social.facebook"
-                                    size="lg"
-                                    placeholder="Facebook Account "
-                                    required
-                                    >
-
-                                    </b-form-input>
-                                </b-form-group>
-
-                                <b-form-group
-                                label="Twitter Profile Link"
-                                >
-                                    <b-form-input
-                                    type="text"
-                                    v-model="social.twitter"
-                                    size="lg"
-                                    placeholder="Twitter Account "
-                                    required
-                                    >
-
-                                    </b-form-input>
-                                </b-form-group>
-
                                 <b-form-group class="text-center mt-5">
                                     <b-button type="submit" variant="primary" :disabled="isdisabled" class="mr-2 btn-lg btn-block">Register</b-button>
                                 </b-form-group>
@@ -206,6 +91,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import LocationService from '@/services/LocationService'
 import FrontendValidation from '@/services/ValidationService'
 export default {
@@ -215,44 +101,28 @@ export default {
       name: '',
       password: '',
       repassword: '',
-      type: null, // 0 for user and 1 for org :)
-      location: {
-        country: '',
-        city: ''
-      },
-      admin_name: '', // only for org type
-      gender: null, // only for user type
-      social: {
-        facebook: null,
-        github: null,
-        twitter: null
-      }
+      isLoading: false
     }
   },
   methods: {
+    ...mapActions({
+      addSignupData: 'addSignupData'
+    }),
     register (e) {
+      e.preventDefault()
       LocationService.getLocation()
         .then((position) => {
           this.currentPosition = position
           this.$store.state.position = position
         })
         .then(async () => {
-          const response = await fetch('http://localhost:3000/auth/signup', {
-            method: 'POST',
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ email: this.email, name: this.name, pass: this.password, type: this.type, location: this.location, adminName: this.admin_name, social: this.social, gender: this.gender })
+          this.addSignupData({
+            email: this.email,
+            password: this.password,
+            name: this.name
           })
-          const content = await response.json()
-          console.log(content)
-          if (parseInt(content.status) === 0) {
-            this.$router.push({ path: `/signup?err=true` })
-          } else {
-            alert('You have signed up successfully, please login.')
-            this.$router.push({ path: `/login` })
-          }
+          this.$router.push('/signup/2')
+          // We'll now send this data to register page as redirect!
         })
       // Now we can send form details to and fetch tokens if logged in and then redirect to feed page
       // if login failed use this.$router.push({path: 'welcome', query:{source: 'login' , error:'true'}})
@@ -265,7 +135,30 @@ export default {
       //   this.addUser(User)
       //   this.$router.push({ path: `/feed${User.id}` })
       // })
-      e.preventDefault()
+    },
+    googleSignup () {
+      this.isLoading = true
+      this.$gAuth.signIn()
+        .then(GoogleUser => {
+          // On success do something, refer to https://developers.google.com/api-client-library/javascript/reference/referencedocs#googleusergetid
+          console.log('user', GoogleUser)
+          // GoogleUser.getId() : Get the user's unique ID string.
+          // GoogleUser.getBasicProfile() : Get the user's basic profile information.
+          // GoogleUser.getAuthResponse() : Get the response object from the user's auth session. access_token and so on
+          this.isSignIn = this.$gAuth.isAuthorized
+          this.addSignupData({
+            email: GoogleUser.w3.U3,
+            password: '123345', // for test
+            name: GoogleUser.w3.ig,
+            googleID: GoogleUser.w3.Eea
+          })
+          this.isLoading = false
+          this.$router.push('/signup/2')
+        })
+        .catch(error => {
+          // on fail do something
+          console.log(error)
+        })
     }
   },
   computed: {
@@ -277,9 +170,6 @@ export default {
     },
     isdisabled () {
       return (!(this.emailCheck) && this.passCheck) || this.email.length === 0 || this.password === 0
-    },
-    isOrg () {
-      return parseInt(this.type) === 1
     }
 
   }

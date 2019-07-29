@@ -142,6 +142,19 @@ module.exports = {
         
     },
     upVoteDownVote : async function(req,res) {
+        if(req.user.type === 1) {
+            await org.findByIdAndUpdate(req.user.id,{
+                $push:{
+                    'LikedProjects':req.body.id
+                }
+            })
+        }else {
+            await user.findByIdAndUpdate(req.user.id,{
+                $push:{
+                    'LikedProjects':req.body.id
+                }
+            })
+        }
         console.log(req.body.vote)
         if(req.body.vote== 1 || req.body.vote== -1 || req.body.vote == 0) {
             try {
@@ -166,5 +179,28 @@ module.exports = {
         }
         
         
+    },
+    LikedProjects : async function(req,res){
+        if(req.user.type === 1) {
+            org.findById(req.user.id)
+            .populate('LikedProjects')
+            .exec((err,doc) => {
+                if(err) return res.json({status:0, msg:'Unable to fetch liked projects'})
+                res.json({
+                    status:1,
+                    projects:doc.LikedProjects
+                })
+            })
+        }else {
+            user.findById(req.user.id)
+            .populate('LikedProjects')
+            .exec((err,doc) => {
+                if(err) return res.json({status:0, msg:'Unable to fetch liked projects'})
+                res.json({
+                    status:1,
+                    projects:doc.LikedProjects
+                })
+            })
+        }
     }
 }

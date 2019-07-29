@@ -19,5 +19,8 @@ export default {
   },
   toggleDarkMode: ({ commit }, bool) => {
     commit('toggledarkMode', bool)
+  },
+  addSignupData: ({ commit }, data) => {
+    commit('addSignupCredentials', data)
   }
 }

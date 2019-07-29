@@ -7,4 +7,6 @@ Router.post('/fetchProjects',passport.authenticate('jwt',{session:false}), contr
 Router.post('/fetchProject',passport.authenticate('jwt',{session:false}), controller.fetchProject)
 Router.post('/addComment',passport.authenticate('jwt',{session:false}),controller.addComment)
 Router.post('/addVote',passport.authenticate('jwt',{session:false}),controller.upVoteDownVote)
+Router.post('/LikedProjects',passport.authenticate('jwt',{session:false}),controller.LikedProjects)
+
 module.exports = Router

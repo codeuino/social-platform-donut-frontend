@@ -6,6 +6,12 @@ const UserSchema = new Schema({
     type: Number,
     required: true
   },
+  googleId:{
+    type:String,
+  },
+  githubId:{
+    type:String
+  },
   name: {
     type: String
   },
@@ -92,6 +98,12 @@ const UserSchema = new Schema({
     }
   ],
   Projects :[
+    {
+      type:Schema.Types.ObjectId,
+      ref:'project'
+    }
+  ],
+  LikedProjects:[
     {
       type:Schema.Types.ObjectId,
       ref:'project'

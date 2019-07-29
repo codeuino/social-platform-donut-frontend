@@ -14,6 +14,8 @@ import Home from './views/Home.vue'
 import Event from './views/Event.vue'
 import EventFeed from './views/EventFeed.vue'
 import EventForm from './views/EventForm.vue'
+import Signup2 from './views/CompleteSignup.vue'
+import LikedProjects from './views/LikedProjects.vue'
 
 Vue.use(Router)
 
@@ -36,6 +38,11 @@ export default new Router({
       path: '/signup',
       name: 'Signup',
       component: SignupView
+    },
+    {
+      path: '/signup/2',
+      name: 'Signup2',
+      component: Signup2
     },
     {
       path: '/login',
@@ -91,6 +98,12 @@ export default new Router({
       path: '/events/create',
       name: 'EventForm',
       component: EventForm
+    },
+    {
+      path: '/projects/liked/:id',
+      name: 'LikedProjects',
+      component: LikedProjects
+
     }
   ]
 })
