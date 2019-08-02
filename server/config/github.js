@@ -20,21 +20,7 @@ passport.use(
       callbackURL: '/auth/github/redirect'
     },
     function(ac, re, pro, done) {
-      user.findOne({ Eid: pro.id }).then(function(data) {
-        if (data) {
-          console.log('Already in database');
-          done(null, data);
-        } else {
-          new user({
-            username: pro.username,
-            Eid: pro.id
-          })
-            .save()
-            .then(function(us) {
-              done(null, us);
-            });
-        }
-      });
+      done(null,pro)
     }
   )
 );

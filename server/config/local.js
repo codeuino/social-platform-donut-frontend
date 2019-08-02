@@ -6,7 +6,7 @@ const {secret} = require('../config/credential')
 opts.secretOrKey='mySecret'
 
 module.exports= passport => {
-  passport.use(new JWTStrategy(opts,(token, next) => {
+  passport.use('jwt',new JWTStrategy(opts,(token, next) => {
       try {
         next(null,token)
       } catch (err) {
@@ -14,5 +14,6 @@ module.exports= passport => {
       }
     }
   ))
+  
   
 }

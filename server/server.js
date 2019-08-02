@@ -6,6 +6,7 @@ const cors = require('cors')
 const app = express();
 const cookie = require('cookie-session');
 const GoogleStrategy = require('./config/google')
+const GithubStrategy = require('./config/github')
 const {secret,db, VAPID_KEYS} = require('./config/credential.js');
 const indexRoutes = require('./routes/index.routes');
 const expressValidator = require('express-validator');

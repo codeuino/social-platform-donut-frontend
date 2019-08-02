@@ -11,5 +11,6 @@
 <script>
 export default {
   name: 'IntegrationSettings'
+
 }
 </script>

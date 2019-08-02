@@ -27,14 +27,13 @@ const UserSchema = new Schema({
   },
   gender: {
     type: Number,
-    required:true
   },
   website : {
     type : String
   },
   pass: {
     type: String,
-    required:true
+    // required:true
   },
   followersList: [{
     id:{

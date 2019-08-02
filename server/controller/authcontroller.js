@@ -1,4 +1,5 @@
 const User=require('../schema/user.js')
+const url = require('url');    
 const Organisation=require('../schema/organisation.js')
 const Social=require('../schema/social.js')
 const validateRegisterInput=require('../validation/registervalidation.js')
@@ -7,6 +8,7 @@ const jwt=require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const secret ='mySecret'
 const _ =require('lodash')
+let clientBaseURL = 'http://localhost:8080/feed/'
 module.exports={
     signup:async(req,res)=>{
         const {error,isValid}=validateRegisterInput(req.body);
@@ -90,9 +92,7 @@ module.exports={
                         status:1,
                         token:'Bearer  ' + tok,
                         user:u
-                        })
-                    
-                
+                })
             }
             else {
                 const user=await User.findOne({email:req.body.email})
@@ -117,6 +117,101 @@ module.exports={
                 } 
             }
             
+    },
+    github : async (req,res) => {
+        const data = req.user
+        if(data._json.type=='User') {
+            const user = await User.findOne({email: data._json.email})
+            if(user) {
+                await User.findByIdAndUpdate(user._id,{
+                    $set:{
+                        'githubId': data.id
+                    }
+                })
+                const payload={id:user._id,email:user.email,type:1};
+                const tok=await jwt.sign(payload,secret)
+                var u = await _.pick(user,['name','_id','type'])
+                
+                res.redirect(url.format({
+                    pathname:clientBaseURL+u._id,
+                    query:{
+                        "token":'Bearer  ' +tok,
+                        "name": user.name
+                    }
+                }))
+            }else {
+                const social = await new Social({github:data._json.html_url})
+                social.save().then((social)=>{
+                    socialId = social._id
+                })
+                user = await User.create({
+                    type : 0,
+                    name:data.displayName,
+                    githubId: data.id,
+                    followingList:[],
+                    followersList:[],
+                    email:data._json.email,
+                    location :{ city:data._json.location}
+                })
+                const payload={id:user._id,email:user.email,type:1};
+                const tok=await jwt.sign(payload,secret)
+                var u = await _.pick(user,['name','_id','type'])
+                res.redirect(url.format({
+                    pathname:clientBaseURL+u._id,
+                    query:{
+                        "token":'Bearer  ' +tok,
+                        "name": user.name
+                    }
+                }))
+            }
+        }else {
+            const user = await Organisation.findOne({email: data._json.email})
+            if(user) {
+                await Organisation.findByIdAndUpdate(user._id,{
+                    $set:{
+                        'githubId': data.id
+                    }
+                })
+                const payload={id:user._id,email:user.email,type:1};
+                const tok=await jwt.sign(payload,secret)
+                var u = await _.pick(user,['name','_id','type'])
+                console.log(u._id)
+                console.log(clientBaseURL)
+                console.log(path.resolve(clientBaseURL,u._id))
+                res.redirect(url.format({
+                    pathname:clientBaseURL+u._id,
+                    query:{
+                        "token":'Bearer  ' +tok,
+                        "name": user.name
+                    }
+                }))
+            }else {
+                const social = await new Social({github:data._json.html_url})
+                social.save().then((social)=>{
+                    socialId = social._id
+                })
+                user = await Organisation.create({
+                    type : 0,
+                    name:data.displayName,
+                    adminName: data.username,
+                    githubId: data.id,
+                    followingList:[],
+                    followersList:[],
+                    email:data._json.email,
+                    location :{ city:data._json.location}
+                })
+                const payload={id:user._id,email:user.email,type:1};
+                const tok=await jwt.sign(payload,secret)
+                var u = await _.pick(user,['name','_id','type'])       
+                res.redirect(url.format({
+                    pathname:clientBaseURL+u._id,
+                    query:{
+                        "token":'Bearer  ' +tok,
+                        "name": user.name
+                    }
+                }))
+            }
+        }
     }
 
 }

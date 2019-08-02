@@ -22,6 +22,7 @@
 <script>
 import FeedGroup from '@/components/FeedGroup.vue'
 import UserDetail from '@/components/Userdetail.vue'
+import User from '@/assets/test_data/users'
 export default {
   name: 'ProfileView',
   components: {
@@ -39,7 +40,8 @@ export default {
     }
   },
   mounted () {
-    this.profile.userDetails = this.$store.state.userDetails
+    this.profile.userDetails = User
+    this.profile.posts = User.posts
     this.isloading = false
   },
   methods: {

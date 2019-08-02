@@ -1,6 +1,6 @@
 <template>
     <div >
-        <b-navbar v-if="this.$store.state.isLogged" toggleable="sm" type="dark" variant="dark">
+        <b-navbar v-if="isLogged" toggleable="sm" type="dark" variant="dark">
             <router-link :to="`/feed/${id}`"><b-navbar-brand >DONUT</b-navbar-brand></router-link>
             <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
             <b-collapse id="nav-collapse" is-nav>
@@ -47,12 +47,14 @@ export default {
   },
   data () {
     return {
-      isLogged: true
     }
   },
   computed: {
     id () {
       return this.$session.get('UserID')
+    },
+    isLogged () {
+      return this.$store.state.isLogged
     }
   },
   methods: {
@@ -63,10 +65,8 @@ export default {
       this.toggleDarkMode(!this.$store.state.darkMode)
     },
     SignOut () {
-      console.log(this.$session.get('isLogged'))
-      this.$session.destroy()
-      console.log(this.$session.get('isLogged'))
       this.$store.state.isLogged = false
+      this.$session.destroy()
       this.$router.push('/login')
     }
   }

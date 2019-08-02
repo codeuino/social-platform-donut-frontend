@@ -51,6 +51,15 @@ export default {
     }
   },
   async created () {
+    if (this.$route.query.token) {
+      let query = this.$route.query
+      console.log(query)
+      this.$session.start()
+      await this.$session.set('token', query.token)
+      this.$session.set('isLogged', true)
+      this.$session.set('User', query.name)
+      this.$session.set('UserID', this.$route.params.id)
+    }
     // First we need to check whether the token exist then backedn can check and if some error comes, it will send back to login page
     if (!this.$session.exists()) {
       this.$router.push('/login')
@@ -65,7 +74,11 @@ export default {
     })
     const content = await resp.json()
     console.log(content)
-    this.posts = content.projects
+    if (content.status === 1) {
+      this.posts = content.projects
+    } else {
+      this.$router.push('/login')
+    }
   }
 }
 </script>

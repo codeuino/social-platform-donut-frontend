@@ -1,56 +1,53 @@
 <template>
-            <b-container>
-                    <b-card class="shadow-lg">
-                        <b-card-header class="text-center bg-transparent">
-                                <h5 class="card-head mb-2">
-                                    Too Lazy? We got you :)
-                                </h5>
-                                <!-- <a href="#" class="btn btn-dark mr-2 p-2 ">Login Using <v-icon class="text-white ml-1"> fab fa-github</v-icon> </a> -->
-                                <a href="#" class="btn btn-danger mr-2 p-2" @click="googleLogin">Login Using <v-icon class="text-white ml-1"> fab fa-google</v-icon></a>
-                            <h3 class="card-head mt-5">Login</h3>
-                            </b-card-header>
-                        <b-card-body class="my-3">
-                            <b-form @submit="login">
-                                <b-form-group
-                                label="Email"
-                                >
-                                <b-form-input
-                                size="lg"
-                                v-model="form.email"
-                                type="email"
-                                placeholder="Enter email"
-                                ></b-form-input>
-                                <span v-if="!emailCheck" class="err">Invalid Email</span>
-                                </b-form-group>
-                                <b-form-group
-                                label="Password"
-                                >
-                                <b-form-input
-                                size="lg"
-                                v-model="form.password"
-                                type="password"
-                                placeholder="Enter Password"
-                                ></b-form-input>
+  <b-container>
+    <b-card class="shadow-lg">
+      <b-card-header class="text-center bg-transparent">
+        <h5 class="card-head mb-2">Too Lazy? We got you :)</h5>
+        <a href="http://localhost:3000/auth/github" class="btn btn-dark mr-2 p-2 ">Login Using <v-icon class="text-white ml-1"> fab fa-github</v-icon> </a>
+        <a href="#" class="btn btn-danger mr-2 p-2" @click="googleLogin">
+          Login Using
+          <v-icon class="text-white ml-1">fab fa-google</v-icon>
+        </a>
+        <h3 class="card-head mt-5">Login</h3>
+      </b-card-header>
+      <b-card-body class="my-3">
+        <b-form @submit="login">
+          <b-form-group label="Email">
+            <b-form-input size="lg" v-model="form.email" type="email" placeholder="Enter email"></b-form-input>
+            <span v-if="!emailCheck" class="err">Invalid Email</span>
+          </b-form-group>
+          <b-form-group label="Password">
+            <b-form-input
+              size="lg"
+              v-model="form.password"
+              type="password"
+              placeholder="Enter Password"
+            ></b-form-input>
+          </b-form-group>
 
-                                </b-form-group>
+          <b-form-group>
+            <b-form-select v-model="type" :options="options"></b-form-select>
+          </b-form-group>
 
-                                <b-form-group>
-                                      <b-form-select v-model="type" :options="options"></b-form-select>
-                                </b-form-group>
+          <b-form-group class="text-center mt-5">
+            <b-button
+              type="submit"
+              :disabled="isdisabled"
+              variant="primary"
+              class="mr-2 btn-lg btn-block"
+            >Login</b-button>
+          </b-form-group>
 
-                                <b-form-group class="text-center mt-5">
-                                    <b-button type="submit" :disabled="isdisabled" variant="primary" class="mr-2 btn-lg btn-block">Login</b-button>
-                                </b-form-group>
-
-                                <b-form-group class="text-right">
-                                    <div>
-                                        Not a member? <a href="/signup">Click Here</a>
-                                    </div>
-                                </b-form-group>
-                            </b-form>
-                        </b-card-body>
-                    </b-card>
-            </b-container>
+          <b-form-group class="text-right">
+            <div>
+              Not a member?
+              <a href="/signup">Click Here</a>
+            </div>
+          </b-form-group>
+        </b-form>
+      </b-card-body>
+    </b-card>
+  </b-container>
 </template>
 
 <script>
@@ -71,7 +68,6 @@ export default {
         currentPosition: null
       },
       type: 0
-
     }
   },
   methods: {
@@ -82,7 +78,7 @@ export default {
     login (e) {
       e.preventDefault()
       LocationService.getLocation()
-        .then((position) => {
+        .then(position => {
           var pos = {
             latitude: position.coords.latitude,
             longitude: position.coords.longitude
@@ -94,30 +90,39 @@ export default {
           const response = await fetch('http://localhost:3000/auth/login', {
             method: 'POST',
             headers: {
-              'Accept': 'application/json',
+              Accept: 'application/json',
               'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ email: this.form.email, pass: this.form.password, type: this.type })
+            body: JSON.stringify({
+              email: this.form.email,
+              pass: this.form.password,
+              type: this.type
+            })
           })
           const content = await response.json()
           try {
             if (content.status === 0) {
-              this.$router.push({ path: `/login?err=true?msg=${content.error}` })
+              this.$router.push({
+                path: `/login?err=true?msg=${content.error}`
+              })
             } else {
               console.log('Login Successful')
               if ('serviceWorker' in navigator) {
                 console.log('Service worker is there')
                 const sub = await Subscription.createSubscription()
                 const body = JSON.stringify(sub)
-                const response = await fetch('http://localhost:3000/profile/addDevice', {
-                  method: 'POST',
-                  headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'Authorization': content.token
-                  },
-                  body: body
-                })
+                const response = await fetch(
+                  'http://localhost:3000/profile/addDevice',
+                  {
+                    method: 'POST',
+                    headers: {
+                      Accept: 'application/json',
+                      'Content-Type': 'application/json',
+                      Authorization: content.token
+                    },
+                    body: body
+                  }
+                )
                 var resp = await response.json()
                 console.log(resp)
               } else {
@@ -129,6 +134,7 @@ export default {
               this.$session.start()
               this.$session.set('token', content.token)
               this.$session.set('isLogged', true)
+              this.$store.state.isLogged = true
               this.$session.set('User', content.user.name)
               this.$session.set('UserID', content.user._id)
               console.log(this.$session.get('User'))
@@ -146,11 +152,14 @@ export default {
           // this.$router.push({ path: `/feed/${User.id}` })
         })
         .catch(() => {
-          alert('Please Connect To internet to login and allow location access for better results')
+          alert(
+            'Please Connect To internet to login and allow location access for better results'
+          )
         })
     },
     googleLogin () {
-      this.$gAuth.signIn()
+      this.$gAuth
+        .signIn()
         .then(async GoogleUser => {
           // On success do something, refer to https://developers.google.com/api-client-library/javascript/reference/referencedocs#googleusergetid
           console.log('user', GoogleUser)
@@ -164,27 +173,27 @@ export default {
           fetch('http://localhost:3000/auth/googleLogin', {
             method: 'POST',
             headers: {
-              'Accept': 'application/json',
+              Accept: 'application/json',
               'Content-Type': 'application/json'
             },
             body: JSON.stringify({
               email: GoogleUser.w3.U3,
               googleID: GoogleUser.w3.Eea
             })
-          }).then(response => {
-            const content = response.json()
-            return content
           })
+            .then(response => {
+              const content = response.json()
+              return content
+            })
             .then(content => {
               console.log(content)
               if (content.status === 1) {
                 this.$session.start()
                 this.$session.set('token', content.token)
-                this.$session.set('isLogged', true)
+                this.$store.state.isLogged = true
                 this.$session.set('User', content.user.name)
                 this.$session.set('UserID', content.user._id)
                 console.log(this.$session.get('User'))
-                this.$store.state.isLogged = true
                 this.$router.push({ path: `/feed/${content.user._id}` })
               }
             })
@@ -197,25 +206,25 @@ export default {
   },
   computed: {
     emailCheck () {
-      return FrontendValidation.isValidEmail(this.form.email) || this.form.email.length === 0
+      return (
+        FrontendValidation.isValidEmail(this.form.email) ||
+        this.form.email.length === 0
+      )
     },
     isdisabled () {
       return !this.emailCheck || this.form.email.length === 0
     }
-
   }
 }
 </script>
 
 <style scoped>
 .container {
-    max-width: 600px;
-    position: relative;
-    top:70px;
-
+  max-width: 600px;
+  position: relative;
+  top: 70px;
 }
 .err {
-    color: red;
-
+  color: red;
 }
 </style>

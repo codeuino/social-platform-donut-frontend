@@ -29,15 +29,9 @@ route.post('/googleLogin',url,async (req,res)=>{
           const payload={id:user._id,email:user.email,type:user.type};
           const tok=await jwt.sign(payload,secret)
           var u = await _.pick(user,['name','_id','type'])
-          res.json({
-                  status:1,
-                  token:'Bearer  ' + tok,
-                  user:u
-                  })
+          res.json({status:1,token:'Bearer  ' + tok,user:u})
         }else {
-          res.json({
-            status:0,
-          })
+          res.json({status:0})
         }
       }
     }else{
@@ -56,9 +50,7 @@ route.post('/googleLogin',url,async (req,res)=>{
   
 })
 route.get('/github', passport.authenticate('github'));
-route.get('/github/redirect', passport.authenticate('github'), function(req,res){
-  res.redirect('/profile/profile/:id');
-});
+route.get('/github/redirect', passport.authenticate('github'), Authcontroller.github);
 
 route.get('/facebook', passport.authenticate('facebook'));
 

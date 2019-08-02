@@ -14,7 +14,7 @@
                                 <h5 class="card-head mb-2">
                                     Too Lazy? We got you :)
                                 </h5>
-                                <!-- <a href="#" class="btn btn-dark mr-2 p-2 ">Signup Using <v-icon class="text-white ml-1"> fab fa-github</v-icon> </a> -->
+                                <a href="http://localhost:3000/auth/github" class="btn btn-dark mr-2 p-2 " @click="githubLogin">Signup Using <v-icon class="text-white ml-1"> fab fa-github</v-icon> </a>
                                 <a href="#" @click="googleSignup" class="btn btn-danger mr-2 p-2">Signup Using <v-icon class="text-white ml-1"> fab fa-google</v-icon></a>
                                 <h2 class="card-head mt-5"> Or Signup</h2>
                         </b-card-header>
@@ -159,6 +159,9 @@ export default {
           // on fail do something
           console.log(error)
         })
+    },
+    githubLogin () {
+      console.log('Logging with github')
     }
   },
   computed: {
