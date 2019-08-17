@@ -70,7 +70,7 @@ export default {
     if (!this.$session.exists()) {
       this.$router.push('/login')
     }
-    const resp = await fetch('http://localhost:3000/fetchFeed', {
+    const resp = await fetch(this.$store.state.BaseURL + '/fetchFeed', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',

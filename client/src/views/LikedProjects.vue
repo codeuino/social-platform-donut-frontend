@@ -22,7 +22,7 @@ export default {
     }
   },
   async mounted () {
-    const response = await fetch('http://localhost:3000/projects/LikedProjects', {
+    const response = await fetch(this.$store.state.BaseURL + '/projects/LikedProjects', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',

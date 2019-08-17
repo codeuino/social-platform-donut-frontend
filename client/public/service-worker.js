@@ -3,7 +3,6 @@ if (workbox) {
 
   workbox.precaching.precacheAndRoute(self.__precacheManifest)
   self.addEventListener('push', event => {
-    console.log('HI')
     const data = event.data.json()
     console.log(data.notification)
     self.registration.showNotification(data.notification.title, {

@@ -33,7 +33,7 @@ export default {
       this.$router.push('/login')
     }
     try {
-      const resp = await fetch('http://localhost:3000/events/fetchEvents', {
+      const resp = await fetch(this.$store.state.BaseURL + '/events/fetchEvents', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',

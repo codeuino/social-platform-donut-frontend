@@ -3,7 +3,7 @@
     <b-card class="shadow-lg">
       <b-card-header class="text-center bg-transparent">
         <h5 class="card-head mb-2">Too Lazy? We got you :)</h5>
-        <a href="http://localhost:3000/auth/github" class="btn btn-dark mr-2 p-2 ">Login Using <v-icon class="text-white ml-1"> fab fa-github</v-icon> </a>
+        <a :href="this.$store.state.BaseURL +'/auth/github'" class="btn btn-dark mr-2 p-2 ">Login Using <v-icon class="text-white ml-1"> fab fa-github</v-icon> </a>
         <a href="#" class="btn btn-danger mr-2 p-2" @click="googleLogin">
           Login Using
           <v-icon class="text-white ml-1">fab fa-google</v-icon>
@@ -87,7 +87,7 @@ export default {
           this.$store.state.position = pos
         })
         .then(async () => {
-          const response = await fetch('http://localhost:3000/auth/login', {
+          const response = await fetch(this.$store.state.BaseURL + '/auth/login', {
             method: 'POST',
             headers: {
               Accept: 'application/json',
@@ -113,7 +113,7 @@ export default {
                 const sub = await Subscription.createSubscription()
                 const body = JSON.stringify(sub)
                 const response = await fetch(
-                  'http://localhost:3000/profile/addDevice',
+                  this.$store.state.BaseURL + '/profile/addDevice',
                   {
                     method: 'POST',
                     headers: {
@@ -173,7 +173,7 @@ export default {
           return GoogleUser
         })
         .then(GoogleUser => {
-          fetch('http://localhost:3000/auth/googleLogin', {
+          fetch(this.$store.state.BaseURL + '/auth/googleLogin', {
             method: 'POST',
             headers: {
               Accept: 'application/json',

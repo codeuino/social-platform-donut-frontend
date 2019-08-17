@@ -52,7 +52,7 @@ export default {
   },
   async created () {
     Authenticate.Authenticate(this)
-    let response = await fetch('http://localhost:3000/profile/getProfile', {
+    let response = await fetch(this.$store.state.BaseURL + '/profile/getProfile', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',

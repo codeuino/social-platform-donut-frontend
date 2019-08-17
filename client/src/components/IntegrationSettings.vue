@@ -65,7 +65,7 @@ export default {
   },
   name: 'IntegrationSettings',
   async created () {
-    const response = await fetch('http://localhost:3000/profile/getDetails', {
+    const response = await fetch(this.$store.state.BaseURL + '/profile/getDetails', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -120,7 +120,7 @@ export default {
           github: this.selectedRepos[i].url
         }
         console.log(Project)
-        const respProject = await fetch('http://localhost:3000/projects/addProject',
+        const respProject = await fetch(this.$store.state.BaseURL + '/projects/addProject',
           {
             method: 'POST',
             headers: {
@@ -130,7 +130,11 @@ export default {
             },
             body: JSON.stringify(Project)
           })
-        const content = await respProject.json()
+        if (respProject.status === 200) {
+          alert('Projects Added')
+        } else {
+          alert('Failed to add projects')
+        }
         this.isLoading = false
       }
     }

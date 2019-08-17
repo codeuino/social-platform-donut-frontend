@@ -156,7 +156,7 @@ export default {
         phone: this.phone,
         email: this.email
       }
-      const response = await fetch('http://localhost:3000/events/addEvent', {
+      const response = await fetch(this.$store.state.BaseURL + '/events/addEvent', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',

@@ -116,7 +116,7 @@ export default {
   },
   methods: {
     async attendEvent () {
-      const resp = await fetch('http://localhost:3000/events/attendEvent', {
+      const resp = await fetch(this.$store.state.BaseURL + '/events/attendEvent', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -134,7 +134,7 @@ export default {
   },
   async mounted () {
     Authenticate.Authenticate(this)
-    const resp = await fetch('http://localhost:3000/events/fetchEvent', {
+    const resp = await fetch(this.$store.state.BaseURL + '/events/fetchEvent', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',

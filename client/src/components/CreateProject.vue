@@ -81,7 +81,7 @@ export default {
   data () {
     return {
       options: [
-        'Vue.JS', 'Node.JS', 'React.JS', 'Python', 'PHP', 'C++', 'C', 'MongoDB'
+        'Vue.JS', 'Node.JS', 'React.JS', 'Python', 'PHP', 'C++', 'C', 'MongoDB', 'MYSQL', 'Angular', 'Ruby On Rails', 'HTML', 'Scala', 'Django', 'Flask', 'Java', 'OpenCV', 'Bash'
       ],
       image: '',
       newPost: {
@@ -145,7 +145,7 @@ export default {
     },
     async addPost () {
       // Here we will send to backend
-      const response = await fetch('http://localhost:3000/projects/addProject',
+      const response = await fetch(this.$store.state.BaseURL + '/projects/addProject',
         {
           method: 'POST',
           headers: {

@@ -11,5 +11,7 @@ export default {
   Portfolio: {},
   darkMode: false,
   Todos: [],
-  temp: {}
+  temp: {},
+  // On deployment make sure you change this accordingly
+  BaseURL: 'http://localhost:3000'
 }

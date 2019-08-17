@@ -158,7 +158,7 @@ export default {
           // User now dislikes the post and we should send this to
           this.isThumbsUpActive = false
           this.isThumbsDownActive = true
-          const resp = await fetch('http://localhost:3000/projects/addVote', {
+          const resp = await fetch(this.$store.state.BaseURL + '/projects/addVote', {
             method: 'POST',
             headers: {
               'Accept': 'application/json',
@@ -194,7 +194,7 @@ export default {
           date: today.getFullYear() + '/' + (today.getMonth() + 1) + '/' + today.getDate(),
           uuid: uuid.v4()
         }
-        const resp = await fetch('http://localhost:3000/projects/addComment', {
+        const resp = await fetch(this.$store.state.BaseURL + '/projects/addComment', {
           method: 'POST',
           headers: {
             'Accept': 'application/json',
@@ -221,7 +221,7 @@ export default {
     if (!this.$session.exists()) {
       this.$router.push('/login')
     }
-    const response = await fetch('http://localhost:3000/projects/fetchProject',
+    const response = await fetch(this.$store.state.BaseURL + '/projects/fetchProject',
       {
         method: 'POST',
         headers: {

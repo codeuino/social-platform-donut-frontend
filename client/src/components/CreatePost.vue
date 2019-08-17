@@ -73,7 +73,7 @@ export default {
   methods: {
     async addPost (e) {
       e.preventDefault()
-      const response = await fetch('http://localhost:3000/posts/add',
+      const response = await fetch(this.$store.state.BaseURL + '/posts/add',
         {
           method: 'POST',
           headers: {

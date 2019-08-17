@@ -118,7 +118,7 @@ export default {
           this.isThumbsUpActive = false
           this.isThumbsDownActive = false
           // Here he undo his/her like, so now value to be null and sends to backend
-          const resp = await fetch('http://localhost:3000/projects/addVote', {
+          const resp = await fetch(this.$store.state.BaseURL + '/projects/addVote', {
             method: 'POST',
             headers: {
               'Accept': 'application/json',
@@ -138,7 +138,7 @@ export default {
           this.isThumbsUpActive = true
           this.isThumbsDownActive = false
           // He now likes the post and we should send this to backend
-          const resp = await fetch('http://localhost:3000/projects/addVote', {
+          const resp = await fetch(this.$store.state.BaseURL + '/projects/addVote', {
             method: 'POST',
             headers: {
               'Accept': 'application/json',
@@ -161,7 +161,7 @@ export default {
           this.isThumbsUpActive = false
           this.isThumbsDownActive = false
           // Here he undo his/her dislike, so now value to be null or we can just remove user from map and sends to backend
-          const resp = await fetch('http://localhost:3000/projects/addVote', {
+          const resp = await fetch(this.$store.state.BaseURL + '/projects/addVote', {
             method: 'POST',
             headers: {
               'Accept': 'application/json',
@@ -181,7 +181,7 @@ export default {
           // User now dislikes the post and we should send this to
           this.isThumbsUpActive = false
           this.isThumbsDownActive = true
-          const resp = await fetch('http://localhost:3000/projects/addVote', {
+          const resp = await fetch(this.$store.state.BaseURL + '/projects/addVote', {
             method: 'POST',
             headers: {
               'Accept': 'application/json',
@@ -214,7 +214,7 @@ export default {
           date: today.getFullYear() + '/' + (today.getMonth() + 1) + '/' + today.getDate(),
           uuid: uuid.v4()
         }
-        const resp = await fetch('http://localhost:3000/projects/addComment', {
+        const resp = await fetch(this.$store.state.BaseURL + '/projects/addComment', {
           method: 'POST',
           headers: {
             'Accept': 'application/json',

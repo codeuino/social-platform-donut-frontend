@@ -156,7 +156,7 @@ export default {
       const name = this.$store.state.temp.name
       let googleID = this.$store.state.temp.googleID ? this.$store.state.temp.googleID : ''
       let githubID = this.$store.state.temp.githubID ? this.$store.state.temp.githubID : ''
-      const response = await fetch('http://localhost:3000/auth/signup', {
+      const response = await fetch(this.$store.state.BaseURL + '/auth/signup', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
