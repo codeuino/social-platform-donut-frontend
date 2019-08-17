@@ -1,6 +1,8 @@
 const Posts=require('../schema/posts')
 const {MongoClient,ObjectId}=require('mongodb')
 const {MongoCron}= require('mongodb-cron');
+const org = require('../schema/organisation')
+const user = require('../schema/user')
 const url=require('../config/credential').db
 MongoClient.connect(url,{useNewUrlParser:true}).then((mongo)=>{
     const db= mongo.db('donut')
@@ -25,15 +27,34 @@ module.exports={
     //Adding posts to collection
    add: async(req,res)=>{
        const post=new Posts()
-       console.log(req.body)
        //Setting parameteres of body to posts
        for(x in req.body)
        {
            post[x]=req.body[x]
        }
-       //Saving posts inside collection
-        const pst=await post.save()
-        res.status(200).json({"success":"Successfully entered"})
+       let authorName
+        try {
+            if(req.user.type===1){
+                const User = await org.findById(req.user.id)
+                authorName = User.name
+                post.userName = authorName
+                post.user = req.user.id
+            }else {
+                const User = await user.findById(req.user.id)
+                authorName = User.name
+                post.userName = authorName
+                post.user = req.user.id
+            }
+            
+            const pst=await post.save()
+            res.status(200).json({"success":"Successfully entered"})
+        } catch (error) {
+            console.log(error)
+            return res.status(400).json({
+                status:0
+            })
+        }
+       
     },
     //Deleting Posts
     delete:async(req,res)=>{

@@ -77,6 +77,10 @@ const UserSchema = new Schema({
       type:String
     }
   },
+  navbarName: {
+    type:String,
+    default:'Donut'
+  },
   social:{
     type:Schema.Types.ObjectId,
     ref:'social'

@@ -12,13 +12,25 @@ module.exports ={
             time: req.body.time,
             date:req.body.date
         }
-        const organiserDetails = {
-            phone:req.body.phone,
-            email:req.body.email
+        let user
+        if(req.user.type === 1) {
+            user = await Organisation.findById(req.user.id)   
+        }else {
+            user = await User.findById(req.user.id)
         }
+        let organiserDetails = {
+            phone:req.body.phone,
+            email:req.body.email,
+            Type: req.user.type,
+            id:req.user.id,
+            name: user.name
+        }
+        
         //Add image to mongoose and save filename in events collection
         let event
+
         try {
+            console.log('hi')
             event = await Event.create({
                 members:[req.user.id],
                 title: req.body.title,
@@ -26,9 +38,11 @@ module.exports ={
                 organiser : req.user.id,
                 description: req.body.description,
                 organiserDetails : organiserDetails,
+                attendees:[req.user.id],
                 //NEed to add gridfs to upload image
                 coverImg : ''
             })
+            console.log(event)
         } catch(err) {
             console.log(err)
             res.status(400).json({
@@ -36,7 +50,7 @@ module.exports ={
                 msg:'Failed to add event'
             })
         }
-        
+        console.log(event)
         if(req.user.type ===1) {
             try {
                 const  user = await Organisation.findByIdAndUpdate(req.user.id,{
@@ -47,7 +61,7 @@ module.exports ={
                 res.json({
                     status:1,
                     msg:'Success',
-                    event:event
+                    event:event._id
                 })
             } catch (err) {
                 console.log(err)
@@ -60,7 +74,7 @@ module.exports ={
             try {
                 const  user = await User.findByIdAndUpdate(req.user.id,{
                     $push : {
-                        'Events': event
+                        'Events': event._id
                     }
                 })
                 res.json({
@@ -269,34 +283,33 @@ module.exports ={
         }
     },
     fetchEvent :async function( req,res) {
-        Event.findById(req.body.id)
-        .populate('organiser members')
-        .exec((err,doc)=>{
-            if(err) return res.status(400).json({status:0,msg:'Failed to fetch event'})
-            const eventDetails = _.pick(doc,['venue','status','_id','title','organiser.name','description','organiserDetails','members','attendees'])
-            res.json({
-                status:1,
-                event:eventDetails
+        const event = await Event.findById(req.body.id)
+        if(!event) {
+            res.status(400).json({
+                msg: "Event doesn't exist"
             })
-        }) 
+        }else {
+            res.status(200).json({
+                event
+            })
+        }
+         
     },
     fetchEvents : async function(req,res) {
-            let Events=[]
-            Event.find()
-            .populate('organiser')
-            .exec((err,doc) => {
-                if (err) return res.status(400).json({status:0,msg:'Failed to fetch event'})    
-                console.log(doc)   
-                doc.forEach(event => {
-                    var temp = _.pick(event,['venue','status', '_id','title','description','organiserDetails'])
-                    temp.organiser = event.organiser.name
-                    Events.push(temp)
-                } )
-                res.json({
-                    status:1,
-                    events:Events
-                })
-            })      
+        try {
+            var events = await Event.find({}).sort({createdAt:-1})
+        res.json({
+            status:1,
+            events:events
+        })
+        }catch(err) {
+            console.log(err)
+            res.json({
+                status:0,
+                msg:'Unable To Fetch Events'
+            })
+        }
+        
     },
     attendEvent : async function(req,res) {
         try {

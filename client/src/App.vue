@@ -10,7 +10,6 @@
         <NavigationBar  />
         <v-content class="content">
           <router-view></router-view>
-          <Todos v-if="$store.state.isLogged"/>
         </v-content>
       </div>
   </v-app>
@@ -32,6 +31,7 @@ export default {
   mounted () {
   },
   computed: {
+
   },
   created () {
     window.addEventListener('offline', function (e) {

@@ -32,9 +32,11 @@ const passport=require('passport');
 
 // route.get('/setting', url, profileController.setting);
 
-// route.get('/getDetails', url, profileController.getDetails);
+route.post('/getDetails', passport.authenticate('jwt',{session:false}), profileController.getDetails);
 
 // route.post('/updateDetails', jsonParser, profileController.updateDetails);
+
 route.post('/follow', passport.authenticate('jwt',{session:false}), profileController.follow)
 route.post('/addDevice', passport.authenticate('jwt',{session:false}), profileController.addDevice)
+route.post('/getProfile',passport.authenticate('jwt',{session:false}),profileController.getProfile)
 module.exports = route;

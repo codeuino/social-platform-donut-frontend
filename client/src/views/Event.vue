@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="wrapper">
     <b-container v-if="isLoading">
         <center><b-spinner style="width: 3rem; height: 3rem;" label="Large Spinner"></b-spinner></center>
     </b-container>
@@ -93,6 +93,8 @@
 import Authenticate from '@/services/Auth'
 export default {
   name: 'Event',
+  components: {
+  },
   data () {
     return {
       title: 'EVENT NAME',
@@ -145,9 +147,10 @@ export default {
     })
     const content = await resp.json()
     console.log(content)
+    console.log('hi')
     this.title = content.event.title
     this.description = content.event.description
-    this.organiser = content.event.organiser.name
+    this.organiser = content.event.organiserDetails.name
     this.venue = content.event.venue
     this.coverImg = content.event.coverImg
     this.attendees = content.event.attendees
@@ -172,6 +175,15 @@ export default {
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap');
+.wrapper {
+  margin-top:25px;
+  background-color:#edf2fb;
+  min-height:100vh;
+  font-family: 'Josefin Sans', sans-serif;
+
+}
+
 .event-heading > h4, h5{
     font-weight: 200
 }
@@ -189,15 +201,16 @@ export default {
     grid-template-columns: 60% auto;
     grid-gap: 20px;
 }
+.event-body > div {
+  background-color:white;
+}
  .event-venue {
     padding:10px;
     max-height:480px;
-    border: 1px solid rgba(0,0,0,0.6);
     border-radius: 10px;
 }
 .event-content {
     padding: 10px;
-    border: 1px solid rgba(0,0,0,0.6);
     border-radius: 10px;
 }
 .ResponseDiv {

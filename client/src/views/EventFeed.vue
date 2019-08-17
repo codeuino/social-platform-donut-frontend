@@ -3,22 +3,18 @@
         <b-container v-if="isLoading">
             <center><b-spinner style="width: 3rem; height: 3rem;" label="Large Spinner"></b-spinner></center>
         </b-container>
-        <b-container v-else>
-            <h1 class="feed-heading">Events for you</h1>
-            <hr>
-            <router-link :to="`/events/create`"><button class="btn btn-primary btn-lg text-white">Create Event</button></router-link>
-            <b-container v-if="events.length===0">
-            <center><h5>0 Events</h5></center>
-            </b-container>
-            <div class="feed-content">
-                <EventsMiniCard  v-for="(event, index) in events" v-bind:key="index" :event="event"/>
-            </div>
-        </b-container>
+         <div v-else class="wrapper" :class="$store.state.darkMode ? 'bg-dark' : '' ">
+        <SideNavigation/>
+        <FeedGroup :postsArray="events"/>
+        <Recent/>
+    </div>
     </div>
 </template>
 
 <script>
-import EventsMiniCard from '@/components/EventsMiniCard.vue'
+import SideNavigation from '@/components/SideNavigation.vue'
+import Recent from '@/components/Recent.vue'
+import FeedGroup from '@/components/FeedGroup.vue'
 export default {
   name: 'EventFeed',
   data () {
@@ -28,7 +24,9 @@ export default {
     }
   },
   components: {
-    EventsMiniCard
+    SideNavigation,
+    Recent,
+    FeedGroup
   },
   async mounted () {
     if (!this.$session.exists()) {
@@ -44,10 +42,13 @@ export default {
         }
       })
       const content = await resp.json()
-
-      this.events = content.events
+      if (content.status === 1) {
+        this.events = content.events
+      } else {
+        console.log(content)
+      }
     } catch (error) {
-
+      console.log(error)
     }
     this.isLoading = false
   }
@@ -55,13 +56,16 @@ export default {
 </script>
 
 <style scoped>
-h1 {
-    font-size:48px;
+.light {
+  background-color: #edf2fb;
 }
-.feed-content {
-    margin-top:50px;
-    display: grid;
-    grid-template-columns: auto auto auto;
-    grid-row-gap: 20px;
+.wrapper {
+  min-height:96vh;
+  background-color:#edf2fb;
+  padding:10px;
+  padding-top: 35px;
+  font-family: 'Josefin Sans', sans-serif;
+
 }
+
 </style>

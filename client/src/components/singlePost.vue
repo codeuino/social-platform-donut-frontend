@@ -8,9 +8,9 @@
                     <b-spinner style="width: 3rem; height: 3rem;" label="Large Spinner" ></b-spinner>
                 </b-card>
         </div>
-        <b-card v-if="!isloading" >
-            <b-card-title>{{Currentpost.title}}</b-card-title>
-            <p>{{Currentpost.author}}</p>
+        <b-card v-if="!isloading" class="singlePost" >
+            <b-card-title class="title">{{Currentpost.title}}</b-card-title>
+            <p>{{Currentpost.authorName}}</p>
             <hr>
             <b-card-text v-html="Currentpost.content" />
             <b-card-text  class="stackList">
@@ -194,7 +194,7 @@ export default {
           date: today.getFullYear() + '/' + (today.getMonth() + 1) + '/' + today.getDate(),
           uuid: uuid.v4()
         }
-        const resp = await fetch('http://localhost:3000/projects/addVote', {
+        const resp = await fetch('http://localhost:3000/projects/addComment', {
           method: 'POST',
           headers: {
             'Accept': 'application/json',
@@ -237,6 +237,7 @@ export default {
     this.Currentpost.content = content.project.content
     this.Currentpost.lang = content.project.Lang
     this.Currentpost.comments = content.project.comments
+    this.Currentpost.authorName = content.project.authorName
     // eslint-disable-next-line no-unused-expressions
     this.Currentpost.upAnddown = content.project.upDownVote
     this.comments = this.Currentpost.comments
@@ -248,6 +249,13 @@ export default {
 
 </script>
 <style scoped>
+.title {
+  font-weight:600;
+  color:#618abb;
+}
+.singlePost {
+  border-radius: 10px;
+}
 .card-text {
     overflow-x: hidden;
     word-wrap:break-word;

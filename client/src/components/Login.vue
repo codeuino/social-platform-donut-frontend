@@ -102,8 +102,9 @@ export default {
           const content = await response.json()
           try {
             if (content.status === 0) {
+              alert('Login failed')
               this.$router.push({
-                path: `/login?err=true?msg=${content.error}`
+                path: `/login`
               })
             } else {
               console.log('Login Successful')
@@ -136,7 +137,9 @@ export default {
               this.$session.set('isLogged', true)
               this.$store.state.isLogged = true
               this.$session.set('User', content.user.name)
+
               this.$session.set('UserID', content.user._id)
+              this.$session.set('navbarName', content.user.navbarName)
               console.log(this.$session.get('User'))
               console.log('hi')
               this.$router.push({ path: `/feed/${content.user._id}` })
@@ -192,9 +195,16 @@ export default {
                 this.$session.set('token', content.token)
                 this.$store.state.isLogged = true
                 this.$session.set('User', content.user.name)
+                this.$session.set('navbarName', content.user.navbarName)
+                console.log(this.$session.get('navbarName'))
                 this.$session.set('UserID', content.user._id)
                 console.log(this.$session.get('User'))
                 this.$router.push({ path: `/feed/${content.user._id}` })
+              } else {
+                alert('Login failed')
+                this.$router.push({
+                  path: `/login`
+                })
               }
             })
         })

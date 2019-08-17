@@ -74,6 +74,10 @@ const OrgSchema = new Schema({
           type:String
         }
       },
+      navbarName: {
+        type:String,
+        default:'Donut'
+      },
       social:{
         type:Schema.Types.ObjectId,
         ref:'social'
@@ -87,6 +91,17 @@ const OrgSchema = new Schema({
           type: Schema.Types.ObjectId,
           ref:'Todo'
           }
+      ],
+      Events : [
+        {
+          type:String,
+        }
+      ],
+      Projects :[
+        {
+          type:Schema.Types.ObjectId,
+          ref:'project'
+        }
       ],
       LikedProjects:[
         {

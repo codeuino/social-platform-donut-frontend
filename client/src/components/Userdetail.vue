@@ -1,5 +1,5 @@
 <template>
-    <div class="userDetail-wrapper w-100 text-center text-white" :class="$store.state.darkMode ? 'bg-dark' : 'bg-info'">
+    <!--- <div class="userDetail-wrapper w-100 text-center text-white" :class="$store.state.darkMode ? 'bg-dark' : 'bg-info'">
         <b-jumbotron :class="$store.state.darkMode ? 'dark' : ''"></b-jumbotron>
         <div class="header">
             <img class="profilePic" :src="user.profilePicture" alt="">
@@ -33,7 +33,45 @@
                  </b-row>
 
         </div>
+    </div> --->
+    <div class="user-detail-wrapper b-container">
+      <div class="row profile-wrapper">
+        <div class="profile-img col-4">
+          <img src="https://image.flaticon.com/icons/svg/17/17004.svg" alt="">
+        </div>
+        <div class="col-8 profile-detail pt-4">
+          <h4>{{user.name}}</h4>
+          <p class="lead">{{user.location.city}}, {{user.location.country}}</p>
+        </div>
+      </div>
+      <div class="bio-wrapper">
+          <h5>Bio</h5>
+          <hr>
+          <p class="bio" >{{user.bio}}</p>
+      </div>
+      <div class="row stats">
+            <div class="col-6 lead"><b>Followers</b> {{followerCount}} </div>
+            <div class="col-6 lead"><b>Following</b> {{followingCount}} </div>
+      </div>
+      <hr>
+      <center>
+        <div v-if="differentPerson" class="mt-3">
+                <span v-if="!isUserFollowing"><b-button @click="toggleFollowing" variant="outline-dark">Follow +</b-button></span>
+                <span v-if="isUserFollowing"><b-button @click="toggleFollowing" variant="dark">Following</b-button></span>
+        </div>
+      </center>
+
+      <hr>
+      <div class="userLinks">
+        <button class="btn linkedin" >LinkedIn</button>
+        <button class="btn ml-2 btn-primary">Facebook</button>
+        <button class="btn ml-2 btn-dark">Github</button>
+        <button class="btn ml-2 btn-danger">Google</button>
+
+      </div>
+
     </div>
+
 </template>
 
 <script>
@@ -61,10 +99,10 @@ export default {
   },
   computed: {
     followingCount () {
-      return this.user.followings.length
+      return this.user.followingList.length
     },
     followerCount () {
-      return this.user.followers.length
+      return this.user.followersList.length
     },
     differentPerson () {
       return this.$route.params.id !== this.user.id
@@ -77,50 +115,61 @@ export default {
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css?family=Raleway&display=swap');
-.profilePic {
-    height:200px;
-    width:200px;
-    border: 5px solid skyblue;
-    border-radius: 50%;
+.user-detail-wrapper {
+  min-height:84vh;
+  position: fixed;
+  background-color:white;
+  border-radius: 5px;
+  min-width:27vw;
+  max-width:27vw;
+  top:100px;
+  margin-left:7vw;
+  padding: 30px;
+  padding-top:40px;
 
 }
-.header{
-    font-family:'Raleway', sans-serif;
-    position: relative;
-    top:-90px;
-    margin-bottom: -80px;
+.profile-img > img {
+  height:100px;
 }
-.followStats > div {
-    display: inline-block;
-    margin-left: 20px;
-    margin-top: -3px;
+.profile-detail > p {
+  font-size:14px;
+  opacity: 0.7;
 }
-#social-links > div {
-    display: inline-block;
-    margin-left: 20px;
-    margin-top: -3px;
-
+.profile-wrapper {
+  background-color: #edf2fb;
+  padding:  20px 0;
+  border-radius: 10px;
 }
-.jumbotron {
-    min-height: 100px;
+.bio-wrapper {
+  margin-top:40px;
 }
-
-#social-links {
-    text-align: left;
+.bio-wrapper > p {
+  word-break: break-all;
 }
-@media (max-width: 780px){
-    #social-links {
-        text-align: center !important;
-    }
-}
-/* .userDetail-wrapper {
-    background-color: rgba(0, 67, 200)
-} */
 .bio {
-    font-size:18px;
+  line-height: 2;
+  text-align: justify;
+  opacity:0.6;
 }
-.dark {
-  background-color: #121212;
+.stats > div > b {
+  opacity: 0.6;
+  margin-right: 10px;
+}
+.userLinks > button {
+  display: block;
+  width: 100px;
+}
+.userLinks {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.linkedin {
+  background-color: rgb(13, 13, 172);
+  color:white;
+}
+.linkedin:hover{
+  color:white;
+  background-color: rgb(4, 4, 122);
 }
 </style>

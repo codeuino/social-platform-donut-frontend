@@ -23,6 +23,19 @@
                                                 <option slot="first" :value="null">Choose Account Type...</option>
                                                 </b-form-select>
                                 </b-form-group>
+                                <!-- Bio -->
+                                <b-form-group
+                                label="Bio"
+                                >
+                                    <b-form-input
+                                    v-model="bio"
+                                    type="text"
+                                    size="lg"
+                                    placeholder="Write something about yourself"
+                                    required
+                                    >
+                                    </b-form-input>
+                                </b-form-group>
                                 <!-- Location -->
 
                                 <b-form-group
@@ -65,16 +78,12 @@
                                     placeholder="Admin's Name"
                                     required
                                     >
-
                                     </b-form-input>
                                 </b-form-group>
-
                                 <!-- Gender -->
-
                                 <b-form-group
                                 label="Gender"
                                 >
-
                                     <b-form-select
                                     :disabled="isOrg"
                                     class="mb-2 mr-sm-2 mb-sm-0"
@@ -99,7 +108,18 @@
                                     required
                                     placeholder="Github Account "
                                     >
-
+                                    </b-form-input>
+                                </b-form-group>
+                                <b-form-group
+                                label="Custom Navbar"
+                                >
+                                    <b-form-input
+                                    type="text"
+                                    v-model="navbarName"
+                                    size="lg"
+                                    required
+                                    placeholder="Custom Navbar "
+                                    >
                                     </b-form-input>
                                 </b-form-group>
                                 <b-form-group class="text-center mt-5">
@@ -118,11 +138,13 @@ export default {
   data () {
     return {
       country: '',
+      bio: '',
       city: '',
       github: '',
       adminName: '',
       gender: 0,
-      type: ''
+      type: '',
+      navbarName: 'Donut'
     }
   },
   methods: {
@@ -155,7 +177,9 @@ export default {
             city: this.city
           },
           googleID: googleID,
-          githubID: githubID
+          githubID: githubID,
+          navbarName: this.navbarName,
+          bio: this.bio
 
         })
       })

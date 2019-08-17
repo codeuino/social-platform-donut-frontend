@@ -1,99 +1,53 @@
 <template>
-    <div>
-            <b-row>
-                <b-col cols="6" class="editor">
-                    <div>
-                        <b-card>
-                            <b-card-header>
-                                <b-form-input size="lg"
-                                v-model="newPost.card_title"
-                                type="text"
-                                required
-                                placeholder="Enter Title"
-                                ></b-form-input>
-                            </b-card-header>
-                            <br>
-                            <vue-editor id="editor"  v-model="newPost.content" :editorToolbar="customToolbar"></vue-editor>
-                            <br>
-                            <b-form-group>
-                              <b-form-input
-                              v-model="newPost.description"
-                              placeholder="Small description"
-                              >
-
-                              </b-form-input>
-                            </b-form-group>
-                            <b-form-group>
-                              <b-form-input
-                              v-model="newPost.github"
-                              placeholder="Github Link"
-                              >
-
-                              </b-form-input>
-                            </b-form-group>
-                              <label class="typo__label">Choose Languages</label>
-                              <multiselect v-model="newPost.Lang" :options="options" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Pick some" :preselect-first="true">
-                                <template slot="selection" slot-scope="{ values, search, isOpen }"><span class="multiselect__single" v-if="newPost.Lang.length &amp;&amp; !isOpen">{{ newPost.Lang.length }} options selected</span></template>
-                              </multiselect>
-
-                            <b-card-footer class="bg-light text-white mt-2">
-                                <b-row >
-                                    <b-col cols="6">
-                                          <b-form-file v-model="image" class="mt-1" plain></b-form-file>
-                                    </b-col>
-                                    <b-col cols="6">
-                                        <button  @click="reset" class="btn btn-danger mr-1">Reset</button>
-                                        <button :disabled="checkText" @click="makePreviewPost" class="btn btn-success mr-1">Preview</button>
-                                        <button :disabled="checkText" @click="addPost" class="btn btn-primary">Submit</button>
-                                    </b-col>
-                                </b-row>
-                            </b-card-footer>
-                        </b-card>
-                    </div>
-                </b-col>
-                <b-col cols="6">
-                    <b-card>
+    <div class="wrapper">
+      <b-row>
+        <b-col cols="6">
+          <b-container>
+            <b-form >
+                <b-form-group
+                label="Title"
+                >
+                <b-form-input
+                placeholder= "Enter title"
+                v-model="title"
+                required
+                >
+                </b-form-input>
+                </b-form-group>
+                <b-form-group
+                >
+                <vue-editor id="editor1"  v-model="content" :editorToolbar="customToolbar"></vue-editor>
+                </b-form-group>
+                <div class="Submit">
+                  <button @click="addPost" class="btn-lg btn-primary mr-4" >Add post</button>
+                  <button @click="Preview" class="btn-lg btn-success ml-3" >Preview</button>
+                </div>
+            </b-form>
+          </b-container>
+        </b-col>
+        <b-col cols="6">
+          <b-card>
                     <div class="my-2">
                     <h1>Preview</h1>
                     <br>
-                    <Post v-if="showPreview" v-bind:preview="true" :post="PostTest"/>
+                    <Project v-if="showPreview" :post="testPost"/>
                     </div>
-                    </b-card>
-                </b-col>
-            </b-row>
-            <div>
+          </b-card>
+        </b-col>
+      </b-row>
 
-            </div>
     </div>
 </template>
 
 <script>
-import Multiselect from 'vue-multiselect'
+import Project from './Project.vue'
 import { VueEditor } from 'vue2-editor'
-import Post from './Post.vue'
 export default {
-  name: 'CreatePost',
-  components: {
-    Post,
-    VueEditor,
-    Multiselect
-  },
+  name: 'CreateEvent',
   data () {
     return {
-      options: [
-        'Vue.JS', 'Node.JS', 'React.JS', 'Python', 'PHP', 'C++', 'C', 'MongoDB'
-      ],
-      image: '',
-      newPost: {
-        card_title: '', // So changes can only be seen on clicking preview
-        content: '',
-        github: '',
-        card_author: this.$session.get('User'),
-        card_author_id: this.$session.get('UserID'),
-        card_image: '',
-        Lang: [],
-        description: ''
-      },
+      title: '',
+      content: '',
       customToolbar: [
         ['bold', 'italic', 'underline', 'strike'],
         [{ list: 'ordered' }, { list: 'bullet' }],
@@ -102,51 +56,24 @@ export default {
         [{ 'indent': '-1' }, { 'indent': '+1' }],
         [{ 'direction': 'rtl' }],
         [{ 'header': [1, 2, 3, 4, 5, 6, false] }]
-
       ],
-      showPreview: true, // This variable is imp, have a look in Post module doc to understand
-      PostTest: { // This object goes to Post module, we can't send newPost directly to Post module cause first we need to render the file send via form using Reader()
-        pname: '',
-        card_text: '',
-        card_img: '',
-        card_author: this.$session.get('User'),
-        card_author_id: this.$session.get('UserID'),
-        description: ''
-      }
+      testPost: {},
+      showPreview: false
     }
+  },
+  components: {
+    VueEditor,
+    Project
   },
   computed: {
     checkText () {
-      return (this.newPost.card_title === '' || this.newPost.content === '') // || this.newPost.description === ''
+      return (this.title === '' || this.content === '') // || this.newPost.description === ''
     }
   },
   methods: {
-    makePreviewPost () {
-      this.PostTest.card_text = this.newPost.content
-      this.PostTest.pname = this.newPost.card_title
-      this.PostTest.description = this.newPost.description
-      var reader = new FileReader()
-      if (this.image) {
-        reader.readAsDataURL(this.image)
-        reader.addEventListener('loadend', () => {
-          this.PostTest.card_img = reader.result
-          this.newPost.card_image = reader.result
-        }, false)
-      }
-    },
-    reset () {
-      this.newPost.card_title = ''
-      this.newPost.content = ''
-      this.PostTest.pname = ''
-      this.PostTest.card_text = ''
-      this.PostTest.card_img = ''
-      this.PostTest.description = ''
-    },
-    async addPost () {
-      console.log(this.$session.get('token'))
-      // Here we will send to backend
-      console.log(this.newPost)
-      const response = await fetch('http://localhost:3000/projects/addProject',
+    async addPost (e) {
+      e.preventDefault()
+      const response = await fetch('http://localhost:3000/posts/add',
         {
           method: 'POST',
           headers: {
@@ -155,26 +82,33 @@ export default {
             'Authorization': this.$session.get('token')
           },
           body: JSON.stringify({
-            card_title: this.newPost.card_title,
-            description: this.newPost.description,
-            card_text: this.newPost.content,
-            Lang: this.newPost.Lang,
-            image: this.newPost.card_img,
-            github: this.newPost.github
+            title: this.title,
+            content: this.content
           // We'll take author details from JWT ;)
           })
         })
-      const content = await response.json()
-      console.log(content)
-      location.reload()
+      if (response.status === 200) {
+        alert('Post Added')
+        this.$bvModal.hide('modal-4')
+      } else {
+        alert('Failed to add post')
+      }
+    },
+    Preview (e) {
+      e.preventDefault()
+      this.showPreview = true
+      this.testPost = {
+        title: this.title,
+        content: this.content,
+        userName: 'Preview'
+      }
     }
   }
 }
 </script>
-<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 
 <style scoped>
-.editor {
-  max-width: 50%;
+.Submit > button {
+  float: right;
 }
 </style>

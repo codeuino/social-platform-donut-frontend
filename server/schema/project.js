@@ -27,8 +27,9 @@ upDownVote : {
   of:String,
   default:{}
 },
-createdAt:{
-  type:String
+createdAt : {
+  type:Date,
+  default:Date.now
 },
 image:{
 type:String

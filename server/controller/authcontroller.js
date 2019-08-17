@@ -34,6 +34,7 @@ module.exports={
                 user.type = 1
                 user.name = req.body.name
                 user.adminName = req.body.adminName
+                user.bio = req.body.bio
                 user.website=(req.body.website?req.body.website:'')
                 user.pass = req.body.pass
                 user.followingList=[]
@@ -43,6 +44,7 @@ module.exports={
                 user.social = socialId
                 user.googleId = req.body.googleID
                 user.githubId = req.body.githubID
+                user.navbarName = req.body.navbarName
                 const data=await user.save();
                 res.status(200).json({"success":"Successfully registered", status:1,id:data._id})
             }
@@ -54,6 +56,7 @@ module.exports={
                 user.gender=req.body.gender;
                 user.website=(req.body.website?req.body.website:'')
                 user.pass = req.body.pass
+                user.bio = req.body.bio
                 user.followingList=[]
                 user.followersList=[]
                 user.email=req.body.email
@@ -61,6 +64,7 @@ module.exports={
                 user.social = socialId
                 user.googleId = req.body.googleID
                 user.githubId = req.body.githubID
+                user.navbarName = req.body.navbarName
                 const data=await user.save();
                 res.status(200).json({
                     "success":"Successfully registered",
@@ -78,7 +82,7 @@ module.exports={
         if(parseInt(req.body.type)===1) {
                 const user = await Organisation.findOne({email:req.body.email})
                 if(!user) return  res.status(400).json({err:"USER NOT FOUND", status : 0}) 
-                if(user.googleId!=='' || user.githubId!=='') return res.status({status:0,msg:'Github or Google Account exist, use that!'})                 
+                if(user.googleId!=='' || user.githubId!=='') return res.status(400).json({status:0,msg:'Github or Google Account exist, use that!'})                 
                 try {
                         var res2 = await bcrypt.compare(req.body.pass,user.pass)
                         if(res2===false) return res.status(400).json({"error":"Wrong password", status: 0})
@@ -87,7 +91,8 @@ module.exports={
                 }
                 const payload={id:user._id,email:user.email,type:1};
                 const tok=await jwt.sign(payload,secret)
-                var u = await _.pick(user,['name','_id','type'])
+                var u = await _.pick(user,['name','_id','type','navbarName'])
+                console.log(u)
                 res.json({
                         status:1,
                         token:'Bearer  ' + tok,
@@ -107,7 +112,8 @@ module.exports={
                     }
                     const payload={id:user._id,email:user.email,type:0};
                     const tok=await jwt.sign(payload,secret)
-                    var u = await _.pick(user,['name','_id','type'])
+                    var u = await _.pick(user,['name','_id','type','navbarName'])
+                    console.log(u)
                     res.json({
                             status:1,
                             token:'Bearer ' + tok,
@@ -120,15 +126,16 @@ module.exports={
     },
     github : async (req,res) => {
         const data = req.user
+        console.log(data)
         if(data._json.type=='User') {
-            const user = await User.findOne({email: data._json.email})
+            let user = await User.findOne({email: data._json.email})
             if(user) {
                 await User.findByIdAndUpdate(user._id,{
                     $set:{
-                        'githubId': data.id
+                        'githubId': data._json.login
                     }
                 })
-                const payload={id:user._id,email:user.email,type:1};
+                const payload={id:user._id,email:user.email,type:0};
                 const tok=await jwt.sign(payload,secret)
                 var u = await _.pick(user,['name','_id','type'])
                 
@@ -147,13 +154,13 @@ module.exports={
                 user = await User.create({
                     type : 0,
                     name:data.displayName,
-                    githubId: data.id,
+                    githubId: data._json.login,
                     followingList:[],
                     followersList:[],
                     email:data._json.email,
                     location :{ city:data._json.location}
                 })
-                const payload={id:user._id,email:user.email,type:1};
+                const payload={id:user._id,email:user.email,type:0};
                 const tok=await jwt.sign(payload,secret)
                 var u = await _.pick(user,['name','_id','type'])
                 res.redirect(url.format({
@@ -165,11 +172,11 @@ module.exports={
                 }))
             }
         }else {
-            const user = await Organisation.findOne({email: data._json.email})
+            let user = await Organisation.findOne({email: data._json.email})
             if(user) {
                 await Organisation.findByIdAndUpdate(user._id,{
                     $set:{
-                        'githubId': data.id
+                        'githubId': data._json.login
                     }
                 })
                 const payload={id:user._id,email:user.email,type:1};
@@ -194,7 +201,7 @@ module.exports={
                     type : 0,
                     name:data.displayName,
                     adminName: data.username,
-                    githubId: data.id,
+                    githubId: data._json.login,
                     followingList:[],
                     followersList:[],
                     email:data._json.email,

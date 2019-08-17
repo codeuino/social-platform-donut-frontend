@@ -1,5 +1,5 @@
 <template>
-    <div class="wrapper" :class="$store.state.darkMode ? 'content-dark-2' : '' ">
+    <div class="wrapper" :class="$store.state.darkMode ? 'bg-dark' : '' ">
         <SideNavigation/>
         <FeedGroup :postsArray="posts"/>
         <Recent/>
@@ -31,7 +31,7 @@ import SideNavigation from '@/components/SideNavigation.vue'
 import Recent from '@/components/Recent.vue'
 import FeedGroup from '@/components/FeedGroup.vue'
 export default {
-  name: 'Feed',
+  name: 'ProjectFeed',
   components: {
     SideNavigation,
     FeedGroup,
@@ -57,7 +57,6 @@ export default {
   },
   async beforeCreate () {
     if (this.$route.query.token) {
-      // This works when user login or signup using github so, we need to push data to vue app, so we use query for that
       let query = this.$route.query
       console.log(query)
       this.$session.start()
@@ -70,7 +69,7 @@ export default {
     if (!this.$session.exists()) {
       this.$router.push('/login')
     }
-    const resp = await fetch('http://localhost:3000/fetchFeed', {
+    const resp = await fetch('http://localhost:3000/projects/fetchProjects', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -81,7 +80,7 @@ export default {
     const content = await resp.json()
     console.log(content)
     if (content.status === 1) {
-      this.posts = content.feed
+      this.posts = content.projects
     } else {
       this.$router.push('/login')
     }
@@ -103,8 +102,5 @@ export default {
   padding-top: 35px;
   font-family: 'Josefin Sans', sans-serif;
 
-}
-.content-dark-2{
-  background-color: #121212;
 }
 </style>

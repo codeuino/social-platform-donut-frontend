@@ -28,7 +28,7 @@ route.post('/googleLogin',url,async (req,res)=>{
         if(user.googleId === req.body.googleID) {
           const payload={id:user._id,email:user.email,type:user.type};
           const tok=await jwt.sign(payload,secret)
-          var u = await _.pick(user,['name','_id','type'])
+          var u = await _.pick(user,['name','_id','type','navbarName'])
           res.json({status:1,token:'Bearer  ' + tok,user:u})
         }else {
           res.json({status:0})

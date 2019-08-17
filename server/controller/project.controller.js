@@ -35,7 +35,6 @@ module.exports = {
                Lang:req.body.Lang,
                authorId: req.user.id,
                authorName : authorName,
-               createdAt : new Date().getDate() + "-" + new Date().getMonth() + "-" + new Date().getFullYear(),
                image : req.body.image // Lets keep it as a string for now ! :)
            })
            // HEre we will notify all followers and followers might be logged in several devices so :)
@@ -58,7 +57,7 @@ module.exports = {
                     }
                 })
            }
-
+           //Followers notify function
            const Followers = User.followersList
            Followers.forEach(async follower => {
                console.log('HI')
