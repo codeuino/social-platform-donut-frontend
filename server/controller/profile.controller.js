@@ -3,6 +3,7 @@
 
 const Subscription = require('../schema/subscription')
 const user = require('../schema/user.js');
+const _ = require('lodash')
 const OrganisationModel = require('../schema/organisation')
 const proj = require('../schema/project.js');
 const expressValidator = require('express-validator');
@@ -19,7 +20,8 @@ const { check, validationResult } = require('express-validator/check');
 // var upload = multer({storage: storage});
 module.exports = {
   addDevice: async function(req,res) {
-      const subscription = req.body // Here it goes subscription obj
+      const subscription = req.body 
+      // Here it goes subscription obj
       // We'll check whether subscription exists or not
       Subscription.findOne({endpoint:subscription.endpoint})
       .then(sub => {
@@ -33,6 +35,7 @@ module.exports = {
             Subscription.create(subscription)
             .then(sub => {
               console.log(sub)
+              // We have to add device id to user
               if(req.user.type == 1) {
                 OrganisationModel.findByIdAndUpdate(req.user.id,{
                   $push:{
@@ -41,10 +44,7 @@ module.exports = {
                 }).then(
                   user=> {
                     console.log(user)
-                    res.json({
-                      status:1,
-                      msg:'Success'
-                    })
+                    res.json({ status:1, msg:'Success'})
                   })
                 .catch(err => {
                   console.log(err)
@@ -62,17 +62,11 @@ module.exports = {
                 }).then(
                   user=> {
                     console.log(user)
-                    res.json({
-                      status:1,
-                      msg:'Success'
-                    })
+                    res.json({ status:1, msg:'Success'})
                   })
                 .catch(err => {
                   console.log(err)
-                  res.status(400).json({
-                    status:0,
-                    msg: 'Fail'
-                  })
+                  res.status(400).json({ status:0, msg: 'Fail'})
                 }) 
               }
               
@@ -82,51 +76,54 @@ module.exports = {
         })
       .catch (err => {
         console.log(err)
-        res.status(400).json({
-          status:0,
-          msg: 'Fail'
-        })
+        res.status(400).json({ status:0, msg: 'Fail' })
       })
-       
-      
   },
   follow: async function(req,res) {
+    let returnFLag
     const SubscribingTo = req.body.user.id // User who's getting a follower
     const SubscribingBy = req.user.id // User who will subscribe
     let tempUser
     let tempOrg
     // Check if both users are same 
     if(SubscribingBy===SubscribingTo) {
-      return res.json({
-        status:0,
-        msg: "You can't follow yourself"
-      })
+      return res.json({ status:0, msg: "You can't follow yourself" })
     }
     // Now We Must check whether subscribingto is already in the listl, if YES we'll send failure response
     // First Let's update subscribing user 
     if(req.user.type === 1 ){
 
       tempOrg = await OrganisationModel.findById(SubscribingBy)
-      if(tempOrg.followingList.indexOf(SubscribingTo.toString()) !== -1) {
-        return res.send({status:1,msg:'User Already Follows'})
-      }
+      
+      tempOrg.followingList.forEach(user => {
+        if(user.id == SubscribingTo) {
+          returnFLag = true
+          return res.send({status:1, msg:'User Already Follows'})
+        }
+      })
+      if(returnFLag) return 
       try {
-        await OrganisationModel.findByIdAndUpdate(SubscribingBy,{ $push: {'followingList' : SubscribingTo}})
+        await OrganisationModel.findByIdAndUpdate(SubscribingBy,{ $push: {'followingList' : {id:SubscribingTo,type:req.body.user.type}}})
       } catch(err) {
         return res.json({status:0, msg:'Some Error Occured'})
       }
     }else {
       tempUser = await user.findById(SubscribingBy)
       console.log(tempUser)
-      if(tempUser.followingList.indexOf(SubscribingTo) !==-1 ) {
-        return res.send({status:1, msg:'User Already Follows'})
-      }
+      
+      tempUser.followingList.forEach(user => {
+        if(user.id == SubscribingTo) {
+          returnFLag = true
+          return res.send({status:1, msg:'User Already Follows'})
+        }
+      })
+      if(returnFLag) return
       try {
-        await user.findByIdAndUpdate(SubscribingBy,{$push: {'followingList' : SubscribingTo }})
+        await user.findByIdAndUpdate(SubscribingBy,{$push: {'followingList' :{id:SubscribingTo,type:req.body.user.type} }})
       }
       catch(err) {
         console.log(err)
-        return res.send({status:0,msg:'Some Error Occured'})
+        return res.send({ status:0,msg:'Some Error Occured'})
       }
     } 
     console.log('Subscribing User UPDATED')
@@ -134,33 +131,19 @@ module.exports = {
     // NOTE: MAKE THIS ASYNC/AWAIT
     if(req.body.user.type === 1 ){
       const User = await OrganisationModel.findById(SubscribingTo)
-      if(User.followersList.indexOf(SubscribingBy.toString()) !== -1 ) {
-        return res.json({status:1,msg:'User Already Follows'})
-      }
-      
       try {
-        await OrganisationModel.findByIdAndUpdate(SubscribingTo,{$push: {'followersList' : SubscribingBy}})
-        return res.json({status:1,msg:'Success'})
+        await OrganisationModel.findByIdAndUpdate(SubscribingTo,{$push: {'followersList' : { id:SubscribingBy, type:req.user.type}}})
+        return res.json({ status:1, msg:'Success'})
       }catch (err) {
         console.log(err)
-        return res.json({status:0,msg:'Some Error Occured'})
+        return res.json({ status:0, msg:'Some Error Occured'})
       }
     }else {
       const User = await user.findById(SubscribingTo)
-      if(User.followersList.indexOf(SubscribingBy.toString()) !== -1 ) {
-          return res.json({
-            status:1,
-            msg:'User Already Follows'
-          })
-        }
-      
       try {
-        await user.findByIdAndUpdate(SubscribingTo,{$push: {'followersList' : SubscribingBy}})
+        await user.findByIdAndUpdate(SubscribingTo,{$push: {'followersList' : { id:SubscribingBy,type:req.user.type}}})
         console.log('Subscribed User Updated')
-        return res.json({
-          status:1,
-          msg:'Success'
-        })
+        return res.json({ status:1, msg:'Success' })
       }catch (err) {
         console.log(err)
         return res.send({
@@ -197,7 +180,6 @@ module.exports = {
       res.json({proje:proj,user:req.params.id})
     })
     }
-
   },
   profileViewSd: function(req, res) {
     proj.aggregate([
@@ -211,19 +193,17 @@ module.exports = {
       }
     ]).sort({createdAt:-1}).then((da)=>{
       user.findOne({ Eid: req.params.sd }).then(function (use) {
-        console.log(da)
-          res.send({ use: use, ques: da, sign: req.user});
+          console.log(da)
+          res.send({use: use,ques:da,sign:req.user});
       })
     })
   },
   publish: function(req, res) {
-
     req.check('contentname','Project name is required !!').notEmpty();
     req.check('git','Github url is required !!').isURL();
     req.check('cont','Description is required !!').notEmpty();
     req.check('genre','Language used is required !!').notEmpty();
-
-          new proj({
+    new proj({
             createdAt:Date.now(),
             pname: req.body.contentname,
             pid: req.user.Eid,
@@ -238,26 +218,6 @@ module.exports = {
               res.send(e).status(200);
        });
 },
-  upDownVote: function (req,res) {
-    proj.findOne({proid: req.body.project}).then((pro)=>{
-      if(pro.upDownVote.get(req.body.client)){
-          if(pro.upDownVote.get(req.body.client)=="-1"){
-              pro.upDownVote.set(req.body.client,"+1")
-              return pro.save()
-
-          }else{
-              pro.upDownVote.set(req.body.client,"-1")
-              return pro.save()
-
-          }
-      }else{
-          pro.upDownVote.set(req.body.client,req.body.vote)
-          return pro.save()
-      }
-  }).catch((err)=>{
-      return err
-    })
-  }, 
   ch2: function(req, res) {
     res.json({ sign: req.user }); // Main LANDING PAGE , NEW COMMENT => Landing page should be only for organisation which will return portfolio of the org
   },
@@ -312,21 +272,80 @@ module.exports = {
             })
             .catch((err)=>{
               res.json({
-                msg:"FAIURE",
+                msg:"FAILURE",
                 status:0
               })
             });
     });
   },
-  getDetails: function(req, res) {
-    user
-      .findOne({ Eid: req.user.Eid })
-      .lean()
-      .then(function(data) {
+  getDetails: async function(req, res) {
+    if(req.user.type === 0) {
+      try {
+        const User = await user.findById(req.user.id)
+        console.log(User)
+        if(User) {
+          var temp = _.pick(User,["_id","githubId",'name'])
         res.json({
           status:1,
-          data
-        });
-      });
+          user:temp
+        })
+        }else {
+          res.json({
+            status:0,
+            msg:"User doesn't exist"
+          })
+        }
+        
+      } catch(err) {
+        res.json({
+          status:0,
+          msg:'Error'
+        })
+      }
+    }else {
+      try {
+        const User = await OrganisationModel.findById(req.user.id)
+        if(User) {
+          var temp = _.pick(User,["_id","githubId",'name'])
+        res.json({
+          status:1,
+          user:temp
+        })
+        }else {
+          res.json({
+            status:0,
+            msg:"User doesn't exist"
+          })
+        }
+        
+      } catch(err) {
+        res.json({
+          status:0,
+          msg:'Error'
+        })
+      }
+    }
+  },
+  getProfile: async function ( req, res) {
+    try {
+      if(req.user.type === 1) {
+        let User = await OrganisationModel.findById(req.user.id).populate('Projects')
+        var temp = await _.pick(User,['name', 'profilePic', 'followersList','followingList', 'bio', 'location','social','Projects'])
+        res.status(200).json({
+          user:temp
+        })
+      }else {
+        let User = await user.findById(req.user.id).populate('Projects')
+        var temp = await _.pick(User,['name', 'profilePic', 'followersList','followingList', 'bio', 'location','social','Projects'])
+        res.status(200).json({
+          user:temp
+        })
+      }
+    } catch (error) {
+      console.log(error)
+      res.status(400).json({
+        msg:'Failed to retreive user details'
+      })
+    }
   }
 };

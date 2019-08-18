@@ -2,6 +2,7 @@ const passport = require('passport');
 const google = require('passport-google-oauth20');
 const key = require('./credential.js');
 const user = require('../schema/user.js');
+const org = require('../schema/organisation.js');
 
 passport.serializeUser(function(user, done) {
   done(null, user.id);
@@ -19,24 +20,8 @@ passport.use(
       clientID: key.oauth.clientID,
       clientSecret: key.oauth.clientSecret
     },
-    function(acc, ref, pro, done) {
-      user.findOne({ Eid: pro.id }).then(function(use) {
-        if (use != null) {
-          console.log('Already in database');
-          done(null, use);
-        } else {
-          new user({
-            fname: pro.name.givenName,
-            lname: pro.name.familyName,
-            username: pro.name.givenName + ' ' + pro.name.familyName,
-            Eid: pro.id
-          })
-            .save()
-            .then(function(us) {
-              done(null, us);
-            });
-        }
-      });
+    function(acc, ref, user, done) {
+      done(null,user)
     }
   )
 );

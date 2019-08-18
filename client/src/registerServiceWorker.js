@@ -12,6 +12,14 @@ register(`${process.env.BASE_URL}service-worker.js`, {
   },
   registered () {
     console.log('Service worker has been registered.')
+    self.addEventListener('push', event => {
+      const data = event.data.json()
+      console.log(data.notification)
+      self.registration.showNotification(data.notification.title, {
+        title: data.notification.title,
+        body: 'Yay it works!'
+      })
+    })
   },
   cached () {
     console.log('Content has been cached for offline use.')

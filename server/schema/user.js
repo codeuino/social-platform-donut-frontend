@@ -6,6 +6,12 @@ const UserSchema = new Schema({
     type: Number,
     required: true
   },
+  googleId:{
+    type:String,
+  },
+  githubId:{
+    type:String
+  },
   name: {
     type: String
   },
@@ -21,23 +27,30 @@ const UserSchema = new Schema({
   },
   gender: {
     type: Number,
-    required:true
   },
   website : {
     type : String
   },
   pass: {
     type: String,
-    required:true
+    // required:true
   },
-  followersList: {
-    type : [Schema.Types.ObjectId],
-    default:[]
-  },
-  followingList: {
-    type : [Schema.Types.ObjectId],
-    default:[]
-  },
+  followersList: [{
+    id:{
+      type:Schema.Types.ObjectId
+    },
+    type:{
+      type:Number
+    }
+  }],
+  followingList: [{
+    id:{
+      type:Schema.Types.ObjectId
+    },
+    type:{
+      type:Number
+    }
+  }],
   devices :{
     type: [Schema.Types.ObjectId],
     default:[]
@@ -64,6 +77,10 @@ const UserSchema = new Schema({
       type:String
     }
   },
+  navbarName: {
+    type:String,
+    default:'Donut'
+  },
   social:{
     type:Schema.Types.ObjectId,
     ref:'social'
@@ -80,8 +97,19 @@ const UserSchema = new Schema({
   ],
   Events : [
     {
+      type:String,
+    }
+  ],
+  Projects :[
+    {
       type:Schema.Types.ObjectId,
-      ref:'Event'
+      ref:'project'
+    }
+  ],
+  LikedProjects:[
+    {
+      type:Schema.Types.ObjectId,
+      ref:'project'
     }
   ]
 

@@ -38,11 +38,8 @@ export default {
     }
   },
   created () {
-    if (this.$store.state.token) {
-      // so for test we will use test data
-      this.profile.posts = this.$store.state.userDetails.posts
-    } else {
-      this.$router.push({ path: 'login', query: { error: 'true' } })
+    if (!this.$session.exists()) {
+      this.$router.push('/login')
     }
   },
   methods: {

@@ -1,9 +1,9 @@
 <template>
     <div class="event-form-wrapper">
-        <b-container>
-            <h1>Create Event</h1>
-            <hr>
-            <b-form @submit="addEvent" enctype='multipart/form-data'>
+      <b-row>
+        <b-col cols="6">
+          <b-container>
+            <b-form enctype='multipart/form-data'>
                 <b-form-group
                 label="Title"
                 >
@@ -33,7 +33,7 @@
                         </b-form-input>
                         </b-form-group>
                     </b-col>
-                    <b-col md="2">
+                    <b-col md="4">
                         <b-form-group
                         label="Time"
                         >
@@ -45,7 +45,7 @@
                         </b-form-input>
                         </b-form-group>
                     </b-col>
-                    <b-col md="6">
+                    <b-col md="4">
                         <place-autocomplete-field v-model="location" placeholder="Enter an an address, zipcode, or location" label="Address" name="field1" api-key="AIzaSyAhSv9zWvisiTXRPRw6K8AE0DCmrRMpQcU"></place-autocomplete-field>
                     </b-col>
                 </b-row>
@@ -89,24 +89,41 @@
                         drop-placeholder="Drop file here..."
                       ></b-form-file>
                     </b-form-group>
-                <div class="Submit">
-                  <button class="btn-lg btn-primary btn-primary ">Add Event</button>
-                </div>
             </b-form>
+            <div class="Submit">
+                  <button @click="addEvent" class="btn-lg btn-primary btn-primary ">Add Event</button>
+                  <button @click="Preview" class="btn-lg btn-success ml-3" >Preview</button>
+
+                </div>
         </b-container>
+        </b-col>
+        <b-col cols="6">
+          <b-card>
+                    <div class="my-2">
+                    <h1>Preview</h1>
+                    <br>
+                    <Project v-if="showPreview" :post="testEvent"/>
+                    </div>
+          </b-card>
+        </b-col>
+      </b-row>
+
     </div>
 </template>
 
 <script>
-
+import Project from './Project.vue'
 import { VueEditor } from 'vue2-editor'
 export default {
   name: 'EventForm',
   components: {
-    VueEditor
+    VueEditor,
+    Project
   },
   data () {
     return {
+      testEvent: {},
+      showPreview: false,
       description: '',
       title: '',
       date: null,
@@ -129,7 +146,6 @@ export default {
   methods: {
     async addEvent (e) {
       e.preventDefault()
-
       const body = {
         title: this.title,
         location: this.location,
@@ -149,14 +165,35 @@ export default {
         },
         body: JSON.stringify(body)
       })
-      const content = await response.json()
-      console.log(content)
+      if (response.status === 200) {
+        alert('Event created')
+      } else {
+        alert('Failed to create event')
+      }
+    },
+    Preview (e) {
+      e.preventDefault()
+      this.showPreview = true
+      this.testEvent = {
+        title: this.title,
+        venue: {
+          location: this.location,
+          time: this.time
+        },
+        date: this.date,
+        description: this.description,
+        coverImg: this.coverImg,
+        phone: this.phone,
+        email: this.email,
+        organiserDetails: {
+          name: 'Preview'
+        },
+        attendees: ['Preview']
+      }
     }
   },
   mounted () {
-    if (!this.$session.exists()) {
-      this.$router.push('/login')
-    }
+
   }
 }
 </script>

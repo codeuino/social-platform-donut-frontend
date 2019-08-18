@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="wrapper">
         <b-list-group>
         <b-list-group-item href="#" :active="this.$store.state.SettingState.isPactive" id="pSetting" @click="toggleActive ">Profle Settings</b-list-group-item>
         <b-list-group-item href="#" :active="this.$store.state.SettingState.isIactive" id="iSetting" @click="toggleActive">Integration Settings</b-list-group-item>
@@ -37,3 +37,9 @@ export default {
 
 }
 </script>
+
+<style scoped>
+.wrapper {
+  z-index: 0;
+}
+</style>

@@ -118,58 +118,59 @@ module.exports= {
         
     },
     getTodos : async function(req,res) {
-        if(req.user.type===1) {
+        let todos=[]
+        console.log(req.user)
+        if(req.user.type === 1) {
             //it's a org
-            try {
-                OrgModel.findById(req.user.id)
-                .populate('Todos')
-                .exec((err,doc)=> {
-                    if(err){
-                        console.log(err)
-                        res.status(400).json({
-                            status:0,
-                            msg:'Fail To fetch Todo'
-                        })
-                    }else {
-                        res.json({
-                            status:1,
-                            todos:doc.Todos
-                        })
-                    }
-                })
-                    
-            } catch (err) {
-                console.log(err)
-                res.status(400).json({
-                    status:0,
-                    msg:'Fail To fetch Todo'
-                })
-            }
+                try {
+                    OrgModel.findById(req.user.id)
+                    .populate('Todos')
+                    .exec((err,doc)=> {
+                        if(err){
+                            console.log(err)
+                            res.status(400).json({
+                                status:0,
+                                msg:'Fail To fetch Todo'
+                            })
+                        }else {
+                            res.json({
+                                status:1,
+                                todos:doc.Todos
+                            })
+                        }
+                    })
+                } catch (error) {
+                    console.log(error)
+                    res.json({
+                        status:0,
+                    })
+                }
             
-        } else {
-            try {
-                UserModel.findById(req.user.id)
-                .populate('Todos')
-                .exec(function(err,doc) {
-                    if(err){
-                        console.log(err)
-                        res.status(400).json({
-                            status:0,
-                            msg:'Fail To fetch Todo'
-                        })
-                    }else {
-                        res.json({
-                            status:1,
-                            todos:doc.Todos
-                        })
-                    }
-                })
-            } catch (err) {
-                res.status(400).json({
-                    status:0,
-                    msg:'Fail To fetch Todo'
-                })
-            }
+        }else {
+                try {
+                    UserModel.findById(req.user.id)
+                    .populate('Todos')
+                    .exec(function(err,doc) {
+                        if(err){
+                            console.log(err)
+                            res.status(400).json({
+                                status:0,
+                                msg:'Fail To fetch Todo'
+                            })
+                        }else {
+                            res.json({
+                                status:1,
+                                todos:doc.Todos
+                            })
+                        }
+                    })
+                } catch (error) {
+                    console.log(error)
+                    res.json({
+                        status:0,
+                    })
+                }
+            
         }
     }
 }

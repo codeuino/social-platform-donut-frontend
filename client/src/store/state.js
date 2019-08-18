@@ -10,5 +10,8 @@ export default {
   IDofShare: null,
   Portfolio: {},
   darkMode: false,
-  Todos: []
+  Todos: [],
+  temp: {},
+  // On deployment make sure you change this accordingly
+  BaseURL: 'http://localhost:3000'
 }

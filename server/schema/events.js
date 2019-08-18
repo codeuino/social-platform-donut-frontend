@@ -13,34 +13,26 @@ const EventSchema = new Schema({
     attendees :[
         {
             type:Schema.Types.ObjectId,
-            ref:'user',
-            unique:true
         }
     ],
     venue: {
         location:{
-            latitute : {
-                type:String
-            },
-            longitute: {
-                type:String
-            }
+            type:String,
+            required:true
         },
         time: {
             type:String,
             required:true
+        },
+        date: {
+            type:String,
+            required:true
         }
-    },
-    organiser :{
-        type: Schema.Types.ObjectId,
-        ref:'user'
     },
     members: [
         {
             type:Schema.Types.ObjectId,
-            ref:'user',
-            unique:true
-        }
+         }
     ],
     description : {
         type:String,
@@ -55,8 +47,16 @@ const EventSchema = new Schema({
             type:String,
         },
         email : {
-            type:String,
-            
+            type:String,  
+        },
+        Type: {
+            type:Number
+        },
+        id:{
+            type: Schema.Types.ObjectId
+        },
+        name: {
+            type:String
         }
     },
     coverImg:{

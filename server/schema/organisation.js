@@ -6,6 +6,12 @@ const OrgSchema = new Schema({
         type: Number,
         required: true
       },
+      googleId:{
+        type:String,
+      },
+      githubId:{
+        type:String
+      },
     name: {
         type: String
       },
@@ -26,14 +32,22 @@ const OrgSchema = new Schema({
         type: String,
         required:true
       },
-      followersList: {
-        type : [Schema.Types.ObjectId],
-        default:[]
-      },
-      followingList: {
-        type : [Schema.Types.ObjectId],
-        default:[]
-      },
+      followersList: [{
+        id:{
+          type:Schema.Types.ObjectId
+        },
+        type:{
+          type:Number
+        }
+      }],
+      followingList: [{
+        id:{
+          type:Schema.Types.ObjectId
+        },
+        type:{
+          type:Number
+        }
+      }],
       devices:{
         type : [Schema.Types.ObjectId],
         default:[]
@@ -60,6 +74,10 @@ const OrgSchema = new Schema({
           type:String
         }
       },
+      navbarName: {
+        type:String,
+        default:'Donut'
+      },
       social:{
         type:Schema.Types.ObjectId,
         ref:'social'
@@ -67,7 +85,30 @@ const OrgSchema = new Schema({
       contributors:{
           type:[String],
           default : []
-      }
+      },
+      Todos: [
+        {
+          type: Schema.Types.ObjectId,
+          ref:'Todo'
+          }
+      ],
+      Events : [
+        {
+          type:String,
+        }
+      ],
+      Projects :[
+        {
+          type:Schema.Types.ObjectId,
+          ref:'project'
+        }
+      ],
+      LikedProjects:[
+        {
+          type:Schema.Types.ObjectId,
+          ref:'project'
+        }
+      ]
 })
 OrgSchema.pre('save', function(next) {
     var user = this;

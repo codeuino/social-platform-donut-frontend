@@ -7,6 +7,9 @@ pname:{
 authorId:{
   type:schema.Types.ObjectId,
 },
+authorName:{
+  type:String
+},
 github:{
   type:String
 },
@@ -24,12 +27,25 @@ upDownVote : {
   of:String,
   default:{}
 },
-createdAt:{
-  type:String
+createdAt : {
+  type:Date,
+  default:Date.now
 },
 image:{
 type:String
-}
+},
+comments:[
+  {
+    author: String,
+    author_id: schema.Types.ObjectId,
+    comment: String,
+    date: {
+      type:Date,
+      default:Date.now
+    },
+    id: String
+  }
+]
 });
 
 const ProjectModel=mongoose.model('project',project);

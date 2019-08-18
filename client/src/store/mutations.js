@@ -23,5 +23,8 @@ export default {
   },
   toggledarkMode: (state, bool) => {
     state.darkMode = bool
+  },
+  addSignupCredentials: (state, data) => {
+    state.temp = data
   }
 }

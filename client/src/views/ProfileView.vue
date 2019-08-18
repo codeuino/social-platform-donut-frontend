@@ -7,26 +7,25 @@
             </b-container>
         </div>
         <div v-if="!isloading" class="w-100">
-                <b-row class="shadow-lg">
-                        <UserDetail :user="profile.userDetails" @FollowerIncoming='toggleFollower'  />
-                </b-row>
-                <b-row>
-                    <div class="w-100">
-                        <FeedGroup :postsArray="profile.posts"/>
-                    </div>
-                </b-row>
+                <SideNavigation/>
+                <UserDetail :user="profile.userDetails" @FollowerIncoming='toggleFollower'  />
+                <FeedGroup :postsArray="profile.posts"/>
         </div>
     </div>
 </template>
 
 <script>
+import SideNavigation from '@/components/SideNavigation.vue'
 import FeedGroup from '@/components/FeedGroup.vue'
 import UserDetail from '@/components/Userdetail.vue'
+import Authenticate from '@/services/Auth'
+
 export default {
   name: 'ProfileView',
   components: {
     UserDetail,
-    FeedGroup
+    FeedGroup,
+    SideNavigation
   },
   data () {
     return {
@@ -39,28 +38,32 @@ export default {
     }
   },
   mounted () {
-    this.profile.userDetails = this.$store.state.userDetails
-    this.isloading = false
   },
   methods: {
     toggleFollower (arg1) {
       if (arg1 === 0) {
         // user doesn't wants to follow the profile anymore, we can add backend calls and remove user for follower list using the id
-        // console.log(arg1)
+        console.log(arg1)
       } else {
         // User wanna follow this profile
-        // console.log(arg1)
+        console.log(arg1)
       }
     }
   },
-  created () {
-    if (this.$store.state.token) {
-      // Now here we can fetch the user posts XD
-      // so for test we will use test data
-      this.profile.posts = this.$store.state.userDetails.posts
-    } else {
-      this.$router.push({ path: '/login', query: { error: 'true' } })
-    }
+  async created () {
+    Authenticate.Authenticate(this)
+    let response = await fetch(this.$store.state.BaseURL + '/profile/getProfile', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': this.$session.get('token')
+      }
+    })
+    var content = await response.json()
+    this.profile.userDetails = content.user
+    this.profile.posts = content.user.Projects
+    this.isloading = false
   }
 }
 </script>

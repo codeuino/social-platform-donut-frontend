@@ -1,5 +1,4 @@
 const Jimp=require('jimp')
-
 module.exports={
     ppResize:function(img,height,width){
         imgDir="./views/uploads/profilePics/"+img
@@ -11,5 +10,6 @@ module.exports={
               .quality(60) 
               .write(imgDir)
           });
-        }
+        },
+    
 }

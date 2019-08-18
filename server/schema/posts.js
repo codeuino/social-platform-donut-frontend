@@ -5,6 +5,9 @@ var postSchema=new schema({
   user:{
     type:ObjectId
   },
+  userName : {
+    type:String
+  },
   title:{
     type:String,
     required:true
@@ -29,10 +32,7 @@ var postSchema=new schema({
       type:[{user:ObjectId,
       content:String}]
   },
-  //Type will be Posts,Project,Scholarship
-  type:{
-    type:String
-  }
+  
 })
 postSchema.set('timestamps', true); // this will add createdAt and updatedAt timestamps
 const Post = mongoose.model('post', postSchema);
