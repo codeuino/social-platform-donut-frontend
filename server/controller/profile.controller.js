@@ -6,8 +6,6 @@ const user = require('../schema/user.js');
 const _ = require('lodash')
 const OrganisationModel = require('../schema/organisation')
 const proj = require('../schema/project.js');
-const expressValidator = require('express-validator');
-const { check, validationResult } = require('express-validator/check');
 // var multer = require('multer');
 // var storage = multer.diskStorage({
 //   destination: (req, file, cb) => {
@@ -123,7 +121,7 @@ module.exports = {
       }
       catch(err) {
         console.log(err)
-        return res.send({ status:0,msg:'Some Error Occured'})
+        return res.status(400).json({ status:0,msg:'Some Error Occured'})
       }
     } 
     console.log('Subscribing User UPDATED')
@@ -136,7 +134,7 @@ module.exports = {
         return res.json({ status:1, msg:'Success'})
       }catch (err) {
         console.log(err)
-        return res.json({ status:0, msg:'Some Error Occured'})
+        return res.status(400).json({ status:0, msg:'Some Error Occured'})
       }
     }else {
       const User = await user.findById(SubscribingTo)
@@ -146,7 +144,7 @@ module.exports = {
         return res.json({ status:1, msg:'Success' })
       }catch (err) {
         console.log(err)
-        return res.send({
+        return res.status(400).send({
           status:0,
           msg:'Some Error Occured'
       })
@@ -154,14 +152,7 @@ module.exports = {
     //END
   }
 },
-  search: function(req, res) {
-    console.log(req.body); // So here we need to fetch data from query instead of body, and then need to return array of result :)
-  },
-  check: function(req, res) {
-    console.log(req.body); // I have no idea abou this function!
-  },
   profileId: function(req, res) {
-
     if(req.user.id==req.params.id)
     {
       user
@@ -244,7 +235,9 @@ module.exports = {
       .then((result)=>{
         if(result.isEmpty() === true){
           result.array().forEach((error)=>{
-            res.status(400).send(error)
+            res.status(400).json({
+              error
+            })
           });
         }
       })
@@ -271,7 +264,7 @@ module.exports = {
               // res.send('success');
             })
             .catch((err)=>{
-              res.json({
+              res.status(400).json({
                 msg:"FAILURE",
                 status:0
               })
@@ -290,14 +283,13 @@ module.exports = {
           user:temp
         })
         }else {
-          res.json({
+          res.status(400).json({
             status:0,
             msg:"User doesn't exist"
           })
         }
-        
       } catch(err) {
-        res.json({
+        res.status(400).json({
           status:0,
           msg:'Error'
         })
@@ -312,14 +304,14 @@ module.exports = {
           user:temp
         })
         }else {
-          res.json({
+          res.status(400).json({
             status:0,
             msg:"User doesn't exist"
           })
         }
         
       } catch(err) {
-        res.json({
+        res.status(400).json({
           status:0,
           msg:'Error'
         })

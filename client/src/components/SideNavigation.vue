@@ -40,6 +40,11 @@
         <router-link :to='`/dashboard/${id}`'><i class="fa fa-server" aria-hidden="true"></i></router-link>
       </center>
     </div>
+    <div class="feed-icon">
+      <center>
+        <router-link :to='`/portfolio/${id}`'><i class="fa fa-globe" aria-hidden="true"></i></router-link>
+      </center>
+    </div>
     </div>
     <div class="group-2">
       <div class="feed-icon mb-5">

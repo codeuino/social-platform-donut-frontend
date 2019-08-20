@@ -13,12 +13,10 @@ import ProjectView from './views/ProjectView.vue'
 import Home from './views/Home.vue'
 import Event from './views/Event.vue'
 import EventFeed from './views/EventFeed.vue'
-import EventForm from './views/EventForm.vue'
 import Signup2 from './views/CompleteSignup.vue'
 import LikedProjects from './views/LikedProjects.vue'
 import ProjectFeed from './views/ProjectFeed.vue'
 Vue.use(Router)
-
 export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,

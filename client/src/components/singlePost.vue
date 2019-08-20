@@ -1,7 +1,7 @@
 <template>
     <div>
         <b-modal id="modal-1" cancel-disabled  ok-only centered >
-            <SocialMedia/>
+            <SocialMedia :currentID="Currentpost._id"/>
         </b-modal>
         <div v-if="isloading">
                 <b-card class="text-center">
@@ -50,7 +50,7 @@
                     <v-icon dark :class="{'black': isThumbsDownActive}" @click="toggleVote">thumb_down</v-icon>
                     </v-btn>
 
-                    <v-btn @click="SETID" fab dark small color="blue" v-b-modal.modal-1>
+                    <v-btn fab dark small color="blue" v-b-modal.modal-1>
                     <v-icon dark>mdi-share</v-icon>
                     </v-btn>
                     </b-col>
@@ -84,7 +84,8 @@ export default {
       Currentpost: {
       },
       comments: [],
-      Currentcomment: ''
+      Currentcomment: '',
+      github: ''
     }
   },
   methods: {
@@ -95,7 +96,7 @@ export default {
           this.isThumbsUpActive = false
           this.isThumbsDownActive = false
           // Here he undo his/her like, so now value to be null and sends to backend
-          const resp = await fetch('http://localhost:3000/projects/addVote', {
+          const resp = await fetch(this.$store.state.BaseURL + '/projects/addVote', {
             method: 'POST',
             headers: {
               'Accept': 'application/json',
@@ -107,15 +108,19 @@ export default {
               vote: '0'
             })
           })
-          const content = await resp.json()
-          console.log(content)
-          console.log(this.Currentpost.upAnddown[this.currentUserId])
+          if (resp.status === 200) {
+            const content = await resp.json()
+            console.log(content)
+            console.log(this.Currentpost.upAnddown[this.currentUserId])
+          } else {
+            alert('Failed to like or dislike')
+          }
         } else {
           this.Currentpost.upAnddown[this.currentUserId] = '1'
           this.isThumbsUpActive = true
           this.isThumbsDownActive = false
           // He now likes the post and we should send this to backend
-          const resp = await fetch('http://localhost:3000/projects/addVote', {
+          const resp = await fetch(this.$store.state.BaseURL + '/projects/addVote', {
             method: 'POST',
             headers: {
               'Accept': 'application/json',
@@ -127,9 +132,11 @@ export default {
               vote: '1'
             })
           })
-          const content = await resp.json()
-          console.log(content)
-          console.log(this.Currentpost.upAnddown[this.currentUserId])
+          if (resp.status === 200) {
+            console.log(this.Currentpost.upAnddown[this.currentUserId])
+          } else {
+            alert('Failed to like or dislike')
+          }
         }
       }
       if (e.target.innerHTML === 'thumb_down') {
@@ -138,7 +145,7 @@ export default {
           this.isThumbsUpActive = false
           this.isThumbsDownActive = false
           // Here he undo his/her dislike, so now value to be null or we can just remove user from map and sends to backend
-          const resp = await fetch('http://localhost:3000/projects/addVote', {
+          const resp = await fetch(this.$store.state.BaseURL + '/projects/addVote', {
             method: 'POST',
             headers: {
               'Accept': 'application/json',
@@ -170,14 +177,15 @@ export default {
               vote: '-1'
             })
           })
-          const content = await resp.json()
-          console.log(content)
-          console.log(this.Currentpost.upAnddown[this.currentUserId])
+          if (resp.status === 200) {
+            const content = await resp.json()
+            console.log(content)
+            console.log(this.Currentpost.upAnddown[this.currentUserId])
+          } else {
+            alert('Failed to add like or dislike')
+          }
         }
       }
-    },
-    SETID () {
-      this.addPostID(this.post.pid)
     },
     async addComment (e) {
       e.preventDefault()
@@ -208,11 +216,14 @@ export default {
 
           })
         })
-        const content = await resp.json()
-        console.log(content)
-
-        this.comments = [...this.comments, tempComment]
-        this.Currentcomment = ''
+        if (resp.status === 200) {
+          const content = await resp.json()
+          console.log(content)
+          this.comments = [...this.comments, tempComment]
+          this.Currentcomment = ''
+        } else {
+          alert('Failed to add comment')
+        }
       }
       // We will also need to send comment to backend
     }
@@ -231,18 +242,21 @@ export default {
         },
         body: JSON.stringify({ id: this.$route.params.post_id })
       })
-    const content = await response.json()
-    console.log(content)
-    this.Currentpost.title = content.project.pname
-    this.Currentpost.content = content.project.content
-    this.Currentpost.lang = content.project.Lang
-    this.Currentpost.comments = content.project.comments
-    this.Currentpost.authorName = content.project.authorName
-    // eslint-disable-next-line no-unused-expressions
-    this.Currentpost.upAnddown = content.project.upDownVote
-    this.comments = this.Currentpost.comments
-    // this.Currentpost.social.github = content.project.github
-    this.isloading = false
+    if (response.status === 200) {
+      const content = await response.json()
+      console.log(content)
+      this.Currentpost.title = content.project.pname
+      this.Currentpost.content = content.project.content
+      this.Currentpost.lang = content.project.Lang
+      this.Currentpost.comments = content.project.comments
+      this.Currentpost.authorName = content.project.authorName
+      this.Currentpost.upAnddown = content.project.upDownVote
+      this.comments = this.Currentpost.comments
+      this.Currentpost.github = content.project.github
+      this.isloading = false
+    } else {
+      alert('Failed to fetch Project')
+    }
   }
 
 }

@@ -4,7 +4,6 @@
         header="Complete Signup"
         lead="Complete Following Steps To Register"
         >
-
         </b-jumbotron>
         <b-container class="mt-5">
             <div class="form">
@@ -61,12 +60,9 @@
                                     placeholder="City Name"
                                     required
                                     >
-
                                     </b-form-input>
                                 </b-form-group>
-
                                 <!-- Admin Name -->
-
                                 <b-form-group
                                 label="Admin's Name"
                                 >
@@ -95,9 +91,7 @@
                                     <option slot="first" :value="null">Gender</option>
                                     </b-form-select>
                                 </b-form-group>
-
                                 <!-- Social Media Handles -->
-
                                 <b-form-group
                                 label="Github Handle"
                                 >
@@ -125,7 +119,6 @@
                                 <b-form-group class="text-center mt-5">
                                     <b-button type="submit" @click="addUser" variant="primary" class="mr-2 btn-lg btn-block">Complete Registration</b-button>
                                 </b-form-group>
-
                 </b-form>
             </div>
         </b-container>
@@ -150,7 +143,6 @@ export default {
   methods: {
     async addUser (e) {
       e.preventDefault()
-      console.log('HI')
       const email = this.$store.state.temp.email
       const password = this.$store.state.temp.password
       const name = this.$store.state.temp.name
@@ -183,8 +175,7 @@ export default {
 
         })
       })
-      const content = await response.json()
-      if (content.status === 1) {
+      if (response.status === 200) {
         alert('Congratulations, you are successfully signed in')
         this.$router.push('/login')
       } else {
@@ -199,9 +190,9 @@ export default {
     }
   },
   mounted () {
-    // if (!this.$store.state.temp.hasOwnProperty('email')) {
-    //   this.$router.push('/signup')
-    // }
+    if (!this.$store.state.temp.hasOwnProperty('email')) {
+      this.$router.push('/signup')
+    }
   }
 }
 </script>

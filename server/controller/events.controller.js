@@ -30,7 +30,6 @@ module.exports ={
         let event
 
         try {
-            console.log('hi')
             event = await Event.create({
                 members:[req.user.id],
                 title: req.body.title,
@@ -201,19 +200,16 @@ module.exports ={
                         }
                     })
                 res.json({
-                        status:1,
                         msg:'Event Updated'
                     })
                 }else {
                     res.status(401).json({
-                        status:0,
                         msg:'Authentication Error'
                     })
                 }
             }catch (err) {
                 console.log(err)
                 res.status(400).json({
-                    status:0,
                     msg:'Failed to update event'
                 })
             }
@@ -222,7 +218,6 @@ module.exports ={
     changeStatus:  async function (req,res) {
         if(req.body.status>3 || req.body.status <0) {
             return res.status(400).json({
-                status:0,
                 msg:'Invalid Status'
             })
         }
@@ -238,19 +233,16 @@ module.exports ={
                         }
                     })
                 res.json({
-                        status:1,
-                        msg:'WEvent Updated'
+                        msg:'Event Updated'
                     })
                 }else {
                     res.status(401).json({
-                        status:0,
                         msg:'Authentication Error'
                     })
                 }
             }catch (err) {
                 console.log(err)
                 res.status(400).json({
-                    status:0,
                     msg:'Failed to update event'
                 })
             }

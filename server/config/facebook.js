@@ -23,7 +23,6 @@ passport.use(
     (accessToken, refreshToken, profile, done) => {
       user.findOne({ Eid: profile.id }).then(data => {
         if (data) {
-          console.log('Already in Database');
           done(null, data);
         } else {
           new user({

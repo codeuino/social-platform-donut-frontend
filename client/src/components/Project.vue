@@ -126,13 +126,13 @@ export default {
               'Authorization': this.$session.get('token')
             },
             body: JSON.stringify({
-              id: this.$route.params.post_id,
+              id: this.Currentpost._id,
               vote: '0'
             })
           })
-          const content = await resp.json()
-          console.log(content)
-          console.log(this.Currentpost.upDownVote[this.currentUserId])
+          if (resp.status !== 200) {
+            alert('Sorry, you cannot vote right now, please try later')
+          }
         } else {
           this.Currentpost.upDownVote[this.currentUserId] = '1'
           this.isThumbsUpActive = true
@@ -146,13 +146,13 @@ export default {
               'Authorization': this.$session.get('token')
             },
             body: JSON.stringify({
-              id: this.$route.params.post_id,
+              id: this.Currentpost._id,
               vote: '1'
             })
           })
-          const content = await resp.json()
-          console.log(content)
-          console.log(this.Currentpost.upDownVote[this.currentUserId])
+          if (resp.status !== 200) {
+            alert('Sorry, you cannot vote right now, please try later')
+          }
         }
       }
       if (classList.includes('fa-thumbs-down')) {
@@ -173,9 +173,9 @@ export default {
               vote: '0'
             })
           })
-          const content = await resp.json()
-          console.log(content)
-          console.log(this.Currentpost.upDownVote[this.currentUserId])
+          if (resp.status !== 200) {
+            alert('Sorry, you cannot vote right now, please try later')
+          }
         } else {
           this.Currentpost.upDownVote[this.currentUserId] = '-1'
           // User now dislikes the post and we should send this to
@@ -193,9 +193,9 @@ export default {
               vote: '-1'
             })
           })
-          const content = await resp.json()
-          console.log(content)
-          console.log(this.Currentpost.upDownVote[this.currentUserId])
+          if (resp.status !== 200) {
+            alert('Sorry, you cannot vote right now, please try later')
+          }
         }
       }
     },
@@ -228,10 +228,14 @@ export default {
 
           })
         })
-        const content = await resp.json()
-        console.log(content)
-        alert('Comment Added')
-        this.Currentcomment = ''
+        if (resp.status === 200) {
+          const content = await resp.json()
+          console.log(content)
+          alert('Comment Added')
+          this.Currentcomment = ''
+        } else {
+          alert('Failed to add comment')
+        }
       }
     }
   },
@@ -239,7 +243,6 @@ export default {
     this.Currentpost = this.post
     this.isloading = false
     this.currentUserId = this.$session.get('UserID')
-    console.log(this.Currentpost.organiserName)
   }
 
 }
@@ -337,5 +340,4 @@ export default {
 .post-title > a>  h4 {
   font-size: 20px;
 }
-
 </style>

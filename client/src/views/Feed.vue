@@ -78,9 +78,9 @@ export default {
         'Authorization': this.$session.get('token')
       }
     })
-    const content = await resp.json()
-    console.log(content)
-    if (content.status === 1) {
+
+    if (resp.status === 200) {
+      const content = await resp.json()
       this.posts = content.feed
     } else {
       this.$router.push('/login')

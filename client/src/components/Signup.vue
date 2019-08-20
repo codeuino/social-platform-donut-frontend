@@ -127,14 +127,7 @@ export default {
       // Now we can send form details to and fetch tokens if logged in and then redirect to feed page
       // if login failed use this.$router.push({path: 'welcome', query:{source: 'login' , error:'true'}})
       // We also need to update Last login location !
-      // We will also update this.$store.state.userDetails.token and add token in it if successful XD
-
-      //   this.addToken({
-      //     test: 'Test Token'
-      //   })
-      //   this.addUser(User)
-      //   this.$router.push({ path: `/feed${User.id}` })
-      // })
+      // We will also update this.$store.state.userDetails.token and add token in it if successful
     },
     googleSignup () {
       this.isLoading = true

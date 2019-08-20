@@ -1,5 +1,5 @@
 <template>
-    <div class="wrapper">
+    <div class="wrapper"  :class="$store.state.darkMode ? 'dark' : '' ">
         <div v-if="isloading">
             <b-container class="text-center">
               <b-spinner style="width: 3rem; height: 3rem;" label="Large Spinner"></b-spinner>
@@ -60,10 +60,14 @@ export default {
         'Authorization': this.$session.get('token')
       }
     })
-    var content = await response.json()
-    this.profile.userDetails = content.user
-    this.profile.posts = content.user.Projects
-    this.isloading = false
+    if (response.status === 200) {
+      var content = await response.json()
+      this.profile.userDetails = content.user
+      this.profile.posts = content.user.Projects
+      this.isloading = false
+    } else {
+      alert('Failed to fetch feed ')
+    }
   }
 }
 </script>
@@ -73,6 +77,9 @@ export default {
     .container {
         max-width:1300px !important;
     }
+}
+.dark{
+  background-color: #121212;
 }
 .wrapper {
     overflow-x: hidden;

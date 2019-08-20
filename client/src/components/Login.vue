@@ -124,10 +124,11 @@ export default {
                     body: body
                   }
                 )
-                var resp = await response.json()
-                console.log(resp)
+                if (response.status === 200) {
+                  alert('Device added')
+                }
               } else {
-                console.log('NOOO')
+                alert("Sorry, we can't support this browser")
               }
               this.addToken({
                 secret_token: content.token
@@ -140,8 +141,6 @@ export default {
 
               this.$session.set('UserID', content.user._id)
               this.$session.set('navbarName', content.user.navbarName)
-              console.log(this.$session.get('User'))
-              console.log('hi')
               this.$router.push({ path: `/feed/${content.user._id}` })
             }
           } catch (err) {
@@ -165,7 +164,6 @@ export default {
         .signIn()
         .then(async GoogleUser => {
           // On success do something, refer to https://developers.google.com/api-client-library/javascript/reference/referencedocs#googleusergetid
-          console.log('user', GoogleUser)
           // GoogleUser.getId() : Get the user's unique ID string.
           // GoogleUser.getBasicProfile() : Get the user's basic profile information.
           // GoogleUser.getAuthResponse() : Get the response object from the user's auth session. access_token and so on
@@ -184,21 +182,16 @@ export default {
               googleID: GoogleUser.w3.Eea
             })
           })
-            .then(response => {
-              const content = response.json()
-              return content
-            })
-            .then(content => {
-              console.log(content)
-              if (content.status === 1) {
+            .then(async response => {
+              console.log(response)
+              if (response.status === 200) {
+                const content = await response.json()
                 this.$session.start()
                 this.$session.set('token', content.token)
                 this.$store.state.isLogged = true
                 this.$session.set('User', content.user.name)
                 this.$session.set('navbarName', content.user.navbarName)
-                console.log(this.$session.get('navbarName'))
                 this.$session.set('UserID', content.user._id)
-                console.log(this.$session.get('User'))
                 this.$router.push({ path: `/feed/${content.user._id}` })
               } else {
                 alert('Login failed')
@@ -206,6 +199,10 @@ export default {
                   path: `/login`
                 })
               }
+            })
+            .catch(error => {
+              alert('Please check your internet connection')
+              console.log(error)
             })
         })
         .catch(error => {

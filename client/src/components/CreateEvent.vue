@@ -102,7 +102,7 @@
                     <div class="my-2">
                     <h1>Preview</h1>
                     <br>
-                    <Project v-if="showPreview" :post="testEvent"/>
+                    <Project v-if="showPreview" :post="previewEvent"/>
                     </div>
           </b-card>
         </b-col>
@@ -122,7 +122,7 @@ export default {
   },
   data () {
     return {
-      testEvent: {},
+      previewEvent: {},
       showPreview: false,
       description: '',
       title: '',
@@ -174,7 +174,7 @@ export default {
     Preview (e) {
       e.preventDefault()
       this.showPreview = true
-      this.testEvent = {
+      this.previewEvent = {
         title: this.title,
         venue: {
           location: this.location,

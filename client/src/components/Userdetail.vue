@@ -1,40 +1,6 @@
 <template>
-    <!--- <div class="userDetail-wrapper w-100 text-center text-white" :class="$store.state.darkMode ? 'bg-dark' : 'bg-info'">
-        <b-jumbotron :class="$store.state.darkMode ? 'dark' : ''"></b-jumbotron>
-        <div class="header">
-            <img class="profilePic" :src="user.profilePicture" alt="">
-            <h3 class="mt-2 ">{{user.name}}</h3>
-            <h5 class="lead mt-2"><v-icon class="text-white">mdi-map</v-icon> {{user.location.country}}</h5>
-            <div v-if="differentPerson" class="mt-3">
-                <span v-if="!isUserFollowing"><b-button @click="toggleFollowing" variant="outline-dark">Follow +</b-button></span>
-                <span v-if="isUserFollowing"><b-button @click="toggleFollowing" variant="dark">Following</b-button></span>
-            </div>
-            <div class=" mt-3">
-                <p class="bio">
-                    {{user.bio}}
-                </p>
-            </div>
-
-            <hr>
-        </div>
-        <div>
-                <b-row>
-                <b-col class="followStats " md="7">
-                    <div ><b>Followers</b><br> {{followerCount}} </div>
-                    <div><b>Following</b><br> {{followingCount}} </div>
-                </b-col>
-                <b-col md="5"  id="social-links">
-                    <div><a :href="user.social.facebook"><button class="btn btn-primary">Facebook</button></a></div>
-                    <div><a :href="user.social.github"><button class="btn btn-success">Github</button></a></div>
-                    <div><a :href="user.social.twitter"><button class="btn btn-dark">Twitter</button></a></div>
-                    <div><a :href="user.website"><button class="btn btn-light">Website</button></a></div>
-                    <div> <router-link class="btn btn-danger" :to="`/portfolio/${user.id}`">View Portfolio</router-link></div>
-                </b-col>
-                 </b-row>
-
-        </div>
-    </div> --->
-    <div class="user-detail-wrapper b-container">
+    <div class="post-card" >
+    <div class="user-detail-wrapper b-container" :class="$store.state.darkMode ? 'dark-mode' : 'light-mode' ">
       <div class="row profile-wrapper">
         <div class="profile-img col-4">
           <img src="https://image.flaticon.com/icons/svg/17/17004.svg" alt="">
@@ -70,6 +36,7 @@
 
       </div>
 
+    </div>
     </div>
 
 </template>
@@ -115,10 +82,16 @@ export default {
 </script>
 
 <style scoped>
+.dark-mode {
+  background-color: #1A1A1B;
+  color:white;
+}
+.light-mode {
+  background-color:white;
+}
 .user-detail-wrapper {
   min-height:84vh;
   position: fixed;
-  background-color:white;
   border-radius: 5px;
   min-width:27vw;
   max-width:27vw;

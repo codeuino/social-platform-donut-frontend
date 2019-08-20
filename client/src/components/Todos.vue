@@ -36,7 +36,7 @@ export default {
   },
   async mounted () {
     try {
-      const response = await fetch('http://localhost:3000/todos/getTodos', {
+      const response = await fetch(this.$store.state.BaseURL + '/todos/getTodos', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -44,9 +44,8 @@ export default {
           'Authorization': this.$session.get('token')
         }
       })
-      const data = await response.json()
-      console.log(data)
-      if (data.status !== 0) {
+      if (response.status === 200) {
+        const data = await response.json()
         this.todos = data.todos
       } else {
         console.log('Some Error Occured')
@@ -66,9 +65,7 @@ export default {
           title: this.newTodo,
           completedAt: null
         }
-        this.todos.push(newtodo)
-        this.newTodo = ''
-        const response = await fetch('http://localhost:3000/todos/addTodo', {
+        const response = await fetch(this.$store.state.BaseURL + '/todos/addTodo', {
           method: 'POST',
           headers: {
             'Accept': 'application/json',
@@ -77,14 +74,19 @@ export default {
           },
           body: JSON.stringify(newtodo)
         })
-        const data = await response.json()
-        console.log(data)
+        if (response.status === 200) {
+          const data = await response.json()
+          console.log(data)
+          this.todos.push(newtodo)
+          this.newTodo = ''
+        } else {
+          alert('Failed to add todos')
+        }
       }
     },
     async deleteTodo (id) {
-      this.todos = this.todos.filter(todo => todo.id !== id)
       // Send this to db and delete it there as well :D
-      const response = await fetch('http://localhost:3000/todos/deleteTodo', {
+      const response = await fetch(this.$store.state.BaseURL + '/todos/deleteTodo', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -93,8 +95,13 @@ export default {
         },
         body: JSON.stringify({ id })
       })
-      const data = await response.json()
-      console.log(data)
+      if (response.status === 200) {
+        const data = await response.json()
+        console.log(data)
+        this.todos = this.todos.filter(todo => todo.id !== id)
+      } else {
+        alert('Failed to delete todo')
+      }
     }
   },
   computed: {

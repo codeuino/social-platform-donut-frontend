@@ -1,13 +1,13 @@
 <template>
 <div>
-    <div class="error" v-if="error">
+    <div class="error" >
       <center><h1>Page Not Found</h1></center>
     </div>
-    <div class="PortfolioForm" v-if="Portfolionotexist && $store.state.token  && $store.state.userDetails.id === parseInt($route.params.id)">
+    <div class="PortfolioForm">
         <PortfolioStarterForm/>
     </div>
 
-    <div color="Portfolio" v-if="!Portfolionotexist">
+    <div color="Portfolio">
         <LandingScreen :title="Portfolio.LandingPage.title" :social="Portfolio.LandingPage.social" :tagline="Portfolio.LandingPage.tagline" :cover_img="Portfolio.LandingPage.cover_img" :profilePicture="Portfolio.LandingPage.profilePicture"/>
         <AboutScreen :description="Portfolio.AboutScreen.description" :images="Portfolio.AboutScreen.images"/>
         <hr>
@@ -67,9 +67,7 @@ export default {
     //     this.error = true
     //   }
     // }
-    // I'm going to have look on this, I have no idea what I did, It looks overs various situation which leads to one conclusion ERR!
 
-    // Fetch from server using axios and then
     this.Portfolio = {
       LandingPage: {
         cover_img: 'https://images.pexels.com/photos/2402955/pexels-photo-2402955.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=1064',

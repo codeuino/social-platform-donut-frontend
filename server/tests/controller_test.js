@@ -38,7 +38,7 @@ describe('controllers', () => {
       .post('/auth/userlogin')
       .send({
         fname: 'tushar',
-        email:'tushar.goel.dav@gmail.com',
+        email: 'tushar.goel.dav@gmail.com',
         lname: 'goel',
         dob: '29/08/1999',
         github: 'TG1999',
@@ -54,5 +54,4 @@ describe('controllers', () => {
       .expect(302)
       .expect('Found. Redirecting to /', done);
   });
-  
 });

@@ -2,7 +2,6 @@ const passport = require('passport');
 const google = require('passport-google-oauth20');
 const key = require('./credential.js');
 const user = require('../schema/user.js');
-const org = require('../schema/organisation.js');
 
 passport.serializeUser(function(user, done) {
   done(null, user.id);
@@ -21,7 +20,7 @@ passport.use(
       clientSecret: key.oauth.clientSecret
     },
     function(acc, ref, user, done) {
-      done(null,user)
+      done(null, user);
     }
   )
 );

@@ -1,9 +1,9 @@
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 const SubscriptionSchema = new Schema({
   endpoint: {
-    type: String,
+    type: String
   },
   expirationTime: {
     type: String,
@@ -17,6 +17,6 @@ const SubscriptionSchema = new Schema({
       type: String
     }
   }
-})
-const SubscriptionModel = mongoose.model('subscription', SubscriptionSchema)
-module.exports = SubscriptionModel
+});
+const SubscriptionModel = mongoose.model('subscription', SubscriptionSchema);
+module.exports = SubscriptionModel;

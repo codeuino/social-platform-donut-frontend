@@ -22,7 +22,7 @@ export default {
   methods: {
     async completeTodo () {
       this.isComplete = true
-      const response = await fetch('http://localhost:3000/todos/completeTodo', {
+      const response = await fetch(this.$store.state.BaseURL + '/todos/completeTodo', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -31,8 +31,12 @@ export default {
         },
         body: JSON.stringify({ id: this.TodoObject.id })
       })
-      const data = await response.json()
-      console.log(data)
+      if (response.status === 200) {
+        const data = await response.json()
+        console.log(data)
+      } else {
+        alert('Failed to update todo')
+      }
     }
   },
   mounted () {

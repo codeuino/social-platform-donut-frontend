@@ -41,11 +41,11 @@ export default {
           'Authorization': this.$session.get('token')
         }
       })
-      const content = await resp.json()
-      if (content.status === 1) {
+      if (resp.status === 200) {
+        const content = await resp.json()
         this.events = content.events
       } else {
-        console.log(content)
+        alert('Failed to fetch event')
       }
     } catch (error) {
       console.log(error)
