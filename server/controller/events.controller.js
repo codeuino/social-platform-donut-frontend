@@ -5,8 +5,6 @@ const _ = require('lodash')
 module.exports ={ 
     addEvent : async function(req,res) {
         //Note : We have to have validate date, they should be of future XD
-        console.log(req.body)
-        console.log(req.file)
         const Venue = {
             location: req.body.location,
             time: req.body.time,
@@ -41,7 +39,6 @@ module.exports ={
                 //NEed to add gridfs to upload image
                 coverImg : ''
             })
-            console.log(event)
         } catch(err) {
             console.log(err)
             res.status(400).json({
@@ -49,12 +46,11 @@ module.exports ={
                 msg:'Failed to add event'
             })
         }
-        console.log(event)
         if(req.user.type ===1) {
             try {
                 const  user = await Organisation.findByIdAndUpdate(req.user.id,{
                     $push : {
-                        'Events': event
+                        'Events': event._id
                     }
                 })
                 res.json({

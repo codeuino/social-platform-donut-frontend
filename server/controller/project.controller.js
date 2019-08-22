@@ -20,7 +20,7 @@ module.exports = {
             }
         } catch (error) {
             return res.status(400).json({
-                status:0
+                msg:"Failed to add project"
             })
         }
         
@@ -86,7 +86,7 @@ module.exports = {
                    
                })
            })
-           res.json({Project,status:1})
+           res.json({Project})
         } catch (err) {
             res.status(400).json({err,status:0})
         }
@@ -94,16 +94,21 @@ module.exports = {
     fetchProjects : async function (req,res) {
     const projects = await ProjectModel.find({})
     res.json({
-        status:1,
         projects:projects
     })
     },
     fetchProject : async function (req,res) {
         const project = await ProjectModel.findById(req.body.id)
-        res.json({
-            status:1,
-            project:project
-        })
+        if(project) {
+            res.json({
+                project:project
+            })
+        }else {
+            res.status(400).json({
+                msg:'Failed to fetch project'
+            })
+        }
+        
     },
     addComment : async function(req,res) {
         let User
@@ -125,12 +130,12 @@ module.exports = {
                 }
             })
             res.json({
-                status:1,
+                msg:'Success'
             })
         } catch (error) {
             console.log(error)
             res.status(400).json({
-                status:0
+                msg:'Failure'
             })
         }
         
