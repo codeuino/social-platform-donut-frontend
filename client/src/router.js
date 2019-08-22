@@ -63,7 +63,7 @@ export default new Router({
       component: Settings
     },
     {
-      path: '/profile/:id',
+      path: '/profile',
       name: 'ProfileView',
       component: ProfileView
     },

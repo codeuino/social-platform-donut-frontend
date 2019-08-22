@@ -1,7 +1,7 @@
 <template>
     <div class="post-card" >
     <div class="user-detail-wrapper b-container" :class="$store.state.darkMode ? 'dark-mode' : 'light-mode' ">
-      <div class="row profile-wrapper">
+      <div class="row profile-wrapper" :class="$store.state.darkMode ? 'profile-wrapper-dark' : 'profile-wrapper-light' ">
         <div class="profile-img col-4">
           <img src="https://image.flaticon.com/icons/svg/17/17004.svg" alt="">
         </div>
@@ -108,8 +108,13 @@ export default {
   font-size:14px;
   opacity: 0.7;
 }
+.profile-wrapper-light {
+    background-color: #edf2fb;
+}
+.profile-wrapper-dark {
+    background-color: #121212;
+}
 .profile-wrapper {
-  background-color: #edf2fb;
   padding:  20px 0;
   border-radius: 10px;
 }

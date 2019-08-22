@@ -54,6 +54,10 @@ export default {
     Authenticate.Authenticate(this)
     let response = await fetch(this.$store.state.BaseURL + '/profile/getProfile', {
       method: 'POST',
+      body: JSON.stringify({
+        id: this.$route.query.id,
+        type: this.$route.query.type
+      }),
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',

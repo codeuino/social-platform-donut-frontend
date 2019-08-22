@@ -138,7 +138,6 @@ export default {
               this.$session.set('isLogged', true)
               this.$store.state.isLogged = true
               this.$session.set('User', content.user.name)
-
               this.$session.set('UserID', content.user._id)
               this.$session.set('navbarName', content.user.navbarName)
               this.$router.push({ path: `/feed/${content.user._id}` })
@@ -183,13 +182,13 @@ export default {
             })
           })
             .then(async response => {
-              console.log(response)
               if (response.status === 200) {
                 const content = await response.json()
                 this.$session.start()
                 this.$session.set('token', content.token)
                 this.$store.state.isLogged = true
                 this.$session.set('User', content.user.name)
+                this.$session.set('UserType', content.user.type)
                 this.$session.set('navbarName', content.user.navbarName)
                 this.$session.set('UserID', content.user._id)
                 this.$router.push({ path: `/feed/${content.user._id}` })

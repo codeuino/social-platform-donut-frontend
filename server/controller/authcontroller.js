@@ -143,7 +143,9 @@ module.exports={
                     pathname:clientBaseURL+u._id,
                     query:{
                         "token":'Bearer  ' +tok,
-                        "name": user.name
+                        "name": user.name,
+                        "type":u.type
+
                     }
                 }))
             }else {
@@ -167,7 +169,8 @@ module.exports={
                     pathname:clientBaseURL+u._id,
                     query:{
                         "token":'Bearer  ' +tok,
-                        "name": user.name
+                        "name": user.name,
+                        "type":u.type
                     }
                 }))
             }
@@ -189,7 +192,8 @@ module.exports={
                     pathname:clientBaseURL+u._id,
                     query:{
                         "token":'Bearer  ' +tok,
-                        "name": user.name
+                        "name": user.name,
+                        "type":u.type
                     }
                 }))
             }else {
@@ -214,7 +218,8 @@ module.exports={
                     pathname:clientBaseURL+u._id,
                     query:{
                         "token":'Bearer  ' +tok,
-                        "name": user.name
+                        "name": user.name,
+                        "type":u.type
                     }
                 }))
             }

@@ -25,7 +25,6 @@ module.exports = {
       .then(sub => {
           if(sub) {
             res.json({
-              status:1,
               msg:'Success'
             })
           }else {
@@ -42,12 +41,11 @@ module.exports = {
                 }).then(
                   user=> {
                     console.log(user)
-                    res.json({ status:1, msg:'Success'})
+                    res.json({msg:'Success'})
                   })
                 .catch(err => {
                   console.log(err)
                   res.status(400).json({
-                    status:0,
                     msg: 'Fail'
                   })
                 }) 
@@ -60,11 +58,11 @@ module.exports = {
                 }).then(
                   user=> {
                     console.log(user)
-                    res.json({ status:1, msg:'Success'})
+                    res.json({ msg:'Success'})
                   })
                 .catch(err => {
                   console.log(err)
-                  res.status(400).json({ status:0, msg: 'Fail'})
+                  res.status(400).json({msg: 'Fail'})
                 }) 
               }
               
@@ -74,7 +72,7 @@ module.exports = {
         })
       .catch (err => {
         console.log(err)
-        res.status(400).json({ status:0, msg: 'Fail' })
+        res.status(400).json({msg: 'Fail' })
       })
   },
   follow: async function(req,res) {
@@ -85,7 +83,7 @@ module.exports = {
     let tempOrg
     // Check if both users are same 
     if(SubscribingBy===SubscribingTo) {
-      return res.json({ status:0, msg: "You can't follow yourself" })
+      return res.json({msg: "You can't follow yourself" })
     }
     // Now We Must check whether subscribingto is already in the listl, if YES we'll send failure response
     // First Let's update subscribing user 
@@ -96,14 +94,14 @@ module.exports = {
       tempOrg.followingList.forEach(user => {
         if(user.id == SubscribingTo) {
           returnFLag = true
-          return res.send({status:1, msg:'User Already Follows'})
+          return res.json({ msg:'User Already Follows'})
         }
       })
       if(returnFLag) return 
       try {
         await OrganisationModel.findByIdAndUpdate(SubscribingBy,{ $push: {'followingList' : {id:SubscribingTo,type:req.body.user.type}}})
       } catch(err) {
-        return res.json({status:0, msg:'Some Error Occured'})
+        return res.json({msg:'Some Error Occured'})
       }
     }else {
       tempUser = await user.findById(SubscribingBy)
@@ -112,7 +110,7 @@ module.exports = {
       tempUser.followingList.forEach(user => {
         if(user.id == SubscribingTo) {
           returnFLag = true
-          return res.send({status:1, msg:'User Already Follows'})
+          return res.json({msg:'User Already Follows'})
         }
       })
       if(returnFLag) return
@@ -121,7 +119,7 @@ module.exports = {
       }
       catch(err) {
         console.log(err)
-        return res.status(400).json({ status:0,msg:'Some Error Occured'})
+        return res.status(400).json({msg:'Some Error Occured'})
       }
     } 
     console.log('Subscribing User UPDATED')
@@ -131,10 +129,10 @@ module.exports = {
       const User = await OrganisationModel.findById(SubscribingTo)
       try {
         await OrganisationModel.findByIdAndUpdate(SubscribingTo,{$push: {'followersList' : { id:SubscribingBy, type:req.user.type}}})
-        return res.json({ status:1, msg:'Success'})
+        return res.json({ msg:'Success'})
       }catch (err) {
         console.log(err)
-        return res.status(400).json({ status:0, msg:'Some Error Occured'})
+        return res.status(400).json({ msg:'Some Error Occured'})
       }
     }else {
       const User = await user.findById(SubscribingTo)
@@ -145,7 +143,6 @@ module.exports = {
       }catch (err) {
         console.log(err)
         return res.status(400).send({
-          status:0,
           msg:'Some Error Occured'
       })
     } 
@@ -259,14 +256,12 @@ module.exports = {
             .then(()=>{
               res.json({
                 msg:"Success",
-                status:1
               })
               // res.send('success');
             })
             .catch((err)=>{
               res.status(400).json({
                 msg:"FAILURE",
-                status:0
               })
             });
     });
@@ -279,18 +274,15 @@ module.exports = {
         if(User) {
           var temp = _.pick(User,["_id","githubId",'name'])
         res.json({
-          status:1,
           user:temp
         })
         }else {
-          res.status(400).json({
-            status:0,
+          res.status(404).json({
             msg:"User doesn't exist"
           })
         }
       } catch(err) {
         res.status(400).json({
-          status:0,
           msg:'Error'
         })
       }
@@ -300,34 +292,32 @@ module.exports = {
         if(User) {
           var temp = _.pick(User,["_id","githubId",'name'])
         res.json({
-          status:1,
           user:temp
         })
         }else {
           res.status(400).json({
-            status:0,
             msg:"User doesn't exist"
           })
         }
         
       } catch(err) {
         res.status(400).json({
-          status:0,
           msg:'Error'
         })
       }
     }
   },
   getProfile: async function ( req, res) {
+    req.body.type = parseInt(req.body.type)
     try {
-      if(req.user.type === 1) {
-        let User = await OrganisationModel.findById(req.user.id).populate('Projects')
+      if(req.body.type === 1) {
+        let User = await OrganisationModel.findById(req.body.id).populate('Projects')
         var temp = await _.pick(User,['name', 'profilePic', 'followersList','followingList', 'bio', 'location','social','Projects'])
         res.status(200).json({
           user:temp
         })
       }else {
-        let User = await user.findById(req.user.id).populate('Projects')
+        let User = await user.findById(req.body.id).populate('Projects')
         var temp = await _.pick(User,['name', 'profilePic', 'followersList','followingList', 'bio', 'location','social','Projects'])
         res.status(200).json({
           user:temp
