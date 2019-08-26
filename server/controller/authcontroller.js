@@ -5,12 +5,12 @@ const Social=require('../schema/social.js')
 const validateRegisterInput=require('../validation/registervalidation.js')
 const validateLoginInput=require('../validation/loginvalidation.js')
 const jwt=require('jsonwebtoken')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 const secret ='mySecret'
 const _ =require('lodash')
 let clientBaseURL = 'http://localhost:8080/feed/'
 module.exports={
-    signup:async(req,res)=>{
+    signup:async function (req,res) {
         const {error,isValid}=validateRegisterInput(req.body);
         if(!isValid)
         {
@@ -76,7 +76,7 @@ module.exports={
         }
     },
 
-    login:async(req,res)=>{
+    login:async function(req,res) {
         const {error,isValid}=validateLoginInput(req.body);
         if(!isValid) return res.status(400).json({error, status:0});        
         if(parseInt(req.body.type)===1) {
@@ -143,7 +143,9 @@ module.exports={
                     pathname:clientBaseURL+u._id,
                     query:{
                         "token":'Bearer  ' +tok,
-                        "name": user.name
+                        "name": user.name,
+                        "type":u.type
+
                     }
                 }))
             }else {
@@ -167,7 +169,8 @@ module.exports={
                     pathname:clientBaseURL+u._id,
                     query:{
                         "token":'Bearer  ' +tok,
-                        "name": user.name
+                        "name": user.name,
+                        "type":u.type
                     }
                 }))
             }
@@ -189,7 +192,8 @@ module.exports={
                     pathname:clientBaseURL+u._id,
                     query:{
                         "token":'Bearer  ' +tok,
-                        "name": user.name
+                        "name": user.name,
+                        "type":u.type
                     }
                 }))
             }else {
@@ -214,7 +218,8 @@ module.exports={
                     pathname:clientBaseURL+u._id,
                     query:{
                         "token":'Bearer  ' +tok,
-                        "name": user.name
+                        "name": user.name,
+                        "type":u.type
                     }
                 }))
             }

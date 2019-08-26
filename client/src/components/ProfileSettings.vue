@@ -87,6 +87,7 @@ export default {
   data () {
     return {
       isSubmitting: false,
+      // default data
       userData: {
         image: '',
         name: '',

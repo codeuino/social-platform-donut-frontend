@@ -51,7 +51,7 @@ module.exports={
         } catch (error) {
             console.log(error)
             return res.status(400).json({
-                status:0
+                "msg":"Failed to add post"
             })
         }
        
@@ -59,7 +59,6 @@ module.exports={
     //Deleting Posts
     delete:async(req,res)=>{
         var o_id = new mongo.ObjectID(req.body.id);
-        console.log(o_id)
         console.log(req.body.id)
         //Removing post from collection
         const del= await Posts.remove({_id:req.body.id})

@@ -1,20 +1,18 @@
 <template>
     <div>
-        <b-jumbotron
-        class="bg-info text-white mb-0"
-        header="Liked Projects"
-        >
-        </b-jumbotron>
+        <SideNavigation/>
         <FeedGroup  :postsArray="projects"/>
     </div>
 </template>
 
 <script>
+import SideNavigation from '@/components/SideNavigation.vue'
 import FeedGroup from '@/components/FeedGroup.vue'
 export default {
   name: 'LikedProjects',
   components: {
-    FeedGroup
+    FeedGroup,
+    SideNavigation
   },
   data () {
     return {

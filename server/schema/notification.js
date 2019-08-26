@@ -16,7 +16,7 @@ const notificationSchema = new schema({
   userid: {
     type: String
   },
-  shortinfo:{
+  shortinfo: {
     type: String
   }
 });

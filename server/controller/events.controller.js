@@ -5,8 +5,6 @@ const _ = require('lodash')
 module.exports ={ 
     addEvent : async function(req,res) {
         //Note : We have to have validate date, they should be of future XD
-        console.log(req.body)
-        console.log(req.file)
         const Venue = {
             location: req.body.location,
             time: req.body.time,
@@ -30,7 +28,6 @@ module.exports ={
         let event
 
         try {
-            console.log('hi')
             event = await Event.create({
                 members:[req.user.id],
                 title: req.body.title,
@@ -42,7 +39,6 @@ module.exports ={
                 //NEed to add gridfs to upload image
                 coverImg : ''
             })
-            console.log(event)
         } catch(err) {
             console.log(err)
             res.status(400).json({
@@ -50,12 +46,11 @@ module.exports ={
                 msg:'Failed to add event'
             })
         }
-        console.log(event)
         if(req.user.type ===1) {
             try {
                 const  user = await Organisation.findByIdAndUpdate(req.user.id,{
                     $push : {
-                        'Events': event
+                        'Events': event._id
                     }
                 })
                 res.json({
@@ -201,19 +196,16 @@ module.exports ={
                         }
                     })
                 res.json({
-                        status:1,
                         msg:'Event Updated'
                     })
                 }else {
                     res.status(401).json({
-                        status:0,
                         msg:'Authentication Error'
                     })
                 }
             }catch (err) {
                 console.log(err)
                 res.status(400).json({
-                    status:0,
                     msg:'Failed to update event'
                 })
             }
@@ -222,7 +214,6 @@ module.exports ={
     changeStatus:  async function (req,res) {
         if(req.body.status>3 || req.body.status <0) {
             return res.status(400).json({
-                status:0,
                 msg:'Invalid Status'
             })
         }
@@ -238,19 +229,16 @@ module.exports ={
                         }
                     })
                 res.json({
-                        status:1,
-                        msg:'WEvent Updated'
+                        msg:'Event Updated'
                     })
                 }else {
                     res.status(401).json({
-                        status:0,
                         msg:'Authentication Error'
                     })
                 }
             }catch (err) {
                 console.log(err)
                 res.status(400).json({
-                    status:0,
                     msg:'Failed to update event'
                 })
             }

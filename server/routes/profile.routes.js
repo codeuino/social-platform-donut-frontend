@@ -1,10 +1,8 @@
 const express = require('express');
 const route = express.Router();
 const bodyparser = require('body-parser');
-const url = bodyparser.urlencoded({ extended: false });
 const profileController = require('../controller/profile.controller');
-const jsonParser = bodyparser.json();
-const passport=require('passport');
+const passport = require('passport');
 // var multer = require('multer');
 // var storage = multer.diskStorage({
 //   destination: (req, file, cb) => {
@@ -32,11 +30,27 @@ const passport=require('passport');
 
 // route.get('/setting', url, profileController.setting);
 
-route.post('/getDetails', passport.authenticate('jwt',{session:false}), profileController.getDetails);
+route.post(
+  '/getDetails',
+  passport.authenticate('jwt', { session: false }),
+  profileController.getDetails
+);
 
 // route.post('/updateDetails', jsonParser, profileController.updateDetails);
 
-route.post('/follow', passport.authenticate('jwt',{session:false}), profileController.follow)
-route.post('/addDevice', passport.authenticate('jwt',{session:false}), profileController.addDevice)
-route.post('/getProfile',passport.authenticate('jwt',{session:false}),profileController.getProfile)
+route.post(
+  '/follow',
+  passport.authenticate('jwt', { session: false }),
+  profileController.follow
+);
+route.post(
+  '/addDevice',
+  passport.authenticate('jwt', { session: false }),
+  profileController.addDevice
+);
+route.post(
+  '/getProfile',
+  passport.authenticate('jwt', { session: false }),
+  profileController.getProfile
+);
 module.exports = route;

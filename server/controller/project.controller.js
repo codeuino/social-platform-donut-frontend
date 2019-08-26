@@ -19,9 +19,8 @@ module.exports = {
                 authorName = User.name
             }
         } catch (error) {
-            console.log(error)
-            return res.json({
-                status:0
+            return res.status(400).json({
+                msg:"Failed to add project"
             })
         }
         
@@ -47,7 +46,6 @@ module.exports = {
                         'Projects':Project._id
                     }
                 })
-
            }else {
                // It's an individual
                 User = await user.findById(req.user.id)
@@ -60,14 +58,12 @@ module.exports = {
            //Followers notify function
            const Followers = User.followersList
            Followers.forEach(async follower => {
-               console.log('HI')
                let Follower
                if(follower.type===1) {
                 Follower = await org.findById(follower.id)
                }else {
                 Follower = await user.findById(follower.id)
                }
-               console.log(Follower)
                const devices = Follower.devices
                devices.forEach(device => {
                    subscription.findById(device)
@@ -89,9 +85,8 @@ module.exports = {
                    
                    
                })
-           });
-
-           res.json({Project,status:1})
+           })
+           res.json({Project})
         } catch (err) {
             res.status(400).json({err,status:0})
         }
@@ -99,16 +94,21 @@ module.exports = {
     fetchProjects : async function (req,res) {
     const projects = await ProjectModel.find({})
     res.json({
-        status:1,
         projects:projects
     })
     },
     fetchProject : async function (req,res) {
         const project = await ProjectModel.findById(req.body.id)
-        res.json({
-            status:1,
-            project:project
-        })
+        if(project) {
+            res.json({
+                project:project
+            })
+        }else {
+            res.status(400).json({
+                msg:'Failed to fetch project'
+            })
+        }
+        
     },
     addComment : async function(req,res) {
         let User
@@ -130,12 +130,12 @@ module.exports = {
                 }
             })
             res.json({
-                status:1,
+                msg:'Success'
             })
         } catch (error) {
             console.log(error)
-            res.json({
-                status:0
+            res.status(400).json({
+                msg:'Failure'
             })
         }
         
@@ -166,12 +166,13 @@ module.exports = {
                 })
             } catch (error) {
                 console.log(error)
-                res.json({
-                    status:0
+                res.status(400).json({
+                    status:0,
+                    msg:'Failed to like or dislike this project'
                 })
             }
         }else {
-             return res.json({
+             return res.status(400).json({
                 status:0,
                 msg:'Use only 1 for upvote and -1 for downvote '
             })

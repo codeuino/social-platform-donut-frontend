@@ -1,21 +1,5 @@
 <template>
         <div  :class="$store.state.darkMode ? 'content-dark' : 'content-light' ">
-
-            <!-- <b-container >
-            <div v-if="isloading" class="text-center">
-                <b-spinner style="width: 3rem; height: 3rem;" label="Large Spinner" type="grow"></b-spinner>
-                <h4>Please Wait Do not Refresh</h4>
-            </div>
-            <div v-if="!isloading">
-                <b-container>
-                  <div class="feed-group">
-                    <Post v-for="(project, index) in postsArray" v-bind:key="index" :post="project" />
-                  </div>
-                </b-container>
-
-            </div>
-            </b-container> -->
-
             <div v-if="RouteName === 'ProjectFeed' || RouteName === 'Feed' || RouteName === 'EventFeed'" class="main-feed" :class="$store.state.darkMode ? 'content-dark' : 'content-light' ">
             <!-- Feed start-->
             <b-modal size="xl" ok-only ok-variant="secondary" ok-title="Cancel"  id="modal-2"  title="Create A Project">
@@ -36,7 +20,7 @@
             <!--     Feed end -->
             </div>
 
-          <div v-else class="main-feed-2">
+          <div v-else class="main-feed-2" :class="$store.state.darkMode ? 'content-dark' : 'content-light' ">
                         <Project :key="index" v-for="(post,index) in postsArray" :post="post"/>
           </div>
         </div>
@@ -65,9 +49,6 @@ export default {
       postsGroups: []
     }
   },
-  mounted () {
-    console.log(this.$route.name)
-  },
   computed: {
     RouteName () {
       return this.$route.name
@@ -92,7 +73,6 @@ export default {
   padding-top:20px;
 }
 .main-feed-2 {
-  background-color:#edf2fb;
   min-height:98vh;
   margin-left:35vw;
   margin-right: 20px;

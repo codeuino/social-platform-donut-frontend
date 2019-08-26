@@ -1,5 +1,5 @@
 <template>
-    <div class="wrapper">
+    <div class="wrapper" >
         <SideNavigation/>
         <b-container >
             <div class="PostView">

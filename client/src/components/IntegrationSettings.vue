@@ -9,7 +9,7 @@
                 <h3 class="lead">Import from Github</h3>
                 <hr>
                 <div v-if="githubId == '' ">
-                    <a href="http://localhost:3000/auth/github">
+                    <a :href="this.$store.state.BaseURL +'/auth/github'">
                     <button class="btn btn-lg btn-danger text-white">
                     Import from Github  <v-icon class="text-white ml-1"> fab fa-github</v-icon>
                     </button>
@@ -109,8 +109,8 @@ export default {
         const readmeObj = await resp.json()
         var res = await fetch(readmeObj.download_url)
         var readme = await res.text()
-        var readmeHTML = converter.makeHtml(readme)
-        readmeHTML = `<p>${readmeHTML}</p>`
+        var readmeHTML = converter.makeHtml(readme) // Converting markdown to html
+        readmeHTML = `<p>${readmeHTML}</p>` // Wrapping html around p tag
         const Project = {
           card_title: this.selectedRepos[i].name,
           description: this.selectedRepos[i].description,
@@ -119,7 +119,6 @@ export default {
           image: '',
           github: this.selectedRepos[i].url
         }
-        console.log(Project)
         const respProject = await fetch(this.$store.state.BaseURL + '/projects/addProject',
           {
             method: 'POST',

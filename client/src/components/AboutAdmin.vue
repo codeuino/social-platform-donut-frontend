@@ -41,7 +41,6 @@ export default {
         font-size:46px;
     }
     .content {
-
         word-wrap: break-word;
         font-size: 20px;
         font-family: 'Raleway', sans-serif;

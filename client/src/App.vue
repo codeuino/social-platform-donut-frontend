@@ -18,20 +18,15 @@
 
 <script>
 import NavigationBar from './components/NavigationBar.vue'
-import Todos from './components/Todos'
 export default {
   name: 'App',
   components: {
-    NavigationBar,
-    Todos
+    NavigationBar
   },
-
   data () {
-  },
-  mounted () {
-  },
-  computed: {
-
+    return {
+      // KEEP THIS ON APP.VUE!
+    }
   },
   created () {
     window.addEventListener('offline', function (e) {
@@ -51,10 +46,6 @@ export default {
         onlineCard.style.display = 'none'
       }, 2000)
     })
-  },
-  destroyed () {
-    window.removeEventListener('offline')
-    window.removeEventListener('online')
   }
 
 }

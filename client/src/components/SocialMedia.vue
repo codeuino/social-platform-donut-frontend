@@ -28,9 +28,12 @@ export default {
     Twitter,
     CopyLink
   },
+  props: {
+    currentID: String
+  },
   computed: {
     shareURL () {
-      return 'www.google.com/' + this.$store.state.IDofShare // Change according to deployment
+      return this.$router.base + `project/${this.currentID}`
     }
   }
 }

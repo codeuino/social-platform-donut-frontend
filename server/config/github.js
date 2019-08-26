@@ -20,7 +20,7 @@ passport.use(
       callbackURL: '/auth/github/redirect'
     },
     function(ac, re, pro, done) {
-      done(null,pro)
+      done(null, pro);
     }
   )
 );

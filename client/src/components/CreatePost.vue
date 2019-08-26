@@ -30,7 +30,7 @@
                     <div class="my-2">
                     <h1>Preview</h1>
                     <br>
-                    <Project v-if="showPreview" :post="testPost"/>
+                    <Project v-if="showPreview" :post="previewPost"/>
                     </div>
           </b-card>
         </b-col>
@@ -57,7 +57,7 @@ export default {
         [{ 'direction': 'rtl' }],
         [{ 'header': [1, 2, 3, 4, 5, 6, false] }]
       ],
-      testPost: {},
+      previewPost: {}, // Default state
       showPreview: false
     }
   },
@@ -97,7 +97,7 @@ export default {
     Preview (e) {
       e.preventDefault()
       this.showPreview = true
-      this.testPost = {
+      this.previewPost = {
         title: this.title,
         content: this.content,
         userName: 'Preview'

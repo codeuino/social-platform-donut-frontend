@@ -1,6 +1,6 @@
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema
-const bycrypt = require('bcrypt')
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+const bycrypt = require('bcryptjs');
 const OrgSchema = new Schema({
     type: {
         type: Number,
@@ -54,26 +54,26 @@ const OrgSchema = new Schema({
       },
       bio: {
         type: String
-      },
+  },
       lang: {
         type: [String]
-      },
+  },
       location:{
         country:{
           type:String
         },
         city:{
-          type:String
+      type: String
         }
-      },
-      last_login:{
+  },
+  last_login: {
         lat:{
           type:String
         },
-        long:{
+    long: {
           type:String
         }
-      },
+  },
       navbarName: {
         type:String,
         default:'Donut'

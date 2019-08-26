@@ -4,7 +4,7 @@
     <div class="profile-img-wrapper mb-5">
       <center>
 
-        <router-link :to='`/profile/${id}`'><img src="https://image.flaticon.com/icons/svg/17/17004.svg" alt="">
+        <router-link :to='ProfileLink'><img src="https://image.flaticon.com/icons/svg/17/17004.svg" alt="">
 </router-link>
       </center>
     </div>
@@ -40,6 +40,11 @@
         <router-link :to='`/dashboard/${id}`'><i class="fa fa-server" aria-hidden="true"></i></router-link>
       </center>
     </div>
+    <div class="feed-icon">
+      <center>
+        <router-link :to='`/portfolio/${id}`'><i class="fa fa-globe" aria-hidden="true"></i></router-link>
+      </center>
+    </div>
     </div>
     <div class="group-2">
       <div class="feed-icon mb-5">
@@ -65,6 +70,11 @@ export default {
   computed: {
     id () {
       return this.$session.get('UserID')
+    },
+    ProfileLink () {
+      var id = this.$session.get('UserID')
+      var type = this.$session.get('UserType')
+      return `/profile?type=${type}&id=${id}`
     }
   },
   methods: {

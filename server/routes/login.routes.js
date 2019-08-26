@@ -16,7 +16,6 @@ route.get('/google/redirect', passport.authenticate('google'), function(req,res)
   res.json(req.user)
 });
 route.post('/googleLogin',url,async (req,res)=>{
-  console.log('hi')
   let user
   try {
     user = await UserModel.findOne({email:req.body.email})

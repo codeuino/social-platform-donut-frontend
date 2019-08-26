@@ -1,26 +1,9 @@
 <template>
     <div class="wrapper" :class="$store.state.darkMode ? 'bg-dark' : '' ">
         <SideNavigation/>
+        <router-link :to="getLikedProjectsLink" ><a href="" class="liked-projects">Liked Projects</a></router-link>
         <FeedGroup :postsArray="posts"/>
         <Recent/>
-        <!-- <div>
-        <b-jumbotron class="mb-0" style="border-radius:0" :header="Welcome" :bg-variant="$store.state.darkMode ? 'dark' : 'info'"  text-variant="white" />
-        </div>
-        <hr v-if="$store.state.darkMode" class="mb-0 mt-0">
-        <div :class="$store.state.darkMode ? 'bg-dark' : 'light' ">
-            <b-container>
-                <b-button v-b-modal.modal-2  class="bg-primary btn-lg">Create a Post </b-button>
-                <router-link :to="getLikedProjectsLink" ><a href="" class="float-right">Liked Projects</a></router-link>
-                <b-modal size="xl" ok-only ok-variant="secondary" ok-title="Cancel"  id="modal-2"  title="Create A Post">
-                    <CreatePost />
-                </b-modal>
-            </b-container>
-        </div>
-        <FeedGroup v-if="posts" v-bind:postsArray="posts" />
-        <b-container v-if="posts.length==0">
-            <h5 :class="$store.state.darkMode ? 'text-white' : '' ">No Posts Yet, Go Make One!</h5>
-        </b-container>  -->
-
     </div>
 </template>
 
@@ -77,9 +60,9 @@ export default {
         'Authorization': this.$session.get('token')
       }
     })
-    const content = await resp.json()
-    console.log(content)
-    if (content.status === 1) {
+    if (resp.status === 200) {
+      const content = await resp.json()
+
       this.posts = content.projects
     } else {
       this.$router.push('/login')
@@ -101,6 +84,11 @@ export default {
   padding:10px;
   padding-top: 35px;
   font-family: 'Josefin Sans', sans-serif;
+
+}
+.liked-projects {
+  margin-left:100px;
+  position: absolute;
 
 }
 </style>

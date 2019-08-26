@@ -54,9 +54,9 @@
                             <div class="detail-icon">
                                 <v-icon>fa-map-marker</v-icon>
                             </div>
-                             <div class="detail-content">
+                            <div class="detail-content">
                                 {{venue.location}}
-                             </div>
+                            </div>
                         </div>
                         <br>
                         <h4>For More information, Contact</h4>
@@ -65,18 +65,18 @@
                             <div class="detail-icon">
                                 <v-icon>fa-phone</v-icon>
                             </div>
-                             <div class="detail-content">
+                            <div class="detail-content">
                                 {{organiserDetails.phone}}
-                             </div>
+                            </div>
                         </div>
                         <br>
                         <div class="detailFlex">
                             <div class="detail-icon">
                                 <v-icon>fa-envelope</v-icon>
                             </div>
-                             <div class="detail-content">
+                            <div class="detail-content">
                                 {{organiserDetails.email}}
-                             </div>
+                            </div>
                         </div>
                         <div class="map">
                         </div>
@@ -127,9 +127,11 @@ export default {
           id: this.$route.params.id
         })
       })
-      const content = await resp.json()
-      console.log(content)
-      this.attendees.push(this.$session.get('token'))
+      if (resp.status === 200) {
+        this.attendees.push(this.$session.get('token'))
+      } else {
+        alert('Failed to join event, please try again!')
+      }
     }
   },
   async mounted () {
@@ -145,15 +147,18 @@ export default {
         id: this.$route.params.id
       })
     })
-    const content = await resp.json()
-    console.log(content)
-    console.log('hi')
-    this.title = content.event.title
-    this.description = content.event.description
-    this.organiser = content.event.organiserDetails.name
-    this.venue = content.event.venue
-    this.coverImg = content.event.coverImg
-    this.attendees = content.event.attendees
+    if (resp.status === 200) {
+      const content = await resp.json()
+      this.title = content.event.title
+      this.description = content.event.description
+      this.organiser = content.event.organiserDetails.name
+      this.venue = content.event.venue
+      this.coverImg = content.event.coverImg
+      this.attendees = content.event.attendees
+    } else {
+      alert('Failed to fetch Event')
+    }
+
     this.isLoading = false
     // We'll fetch event details from backend here and put the value in an object
     // don't forget to change isloading to false
