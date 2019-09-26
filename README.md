@@ -1,5 +1,7 @@
 # donut-staging
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/cd5362aa-7048-4724-892b-b7507fafdee4/deploy-status)](https://app.netlify.com/sites/donut-staging/deploys)
+
 ## Project setup
 ```
 npm install
