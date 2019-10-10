@@ -83,3 +83,5 @@ const ser = app.listen(PORT, function() {
 //     });
 //   });
 // });
+
+module.exports = ser;
