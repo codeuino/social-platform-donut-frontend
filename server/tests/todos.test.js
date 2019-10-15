@@ -1,14 +1,7 @@
 process.env.TESTING = true;
 const { expect } = require('chai');
 const chai = require('chai');
-const secret = require('../config/credential.js');
-const mongoose = require('mongoose');
-const passport = require('passport');
-const indexRoutes = require('../routes/index.routes');
 const express = require('express');
-const app = express();
-const path = require('path');
-const cookie = require('cookie-session');
 const chaiHttp = require('chai-http');
 const server = require('../server');
 const todoId = Math.round(Math.random() * 100);

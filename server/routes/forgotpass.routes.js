@@ -10,3 +10,5 @@ Router.get(
     '/:email/:pass',
     controller.changePass
 )
+
+module.exports = Router

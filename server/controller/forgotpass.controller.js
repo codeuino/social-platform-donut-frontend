@@ -1,7 +1,7 @@
 const User = require('../schema/user')
 var nodemailer = require('nodemailer');
 var os = require("os");
-var cred=require("../config/credentials.js")
+var cred=require("../config/credential.js")
 var transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
