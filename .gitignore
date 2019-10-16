@@ -82,3 +82,6 @@ scredential.js
 secret.js
 config/credential.js
 views/images/uploads
+
+#file created for testing purpose
+test.js
