@@ -13,6 +13,7 @@ import './registerServiceWorker'
 import '@fortawesome/fontawesome-free/css/all.css'
 import VueSession from 'vue-session'
 import GAuth from 'vue-google-oauth2'
+import vueSmoothScroll from 'vue2-smooth-scroll'
 
 const gauthOption = {
   clientId: '292879518645-2n2ufv7b1162t140hk4nvm2ciq7pfbqh.apps.googleusercontent.com',
@@ -22,6 +23,7 @@ const gauthOption = {
 Vue.use(GAuth, gauthOption)
 Vue.use(VuePlaceAutocomplete)
 Vue.use(VueSession)
+Vue.use(vueSmoothScroll)
 Vue.use(Vuetify, {
   iconfront: 'mdi' || 'fa' || 'fa4'
 })

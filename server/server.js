@@ -24,9 +24,6 @@ mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
 app.use(cors());
 
 const VAPID_KEYS = webPush.generateVAPIDKeys();
-//for trial purpose
-console.log(`Public keys: ${VAPID_KEYS.publicKey}`);
-console.log(`Private keys: ${VAPID_KEYS.privateKey}`);
 
 webPush.setVapidDetails(
   'mailto:test@test.com',
