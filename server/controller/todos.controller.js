@@ -14,13 +14,11 @@ module.exports= {
                         'Todos' : todo._id
                     }
                 })
-                res.json({
-                    status:1,
+                res.status(201).json({
                     msg:'Success'
                 })
             } catch (err) {
                 res.status(400).json({
-                    status:0,
                     msg:'Fail To Add Todo'
                 })
             }
@@ -32,13 +30,11 @@ module.exports= {
                         'Todos' : todo._id
                     }
                 })
-                res.json({
-                    status:1,
+                res.status(200).json({
                     msg:'Success'
                 })
             } catch (err) {
                 res.status(400).json({
-                    status:0,
                     msg:'Fail To Add Todo'
                 })
             }
@@ -51,14 +47,12 @@ module.exports= {
                     'completedAt' : new Date().getDate() + "/" + new Date().getMonth() + "/" + new Date().getFullYear()
                 }
             })
-            res.json({
-                status:1,
+            res.status(200).json({
                 msg:'Success'
             })
         } catch (err) {
             console.log(err)
             res.status(400).json({
-                status:0,
                 msg:'Failure'
             })
         }
@@ -77,14 +71,12 @@ module.exports= {
                             'Todos' : delTodo._id
                         }
                     })
-                    res.json({
-                        status:1,
+                    res.status(200).json({
                         msg:'Success'
                     })
                 } catch (err) {
                     console.log(err)
                     res.status(400).json({
-                        status:0,
                         msg:'Fail To Delete Todo'
                     })
                 }
@@ -96,14 +88,12 @@ module.exports= {
                             'Todos' : delTodo._id
                         }
                     })
-                    res.json({
-                        status:1,
+                    res.status(200).json({
                         msg:'Success'
                     })
                 } catch (err) {
                     console.log(err)
                     res.status(400).json({
-                        status:0,
                         msg:'Fail To Add Todo'
                     })
                 }
@@ -111,7 +101,6 @@ module.exports= {
         } catch (err) {
             console.log(err)
             return res.status(400).json({
-                status:0,
                 msg:'Fail To Delete Todo'
             })
         }
@@ -133,8 +122,7 @@ module.exports= {
                                 msg:'Fail To fetch Todo'
                             })
                         }else {
-                            res.json({
-                                status:1,
+                            res.status(200).json({
                                 todos:doc.Todos
                             })
                         }
@@ -142,7 +130,7 @@ module.exports= {
                 } catch (error) {
                     console.log(error)
                     res.status(400).json({
-                        status:0,
+                        error
                     })
                 }
             
@@ -154,20 +142,18 @@ module.exports= {
                         if(err){
                             console.log(err)
                             res.status(400).json({
-                                status:0,
                                 msg:'Fail To fetch Todo'
                             })
                         }else {
-                            res.json({
-                                status:1,
+                            res.status(200).json({
                                 todos:doc.Todos
                             })
                         }
                     })
                 } catch (error) {
                     console.log(error)
-                    res.json({
-                        status:0,
+                    res.status(400).json({
+                        error
                     })
                 }
             

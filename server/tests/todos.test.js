@@ -4,6 +4,7 @@ const chai = require('chai');
 const express = require('express');
 const chaiHttp = require('chai-http');
 const server = require('../server');
+const assert = require('assert');
 const todoId = Math.round(Math.random() * 100);
 var loggedInToken = '';
 chai.use(chaiHttp);
@@ -38,8 +39,7 @@ function addTodos(done){
     .end((err, res)=>{
       // console.log('add todos: ',res.body);
       expect(res.body).to.be.an('object');
-      expect(res.body).to.have.property('status');
-      expect(res.body).to.include({status: 1});
+      assert.equal(res.status, 200);
       done();
     });
 }
@@ -51,8 +51,8 @@ function getTodos(done){
     .end((err, res)=>{
       // console.log('get todos :', res.body);
       expect(res.body).to.be.an('object');
-      expect(res.body).to.have.property('status');
       expect(res.body).to.have.property('todos');
+      assert.equal(res.status, 200);
       done();
     });
 }
@@ -65,8 +65,8 @@ function completeTodos(done){
     .end((err, res)=>{
       // console.log('complete todo ', res.body);
       expect(res.body).to.be.an('object');
-      expect(res.body).to.have.property('status');
       expect(res.body).to.have.property('msg');
+      assert.equal(res.status, 200);
       done();
     })    
 } 
@@ -79,8 +79,8 @@ function deleteTodos(done){
     .end((err, res)=>{
       console.log('delete todo ', res.body);
       expect(res.body).to.be.an('object');
-      expect(res.body).to.have.property('status');
       expect(res.body).to.have.property('msg');
+      assert.equal(res.status, 200);
       done();
     });
 }
