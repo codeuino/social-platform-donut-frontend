@@ -6,7 +6,7 @@ const app = express();
 const chalk = require('chalk');
 const cookie = require('cookie-session');
 const GithubStrategy = require('./config/github')
-const { db } = require('./config/credential.js');
+const { db, VAPID_KEYS } = require('./config/credential.js');
 const indexRoutes = require('./routes/index.routes');
 const expressValidator = require('express-validator');
 const methodOverride = require('method-override');
@@ -23,12 +23,11 @@ mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
   })
 app.use(cors());
 
-const VAPID_KEYS = webPush.generateVAPIDKeys();
 
 webPush.setVapidDetails(
   'mailto:test@test.com',
-  VAPID_KEYS.publicKey,
-  VAPID_KEYS.privateKey
+  VAPID_KEYS.Public,
+  VAPID_KEYS.Private
 );
 app.use(function (req, res, next) {
   next();
