@@ -75,26 +75,13 @@ using the command `git clone https://github.com/username/Social-Platform-Donut.g
 
 5. Setting up the local database instance 
       
-      You need to have a MongoDB atlas account to create local
-      https://www.youtube.com/watch?v=KKyag6t98g8
-      Check out the above link to setup MongoDB atlas.
-      The mongodb URL should be pasted in credential.js files.
+      You need to install mongodb in your local machine
 
 
 
-6. run this command to run on local
-
-    ```shell
-    nodemon server.js
-    ```
-    or
-    ```shell
-    node server.js
-    ```
+6. Go to README.md file in the server folder and follow the instructions.
 
 HURRAY! you have done it just start contributing to the project.
-
-Now open your browser and type the link `http://localhost:3000` to continue viewing project.
 
 Setting Up Database
 ------------
