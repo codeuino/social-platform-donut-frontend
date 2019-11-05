@@ -63,7 +63,7 @@ route.post('/login', url,Authcontroller.login);
 
 route.get('/logout', function(req, res) {
   req.logout();
-  res.send({
+  res.json({
     msg:"User Logged Out",
     status:1
   });
