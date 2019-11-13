@@ -6,7 +6,9 @@ const app = express();
 const chalk = require('chalk');
 const cookie = require('cookie-session');
 const GithubStrategy = require('./config/github')
-const {  db, VAPID_KEYS } = require('./config/credential.js');
+const {db ,VAPID_KEYS} = require('./config/credential.js');
+
+
 const indexRoutes = require('./routes/index.routes');
 const expressValidator = require('express-validator');
 const methodOverride = require('method-override');
@@ -22,6 +24,7 @@ mongoose.connect(db, { useNewUrlParser: true })
   console.log(chalk.red.bold("Check it out, https://www.mongodb.com"))
 })
 app.use(cors());
+
 webPush.setVapidDetails(
   'mailto:test@test.com',
   VAPID_KEYS.Public,
@@ -83,3 +86,5 @@ const ser = app.listen(PORT, function() {
 //     });
 //   });
 // });
+
+module.exports = ser;

@@ -10,7 +10,7 @@ const passport = require('passport')
 const Projects = require('../schema/project')
 const Events = require('../schema/events')
 const Posts = require('../schema/posts')
-
+const Forgot= require('./forgotpass.routes')
 //Setting posts route
 router.use('/posts',postRoutes)
 router.use('/profile', profileRoutes);
@@ -18,6 +18,7 @@ router.use('/auth', loginRoutes);
 router.use('/projects',projectRoutes)
 router.use('/todos',TodosRoutes)
 router.use('/events',EventsRoutes)
+router.use('/forgot',Forgot)
 router.post('/fetchFeed',passport.authenticate('jwt',{session:false}), async (req,res) => {
     var projects = await Projects.find({})
     var posts = await Posts.find({})
