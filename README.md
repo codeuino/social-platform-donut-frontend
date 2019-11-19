@@ -111,6 +111,8 @@ Note: For windows user, run this command using [git bash](https://git-scm.com/do
 
 ## Contributions Best Practices
 
+[![GitHub issues](https://img.shields.io/github/issues/codeuino/Social-Platform-Donut?logo=github)](https://github.com/codeuino/Social-Platform-Donut/issues) ![GitHub pull requests](https://img.shields.io/github/issues-pr-raw/codeuino/Social-Platform-Donut?logo=git&logoColor=white)
+
 **Commits**
 * Write clear meaningful git commit messages (Do read [this](http://chris.beams.io/posts/git-commit/)).
 * Make sure your PR's description contains GitHub's special keyword references that automatically close the related issue when the PR is merged. (Check [this](https://github.com/blog/1506-closing-issues-via-pull-requests) for more info)
@@ -118,6 +120,8 @@ Note: For windows user, run this command using [git bash](https://git-scm.com/do
 * When you're submitting a PR for a UI-related issue, it would be really awesome if you add a screenshot of your change or a link to a deployment where it can be tested out along with your PR. It makes it very easy for the reviewers and you'll also get reviews quicker.
 
 ## Community
+
+[![GitHub forks](https://img.shields.io/github/forks/codeuino/Social-Platform-Donut?logo=github)](https://github.com/codeuino/Social-Platform-Donut/network) [![GitHub stars](https://img.shields.io/github/stars/codeuino/Social-Platform-Donut?logo=github)](https://github.com/codeuino/Social-Platform-Donut/stargazers) 
 
 All feedback and suggestions are welcome!
 
@@ -140,6 +144,8 @@ Support this project by becoming a sponsor/collaborator/partner/contributors.
 
 
 ## Licensing
+
+[![GitHub license](https://img.shields.io/github/license/codeuino/Social-Platform-Donut?logo=github)](https://github.com/codeuino/Social-Platform-Donut/blob/master/LICENSE)
 
 <b>Donut An Open Source Social Collaborating platform is a web Based framework Software,
   
