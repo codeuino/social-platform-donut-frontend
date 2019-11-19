@@ -54,7 +54,7 @@ Technical Features
 Installation
 ------------
 
-[![NODE JS](http://img.shields.io/badge/Node-JS-teal.svg?logo=node.js)](https://nodejs.org/en/)
+[![NODE JS](http://img.shields.io/badge/NodeJS-required-teal.svg?logo=node.js)](https://nodejs.org/en/) [![NPM](http://img.shields.io/badge/npm-required-red.svg?logo=npm)](http://npmjs.com/)
 
 To get this project running locally on your machine follows the steps below in order:
 
