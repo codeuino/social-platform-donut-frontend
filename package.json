@@ -6,6 +6,7 @@
   "scripts": {
     "start": "nodemon server.js",
     "test": "mocha tests/*.js",
+    "test-system": "mocha tests/system_test.js",
     "report": "nyc --reporter=html mocha tests/*.js",
     "lint": "eslint ./tests/**/**.js ./schema/**/**.js ./routes/**/**.js ./controller/**/**.js ./config/**/**.js ./server.js  --fix"
   },
@@ -40,8 +41,10 @@
     "chai": "^4.2.0",
     "eslint-config-prettier": "^4.1.0",
     "eslint-plugin-prettier": "^3.0.1",
+    "lodash": "^4.17.15",
     "mocha": "^6.0.2",
     "nyc": "^13.3.0",
+    "parse-gitignore": "^1.0.1",
     "prettier": "^1.16.4",
     "supertest": "^3.4.2"
   }
