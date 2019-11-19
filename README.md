@@ -6,11 +6,11 @@
 
 codeuino's open source social platform <br><br>
 
-[![Slack Status](https://img.shields.io/badge/slack-chat-yellow.svg)](https://codeuino.slack.com)    [![PRs Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)](http://makeapullrequest.com) [![Issues Open](https://img.shields.io/github/issues-raw/codeuino/Social-Platform-Donut.svg?color=orange)](https://github.com/codeuino/Social-Platform-Donut/issues) [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![Slack Status](https://img.shields.io/badge/slack-chat-yellow.svg?logo=slack)](https://codeuino.slack.com)    [![PRs Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?logo=github)](http://makeapullrequest.com) [![Issues Open](https://img.shields.io/github/issues-raw/codeuino/Social-Platform-Donut.svg?color=orange&logo=github)](https://github.com/codeuino/Social-Platform-Donut/issues) [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg?logo=github)](https://www.gnu.org/licenses/gpl-3.0)
 
 </div>
 
-#### For frontend of this repo move to this repository https://github.com/codeuino/frontened
+#### For frontend of this repo move to [this](https://github.com/codeuino/frontened) repository.
 
 <div align='center'>
 <img style="border:1px black solid;" height=165px src="READMEassets/signup_community.png">
@@ -53,6 +53,9 @@ Technical Features
 
 Installation
 ------------
+
+[![NODE JS](http://img.shields.io/badge/NodeJS-required-teal.svg?logo=node.js)](https://nodejs.org/en/) [![NPM](http://img.shields.io/badge/npm-required-red.svg?logo=npm)](http://npmjs.com/)
+
 To get this project running locally on your machine follows the steps below in order:
 
 1. fork this repo
@@ -75,10 +78,9 @@ using the command `git clone https://github.com/username/Social-Platform-Donut.g
 
 5. Setting up the local database instance 
       
-      You need to have a MongoDB atlas account to create local
-      https://www.youtube.com/watch?v=KKyag6t98g8
-      Check out the above link to setup MongoDB atlas.
-      The mongodb URL should be pasted in credential.js files.
+      You need to have a MongoDB atlas account to create local database.
+      Check out [this link](https://www.youtube.com/watch?v=KKyag6t98g8) to setup MongoDB atlas.
+      The mongodb URL should be pasted in `credential.js` files.
 
 
 
@@ -98,6 +100,10 @@ Now open your browser and type the link `http://localhost:3000` to continue view
 
 Setting Up Database
 ------------
+
+
+[![MongoDB](http://img.shields.io/badge/Mongo-DB-green.svg?logo=mongodb)](https://www.mongodb.com/download-center/community)
+
 Make sure you have MongoDB installed on your computer. If not get it here [MongoDB Community Server](https://www.mongodb.com/download-center/community)
 
 1. Open the terminal, locate the "scripts" folder and run the dbcreater.sh
@@ -111,21 +117,25 @@ Note: For windows user, run this command using [git bash](https://git-scm.com/do
 
 ## Contributions Best Practices
 
+[![GitHub issues](https://img.shields.io/github/issues/codeuino/Social-Platform-Donut?logo=github)](https://github.com/codeuino/Social-Platform-Donut/issues) ![GitHub pull requests](https://img.shields.io/github/issues-pr-raw/codeuino/Social-Platform-Donut?logo=git&logoColor=white) ![GitHub contributors](https://img.shields.io/github/contributors/codeuino/Social-Platform-Donut?logo=github)
+
 **Commits**
-* Write clear meaningful git commit messages (Do read http://chris.beams.io/posts/git-commit/)
-* Make sure your PR's description contains GitHub's special keyword references that automatically close the related issue when the PR is merged. (More info at https://github.com/blog/1506-closing-issues-via-pull-requests )
-* When you make very very minor changes to a PR of yours (like for example fixing a failing Travis build or some small style corrections or minor changes requested by reviewers) make sure you squash your commits afterward so that you don't have an absurd number of commits for a very small fix. (Learn how to squash at https://davidwalsh.name/squash-commits-git )
+* Write clear meaningful git commit messages (Do read [this](http://chris.beams.io/posts/git-commit/)).
+* Make sure your PR's description contains GitHub's special keyword references that automatically close the related issue when the PR is merged. (Check [this](https://github.com/blog/1506-closing-issues-via-pull-requests) for more info)
+* When you make very very minor changes to a PR of yours (like for example fixing a failing Travis build or some small style corrections or minor changes requested by reviewers) make sure you squash your commits afterward so that you don't have an absurd number of commits for a very small fix. (Learn how to squash at [here](https://davidwalsh.name/squash-commits-git))
 * When you're submitting a PR for a UI-related issue, it would be really awesome if you add a screenshot of your change or a link to a deployment where it can be tested out along with your PR. It makes it very easy for the reviewers and you'll also get reviews quicker.
 
 ## Community
 
+[![GitHub forks](https://img.shields.io/github/forks/codeuino/Social-Platform-Donut?logo=github)](https://github.com/codeuino/Social-Platform-Donut/network) [![GitHub stars](https://img.shields.io/github/stars/codeuino/Social-Platform-Donut?logo=github)](https://github.com/codeuino/Social-Platform-Donut/stargazers) ![GitHub last commit](https://img.shields.io/github/last-commit/codeuino/Social-Platform-Donut?logo=github)
+
 All feedback and suggestions are welcome!
 
 * 💬 Join the community on [Slack](https://join.slack.com/t/codeuino/shared_invite/enQtMzcxOTQwNzE4NzcxLWEyNzUxYjI0ZThiNWUyYWI5MzJlMTNmODMxN2NjMTcxODJkZmFhNTVkYmUyOTQ1YzgzNTlmMTVkYzVhMzdmNTQ )
-* 📣 Stay up to date on new features and announcements on the following
-1.[@Mailing List](codeuino-devel@googlegroups.com).
-1.[@Discussion Portal](https://groups.google.com/d/forum/codeuino-devel).
-1.[@Codeuino Wiki](wiki.codeuino.org).
+* 📣 Stay up to date on new features and announcements on the following:
+  - [@Mailing List](codeuino-devel@googlegroups.com).
+  - [@Discussion Portal](https://groups.google.com/d/forum/codeuino-devel).
+  - [@Codeuino Wiki](wiki.codeuino.org).
 
 
 ## Sponsors/Partners
@@ -135,11 +145,13 @@ Support this project by becoming a sponsor/collaborator/partner/contributors.
 
 #### Current
 
-<a href="#" target="_blank"><img src="https://secure.meetupstatic.com/photos/event/2/6/d/b/600_456849947.jpeg" width="200" height="100" /></a>
-<a href="#" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/DigitalOcean_logo.svg" width="200" height="100" /></a>
+| <a href="https://www.womenwhocode.com/"><img src="https://secure.meetupstatic.com/photos/event/2/6/d/b/600_456849947.jpeg" width="200px" height="100px"></a> | <a href="https://www.digitalocean.com/"><img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/DigitalOcean_logo.svg" width="200px" height="100px"></a> |
+|:-:|:-:|
 
 
 ## Licensing
+
+[![GitHub license](https://img.shields.io/github/license/codeuino/Social-Platform-Donut?logo=github)](https://github.com/codeuino/Social-Platform-Donut/blob/master/LICENSE)
 
 <b>Donut An Open Source Social Collaborating platform is a web Based framework Software,
   
@@ -155,4 +167,7 @@ This program is distributed in the hope that it will be useful,
     GNU General Public License for more details at OSI <https://opensource.org/licenses/GPL-3.0>
 
 You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+    along with this program.  If not, see [this](http://www.gnu.org/licenses/).
+
+[![Twitter Follow](https://img.shields.io/twitter/follow/codeuino?style=social)](https://twitter.com/codeuino) [![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://github.com/codeuino/Social-Platform-Donut)
+
