@@ -135,8 +135,8 @@ Support this project by becoming a sponsor/collaborator/partner/contributors.
 
 #### Current
 
-<a href="#" target="_blank"><img src="https://secure.meetupstatic.com/photos/event/2/6/d/b/600_456849947.jpeg" width="200" height="100" /></a>
-<a href="#" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/DigitalOcean_logo.svg" width="200" height="100" /></a>
+| <a href="https://www.womenwhocode.com/"><img src="https://secure.meetupstatic.com/photos/event/2/6/d/b/600_456849947.jpeg" width="200px" height="100px"></a> | <a href="https://www.digitalocean.com/"><img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/DigitalOcean_logo.svg" width="200px" height="100px"></a> |
+|:-:|:-:|
 
 
 ## Licensing
