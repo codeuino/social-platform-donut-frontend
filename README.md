@@ -53,6 +53,9 @@ Technical Features
 
 Installation
 ------------
+
+[![NODE JS](http://img.shields.io/badge/Node-JS-teal.svg?logo=node.js)](https://nodejs.org/en/)
+
 To get this project running locally on your machine follows the steps below in order:
 
 1. fork this repo
@@ -98,6 +101,10 @@ Now open your browser and type the link `http://localhost:3000` to continue view
 
 Setting Up Database
 ------------
+
+
+[![MongoDB](http://img.shields.io/badge/Mongo-DB-green.svg?logo=mongodb)](https://www.mongodb.com/download-center/community)
+
 Make sure you have MongoDB installed on your computer. If not get it here [MongoDB Community Server](https://www.mongodb.com/download-center/community)
 
 1. Open the terminal, locate the "scripts" folder and run the dbcreater.sh
