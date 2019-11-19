@@ -78,10 +78,9 @@ using the command `git clone https://github.com/username/Social-Platform-Donut.g
 
 5. Setting up the local database instance 
       
-      You need to have a MongoDB atlas account to create local
-      https://www.youtube.com/watch?v=KKyag6t98g8
-      Check out the above link to setup MongoDB atlas.
-      The mongodb URL should be pasted in credential.js files.
+      You need to have a MongoDB atlas account to create local database.
+      Check out [this link](https://www.youtube.com/watch?v=KKyag6t98g8) to setup MongoDB atlas.
+      The mongodb URL should be pasted in `credential.js` files.
 
 
 
