@@ -82,3 +82,4 @@ credential.js
 secret.js
 
 views/images/uploads
+.DS_Store
