@@ -6,7 +6,7 @@
 
 codeuino's open source social platform <br><br>
 
-[![Slack Status](https://img.shields.io/badge/slack-chat-yellow.svg)](https://codeuino.slack.com)    [![PRs Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)](http://makeapullrequest.com) [![Issues Open](https://img.shields.io/github/issues-raw/codeuino/Social-Platform-Donut.svg?color=orange)](https://github.com/codeuino/Social-Platform-Donut/issues) [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![Slack Status](https://img.shields.io/badge/slack-chat-yellow.svg?logo=slack)](https://codeuino.slack.com)    [![PRs Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?logo=github)](http://makeapullrequest.com) [![Issues Open](https://img.shields.io/github/issues-raw/codeuino/Social-Platform-Donut.svg?color=orange&logo=github)](https://github.com/codeuino/Social-Platform-Donut/issues) [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg?logo=github)](https://www.gnu.org/licenses/gpl-3.0)
 
 </div>
 
