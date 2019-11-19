@@ -111,7 +111,7 @@ Note: For windows user, run this command using [git bash](https://git-scm.com/do
 
 ## Contributions Best Practices
 
-[![GitHub issues](https://img.shields.io/github/issues/codeuino/Social-Platform-Donut?logo=github)](https://github.com/codeuino/Social-Platform-Donut/issues) ![GitHub pull requests](https://img.shields.io/github/issues-pr-raw/codeuino/Social-Platform-Donut?logo=git&logoColor=white)
+[![GitHub issues](https://img.shields.io/github/issues/codeuino/Social-Platform-Donut?logo=github)](https://github.com/codeuino/Social-Platform-Donut/issues) ![GitHub pull requests](https://img.shields.io/github/issues-pr-raw/codeuino/Social-Platform-Donut?logo=git&logoColor=white) ![GitHub contributors](https://img.shields.io/github/contributors/codeuino/Social-Platform-Donut?logo=github)
 
 **Commits**
 * Write clear meaningful git commit messages (Do read [this](http://chris.beams.io/posts/git-commit/)).
@@ -121,7 +121,7 @@ Note: For windows user, run this command using [git bash](https://git-scm.com/do
 
 ## Community
 
-[![GitHub forks](https://img.shields.io/github/forks/codeuino/Social-Platform-Donut?logo=github)](https://github.com/codeuino/Social-Platform-Donut/network) [![GitHub stars](https://img.shields.io/github/stars/codeuino/Social-Platform-Donut?logo=github)](https://github.com/codeuino/Social-Platform-Donut/stargazers) 
+[![GitHub forks](https://img.shields.io/github/forks/codeuino/Social-Platform-Donut?logo=github)](https://github.com/codeuino/Social-Platform-Donut/network) [![GitHub stars](https://img.shields.io/github/stars/codeuino/Social-Platform-Donut?logo=github)](https://github.com/codeuino/Social-Platform-Donut/stargazers) ![GitHub last commit](https://img.shields.io/github/last-commit/codeuino/Social-Platform-Donut?logo=github)
 
 All feedback and suggestions are welcome!
 
@@ -162,3 +162,6 @@ This program is distributed in the hope that it will be useful,
 
 You should have received a copy of the GNU General Public License
     along with this program.  If not, see [this](http://www.gnu.org/licenses/).
+
+[![Twitter Follow](https://img.shields.io/twitter/follow/codeuino?style=social)](https://twitter.com/codeuino) [![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://github.com/codeuino/Social-Platform-Donut)
+
