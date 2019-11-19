@@ -10,7 +10,7 @@ codeuino's open source social platform <br><br>
 
 </div>
 
-#### For frontend of this repo move to this repository https://github.com/codeuino/frontened
+#### For frontend of this repo move to [this](https://github.com/codeuino/frontened) repository.
 
 <div align='center'>
 <img style="border:1px black solid;" height=165px src="READMEassets/signup_community.png">
@@ -112,9 +112,9 @@ Note: For windows user, run this command using [git bash](https://git-scm.com/do
 ## Contributions Best Practices
 
 **Commits**
-* Write clear meaningful git commit messages (Do read http://chris.beams.io/posts/git-commit/)
-* Make sure your PR's description contains GitHub's special keyword references that automatically close the related issue when the PR is merged. (More info at https://github.com/blog/1506-closing-issues-via-pull-requests )
-* When you make very very minor changes to a PR of yours (like for example fixing a failing Travis build or some small style corrections or minor changes requested by reviewers) make sure you squash your commits afterward so that you don't have an absurd number of commits for a very small fix. (Learn how to squash at https://davidwalsh.name/squash-commits-git )
+* Write clear meaningful git commit messages (Do read [this](http://chris.beams.io/posts/git-commit/)).
+* Make sure your PR's description contains GitHub's special keyword references that automatically close the related issue when the PR is merged. (Check [this](https://github.com/blog/1506-closing-issues-via-pull-requests) for more info)
+* When you make very very minor changes to a PR of yours (like for example fixing a failing Travis build or some small style corrections or minor changes requested by reviewers) make sure you squash your commits afterward so that you don't have an absurd number of commits for a very small fix. (Learn how to squash at [here](https://davidwalsh.name/squash-commits-git))
 * When you're submitting a PR for a UI-related issue, it would be really awesome if you add a screenshot of your change or a link to a deployment where it can be tested out along with your PR. It makes it very easy for the reviewers and you'll also get reviews quicker.
 
 ## Community
@@ -155,4 +155,4 @@ This program is distributed in the hope that it will be useful,
     GNU General Public License for more details at OSI <https://opensource.org/licenses/GPL-3.0>
 
 You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+    along with this program.  If not, see [this](http://www.gnu.org/licenses/).
