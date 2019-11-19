@@ -122,10 +122,10 @@ Note: For windows user, run this command using [git bash](https://git-scm.com/do
 All feedback and suggestions are welcome!
 
 * 💬 Join the community on [Slack](https://join.slack.com/t/codeuino/shared_invite/enQtMzcxOTQwNzE4NzcxLWEyNzUxYjI0ZThiNWUyYWI5MzJlMTNmODMxN2NjMTcxODJkZmFhNTVkYmUyOTQ1YzgzNTlmMTVkYzVhMzdmNTQ )
-* 📣 Stay up to date on new features and announcements on the following
-1.[@Mailing List](codeuino-devel@googlegroups.com).
-1.[@Discussion Portal](https://groups.google.com/d/forum/codeuino-devel).
-1.[@Codeuino Wiki](wiki.codeuino.org).
+* 📣 Stay up to date on new features and announcements on the following:
+  - [@Mailing List](codeuino-devel@googlegroups.com).
+  - [@Discussion Portal](https://groups.google.com/d/forum/codeuino-devel).
+  - [@Codeuino Wiki](wiki.codeuino.org).
 
 
 ## Sponsors/Partners
