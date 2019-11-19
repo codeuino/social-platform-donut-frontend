@@ -74,6 +74,16 @@ describe('SOCIAL-PLATFORM-DONUT repository', function () {
     });
   });
 
+  describe('CODE_OF_CONDUCT.md', function () {
+    it('must exist', function (done) {
+      fs.stat('./CODE_OF_CONDUCT.md', done);
+    });
+
+    it('must have readable content', function () {
+      expect(fs.readFileSync('./CODE_OF_CONDUCT.md').toString()).to.be.ok;
+    });
+  });
+
   describe('LICENSE', function () {
     it('must exist', function (done) {
       fs.stat('./LICENSE', done);
