@@ -206,7 +206,7 @@ export default {
         LandingPage: {
           title: '',
           tagline: '',
-          coverImg: '',
+          coverImg: null,
           social: {
             facebook: '',
             github: ''
@@ -218,7 +218,7 @@ export default {
         },
         AboutAdmin: {
           name: '',
-          profilePic: '',
+          profilePic: null,
           social: {
             github: '',
             email: ''
