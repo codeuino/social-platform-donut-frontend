@@ -43,32 +43,7 @@ export default {
   },
   data () {
     return {
-      Portfolio: {},
-      error: false
-
-    }
-  },
-  computed: {
-    Portfolionotexist () {
-      return _.isEmpty(this.Portfolio)
-    }
-  },
-  mounted () {
-    // if (this.Portfolionotexist && !this.$store.state.token) {
-    //   if (this.$store.state.userDetails) {
-    //     if (this.$store.state.userDetails.hasOwnProperty('id')) {
-    //       if (this.$store.state.userDetails.id !== this.$route.params.id) {
-    //         this.error = true
-    //       }
-    //     } else {
-    //       this.error = true
-    //     }
-    //   } else {
-    //     this.error = true
-    //   }
-    // }
-
-    this.Portfolio = {
+      Portfolio: {
       LandingPage: {
         cover_img: 'https://images.pexels.com/photos/2402955/pexels-photo-2402955.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=1064',
         title: 'Codeuino',
@@ -92,7 +67,30 @@ export default {
         },
         about: '<p>Hello world, this a description of my org Ive just created in DONUT. Donut provides such great features for sharing new ideas among employees and building a cool social network among them.</p>' // We can add html in it
       }
+    },
+      error: false
+
     }
+  },
+  computed: {
+    Portfolionotexist () {
+      return _.isEmpty(this.Portfolio)
+    }
+  },
+  mounted () {
+    // if (this.Portfolionotexist && !this.$store.state.token) {
+    //   if (this.$store.state.userDetails) {
+    //     if (this.$store.state.userDetails.hasOwnProperty('id')) {
+    //       if (this.$store.state.userDetails.id !== this.$route.params.id) {
+    //         this.error = true
+    //       }
+    //     } else {
+    //       this.error = true
+    //     }
+    //   } else {
+    //     this.error = true
+    //   }
+    // }
   }
 
 }
