@@ -3,11 +3,11 @@ const Router = express.Router();
 const passport = require('passport');
 const controller= require('../controller/forgotpass.controller')
 Router.post(
-    '/getById',
+    '/getById/:email',
     controller.getById
   );
 Router.get(
-    '/:email/:pass',
+    '/changePass',
     controller.changePass
 )
 
