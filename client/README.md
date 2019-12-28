@@ -5,7 +5,7 @@
 2  write 'npm install' in the terminal to install the node modules.
 3 After installing write npm run serve.
 4 Open the browser and type the link 'localhost:8080'.
-5 Hurray you have done it and start contributing to it .
+5 Hurray you have done it and start contributing to it.
 
 ## Project setup
 ```
