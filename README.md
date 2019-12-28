@@ -76,7 +76,7 @@ using the command `git clone https://github.com/username/Social-Platform-Donut.g
     ```shell
     npm install
     ```
-    Create a credential.js file in the server folder, learn how to make one [here](https://github.com/aRealCyborg/Social-Platform-Donut/tree/development/server)
+    Create a credential.js file in the server folder, learn how to make one [here](https://github.com/codeuino/Social-Platform-Donut/tree/development/server)
 
     Then locate the "client" folder and run.
     ```shell
@@ -86,7 +86,7 @@ using the command `git clone https://github.com/username/Social-Platform-Donut.g
     ```shell
     npm run serve
     ```
-    To learn client commands check [here](https://github.com/aRealCyborg/Social-Platform-Donut/tree/development/client)
+    To learn client commands check [here](https://github.com/codeuino/Social-Platform-Donut/tree/development/client)
 5. Setting up the local database instance 
       
       You need to have a MongoDB atlas account to create local database.
