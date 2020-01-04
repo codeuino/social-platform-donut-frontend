@@ -31,6 +31,7 @@ module.exports={
             if(parseInt(req.body.type)===1)
             {
                 const user = new Organisation()
+
                 user.type = 1
                 user.name = req.body.name
                 user.adminName = req.body.adminName
@@ -45,11 +46,26 @@ module.exports={
                 user.googleId = req.body.googleID
                 user.githubId = req.body.githubID
                 user.navbarName = req.body.navbarName
-                const data=await user.save();
-                res.status(200).json({"success":"Successfully registered", status:1,id:data._id})
+
+                const data = await user.save();
+                res.status(200).json({
+                    "success": "Successfully registered",
+                    status: 1,
+                    id: data._id
+                })
+
+                const payload = { id: data._id, email: data.email, type: 1 }
+                const token = jwt.sign(payload, secret)
+                var u = await _.pick(data, ['name','_id','type','navbarName'])
+                res.json({
+                    status:1,
+                    token:'Bearer ' + token,
+                    user:u
+                })
             }
             else {
-                const user=new User()
+                const user = new User()
+
                 user.type = 0
                 user.name = req.body.name
                 user.dob=Date(req.body.dob);
@@ -65,11 +81,21 @@ module.exports={
                 user.googleId = req.body.googleID
                 user.githubId = req.body.githubID
                 user.navbarName = req.body.navbarName
-                const data=await user.save();
+
+                const data = await user.save();
                 res.status(200).json({
                     "success":"Successfully registered",
+                    status: 1,
+                    id: data._id
+                })
+
+                const payload = { id: data._id, email: data.email, type: 0 }
+                const token = jwt.sign(payload, secret)
+                var u = await _.pick(data, ['name','_id','type','navbarName'])
+                res.json({
                     status:1,
-                    id:data._id
+                    token:'Bearer ' + token,
+                    user:u
                 })
             }
             
