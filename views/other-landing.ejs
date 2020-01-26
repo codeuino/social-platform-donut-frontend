@@ -1,0 +1,284 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Codeuino</title>
+        <!-- Font Awesome -->
+        <!-- Bootstrap core CSS -->
+        <link href="/vendor/bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+        <!-- Material Design Bootstrap -->
+        <link href="/vendor/mdbootstrap/mdb.min.css" type="text/css" rel="stylesheet">
+
+        <!-- Your custom styles (optional) -->
+        <link href="../../css/other-landing.css" type="text/css" rel="stylesheet">
+    </head>
+    <body>
+        <!-- Start your project here-->
+        <!--Main Navigation-->
+        <header>
+            <!--Navbar-->
+            <nav class="navbar navbar-expand-lg navbar-dark elegant-color-dark fixed-top">
+                <div class="container">
+                <!-- Navbar brand -->
+                <a class="navbar-brand font-weight-bold text-uppercase blue-text" href="#">DONUT</a>
+                <span id="phrase" class="align-middle white-text">Codeuino's Open Source Social Platform</span>
+                <!-- Collapse button -->
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav" aria-controls="basicExampleNav"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+                <!-- Collapsible content -->
+                <div class="collapse navbar-collapse justify-content-end" id="basicExampleNav">
+                  <ul class="navbar-nav nav-flex-icons">
+                    <!-- Links -->
+                    <ul class="navbar-nav mr-auto">
+                      <li class="nav-item active">
+                        <form class="form-inline">
+                            <div class="input-group col-12 pl-0">
+                                <input type="text" id="search-input" class="form-control form-control-lg py-2 border-right-0 border" placeholder="Search">
+                                <span class="input-group-append">
+                                  <button id="search-btn" class="btn-outline border-left-0 border" type="button">
+                                    <i class="fa fa-search"></i>
+                                  </button>
+                                </span>
+                              </div>
+                        </form>
+                      </li>
+                      <li class="nav-item ">
+                        <a class="nav-link" href="#">Home
+                          <span class="sr-only">(current)</span>
+                        </a>
+                        </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="/profile/ch2">Community</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#">Help</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="/profile/setting"><%=use.fname %><%=use.lname%></a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="/profile/dashBoard">DashBoard</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="/profile/submitProject">Publish</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="/auth/logout">Logout</a>
+                      </li>
+                    </ul>
+                  </ul>
+                </div>
+                <!-- Collapsible content -->
+              </div>
+            </nav>
+            <!--/.Navbar-->
+            <!--Navbar-->
+
+            <!--/.Navbar-->
+            <!--Navbar-->
+            <!--/.Navbar-->
+            <!--Navbar-->
+
+            <!--/.Navbar-->
+
+        </header>
+        <!--Main Navigation-->
+        <!--Main Layout-->
+        <main>
+          <!-- Intro Section -->
+          <div class="container flex-center">
+            <div class="row pt-5 mt-3 justify-content-center">
+              <!--Grid column-->
+              <div class="col-lg-6 col-md-8">
+
+                  <% ques.forEach(function(x){%>
+
+                    <div class="card mb-4">
+                      <!--Card content-->
+                      <div class="card-body">
+                        <!--Title-->
+                        <h4 class="card-title"><img src="./images/prof.jpg" class="user" alt=""><%=x.result[0].username%></h4>
+                        <h6 class="card-subtitle mb-2 text-muted">Backend Developer</h6>
+                        <hr class="hr-danger wow">
+                        <!--Text-->
+                        <div class="container">
+                          <div class="row">
+                            <img src='<%=x.image%>' style="max-height:100%;max-width:100%">
+                            <%for(var q=0;q<x.Lang.length;q++){%>
+                              <a href="#" class="btn btn-blue-grey btn-rounded"><%=x.Lang[q]%></a>
+                            <%}%>
+                          </div>
+                        </div>
+                        <p class="card-text"><%=x.content%></p>
+                        <p class="card-text">Visit <a class="blue-text" href="<%=x.github%>"><%=x.github%></a></p>
+                      </div>
+                      <div class="container">
+                        <div class="row">
+                          <a href="#" class="btn btn-outline-grey btn-rounded ch" id="<%=x.proid%>"><%=x.upvote.length%></a>
+                          <a href="#" class="btn btn-outline-grey btn-rounded ch2" id="<%=x.proid%>"><%=x.downvote.length%></a>
+                          <a href="#" class="btn btn-outline-grey btn-rounded">Comment</a>
+                          <a href="#" class="btn btn-outline-grey btn-rounded">Share</a>
+                        </div>
+                      </div>
+                      <div class="container">
+                        <div class="row">
+                          <div class="form-group grey-border btn-rounded">
+                            <textarea class="form-control z-depth-1 btn-rounded" rows="3" placeholder="Reply"></textarea>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+
+                  <%})%>
+                <!--Card-->
+                <!--/.Card-->
+
+                <!--Card-->
+                <!--/.Card-->
+
+                <!--Card-->
+
+                <!--/.Card-->
+
+                <!--Card-->
+                <div class="card mb-4">
+                  <!--Card content-->
+                  <div class="card-body">
+                    <!--Title-->
+                    <h4 class="card-title"><img src="./images/prof.jpg" class="user" alt="">User Name</h4>
+                    <h6 class="card-subtitle mb-2 text-muted">Backend Developer</h6>
+                    <hr class="hr-danger wow">
+                    <!--Text-->
+                    <div class="container">
+                      <div class="row">
+                        <a class="nav-link" href="#">Tags</a>
+                        <a href="#" class="myButton btn btn-blue-grey btn-rounded">Project</a>
+                        <a href="#" class="myButton btn btn-blue-grey btn-rounded">Article</a>
+                        <a href="#" class="myButton btn btn-blue-grey btn-rounded">Codeuino</a>
+                      </div>
+                    </div>
+                    <p class="card-text">This platform has been Example. Add shadows to different elements: #example1 { Example. Add a blur effect to the shadow: #example1 { Example. Define the spread radius of the shadow: #example1 { Example. Define multiple shadows: #example</p>
+                    <p class="card-text">Visit <a class="blue-text">Codeuino.org</a></p>
+                  </div>
+                  <div class="container">
+                    <div class="row">
+                      <a href="#" class="btn btn-outline-grey btn-rounded"></a>
+                      <a href="#" class="btn btn-outline-grey btn-rounded">-1</a>
+                      <a href="#" class="btn btn-outline-grey btn-rounded">Comment</a>
+                      <a href="#" class="btn btn-outline-grey btn-rounded">Share</a>
+                    </div>
+                  </div>
+                  <div class="container">
+                    <div class="row">
+                      <div class="form-group grey-border btn-rounded w-100 pr-2">
+                        <textarea class="form-control z-depth-1 btn-rounded reply" rows="3" placeholder="Reply"></textarea>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+                <!--/.Card-->
+              </div>
+              <!--Grid column-->
+
+              <!--Grid column-->
+              <div class="col-lg-3 col-md-4 mb-4">
+                <div class="projects">
+                <!--Card-->
+                <div class="card mb-4">
+                  <!--Card content-->
+                  <div class="card-body justify-content-center">
+                    <!--Title-->
+                    <a href="#" class="btn btn-danger btn-rounded">Proposed Project</a>
+                    <!--Text-->
+                    <p class="card-text pr-text"><a class="blue-text font-weight-bold">Codeuino</a> &emsp; This Project is about fjjfoj ffjfnfnf gngrgnf gogojgjg gjodjgjg</p>
+                    <p class="card-text pr-text"><a class="blue-text font-weight-bold">Certifier</a> &emsp; This Project is about fjjfoj ffjfnfnf gngrgnf gogojgjg gjodjgjg</p>
+                    <p class="card-text pr-text"><a class="blue-text font-weight-bold">Chat Platform</a> &emsp; This Project is about fjjfoj ffjfnfnf gngrgnf gogojgjg gjodjgjg</p>
+                    <p class="card-text pr-text"><a class="blue-text font-weight-bold">Badge Former</a> &emsp; This Project is about fjjfoj ffjfnfnf gngrgnf gogojgjg gjodjgjg</p>
+                    <p class="card-text pr-text"><a class="blue-text font-weight-bold">Bots-VI</a> &emsp; This Project is about fjjfoj ffjfnfnf gngrgnf gogojgjg gjodjgjg</p>
+                  </div>
+
+                </div>
+                <!--/.Card-->
+
+                <!--Card-->
+                <div class="card mb-4">
+                  <!--Card content-->
+                  <div class="card-body justify-content-center">
+                    <!--Title-->
+                    <a href="#" class="btn btn-danger btn-rounded">Open Source Events</a>
+                    <!--Text-->
+                    <p class="card-text ev-text"><img src="./images/prof.jpg" class="event" alt=""> &emsp; This Project is about fjjfoj ffjfnfnf gngrgnf gogojgjg gjodjgjg</p>
+                    <p class="card-text ev-text"><img src="./images/back.jpg" class="event" alt=""> &emsp; This Project is about fjjfoj ffjfnfnf gngrgnf gogojgjg gjodjgjg</p>
+                    <p class="card-text ev-text"><img src="./images/all_4_events.jpg" class="event" alt=""> &emsp; This Project is about fjjfoj ffjfnfnf gngrgnf gogojgjg gjodjgjg</p>
+                    <p class="card-text ev-text"><img src="./images/prof.jpg" class="event" alt=""> &emsp; This Project is about fjjfoj ffjfnfnf gngrgnf gogojgjg gjodjgjg</p>
+                  </div>
+
+                </div>
+                <!--/.Card-->
+
+              </div>
+              </div>
+              <!--Grid column-->
+            </div>
+        </div>
+        </main>
+        
+        <script type="text/javascript" src="/vendor/jquery/jquery.min.js"></script>
+        <script>
+        $(document).ready(function(){
+
+          $('.ch').click(function(e){
+            e.preventDefault();
+            var z=$(this).attr('id');
+
+            $.ajax({
+
+                url:'/profile/upvote',
+                method:'POST',
+                contentType:'application/json',
+                data:JSON.stringify({'project':z,client:'<%=sign.Eid%>'}),
+                success:function(res){
+                    console.log(res);
+                }
+            })
+              });
+
+
+
+          $('.ch2').click(function(e){
+            e.preventDefault();
+            var z=$(this).attr('id');
+            $.ajax({
+
+                url:'/profile/upDownVote',
+                method:'POST',
+                contentType:'application/json',
+                data:JSON.stringify({'project':z,client:'<%=sign.Eid%>','vote':'-1'}),
+                success:function(res){
+                  console.log("Sucess")
+                  //Frontend code can be implemented
+                },
+                error:function (res) {
+                  console.log(res)
+                  console.log("Error")
+                  //Frontend code can be implemented
+                }
+           });
+          })
+        })
+</script>
+        <!-- Bootstrap tooltips -->
+        <script type="text/javascript" src="/vendor/bootstrap/js/popper.min.js"></script>
+        <!-- Bootstrap core JavaScript -->
+        <script type="text/javascript" src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    </body>
+</html>
