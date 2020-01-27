@@ -1,26 +1,15 @@
-import Vue from "vue";
-import Router from "vue-router";
-import Home from "./views/Home.vue";
+import React from "react";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import Login from "./auth/login/login";
+import Dashboard from "./user/dashboard/dashboard";
 
-Vue.use(Router);
+const Router = () => (
+  <BrowserRouter>
+    <Switch>
+      <Route exact path="/login" component={Login} />
+      <Route exact path="/dashboard" component={Dashboard} />
+    </Switch>
+  </BrowserRouter>
+);
 
-export default new Router({
-  mode: "history",
-  base: process.env.BASE_URL,
-  routes: [
-    {
-      path: "/",
-      name: "home",
-      component: Home
-    },
-    {
-      path: "/about",
-      name: "about",
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () =>
-        import(/* webpackChunkName: "about" */ "./views/About.vue")
-    }
-  ]
-});
+export default Router;
