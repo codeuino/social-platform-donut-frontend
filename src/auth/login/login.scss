@@ -1,0 +1,58 @@
+.login-page {
+  display: flex;
+  flex-direction: row;
+  margin: 50px;
+  .welcome-text {
+    flex: 1.8;
+    margin: 140px 0 0 0;
+    .logo {
+      display: flex;
+      img {
+        width: 109px;
+        height: 109px;
+      }
+      h2 {
+        padding: 34px 10px 0 20px;
+        color: #2d2d2d;
+        font-size: 34px;
+      }
+    }
+    .extra-donuts {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      img {
+        height: 109px;
+      }
+    }
+    h1 {
+      color: #000000;
+      font-size: 40px;
+      font-weight: bold;
+    }
+    p {
+      color: #90949c;
+      font-size: 20px;
+      font-weight: normal;
+    }
+  }
+  .user-details {
+    flex: 1;
+    .user-data {
+      padding: 30px;
+      box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.1);
+      min-height: 380px;
+      height: auto;
+    }
+  }
+  @media (min-width: 320px) and (max-width: 640px) {
+    flex-direction: column;
+    margin: 20px;
+    .welcome-text {
+      margin: 20px 0 0 0;
+      .extra-donuts {
+        display: none;
+      }
+    }
+  }
+}
