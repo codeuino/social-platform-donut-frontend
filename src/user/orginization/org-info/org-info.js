@@ -1,25 +1,25 @@
 import React, { Component } from "react";
-import "./user-info.scss";
+import "./org-info.scss";
 import { Button } from "react-bootstrap";
 
-class UserInfo extends Component {
+class OrgInfo extends Component {
   render() {
     return (
-      <div className="user-details">
-        <div className="user-image">
-          <div className="user-pic">
+      <div className="org-details">
+        <div className="org-image">
+          <div className="org-pic">
             <img src="" alt="" />
           </div>
           <div className="edit-option">
             <Button variant="primary">User Edit</Button>
           </div>
         </div>
-        <div className="user-data">
+        <div className="org-data">
           <h1>
-            Dhanus Rajendra <Button variant="primary">Follow</Button>
+            CodeUnio Community <Button variant="primary">Follow</Button>
           </h1>
-          <p className="profession">Front end developer</p>
-          <p className="place">Bengaluru, Karnataka</p>
+          <p className="profession">Started 10 years ago</p>
+          <p className="place">584 members</p>
           <p className="desc">
             where millions of people gather together every day to imagine,
             create
@@ -35,4 +35,4 @@ class UserInfo extends Component {
   }
 }
 
-export default UserInfo;
+export default OrgInfo;
