@@ -5,11 +5,18 @@ import Posts from "./posts/posts";
 import Updates from "../dashboard/updates/updates";
 
 class PinnedPosts extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      pinned_posts: true
+    };
+  }
+
   render() {
     return (
       <div className="pinned-posts">
         <div className="navigation">
-          <Navigation></Navigation>
+          <Navigation posts={this.state.pinned_posts}></Navigation>
         </div>
         <div className="news">
           <Posts></Posts>

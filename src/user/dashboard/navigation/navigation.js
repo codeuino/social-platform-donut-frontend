@@ -5,6 +5,7 @@ import logo from "../../../images/donut.png";
 
 class Navigation extends Component {
   render() {
+    console.log(this.props);
     const divStyle = {
       position: "absolute",
       bottom: 0
@@ -16,10 +17,22 @@ class Navigation extends Component {
           <ListGroup.Item>
             <img src={logo} alt="logo" /> <span>DONUT</span>
           </ListGroup.Item>
-          <ListGroup.Item active>Dashboard</ListGroup.Item>
-          <ListGroup.Item>Pinned Posts</ListGroup.Item>
-          <ListGroup.Item>Organization</ListGroup.Item>
-          <ListGroup.Item>Account</ListGroup.Item>
+          <ListGroup.Item
+            className={this.props.dashboard ? "active" : "inactive"}
+          >
+            Dashboard
+          </ListGroup.Item>
+          <ListGroup.Item className={this.props.posts ? "active" : "inactive"}>
+            Pinned Posts
+          </ListGroup.Item>
+          <ListGroup.Item className={this.props.org ? "active" : "inactive"}>
+            Organization
+          </ListGroup.Item>
+          <ListGroup.Item
+            className={this.props.profile ? "active" : "inactive"}
+          >
+            Account
+          </ListGroup.Item>
           <ListGroup.Item style={divStyle}>Settings</ListGroup.Item>
         </ListGroup>
       </div>

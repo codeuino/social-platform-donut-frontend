@@ -6,11 +6,18 @@ import Portfolio from "../dashboard/portfolio/portfolio";
 import Posts from "../pinned-posts/posts/posts";
 
 class Orginization extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      org: true
+    };
+  }
+
   render() {
     return (
       <div className="orginization">
         <div className="navigation">
-          <Navigation></Navigation>
+          <Navigation org={this.state.org}></Navigation>
         </div>
         <div className="news">
           <div className="notify-user">

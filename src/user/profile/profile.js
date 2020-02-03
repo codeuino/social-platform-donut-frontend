@@ -6,11 +6,18 @@ import Portfolio from "../dashboard/portfolio/portfolio";
 import Posts from "../pinned-posts/posts/posts";
 
 class Profile extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      profile: true
+    };
+  }
+
   render() {
     return (
       <div className="profile">
         <div className="navigation">
-          <Navigation></Navigation>
+          <Navigation profile={this.state.profile}></Navigation>
         </div>
         <div className="news">
           <div className="notify-user">
