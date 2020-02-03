@@ -4,8 +4,12 @@ import "./navigation.scss";
 import logo from "../../../images/donut.png";
 
 class Navigation extends Component {
+  // onClick(params) {
+  //   this.state.Link("/" + params);
+  //   console.log(params);
+  // }
+
   render() {
-    console.log(this.props);
     const divStyle = {
       position: "absolute",
       bottom: 0
@@ -19,17 +23,25 @@ class Navigation extends Component {
           </ListGroup.Item>
           <ListGroup.Item
             className={this.props.dashboard ? "active" : "inactive"}
+            // onClick={() => this.onClick("dashboard")}
           >
             Dashboard
           </ListGroup.Item>
-          <ListGroup.Item className={this.props.posts ? "active" : "inactive"}>
+          <ListGroup.Item
+            className={this.props.posts ? "active" : "inactive"}
+            // onClick={() => this.onClick("posts")}
+          >
             Pinned Posts
           </ListGroup.Item>
-          <ListGroup.Item className={this.props.org ? "active" : "inactive"}>
+          <ListGroup.Item
+            className={this.props.org ? "active" : "inactive"}
+            // onClick={() => this.onClick("orginization")}
+          >
             Organization
           </ListGroup.Item>
           <ListGroup.Item
             className={this.props.profile ? "active" : "inactive"}
+            // onClick={() => this.onClick("profile")}
           >
             Account
           </ListGroup.Item>
