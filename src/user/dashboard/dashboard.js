@@ -8,11 +8,18 @@ import NewsFeed from "./news-feed/news-feed";
 import Updates from "./updates/updates";
 
 class Dashboard extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      dashboard: true
+    };
+  }
+
   render() {
     return (
       <div className="dashboard">
         <div className="navigation">
-          <Navigation></Navigation>
+          <Navigation dashboard={this.state.dashboard}></Navigation>
         </div>
         <div className="news">
           <div className="notify-user">
