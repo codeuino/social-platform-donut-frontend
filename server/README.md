@@ -10,6 +10,6 @@
    </br>**note** : Now generate vapid keys following this  link https://pusher.com/tutorials/push-notifications-node-service-workers
 
  4. Write <code>npm start</code>, to start server on PORT 3000.
- 5. Now Go to README.md file in the client folder .
+ 5. Now Go to README.md file in the [client folder](../client) .
 
 
