@@ -25,7 +25,7 @@ class Login extends Component {
             <img src={multipleDonuts} alt="donut logo" />
           </div>
         </div>
-        <div className="user-details">
+        <div className="user-details-login">
           {/* <div className="background-donut">
             <img src={backGroundDonut} alt="donut logo" />
           </div> */}
