@@ -1,0 +1,5 @@
+module.exports = { secret:'secret_key', 
+oauth: { clientID: "GOOGLE SECRET Client ID", clientSecret: "google client secret" }, 
+db: 'DB URL', github: { clientID: 'Github Client ID', clientSecret: 'Github Client Secret' }, 
+facebook: { clientID: 'FB Client ID', clientSecret: 'FB Client Secret' }, 
+VAPID_KEYS : { Public: "Vapid Keys", Private: "Vapid Keys" }}
