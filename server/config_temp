@@ -1,5 +1,5 @@
 module.exports =  {
-secret:'secret_key',
+secret: 'secret_key',
 oauth:  {
 clientID: "GOOGLE SECRET Client ID",
 clientSecret: "google client secret"
