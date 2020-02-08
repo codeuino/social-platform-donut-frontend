@@ -1,0 +1,19 @@
+.portfolio {
+  display: flex;
+  text-align: center;
+  min-height: 198px;
+  height: 198px;
+  .items-list {
+    flex: 0.8;
+    border: solid 1px #dfe9f1;
+    .item {
+      padding: 12px;
+      h1 {
+        font-size: 26px;
+      }
+      h3 {
+        font-size: 15px;
+      }
+    }
+  }
+}
