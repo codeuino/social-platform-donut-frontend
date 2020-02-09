@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Tab, Tabs } from "react-bootstrap";
 import LoginForm from "../login-form/login-form";
 import SignUpForm from "../signup-form/signup-form";
-import logo from "../../images/donut.png";
+import logo from "../../svgs/donut.svg";
 import multipleDonuts from "../../images/extra-donuts.png";
 // import backGroundDonut from "../../images/background-donut.png";
 import "./login.scss";
@@ -14,9 +14,8 @@ class Login extends Component {
         <div className="welcome-text">
           <div className="logo">
             <img src={logo} alt="donut logo" />
-            <h2>DONUT</h2>
           </div>
-          <h1>One place for meeting everyone</h1>
+          <h1>One place for meeting everyone.</h1>
           <p>
             An Open Source Social networking bridge between Developers,
             Organisations and Open Source aspirants

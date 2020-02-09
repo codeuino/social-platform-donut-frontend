@@ -7,11 +7,12 @@
     margin: 140px 0 0 0;
     .logo {
       display: flex;
+      padding-bottom: 20px;
       img {
-        width: 109px;
-        height: 109px;
+        width: 280px;
+        height: 80px;
       }
-      h2 {
+      h2 {        
         padding: 34px 10px 0 20px;
         color: #2d2d2d;
         font-size: 34px;
@@ -26,14 +27,19 @@
       }
     }
     h1 {
+      font-family: 'Playfair Display', serif;
       color: #000000;
-      font-size: 40px;
+      font-size: 50px;
+      font-style: normal;
       font-weight: bold;
+      padding-bottom: 20px;
+      line-height: 100px;
     }
     p {
       color: #90949c;
       font-size: 20px;
       font-weight: normal;
+      padding-right: 30px;
     }
   }
   .user-details {
