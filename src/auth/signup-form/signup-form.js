@@ -7,11 +7,7 @@ class SignUpForm extends Component {
     return (
       <div className="signup-details">
         <Form>
-          <Form.Group controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control type="email" placeholder="abc@gmail.com" />
-          </Form.Group>
-
+            
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
             <Form.Control type="email" placeholder="abc@gmail.com" />
