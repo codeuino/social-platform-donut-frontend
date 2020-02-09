@@ -1,12 +1,80 @@
 .notifications {
   flex: 1;
-  height: 250px;
+  // height: 250px;
   overflow: auto;
   .table {
+    box-shadow: 0 2px 2px 0 #dfe9f1;
     thead {
+      border-top: 1px solid #dfe9f1;
+      border-left: 1px solid #dfe9f1;
       th {
         text-align: center;
+        padding-bottom: 2px;
       }
     }
+    tbody {
+      display: block;
+      max-height: 200px;
+      overflow: auto;
+      border: 1px solid #dfe9f1;
+    }
+    td{
+      padding-top: 5px;
+      padding-bottom: 0px;
+    }
   }
+}
+
+thead, tr {
+  display:table;
+  width:100%;
+  table-layout:fixed;
+}
+
+.notification-container{
+  display: flex;
+  border-bottom: 1px solid #ccc;
+  padding: 5px 0
+}
+
+.notification-img-container > img {
+  width: 25px;
+  height: 25px;
+  // border-radius: 100%;
+  background-blend-mode: normal;
+  margin-top:10px;
+}
+
+.notification-description{
+  padding: 0px 20px;
+  p{
+    color: rgba(29, 33, 41, 0.5);
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 15px;
+    margin-bottom: 2px;
+  }
+  h6{
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 21px;
+    margin-bottom: 0px;
+  }
+}
+
+::-webkit-scrollbar, tbody::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+
+::-webkit-scrollbar-thumb, tbody::-webkit-scrollbar-thumb {
+  background: #888; 
+  border-radius: 40px;
 }
