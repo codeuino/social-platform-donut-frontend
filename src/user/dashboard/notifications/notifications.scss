@@ -1,0 +1,12 @@
+.notifications {
+  flex: 1;
+  height: 250px;
+  overflow: auto;
+  .table {
+    thead {
+      th {
+        text-align: center;
+      }
+    }
+  }
+}

@@ -1,0 +1,17 @@
+.login-details {
+  padding: 15px 0;
+  .form-group {
+    label {
+      color: #00abff;
+    }
+  }
+  .cta-login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+    button {
+      padding: 8px 50px;
+    }
+  }
+}
