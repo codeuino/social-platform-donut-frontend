@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import "./orginization.scss";
+import "./organization.scss";
 import Navigation from "../dashboard/navigation/navigation";
 import OrgInfo from "./org-info/org-info";
 import Portfolio from "../dashboard/portfolio/portfolio";
 import Posts from "../pinned-posts/posts/posts";
 
-class Orginization extends Component {
+class Organization extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -15,7 +15,7 @@ class Orginization extends Component {
 
   render() {
     return (
-      <div className="orginization">
+      <div className="organization">
         <div className="navigation">
           <Navigation org={this.state.org}></Navigation>
         </div>
@@ -33,4 +33,4 @@ class Orginization extends Component {
   }
 }
 
-export default Orginization;
+export default Organization;
