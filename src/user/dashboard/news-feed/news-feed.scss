@@ -1,0 +1,66 @@
+.news-feed {
+  padding: 0 20px;
+  .post-article {
+    height: 50px;
+    border: solid 1px #dfe9f1;
+    .article {
+      display: flex;
+      input {
+        flex: 1;
+        border: none;
+        padding: 12px;
+      }
+    }
+    .cta {
+      padding: 5px 8px;
+      button {
+        margin: 0 3px;
+      }
+    }
+    .categories {
+      display: flex;
+      margin: 20px auto;
+      justify-content: center;
+      .category-type {
+        padding: 4px 36px;
+        border: solid 1px #007bff;
+        border-radius: 100px;
+        color: #007bff;
+        margin: 0 5px;
+        cursor: pointer;
+        &.active {
+          background: #007bff;
+          color: white;
+        }
+      }
+    }
+    .article-posts {
+      display: flex;
+      .individual-post {
+        border: solid 1px #dfe9f1;
+        margin: 0 10px;
+        padding: 8px;
+        .user-info {
+          display: flex;
+          .img-desc {
+            h2 {
+              font-size: 16px;
+              padding: 0 10px;
+              font-weight: bold;
+              margin: 0;
+            }
+            p {
+              font-size: 12px;
+              margin: 0;
+              padding: 0 10px;
+            }
+          }
+        }
+        .post-details {
+          font-size: 14px;
+          padding: 10px 0;
+        }
+      }
+    }
+  }
+}

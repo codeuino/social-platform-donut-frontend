@@ -1,0 +1,21 @@
+.dashboard {
+  display: flex;
+  min-height: 100vh;
+  height: auto;
+  font-family: Muli, sans-serif;
+  .navigation {
+    flex: 0.5;
+    border-right: solid 1px #dfe9f1;
+  }
+  .news {
+    flex: 2;
+    .notify-user {
+      display: flex;
+      padding: 20px 0px 20px 30px;
+    }
+  }
+  .promotions {
+    flex: 1;
+    padding: 20px 12px 20px 0px;
+  }
+}
