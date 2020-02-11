@@ -3,14 +3,29 @@
     .list-group-item {
       cursor: pointer;
       border: none;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 14px;
+      line-height: 21px;
+      letter-spacing: 0.1px;
+      text-decoration: none;
       img {
-        width: 34px;
+        height: 50px;
+        width: 120px;
       }
       span {
         font-weight: bold;
         font-size: 25px;
         vertical-align: middle;
       }
+    }
+  }
+}
+
+.navigation{
+  .list-group{
+    .active{
+      background-color: rgba(26, 115, 232, 0.1);
     }
   }
 }
