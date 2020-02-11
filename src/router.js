@@ -4,7 +4,7 @@ import Login from "./auth/login/login";
 import Dashboard from "./user/dashboard/dashboard";
 import PinnedPosts from "./user/pinned-posts/pinned-posts";
 import Profile from "./user/profile/profile";
-import Orginization from "./user/orginization/orginization";
+import Organization from "./user/organization/organization";
 
 const Router = () => (
   <BrowserRouter>
@@ -14,7 +14,7 @@ const Router = () => (
       <Route exact path="/dashboard" component={Dashboard} />
       <Route exact path="/pinned-posts" component={PinnedPosts} />
       <Route exact path="/profile" component={Profile} />
-      <Route exact path="/organization" component={Orginization} />
+      <Route exact path="/organization" component={Organization} />
     </Switch>
   </BrowserRouter>
 );
