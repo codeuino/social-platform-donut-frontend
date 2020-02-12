@@ -42,6 +42,19 @@
         margin: 5px 7px 0 0;
         padding: 8px;
         font-size: 14px;
+        box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
+        border-radius: 20px;
+      }
+    }
+  }
+}
+
+.org-details {
+  .org-data {
+    h1 {
+      .btn-primary {
+        box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
+        border-radius: 20px;
       }
     }
   }
