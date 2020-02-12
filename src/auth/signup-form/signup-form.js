@@ -13,6 +13,11 @@ class SignUpForm extends Component {
             <Form.Control type="email" placeholder="abc@gmail.com" />
           </Form.Group>
 
+          <Form.Group controlId="formBasicUserName">
+            <Form.Label>User Name or Organisation Name</Form.Label>
+            <Form.Control type="username" placeholder="You know it" />
+          </Form.Group>
+
           <Form.Group controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
             <Form.Control type="password" placeholder="***********" />
@@ -28,6 +33,19 @@ class SignUpForm extends Component {
             </Button>
           </div>
         </Form>
+        <div className="text-center text-muted signUp">Or sign up with</div>
+        <div className="text-center signUpButtons">
+          <Button type="submit" className="btn btn-primary">
+          Facebook
+          </Button>
+          <Button type="submit"className="btn btn-primary">
+          Github
+          </Button> 
+        </div>
+        <div className="text-center text-muted login">
+        Already have an account? 
+        <a href="#"> Login</a>
+        </div>
       </div>
     );
   }

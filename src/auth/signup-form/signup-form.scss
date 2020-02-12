@@ -15,3 +15,25 @@
     }
   }
 }
+.signUp{
+  margin-top:12px;
+  font-family: Inter;
+  font-style: normal;
+  font-size: 15px;
+}
+.signUpButtons{
+  display:flex;
+  justify-content: center;
+}
+.signUpButtons > Button{
+  font-family: Inter;
+  text-align:center;
+  margin:15px;
+  border-radius: 0 !important;
+  margin-top: 5px;
+}
+.login{
+  font-family: Inter;
+  letter-spacing: 0.2px;
+  margin-top:10px;
+}
