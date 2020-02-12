@@ -1,0 +1,101 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+.not-found-container {
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+}
+
+.header {
+    margin: 50px 0px 0px 10px;
+    padding: 0;
+}
+
+.content {
+    width: 100%;
+    height: 75vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;   
+    padding: 0px 20px;
+}
+
+.content__title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.title__donut img {
+    height: 165px;
+    padding: 7px 0px;
+    animation: infiniteRotate 3s infinite none;
+}
+
+@keyframes infiniteRotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.title__text {
+    font-size: 200px;   
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    font-weight: 800;
+    color: #212121;
+}
+
+.content__message {
+    margin-top: 5px;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: #90949c;
+    font-size: 30px;
+    text-align: center;
+}
+
+.content__redirect {
+    margin-top: 30px;
+    color: #000;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    font-size: 22px;
+    font-weight: 500;
+}
+
+.redirect-link {
+    color: #007bff;
+    text-decoration: underline;
+    ::hover {
+        color: darken(#007bff, 10%);
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    .header {
+        margin: 40px 0px 0px 15px;       
+    }
+
+    .title__donut img {
+        height: 130px;
+        padding: 7px 0px;
+    }
+
+    .title__text {
+        font-size: 150px;   
+    }
+
+    .content__message {
+        font-size: 23px;
+    }
+
+    .content__redirect {
+        font-size: 20px;
+    }
+}

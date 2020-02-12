@@ -1,11 +1,8 @@
 import React, { Component } from "react";
-import { ListGroup , Nav} from "react-bootstrap";
-import {Link, NavLink, Route} from 'react-router-dom';
+import { ListGroup } from "react-bootstrap";
+import { NavLink } from 'react-router-dom';
+import { DonutTitleSmall } from "../../../donutTitle/donutTitle";
 import "./navigation.scss";
-import "./navigation.css";
-
-import logo from "../../../svgs/donut.svg";
-import dashboard from "../../../svgs/dashboard.svg";
 
 class Navigation extends Component {
   // onClick(params) {
@@ -27,7 +24,7 @@ class Navigation extends Component {
       <div className="navigation">
         <ListGroup>
           <ListGroup.Item>
-            <NavLink to="/dashboard"><img src={logo} alt="logo" /></NavLink>
+            <NavLink to="/dashboard"><div className="donut-title"><DonutTitleSmall /></div></NavLink>
           </ListGroup.Item>
           <ListGroup.Item
             className={this.props.dashboard ? "active" : "inactive"}
