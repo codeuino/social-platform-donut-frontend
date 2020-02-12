@@ -1,18 +1,20 @@
 .portfolio {
-  box-shadow: 0 2px 2px 0 #ccc;
+  box-shadow: -1px 2px 2px -1px rgba(0, 0, 0, 0.1);
   display: flex;
   text-align: center;
   // min-height: 198px;
   // height: 198px;
-  height: 239px;
+  border-top-right-radius: 2%;
+  border-bottom-right-radius: 2%;
+  height: 269px;
   .items-list {
     flex: 0.8;
-    padding: 35px 0px;
+    padding: 40px 0px;
     border: solid 1px #dfe9f1;
     .item {
       padding: 12px;
       h1 {
-        font-size: 26px;
+        font-size: 36px;
         font-family: SF UI Text;
         font-style: normal;
         font-weight: bold;
