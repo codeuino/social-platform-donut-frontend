@@ -3,8 +3,9 @@
   flex-direction: row;
   border: solid 1px #dfe9f1;
   min-height: 198px;
-  height: 198px;
-  flex: 0.5;
+  height: auto;
+  flex: 0.5 1;
+  align-items: center;
   .org-image {
     flex: 0.5;
     text-align: center;
