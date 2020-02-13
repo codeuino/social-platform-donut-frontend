@@ -42,8 +42,13 @@
       padding-right: 30px;
     }
   }
-  Button{
+  .facebook,.facebook:hover{
     background-color: #3b5998;
+    color:white;
+  }
+  .github,.github:hover{
+    background-color: #211f1f;
+    color:white;
   }
   .user-details {
     flex: 1;
