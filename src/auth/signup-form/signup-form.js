@@ -35,10 +35,10 @@ class SignUpForm extends Component {
         </Form>
         <div className="text-center text-muted signUp">Or sign up with</div>
         <div className="text-center signUpButtons">
-          <Button type="submit" className="btn btn-primary facebook">
+          <Button type="submit" variant="primary" className="facebook">
           Facebook
           </Button>
-          <Button type="submit"className="btn btn-dark github">
+          <Button type="submit" variant="dark" className="github">
           Github
           </Button> 
         </div>
