@@ -6,11 +6,6 @@ import "./navigation.scss";
 import logo from "../../../svgs/donut.svg";
 
 class Navigation extends Component {
-  // onClick(params) {
-  //   this.state.Link("/" + params);
-  //   console.log(params);
-  // }
-
   render() {
     const divStyle = {
       position: "absolute",
@@ -27,7 +22,6 @@ class Navigation extends Component {
           </ListGroup.Item>
           <ListGroup.Item
             className={this.props.dashboard ? "active" : "inactive"}
-            // onClick={() => this.onClick("dashboard")}
           >
             <svg
               width="38"
@@ -46,10 +40,7 @@ class Navigation extends Component {
               <b>Dashboard</b>
             </NavLink>
           </ListGroup.Item>
-          <ListGroup.Item
-            className={this.props.posts ? "active" : "inactive"}
-            // onClick={() => this.onClick("posts")}
-          >
+          <ListGroup.Item className={this.props.posts ? "active" : "inactive"}>
             <svg
               width="38"
               height="38"
@@ -69,10 +60,7 @@ class Navigation extends Component {
               <b>Pinned Posts</b>
             </NavLink>
           </ListGroup.Item>
-          <ListGroup.Item
-            className={this.props.org ? "active" : "inactive"}
-            // onClick={() => this.onClick("orginization")}
-          >
+          <ListGroup.Item className={this.props.org ? "active" : "inactive"}>
             <svg
               width="38"
               height="38"
@@ -92,7 +80,6 @@ class Navigation extends Component {
           </ListGroup.Item>
           <ListGroup.Item
             className={this.props.profile ? "active" : "inactive"}
-            // onClick={() => this.onClick("profile")}
           >
             <svg
               width="38"
