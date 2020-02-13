@@ -44,7 +44,37 @@
         margin: 5px 7px 0 0;
         padding: 8px;
         font-size: 14px;
+        box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
+        border-radius: 20px;
+        width: 80px;
+        height: 35px;
+        font-family: Inter;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 17px;
+        text-align: center;
       }
     }
   }
 }
+
+.user-details {
+  .user-data {
+    h1 {
+      .btn-primary{
+        box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
+        border-radius: 20px;
+        width: 80px;
+        height: 35px;
+        font-family: Inter;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 17px;
+        text-align: center;
+      }
+    }
+  }
+}
+
