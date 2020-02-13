@@ -3,7 +3,9 @@
   flex-direction: row;
   border: solid 1px #dfe9f1;
   min-height: 198px;
-  height: 198px;
+  height: auto;
+  align-items: center;
+  flex: 0.5;
   .user-image {
     flex: 1;
     text-align: center;
