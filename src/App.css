@@ -1,3 +1,13 @@
+@font-face {
+  font-family: 'SF UI Text';
+  src: local('SF UI Text'), url(./fonts/SFUIText-Bold.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: local('Inter'), url(./fonts/Inter-Regular.otf) format('opentype');
+}
+
 .App {
   text-align: center;
 }
