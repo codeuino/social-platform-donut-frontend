@@ -15,6 +15,9 @@
       padding: 5px 8px;
       button {
         margin: 0 3px;
+        height: 43px;
+        font-weight: bold;
+        background: #1A73E8;
       }
     }
     .categories {
@@ -64,3 +67,26 @@
     }
   }
 }
+
+.news-feed {
+  .post-article {
+    .article {
+      .post-input {
+        background: #FFFFFF;
+        border: 1px solid #CCCCCC;
+        box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+      }
+      .cta {
+        button {
+          svg{
+            padding-right: 16px;
+            margin-top: 0px;
+          }
+        }
+      }
+    }
+  }
+}
+
+
