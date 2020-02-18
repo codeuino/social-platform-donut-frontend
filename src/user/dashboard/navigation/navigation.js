@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { ListGroup } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
+import { NavLink } from 'react-router-dom';
+import { DonutTitleSmall } from "../../../donutTitle/donutTitle";
 import "./navigation.scss";
-
-import logo from "../../../svgs/donut.svg";
 
 class Navigation extends Component {
   render() {
@@ -16,9 +15,7 @@ class Navigation extends Component {
       <div className="navigation">
         <ListGroup>
           <ListGroup.Item>
-            <NavLink to="/dashboard">
-              <img src={logo} alt="logo" />
-            </NavLink>
+            <NavLink to="/dashboard"><div className="donut-title"><DonutTitleSmall /></div></NavLink>
           </ListGroup.Item>
           <ListGroup.Item
             className={this.props.dashboard ? "active" : "inactive"}
