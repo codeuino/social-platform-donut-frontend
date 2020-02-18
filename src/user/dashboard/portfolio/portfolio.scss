@@ -1,19 +1,31 @@
 .portfolio {
+  box-shadow: -1px 2px 2px -1px rgba(0, 0, 0, 0.1);
   display: flex;
   text-align: center;
-  min-height: 198px;
-  height: 198px;
+  border-top-right-radius: 2%;
+  border-bottom-right-radius: 2%;
+  flex:0.5;
+  height: 269px;
   .items-list {
     flex: 0.8;
+    padding: 40px 0px;
     border: solid 1px #dfe9f1;
     .item {
       padding: 12px;
       h1 {
-        font-size: 26px;
+        font-size: 36px;
+        font-family: SF UI Text;
+        font-style: normal;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 0px;
       }
       h3 {
         font-size: 15px;
-        color: #4457A5;
+        color: #4457a5;
+        font-family: Inter;
+        font-style: normal;
+        font-weight: 600;
       }
     }
   }
