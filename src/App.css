@@ -8,6 +8,11 @@
   src: local('Inter'), url(./fonts/Inter-Regular.otf) format('opentype');
 }
 
+@font-face {
+  font-family: 'Qanelas';
+  src: local('Qanelas'), url(./fonts/Qanelas-Regular.ttf) format('truetype');
+}
+
 .App {
   text-align: center;
 }
