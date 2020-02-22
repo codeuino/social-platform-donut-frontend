@@ -15,7 +15,7 @@ export class AddProject extends Component{
       centered
     >
       <div className="container">
-        <Modal.Header closeButton className="heading">
+        <Modal.Header closeButton className="heading border border-0 p-0">
         <Modal.Title id="contained-modal-title-vcenter"> 
         <div className="title">New Project</div>
         <div className="about">ABOUT THE PROJECT</div>
@@ -44,14 +44,14 @@ export class AddProject extends Component{
               size="sm"/>
           </Row>
           <Row className="form-content">
-            <Col className="cols" sm={5}>
+            <Col className="p-0" sm={5}>
             <Form.Label className="label">Github Link</Form.Label>
             <Form.Control
                 type="text"
                 placeholder="Enter github link"
                 size="sm"/>
             </Col>
-            <Col className="cols" sm={5}>
+            <Col className="p-0" sm={5}>
             <Form.Label className="label">Other Link</Form.Label>
             <Form.Control
                 type="text"
