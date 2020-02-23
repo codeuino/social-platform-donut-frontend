@@ -1,12 +1,17 @@
 import React, { Component } from "react";
-import { ListGroup } from "react-bootstrap";
+import { ListGroup, Button } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
+import { DonutTitleSmall } from "../../../donutTitle/donutTitle";
 import "./navigation.scss";
-
-import logo from "../../../svgs/donut.svg";
+import {Logout} from "../../profile/popups/logout";
+import logo from "../../../svgs/logout.svg";
 
 class Navigation extends Component {
+  state = { logout:false };
   render() {
+    let cancel =()=>this.setState({
+      logout:false
+    });
     const divStyle = {
       position: "absolute",
       bottom: 0
@@ -16,9 +21,7 @@ class Navigation extends Component {
       <div className="navigation">
         <ListGroup>
           <ListGroup.Item>
-            <NavLink to="/dashboard">
-              <img src={logo} alt="logo" />
-            </NavLink>
+            <NavLink to="/dashboard"><div className="donut-title"><DonutTitleSmall /></div></NavLink>
           </ListGroup.Item>
           <ListGroup.Item
             className={this.props.dashboard ? "active" : "inactive"}
@@ -109,7 +112,7 @@ class Navigation extends Component {
               <b>Account</b>
             </NavLink>
           </ListGroup.Item>
-          <ListGroup.Item style={divStyle}>
+          <ListGroup.Item style={{position: "absolute", bottom: "50px"}}>
             <svg
               width="38"
               height="38"
@@ -124,6 +127,16 @@ class Navigation extends Component {
               />
             </svg>
             Settings
+          </ListGroup.Item>
+          <ListGroup.Item style={divStyle}>
+            <Button variant="link" size="sm" style=
+            {{"margin-left": "-8.5px", color: "rgba(0, 0, 0, 0.5)"}} onClick={
+              ()=>this.setState({logout:true})}>
+            <img class="logout" src={logo} alt="L"></img>
+            <b>Logout</b>
+            </Button>
+            <Logout show={this.state.logout}
+              onHide={cancel} />
           </ListGroup.Item>
         </ListGroup>
       </div>
