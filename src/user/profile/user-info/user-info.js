@@ -1,9 +1,15 @@
 import React, { Component } from "react";
 import "./user-info.scss";
 import { Button } from "react-bootstrap";
+import { UserEdit } from "../../../popups/UserEdit/UserEdit";
 
 class UserInfo extends Component {
+  state = { userEdit :false };
+
   render() {
+    const closePopup =()=>this.setState({
+      userEdit:false
+    })
     return (
       <div className="user-details">
         <div className="user-image">
@@ -11,7 +17,8 @@ class UserInfo extends Component {
             <img src="" alt="" />
           </div>
           <div className="edit-option">
-            <Button variant="primary">User Edit</Button>
+            <Button variant="primary" onClick={()=>this.setState({userEdit:true})}>User Edit</Button>
+            <UserEdit show={this.state.userEdit} onHide={closePopup}/>
           </div>
         </div>
         <div className="user-data">

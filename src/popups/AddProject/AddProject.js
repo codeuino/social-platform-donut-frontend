@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Modal, Button, Row, Col, Form} from 'react-bootstrap';
-import "./AddProject.scss";
+import "../popups.scss";
 
 export class AddProject extends Component{
     constructor(props){

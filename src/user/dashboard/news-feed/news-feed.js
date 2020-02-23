@@ -3,6 +3,7 @@ import { Button } from "react-bootstrap";
 import "./news-feed.scss";
 import gsoc from "../../../images/gsoc.png";
 import {AddProject} from "../../../popups/AddProject/AddProject";
+
 class NewsFeed extends Component {
   state = { date: new Date(),addProject:false };
   render() {
