@@ -2,19 +2,22 @@ import React, { Component } from "react";
 import { Button } from "react-bootstrap";
 import "./news-feed.scss";
 import gsoc from "../../../images/gsoc.png";
-import {AddProject} from "../../../popups/AddProject/AddProject";
+import { AddProject } from "../../../popups/AddProject/AddProject";
+import { AddPost } from "../../../popups/AddPost/AddPost";
 
 class NewsFeed extends Component {
-  state = { date: new Date(),addProject:false };
+  state = { date: new Date(), addProject: false, addPost: false };
   render() {
     const closePopup =()=>this.setState({
-      addProject:false
+      addProject:false,
+      addPost:false
     })
     return (
       <div className="news-feed">
         <div className="post-article">
           <div className="article">
-            <input type="text" placeholder="write a post..." />
+            <input type="text" placeholder="write a post..." onClick={()=>this.setState({addPost:true})} />
+            <AddPost show={this.state.addPost} onHide={closePopup}/>
             <div className="cta">
               <Button variant="primary">Event</Button>
               <Button variant="primary" onClick={()=>this.setState({addProject:true})}>Project</Button>
