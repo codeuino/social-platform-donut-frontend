@@ -5,7 +5,8 @@ import profileImg from "../../../svgs/evt-creator.svg";
 import upVoteImg from "../../../svgs/up.svg";
 import downVoteImg from "../../../svgs/down.svg";
 import commentIcon from "../../../svgs/comment.svg";
-import  eventImg  from "../../../svgs/event-img-1.svg";
+import eventImg from "../../../svgs/event-img-1.svg";
+import eventImg2 from "../../../svgs/event-img-2.svg";
 
 
 const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
@@ -43,85 +44,159 @@ const feed = [
     _id: 1,
     imgSrc: profileImg,
     createdBy: 'Marjorie Alexander',
+    created: 'June 5, 2018 4:31 AM', 
     details: 'ex sit ex laboris adipisicing enim eiusmod proident exercitation ea fugiat in mollit pariatur occaecat ut nostrud ullamco ex official',
     upvotes: 810,
     downVotes: 185,
-    eventImage: null
+    eventImage: null,
+    type: 'Donut'
   },
   {
     _id: 2,
     imgSrc: profileImg,
     createdBy: 'Marjorie Alexander',
+    created: 'June 5, 2018 4:31 AM',
     details: 'ex sit ex laboris adipisicing enim eiusmod proident exercitation ea fugiat in mollit pariatur occaecat ut nostrud ullamco ex official',
     upvotes: 80,
     downVotes: 15,
-    eventImage: eventImg
+    eventImage: eventImg2,
+    type: 'Project',
+    projectName: 'Some Huge Project Name',
+    projectOwner: 'Neilson'
   },
   {
     _id: 3,
     imgSrc: profileImg,
     createdBy: 'Marjorie Alexander',
+    created: 'June 5, 2018 4:31 AM',
     details: 'ex sit ex laboris adipisicing enim eiusmod proident exercitation ea fugiat in mollit pariatur occaecat ut nostrud ullamco ex official',
     upvotes: 104,
     downVotes: 25,
-    eventImage: null
+    eventImage: null,
+    type: 'Donut'
   },
   {
     _id: 4,
     imgSrc: profileImg,
     createdBy: 'Marjorie Alexander',
+    created: 'June 5, 2018 4:31 AM',
     details: 'ex sit ex laboris adipisicing enim eiusmod proident exercitation ea fugiat in mollit pariatur occaecat ut nostrud ullamco ex official',
     upvotes: 810,
     downVotes: 185,
-    eventImage: null
+    eventImage: null,
+    type: 'Donut'
   },
   {
     _id: 5,
     imgSrc: profileImg,
     createdBy: 'Marjorie Alexander',
+    created: 'June 5, 2018 4:31 AM',
+    eventName: 'Christmas Party',
     details: 'ex sit ex laboris adipisicing enim eiusmod proident exercitation ea fugiat in mollit pariatur occaecat ut nostrud ullamco ex official',
     upvotes: 80,
     downVotes: 15,
-    eventImage: eventImg
+    eventImage: eventImg,
+    type: 'Event'
   },
   {
     _id: 6,
     imgSrc: profileImg,
     createdBy: 'Marjorie Alexander',
+    created: 'June 5, 2018 4:31 AM',
     details: 'ex sit ex laboris adipisicing enim eiusmod proident exercitation ea fugiat in mollit pariatur occaecat ut nostrud ullamco ex official',
     upvotes: 80,
     downVotes: 15,
-    eventImage: null
+    eventImage: null,
+    type: 'Donut'
   },
   {
     _id: 7,
     imgSrc: profileImg,
     createdBy: 'Marjorie Alexander',
+    created: 'June 5, 2018 4:31 AM',
     details: 'ex sit ex laboris adipisicing enim eiusmod proident exercitation ea fugiat in mollit pariatur occaecat ut nostrud ullamco ex official',
     upvotes: 810,
     downVotes: 185,
-    eventImage: null
+    eventImage: null,
+    type: 'Donut'
   },
 ]
 
 class NewsFeed extends Component {
   state = { date: new Date() };
   render() {
+    var content; 
     let newsFeed = feed.map((newsItem, i)=>{
-      return(
-        <div  className="individual-post">
-          {newsItem.eventImage ? <div className="event-image-container">
+      if(newsItem.type === "Project"){
+        content = (
+          newsItem.eventImage ? 
+          <div className="project-image-container">
             <img src = {newsItem.eventImage}/>
+            <div className="project-jumbotron">
+              <div className="project-details">
+                <h3>{newsItem.projectName}</h3>
+                <p>By {newsItem.projectOwner}</p>
+                <div className="view-project-btn-container">
+                  <Button className="view-project-btn text-center">View Project</Button>
+                </div>
+              </div>
+            </div>
           </div>
-          :
-          <div></div>}
+          : 
+          <div></div>
+        )
+      }else if(newsItem.type === "Event"){
+        content = (
+          newsItem.eventImage ? 
+          <div className="event-image-container">
+            <img src = {newsItem.eventImage}/>
+            <div className="event-jumbotron">
+              <div className="event-details">
+                <h3>{newsItem.eventName}</h3>
+                <div className="event-schedule">
+                  <div className="event-date">
+                    <div className="date-content">
+                      <small>DATE</small>
+                      <h4>25</h4>
+                      <h5>Dec</h5>
+                      <h6>2020</h6>
+                    </div>
+                  </div>
+
+                  <div className="event-time">
+                    <div className="time-content">
+                      <small>TIME</small>
+                      <h4>10</h4>
+                      <h5>PM</h5>
+                      <h6>Onwards</h6>
+                    </div>
+                  </div>
+                </div>
+                <div className="tag-container">
+                  <Button className="tag-btn">+1 RSVP</Button>
+                </div>
+              </div>
+            </div>
+          </div>
+          : 
+          <div></div>
+        )
+      }else{
+        content = (
+          <div></div>
+        )
+      }
+
+      return(
+        <div className="individual-post">
+          {content}
           <div className="user-info">
             <div className="image">
               <img src={newsItem.imgSrc} alt="icon" />
             </div>
             <div className="img-desc">
               <h2>{newsItem.createdBy}</h2>
-              <small>{this.state.date.toTimeString()}</small>
+              <small>{newsItem.created}</small>
             </div>
             <div className="dropdown-container">
               <Dropdown>
