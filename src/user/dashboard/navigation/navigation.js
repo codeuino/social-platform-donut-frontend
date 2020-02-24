@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { ListGroup, Button } from "react-bootstrap";
+import { ListGroup } from "react-bootstrap";
 import { NavLink } from 'react-router-dom';
 import { DonutTitleSmall } from "../../../donutTitle/donutTitle";
+import { Button } from "react-bootstrap";
 import "./navigation.scss";
 import {Logout} from "../../profile/popups/logout";
 
