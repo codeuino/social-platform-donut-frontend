@@ -6,6 +6,7 @@ import "./navigation.scss";
 import {Logout} from "../../profile/popups/logout";
 import logo from "../../../svgs/logout.svg";
 
+
 class Navigation extends Component {
   state = { logout:false };
   render() {
