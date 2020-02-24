@@ -9,10 +9,6 @@
       line-height: 21px;
       letter-spacing: 0.1px;
       text-decoration: none;
-      img {
-        height: 50px;
-        width: 120px;
-      }
       span {
         font-weight: bold;
         font-size: 25px;
@@ -20,6 +16,10 @@
       }
     }
   }
+}
+
+.donut-title {
+  width: 50px;
 }
 
 .navigation{
@@ -64,4 +64,12 @@
       }
     }
   }
+}
+
+.logout{
+  height: 21px;
+  width: 21px;
+  color: rgba(0, 0, 0, 0.5);
+  margin-right: 15px;
+  margin-left: 2px;
 }

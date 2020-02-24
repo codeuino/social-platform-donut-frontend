@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Modal, Button} from 'react-bootstrap';
-import "./edit-profile.scss";
+import "./popups.scss";
 
 export class Logout extends Component{
     // eslint-disable-next-line
