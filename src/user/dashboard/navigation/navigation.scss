@@ -18,6 +18,17 @@
   }
 }
 
+.navigation{
+  .list-group{
+    .nav-items-container{
+      border-top: 1px solid #ccc;
+      padding-top: 15px;
+      padding-left: 8px;
+      margin-top: 1px;
+    }
+  }
+}
+
 .donut-title {
   width: 50px;
 }
@@ -26,8 +37,10 @@
   .list-group{
     .active{
       background-color: rgba(26, 115, 232, 0.1);
+      border-radius: 4px 0px 0px 4px;
       .link {
-        color : #1A73E8
+        color : #1A73E8;
+        background-color: transparent;
       }
     }
   }

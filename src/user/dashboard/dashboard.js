@@ -21,16 +21,18 @@ class Dashboard extends Component {
         <div className="navigation">
           <Navigation dashboard={this.state.dashboard}></Navigation>
         </div>
-        <div className="news">
-          <div className="notify-user">
-            <UpcomingEvents></UpcomingEvents>
-            <Notifications></Notifications>
+        <div className="main-content">
+          <div className="news">
+            <div className="notify-user">
+              <UpcomingEvents></UpcomingEvents>
+              <Notifications></Notifications>
+            </div>
+            <NewsFeed></NewsFeed>
           </div>
-          <NewsFeed></NewsFeed>
-        </div>
-        <div className="promotions">
-          <Portfolio></Portfolio>
-          <Updates></Updates>
+          <div className="promotions">
+            <Portfolio></Portfolio>
+            <Updates></Updates>
+          </div>
         </div>
       </div>
     );

@@ -7,6 +7,12 @@
     flex: 0.5;
     border-right: solid 1px #dfe9f1;
   }
+  .main-content{
+    display: flex;
+    flex: 3 1;
+    height: -webkit-fill-available;
+    overflow: scroll;
+  }
   .news {
     flex: 2;
     .notify-user {
