@@ -4,6 +4,8 @@ import Navigation from "../dashboard/navigation/navigation";
 import OrgInfo from "./org-info/org-info";
 import Portfolio from "../dashboard/portfolio/portfolio";
 import Posts from "../pinned-posts/posts/posts";
+import Updates from "../dashboard/updates/updates";
+import Contact from "./Contact/Contact";
 
 class Organization extends Component {
   constructor(props) {
@@ -26,6 +28,10 @@ class Organization extends Component {
           </div>
           <div className="posts-profile">
             <Posts></Posts>
+            <div className="post-sidebar">
+            <Updates></Updates>
+            <Contact></Contact>
+            </div>
           </div>
         </div>
       </div>

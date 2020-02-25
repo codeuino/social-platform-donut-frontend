@@ -1,55 +1,36 @@
 import React, { Component } from "react";
+import Donut from "./Donut/Donut";
+import AboutUs from "./AboutUs/AboutUs";
 import "./posts.scss";
-import gsoc from "../../../images/gsoc.png";
 
 class Posts extends Component {
-  state = { date: new Date() };
+  state = { route: "AboutUs", active:1 };
+
+  onTabChange = (data,index) => {
+    this.setState({
+      route: data,
+      active:index
+    }
+    )
+  }
+
   render() {
     return (
       <div className="posts">
-        <h1>Pinned Posts</h1>
+        <h1>Posts</h1>
         <div className="pinned-posts">
           <div className="categories">
-            <div className="category-type active">All</div>
-            <div className="category-type">Donuts</div>
-            <div className="category-type">Events</div>
-            <div className="category-type">Projects</div>
+            <div className={this.state.active==1 ? "category-type active" : "category-type"} onClick={()=>this.onTabChange("AboutUs",1)}>About Us</div>
+            <div className={this.state.active==2 ? "category-type active" : "category-type"} onClick={()=>this.onTabChange("Donuts",2)}>Donuts</div>
+            <div className={this.state.active==3 ? "category-type active" : "category-type"} onClick={()=>this.onTabChange("Events",3)}>Events</div>
+            <div className={this.state.active==4 ? "category-type active" : "category-type"} onClick={()=>this.onTabChange("Projects",4)}>Projects</div>
           </div>
-          <div className="article-posts">
-            <div className="individual-post">
-              <div className="user-info">
-                <div className="image">
-                  <img src={gsoc} alt="icon" />
-                </div>
-                <div className="img-desc">
-                  <h2>Marjorie Alexander</h2>
-                  <p>{this.state.date.toTimeString()}</p>
-                </div>
-              </div>
-              <div className="post-details">
-                ex sit ex laboris adipisicing enim eiusmod proident exercitation
-                ea fugiat in mollit pariatur occaecat ut nostrud ullamco ex
-                official
-              </div>
-            </div>
 
-            <div className="individual-post">
-              <div className="user-info">
-                <div className="image">
-                  <img src={gsoc} alt="icon" />
-                </div>
-                <div className="img-desc">
-                  <h2>Marjorie Alexander</h2>
-                  <p>{this.state.date.toTimeString()}</p>
-                </div>
-              </div>
-              <div className="post-details">
-                ex sit ex laboris adipisicing enim eiusmod proident exercitation
-                ea fugiat in mollit pariatur occaecat ut nostrud ullamco ex
-                official
-              </div>
-            </div>
-          </div>
+          { this.state.route==="AboutUs" ?
+            <AboutUs></AboutUs>:
+            <Donut></Donut>
+          }
+    
         </div>
       </div>
     );

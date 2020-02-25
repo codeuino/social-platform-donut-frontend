@@ -28,34 +28,5 @@
         }
       }
     }
-    .article-posts {
-      display: flex;
-      margin: 20px;
-      .individual-post {
-        border: solid 1px #dfe9f1;
-        margin: 0 10px;
-        padding: 8px;
-        .user-info {
-          display: flex;
-          .img-desc {
-            h2 {
-              font-size: 16px;
-              padding: 0 10px;
-              font-weight: bold;
-              margin: 0;
-            }
-            p {
-              font-size: 12px;
-              margin: 0;
-              padding: 0 10px;
-            }
-          }
-        }
-        .post-details {
-          font-size: 14px;
-          padding: 10px 0;
-        }
-      }
-    }
   }
 }

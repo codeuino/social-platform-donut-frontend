@@ -14,7 +14,11 @@
       padding: 20px 0px 20px 30px;
     }
     .posts-profile {
-      width: 90.5%;
+      width:100%;
+      display: flex;
+    }
+    .post-sidebar{
+      margin-right: 20px;
     }
   }
 }
