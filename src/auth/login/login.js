@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Tab, Tabs } from "react-bootstrap";
 import LoginForm from "../login-form/login-form";
 import SignUpForm from "../signup-form/signup-form";
-import { DonutTitle }from "../../donutTitle/donutTitle";
+import { DonutTitle } from "../../donutTitle/donutTitle";
 import multipleDonuts from "../../images/extra-donuts.png";
 // import backGroundDonut from "../../images/background-donut.png";
 import "./login.scss";
@@ -25,9 +25,6 @@ class Login extends Component {
           </div>
         </div>
         <div className="user-details">
-          {/* <div className="background-donut">
-            <img src={backGroundDonut} alt="donut logo" />
-          </div> */}
           <div className="user-data">
             <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
               <Tab eventKey="home" title="Login">

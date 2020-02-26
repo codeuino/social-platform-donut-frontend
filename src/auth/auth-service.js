@@ -7,6 +7,14 @@ export const loginIn = body => {
   });
 };
 
+export const signUp = body => {
+  return axios.post("http://donut-api-prod.codeuino.org/user", {
+    name: body.name,
+    email: body.email,
+    password: body.password
+  });
+};
+
 export const decodeResponse = response => {
   const parts = response.split(".");
   if (parts.length !== 3) {
