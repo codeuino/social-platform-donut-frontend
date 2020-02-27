@@ -19,9 +19,11 @@ class PinnedPosts extends Component {
           <Navigation posts={this.state.pinned_posts}></Navigation>
         </div>
         <div className="news">
+        <h1 class="Pinned-post">Pinned Posts</h1>
           <Posts></Posts>
         </div>
-        <div className="promotions">
+        <div className="promotions mt-3">
+        <h1 class="organization-update">Organization Updates</h1>
           <Updates></Updates>
         </div>
       </div>
