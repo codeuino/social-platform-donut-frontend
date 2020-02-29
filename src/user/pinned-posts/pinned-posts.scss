@@ -3,6 +3,9 @@
   min-height: 100vh;
   height: auto;
   font-family: Muli, sans-serif;
+  h1{
+    font-family:"Times New Roman", Times, serif;
+  }
   .navigation {
     flex: 0.5;
     border-right: solid 1px #dfe9f1;
@@ -16,6 +19,11 @@
   }
   .promotions {
     flex: 1;
-    padding: 20px 12px 20px 0px;
+  }
+  .Pinned-post{
+    padding: 20px 12px 0px 30px;
+  }
+  .organization-update{
+    padding: 20px 12px 0px 0px;
   }
 }
