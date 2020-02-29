@@ -35,11 +35,11 @@
     margin-bottom: 3px;
 }
 .form-input{
-font-family: Inter;
-font-style: normal;
-font-weight: 300;
-font-size: 13px;
-line-height: 16px;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 13px;
+    line-height: 16px;
 }
 .form-content{
     margin-top:-2%;
@@ -66,35 +66,32 @@ line-height: 16px;
 .photo{
     margin-top: 3px;
     height: 43px;
-    width: 43px;
-    
+    width: 43px; 
 } 
 .user{
     margin-top: 2px;
     font-size: 1.1em;
-    color: black;
-    margin-left: -145px;
+    color: black;    
 }
 .descr{
     font-size: 0.8em;
     color: rgb(90, 84, 84);
-    margin-top: -13px;
-    margin-left: -137px;
+    margin-top: -13px;   
 }
 .follow-link{
     margin-top: 3px;
     padding: 8px;
-        font-size: 14px;
-        box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
-        border-radius: 20px;
-        width: 80px;
-        height: 35px;
-        font-family: Inter;
-        font-style: normal;
-        font-weight: 600;
-        font-size: 14px;
-        line-height: 17px;
-        text-align: center;
+    font-size: 14px;
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    width: 80px;
+    height: 35px;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
 }
 .follower{
     margin-top: 10px;

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Modal, Button, Row} from 'react-bootstrap';
+import {Modal, Button, Row, Col} from 'react-bootstrap';
 import logo from "../../../svgs/profile-icon.svg";
 import "./popups.scss";
 
@@ -26,36 +26,52 @@ export class Followers extends Component{
         </Modal.Header>
         <Modal.Body>
             <Row className="follower" id="p1">
-                <img class="photo" src={logo} alt="I"></img>
-                <div className="contain"> 
+                <Col md={2}><img class="photo" src={logo} alt="I"></img></Col>
+                <Col md={7}><div className="contain"> 
                   <p className="user">Dhanus Rajendra</p>
                   <p className="descr">Front-End Developer</p>
-                </div>
-                <Button className="follow-link" variant="outline-primary">Follow</Button>
+                </div></Col>
+                <Col md={3}><Button className="follow-link" variant="outline-primary">Follow</Button></Col>
             </Row>
-            <Row className="follower">
-                <img class="photo" src={logo} alt="I"></img>
-                <div className="contain"> 
+            <Row className="follower" id="p1">
+                <Col md={2}><img class="photo" src={logo} alt="I"></img></Col>
+                <Col md={7}><div className="contain"> 
                   <p className="user">Dhanus Rajendra</p>
                   <p className="descr">Front-End Developer</p>
-                </div>
-                <Button className="follow-link" variant="outline-primary">Follow</Button>
+                </div></Col>
+                <Col md={3}><Button className="follow-link" variant="outline-primary">Follow</Button></Col>
             </Row>
-            <Row className="follower">
-                <img class="photo" src={logo} alt="I"></img>
-                <div className="contain"> 
+            <Row className="follower" id="p1">
+                <Col md={2}><img class="photo" src={logo} alt="I"></img></Col>
+                <Col md={7}><div className="contain"> 
                   <p className="user">Dhanus Rajendra</p>
                   <p className="descr">Front-End Developer</p>
-                </div>
-                <Button className="follow-link" variant="outline-primary">Follow</Button>
+                </div></Col>
+                <Col md={3}><Button className="follow-link" variant="outline-primary">Follow</Button></Col>
             </Row>
-            <Row className="follower">
-                <img class="photo" src={logo} alt="I"></img>
-                <div className="contain"> 
+            <Row className="follower" id="p1">
+                <Col md={2}><img class="photo" src={logo} alt="I"></img></Col>
+                <Col md={7}><div className="contain"> 
                   <p className="user">Dhanus Rajendra</p>
                   <p className="descr">Front-End Developer</p>
-                </div>
-                <Button className="follow-link" variant="outline-primary">Follow</Button>
+                </div></Col>
+                <Col md={3}><Button className="follow-link" variant="outline-primary">Follow</Button></Col>
+            </Row>
+            <Row className="follower" id="p1">
+                <Col md={2}><img class="photo" src={logo} alt="I"></img></Col>
+                <Col md={7}><div className="contain"> 
+                  <p className="user">Dhanus Rajendra</p>
+                  <p className="descr">Front-End Developer</p>
+                </div></Col>
+                <Col md={3}><Button className="follow-link" variant="outline-primary">Follow</Button></Col>
+            </Row>
+            <Row className="follower" id="p1">
+                <Col md={2}><img class="photo" src={logo} alt="I"></img></Col>
+                <Col md={7}><div className="contain"> 
+                  <p className="user">Dhanus Rajendra</p>
+                  <p className="descr">Front-End Developer</p>
+                </div></Col>
+                <Col md={3}><Button className="follow-link" variant="outline-primary">Follow</Button></Col>
             </Row>
         </Modal.Body>
       </div>
