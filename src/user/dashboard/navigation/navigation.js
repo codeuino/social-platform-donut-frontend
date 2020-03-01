@@ -102,11 +102,11 @@ class Navigation extends Component {
                 className="path-name"
               />
             </svg>
-            <NavLink to="profile" className="link">
+            <NavLink to="/profile" className="link">
               <b>Account</b>
             </NavLink>
           </ListGroup.Item>
-          <ListGroup.Item style={divStyle}>
+          <ListGroup.Item className={'settings'}>
             <svg
               width="38"
               height="38"

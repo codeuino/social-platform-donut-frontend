@@ -6,6 +6,7 @@ import PinnedPosts from "./user/pinned-posts/pinned-posts";
 import Profile from "./user/profile/profile";
 import Organization from "./user/organization/organization";
 import NotFound from "./404/notFound";
+import Discourse from "./user/apps/discourse/discourse";
 
 
 const Router = () => (
@@ -17,6 +18,7 @@ const Router = () => (
       <Route exact path="/pinned-posts" component={PinnedPosts} />
       <Route exact path="/profile" component={Profile} />
       <Route exact path="/organization" component={Organization} />
+      <Route exact path="/apps/discourse" component={Discourse}/>
       <Route component={NotFound} />
     </Switch>
   </BrowserRouter>

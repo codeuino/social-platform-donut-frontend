@@ -24,6 +24,13 @@
 
 .navigation{
   .list-group{
+    position: relative;
+    height: 100vh
+  }
+}
+
+.navigation{
+  .list-group{
     .active{
       background-color: rgba(26, 115, 232, 0.1);
       .link {
@@ -62,6 +69,14 @@
           fill-opacity : 10
         }
       }
+    }
+  }
+}
+
+.navigation{
+  .list-group{
+    .settings{
+      margin-top: auto;
     }
   }
 }
