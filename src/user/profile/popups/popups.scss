@@ -1,0 +1,100 @@
+.heading{
+    margin-top: 20px;
+}
+.title{
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 29px;
+    color: #1A73E8;
+}
+.about{
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 14px;
+    letter-spacing: 0.2em;
+    color: #90949C;
+    margin-top:10px;
+}
+.message{
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 14px;
+    letter-spacing: 0.2em;
+    color: rgb(28, 30, 34);
+    margin-top:15px;
+    margin-bottom: 20px;
+}
+.extra{
+    margin-bottom: 20px;
+    margin-left: -15px;
+}
+.label{
+    font-weight: 600;
+    font-size: 12px;
+    color:#000000;
+    margin-bottom: 3px;
+}
+.form-input{
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 13px;
+    line-height: 16px;
+}
+.form-content{
+    margin-top:-2%;
+    margin-bottom: 20px;
+    justify-content:space-between;
+}
+.form-footer{
+    margin-top: 0;
+    Button{
+        width:90px;
+        margin-right: 20px;
+        margin-bottom: 30px;
+        border-radius: 100px;
+        font-weight:600;
+    }
+    .savebtn{
+        background-color: #1A73E8;
+    }
+
+}
+.contain{
+    margin-top: -3px;
+}
+.photo{
+    margin-top: 3px;
+    height: 43px;
+    width: 43px; 
+} 
+.user{
+    margin-top: 2px;
+    font-size: 1.1em;
+    color: black;    
+}
+.descr{
+    font-size: 0.8em;
+    color: rgb(90, 84, 84);
+    margin-top: -13px;   
+}
+.follow-link{
+    margin-top: 3px;
+    padding: 8px;
+    font-size: 14px;
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    width: 80px;
+    height: 35px;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+}
+.follower{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    justify-content:space-between;
+}
