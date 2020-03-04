@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Modal, Row} from 'react-bootstrap';
-import JitsiMeetComponent from "./jitsi_api";
+import JitsiMeetComponent from "./JitsiApi";
 import "./jitsi.scss";
 
 export class JitsiMeet extends Component{

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Modal, Button, Row, Col, Form} from 'react-bootstrap';
-import {JitsiMeet} from './JITSI';
+import {JitsiMeet} from './Jitsi';
 import "../../user/profile/popups/popups.scss";
 
 export class Info extends Component{
@@ -26,7 +26,7 @@ export class Info extends Component{
     return (
         <Modal
       {...this.props}
-      size="md"
+      size="sm"
       aria-labelledby="contained-modal-title-vcenter"
       centered>
       <div className="container">
