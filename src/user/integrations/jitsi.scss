@@ -1,0 +1,27 @@
+.containerStyle{
+    height: 600px;
+    width: 470px;
+}
+.container{
+    width: 60%;
+    height: 90%;
+}
+.display2{
+    justify-content:space-between;
+}
+.base{
+    height: 450px;
+    width: 450px;
+    background-color: red;
+    position: relative;
+    right: 200px;
+}
+.heading{
+    margin-top: 20px;
+}
+.title{
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 29px;
+    color: #1A73E8;
+}
