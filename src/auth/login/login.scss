@@ -57,3 +57,32 @@
     }
   }
 }
+
+.login-page {
+  .user-details {
+    .user-data {
+      p {
+        font-family: Inter;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 12px;  
+        line-height: 15px;
+      }
+      a {
+        button {
+          background: #1A73E8;
+          box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.08);
+          border-radius: 5px;
+          .loginbtn-content {
+            font-family: Inter;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 17px;
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+}

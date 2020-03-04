@@ -4,6 +4,8 @@ import "./login-form.scss";
 import cookie from "react-cookies";
 import { withRouter } from "react-router-dom";
 import * as auth from "../auth-service";
+import TextField from '@material-ui/core/TextField';
+
 
 class LoginForm extends Component {
   constructor(props) {
@@ -55,35 +57,40 @@ class LoginForm extends Component {
       <div className="login-details">
         <Form>
           <Form.Group controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control
-              required
-              type="email"
-              placeholder="abc@gmail.com"
-              name="email"
-              onChange={event => this.handleChange(event, "email")}
+            <TextField
+              id="outlined-full-width"
+              label="Email"
+              style={{ margin: 8 }}
+              placeholder="abc@donut.com"
+              helperText="We will not share your information with anyone"
+              fullWidth
+              margin="normal"
+              InputLabelProps={{
+              shrink: true,
+              }}
+              variant="outlined"
             />
-            <Form.Text className="text-muted">
-              We'll never share your email with anyone else.
-            </Form.Text>
           </Form.Group>
 
           <Form.Group controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
-            <Form.Control
-              required
-              type="password"
-              placeholder="***********"
-              name="password"
-              onChange={event => this.handleChange(event, "password")}
+            <TextField
+              id="outlined-full-width"
+              label="Password"
+              style={{ margin: 8 }}
+              placeholder="********"
+              fullWidth
+              margin="normal"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              variant="outlined"
             />
           </Form.Group>
           <div className="cta-login">
             <Button
               variant="primary"
               type="submit"
-              onClick={this.authorizeUser}
-            >
+              onClick={this.authorizeUser}>
               Login
             </Button>
           </div>

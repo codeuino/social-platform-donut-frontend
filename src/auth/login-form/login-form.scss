@@ -1,8 +1,13 @@
 .login-details {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
   padding: 15px 0;
   .form-group {
     label {
-      color: #00abff;
+      font-size: 18px;
+      line-height: 22px;
+      color: #1A73E8;
     }
   }
   .cta-login {
@@ -12,6 +17,8 @@
     margin-top: 30px;
     button {
       padding: 8px 50px;
+      font-size: 20px;
+      line-height: 24px;
     }
   }
 }

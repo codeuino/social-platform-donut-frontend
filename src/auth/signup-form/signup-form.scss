@@ -1,8 +1,13 @@
 .signup-details {
   padding: 15px 0;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
   .form-group {
     label {
       color: #00abff;
+      font-size: 18px;
+      line-height: 22px;
     }
   }
   .cta-register {
@@ -12,6 +17,8 @@
     margin-top: 30px;
     button {
       padding: 8px 50px;
+      font-size: 20px;
+      line-height: 24px;
     }
   }
 }
