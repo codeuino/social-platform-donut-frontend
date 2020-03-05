@@ -2,7 +2,6 @@
   padding: 0 20px;
   .post-article {
     height: 50px;
-    border: solid 1px #dfe9f1;
     .article {
       display: flex;
       input {
@@ -361,6 +360,98 @@
   color: #1EB025;
 }
 
-.down-vote small{
-  color: #FF0000;
+// .down-vote small{
+//   color: #FF0000;
+// }
+
+.news-feed {
+  .post-article {
+    .article {
+      .post-input {
+        background: #FFFFFF;
+        border: 1px solid #CCCCCC;
+        box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+      }
+      .cta {
+        button {
+          svg{
+            padding-right: 16px;
+            padding-bottom: 5px;
+            margin-top: 0px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.modal-box{
+  .modal-header {
+    .modal-title {
+      .main {
+        font-family: Inter;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 32px;
+        line-height: 39px;
+        color: #1A73E8;
+      }
+      .mini {
+        font-family: Inter;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 19px;
+        color: #90949C;
+        letter-spacing: 0.2em;
+        padding-top: 18px;
+      }
+    }
+  }
+  .modal-body{
+    .modal-form {
+      .modal-row {
+        .modal-group {
+          .form-label {
+            font-family: Inter;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 17px;
+            color: #1A73E8;
+          }
+          .post{
+            border: 0.75px solid #E2E2E2;
+            box-sizing: border-box;
+            border-radius: 5px;
+            text-align: left;
+            resize: none;
+          }
+        }
+      }
+    }
+  }
+  .modal-buttons {
+    .save{
+      font-weight: bold;
+      background: #1A73E8;
+      box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
+      border-radius: 34px;
+      width: 74px;
+      margin-right: 20px;
+      margin-bottom: 10px;
+      margin-left: 14px;
+    }
+    .cancel{
+      border: 1px solid #1A73E8;
+      box-sizing: border-box;
+      box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
+      border-radius: 34px;
+      margin-right: 20px;
+      margin-bottom: 10px;
+      color: #1A73E8;
+      font-weight: 500;
+    }
+  }
 }
