@@ -6,18 +6,21 @@ import { DonutTitleSmall } from "../../../donutTitle/donutTitle";
 import "./navigation.scss";
 import {Logout} from "../../profile/popups/logout";
 import logo from "../../../svgs/logout.svg";
+import {Info} from '../../integrations/NameForm';
 
 class Navigation extends Component {
-  state = { logout:false };
+  state = { logout:false, open: false };
   render() {
-    let cancel =()=>this.setState({
-      logout:false
+    let cancel = ()=>this.setState({
+      logout: false
+    });
+    let close = ()=>this.setState({
+      open: false
     });
     const divStyle = {
       position: "absolute",
       bottom: 0
     };
-
     return (
       <div className="navigation">
         <ListGroup>
@@ -141,9 +144,19 @@ class Navigation extends Component {
             <Logout show={this.state.logout}
               onHide={cancel} />
           </ListGroup.Item>
+
+          <ListGroup.Item style={{position: "absolute", bottom: "400px"}}>
+            <Button variant="outline-secondary" size="sm" style = {
+            {"margin-left": "12.5px", color: "rgba(0, 0, 0, 0.5)"}} onClick={
+              () => this.setState({open:true})}>
+            <b>Jitsi Meet</b>
+            </Button>
+            {this.state.open ? <Info show={this.state.open}  onHide={close}/> : null}
+          </ListGroup.Item>
+          
           <ListGroup.Item style={divStyle}>
-            <Button variant="link" size="sm" style=
-            {{"margin-left": "-8.5px", color: "rgba(0, 0, 0, 0.5)"}} onClick={
+            <Button variant="link" size="sm" style = {
+            {"margin-left": "-8.5px", color: "rgba(0, 0, 0, 0.5)"}} onClick={
               ()=>this.setState({logout:true})}>
             <img class="logout" src={logo} alt="L"></img>
             <b>Logout</b>
