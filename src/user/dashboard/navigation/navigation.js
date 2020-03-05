@@ -146,9 +146,8 @@ class Navigation extends Component {
           </ListGroup.Item>
 
           <ListGroup.Item style={{position: "absolute", bottom: "400px"}}>
-            <Button variant="outline-secondary" size="sm" style = {
-            {"margin-left": "12.5px", color: "rgba(0, 0, 0, 0.5)"}} onClick={
-              () => this.setState({open:true})}>
+            <Button variant="outline-secondary" size="sm" className="jitsi"
+            onClick={() => this.setState({open:true})}>
             <b>Jitsi Meet</b>
             </Button>
             {this.state.open ? <Info show={this.state.open}  onHide={close}/> : null}
