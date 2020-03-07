@@ -14,28 +14,22 @@ class AddEventModal extends React.Component {
     };
   }
 
-  onTitleChange = event => {
-    this.setState({ title: event.target.value });
-  };
-
-  onStartChange = event => {
-    this.setState({ start: event.target.value });
-  };
-
-  onEndChange = event => {
-    console.log('end changed');
-    this.setState({ end: event.target.value });
+  handleChanges = event => {
+    this.setState({ [event.target.name]: event.target.value });
   };
 
   handleSubmit = () => {
-    console.log(this.state.title);
     let title = this.state.title;
 
-    let startDate = new Date(this.state.start);
-    startDate = startDate.toISOString();
+    let timezoneUnedited = new Date().toString().match(/([-\+][0-9]+)\s/)[1];
+    let timeZone =
+      timezoneUnedited.substring(0, 3) + ':' + timezoneUnedited.substring(3);
 
-    let endDate = new Date(this.state.end);
-    endDate = endDate.toISOString();
+    let startDTString =
+      this.state.start + 'T' + this.state.startTime + ':00' + timeZone;
+
+    let endDTString =
+      this.state.end + 'T' + this.state.endTime + ':00' + timeZone;
 
     fetch('http://localhost:8000/calendar/newevent', {
       method: 'POST',
@@ -46,8 +40,8 @@ class AddEventModal extends React.Component {
         title: title,
         id: this.props.calendarId,
         token: this.props.token,
-        startDate: startDate,
-        endDate: endDate
+        startDate: startDTString,
+        endDate: endDTString
       })
     })
       .then(data => {
@@ -83,30 +77,51 @@ class AddEventModal extends React.Component {
                 type='text'
                 placeholder='Enter the event title'
                 size='sm'
-                onChange={this.onTitleChange}
+                onChange={this.handleChanges}
+                name='title'
               />
             </Row>
             <Row className='form-content'>
               <Col className='p-0' sm={5}>
-                <Form.Label className='label'>
-                  Event Starting Date/Time
-                </Form.Label>
+                <Form.Label className='label'>Event Starting Date</Form.Label>
                 <Form.Control
                   type='text'
                   placeholder='05:15AM'
                   size='sm'
-                  onChange={this.onStartChange}
+                  onChange={this.handleChanges}
+                  name='start'
                 />
               </Col>
               <Col className='p-0' sm={5}>
-                <Form.Label className='label'>
-                  Event Ending Date/Time
-                </Form.Label>
+                <Form.Label className='label'>Event Ending Date</Form.Label>
                 <Form.Control
                   type='text'
                   placeholder='06:45AM'
                   size='sm'
-                  onChange={this.onEndChange}
+                  onChange={this.handleChanges}
+                  name='end'
+                />
+              </Col>
+            </Row>
+            <Row className='form-content'>
+              <Col className='p-0' sm={5}>
+                <Form.Label className='label'>Event Starting Time</Form.Label>
+                <Form.Control
+                  type='text'
+                  placeholder='05:15AM'
+                  size='sm'
+                  onChange={this.handleChanges}
+                  name='startTime'
+                />
+              </Col>
+              <Col className='p-0' sm={5}>
+                <Form.Label className='label'>Event Ending Time</Form.Label>
+                <Form.Control
+                  type='text'
+                  placeholder='06:45AM'
+                  size='sm'
+                  onChange={this.handleChanges}
+                  name='endTime'
                 />
               </Col>
             </Row>
