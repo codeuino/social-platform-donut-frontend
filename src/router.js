@@ -6,6 +6,7 @@ import PinnedPosts from './user/pinned-posts/pinned-posts';
 import Profile from './user/profile/profile';
 import Organization from './user/organization/organization';
 import NotFound from './404/notFound';
+import Settings from './user/dashboard/settings/Settings';
 import CalendarDashboard from './app-integrations/google-calendar/CalendarDashboard';
 
 const Router = () => (
@@ -17,6 +18,7 @@ const Router = () => (
       <Route exact path='/pinned-posts' component={PinnedPosts} />
       <Route exact path='/profile' component={Profile} />
       <Route exact path='/organization' component={Organization} />
+      <Route exact path='/settings' component={Settings} />
       <Route exact path='/calendar' component={CalendarDashboard} />
       <Route component={NotFound} />
     </Switch>
