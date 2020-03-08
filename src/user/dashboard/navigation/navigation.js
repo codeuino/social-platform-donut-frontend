@@ -14,8 +14,8 @@ class Navigation extends Component {
       logout:false
     });
     const divStyle = {
-      position: "absolute",
-      bottom: 0
+      position: "relative",
+      bottom: "-15em"
     };
 
     return (
