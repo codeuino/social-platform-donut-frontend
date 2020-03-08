@@ -1,0 +1,33 @@
+.main-donut-logo {
+    padding: 0;
+}
+
+.main-donut-logo img {   
+    height: 70px;
+    margin-bottom: 0px;
+}
+
+.main-donut-logo-small {
+    display: flex;
+}
+
+.main-donut-logo-small img {   
+    height: 27px;
+    margin-bottom: 0px;
+}
+
+@keyframes infiniteRotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@media only screen and (max-width: 700px) {
+
+    .main-donut-logo img {
+        height: 40px;
+    }
+}
