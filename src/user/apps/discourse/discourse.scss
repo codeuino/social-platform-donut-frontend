@@ -4,8 +4,14 @@
 
 
 .discourse{
+    .loader-container{
+        width: fit-content;
+        margin:auto;
+    }
     .main-content{
         display: flex;
-        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        // flex-wrap: wrap;
     }
 }

@@ -23,6 +23,7 @@
 }
 
 .navigation{
+  border-right: solid 1px #dfe9f1;
   .list-group{
     position: relative;
     height: 100vh
@@ -73,10 +74,10 @@
   }
 }
 
-.navigation{
-  .list-group{
-    .settings{
-      margin-top: auto;
-    }
-  }
+.logout{
+  height: 21px;
+  width: 21px;
+  color: rgba(0, 0, 0, 0.5);
+  margin-right: 15px;
+  margin-left: 2px;
 }
