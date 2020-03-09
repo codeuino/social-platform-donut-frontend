@@ -15,3 +15,22 @@
     }
   }
 }
+.loginbtn{
+  background: #ffffff;
+  color: #000000;
+  padding: 1vh;
+  border: 1px solid rgb(211, 220, 228);
+  border-radius: 3px;
+  width: 45%;
+}
+.login-icon{
+  width: 1em;
+  height: 1em;
+  vertical-align: middle;
+}
+.loginbtn-content{
+  font-size: 16px;
+  font-family: Roboto, sans-serif;
+  font-weight: 500;
+  line-height: 1em;
+}
