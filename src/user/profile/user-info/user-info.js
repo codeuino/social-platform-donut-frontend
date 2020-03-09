@@ -21,16 +21,16 @@ class UserInfo extends Component {
           <div className="edit-option">
             <Button variant="primary" onClick={
               ()=>this.setState({editProfile:true})}>User Edit</Button>
-              <EditProfile show={this.state.editProfile}
-              onHide={cancel} />
+              <EditProfile open={this.state.editProfile}
+              onClose={cancel} />
           </div>
         </div>
         <div className="user-data">
           <h1>
             Dhanus Rajendra <Button variant="primary" onClick={
               ()=>this.setState({followersList:true})}>Follow</Button>
-              <Followers show={this.state.followersList}
-              onHide={cancelf} />
+              <Followers open={this.state.followersList}
+              onClose={cancelf} />
           </h1>
           <p className="profession">Front end developer</p>
           <p className="place">Bengaluru, Karnataka</p>

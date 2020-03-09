@@ -1,5 +1,9 @@
 import React, {Component} from 'react';
-import {Modal, Button, Row, Col} from 'react-bootstrap';
+import { sizing } from '@material-ui/system';
+import { withStyles } from '@material-ui/core/styles';
+import { Dialog, DialogContent, DialogTitle, Button, Grid } from '@material-ui/core';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
 import logo from "../../../svgs/profile-icon.svg";
 import "./popups.scss";
 
@@ -8,74 +12,168 @@ export class Followers extends Component{
     constructor(props){
         super(props);
     }
-    state = {text:"Follow"};
+    state = {text: "Follow"};
     render(){
-        
+      const styles = theme => ({
+        root: {
+          margin: 0,
+          padding: theme.spacing(2),
+        },
+        closeButton: {
+          position: 'absolute',
+          right: theme.spacing(1),
+          top: theme.spacing(1),
+          color: theme.palette.grey[500],
+        },
+      });
+      
+     const IconClose = withStyles(styles)(props => {
+        const { children, classes, onClose, ...other } = props;
+        return (
+          <div>
+            
+              <IconButton aria-label="close" className={classes.closeButton} onClick={this.props.onClose}>
+                <CloseIcon />
+              </IconButton>
+            
+          </div>
+        );
+      });
+      
     return (
-        <Modal
-      {...this.props}
-      size="md"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered>
+
       <div className="container">
-        <Modal.Header closeButton className="heading border border-0 p-0">
-        <Modal.Title id="contained-modal-title-vcenter"> 
-        <div className="title">Followers</div>
-        <div className="about">PEOPLE WHO FOLLOW YOU</div>
-        </Modal.Title> 
-        </Modal.Header>
-        <Modal.Body>
-            <Row className="follower" id="p1">
-                <Col md={2}><img class="photo" src={logo} alt="I"></img></Col>
-                <Col md={7}><div className="contain"> 
-                  <p className="user">Dhanus Rajendra</p>
-                  <p className="descr">Front-End Developer</p>
-                </div></Col>
-                <Col md={3}><Button className="follow-link" variant="outline-primary">Follow</Button></Col>
-            </Row>
-            <Row className="follower" id="p1">
-                <Col md={2}><img class="photo" src={logo} alt="I"></img></Col>
-                <Col md={7}><div className="contain"> 
-                  <p className="user">Dhanus Rajendra</p>
-                  <p className="descr">Front-End Developer</p>
-                </div></Col>
-                <Col md={3}><Button className="follow-link" variant="outline-primary">Follow</Button></Col>
-            </Row>
-            <Row className="follower" id="p1">
-                <Col md={2}><img class="photo" src={logo} alt="I"></img></Col>
-                <Col md={7}><div className="contain"> 
-                  <p className="user">Dhanus Rajendra</p>
-                  <p className="descr">Front-End Developer</p>
-                </div></Col>
-                <Col md={3}><Button className="follow-link" variant="outline-primary">Follow</Button></Col>
-            </Row>
-            <Row className="follower" id="p1">
-                <Col md={2}><img class="photo" src={logo} alt="I"></img></Col>
-                <Col md={7}><div className="contain"> 
-                  <p className="user">Dhanus Rajendra</p>
-                  <p className="descr">Front-End Developer</p>
-                </div></Col>
-                <Col md={3}><Button className="follow-link" variant="outline-primary">Follow</Button></Col>
-            </Row>
-            <Row className="follower" id="p1">
-                <Col md={2}><img class="photo" src={logo} alt="I"></img></Col>
-                <Col md={7}><div className="contain"> 
-                  <p className="user">Dhanus Rajendra</p>
-                  <p className="descr">Front-End Developer</p>
-                </div></Col>
-                <Col md={3}><Button className="follow-link" variant="outline-primary">Follow</Button></Col>
-            </Row>
-            <Row className="follower" id="p1">
-                <Col md={2}><img class="photo" src={logo} alt="I"></img></Col>
-                <Col md={7}><div className="contain"> 
-                  <p className="user">Dhanus Rajendra</p>
-                  <p className="descr">Front-End Developer</p>
-                </div></Col>
-                <Col md={3}><Button className="follow-link" variant="outline-primary">Follow</Button></Col>
-            </Row>
-        </Modal.Body>
+        <Dialog
+          {...this.props}
+          aria-labelledby="customized-dialog-title">
+          <DialogTitle> 
+            <span className="title">Followers</span>
+            {this.props.onClose ? <IconClose/> : null}
+            <div className="about">PEOPLE WHO FOLLOW YOU</div>
+          </DialogTitle> 
+          <DialogContent>
+            <Grid container spacing={4}>        
+              <Grid item sm={2} xs={3 | 12}>
+                <img class="photo" src={logo} alt="I"></img>
+              </Grid>
+              <Grid item sm={7} xs={9 | 12}>
+                <h5><b>Dhanus Rajendra</b></h5>
+                <p className="descr">Front-End Developer</p>
+              </Grid>
+              <Grid item sm={3} xs={12}
+              className="follow"
+              alignItems="center">
+                <Button size="small"
+                variant="contained">
+                  Follow
+                </Button>
+              </Grid>
+            </Grid>
+            <Grid container spacing={4}>        
+              <Grid item sm={2} xs={3 | 12}>
+                <img class="photo" src={logo} alt="I"></img>
+              </Grid>
+              <Grid item sm={7} xs={9 | 12}>
+                <h5><b>Dhanus Rajendra</b></h5>
+                <p className="descr">Front-End Developer</p>
+              </Grid>
+              <Grid item sm={3} xs={12}
+              className="follow"
+              alignItems="center">
+                <Button size="small"
+                variant="contained">
+                  Follow
+                </Button>
+              </Grid>
+            </Grid>
+            <Grid container spacing={4}>        
+              <Grid item sm={2} xs={3 | 12}>
+                <img class="photo" src={logo} alt="I"></img>
+              </Grid>
+              <Grid item sm={7} xs={9 | 12}>
+                <h5><b>Dhanus Rajendra</b></h5>
+                <p className="descr">Front-End Developer</p>
+              </Grid>
+              <Grid item sm={3} xs={12}
+              className="follow"
+              alignItems="center">
+                <Button size="small"
+                variant="contained">
+                  Follow
+                </Button>
+              </Grid>
+            </Grid>
+            <Grid container spacing={4}>        
+              <Grid item sm={2} xs={3 | 12}>
+                <img class="photo" src={logo} alt="I"></img>
+              </Grid>
+              <Grid item sm={7} xs={9 | 12}>
+                <h5><b>Dhanus Rajendra</b></h5>
+                <p className="descr">Front-End Developer</p>
+              </Grid>
+              <Grid item sm={3} xs={12}
+              className="follow"
+              alignItems="center">
+                <Button size="small"
+                variant="contained">
+                  Follow
+                </Button>
+              </Grid>
+            </Grid>
+            <Grid container spacing={4}>        
+              <Grid item sm={2} xs={3 | 12}>
+                <img class="photo" src={logo} alt="I"></img>
+              </Grid>
+              <Grid item sm={7} xs={9 | 12}>
+                <h5><b>Dhanus Rajendra</b></h5>
+                <p className="descr">Front-End Developer</p>
+              </Grid>
+              <Grid item sm={3} xs={12}
+              className="follow"
+              alignItems="center">
+                <Button size="small"
+                variant="contained">
+                  Follow
+                </Button>
+              </Grid>
+            </Grid>
+            <Grid container spacing={4}>        
+              <Grid item sm={2} xs={3 | 12}>
+                <img class="photo" src={logo} alt="I"></img>
+              </Grid>
+              <Grid item sm={7} xs={9 | 12}>
+                <h5><b>Dhanus Rajendra</b></h5>
+                <p className="descr">Front-End Developer</p>
+              </Grid>
+              <Grid item sm={3} xs={12}
+              className="follow"
+              alignItems="center">
+                <Button size="small"
+                variant="contained">
+                  Follow
+                </Button>
+              </Grid>
+            </Grid>
+            <Grid container spacing={4}>        
+              <Grid item sm={2} xs={3 | 12}>
+                <img class="photo" src={logo} alt="I"></img>
+              </Grid>
+              <Grid item sm={7} xs={9 | 12}>
+                <h5><b>Dhanus Rajendra</b></h5>
+                <p className="descr">Front-End Developer</p>
+              </Grid>
+              <Grid item sm={3} xs={12}
+              className="follow"
+              alignItems="center">
+                <Button size="small"
+                variant="contained">
+                  Follow
+                </Button>
+              </Grid>
+            </Grid>      
+          </DialogContent>
+        </Dialog>
       </div>
-      </Modal>
     );
   }
 }
