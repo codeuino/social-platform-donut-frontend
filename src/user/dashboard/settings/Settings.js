@@ -8,7 +8,7 @@ class Settings extends Component {
     super(props);
     this.state = {
       settings: true
-    }
+    };
   }
   render() {
     return (
@@ -17,7 +17,7 @@ class Settings extends Component {
             <Navigation settings={this.state.settings}></Navigation>
           </div>
           <div className="settings-content">
-            <SettingContent />
+            <SettingContent></SettingContent>
           </div>
       </div>
     )
