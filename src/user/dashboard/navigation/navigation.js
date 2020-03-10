@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { ListGroup, Button } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
+import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { DonutTitleSmall } from "../../../donutTitle/donutTitle";
 import "./navigation.scss";
 import {Logout} from "../../profile/popups/logout";
@@ -112,7 +113,7 @@ class Navigation extends Component {
               <b>Account</b>
             </NavLink>
           </ListGroup.Item>
-          <ListGroup.Item style={{position: "absolute", bottom: "50px"}}>
+          <ListGroup.Item style={divStyle}  className={this.props.settings ? "active" : "inactive"}>
             <svg
               width="38"
               height="38"
@@ -126,7 +127,9 @@ class Navigation extends Component {
                 fill-opacity="0.5"
               />
             </svg>
-            Settings
+            <NavLink to="/settings" className="link">
+              <b>Settings</b>
+            </NavLink>
           </ListGroup.Item>
           <ListGroup.Item style={divStyle}>
             <Button variant="link" size="sm" style=
@@ -135,13 +138,21 @@ class Navigation extends Component {
             <img class="logout" src={logo} alt="L"></img>
             <b>Logout</b>
             </Button>
-            <Logout show={this.state.logout}
-              onHide={cancel} />
+            <Logout open={this.state.logout}
+              onClose={cancel} />
           </ListGroup.Item>
         </ListGroup>
       </div>
     );
   }
+}
+
+Navigation.propTypes = {
+  dashboard: PropTypes.bool,
+  post: PropTypes.bool,
+  org: PropTypes.bool,
+  profile: PropTypes.bool,
+  settings: PropTypes.bool
 }
 
 export default Navigation;
