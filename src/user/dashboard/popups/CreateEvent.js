@@ -7,7 +7,6 @@ import CloseIcon from '@material-ui/icons/Close';
 import "../../profile/popups/popups.scss";
 
 export class CreateEvent extends Component{
-    // eslint-disable-next-line
     constructor(props){
         super(props);
     }
