@@ -69,7 +69,7 @@ class CalendarView extends Component {
           show={this.state.showAddModal}
           onHide={this.closeAddModal}
           eventDetails={this.state.eventDetails}
-          token={this.props.token}
+          googleId={this.props.googleId}
           calendarId={this.props.selectedCalendar}
         />
       </React.Fragment>

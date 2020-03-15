@@ -1,21 +1,101 @@
 import React from 'react';
 import { Modal, Button, Row, Col, Form } from 'react-bootstrap';
 import './AddEventModal.scss';
+import validator from 'validator';
 
 class AddEventModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      token: this.props.token,
+      googleId: this.props.googleId,
       title: '',
       date: '',
       start: '',
-      end: ''
+      end: '',
+      errors: [
+        {
+          eventTitle: [
+            {
+              lengthError: 'Event must have a valid title.',
+              display: true
+            }
+          ]
+        },
+        {
+          eventDate: [
+            {
+              lengthError: 'Event must have a valid date.',
+              display: true
+            },
+            {
+              invalidDateError:
+                'The entered dates must be in YYYY-MM-DD format.',
+              display: false
+            }
+          ]
+        },
+        {
+          eventTime: [
+            {
+              lengthError:
+                'The event must have a valid starting and ending time',
+              display: true
+            },
+            {
+              invalidTimeError: 'The entered time must be in HH:MM format',
+              display: false
+            }
+          ]
+        }
+      ]
     };
   }
 
+  componentDidMount() {}
+
   handleChanges = event => {
-    this.setState({ [event.target.name]: event.target.value });
+    let value = event.target.value;
+    let errors = this.state.errors;
+    switch (event.target.name) {
+      case 'title':
+        if (value.length > 0) {
+          errors[0].eventTitle[0].display = false;
+        } else {
+          errors[0].eventTitle[0].display = true;
+        }
+        break;
+      case 'start':
+        if (value.length > 0) {
+          errors[1].eventDate[0].display = false;
+        } else if (!value.length > 0) {
+          errors[1].eventDate[0].display = true;
+        }
+        if (value.length !== 10 && value.length > 0) {
+          errors[1].eventDate[1].display = true;
+        } else {
+          errors[1].eventDate[1].display = false;
+        }
+        break;
+      case 'startTime':
+        if (value.length > 0) {
+          errors[2].eventTime[0].display = false;
+        } else {
+          errors[2].eventTime[0].display = true;
+        }
+        if (
+          value.length === 5 &&
+          value.split(':')[0] <= 24 &&
+          value.split(':')[1] <= 59
+        ) {
+          errors[2].eventTime[1].display = false;
+        } else {
+          errors[2].eventTime[1].display = true;
+        }
+        break;
+      default:
+        break;
+    }
+    this.setState({ [event.target.name]: event.target.value, errors: errors });
   };
 
   handleSubmit = () => {
@@ -39,7 +119,7 @@ class AddEventModal extends React.Component {
       body: JSON.stringify({
         title: title,
         id: this.props.calendarId,
-        token: this.props.token,
+        googleId: this.props.googleId,
         startDate: startDTString,
         endDate: endDTString
       })
@@ -80,23 +160,53 @@ class AddEventModal extends React.Component {
                 onChange={this.handleChanges}
                 name='title'
               />
+              <Form.Label
+                className='errortext'
+                style={{
+                  display: this.state.errors[0].eventTitle[0].display
+                    ? 'inline'
+                    : 'none'
+                }}
+              >
+                {this.state.errors[0].eventTitle[0].lengthError}
+              </Form.Label>
             </Row>
             <Row className='form-content'>
               <Col className='p-0' sm={5}>
                 <Form.Label className='label'>Event Starting Date</Form.Label>
                 <Form.Control
                   type='text'
-                  placeholder='05:15AM'
+                  placeholder='2020-01-01'
                   size='sm'
                   onChange={this.handleChanges}
                   name='start'
                 />
+                <Form.Label
+                  className='errortext'
+                  style={{
+                    display: this.state.errors[1].eventDate[0].display
+                      ? 'inline'
+                      : 'none'
+                  }}
+                >
+                  {this.state.errors[1].eventDate[0].lengthError}
+                </Form.Label>
+                <Form.Label
+                  className='errortext'
+                  style={{
+                    display: this.state.errors[1].eventDate[1].display
+                      ? 'inline'
+                      : 'none'
+                  }}
+                >
+                  {this.state.errors[1].eventDate[1].invalidDateError}
+                </Form.Label>
               </Col>
               <Col className='p-0' sm={5}>
                 <Form.Label className='label'>Event Ending Date</Form.Label>
                 <Form.Control
                   type='text'
-                  placeholder='06:45AM'
+                  placeholder='2020-01-02'
                   size='sm'
                   onChange={this.handleChanges}
                   name='end'
@@ -108,17 +218,37 @@ class AddEventModal extends React.Component {
                 <Form.Label className='label'>Event Starting Time</Form.Label>
                 <Form.Control
                   type='text'
-                  placeholder='05:15AM'
+                  placeholder='22:00'
                   size='sm'
                   onChange={this.handleChanges}
                   name='startTime'
                 />
+                <Form.Label
+                  className='errortext'
+                  style={{
+                    display: this.state.errors[2].eventTime[0].display
+                      ? 'inline'
+                      : 'none'
+                  }}
+                >
+                  {this.state.errors[2].eventTime[0].lengthError}
+                </Form.Label>
+                <Form.Label
+                  className='errortext'
+                  style={{
+                    display: this.state.errors[2].eventTime[1].display
+                      ? 'inline'
+                      : 'none'
+                  }}
+                >
+                  {this.state.errors[2].eventTime[1].invalidTimeError}
+                </Form.Label>
               </Col>
               <Col className='p-0' sm={5}>
                 <Form.Label className='label'>Event Ending Time</Form.Label>
                 <Form.Control
                   type='text'
-                  placeholder='06:45AM'
+                  placeholder='23:00'
                   size='sm'
                   onChange={this.handleChanges}
                   name='endTime'

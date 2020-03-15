@@ -30,19 +30,22 @@ class CalendarDashboard extends Component {
 
   componentWillMount() {
     let query = queryString.parse(this.props.location.search);
-    if (query.token) {
-      window.localStorage.setItem('jwt', query.token);
+    if (query.googleId) {
+      window.localStorage.setItem('googleId', query.googleId);
     }
   }
 
   componentDidMount() {
-    if (window.localStorage.getItem('jwt')) {
+    if (window.localStorage.getItem('googleId')) {
       fetch('http://localhost:8000/calendar/list', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ token: window.localStorage.getItem('jwt') })
+
+        body: JSON.stringify({
+          googleId: window.localStorage.getItem('googleId')
+        })
       })
         .then(res => {
           return res.json();
@@ -50,7 +53,7 @@ class CalendarDashboard extends Component {
         .then(resData => {
           this.setState(
             {
-              token: window.localStorage.getItem('jwt'),
+              googleId: window.localStorage.getItem('googleId'),
               calendars: resData.items
             },
             () => {
@@ -64,9 +67,9 @@ class CalendarDashboard extends Component {
     }
   }
 
-  componentWillUnmount() {
-    window.localStorage.removeItem('jwt');
-  }
+  // componentWillUnmount() {
+  //   window.localStorage.removeItem('jwt');
+  // }
 
   fetchCalendarEvents = () => {
     let id = '';
@@ -88,7 +91,7 @@ class CalendarDashboard extends Component {
       },
       body: JSON.stringify({
         id: id,
-        token: window.localStorage.getItem('jwt')
+        googleId: window.localStorage.getItem('googleId')
       })
     })
       .then(res => {
@@ -148,23 +151,28 @@ class CalendarDashboard extends Component {
             let eventObj = {
               title: eventItem.summary,
               date: startDate,
-              start: eventItem.start.dateTime || eventItem.start.Date || '',
-              end: eventItem.end.dateTime || eventItem.end.Date || ''
+              start: eventItem.start.dateTime || eventItem.start.date || '',
+              end: eventItem.end.dateTime || eventItem.end.date || ''
             };
 
             allEventsArr.push(eventObj);
           }
         });
 
-        this.setState({
-          eventObj: eventsArr,
-          tomorrowEventObj: tomorrowEventsArr,
-          alleventsObj: allEventsArr,
-          visibleEventsArr: eventsArr,
-          selectedDate: 'today',
-          initialLoad: false,
-          selectedCalendarId: id
-        });
+        this.setState(
+          {
+            eventObj: eventsArr,
+            tomorrowEventObj: tomorrowEventsArr,
+            alleventsObj: allEventsArr,
+            visibleEventsArr: eventsArr,
+            selectedDate: 'today',
+            initialLoad: false,
+            selectedCalendarId: id
+          },
+          () => {
+            console.log(this.state.alleventsObj);
+          }
+        );
       })
       .catch(err => {
         console.log(err);
@@ -307,7 +315,7 @@ class CalendarDashboard extends Component {
                 <Tab eventKey='contact' title='Calendar View'>
                   <CalendarView
                     events={this.state.alleventsObj}
-                    token={this.state.token}
+                    googleId={this.state.googleId}
                     fetchEvents={this.fetchCalendarEvents}
                     selectedCalendar={this.state.selectedCalendarId}
                     onHide={this.closeAddModal}
@@ -317,7 +325,7 @@ class CalendarDashboard extends Component {
             </div>
           </div>
         </div>
-        {!this.state.token ? (
+        {!this.state.googleId ? (
           <AuthenticationModal />
         ) : (
           <React.Fragment></React.Fragment>
