@@ -7,7 +7,7 @@ import Profile from "./user/profile/profile";
 import Organization from "./user/organization/organization";
 import NotFound from "./404/notFound";
 import Settings from "./user/dashboard/settings/Settings";
-
+import ForgotPassword from './auth/forgot-password/forgot-password'
 
 const Router = () => (
   <BrowserRouter>
@@ -15,6 +15,7 @@ const Router = () => (
       <Route exact path="/" component={Login} />
       <Route exact path="/login" component={Login} />
       <Route exact path="/dashboard" component={Dashboard} />
+      <Route exact path="/forgot-password" component={ForgotPassword} />
       <Route exact path="/pinned-posts" component={PinnedPosts} />
       <Route exact path="/profile" component={Profile} />
       <Route exact path="/organization" component={Organization} />
