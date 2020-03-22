@@ -6,7 +6,6 @@ class Updates extends Component {
   render() {
     return (
       <div className="updates">
-        <h1>Orginizations Updates</h1>
         <div className="org-updates">
           <div className="notification">
             <div className="image">
