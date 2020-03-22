@@ -7,7 +7,6 @@ class Posts extends Component {
   render() {
     return (
       <div className="posts">
-        <h1>Pinned Posts</h1>
         <div className="pinned-posts">
           <div className="categories">
             <div className="category-type active">All</div>
