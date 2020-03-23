@@ -116,6 +116,37 @@ class Popups extends Component {
         </div>
       </Form>
     );
+    const updatePassword = (
+      <Form>
+        <div className="row">
+          <div className="col-md-9">
+             <Form.Group controlId="formBasicEmail">
+              <Form.Control 
+                type="password"
+                placeholder="Enter New Password"
+                onChange={this.onChange}
+                name="new_password"
+              />
+            </Form.Group>
+            <Form.Group controlId="formBasicEmail">
+            <Form.Control 
+              type="password"
+              placeholder="Confirm Password"
+              onChange={this.onChange}
+              name="confirm_password"
+            />
+          </Form.Group>
+          </div>
+          </div>
+          <div className="row">
+          <div className="col-md-9">
+            <Button className="btn btn-primary" type="button" onClick={this.handleSubmit}>
+             Update Password
+            </Button>
+          </div>
+          </div>
+      </Form>
+    );
     const deactivateAccount = (
       <div className="container">
         <p className="text text-center" style={{color: "red"}}><b>Are you sure ??</b></p>
@@ -150,13 +181,12 @@ class Popups extends Component {
           {Boolean(option === "name") ? updateName : null}
           {Boolean(option === "email") ? updateEmail: null}
           {Boolean(option === "username") ? updateUsername: null}
+          {Boolean(option === "password") ? updatePassword : null}
           {Boolean(option === "account") ? deactivateAccount: null}
           {Boolean(option === "identity") ? checkVerification : null}
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={this.handleClose}>
-            Close
-          </Button>
+        
         </Modal.Footer>
       </Modal>
     )
