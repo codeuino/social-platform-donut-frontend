@@ -1,33 +1,40 @@
 import React, { Component } from "react";
+import Popups from '../../common/Popups';
 import { Form, Button } from "react-bootstrap";
 import "./login-form.scss";
 import cookie from "react-cookies";
 import { withRouter } from "react-router-dom";
 import * as auth from "../auth-service";
-
+ 
 class LoginForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
       email: "",
-      password: ""
+      password: "",
+      modalShow: false,
+      option: "",
+      optionValue: ""
     };
+ 
+    
   }
-
+ 
+ 
   handleChange = (event, params) => {
     event.preventDefault();
     params === "email"
       ? this.setState({ email: event.target.value })
       : this.setState({ password: event.target.value });
   };
-
+ 
   checkValidation = () => {
     if (this.state.email.includes("@") && this.state.email.includes(".")) {
       return true;
     }
     return false;
   };
-
+ 
   authorizeUser = event => {
     event.preventDefault();
     const isValidated = this.checkValidation();
@@ -43,14 +50,23 @@ class LoginForm extends Component {
         });
     }
   };
-
+ 
   setSession = token => {
     const id = token.payload._id;
     cookie.save("userId", id, { path: "/" });
     this.props.history.push("/dashboard");
   };
-
+ 
   render() {
+ 
+        const handleToggle = (e) => {
+      const targetName = e.target.name;
+      this.setState({
+        modalShow: true,
+        option: targetName
+      });
+  
+    }
     return (
       <div className="login-details">
         <Form>
@@ -67,7 +83,7 @@ class LoginForm extends Component {
               We'll never share your email with anyone else.
             </Form.Text>
           </Form.Group>
-
+ 
           <Form.Group controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
             <Form.Control
@@ -88,9 +104,18 @@ class LoginForm extends Component {
             </Button>
           </div>
         </Form>
-      </div>
+        <a className ="forgot-password" href="javascript:void(0)"  onClick={handleToggle} name="password">Forgot Password?</a>
+        <Popups 
+        option={this.state.option}
+        optionValue={this.state.optionValue}
+        modalShow={this.state.modalShow}
+      />
+        </div>
+     
+ 
     );
   }
 }
-
+ 
 export default withRouter(LoginForm);
+ 
