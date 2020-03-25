@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const loginIn = body => {
-  return axios.post("http://donut-api-prod.codeuino.org/auth/login", {
+  return axios.post("https://donut-backend-prod.herokuapp.com/auth/login", {
     email: body.email,
     password: body.password
   });
