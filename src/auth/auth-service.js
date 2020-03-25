@@ -8,7 +8,7 @@ export const loginIn = body => {
 };
 
 export const signUp = body => {
-  return axios.post("http://donut-api-prod.codeuino.org/user", {
+  return axios.post("https://donut-backend-prod.herokuapp.com/user", {
     name: body.name,
     email: body.email,
     password: body.password
