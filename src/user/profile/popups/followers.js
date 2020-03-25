@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
-import { sizing } from '@material-ui/system';
 import { withStyles } from '@material-ui/core/styles';
 import { Dialog, DialogContent, DialogTitle, Button, Grid } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import logo from "../../../svgs/profile-icon.svg";
 import "./popups.scss";
+import customNotifications from '../../../jsonData/notifications'
 
 export class Followers extends Component{
     // eslint-disable-next-line
@@ -40,6 +40,28 @@ export class Followers extends Component{
         );
       });
       
+      let followers = customNotifications.map((a) => {
+        return(
+          <Grid container spacing={4}>        
+          <Grid item sm={2} xs={3 | 12}>
+            <img class="photo" src={logo} alt="I"></img>
+          </Grid>
+          <Grid item sm={7} xs={9 | 12}>
+            <h5><b>{a.heading}</b></h5>
+            <p className="descr">{a.content}</p>
+          </Grid>
+          <Grid item sm={3} xs={12}
+          className="follow"
+          alignItems="center">
+            <Button size="small"
+            variant="contained">
+              Follow
+            </Button>
+          </Grid>
+        </Grid>
+        );
+        });
+      
     return (
 
       <div className="container">
@@ -52,125 +74,7 @@ export class Followers extends Component{
             <div className="about">PEOPLE WHO FOLLOW YOU</div>
           </DialogTitle> 
           <DialogContent>
-            <Grid container spacing={4}>        
-              <Grid item sm={2} xs={3 | 12}>
-                <img class="photo" src={logo} alt="I"></img>
-              </Grid>
-              <Grid item sm={7} xs={9 | 12}>
-                <h5><b>Dhanus Rajendra</b></h5>
-                <p className="descr">Front-End Developer</p>
-              </Grid>
-              <Grid item sm={3} xs={12}
-              className="follow"
-              alignItems="center">
-                <Button size="small"
-                variant="contained">
-                  Follow
-                </Button>
-              </Grid>
-            </Grid>
-            <Grid container spacing={4}>        
-              <Grid item sm={2} xs={3 | 12}>
-                <img class="photo" src={logo} alt="I"></img>
-              </Grid>
-              <Grid item sm={7} xs={9 | 12}>
-                <h5><b>Dhanus Rajendra</b></h5>
-                <p className="descr">Front-End Developer</p>
-              </Grid>
-              <Grid item sm={3} xs={12}
-              className="follow"
-              alignItems="center">
-                <Button size="small"
-                variant="contained">
-                  Follow
-                </Button>
-              </Grid>
-            </Grid>
-            <Grid container spacing={4}>        
-              <Grid item sm={2} xs={3 | 12}>
-                <img class="photo" src={logo} alt="I"></img>
-              </Grid>
-              <Grid item sm={7} xs={9 | 12}>
-                <h5><b>Dhanus Rajendra</b></h5>
-                <p className="descr">Front-End Developer</p>
-              </Grid>
-              <Grid item sm={3} xs={12}
-              className="follow"
-              alignItems="center">
-                <Button size="small"
-                variant="contained">
-                  Follow
-                </Button>
-              </Grid>
-            </Grid>
-            <Grid container spacing={4}>        
-              <Grid item sm={2} xs={3 | 12}>
-                <img class="photo" src={logo} alt="I"></img>
-              </Grid>
-              <Grid item sm={7} xs={9 | 12}>
-                <h5><b>Dhanus Rajendra</b></h5>
-                <p className="descr">Front-End Developer</p>
-              </Grid>
-              <Grid item sm={3} xs={12}
-              className="follow"
-              alignItems="center">
-                <Button size="small"
-                variant="contained">
-                  Follow
-                </Button>
-              </Grid>
-            </Grid>
-            <Grid container spacing={4}>        
-              <Grid item sm={2} xs={3 | 12}>
-                <img class="photo" src={logo} alt="I"></img>
-              </Grid>
-              <Grid item sm={7} xs={9 | 12}>
-                <h5><b>Dhanus Rajendra</b></h5>
-                <p className="descr">Front-End Developer</p>
-              </Grid>
-              <Grid item sm={3} xs={12}
-              className="follow"
-              alignItems="center">
-                <Button size="small"
-                variant="contained">
-                  Follow
-                </Button>
-              </Grid>
-            </Grid>
-            <Grid container spacing={4}>        
-              <Grid item sm={2} xs={3 | 12}>
-                <img class="photo" src={logo} alt="I"></img>
-              </Grid>
-              <Grid item sm={7} xs={9 | 12}>
-                <h5><b>Dhanus Rajendra</b></h5>
-                <p className="descr">Front-End Developer</p>
-              </Grid>
-              <Grid item sm={3} xs={12}
-              className="follow"
-              alignItems="center">
-                <Button size="small"
-                variant="contained">
-                  Follow
-                </Button>
-              </Grid>
-            </Grid>
-            <Grid container spacing={4}>        
-              <Grid item sm={2} xs={3 | 12}>
-                <img class="photo" src={logo} alt="I"></img>
-              </Grid>
-              <Grid item sm={7} xs={9 | 12}>
-                <h5><b>Dhanus Rajendra</b></h5>
-                <p className="descr">Front-End Developer</p>
-              </Grid>
-              <Grid item sm={3} xs={12}
-              className="follow"
-              alignItems="center">
-                <Button size="small"
-                variant="contained">
-                  Follow
-                </Button>
-              </Grid>
-            </Grid>      
+            {followers}
           </DialogContent>
         </Dialog>
       </div>
