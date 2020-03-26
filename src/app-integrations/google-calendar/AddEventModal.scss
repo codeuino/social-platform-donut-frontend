@@ -1,0 +1,47 @@
+.heading {
+  margin-top: 20px;
+}
+.title {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 29px;
+  color: #1a73e8;
+}
+.about {
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 14px;
+  letter-spacing: 0.2em;
+  color: #90949c;
+  margin-top: 10px;
+}
+.label {
+  font-weight: 600;
+  font-size: 12px;
+  color: #000000;
+  margin-bottom: 3px;
+}
+.errortext {
+  font-weight: 400;
+  font-size: 12px;
+  color: rgb(226, 104, 104);
+  margin-bottom: 3px;
+}
+.form-content {
+  margin-top: -2%;
+  margin-bottom: 20px;
+  justify-content: space-between;
+}
+.form-footer {
+  margin-top: -20px;
+  button {
+    width: 90px;
+    margin-right: 20px;
+    margin-bottom: 30px;
+    border-radius: 100px;
+    font-weight: 600;
+  }
+  .savebtn {
+    background-color: #1a73e8;
+  }
+}

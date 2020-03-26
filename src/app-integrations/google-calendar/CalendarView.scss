@@ -1,0 +1,9 @@
+@import '~@fullcalendar/core/main.css';
+@import '~@fullcalendar/daygrid/main.css';
+
+.calendar-container {
+  margin: 0 auto;
+  max-width: 100%;
+  display: inline-block;
+  overflow-y: visible;
+}

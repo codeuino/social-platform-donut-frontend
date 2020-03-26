@@ -1,0 +1,68 @@
+.dashboard {
+  display: flex;
+  min-height: 100vh;
+  height: auto;
+  font-family: Muli, sans-serif;
+  .navigation {
+    flex: 0.5;
+    border-right: solid 1px #dfe9f1;
+  }
+  .calendar-content {
+    flex: 3;
+    .content {
+      display: flex;
+      padding: 20px;
+      flex-direction: column;
+      min-height: 100vh;
+      .title {
+        flex: 0.5;
+        padding: 20px;
+        text-align: left;
+        width: 100%;
+        .text {
+          font-weight: 700;
+          color: #000000;
+        }
+      }
+      .tab {
+        flex: 5;
+        width: 100%;
+        padding: 20px;
+        overflow-y: auto;
+      }
+    }
+  }
+}
+
+.custom-select {
+  margin-top: 5px;
+}
+
+.set-btn {
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+#top-panel {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+#bottom-panel {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.event {
+  padding: 10px;
+  margin-top: 20px;
+  border: 1px solid #f0eded;
+  border-radius: 10px;
+}
+
+#event-title {
+  font-weight: 700;
+}
