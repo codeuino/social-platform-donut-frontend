@@ -5,13 +5,18 @@
       color: #00abff;
     }
   }
-  .cta-register {
+
+
+  .savebtn{
     display: flex;
+    padding: 8px 50px;
+    margin: 10px auto;
     align-items: center;
     justify-content: center;
-    margin-top: 30px;
     button {
       padding: 8px 50px;
     }
-  }
+  
+  }  
+
 }
