@@ -1,0 +1,86 @@
+.containerStyle{
+    height: 600px;
+    width: 770px;
+}
+.container{
+    width: 60%;
+    height: 90%;
+}
+.display2{
+    justify-content:space-between;
+}
+.base{
+    height: 450px;
+    width: 450px;
+    background-color: red;
+    position: relative;
+    right: 200px;
+}
+.heading{
+    margin-top: 20px;
+}
+.title{
+    font-size: 25px;
+    font-weight: 700;
+    line-height: 29px;
+    color: #1A73E8;
+   // margin-left: 6px;
+}
+.about{
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 14px;
+    letter-spacing: 0.2em;
+    color: #90949C;
+    margin-top:10px;
+    margin-bottom: 5px;
+   // margin-left: 6px;
+}
+.message{
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 14px;
+    letter-spacing: 0.2em;
+    color: rgb(28, 30, 34);
+    margin-top:15px;
+    margin-bottom: 20px;
+}
+
+.label{
+    font-weight: 600;
+    font-size: 15px;
+    color:#000000;
+    margin-bottom: 3px;
+    margin-top: 5px;
+   // margin-left: 3px;
+}
+.form-input{
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 13px;
+    line-height: 16px;
+    //margin-left: 3px;
+}
+.form-content{
+    margin-top:-2%;
+    margin-bottom: 20px;
+    justify-content:space-between;
+}
+.form-footer{
+    margin-top: -5px;
+    Button{
+        width: auto;
+        margin-right: 20px;
+        margin-bottom: 30px;
+        border-radius: 100px;
+        font-weight:600;
+    }
+    .savebtn{
+        background-color: #1A73E8;
+    }
+
+}
+.contain{
+    margin-top: -3px;
+}
