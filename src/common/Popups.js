@@ -67,9 +67,9 @@ nextButton(){
   if(currentStep <2){
     return (
       <button 
-        className="btn btn-primary float-right" 
+      className="btn btn-primary btn-block" 
         type="button" onClick={this.step_next}>
-      Next
+      Send Password Reset-Email
       </button>        
     )
   }
@@ -145,13 +145,38 @@ nextButton(){
         </div>
       </Form>
     );
+
+
+   const resetPassword = (
+     <Form>
+    <div className="form-group">
+    <label htmlFor="password">New Password</label>
+    <input
+      className="form-control"
+      name="new_password"
+      type="password"
+      placeholder="***********"
+      onChange={this.onChange}
+      />      
+    </div>
+    <div className="form-group">
+    <label htmlFor="password">Confirm Password</label>
+    <input
+    className="form-control"
+    name="confirm_password"
+    type="password"
+    placeholder="***********"
+    onChange={this.onChange}
+    />      
+    </div>
+    <button className="btn btn-primary btn-block">Update Password</button>
+    </Form>
+   )
     const updatePassword = (
       <React.Fragment>
 
       <form onSubmit={this.handleSubmit}>
-      {/* 
-        render the form steps and pass required props in
-      */}
+    
         <Step1 
           currentStep={this.state.currentStep} 
           onChange={this.onChange}
@@ -203,6 +228,7 @@ nextButton(){
           {Boolean(option === "email") ? updateEmail: null}
           {Boolean(option === "username") ? updateUsername: null}
           {Boolean(option === "password") ? updatePassword : null}
+          {Boolean(option === "reset_password") ? resetPassword : null}
           {Boolean(option === "account") ? deactivateAccount: null}
           {Boolean(option === "identity") ? checkVerification : null}
         </Modal.Body>
@@ -244,26 +270,9 @@ function Step2(props) {
   return(
     <React.Fragment>
     <div className="form-group">
-      <label htmlFor="password">New Password</label>
-      <input
-        className="form-control"
-        name="new_password"
-        type="password"
-        placeholder="***********"
-        onChange={props.onChange}
-        />      
+      <label htmlFor="password">Check your email to get the link of reset the password. If it doesnot appear within few minutes, check the spam folder.</label>
+          
     </div>
-    <div className="form-group">
-    <label htmlFor="password">Confirm Password</label>
-    <input
-      className="form-control"
-      name="confirm_password"
-      type="password"
-      placeholder="***********"
-      onChange={props.onChange}
-      />      
-  </div>
-    <button className="btn btn-primary btn-block">Update Password</button>
     </React.Fragment>
   );
 }
