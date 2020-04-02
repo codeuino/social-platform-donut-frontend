@@ -44,7 +44,7 @@ export class EditOrg extends Component{
         size="sm"
         aria-labelledby="customized-dialog-title">
           <DialogTitle> 
-            <span className="title">New Organization</span>
+            <span className="title">Edit Organization</span>
             {this.props.onClose ? <IconClose/> : null}
             <div className="about">ABOUT THE ORGANIZATION</div>
           </DialogTitle> 
