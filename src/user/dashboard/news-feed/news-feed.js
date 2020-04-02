@@ -62,6 +62,7 @@ class NewsFeed extends Component {
     this.closep = this.closep.bind(this);
     this.sendPost = this.sendPost.bind(this);
     this.cancelPost = this.cancelPost.bind(this);
+    this.valChange = this.valChange.bind(this);
   }
   
   handleClose = () => {
@@ -76,6 +77,9 @@ class NewsFeed extends Component {
   cancelPost(){
     this.setState({post: false, send: false, msg: 'Write a Post..'})
   };
+  valChange(event){
+    this.setState({msg: event.target.value})
+  }
   render() {
 
     const styles = theme => ({
