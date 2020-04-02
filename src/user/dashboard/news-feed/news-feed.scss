@@ -4,10 +4,19 @@
     height: 50px;
     .article {
       display: flex;
-      input {
+      form {
         flex: 1;
         border: none;
-        padding: 12px;
+        padding-left: 12px;
+        .k1 {
+          display: flex;
+          .k2{
+            flex: 0.95;
+          }
+          .k3{
+            flex: 0.05;
+          }
+        }
       }
     }
     .cta {

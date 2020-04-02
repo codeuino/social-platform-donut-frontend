@@ -1,6 +1,12 @@
 import React, { Component} from "react";
-import { Button , Dropdown, Modal, Form, Col} from "react-bootstrap";
-import { ButtonGroup } from '@material-ui/core'
+import { Button , Dropdown} from "react-bootstrap";
+import { withStyles } from '@material-ui/core/styles';
+import {Dialog, DialogContent, DialogTitle, ButtonGroup, Grid, InputBase, Paper} from '@material-ui/core';
+import {TextField, InputLabel} from '@material-ui/core';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+import SendIcon from '@material-ui/icons/Send';
+import "../../profile/popups/popups.scss";
 import "./news-feed.scss";
 import upVoteImg from "../../../svgs/up.svg";
 import downVoteImg from "../../../svgs/down.svg";
@@ -47,8 +53,15 @@ class NewsFeed extends Component {
     this.state = {
        date : new Date(),
        show : false,
-       proj : false
+       proj : false,
+       post : false,
+       msg : 'Write a Post..',
+       send : false,
     }
+    this.handleClose = this.handleClose.bind(this);
+    this.closep = this.closep.bind(this);
+    this.sendPost = this.sendPost.bind(this);
+    this.cancelPost = this.cancelPost.bind(this);
   }
   
   handleClose = () => {
@@ -56,8 +69,38 @@ class NewsFeed extends Component {
   };
   closep = () => {
     this.setState({proj: false})
-  }
+  };
+  sendPost(){
+    this.setState({post: false, send: true})
+  };
+  cancelPost(){
+    this.setState({post: false, send: false, msg: 'Write a Post..'})
+  };
   render() {
+
+    const styles = theme => ({
+      root: {
+        margin: 0,
+        padding: theme.spacing(2),
+      },
+      closeButton: {
+        position: 'absolute',
+        right: theme.spacing(1),
+        top: theme.spacing(1),
+        color: theme.palette.grey[500],
+      },
+    });
+    
+   const IconClose = withStyles(styles)(props => {
+      const { classes } = props;
+      return (
+        <div>
+            <IconButton aria-label="close" className={classes.closeButton} onClick={this.cancelPost}>
+              <CloseIcon />
+            </IconButton>
+        </div>
+      );
+    });
 
     var content; 
     let newsFeed = feed.map((newsItem, i)=>{
@@ -173,10 +216,76 @@ class NewsFeed extends Component {
       <div className="news-feed">
         <div className="post-article">
           <div className="article">
-            <input type="text" className="post-input" placeholder="write a post..." />
+            <Paper component="form"
+            className="post-input">
+              <div className="k1">
+                <InputBase className="k2"
+                placeholder={this.state.msg}
+                value={(this.state.msg === 'Write a Post..') ? '' : this.state.msg}
+                onClick={() => this.setState({post: true})} />
+                  <IconButton className="k3"
+                  type="submit" disabled={!this.state.send}>
+                    <SendIcon/>
+                  </IconButton>
+              </div>
+            </Paper>
+            <Dialog open={this.state.post}
+            onClose={this.cancelPost}
+            {...this.props} size="sm"
+            aria-labelledby="customized-dialog-title">
+              <DialogTitle> 
+                <span className="title">New Post</span>
+                {this.state.post ? <IconClose/> : null}
+                <div className="about">ABOUT THE POST</div>
+              </DialogTitle> 
+              <DialogContent>
+                <Grid container spacing={3}>
+                  <Grid item sm={12} xs={12}>
+                    <TextField id="outlined-primary" 
+                    label="Post Title"
+                    variant="outlined"
+                    fullWidth='true'
+                    placeholder="Type here.."
+                    value={this.state.msg === 'Write a Post..' ? '' : this.state.msg} 
+                    onChange={this.valChange}
+                    size="small">
+                      <InputLabel/>
+                    </TextField>
+                  </Grid>
+                  <Grid item sm={6} xs={12}>
+                    <TextField id="outlined-primary" 
+                    label="Image URL"
+                    variant="outlined"
+                    fullWidth='true' 
+                    placeholder="Type here.." 
+                    size="small">  
+                    </TextField>
+                  </Grid>
+                  <Grid item sm={12} xs={12}>
+                    <TextField id="outlined-primary" 
+                    label="Post Description"
+                    variant="outlined"
+                    fullWidth='true' 
+                    multiline
+                    rows="5"
+                    placeholder="Write about your post here" 
+                    size="small">
+                      <InputLabel/>
+                    </TextField>
+                  </Grid>   
+                </Grid>
+              </DialogContent>
+              <div className="form-footer">
+                <Button onClick={this.sendPost} 
+                variant="contained" size="sm" 
+                className="savebtn">Save</Button>
+                <Button variant="outlined" className="closebtn" 
+                onClick={this.cancelPost} size="sm">Cancel</Button>
+              </div>
+            </Dialog>
             <div className="cta">
               <ButtonGroup variant="outlined" color="primary"
-              aria-label="contained primary button group">
+              aria-label="contained primary button group">                
                 <Button variant="primary" onClick={() => this.setState({show: true})}>
                   <svg width="30" height="30" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M16 2H15V0H13V2H5V0H3V2H2C1.73786 2.00013 1.47833 2.05202 1.2363 2.1527C0.994268 2.25338 0.7745 2.40086 0.589606 2.58668C0.404713 2.77251 0.258334 2.99301 0.15887 3.23554C0.0594061 3.47808 0.00881501 3.73787 0.00999999 4L0 18C0 18.5304 0.210714 19.0391 0.585786 19.4142C0.960859 19.7893 1.46957 20 2 20H16C16.5299 19.9984 17.0377 19.7872 17.4125 19.4125C17.7872 19.0377 17.9984 18.5299 18 18V4C17.9984 3.47005 17.7872 2.96227 17.4125 2.58753C17.0377 2.2128 16.5299 2.00158 16 2ZM16 18H2V8H16V18ZM16 6H2V4H16V6ZM9 11H14V16H9V11Z" 
