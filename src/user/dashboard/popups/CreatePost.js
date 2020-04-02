@@ -6,9 +6,16 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import "../../profile/popups/popups.scss";
 
-export class EditOrg extends Component{
+export class CreatePost extends Component{
+    
     constructor(props){
         super(props);
+        this.state = {
+          value : ''
+        };
+    }
+    valChange(event){
+      this.setState({value : event.target.value});
     }
     render(){
       const styles = theme => ({
@@ -44,84 +51,50 @@ export class EditOrg extends Component{
         size="sm"
         aria-labelledby="customized-dialog-title">
           <DialogTitle> 
-            <span className="title">Edit Organization</span>
+            <span className="title">New Post</span>
             {this.props.onClose ? <IconClose/> : null}
-            <div className="about">ABOUT THE ORGANIZATION</div>
+            <div className="about">ABOUT THE Post</div>
           </DialogTitle> 
           <DialogContent>
             <Grid container spacing={3}>
-              <Grid item sm={6} xs={12}>
+              <Grid item sm={12} xs={12}>
                 <TextField id="outlined-primary" 
-                label="Organization Name"
+                label="Post Title"
                 variant="outlined"
                 fullWidth='true'
+                placeholder="Type here.."
+                value={this.state.value} 
+                onChange={this.valChange}
+                size="small">
+                  <InputLabel/>
+                </TextField>
+              </Grid>
+              
+             
+              <Grid item sm={6} xs={12}>
+                <TextField id="outlined-primary" 
+                label="Image URL"
+                variant="outlined"
+                fullWidth='true' 
                 placeholder="Type here.." 
-                size="small">
-                  <InputLabel/>
-                </TextField>
-              </Grid>
-              <Grid item sm={6} xs={12}>
-                <TextField id="outlined-primary" 
-                label="Logo URL"
-                variant="outlined"
-                fullWidth='true' 
-                placeholder="Logo for your organization.." 
-                size="small">
-                  <InputLabel/>
-                </TextField>
-              </Grid>
-              <Grid item sm={6} xs={12}>
-                <TextField id="outlined-primary" 
-                label="Short Description"
-                variant="outlined"
-                fullWidth='true'
-                placeholder="Write a Tag line.." 
-                size="small">
-                  <InputLabel/>
-                </TextField>
-              </Grid> 
-              <Grid item sm={6} xs={12}>
-                <TextField id="outlined-primary" 
-                label="Website"
-                variant="outlined"
-                fullWidth='true' 
-                placeholder="www.donut.com" 
                 size="small">
                   <InputLabel/>
                 </TextField>
               </Grid>
               <Grid item sm={12} xs={12}>
                 <TextField id="outlined-primary" 
-                label="Organization Description"
+                label="Post Description"
                 variant="outlined"
-                fullWidth='true'
+                fullWidth='true' 
                 multiline
-                rows="4"
-                placeholder="Tell people about your organization.." 
+                rows="5"
+                placeholder="Write about your post here" 
                 size="small">
                   <InputLabel/>
                 </TextField>
               </Grid>
-              <Grid item sm={6} xs={12}>
-                <TextField id="outlined-primary" 
-                label="Email ID"
-                variant="outlined"
-                fullWidth='true'
-                placeholder="donut@gmail.com" 
-                size="small">
-                  <InputLabel/>
-                </TextField>
-              </Grid> 
-              <Grid item sm={6} xs={12}>
-                <TextField id="outlined-primary" 
-                label="Chat Platform"
-                variant="outlined"
-                fullWidth='true'
-                placeholder="IRC, Slack, etc." 
-                size="small">
-                  <InputLabel/>
-                </TextField>
-              </Grid> 
+             
+              
             </Grid>
           </DialogContent>
           <div className="form-footer">
