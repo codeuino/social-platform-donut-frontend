@@ -48,7 +48,7 @@ export class Followers extends Component{
           </Grid>
           <Grid item sm={7} xs={9 | 12}>
             <h5><b>{a.heading}</b></h5>
-            <p className="descr">{a.content}</p>
+            <p className="descr">{(a.content).substring(0, 30)}</p>
           </Grid>
           <Grid item sm={3} xs={12}
           className="follow"
