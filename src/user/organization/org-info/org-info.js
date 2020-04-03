@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./org-info.scss";
 import { Button } from "react-bootstrap";
+import donut from "../../../svgs/donut-icon-lg.svg";
 
 class OrgInfo extends Component {
   render() {
@@ -8,7 +9,7 @@ class OrgInfo extends Component {
       <div className="org-details">
         <div className="org-image">
           <div className="org-pic">
-            <img src="" alt="" />
+            <img src={donut} alt="" />
           </div>
           <div className="edit-option">
             <Button variant="primary">User Edit</Button>
