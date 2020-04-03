@@ -1,0 +1,17 @@
+.discourse{
+    display: flex;
+}
+
+
+.discourse{
+    .loader-container{
+        width: fit-content;
+        margin:auto;
+    }
+    .main-content{
+        display: flex;
+        margin-left: auto;
+        margin-right: auto;
+        // flex-wrap: wrap;
+    }
+}

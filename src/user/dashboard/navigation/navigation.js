@@ -26,6 +26,7 @@ class Navigation extends Component {
       bottom: 0
     };
 
+
     return (
       <div className="navigation">
         <ListGroup>
@@ -117,9 +118,14 @@ class Navigation extends Component {
                 className="path-name"
               />
             </svg>
-            <NavLink to="profile" className="link">
+            <NavLink to="/profile" className="link">
               <b>Account</b>
             </NavLink>
+          </ListGroup.Item>
+          <ListGroup.Item className={this.props.discourse ? "active" : "inactive"}>
+            <NavLink to="/apps/discourse" className="link">
+                <b>Discourse</b>
+              </NavLink>
           </ListGroup.Item>
           <ListGroup.Item style={divStyle}  
           className={this.props.settings ? "active" : "inactive"}>

@@ -1,0 +1,77 @@
+.topic-details-container{
+    display: flex;
+    .posts-container{
+        margin-left: auto;
+        margin-right: auto;
+        width: 76%;
+        .loader-container{
+            width: fit-content;
+            margin:auto;
+        }
+        .post{
+            width: 80%;
+            margin-left: 20px;
+            border: 1px solid #e9e9e9;
+            padding:20px;
+            margin-bottom: 20px;
+            box-shadow: 1px 4px 5px #dfe9f1;
+            .poster{
+                color: #70837b;
+                margin-bottom: 20px;
+            }
+            .post-description-container{
+                p{
+                    font-size: 14px;
+                }
+                aside.onebox{
+                    border: 5px solid #e9e9e9;
+                    margin-bottom: 1em;
+                    padding: 12px 25px 12px 12px;
+                    font-size: 1em;
+                    .onebox-body{
+                        clear: both;
+                        img{
+                            float: left;
+                        }
+                        .onebox-avatar{
+                            max-height: none;
+                            max-width: none;
+                            height: 60px;
+                            width: 60px;
+                        }
+                    }
+                }
+                aside.quote{
+                    background-color: #f9f9f9;
+                    .title{
+                        font-size: 14px;
+                        border-left: 5px solid #e9e9e9;
+                        padding-left: 5px;
+                    }
+                } blockquote{
+                    border-left: 5px solid #e9e9e9;
+                    background-color: #f9f9f9;
+                    padding-left: 5px;
+                    padding-top: 5px;
+                }
+                pre.content{
+                    height: auto;
+                }
+                pre{
+                    background: #f9f9f9;
+                    code{
+                        padding: 0.5em;
+                        color: #222;
+                        background: #f9f9f9;
+                        word-wrap: normal;
+                    }
+                }
+                p{
+                    .emoji{
+                        height: 20px;
+                    }
+                }
+            }
+        }
+    }
+}

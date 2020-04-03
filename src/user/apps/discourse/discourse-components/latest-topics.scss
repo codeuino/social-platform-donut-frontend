@@ -1,0 +1,45 @@
+.latest-topics-card-container{
+    // width: 50%;
+    border: 1px solid #dfe9f1;
+    margin: 10px;
+    width: 400px;
+}
+
+.latest-topics-card-container{
+    height: max-content;
+    #latest-topics{
+        padding-left: 5px;
+    }
+    small{
+        color: #98a7a1
+    }
+    .latest-topics-list-container{
+        border-top: 2px solid #dfe9f1;
+        box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
+        .topic{
+            border-bottom: 1px solid #dfe9f1;
+            padding-left: 5px;
+            .description-container{
+                width: 75%;
+                h3{
+                    font-family: Inter;
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 14px;
+                    line-height: 21px;
+                    display: inline;
+                    color : #3b4541;
+                }
+                p{
+                    color: #70837b;
+                    font-family: Inter;
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 12px;
+                    line-height: 15px;
+                    margin-bottom: 2px;
+                }
+            }
+        }
+    }
+}
