@@ -61,6 +61,11 @@
   }
 }
 
+.jitsi{
+  margin-left: 12.5px;
+  color: rgba(0, 0, 0, 0.5);
+}
+
 .navigation{
   .list-group {
     .active {
@@ -80,4 +85,9 @@
   color: rgba(0, 0, 0, 0.5);
   margin-right: 15px;
   margin-left: 2px;
+}
+
+.log-button{
+  margin-left: -8.5px; 
+  color: rgba(0, 0, 0, 0.5);
 }

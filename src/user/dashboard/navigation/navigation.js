@@ -6,6 +6,7 @@ import { DonutTitleSmall } from "../../../donutTitle/donutTitle";
 import "./navigation.scss";
 import {Logout} from "../../profile/popups/logout";
 import logo from "../../../svgs/logout.svg";
+import {Info} from "../../integrations/NameForm";
 
 class Navigation extends Component {
   state = { logout:false };
@@ -13,7 +14,14 @@ class Navigation extends Component {
     let cancel =()=>this.setState({
       logout:false
     });
+    let close = ()=>this.setState({
+      open: false
+    });
     const divStyle = {
+      position: "absolute",
+      bottom: '4.5em'
+    };
+    const divStyle2 = {
       position: "absolute",
       bottom: 0
     };
@@ -119,7 +127,8 @@ class Navigation extends Component {
                 <b>Discourse</b>
               </NavLink>
           </ListGroup.Item>
-          <ListGroup.Item style={divStyle}  className={this.props.settings ? "active" : "inactive"}>
+          <ListGroup.Item style={divStyle}  
+          className={this.props.settings ? "active" : "inactive"}>
             <svg
               width="38"
               height="38"
@@ -137,9 +146,9 @@ class Navigation extends Component {
               <b>Settings</b>
             </NavLink>
           </ListGroup.Item>
-          <ListGroup.Item style={divStyle}>
-            <Button variant="link" size="sm" style=
-            {{"margin-left": "-8.5px", color: "rgba(0, 0, 0, 0.5)"}} onClick={
+          <ListGroup.Item style={divStyle2}
+          className={this.props.logout ? "active" : "inactive"}>
+            <Button variant="link" size="sm" className="log-button" onClick={
               ()=>this.setState({logout:true})}>
             <img class="logout" src={logo} alt="L"></img>
             <b>Logout</b>
@@ -147,6 +156,14 @@ class Navigation extends Component {
             <Logout show={this.state.logout}
               onHide={cancel} />
           </ListGroup.Item>
+          <ListGroup.Item>
+            <Button variant="outline-secondary" size="sm" className="jitsi" onClick={
+              () => this.setState({open:true})}>
+            <b>Jitsi Meet</b>
+            </Button>
+            {this.state.open ? <Info show={this.state.open}  onHide={close}/> : null}
+          </ListGroup.Item>
+
         </ListGroup>
       </div>
     );
@@ -158,7 +175,8 @@ Navigation.propTypes = {
   post: PropTypes.bool,
   org: PropTypes.bool,
   profile: PropTypes.bool,
-  settings: PropTypes.bool
+  settings: PropTypes.bool,
+  logout: PropTypes.bool
 }
 
 export default Navigation;
