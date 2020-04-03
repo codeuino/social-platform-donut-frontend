@@ -1,82 +1,38 @@
 import React, { Component } from "react";
 import "./updates.scss";
-import gsoc from "../../../images/gsoc.png";
+import customUpdates from '../../../jsonData/organization-updates'
 
 class Updates extends Component {
+
   render() {
+
+    let organizationUpdates = customUpdates.map((update,i)=>{
+      return(
+          <div className="notification" key={i}>
+            <div className="notification-description-container">
+              <div className="image-container">
+                <div className="image">
+                  <img src={update.imgSrc} alt="icon" />
+                </div>
+              </div>
+              <div className="img-desc-container">
+                <div className="img-desc">
+                  <h2>{update.title}</h2>
+                  <p>{update.description}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+      )
+    })
+
     return (
       <div className="updates">
-        <div className="org-updates">
-          <div className="notification">
-            <div className="image">
-              <img src={gsoc} alt="icon" />
-            </div>
-            <div className="img-desc">
-              <h2>We got into Gsoc</h2>
-              <p>No errors to display with the current filters applied.</p>
-            </div>
-          </div>
-          <div className="notification">
-            <div className="image">
-              <img src={gsoc} alt="icon" />
-            </div>
-            <div className="img-desc">
-              <h2>We got into Gsoc</h2>
-              <p>No errors to display with the current filters applied.</p>
-            </div>
-          </div>
-          <div className="notification">
-            <div className="image">
-              <img src={gsoc} alt="icon" />
-            </div>
-            <div className="img-desc">
-              <h2>We got into Gsoc</h2>
-              <p>No errors to display with the current filters applied.</p>
-            </div>
-          </div>
-          <div className="notification">
-            <div className="image">
-              <img src={gsoc} alt="icon" />
-            </div>
-            <div className="img-desc">
-              <h2>We got into Gsoc</h2>
-              <p>No errors to display with the current filters applied.</p>
-            </div>
-          </div>
-          <div className="notification">
-            <div className="image">
-              <img src={gsoc} alt="icon" />
-            </div>
-            <div className="img-desc">
-              <h2>We got into Gsoc</h2>
-              <p>No errors to display with the current filters applied.</p>
-            </div>
-          </div>
-          <div className="notification">
-            <div className="image">
-              <img src={gsoc} alt="icon" />
-            </div>
-            <div className="img-desc">
-              <h2>We got into Gsoc</h2>
-              <p>No errors to display with the current filters applied.</p>
-            </div>
-          </div>
-          <div className="notification">
-            <div className="image">
-              <img src={gsoc} alt="icon" />
-            </div>
-            <div className="img-desc">
-              <h2>We got into Gsoc</h2>
-              <p>No errors to display with the current filters applied.</p>
-            </div>
-          </div>
-          <div className="notification">
-            <div className="image">
-              <img src={gsoc} alt="icon" />
-            </div>
-            <div className="img-desc">
-              <h2>We got into Gsoc</h2>
-              <p>No errors to display with the current filters applied.</p>
+        <h2>Organization Updates</h2>
+        <div className="update-container">
+          <div className="org-updates">
+            <div className="notification-container">
+              {organizationUpdates}
             </div>
           </div>
         </div>
