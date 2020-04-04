@@ -127,9 +127,9 @@ export class EditOrg extends Component{
           <div className="form-footer">
             <Button onClick={this.props.onClose} 
             variant="contained" size="sm" 
-            className="savebtn">Yes</Button>
+            className="savebtn">Update</Button>
             <Button variant="outlined" className="closebtn" 
-            onClick={this.props.onClose} size="sm">No</Button>
+            onClick={this.props.onClose} size="sm">Cancel</Button>
           </div>
         </Dialog>
       </div>
