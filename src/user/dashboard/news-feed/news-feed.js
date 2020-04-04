@@ -5,6 +5,7 @@ import upVoteImg from "../../../svgs/up.svg";
 import downVoteImg from "../../../svgs/down.svg";
 import commentIcon from "../../../svgs/comment.svg";
 import feed from "../../../jsonData/news-feed";
+import {Comment} from "./popups/comment";
 
 const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
   <a
@@ -43,7 +44,8 @@ class NewsFeed extends Component {
   
     this.state = {
        date : new Date(),
-       show : false
+       show : false,
+       comment:false
     }
   }
   
@@ -61,6 +63,10 @@ class NewsFeed extends Component {
     })
   }
   render() {
+    let cancel =()=>this.setState({
+      comment:false
+    });
+
     const borderStyle = {
       borderBottom: "0 none"
     }
@@ -165,9 +171,12 @@ class NewsFeed extends Component {
                 <small>{newsItem.downVotes}</small>
               </div>
               <div className="comments">
-                <img src={commentIcon} alt="comment"></img>
-                <small>Comment</small>
-              </div>
+                
+                <a href="javascript:void(0)" onClick={
+                  ()=>this.setState({comment:true})}><small><img src={commentIcon} alt="comment"></img></small></a>
+                  <Comment show={this.state.comment}
+                  onHide={cancel} />
+                  </div>
             </div>
           </div>
         </div>
