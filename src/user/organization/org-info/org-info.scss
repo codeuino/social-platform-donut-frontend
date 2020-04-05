@@ -10,6 +10,18 @@
     flex: 0.5;
     text-align: center;
     margin: 35px 0;
+    .useredit{
+      margin-top: 10px;
+      border-radius: 20px;
+      font-size: 14px;
+    }
+    .org-pic{
+      display: inline-block;
+      .orgpic{
+        width: 120px;
+        height: 120px;
+      }
+    }
   }
   .org-data {
     flex: 1;
