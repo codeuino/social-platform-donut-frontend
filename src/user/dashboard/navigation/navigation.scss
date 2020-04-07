@@ -22,12 +22,12 @@
   width: 50px;
 }
 
-.navigation {
-  .list-group {
-    .active {
+.navigation{
+  .list-group{
+    .active{
       background-color: rgba(26, 115, 232, 0.1);
       .link {
-        color: #1a73e8;
+        color : #1A73E8
       }
     }
   }
@@ -47,26 +47,26 @@
   .list-group {
     .list-group-item {
       svg {
-        padding-right: 20px;
+        padding-right : 20px
       }
     }
   }
 }
 
-.navigation {
+.navigation{
   .list-group {
     .active {
-      .icon {
-        .path-name {
-          fill: #1a73e8;
-          fill-opacity: 10;
+      .icon{
+        .path-name{
+          fill : #1A73E8;
+          fill-opacity : 10
         }
       }
     }
   }
 }
 
-.logout {
+.logout{
   height: 21px;
   width: 21px;
   color: rgba(0, 0, 0, 0.5);
