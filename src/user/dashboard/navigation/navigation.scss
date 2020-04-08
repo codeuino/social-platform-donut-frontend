@@ -1,75 +1,55 @@
 .navigation {
   .list-group {
-    .list-group-item {
-      cursor: pointer;
-      border: none;
-      font-style: normal;
-      font-weight: bold;
-      font-size: 14px;
-      line-height: 21px;
-      letter-spacing: 0.1px;
-      text-decoration: none;
-      span {
-        font-weight: bold;
-        font-size: 25px;
-        vertical-align: middle;
+    .route {
+      .active {
+        background-color: rgba(26, 115, 232, 0.1);
       }
     }
+  }
+}
+
+.active {
+  svg {
+    path {
+      fill : #1A73E8;
+      fill-opacity : 10
+    }
+  }
+}
+
+.inactive {
+  .link-text {
+    font-family: Inter;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 21px;
+    letter-spacing: 0.1px;
+    color: rgba(0, 0, 0, 0.5);
+  }
+}
+
+.active {
+  .link-text {
+    font-family: Inter;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 21px;
+    letter-spacing: 0.1px;
+    color: #1A73E8;
   }
 }
 
 .donut-title {
-  width: 50px;
-}
-
-.navigation{
-  .list-group{
-    .active{
-      background-color: rgba(26, 115, 232, 0.1);
-      .link {
-        color : #1A73E8
-      }
-    }
-  }
-}
-
-.navigation {
-  .list-group {
-    .inactive {
-      .link {
-        color: rgba(0, 0, 0, 0.5);
-      }
-    }
-  }
-}
-
-.navigation {
-  .list-group {
-    .list-group-item {
-      svg {
-        padding-right : 20px
-      }
-    }
-  }
+  padding-left: 20px;
 }
 
 .jitsi{
-  margin-left: 12.5px;
+  margin-left: 25px;
   color: rgba(0, 0, 0, 0.5);
 }
 
-.navigation{
-  .list-group {
-    .active {
-      .icon{
-        .path-name{
-          fill : #1A73E8;
-          fill-opacity : 10
-        }
-      }
-    }
-  }
-}
 
 .logout{
   height: 21px;
