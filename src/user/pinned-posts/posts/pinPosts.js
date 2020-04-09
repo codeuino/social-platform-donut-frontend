@@ -63,8 +63,13 @@ const styles = makeStyles((theme) => ({
 
 export default function PinPosts(props){
     const classes = styles();
+    const [type, changeType] = React.useState('All');
+    
+    let handleClick = atrb => () => {
+        changeType(atrb);
+    };
     let posts = feed.map((newsItem) => {
-            if(newsItem.type === "Project"){
+            if(newsItem.type === "Project" && (type === 'All' || type === newsItem.type)){
                 return(
                 <div className="grid">
                     <Paper elevation={1} className={classes.paper}>
@@ -127,7 +132,7 @@ export default function PinPosts(props){
                         </Card>
                     </Paper>
                 </div>  )
-            }else if(newsItem.type === "Event"){
+            }else if(newsItem.type === "Event" && (type === 'All' || type === newsItem.type)){
                 return(
                 <div className="grid">
                     <Paper elevation={1} className={classes.paper}>
@@ -207,7 +212,7 @@ export default function PinPosts(props){
                         </Card>
                     </Paper>
                 </div>)
-            }else if(newsItem.type === "Donut"){
+            }else if(newsItem.type === "Donut" && (type === 'All' || type === newsItem.type)){
                 return(
                 <div className="grid">
                     <Paper elevation={1} className={classes.paper}>
@@ -263,8 +268,26 @@ export default function PinPosts(props){
     );
 
     return (
+        <div>
+        <div className="posts">
+            <h1>Pinned Posts</h1>
+            <div className="categories">
+                <Button variant="contained" className="btn active"
+                onClick={handleClick('All')}>All</Button>
+                <span className="space"></span>
+                <Button variant="contained" className="btn"
+                onClick={handleClick('Donut')}>Donuts</Button>
+                <span className="space"></span>
+                <Button variant="contained" className="btn"
+                onClick={handleClick('Event')}>Events</Button>
+                <span className="space"></span>
+                <Button variant="contained" className="btn"
+                onClick={handleClick('Project')}>Projects</Button>
+            </div>
+        </div>
         <div className="post">
             {posts}
+        </div>
         </div>
     )
 };
