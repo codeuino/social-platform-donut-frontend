@@ -1,59 +1,20 @@
-import React, { Component } from "react";
+import React from "react";
+import { Button } from '@material-ui/core';
 import "./posts.scss";
-import gsoc from "../../../images/gsoc.png";
 
-class Posts extends Component {
-  state = { date: new Date() };
-  render() {
-    return (
-      <div className="posts">
-        <h1>Pinned Posts</h1>
-        <div className="pinned-posts">
-          <div className="categories">
-            <div className="category-type active">All</div>
-            <div className="category-type">Donuts</div>
-            <div className="category-type">Events</div>
-            <div className="category-type">Projects</div>
-          </div>
-          <div className="article-posts">
-            <div className="individual-post">
-              <div className="user-info">
-                <div className="image">
-                  <img src={gsoc} alt="icon" />
-                </div>
-                <div className="img-desc">
-                  <h2>Marjorie Alexander</h2>
-                  <p>{this.state.date.toTimeString()}</p>
-                </div>
-              </div>
-              <div className="post-details">
-                ex sit ex laboris adipisicing enim eiusmod proident exercitation
-                ea fugiat in mollit pariatur occaecat ut nostrud ullamco ex
-                official
-              </div>
-            </div>
-
-            <div className="individual-post">
-              <div className="user-info">
-                <div className="image">
-                  <img src={gsoc} alt="icon" />
-                </div>
-                <div className="img-desc">
-                  <h2>Marjorie Alexander</h2>
-                  <p>{this.state.date.toTimeString()}</p>
-                </div>
-              </div>
-              <div className="post-details">
-                ex sit ex laboris adipisicing enim eiusmod proident exercitation
-                ea fugiat in mollit pariatur occaecat ut nostrud ullamco ex
-                official
-              </div>
-            </div>
-          </div>
+export default function Posts(props){
+  return(
+    <div className="posts">
+      <h1>Pinned Posts</h1>
+      <div className="categories">
+        <Button variant="contained" className="btn active">All</Button>
+        <span className="space"></span>
+        <Button variant="contained" className="btn">Donuts</Button>
+        <span className="space"></span>
+        <Button variant="contained" className="btn">Events</Button>
+        <span className="space"></span>
+        <Button variant="contained" className="btn">Projects</Button>
         </div>
-      </div>
-    );
-  }
-}
-
-export default Posts;
+    </div>
+  )
+};
