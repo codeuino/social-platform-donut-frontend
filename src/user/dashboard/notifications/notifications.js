@@ -1,23 +1,37 @@
 import React, { Component } from "react";
 import "./notifications.scss";
 import customNotifications from '../../../jsonData/notifications'
+import { Typography, List, ListItem, ListItemAvatar, Divider, ListItemText, Avatar }  from '@material-ui/core';
 
 class Notifications extends Component {
   render() {
     let notifications = customNotifications.map((notification,i) => {
       return (
-        <div key={i}>
-          <div className="notification-container"> 
-            <div className="notification-img-container">
-              <img alt="notification-icon" src={notification.imgSrc}></img>
-            </div>
-            <div className="notification-description">
-              <h6>{notification.heading}</h6>
-              {notification.tag ? <button type="button" className="tag">{notification.tag}</button> : <div></div>}
-              <p>{notification.content}</p>
-            </div>
-          </div>
-        </div>
+        <>
+          <ListItem key={i} alignItems="flex-start" className="list-item">
+            <ListItemAvatar className="icon">
+              <Avatar alt="Remy Sharp" src={notification.imgSrc} className="image" />
+            </ListItemAvatar>
+            <ListItemText
+              primary={<Typography style={{"fontWeight": "600", "fontSize": "15px"}}>{notification.heading}</Typography>}
+              secondary={
+              <React.Fragment>
+                <Typography
+                  component="span"
+                  variant="body2"
+                  color="textPrimary"
+                >
+                </Typography>
+                <p style={{"fontSize": "13px"}}>{notification.content}</p>
+              </React.Fragment>
+            }
+          />
+          {notification.tag ? <button variant="contained" color="primary" component="span" className="tag">
+            {notification.tag}
+          </button> : <div></div>}
+          </ListItem>
+          <Divider variant="inset" component="li" />
+        </>
       )
     })
 
@@ -27,7 +41,9 @@ class Notifications extends Component {
           <h5>Notifications</h5>
         </div>
         <div className="all-notifications">
-          {notifications}
+          <List className="list">
+            {notifications}
+          </List>
         </div>
       </div>
     );
