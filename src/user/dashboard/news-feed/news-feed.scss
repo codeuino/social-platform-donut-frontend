@@ -4,10 +4,12 @@
     height: 50px;
     .article {
       display: flex;
-      input {
+      form {
         flex: 1;
         border: none;
-        padding: 12px;
+        padding: 10px;
+        max-height: 55px;
+        max-width: 1500px;
       }
     }
     .cta {

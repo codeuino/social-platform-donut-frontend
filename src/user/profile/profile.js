@@ -3,7 +3,8 @@ import "./profile.scss";
 import Navigation from "../dashboard/navigation/navigation";
 import UserInfo from "./user-info/user-info";
 import Portfolio from "../dashboard/portfolio/portfolio";
-import Posts from "../pinned-posts/posts/posts";
+import PinPosts from "../pinned-posts/posts/pinPosts";
+import Updates from "../dashboard/updates/updates";
 
 class Profile extends Component {
   constructor(props) {
@@ -24,8 +25,13 @@ class Profile extends Component {
             <UserInfo></UserInfo>
             <Portfolio></Portfolio>
           </div>
+          <div className="two">
           <div className="posts-profile">
-            <Posts></Posts>
+            <PinPosts/>
+          </div>
+          <div className="updat">
+            
+          </div>
           </div>
         </div>
       </div>
