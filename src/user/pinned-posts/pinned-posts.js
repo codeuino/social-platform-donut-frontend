@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import "./pinned-posts.scss";
 import Navigation from "../dashboard/navigation/navigation";
-import Posts from "./posts/posts";
 import Updates from "../dashboard/updates/updates";
+import PinPosts from '../pinned-posts/posts/pinPosts';
 
 class PinnedPosts extends Component {
   constructor(props) {
@@ -19,9 +19,8 @@ class PinnedPosts extends Component {
           <Navigation posts={this.state.pinned_posts}></Navigation>
         </div>
         <div className="news">
-        <h1 class="Pinned-post">Pinned Posts</h1>
-          <Posts></Posts>
-        </div>
+          <PinPosts/>
+        </div> 
         <div className="promotions">
         <h1 class="organization-update">Organization Updates</h1>
           <Updates></Updates>
