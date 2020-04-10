@@ -22,6 +22,7 @@ class PinnedPosts extends Component {
           <PinPosts/>
         </div> 
         <div className="promotions">
+        <h1 class="organization-update">Organization Updates</h1>
           <Updates></Updates>
         </div>
       </div>
