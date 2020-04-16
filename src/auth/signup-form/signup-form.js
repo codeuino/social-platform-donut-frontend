@@ -4,10 +4,13 @@ import { TextField } from "@material-ui/core";
 import "./signup-form.scss";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
+import { connect } from 'react-redux';
+import { registerUser } from '../../actions/authAction';
+import { withRouter } from 'react-router-dom';
 
 class SignUpForm extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       first_name: "",
       last_name: "",
@@ -29,9 +32,17 @@ class SignUpForm extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    const newUser = this.state
-
-    console.log("register", newUser);
+    this.props.registerUser(this.state, this.props.history);
+    const emptyForm = {
+      first_name: "",
+      last_name: "",
+      email: "",
+      phone_no: "",
+      description:"",
+      password: "",
+      cnf_password: "",
+    }
+    this.setState({emptyForm});
   }
 
   render() {
@@ -41,6 +52,7 @@ class SignUpForm extends Component {
       },
     }));
 
+    const {first_name, last_name,email, phone_no,description,password,cnf_password } = this.state;
     return (
       <div className="signup-details">
         <Form className={useStyles.root} onSubmit={this.onSubmit}>
@@ -53,7 +65,7 @@ class SignUpForm extends Component {
                 fullWidth
                 size="small"
                 name="first_name"
-                value={this.state.first_name}
+                value={first_name}
                  onChange={this.onChange}
                 variant="outlined"
               />
@@ -66,7 +78,7 @@ class SignUpForm extends Component {
                 fullWidth
                 size="small"
                 name="last_name"
-                value={this.state.last_name}
+                value={last_name}
                  onChange={this.onChange}
                 variant="outlined"
               />
@@ -79,7 +91,7 @@ class SignUpForm extends Component {
                 fullWidth
                 size="small"
                 name="email"
-                value={this.state.email}
+                value={email}
                  onChange={this.onChange}
                 variant="outlined"
               />
@@ -92,7 +104,7 @@ class SignUpForm extends Component {
                 fullWidth
                 size="small"
                 name="phone_no"
-                value={this.state.phone_no}
+                value={phone_no}
                  onChange={this.onChange}
                 variant="outlined"
               />
@@ -105,7 +117,7 @@ class SignUpForm extends Component {
               fullWidth
               size="small"
               name="description"
-              value={this.state.description}
+              value={description}
                onChange={this.onChange}
               variant="outlined"
             />
@@ -118,7 +130,7 @@ class SignUpForm extends Component {
                 fullWidth
                 size="small"
                 name="password"
-                value={this.state.password}
+                value={password}
                  onChange={this.onChange}
                 variant="outlined"
               />
@@ -131,7 +143,7 @@ class SignUpForm extends Component {
                 fullWidth
                 size="small"
                 name="cnf_password"
-                value={this.state.cnf_password}
+                value={cnf_password}
                  onChange={this.onChange}
                 variant="outlined"
               />
@@ -151,4 +163,9 @@ class SignUpForm extends Component {
   }
 }
 
-export default SignUpForm;
+// map state to props 
+const mapStateToProps = (state) => ({
+  error: state.error
+});
+
+export default connect(mapStateToProps, { registerUser })(withRouter(SignUpForm));
