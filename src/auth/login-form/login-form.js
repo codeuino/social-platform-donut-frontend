@@ -2,10 +2,15 @@ import React, { Component } from "react";
 import Popups from '../../common/Popups';
 import { Form, Button } from "react-bootstrap";
 import "./login-form.scss";
-import cookie from "react-cookies";
 import { withRouter } from "react-router-dom";
+<<<<<<< HEAD
 import * as auth from "../auth-service";
  
+=======
+import { connect } from 'react-redux';
+import { loginUser } from '../../actions/authAction';
+
+>>>>>>> development
 class LoginForm extends Component {
   constructor(props) {
     super(props);
@@ -34,6 +39,7 @@ class LoginForm extends Component {
     }
     return false;
   };
+<<<<<<< HEAD
  
   authorizeUser = event => {
     event.preventDefault();
@@ -57,6 +63,14 @@ class LoginForm extends Component {
     this.props.history.push("/dashboard");
   };
  
+=======
+
+  onSubmit = (event) => {
+    event.preventDefault();
+    this.props.loginUser(this.state, this.props.history);
+  }
+
+>>>>>>> development
   render() {
  
         const handleToggle = (e) => {
@@ -69,7 +83,7 @@ class LoginForm extends Component {
     }
     return (
       <div className="login-details">
-        <Form>
+        <Form onSubmit={this.onSubmit}>
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
             <Form.Control
@@ -98,7 +112,6 @@ class LoginForm extends Component {
             <Button
               variant="primary"
               type="submit"
-              onClick={this.authorizeUser}
             >
               Login
             </Button>
@@ -116,6 +129,17 @@ class LoginForm extends Component {
     );
   }
 }
+<<<<<<< HEAD
  
 export default withRouter(LoginForm);
  
+=======
+
+// map state to props 
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  error: state.error
+});
+
+export default connect(mapStateToProps, { loginUser })(withRouter(LoginForm));
+>>>>>>> development
