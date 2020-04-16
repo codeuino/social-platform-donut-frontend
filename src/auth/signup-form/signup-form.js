@@ -20,7 +20,6 @@ class SignUpForm extends Component {
       password: "",
       cnf_password: "",
     };
-   
   }
 
 onChange = (e) => {
@@ -40,9 +39,7 @@ onChange = (e) => {
       password: "",
       cnf_password: "",
     }
-    console.log(this.state)
     this.setState({emptyForm});
-    console.log(this.state)
   }
 
   render() {
