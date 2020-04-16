@@ -8,7 +8,7 @@ class PinnedPosts extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      pinned_posts: true
+     
     };
   }
 
@@ -16,7 +16,7 @@ class PinnedPosts extends Component {
     return (
       <div className="pinned-posts">
         <div className="navigation">
-          <Navigation posts={this.state.pinned_posts}></Navigation>
+          <Navigation></Navigation>
         </div>
         <div className="news">
         <h1 class="Pinned-post">Pinned Posts</h1>

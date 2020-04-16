@@ -16,10 +16,13 @@
       }
     }
   }
+  b{
+    font-size: 15px;
+  }
 }
 
 .donut-title {
-  width: 50px;
+  width: 100px;
 }
 
 .navigation{
@@ -67,9 +70,15 @@
 }
 
 .logout{
-  height: 21px;
-  width: 21px;
+  height: 27px;
+  width: 27px;
   color: rgba(0, 0, 0, 0.5);
-  margin-right: 15px;
+  margin-right: 2%;
   margin-left: 2px;
+}
+
+.donut-logo{
+  height: 27px;
+  width: 27px;
+  color: rgba(0, 0, 0, 0.5);
 }
