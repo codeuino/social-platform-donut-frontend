@@ -20,17 +20,15 @@ class SignUpForm extends Component {
       password: "",
       cnf_password: "",
     };
-    this.onChange=this.onChange.bind(this)
-    this.onSubmit = this.onSubmit.bind(this);
+   
   }
 
-  
-  onChange(e){
-    this.setState({ [e.target.name]:e.target.value })
+onChange = (e) => {
+  this.setState({[e.target.name] : e.target.value });
 }
 
 
-  onSubmit(e) {
+  onSubmit = (e) => {
     e.preventDefault();
     this.props.registerUser(this.state, this.props.history);
     const emptyForm = {
@@ -42,7 +40,9 @@ class SignUpForm extends Component {
       password: "",
       cnf_password: "",
     }
+    console.log(this.state)
     this.setState({emptyForm});
+    console.log(this.state)
   }
 
   render() {
