@@ -233,7 +233,6 @@ nextButton(){
           {Boolean(option === "identity") ? checkVerification : null}
         </Modal.Body>
         <Modal.Footer>
-        
         </Modal.Footer>
       </Modal>
     )
