@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { Form, Button } from "react-bootstrap";
 import "./login-form.scss";
-import cookie from "react-cookies";
 import { withRouter } from "react-router-dom";
-import * as auth from "../auth-service";
+import { connect } from 'react-redux';
+import { loginUser } from '../../actions/authAction';
 
 class LoginForm extends Component {
   constructor(props) {
@@ -28,32 +28,15 @@ class LoginForm extends Component {
     return false;
   };
 
-  authorizeUser = event => {
+  onSubmit = (event) => {
     event.preventDefault();
-    const isValidated = this.checkValidation();
-    if (isValidated) {
-      auth
-        .loginIn(this.state)
-        .then(response => {
-          const decodedToken = auth.decodeResponse(response.data.token);
-          this.setSession(decodedToken);
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    }
-  };
-
-  setSession = token => {
-    const id = token.payload._id;
-    cookie.save("userId", id, { path: "/" });
-    this.props.history.push("/dashboard");
-  };
+    this.props.loginUser(this.state, this.props.history);
+  }
 
   render() {
     return (
       <div className="login-details">
-        <Form>
+        <Form onSubmit={this.onSubmit}>
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
             <Form.Control
@@ -82,7 +65,6 @@ class LoginForm extends Component {
             <Button
               variant="primary"
               type="submit"
-              onClick={this.authorizeUser}
             >
               Login
             </Button>
@@ -93,4 +75,10 @@ class LoginForm extends Component {
   }
 }
 
-export default withRouter(LoginForm);
+// map state to props 
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  error: state.error
+});
+
+export default connect(mapStateToProps, { loginUser })(withRouter(LoginForm));

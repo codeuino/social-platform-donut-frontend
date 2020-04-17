@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { DonutTitleSmall } from "../../../donutTitle/donutTitle";
 import "./navigation.scss";
-import {Logout} from "../../profile/popups/logout";
+import Logout from "../../profile/popups/logout";
 import logo from "../../../svgs/logout.svg";
 import {Info} from "../../integrations/NameForm";
 
