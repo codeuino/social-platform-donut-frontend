@@ -154,9 +154,7 @@ class Popups extends Component {
           {Boolean(option === "identity") ? checkVerification : null}
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={this.handleClose}>
-            Close
-          </Button>
+          
         </Modal.Footer>
       </Modal>
     )
