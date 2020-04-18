@@ -9,7 +9,7 @@ export const registerUser = (userInfo, history) => async (dispatch) => {
   try {
     const res = await axios.post('/user', userInfo);
     if(res.status === 201) {
-      history.push('/');
+      history.push('/dashboard');
     }
   } catch(error) {
       dispatch(errorHandler(error));
