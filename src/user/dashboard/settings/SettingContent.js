@@ -4,6 +4,7 @@ import './styles/settings.scss';
 import Popups from '../../../common/Popups';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { blue } from '@material-ui/core/colors';
+import { Typography, ListItemText, ListItem, List, Link, Button } from '@material-ui/core';
 
 const theme = createMuiTheme({
   palette: {
@@ -57,95 +58,96 @@ class SettingContent extends Component {
       <ThemeProvider theme={theme}>
       <div className="">
         <div className="row ml-3">
-          <div className="col-md-9 mt-5">
+          <List className="col-md-9 mt-5">
             <h4><b>General account settings</b></h4><hr/>
-            <div className="row">
-              <div className="col-md-3">
-                <p className="options">Name</p>
-              </div>
+            <ListItem className="row">
+              <ListItemText className="col-md-3">
+                <Typography className="options">Name</Typography>
+              </ListItemText>
               <div className="col-md-9">
-               <p className="options-value">{name}
+               <Typography className="options-value">{name}
                <span>
-                 <a 
+                 <Link 
                   href="javascript:void(0)" 
                   onClick={handleToggle} 
                   style={{float: "right"}} 
                   name="name"
                   >Edit
-                  </a>
+                  </Link>
                 </span>
-               </p>
+               </Typography>
               </div>
-            </div><hr/>
-            <div className="row">
-              <div className="col-md-3">
-                <p className="options">Username</p>
-              </div>
+            </ListItem><hr/>
+            <ListItem className="row">
+              <ListItemText className="col-md-3">
+                <Typography className="options">Username</Typography>
+              </ListItemText>
               <div className="col-md-9">
-                <p className="options-value">{username}
+                <Typography className="options-value">{username}
                   <span>
-                    <a 
+                    <Link 
                      href="javascript:void(0)" 
                      onClick={handleToggle} 
                      style={{float: "right"}} 
                      name="username"
                      >Edit
-                     </a>
+                     </Link>
                   </span>
-                </p>
+                </Typography>
               </div>
-            </div><hr/>
-            <div className="row">
-              <div className="col-md-3">
-                <p className="options">Email</p>
-              </div>
+            </ListItem><hr/>
+            <ListItem className="row">
+              <ListItemText className="col-md-3">
+                <Typography className="options">Email</Typography>
+              </ListItemText>
               <div className="col-md-9">
-                <p className="options-value">{email}
+                <Typography className="options-value">{email}
                 <span>
-                  <a 
+                  <Link 
                    href="javascript:void(0)" 
                    onClick={handleToggle} 
                    style={{float: "right"}} 
                    name="email"
                    >Edit
-                  </a>
+                  </Link>
                 </span>
-                </p>
+                </Typography>
               </div>
-            </div><hr/>
-            <div className="row">
-              <div className="col-md-3">
-                <p className="options">Identity verified</p>
-              </div>
+            </ListItem><hr/>
+            <ListItem className="row">
+              <ListItemText className="col-md-3">
+                <Typography className="options">Identity verified</Typography>
+              </ListItemText>
               <div className="col-md-9">
-                <p className="options-value">{identity ? "Yes" : "No"}
+                <Typography className="options-value">{identity ? "Yes" : "No"}
                 <span>
-                  <a 
+                  <Link 
                    href="javascript:void(0)" 
                    onClick={handleToggle} 
                    style={{float: "right"}} 
                    name="identity"
                    >View
-                   </a>
+                   </Link>
                 </span>
-                </p>
+                </Typography>
               </div>
-            </div><hr/>
-            <div className="row">
-              <div className="col-md-3">
-                <p className="options">Deactivate account ?</p>
-              </div>
+            </ListItem><hr/>
+            <ListItem className="row">
+              <ListItemText className="col-md-3">
+                <Typography className="options">Deactivate account ?</Typography>
+              </ListItemText>
               <div className="col-md-9">
-                <button 
-                  className="btn btn-light" 
+                <Button 
+                  color="secondary"
+                  variant="contained"
                   style={{float: "right"}} 
                   name="account" 
                   onClick={handleToggle}
                   >Deactivate
-                </button>
+                </Button>
               </div>
-            </div>
-          </div>
+            </ListItem>
+          </List>
           <div className="col-md-3 setting-sidebar">
             <SettingSidebar/>
           </div>

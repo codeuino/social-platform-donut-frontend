@@ -18,6 +18,11 @@ class Navigation extends Component {
       bottom: 0
     };
 
+    const divStyle2 = {
+      position: "absolute",
+      bottom: 50
+    };
+
     return (
       <div className="navigation">
         <ListGroup>
@@ -113,7 +118,7 @@ class Navigation extends Component {
               <b>Account</b>
             </NavLink>
           </ListGroup.Item>
-          <ListGroup.Item style={divStyle}  className={this.props.settings ? "active" : "inactive"}>
+          <ListGroup.Item style={divStyle2}  className={this.props.settings ? "active" : "inactive"}>
             <svg
               width="38"
               height="38"
