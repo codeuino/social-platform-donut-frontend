@@ -1,0 +1,53 @@
+.title {
+  font-size: 22px;
+  font-weight: 600;
+  color: #000000;
+}
+.designation {
+  margin: 5px 0 10px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.5);
+}
+.email-content {
+  display: flex;
+  flex-direction: row;
+  text-align: left;
+  justify-content: flex-start; /* adjustment */
+  position: relative;
+  .initial {
+    flex: 0 1 auto;
+    color: rgba(0, 0, 0, 0.5);
+    font-weight: 550;
+  }
+  .info {
+    color: #000000;
+    font-weight: 600;
+  }
+  .info-email {
+    margin-left: 50px;
+    flex: 0 1 auto;
+  }
+  .info-website {
+    margin-left: 30px;
+  }
+  .info-education {
+    margin-left: 18px;
+    p {
+      color: rgba(0, 0, 0, 0.5);
+    }
+  }
+  .info-skills {
+    margin-left: 55px;
+  }
+  .info-contact {
+    margin-left: 30px;
+  }
+}
+.profilecard {
+  padding: 0 0 0 0;
+  margin-bottom: 10px;
+}
+.cardcontent {
+  padding: 16px 16px 0px 16px;
+}
