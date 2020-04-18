@@ -7,6 +7,8 @@ import Profile from "./user/profile/profile";
 import Organization from "./user/organization/organization";
 import NotFound from "./404/notFound";
 import Settings from "./user/dashboard/settings/Settings";
+import Projects from "./user/projects/projects";
+import ProjInfo from "./user/projects/proj-info/proj-info";
 import PrivateRoute from "./common/PrivateRoute";
 
 
@@ -18,8 +20,10 @@ const Router = () => (
       <PrivateRoute exact path="/dashboard" component={Dashboard} />
       <PrivateRoute exact path="/pinned-posts" component={PinnedPosts} />
       <PrivateRoute exact path="/profile" component={Profile} />
+      <PrivateRoute exact path="/:id/proj-info" component={ProjInfo} />
       <PrivateRoute exact path="/organization" component={Organization} />
       <PrivateRoute exact path="/settings" component={Settings}/>
+      <PrivateRoute exact path="/projects" component={Projects}/>
       <Route component={NotFound} />
     </Switch>
   </BrowserRouter>
