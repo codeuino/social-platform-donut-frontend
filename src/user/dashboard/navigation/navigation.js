@@ -143,8 +143,8 @@ class Navigation extends Component {
             <img class="logout" src={logo} alt="L"></img>
             <b>Logout</b>
             </Button>
-            <Logout show={this.state.logout}
-              onHide={cancel} />
+            <Logout open={this.state.logout}
+              onClose={cancel} />
           </ListGroup.Item>
         </ListGroup>
       </div>
