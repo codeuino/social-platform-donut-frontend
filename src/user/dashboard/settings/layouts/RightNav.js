@@ -13,6 +13,7 @@ import {
 } from "react-icons/md";
 import { FaUserTag } from "react-icons/fa"; 
 import "../../../dashboard/navigation/navigation.scss";
+import { Typography, ListItemText, ListItem, List, withStyles, Link, Button } from '@material-ui/core';
 
 function RightNav({ option, iconsSize, active }) {
   return (

@@ -14,6 +14,11 @@ class Navigation extends Component {
       logout:false
     });
 
+    const divStyle2 = {
+      position: "absolute",
+      bottom: 50
+    };
+
     return (
       <div className="navigation">
         <List>
@@ -102,7 +107,7 @@ class Navigation extends Component {
               <b>Account</b>
             </NavLink>
           </ListGroup.Item>
-          <ListGroup.Item style={divStyle}  className={this.props.settings ? "active" : "inactive"}>
+          <ListGroup.Item style={divStyle2}  className={this.props.settings ? "active" : "inactive"}>
             <svg
               width="38"
               height="38"
@@ -127,8 +132,8 @@ class Navigation extends Component {
             <img class="logout" src={logo} alt="L"></img>
             <b>Logout</b>
             </Button>
-            <Logout show={this.state.logout}
-              onHide={cancel} />
+            <Logout open={this.state.logout}
+              onClose={cancel} />
           </ListGroup.Item>
         </ListGroup>
       </div>
