@@ -13,10 +13,6 @@ class Navigation extends Component {
     let cancel =()=>this.setState({
       logout:false
     });
-    const divStyle = {
-      position: "absolute",
-      bottom: 0
-    };
 
     const divStyle2 = {
       position: "absolute",
@@ -25,16 +21,17 @@ class Navigation extends Component {
 
     return (
       <div className="navigation">
-        <ListGroup>
-          <ListGroup.Item>
-            <NavLink to="/dashboard"><div className="donut-title"><DonutTitleSmall /></div></NavLink>
-          </ListGroup.Item>
-          <ListGroup.Item
-            className={this.props.dashboard ? "active" : "inactive"}
-          >
+        <List>
+          <ListItem href="/dashboard" component="a">
+            <div className="donut-title"><DonutTitleSmall /></div>
+            <Link href="/dashboard" ></Link>
+          </ListItem>
+          <span className="divide"><hr></hr></span>
+          <ListItem button component="a" href="/dashboard"
+            className={this.props.dashboard ? "active" : "inactive"}>
             <svg
-              width="38"
-              height="38"
+              width="20"
+              height="20"
               viewBox="0 0 18 18"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -47,15 +44,13 @@ class Navigation extends Component {
                 className="path-name"
               />
             </svg>
-
-            <NavLink to="/dashboard" className="link">
-              <b>Dashboard</b>
-            </NavLink>
-          </ListGroup.Item>
-          <ListGroup.Item className={this.props.posts ? "active" : "inactive"}>
+            <span className="tabs">Dashboard</span>
+          </ListItem>
+          <ListItem button component="a" href="/pinned-posts"
+            className={this.props.posts ? "active" : "inactive"}>
             <svg
-              width="38"
-              height="38"
+              width="20"
+              height="20"
               viewBox="0 0 21 20"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -70,15 +65,13 @@ class Navigation extends Component {
                 className="path-name"
               />
             </svg>
-
-            <NavLink to="/pinned-posts" className="link">
-              <b>Pinned Posts</b>
-            </NavLink>
-          </ListGroup.Item>
-          <ListGroup.Item className={this.props.org ? "active" : "inactive"}>
+            <span className="tabs">Pinned Posts</span>
+          </ListItem>
+          <ListItem button component="a" href="/organization"
+            className={this.props.org ? "active" : "inactive"}>
             <svg
-              width="38"
-              height="38"
+              width="20"
+              height="20"
               viewBox="0 0 20 20"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -91,17 +84,13 @@ class Navigation extends Component {
                 className="path-name"
               />
             </svg>
-
-            <NavLink to="/organization" className="link">
-              <b>Organization</b>
-            </NavLink>
-          </ListGroup.Item>
-          <ListGroup.Item
-            className={this.props.profile ? "active" : "inactive"}
-          >
+            <span className="tabs">Organization</span>
+          </ListItem>
+          <ListItem button component="a" href="/profile"
+           className={this.props.profile ? "active" : "inactive"} >
             <svg
-              width="38"
-              height="38"
+              width="20"
+              height="20"
               viewBox="0 0 18 18"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
