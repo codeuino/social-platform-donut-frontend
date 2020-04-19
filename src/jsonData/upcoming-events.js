@@ -1,4 +1,6 @@
 import profileImg from '../svgs/profile-icon.svg';
+import profile from '../svgs/profile.svg';
+import display from '../svgs/display.svg';
 
 const events = [
     {
@@ -10,15 +12,15 @@ const events = [
     },
     {
       _id: 2,
-      imgSrc: profileImg,
-      createdBy: 'Julian Richards',
+      imgSrc: profile,
+      createdBy: 'Imra Russel',
       description: 'Lorem ipsum dolor sit amet, duo esse augue torgatos te, ius an nisi deterruisset.',
       tag: ''
     },
     {
       _id: 3,
-      imgSrc: profileImg,
-      createdBy: 'Julian Richards',
+      imgSrc: display,
+      createdBy: 'Kyle Black',
       description: 'Lorem ipsum dolor sit amet, duo esse augue torgatos te, ius an nisi deterruisset.',
       tag: '+1 RSVP'
     },
@@ -31,15 +33,15 @@ const events = [
     },
     {
       _id: 5,
-      imgSrc: profileImg,
-      createdBy: 'Julian Richards',
+      imgSrc: profile,
+      createdBy: 'Imra Russel',
       description: 'Lorem ipsum dolor sit amet, duo esse augue torgatos te, ius an nisi deterruisset.',
       tag: ''
     },
     {
       _id: 6,
-      imgSrc: profileImg,
-      createdBy: 'Julian Richards',
+      imgSrc: display,
+      createdBy: 'Kyle Black',
       description: 'Lorem ipsum dolor sit amet, duo esse augue torgatos te, ius an nisi deterruisset.',
       tag: ''
     }

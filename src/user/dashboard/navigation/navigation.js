@@ -15,6 +15,11 @@ class Navigation extends Component {
       logout:false
     });
 
+    const divStyle2 = {
+      position: "absolute",
+      bottom: 50
+    };
+
     return (
       <div className="navigation">
         <List>

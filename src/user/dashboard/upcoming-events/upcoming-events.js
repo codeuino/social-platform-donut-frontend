@@ -1,23 +1,51 @@
 import React, { Component } from "react";
 import "./upcoming-events.scss";
+import PropTypes from 'prop-types';
 import events from '../../../jsonData/upcoming-events';
+import { List, ListItem, ListItemText, ListItemAvatar, Avatar, Divider, Typography, withStyles } from '@material-ui/core';
+
+const styles = theme => ({
+  pri: {
+    fontWeight: "600",
+    fontSize: "15px"
+  },
+  content: {
+    fontSize: "13px"
+  }
+})
+
+
 
 class UpcomingEvents extends Component {
   render() {
+    const { classes } = this.props
     let upcomingEvents = events.map((event,i)=>{
       return (
-        <div key={i}>
-          <div className="event-container"> 
-            <div className="img-container">
-              <img alt="event-icon" src={event.imgSrc}></img>
-            </div>
-            <div className="event-description">
-              <h6>{event.createdBy}</h6>
-              {event.tag ? <button type="button" className="tag">{event.tag}</button> : <div></div>}
-              <p>{event.description}</p>
-            </div>
-          </div>
-        </div>
+      <>
+        <ListItem key={i} alignItems="flex-start" className="list-item">
+          <ListItemAvatar className="profile-pic">
+            <Avatar alt="Profile" src={event.imgSrc} className="icon"/>
+          </ListItemAvatar>
+          <ListItemText
+            primary={<Typography className={classes.pri}>{event.createdBy}</Typography>}
+            secondary={
+            <React.Fragment>
+              <Typography
+                component="span"
+                variant="body2"
+                color="textPrimary"
+              >
+              </Typography>
+              <p className={classes.content}>{event.description}</p>
+            </React.Fragment>
+          }
+          />
+          {event.tag ? <button variant="contained" color="primary" component="span" className="tag">
+            {event.tag}
+          </button> : <div></div>}
+        </ListItem>
+        <Divider variant="inset" component="li" />
+      </>
       )
     })
     return (
@@ -26,11 +54,17 @@ class UpcomingEvents extends Component {
           <h5>Upcoming Events</h5>
         </div>
         <div className="all-events">
-          {upcomingEvents}
+          <List className="list">
+            {upcomingEvents}
+          </List>
         </div>
-      </div>
+    </div>
     );
   }
 }
 
-export default UpcomingEvents;
+UpcomingEvents.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(UpcomingEvents);
