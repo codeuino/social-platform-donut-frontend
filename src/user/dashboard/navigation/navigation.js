@@ -106,8 +106,7 @@ class Navigation extends Component {
             <NavLink to="profile" className="link">
               <b>Account</b>
             </NavLink>
-          </ListGroup.Item>
-          <ListGroup.Item style={divStyle2}  className={this.props.settings ? "active" : "inactive"}>
+          <ListGroup.Item style={divStyle}  className={this.props.settings ? "active" : "inactive"}>
             <svg
               width="38"
               height="38"
