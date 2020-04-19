@@ -10,7 +10,7 @@ class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      profile: true
+      profile: true,
     };
   }
 
@@ -30,7 +30,6 @@ class Profile extends Component {
             <PinPosts/>
           </div>
           <div className="updat">
-            
           </div>
           </div>
         </div>

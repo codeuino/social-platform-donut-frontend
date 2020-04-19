@@ -1,7 +1,8 @@
 import { SET_CURRENT_USER, RESPONSE_MSG } from "../actions/types"
 
 const initialState = {
-  isAuthenticated: false,
+  // make it false later, default is set to true so that contributors don't need to login for test
+  isAuthenticated: true,
   user: {},
   response_msg: ""
 }

@@ -10,6 +10,18 @@
     flex: 1;
     text-align: center;
     margin: 35px 0;
+    .edit-option {
+      margin-top: 10px;
+      border-radius: 20px;
+      font-size: 14px;
+    }
+    .user-pic {
+      display: inline-block;
+      .userpic {
+        width: 120px;
+        height: 120px;
+      }
+    }
   }
   .user-data {
     flex: 1;

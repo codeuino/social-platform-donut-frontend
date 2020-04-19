@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { Form, Button } from "react-bootstrap";
+import { TextField } from "@material-ui/core";
 import "./signup-form.scss";
+import Grid from "@material-ui/core/Grid";
+import { makeStyles } from "@material-ui/core/styles";
 import { connect } from 'react-redux';
 import { registerUser } from '../../actions/authAction';
 import { withRouter } from 'react-router-dom';
@@ -9,70 +12,170 @@ class SignUpForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
+      firstName: "",
+      lastName: "",
       email: "",
+      phone: "",
+      shortDescription:"",
       password: "",
-      cnfPassword: ""
-    }
+      cnfPassword: "",
+      error:{}
+    };
   }
+
+  
   onChange = (e) => {
-    this.setState({[e.target.name] : e.target.value });
-  }
+    this.setState({ [e.target.name]:e.target.value })
+}
+
 
   onSubmit = (e) => {
     e.preventDefault();
-    this.props.registerUser(this.state, this.props.history);
+    const {firstName, lastName, email, phone, shortDescription, password, cnfPassword } = this.state;
+    if(password === cnfPassword){
+      const newUser = {
+        name:{
+          firstName : firstName,
+          lastName: lastName
+        },
+        email: email,
+        phone: phone,
+        password: password,
+        info: {
+          about: {
+            shortDescription: shortDescription
+        }
+      }
+      }
+      this.props.registerUser(newUser, this.props.history);
+    }
+    else{
+      this.props.history.push('/');
+    }
     const emptyForm = {
-      name: "",
+      firstName: "",
+      lastName: "",
       email: "",
+      phone: "",
+      shortDescription:"",
       password: "",
-      cnfPassword: ""
-    };
+      cnfPassword: "",
+      error:{}
+    }
     this.setState({emptyForm});
   }
 
   render() {
-    const { email, password, cnfPassword } = this.state;
+    const useStyles = makeStyles((theme) => ({
+      root: {
+        flexGrow: 1,
+      },
+    }));
+    const {firstName, lastName, email, phone, shortDescription, password, cnfPassword } = this.state;
     return (
       <div className="signup-details">
-        <Form onSubmit={this.onSubmit}>
-          <Form.Group controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control 
-              type="email" 
-              placeholder="abc@gmail.com" 
-              name="email" 
-              onChange={this.onChange} 
-              defaultValue={email}
+        <Form className={useStyles.root} onSubmit={this.onSubmit}>
+          <Grid container spacing={3}>
+            <Grid item xs={6}>
+              <TextField
+                id="outlined-primary"
+                label="First Name"
+                type="Text"
+                fullWidth
+                size="small"
+                name="firstName"
+                value={firstName}
+                 onChange={this.onChange}
+                variant="outlined"
               />
-          </Form.Group>
-
-          <Form.Group controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
-            <Form.Control 
-              type="password" 
-              placeholder="***********" 
-              name="password"
-              onChange={this.onChange}
-              defaultValue={password}
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                id="outlined-primary"
+                label="Last Name"
+                type="Text"
+                fullWidth
+                size="small"
+                name="lastName"
+                value={lastName}
+                 onChange={this.onChange}
+                variant="outlined"
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                id="outlined-primary"
+                label="Email"
+                type="email"
+                fullWidth
+                size="small"
+                name="email"
+                value={email}
+                 onChange={this.onChange}
+                variant="outlined"
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                id="outlined-primary"
+                label="Phone Number"
+                type="Number"
+                fullWidth
+                size="small"
+                name="phone"
+                value={phone}
+                 onChange={this.onChange}
+                variant="outlined"
+              />
+            </Grid>
+            <Grid item xs={12}>
+            <TextField
+              id="outlined-primary"
+              label="Description"
+              type="Text"
+              fullWidth
+              size="small"
+              name="shortDescription"
+              value={shortDescription}
+               onChange={this.onChange}
+              variant="outlined"
             />
-          </Form.Group>
-
-          <Form.Group controlId="formBasicPassword">
-            <Form.Label>Re-Type Password</Form.Label>
-            <Form.Control 
-              type="password" 
-              placeholder="***********" 
-              name="cnfPassword"
-              onChange={this.onChange}
-              defaultValue={cnfPassword}
-            />
-          </Form.Group>
-          <div className="cta-register">
-            <Button variant="primary" type="submit">
+          </Grid>
+            <Grid item xs={12}>
+              <TextField
+                id="outlined-primary"
+                label="Password"
+                type="password"
+                fullWidth
+                size="small"
+                name="password"
+                value={password}
+                 onChange={this.onChange}
+                variant="outlined"
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                id="outlined-primary"
+                label="Confirm Password"
+                type="password"
+                fullWidth
+                size="small"
+                name="cnfPassword"
+                value={cnfPassword}
+                 onChange={this.onChange}
+                variant="outlined"
+              />
+            </Grid>
+            <Button
+              className="savebtn"
+              type="submit"
+              variant="primary"
+              color="primary"
+            >
               Register
             </Button>
-          </div>
+          </Grid>
         </Form>
       </div>
     );

@@ -7,6 +7,10 @@
     flex: 0.5;
     border-right: solid 1px #dfe9f1;
   }
+  h2 {
+    font-size: 22px;
+    font-weight: 650;
+  }
   .news {
     flex: 3;
     .notify-user {
@@ -21,6 +25,28 @@
     }
     .updat{
       flex: 1;
+    }
+  }
+  .org-info {
+    display: flex;
+    flex-direction: row;
+    .posts {
+      h2 {
+        margin-left: 28px;
+      }
+      flex: 2;
+      display: flex;
+      flex-direction: column;
+      .posts-imp {
+        padding: 0 0 0 0;
+      }
+    }
+    .promotions {
+      flex: 1;
+      margin: 0px 20px;
+      p {
+        font-weight: 600;
+      }
     }
   }
 }
