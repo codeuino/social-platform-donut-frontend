@@ -17,8 +17,14 @@
       display: flex;
       padding: 20px 0px 20px 30px;
     }
+  }
+  .two{
+    display: flex;
     .posts-profile {
-      width: 90.5%;
+      flex: 2;
+    }
+    .updat{
+      flex: 1;
     }
   }
   .org-info {
