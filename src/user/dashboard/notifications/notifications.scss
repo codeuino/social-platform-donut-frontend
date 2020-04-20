@@ -19,59 +19,39 @@
   }
   .all-notifications{
     width:90%;
-    margin: 15px auto;
+    margin: 0px auto 29px auto;
     height: 200px;
     overflow-y: auto;
 
-    .notification-container{
-      display: flex;
-      border-bottom: 1px solid #ccc;
-      padding: 10px 0;
-      width:97%;
-      margin-right: 2px;
-    }
-    .notification-description{
-      padding: 0px 20px;
-      p{
-        color: rgba(29, 33, 41, 0.5);
-        font-family: Inter;
-        font-style: normal;
-        font-weight: normal;
-        font-size: 12px;
-        line-height: 15px;
-        margin-bottom: 2px;
-      }
-      h6{
-        font-family: Inter;
-        font-style: normal;
-        font-weight: 600;
-        font-size: 14px;
-        line-height: 21px;
-        display: inline
-      }
-      .tag{
-        box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
-        border-radius: 100px;
-        border: 1px solid #007bff;
-        background-color: #1A73E8;
-        color: #fff;
-        font-family: Inter;
-        font-style: normal;
-        font-weight: 600;
-        font-size: 10px;
-        line-height: 18px;
-        margin-left: 15px;
-        position: relative;
-        bottom: 5px
+    .list {
+      .list-item {
+        .icon {
+          .image {
+            margin-top: 10px;
+            width: 40px;
+            height: 40px;
+          }
+        }
+        .tag {
+          box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
+          border-radius: 100px;
+          border: 1px solid #007bff;
+          background-color: #1A73E8;
+          color: #fff;
+          font-family: Inter;
+          font-style: normal;
+          font-weight: 600;
+          font-size: 10px;
+          line-height: 18px;
+          margin-left: 15px;
+          margin-top: 12px;
+          position: relative;
+          bottom: 5px;
+          height: 22px;
+          width: 120px;
+        }
       }
     }
-  }
-  
-  .notification-img-container > img {
-    width: 30px;
-    background-blend-mode: normal;
-    margin:auto;
-    height: 90%;
   }
 }
 

@@ -4,9 +4,11 @@ import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { DonutTitleSmall } from "../../../donutTitle/donutTitle";
 import "./navigation.scss";
+import { Info } from "../../integrations/NameForm";
 import {Logout} from "../../profile/popups/logout";
 import logo from "../../../svgs/logout.svg";
 class Navigation extends Component {
+  state = {logout: false};
   render() {
     let cancel =()=>this.setState({
       logout:false

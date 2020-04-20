@@ -8,24 +8,16 @@
   height: 269px;
   .items-list {
     flex: 0.8;
-    padding: 40px 0px;
+    padding: 20px 0 40px 0;
     border: solid 1px #dfe9f1;
+    font-family: SF UI Text;
     .item {
-      padding: 12px;
-      h1 {
-        font-size: 36px;
-        font-family: SF UI Text;
-        font-style: normal;
-        font-weight: bold;
-        text-align: center;
-        margin-bottom: 0px;
-      }
-      h3 {
-        font-size: 15px;
-        color: #4457a5;
+      padding: 6px;
+      text-align: center;
+      .list-text {
+        margin: auto;
         font-family: Inter;
         font-style: normal;
-        font-weight: 600;
       }
     }
   }

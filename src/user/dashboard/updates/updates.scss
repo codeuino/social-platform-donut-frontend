@@ -1,29 +1,36 @@
 .updates {
-  min-height: 300px;
-  height: 400px;
-  margin: 30px 0 0 40px;
+  min-height: 400px;
+  height: 500px;
+  max-width: 450px;
+  width: 95%;
+  margin: 60px 0 0 70px;
   h1 {
-    font-size: 38px;
+    font-size: 30px;
     text-align: center;
     font-weight: bold;
+    margin-bottom: 20px;
   }
   .org-updates {
-    min-height: 300px;
-    max-height: 400px;
+    min-height: 400px;
+    max-height: 500px;
+    padding: 10px 10px 0 10px;
     border: solid 1px #dfe9f1;
     overflow: auto;
     .img-desc {
       h2 {
-        font-size: 22px;
+        font-size: 20px;
         font-weight: bold;
       }
       p {
-        font-size: 16px;
-        margin: 0;
+        font-size: 15px;
+        margin-top: -2px;
       }
     }
     .image {
-      padding: 14px 14px;
+      padding: 0px 14px;
+      margin-top: -10px;
+      min-height: 30px;
+      min-width: 30px;
     } 
   }
 }

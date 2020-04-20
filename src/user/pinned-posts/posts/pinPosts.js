@@ -56,7 +56,7 @@ const styles = makeStyles((theme) => ({
         fontSize: '18px'
     },
     paper: {
-        marginBottom: '15px'
+        marginRight: '15px'
     }
 })
 );

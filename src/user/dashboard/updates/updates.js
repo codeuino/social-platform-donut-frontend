@@ -6,7 +6,9 @@ import {  ListItemText, List, ListItem, Divider } from "@material-ui/core";
 
 const styles = makeStyles((theme) => ({
   root: {
-    paddingTop: '0px'
+    paddingBottom: '3px',
+    paddingTop : '3px',
+    minWidth: '302px'
   }
 })
 );
@@ -16,8 +18,8 @@ export default function Updates(props){
   let upd = [];
   for(i=1; i<20; i++){
     upd.push(
-      <List className={classes.root}>
-        <ListItem>
+      <>
+        <ListItem disableGutters>
           <img className="image" src={gsoc} alt="icon" />
           <ListItemText className="img-desc">
             <h2>We got into Gsoc</h2>
@@ -25,7 +27,7 @@ export default function Updates(props){
           </ListItemText>  
         </ListItem>
         <Divider />
-      </List>
+      </>
     )
   }
     
@@ -33,7 +35,9 @@ export default function Updates(props){
     <div className="updates">
       <h1>Organizations Updates</h1>
       <div className="org-updates">
-            {upd}
+        <List className={classes.root}>
+          {upd}
+        </List>
       </div>
     </div>
   )
