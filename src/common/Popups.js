@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { Modal, Button, Form } from 'react-bootstrap';
 import { MdVerifiedUser } from 'react-icons/md';
 import { FaUserSlash } from 'react-icons/fa';
+import { connect } from 'react-redux';
+import { forgotPassword, changePassword } from '../actions/authAction';
  
 class Popups extends Component {
   constructor(props){
@@ -16,7 +18,9 @@ class Popups extends Component {
       account: "",
       identity: true,
       option: "",
-      optionValue: ""
+      optionValue: "",
+      newPass: "",
+      cnfPass: ""
     }
   }
   
@@ -48,28 +52,57 @@ class Popups extends Component {
     this.setState({[e.target.name] : e.target.value });
   }
 
+  changePassword = (e) => {
+    e.preventDefault();
+    const { newPass } = this.state;
+    const { auth, changePassword, status } = this.props;
+    
+    const passObj = { 
+      password: newPass,
+      id: auth.user ? auth.user._id : null
+    };
+    
+    console.log("change password request sending ...", passObj);
+    changePassword(passObj);
 
+    // show notification on sidebar if done successfully 
+    if(status.success) {
+      console.log("Successfully changed the password!");
+    }
+  }
   
-  step_next = () => {
-    let currentStep = this.state.currentStep
-    currentStep = currentStep >= 2? 2: currentStep + 1
-    this.setState({
-      currentStep: currentStep
-    })
+  forgotPasswordRequest = () => {
+    const { email } = this.state;
+    const { forgotPassword, status } = this.props;
+    
+    console.log("forgot password request sending...")
+    forgotPassword(email);
+    
+    let { currentStep } = this.state;
+    // move to next step if forgot password request successful
+    if(status.success){
+      currentStep = currentStep >= 2 ? 2 : currentStep + 1
+      this.setState({
+        currentStep: currentStep
+      })
+    } else {
+      // show error message in popup 
+      console.log("Something went wrong!!");
+    }
+
   }
     
-
-  
-
 
 nextButton(){
   let currentStep = this.state.currentStep;
   if(currentStep <2){
     return (
       <button 
-      className="btn btn-primary btn-block" 
-        type="button" onClick={this.step_next}>
-      Send Password Reset-Email
+        className="btn btn-primary btn-block" 
+        type="button" 
+        onClick={this.forgotPasswordRequest}
+        > 
+        Send Password Reset-Email
       </button>        
     )
   }
@@ -149,34 +182,41 @@ nextButton(){
 
    const resetPassword = (
      <Form>
+       {this.state.newPass !== this.state.cnfPass ? (
+       <small className="text text-danger">Password not matched!!</small> ) : null}
+      <div className="form-group">
+      <label htmlFor="password">New Password</label>
+      <input
+        className="form-control"
+        name="newPass"
+        type="password"
+        placeholder="***********"
+        onChange={this.onChange}
+        defaultValue={this.state.newPass}
+        />      
+    </div>
     <div className="form-group">
-    <label htmlFor="password">New Password</label>
-    <input
-      className="form-control"
-      name="new_password"
-      type="password"
-      placeholder="***********"
-      onChange={this.onChange}
+      <label htmlFor="password">Confirm Password</label>
+      <input
+        className="form-control"
+        name="cnfPass"
+        type="password"
+        placeholder="***********"
+        onChange={this.onChange}
+        defaultValue={this.state.cnfPass}
       />      
     </div>
-    <div className="form-group">
-    <label htmlFor="password">Confirm Password</label>
-    <input
-    className="form-control"
-    name="confirm_password"
-    type="password"
-    placeholder="***********"
-    onChange={this.onChange}
-    />      
-    </div>
-    <button className="btn btn-primary btn-block">Update Password</button>
+    <button 
+      className="btn btn-primary btn-block"
+      onClick={this.changePassword}
+      >
+      Update Password
+      </button>
     </Form>
    )
     const updatePassword = (
       <React.Fragment>
-
       <form onSubmit={this.handleSubmit}>
-    
         <Step1 
           currentStep={this.state.currentStep} 
           onChange={this.onChange}
@@ -185,7 +225,6 @@ nextButton(){
         <Step2 
           currentStep={this.state.currentStep} 
           onChange={this.onChange}
-         
         />
       
         {this.nextButton()}
@@ -282,5 +321,12 @@ Popups.propTypes = {
   optionValue: PropTypes.any.isRequired
 }
  
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth,
+    status: state.status,
+    error: state.error
+  }
+}
  
-export default Popups;
+export default connect( mapStateToProps, { forgotPassword, changePassword })(Popups);

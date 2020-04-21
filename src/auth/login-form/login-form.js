@@ -17,8 +17,6 @@ class LoginForm extends Component {
       option: "",
       optionValue: ""
     };
- 
-    
   }
 
   onSubmit = (e) => {
@@ -39,7 +37,6 @@ class LoginForm extends Component {
       modalShow: true,
       option: targetName
     });
-
   }
     return (
       <div className="login-details">
@@ -47,32 +44,31 @@ class LoginForm extends Component {
         <Grid container spacing={3}>
         <Grid item xs={12}>
         <TextField
-              id="outlined-primary"
-              label="Email"
-              type="email"
-              fullWidth
-              size="small"
-              name="email"
-              value={email}
-              onChange={this.onChange}
-              variant="outlined"
-              />
+          id="outlined-primary"
+          label="Email"
+          type="email"
+          fullWidth
+          size="small"
+          name="email"
+          value={email}
+          onChange={this.onChange}
+          variant="outlined"
+        />
         </Grid>
         <Grid item xs={12}>
         <TextField
-                id="outlined-primary"
-                label="Password"
-                type="password"
-                fullWidth
-                size="small"
-                name="password"
-                value={password}
-                onChange={this.onChange}
-                variant="outlined"
-              />
+          id="outlined-primary"
+          label="Password"
+          type="password"
+          fullWidth
+          size="small"
+          name="password"
+          value={password}
+          onChange={this.onChange}
+          variant="outlined"
+        />
         </Grid>
        </Grid>
-         
           <div className="cta-login">
             <Button
             variant="contained" color="primary"
@@ -81,15 +77,20 @@ class LoginForm extends Component {
             </Button>
           </div>
         </Form>
-        <a className ="forgot-password" href="javascript:void(0)"  onClick={handleToggle} name="password">Forgot Password?</a>
+        <a 
+          className ="forgot-password" 
+          href="javascript:void(0)"  
+          onClick={handleToggle} 
+          name="password"
+          >
+          Forgot Password?
+        </a>
         <Popups 
-        option={this.state.option}
-        optionValue={this.state.optionValue}
-        modalShow={this.state.modalShow}
-      />
+          option={this.state.option}
+          optionValue={this.state.optionValue}
+          modalShow={this.state.modalShow}
+        />
         </div>
-     
- 
     );
   }
 }
