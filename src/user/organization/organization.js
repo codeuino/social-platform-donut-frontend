@@ -59,10 +59,6 @@ class Organization extends Component {
               </div>
             </div>
           </div>
-          <div className="updat">
-            <Updates/>
-          </div>
-        </div>
         </div>
         </div>
     );
