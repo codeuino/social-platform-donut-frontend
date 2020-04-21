@@ -64,8 +64,7 @@ const styles = makeStyles((theme) => ({
 
 export default function PinPosts(props){
     const classes = styles();
-    const [type, changeType] = React.useState('All');
-    
+    const [type, changeType] = React.useState('All');  
     let handleClick = atrb => () => {
         changeType(atrb);
     };

@@ -20,6 +20,7 @@ export default function Updates(props){
     upd.push(
       <>
         <ListItem disableGutters>
+
           <img className="image" src={gsoc} alt="icon" />
           <ListItemText className="img-desc">
             <h2>We got into Gsoc</h2>
