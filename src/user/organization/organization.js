@@ -8,7 +8,6 @@ import Updates from "../dashboard/updates/updates.js";
 import OrgContact from "./org-contact/OrgContact";
 import orginfo from "../../jsonData/orginfo";
 import PinPosts from "../pinned-posts/posts/pinPosts";
-
 class Organization extends Component {
   constructor(props) {
     super(props);
@@ -60,6 +59,10 @@ class Organization extends Component {
               </div>
             </div>
           </div>
+          <div className="updat">
+            <Updates/>
+          </div>
+        </div>
         </div>
         </div>
     );
