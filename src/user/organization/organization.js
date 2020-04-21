@@ -3,7 +3,8 @@ import "./organization.scss";
 import Navigation from "../dashboard/navigation/navigation";
 import OrgInfo from "./org-info/org-info";
 import Portfolio from "../dashboard/portfolio/portfolio";
-import Posts from "../pinned-posts/posts/posts";
+import PinPosts from "../pinned-posts/posts/pinPosts";
+import Updates from "../dashboard/updates/updates";
 
 class Organization extends Component {
   constructor(props) {
@@ -24,9 +25,14 @@ class Organization extends Component {
             <OrgInfo></OrgInfo>
             <Portfolio></Portfolio>
           </div>
+          <div className="org">
           <div className="posts-profile">
-            <Posts></Posts>
+            <PinPosts/>
           </div>
+          <div className="updat">
+            <Updates/>
+          </div>
+        </div>
         </div>
       </div>
     );

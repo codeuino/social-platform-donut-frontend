@@ -13,8 +13,15 @@
       display: flex;
       padding: 20px 0px 20px 30px;
     }
+  }
+  .org{
+    display: flex;
     .posts-profile {
-      width: 90.5%;
+      flex: 2;
+    }
+    .updat{
+      margin-top: 40px;
+      flex: 0.95;
     }
   }
 }
