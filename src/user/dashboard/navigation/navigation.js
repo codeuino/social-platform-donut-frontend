@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import { ListGroup, Button } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
+import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { DonutTitleSmall } from "../../../donutTitle/donutTitle";
 import "./navigation.scss";
-import {Logout} from "../../profile/popups/logout";
+import Logout from "../../profile/popups/logout";
 import logo from "../../../svgs/logout.svg";
+import {Info} from "../../integrations/NameForm";
 
 class Navigation extends Component {
   state = { logout:false };
@@ -12,7 +14,14 @@ class Navigation extends Component {
     let cancel =()=>this.setState({
       logout:false
     });
+    let close = ()=>this.setState({
+      open: false
+    });
     const divStyle = {
+      position: "absolute",
+      bottom: '4.5em'
+    };
+    const divStyle2 = {
       position: "absolute",
       bottom: 0
     };
@@ -90,6 +99,27 @@ class Navigation extends Component {
               <b>Organization</b>
             </NavLink>
           </ListGroup.Item>
+          
+          <ListGroup.Item className={this.props.proj ? "active" : "inactive"}>
+          <svg  width="38"
+          height="38"
+          viewBox="0 0 20 20"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="icon">
+        
+            <path 
+            d="M17.222,5.041l-4.443-4.414c-0.152-0.151-0.356-0.235-0.571-0.235h-8.86c-0.444,0-0.807,0.361-0.807,0.808v17.602c0,0.448,0.363,0.808,0.807,0.808h13.303c0.448,0,0.808-0.36,0.808-0.808V5.615C17.459,5.399,17.373,5.192,17.222,5.041zM15.843,17.993H4.157V2.007h7.72l3.966,3.942V17.993z" 
+            fill="black"
+            fill-opacity="0.5"
+            className="path-name" />
+          </svg>
+
+          <NavLink to="/projects" className="link">
+            <b>Projects</b>
+          </NavLink>
+        </ListGroup.Item>
+
           <ListGroup.Item
             className={this.props.profile ? "active" : "inactive"}
           >
@@ -108,11 +138,12 @@ class Navigation extends Component {
                 className="path-name"
               />
             </svg>
-            <NavLink to="profile" className="link">
+            <NavLink to="/profile" className="link">
               <b>Account</b>
             </NavLink>
           </ListGroup.Item>
-          <ListGroup.Item style={{position: "absolute", bottom: "50px"}}>
+          <ListGroup.Item style={divStyle}  
+          className={this.props.settings ? "active" : "inactive"}>
             <svg
               width="38"
               height="38"
@@ -126,11 +157,13 @@ class Navigation extends Component {
                 fill-opacity="0.5"
               />
             </svg>
-            Settings
+            <NavLink to="/settings" className="link">
+              <b>Settings</b>
+            </NavLink>
           </ListGroup.Item>
-          <ListGroup.Item style={divStyle}>
-            <Button variant="link" size="sm" style=
-            {{"margin-left": "-8.5px", color: "rgba(0, 0, 0, 0.5)"}} onClick={
+          <ListGroup.Item style={divStyle2}
+          className={this.props.logout ? "active" : "inactive"}>
+            <Button variant="link" size="sm" className="log-button" onClick={
               ()=>this.setState({logout:true})}>
             <img class="logout" src={logo} alt="L"></img>
             <b>Logout</b>
@@ -138,10 +171,27 @@ class Navigation extends Component {
             <Logout show={this.state.logout}
               onHide={cancel} />
           </ListGroup.Item>
+          <ListGroup.Item>
+            <Button variant="outline-secondary" size="sm" className="jitsi" onClick={
+              () => this.setState({open:true})}>
+            <b>Jitsi Meet</b>
+            </Button>
+            {this.state.open ? <Info show={this.state.open}  onHide={close}/> : null}
+          </ListGroup.Item>
+
         </ListGroup>
       </div>
     );
   }
+}
+
+Navigation.propTypes = {
+  dashboard: PropTypes.bool,
+  post: PropTypes.bool,
+  org: PropTypes.bool,
+  profile: PropTypes.bool,
+  settings: PropTypes.bool,
+  logout: PropTypes.bool
 }
 
 export default Navigation;

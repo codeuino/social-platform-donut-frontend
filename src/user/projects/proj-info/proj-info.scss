@@ -1,0 +1,99 @@
+.container {
+  margin-top: 2vh;
+  .back{
+    position:fixed;
+    z-index: 2;
+    top:0;
+    left:15%;
+  }
+}
+
+.proj_img{
+  height:20rem;
+ width:auto; 
+}
+
+.img {
+ height:20rem;
+ width:auto;
+}
+
+
+.project-info {
+  flex: 1;
+  padding: 10px 14px;
+  h1 {
+    color: #0069d9;
+    font-size: 40px;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+  }
+
+  .createAt{
+    color: #2c3e50;
+    font-size: 12px;
+    margin: 4px 0;
+    padding: 0;
+  }
+  .tech-stack{
+    margin-top: 3vh;
+  }
+  .short_des {
+    color: #748391;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 4px 0;
+    padding: 0;
+  }
+
+  .place {
+    color: #2c3e50;
+    font-size: 12px;
+    margin: 4px 0;
+    padding: 0;
+  }
+  .desc {
+    color: #5d5d5d;
+    font-size: 14px;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.description{
+  h1{
+    color: #0069d9;
+    font-size: 30px;
+    margin: 0;
+    font-weight: bold;
+    padding: 0;
+    text-align: center;
+  }
+ 
+  .desc {
+    color: #5d5d5d;
+    font-size: 14px;
+    margin: auto;
+    font-weight: 100;
+    padding: 20px;
+  }
+
+
+  margin-top: 2vh;
+}
+
+
+.maintainers{
+  h1{
+    color: #0069d9;
+    font-size: 30px;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+  }
+  margin-top: 2vh;
+  margin-bottom: 1vh;
+}
+

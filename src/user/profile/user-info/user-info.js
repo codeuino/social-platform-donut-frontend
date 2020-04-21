@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./user-info.scss";
 import { Button } from "react-bootstrap";
+import { Avatar } from "@material-ui/core";
 import {EditProfile} from "./../popups/edit-profile";
 import {Followers} from "./../popups/followers"
 class UserInfo extends Component {
@@ -16,7 +17,7 @@ class UserInfo extends Component {
       <div className="user-details">
         <div className="user-image">
           <div className="user-pic">
-            <img src="" alt="" />
+            <Avatar className="userpic"></Avatar>
           </div>
           <div className="edit-option">
             <Button variant="primary" onClick={
