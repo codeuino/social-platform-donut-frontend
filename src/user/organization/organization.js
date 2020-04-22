@@ -7,7 +7,7 @@ import { Card, CardContent } from "@material-ui/core";
 import Updates from "../dashboard/updates/updates.js";
 import OrgContact from "./org-contact/OrgContact";
 import orginfo from "../../jsonData/orginfo";
-import PinPosts from "../pinned-posts/posts/pinPosts";
+import Posts from "../pinned-posts/posts/posts";
 class Organization extends Component {
   constructor(props) {
     super(props);

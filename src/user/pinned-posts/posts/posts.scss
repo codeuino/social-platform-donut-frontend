@@ -1,3 +1,42 @@
+.posts {
+  display: flex;
+  flex-direction: column;
+  h1 {
+    font-size: 26px;
+    font-weight: bold;
+    margin: 0;
+    padding: 44px 0 0 27px;
+  }
+  .pinned-posts {
+    min-height: 30px;
+    height: auto;
+    display: flex;
+    flex-direction: column; 
+  }
+}
+.categories {
+  display: flex;
+  margin: 10px 0px 10px 20px;
+  .btn {
+    padding: 8px 20px;
+    border: solid 1px #007bff;
+    border-radius: 100px;
+    color: #007bff;
+    margin: 0 5px;
+    cursor: pointer;
+    &:focus {
+      background: #007bff;
+      color: white;
+    }
+    &.active {
+      background: #007bff;
+      color: white;
+    }
+  }
+  .space{
+    width: 10px;
+  }
+}
 .category{
   width: 97%;
   text-align: center;
