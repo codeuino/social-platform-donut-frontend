@@ -9,7 +9,6 @@ class Organization extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      org: true
     };
   }
 
@@ -17,7 +16,7 @@ class Organization extends Component {
     return (
       <div className="organization">
         <div className="navigation">
-          <Navigation org={this.state.org}></Navigation>
+          <Navigation></Navigation>
         </div>
         <div className="news">
           <div className="notify-user">

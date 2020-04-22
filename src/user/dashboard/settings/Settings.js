@@ -7,14 +7,13 @@ class Settings extends Component {
   constructor(props){
     super(props);
     this.state = {
-      settings: true
     }
   }
   render() {
     return (
       <div className="settings">
         <div className="navigation">
-            <Navigation settings={this.state.settings}></Navigation>
+            <Navigation></Navigation>
           </div>
           <div className="settings-content">
             <SettingContent />

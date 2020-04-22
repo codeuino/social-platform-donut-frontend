@@ -9,7 +9,6 @@ class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      profile: true
     };
   }
 
@@ -17,7 +16,7 @@ class Profile extends Component {
     return (
       <div className="profile">
         <div className="navigation">
-          <Navigation profile={this.state.profile}></Navigation>
+          <Navigation></Navigation>
         </div>
         <div className="news">
           <div className="notify-user">
