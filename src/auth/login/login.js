@@ -43,8 +43,8 @@ class Login extends Component {
                 <span className="loginbtn-content">
                   <svg
                     preserveAspectRatio="xMidYMid meet"
-                    height="18"
-                    width="18"
+                    height="22"
+                    width="22"
                     viewBox="0 0 512 512"
                     xmlns="http://www.w3.org/2000/svg"
                     className="login-icon"
@@ -80,8 +80,8 @@ class Login extends Component {
                 <span className="loginbtn-content">
                   <svg
                     preserveAspectRatio="xMidYMid meet"
-                    height="1em"
-                    width="1em"
+                    height="22"
+                    width="22"
                     fill="currentColor"
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 438.549 438.549"

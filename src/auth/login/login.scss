@@ -44,9 +44,20 @@
       box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.1);
       min-height: 380px;
       height: auto;
+
+      a {
+        button {
+          span {
+            svg {
+              padding-right: 5px;
+              margin-bottom: 4px;
+            }
+          }
+        }
+      }
     }
   }
-  @media (min-width: 320px) and (max-width: 640px) {
+  @media (min-width: 320px) and (max-width: 1200px) {
     flex-direction: column;
     margin: 20px;
     .welcome-text {
