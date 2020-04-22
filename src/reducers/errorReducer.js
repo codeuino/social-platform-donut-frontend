@@ -1,7 +1,7 @@
 import { GET_ERRORS, SET_ERROR } from "../actions/types";
 
 const initialState = {
-  msg: ""
+  msg: "",
 };
 
 export default (state = initialState, action) => {
