@@ -16,6 +16,12 @@ class Organization extends Component {
     };
   }
 
+  componentDidMount(){
+    setTimeout(() => {
+      this.setState({isLoading:false})
+    }, 1000);
+  }
+
   render() {
     return (
       <div className="organization">
@@ -23,10 +29,10 @@ class Organization extends Component {
           <Navigation org={this.state.org}></Navigation>
         </div>
         <div className="news">
-          <div className="notify-user">
+        {this.state.isLoading ? topBarLoading() : <div className="notify-user">
             <OrgInfo></OrgInfo>
             <Portfolio></Portfolio>
-          </div>
+          </div>}
           <div className="org-info">
             <div className="posts">
               <h2>Posts</h2>
