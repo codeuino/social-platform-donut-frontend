@@ -10,6 +10,7 @@ import Settings from "./user/dashboard/settings/Settings";
 import Projects from "./user/projects/projects";
 import ProjInfo from "./user/projects/proj-info/proj-info";
 import PrivateRoute from "./common/PrivateRoute";
+import Maintenance from "./maintenance/maintenance";
 
 
 const Router = () => (
@@ -17,6 +18,7 @@ const Router = () => (
     <Switch>
       <Route exact path="/" component={Login} />
       <Route exact path="/login" component={Login} />
+      <Route exact path="/maintenance" component={Maintenance}></Route>
       <PrivateRoute exact path="/dashboard" component={Dashboard} />
       <PrivateRoute exact path="/pinned-posts" component={PinnedPosts} />
       <PrivateRoute exact path="/profile" component={Profile} />
