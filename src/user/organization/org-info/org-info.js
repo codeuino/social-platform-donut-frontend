@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./org-info.scss";
 import { Button } from "react-bootstrap";
+import { Avatar } from "@material-ui/core"
 
 class OrgInfo extends Component {
   render() {
@@ -8,10 +9,10 @@ class OrgInfo extends Component {
       <div className="org-details">
         <div className="org-image">
           <div className="org-pic">
-            <img src="" alt="" />
+            <Avatar alt="Organisation-DP" className='orgpic' src=''></Avatar>
           </div>
           <div className="edit-option">
-            <Button variant="primary">User Edit</Button>
+            <Button variant='primary' className="useredit">User Edit</Button>
           </div>
         </div>
         <div className="org-data">
