@@ -11,6 +11,8 @@ import Projects from "./user/projects/projects";
 import ProjInfo from "./user/projects/proj-info/proj-info";
 import PrivateRoute from "./common/PrivateRoute";
 import Maintenance from "./maintenance/maintenance";
+import Events from "./user/events/events";
+import EventInfo from "./user/events/event-info/event-info";
 
 
 const Router = () => (
@@ -23,9 +25,11 @@ const Router = () => (
       <PrivateRoute exact path="/pinned-posts" component={PinnedPosts} />
       <PrivateRoute exact path="/profile" component={Profile} />
       <PrivateRoute exact path="/:id/proj-info" component={ProjInfo} />
+      <PrivateRoute exact path="/:id/event-info" component={EventInfo}/>
       <PrivateRoute exact path="/organization" component={Organization} />
       <PrivateRoute exact path="/settings" component={Settings}/>
       <PrivateRoute exact path="/projects" component={Projects}/>
+      <PrivateRoute exact path="/events" component={Events}/>
       <Route component={NotFound} />
     </Switch>
   </BrowserRouter>

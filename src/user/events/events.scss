@@ -1,0 +1,34 @@
+.organization {
+    display: flex;
+    min-height: 100vh;
+    height: auto;
+    font-family: Muli, sans-serif;
+    .navigation {
+      flex: 0.5;
+      border-right: solid 1px #dfe9f1;
+    }
+  
+    .events {
+        margin-top: 2vh;
+        margin-left: 210px;
+    }
+  } 
+  
+  .eventName {
+    text-align: center;
+    font-weight: bold;
+    color:rgb(72, 19, 88);
+    font-family: 'Lexend Giga', sans-serif;
+    font-family: 'Pacifico', cursive;
+}
+
+.short_des{
+  text-align: center;
+  font-weight: 100;
+}
+
+.createdAt{
+  text-align: center;
+  font-size: 12px;
+  font-weight: bold;
+}
