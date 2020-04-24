@@ -11,6 +11,7 @@ import Projects from "./user/projects/projects";
 import ProjInfo from "./user/projects/proj-info/proj-info";
 import PrivateRoute from "./common/PrivateRoute";
 import Maintenance from "./maintenance/maintenance";
+import Events from "./user/events/events";
 
 
 const Router = () => (
@@ -26,6 +27,7 @@ const Router = () => (
       <PrivateRoute exact path="/organization" component={Organization} />
       <PrivateRoute exact path="/settings" component={Settings}/>
       <PrivateRoute exact path="/projects" component={Projects}/>
+      <PrivateRoute exact path="/events" component={Events}/>
       <Route component={NotFound} />
     </Switch>
   </BrowserRouter>
