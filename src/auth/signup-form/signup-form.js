@@ -129,6 +129,19 @@ class SignUpForm extends Component {
               />
             </Grid>
             <Grid item xs={12}>
+            <TextField
+              id="outlined-primary"
+              label="Description"
+              type="Text"
+              fullWidth
+              size="small"
+              name="shortDescription"
+              value={shortDescription}
+               onChange={this.onChange}
+              variant="outlined"
+            />
+          </Grid>
+            <Grid item xs={12}>
               <TextField
                 id="outlined-primary"
                 label="Password"
