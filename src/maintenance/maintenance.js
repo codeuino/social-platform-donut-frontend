@@ -17,9 +17,8 @@ class Maintenance extends Component {
           <DonutTitle />
         </div>
         <div className="content">
+          <div className="anim">
           <Lottie
-            height={400}
-            width={400}
             options={{
               loop: true,
               autoplay: true,
@@ -29,6 +28,7 @@ class Maintenance extends Component {
               },
             }}
           />
+          </div>
           <div className="content__message">
             <p>
               Donut has been put under maintenance by the Admins, <br /> Please comeby Later!
