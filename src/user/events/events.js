@@ -16,7 +16,6 @@ class Events extends Component {
     const sectionStyle = {
       width: "100%",
       height: "100%",
-      background: "linear-gradient(45deg, #dce4f1 30%, #d4f7fe 90%)",
       backgroundPosition: "center",
       backgroundSize: "cover",
       backgroundRepeat: "no-repeat",
@@ -41,44 +40,47 @@ class Events extends Component {
 
     let Events = Event_list.map((Item) => (
       <Grid item xs={6} sm={4}>
-        <Card className={useStyles2.root} style={sectionStyle}>
-          <CardContent>
-            <Typography
-              className={useStyles.title}
-              color="textSecondary"
-              gutterBottom
-            >
-              {Item.isOnline ? (
-                <Badge pill variant="success">
-                  Online
-                </Badge>
-              ) : (
-                <Badge pill variant="warning">
-                  {Item.location}
-                </Badge>
-              )}
-            </Typography>
-            <Typography
-              gutterBottom
-              variant="h5"
-              component="h2"
-              className="eventName"
-            >
-              {Item.eventName}
-            </Typography>
+      <div className="event-card">
+      <Card className="event-card">
+      <CardContent>
+        <Typography
+          className={useStyles.title}
+          color="textSecondary"
+          gutterBottom
+        >
+          {Item.isOnline ? (
+            <Badge pill variant="success">
+              Online
+            </Badge>
+          ) : (
+            <Badge pill variant="warning">
+              {Item.location}
+            </Badge>
+          )}
+        </Typography>
+        <Typography
+          gutterBottom
+          variant="h5"
+          component="h2"
+          className="eventName"
+        >
+          {Item.eventName}
+        </Typography>
 
-            <p className="createdAt">Created At: {Item.createdAt}</p>
+        <p className="createdAt">Created At: {Item.createdAt}</p>
 
-            <p className="short_des" color="textSecondary">
-              {Item.description.shortDescription}
-            </p>
-          </CardContent>
-          <CardActions>
-            <Button size="small" href={`/${Item._id}/event-info`}>
-              <strong>See More</strong>
-            </Button>
-          </CardActions>
-        </Card>
+        <p className="short-des" color="textSecondary">
+          {Item.description.shortDescription}
+        </p>
+      </CardContent>
+      <CardActions>
+        <Button size="small" href={`/${Item._id}/event-info`}>
+          <strong>See More</strong>
+        </Button>
+      </CardActions>
+    </Card>
+      </div>
+      
       </Grid>
     ));
 

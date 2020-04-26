@@ -1,19 +1,35 @@
 import React, { Component } from "react";
 import Navigation from "../../dashboard/navigation/navigation";
-import { Card, Col, Row } from "react-bootstrap";
+import { Card, Col, Button, Row } from "react-bootstrap";
 import Event_list from "../../../jsonData/events";
 import {makeStyles, Grid, Fab, CardActionArea, CardContent} from "@material-ui/core";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import "./event-info.scss";
+import DeleteIcon from "@material-ui/icons/Delete";
+import { DeleteEvent } from "../popups/delete-event";
+import EditIcon from '@material-ui/icons/Edit';
+import { EditEvent } from "../popups/edit-event";
+
 class EventInfo extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      event: true,
+      editEvent: false,
+      deleteEvent:false,
       event_info: {},
     };
   }
   render() {
+    let cancel = () =>
+    this.setState({
+      editEvent: false,
+      profile_info:{}
+    });
+    let cancel_del = () =>
+    this.setState({
+      deleteEvent: false,
+    });
+
     const useStyles = makeStyles((theme) => ({
       root: {
         flexGrow: 1,
@@ -44,6 +60,17 @@ class EventInfo extends Component {
     } else {
       event_location = location;
     }
+
+    const data_send={
+      eventName:eventName,
+      shortDescription:description.shortDescription,
+      longDescription:description.longDescription,
+      eventDate:eventDate,
+      location:location,
+      slots:slots,
+      isOnline:isOnline
+
+    }
     return (
       <div className="organization">
         <div className="navigation">
@@ -60,14 +87,38 @@ class EventInfo extends Component {
               >
                 <ArrowBackIcon />
               </Fab>
+              <div className="event-config">
+            <Button
+            variant="light"
+            onClick={() => this.setState({ editEvent: true,event_info:data_send })}
+          >
+            <EditIcon></EditIcon>
+          </Button>{" "}
+          <EditEvent
+            show={this.state.editEvent}
+            data={this.state.event_info}
+            onHide={cancel}
+          />
+          <Button
+          variant="light"
+          onClick={() => this.setState({ deleteEvent: true })}
+        >
+          <DeleteIcon></DeleteIcon>
+        </Button>
+        <DeleteEvent
+          show={this.state.deleteEvent}
+          onHide={cancel_del}
+        />
+            </div>
               <div className="title">
                 <h1>{eventName}</h1>
               </div>
             </Col>
+            
           </Row>
           <Row>
             <Col xs={12}>
-              <p className="createAt">Event Date: {eventDate}</p>
+              <p className="createdAt">Event Date: {eventDate}</p>
             </Col>
           </Row>
 
@@ -85,21 +136,21 @@ class EventInfo extends Component {
 
           <Row>
             <Col xs={12}>
-              <div className="description">
+              <div className="long-description">
+              <h1>About</h1>
                 <hr></hr>
-                <p className="desc">{description.longDescription}</p>
+                <p className="long-desc">{description.longDescription}</p>
               </div>
             </Col>
           </Row>
           <Row>
             <Col xs={12}>
-              <div className="rsvp">
-                <h1>RSVP</h1>
-              </div>
+             
             </Col>
           </Row>
           <div className={useStyles.root}>
-            <Grid container spacing={1}>
+          <div className="rsvp">
+          <Grid container spacing={1}>
               <Grid item xs={6} sm={4}>
                 <Card className={useStyles2.root}>
                   <CardActionArea>
@@ -110,7 +161,7 @@ class EventInfo extends Component {
                         variant="h5"
                         component="h2"
                       >
-                        YES
+                        Hey! We are attending
                       </p>
                       <p
                         className="rsvp-number"
@@ -134,7 +185,7 @@ class EventInfo extends Component {
                         variant="h5"
                         component="h2"
                       >
-                        MAYBE
+                      We might attend :|
                       </p>
                       <p
                         className="rsvp-number"
@@ -158,7 +209,7 @@ class EventInfo extends Component {
                         variant="h5"
                         component="h2"
                       >
-                        NO
+                       Sorry! We cannot attend :(
                       </p>
                       <p
                         className="rsvp-number"
@@ -173,6 +224,8 @@ class EventInfo extends Component {
                 </Card>
               </Grid>
             </Grid>
+          </div>
+            
           </div>
         </div>
       </div>

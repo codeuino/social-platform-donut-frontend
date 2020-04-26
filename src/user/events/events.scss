@@ -17,12 +17,12 @@
   .eventName {
     text-align: center;
     font-weight: bold;
-    color:rgb(72, 19, 88);
+    color:#0069d9;
     font-family: 'Lexend Giga', sans-serif;
     font-family: 'Pacifico', cursive;
 }
 
-.short_des{
+.short-des{
   text-align: center;
   font-weight: 100;
 }
@@ -31,4 +31,15 @@
   text-align: center;
   font-size: 12px;
   font-weight: bold;
+}
+.event-card{
+        max-width: 345px;
+        margin-top: 20px;
+  box-shadow:
+  0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+  0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+  0 12.5px 10px rgba(0, 0, 0, 0.06),
+  0 22.3px 170.9px rgba(0, 0, 0, 0.072),
+  0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+  0 100px 80px rgba(0, 0, 0, 0.12);
 }

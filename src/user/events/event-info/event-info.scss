@@ -32,7 +32,7 @@
     text-align: center;
   }
 
-  .createAt{
+  .createdAt{
     color: #2c3e50;
     font-size: 18px;
     margin: 4px 0;
@@ -41,16 +41,38 @@
     text-align: center;
   }
   
-  .description{
-
-    .desc {
+  .long-description{
+ h1{
+  font-size: 30px;
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+ }
+    .long-desc {
       color: #5d5d5d;
       font-size: 20px;
       margin: auto;
       font-weight: 100;
       padding: 20px;
     }  
+    width: 95%;
     margin-top: 2vh;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+  padding: 10px;
+  box-shadow:
+  0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+  0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+  0 12.5px 10px rgba(0, 0, 0, 0.06),
+  0 22.3px 170.9px rgba(0, 0, 0, 0.072),
+  0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+  0 100px 80px rgba(0, 0, 0, 0.12)
+;
+  }
+  .event-config{
+      margin-left: 70vw;
+      z-index: 1;
   }
   .rsvp{
     h1{
@@ -61,7 +83,7 @@
       padding: 0;
       text-align: center;
     }
-    margin-top: 2vh;
+    margin-top: 3vh;
     margin-bottom: 1vh;
   }
   .segment{
