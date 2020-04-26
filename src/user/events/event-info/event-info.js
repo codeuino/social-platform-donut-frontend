@@ -15,20 +15,20 @@ class EventInfo extends Component {
     super(props);
     this.state = {
       editEvent: false,
-      deleteEvent:false,
+      deleteEvent: false,
       event_info: {},
     };
   }
   render() {
     let cancel = () =>
-    this.setState({
-      editEvent: false,
-      profile_info:{}
-    });
+      this.setState({
+        editEvent: false,
+        profile_info: {},
+      });
     let cancel_del = () =>
-    this.setState({
-      deleteEvent: false,
-    });
+      this.setState({
+        deleteEvent: false,
+      });
 
     const useStyles = makeStyles((theme) => ({
       root: {
@@ -50,7 +50,17 @@ class EventInfo extends Component {
     let event_info = Event_list.filter(
       (x) => x._id === this.props.match.params.id
     );
-    const { eventName, description, slots, eventDate, rsvpYes, rsvpNo, rsvpMaybe, isOnline, location} = event_info[0];
+    const {
+      eventName,
+      description,
+      slots,
+      eventDate,
+      rsvpYes,
+      rsvpNo,
+      rsvpMaybe,
+      isOnline,
+      location,
+    } = event_info[0];
     const yes = rsvpYes.length;
     const no = rsvpNo.length;
     const maybe = rsvpMaybe.length;
@@ -61,16 +71,15 @@ class EventInfo extends Component {
       event_location = location;
     }
 
-    const data_send={
-      eventName:eventName,
-      shortDescription:description.shortDescription,
-      longDescription:description.longDescription,
-      eventDate:eventDate,
-      location:location,
-      slots:slots,
-      isOnline:isOnline
-
-    }
+    const data_send = {
+      eventName: eventName,
+      shortDescription: description.shortDescription,
+      longDescription: description.longDescription,
+      eventDate: eventDate,
+      location: location,
+      slots: slots,
+      isOnline: isOnline,
+    };
     return (
       <div className="organization">
         <div className="navigation">
@@ -88,33 +97,34 @@ class EventInfo extends Component {
                 <ArrowBackIcon />
               </Fab>
               <div className="event-config">
-            <Button
-            variant="light"
-            onClick={() => this.setState({ editEvent: true,event_info:data_send })}
-          >
-            <EditIcon></EditIcon>
-          </Button>{" "}
-          <EditEvent
-            show={this.state.editEvent}
-            data={this.state.event_info}
-            onHide={cancel}
-          />
-          <Button
-          variant="light"
-          onClick={() => this.setState({ deleteEvent: true })}
-        >
-          <DeleteIcon></DeleteIcon>
-        </Button>
-        <DeleteEvent
-          show={this.state.deleteEvent}
-          onHide={cancel_del}
-        />
-            </div>
+                <Button
+                  variant="light"
+                  onClick={() =>
+                    this.setState({ editEvent: true, event_info: data_send })
+                  }
+                >
+                  <EditIcon></EditIcon>
+                </Button>{" "}
+                <EditEvent
+                  show={this.state.editEvent}
+                  data={this.state.event_info}
+                  onHide={cancel}
+                />
+                <Button
+                  variant="light"
+                  onClick={() => this.setState({ deleteEvent: true })}
+                >
+                  <DeleteIcon></DeleteIcon>
+                </Button>
+                <DeleteEvent
+                  show={this.state.deleteEvent}
+                  onHide={cancel_del}
+                />
+              </div>
               <div className="title">
                 <h1>{eventName}</h1>
               </div>
             </Col>
-            
           </Row>
           <Row>
             <Col xs={12}>
@@ -137,95 +147,92 @@ class EventInfo extends Component {
           <Row>
             <Col xs={12}>
               <div className="long-description">
-              <h1>About</h1>
+                <h1>About</h1>
                 <hr></hr>
                 <p className="long-desc">{description.longDescription}</p>
               </div>
             </Col>
           </Row>
           <Row>
-            <Col xs={12}>
-             
-            </Col>
+            <Col xs={12}></Col>
           </Row>
           <div className={useStyles.root}>
-          <div className="rsvp">
-          <Grid container spacing={1}>
-              <Grid item xs={6} sm={4}>
-                <Card className={useStyles2.root}>
-                  <CardActionArea>
-                    <CardContent>
-                      <p
-                        className="rsvp-title"
-                        gutterBottom
-                        variant="h5"
-                        component="h2"
-                      >
-                        Hey! We are attending
-                      </p>
-                      <p
-                        className="rsvp-number"
-                        gutterBottom
-                        variant="h5"
-                        component="h2"
-                      >
-                        {yes}
-                      </p>
-                    </CardContent>
-                  </CardActionArea>
-                </Card>
+            <div className="rsvp">
+              <Grid container spacing={1}>
+                <Grid item xs={6} sm={4}>
+                  <Card className={useStyles2.root}>
+                    <CardActionArea>
+                      <CardContent>
+                        <p
+                          className="rsvp-title"
+                          gutterBottom
+                          variant="h5"
+                          component="h2"
+                        >
+                          Hey! We are attending
+                        </p>
+                        <p
+                          className="rsvp-number"
+                          gutterBottom
+                          variant="h5"
+                          component="h2"
+                        >
+                          {yes}
+                        </p>
+                      </CardContent>
+                    </CardActionArea>
+                  </Card>
+                </Grid>
+                <Grid item xs={6} sm={4}>
+                  <Card className={useStyles2.root}>
+                    <CardActionArea>
+                      <CardContent>
+                        <p
+                          className="rsvp-title"
+                          gutterBottom
+                          variant="h5"
+                          component="h2"
+                        >
+                          We might attend :|
+                        </p>
+                        <p
+                          className="rsvp-number"
+                          gutterBottom
+                          variant="h5"
+                          component="h2"
+                        >
+                          {maybe}
+                        </p>
+                      </CardContent>
+                    </CardActionArea>
+                  </Card>
+                </Grid>
+                <Grid item xs={6} sm={4}>
+                  <Card className={useStyles2.root}>
+                    <CardActionArea>
+                      <CardContent>
+                        <p
+                          className="rsvp-title"
+                          gutterBottom
+                          variant="h5"
+                          component="h2"
+                        >
+                          Sorry! We cannot attend :(
+                        </p>
+                        <p
+                          className="rsvp-number"
+                          gutterBottom
+                          variant="h5"
+                          component="h2"
+                        >
+                          {no}
+                        </p>
+                      </CardContent>
+                    </CardActionArea>
+                  </Card>
+                </Grid>
               </Grid>
-              <Grid item xs={6} sm={4}>
-                <Card className={useStyles2.root}>
-                  <CardActionArea>
-                    <CardContent>
-                      <p
-                        className="rsvp-title"
-                        gutterBottom
-                        variant="h5"
-                        component="h2"
-                      >
-                      We might attend :|
-                      </p>
-                      <p
-                        className="rsvp-number"
-                        gutterBottom
-                        variant="h5"
-                        component="h2"
-                      >
-                        {maybe}
-                      </p>
-                    </CardContent>
-                  </CardActionArea>
-                </Card>
-              </Grid>
-              <Grid item xs={6} sm={4}>
-                <Card className={useStyles2.root}>
-                  <CardActionArea>
-                    <CardContent>
-                      <p
-                        className="rsvp-title"
-                        gutterBottom
-                        variant="h5"
-                        component="h2"
-                      >
-                       Sorry! We cannot attend :(
-                      </p>
-                      <p
-                        className="rsvp-number"
-                        gutterBottom
-                        variant="h5"
-                        component="h2"
-                      >
-                        {no}
-                      </p>
-                    </CardContent>
-                  </CardActionArea>
-                </Card>
-              </Grid>
-            </Grid>
-          </div>
-            
+            </div>
           </div>
         </div>
       </div>

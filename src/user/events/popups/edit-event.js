@@ -5,40 +5,44 @@ export class EditEvent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      eventName: '',
-      shortDescription:'',
-      longDescription:'',
-      slots: '',
-      eventDate: '',
-      isOnline: '',
-    }
-   this.trigger=0
-   this.onChange = this.onChange.bind(this);
+      eventName: "",
+      shortDescription: "",
+      longDescription: "",
+      slots: "",
+      eventDate: "",
+      isOnline: "",
+    };
+    this.trigger = 0;
+    this.onChange = this.onChange.bind(this);
   }
 
-  componentWillReceiveProps(nextProps){
-      if(this.trigger<1)
-         this.setState({...nextProps.data})
-         this.trigger = this.trigger+1;
-        }
+  componentWillReceiveProps(nextProps) {
+    if (this.trigger < 1) this.setState({ ...nextProps.data });
+    this.trigger = this.trigger + 1;
+  }
 
-        onChange = (e) => {
-          this.setState({ [e.target.name]:e.target.value })
-      }
-      
+  onChange = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
 
   onSubmit(e) {
     e.preventDefault();
 
-const EditProject = this.state
+    const EditProject = this.state;
 
     console.log("Edited Event", EditProject);
   }
 
-
-
   render() {
-      return (
+    var {
+      eventName,
+      shortDescription,
+      longDescription,
+      slots,
+      location,
+      isOnline,
+    } = this.state;
+    return (
       <Modal
         {...this.props}
         size="md"
@@ -52,7 +56,7 @@ const EditProject = this.state
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <Form  onSubmit={this.onSubmit.bind(this)}>
+            <Form onSubmit={this.onSubmit.bind(this)}>
               <Row className="form-content">
                 <Col className="p-0" sm={12}>
                   <Form.Label className="label">Event Name</Form.Label>
@@ -60,7 +64,7 @@ const EditProject = this.state
                     className="form-input"
                     type="text"
                     name="eventName"
-                    value={this.state.eventName}
+                    value={eventName}
                     onChange={this.onChange}
                     placeholder="Type here.."
                     size="sm"
@@ -73,65 +77,74 @@ const EditProject = this.state
                   className="form-input"
                   type="Number"
                   name="slots"
-                  value={this.state.slots}
+                  value={slots}
                   onChange={this.onChange}
                   size="sm"
                 />
               </Row>
               <Row className="form-content">
-              <Col className="p-0" sm={12}>
-                <Form.Label className="label">Short Description</Form.Label>
-                <Form.Control
-                  className="form-input"
-                  type="text"
-                  name="shortDescription"
-                  value={this.state.shortDescription}
-                  onChange={this.onChange}
-                  placeholder="Type here.."
-                  size="sm"
-                />
-              </Col>
-            </Row>
-            <Row className="form-content">
-              <Col className="p-0" sm={12}>
-                <Form.Label className="label">Short Description</Form.Label>
-                <Form.Control
-                  className="form-input"
-                  type="text"
-                  name="longDescription"
-                  value={this.state.longDescription}
-                  onChange={this.onChange}
-                  placeholder="Type here.."
-                  size="sm"
-                />
-              </Col>
-            </Row>
-      
-               <Row className="form-content">
-               <Col className="p-0" sm={12}>
-               <Form.Group controlId="exampleForm.SelectCustomSizeSm">
-               <Form.Label>IsOnline</Form.Label>
-               <Form.Control as="select" size="sm" custom>
-                 <option>True</option>
-                 <option>False</option>
-               </Form.Control>
-             </Form.Group>
-               </Col>
-             </Row>
-             <Row className="form-content">
-             <Col className="p-0" sm={12}>
-               <Form.Label className="label">Location</Form.Label>
-               <Form.Control
-                 className="form-input"
-                 type="text"
-                 name="location"
-                 value={this.state.location}
-                 onChange={this.onChange}
-                 placeholder="Type here.."
-                 size="sm"
-               />
-             </Col>
-           </Row>
+                <Col className="p-0" sm={12}>
+                  <Form.Label className="label">Short Description</Form.Label>
+                  <Form.Control
+                    className="form-input"
+                    type="text"
+                    name="shortDescription"
+                    value={shortDescription}
+                    onChange={this.onChange}
+                    placeholder="Type here.."
+                    size="sm"
+                  />
+                </Col>
+              </Row>
+              <Row className="form-content">
+                <Col className="p-0" sm={12}>
+                  <Form.Label className="label">Short Description</Form.Label>
+                  <Form.Control
+                    className="form-input"
+                    type="text"
+                    name="longDescription"
+                    value={longDescription}
+                    onChange={this.onChange}
+                    placeholder="Type here.."
+                    size="sm"
+                  />
+                </Col>
+              </Row>
+
+              <Row className="form-content">
+                <Col className="p-0" sm={12}>
+                  <Form.Group controlId="exampleForm.SelectCustomSizeSm">
+                    <Form.Label>IsOnline</Form.Label>
+                    {isOnline ? (
+                      <Form.Control as="select" size="sm" custom>
+                        <option>True</option>
+                        <option>False</option>
+                      </Form.Control>
+                    ) : (
+                      <Form.Control as="select" size="sm" custom>
+                        <option>False</option>
+                        <option>True</option>
+                      </Form.Control>
+                    )}
+                  </Form.Group>
+                </Col>
+              </Row>
+              {!isOnline ? (
+                <Row className="form-content">
+                  <Col className="p-0" sm={12}>
+                    <Form.Label className="label">Location</Form.Label>
+                    <Form.Control
+                      className="form-input"
+                      type="text"
+                      name="location"
+                      value={location}
+                      onChange={this.onChange}
+                      placeholder="Type here.."
+                      size="sm"
+                    />
+                  </Col>
+                </Row>
+              ) : null}
 
               <div className="form-footer">
                 <Button

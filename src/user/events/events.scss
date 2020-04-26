@@ -3,14 +3,9 @@
     min-height: 100vh;
     height: auto;
     font-family: Muli, sans-serif;
-    .navigation {
-      flex: 0.5;
-      border-right: solid 1px #dfe9f1;
-    }
-  
     .events {
         margin-top: 2vh;
-        margin-left: 210px;
+        
     }
   } 
   
@@ -33,8 +28,8 @@
   font-weight: bold;
 }
 .event-card{
-        max-width: 345px;
-        margin-top: 20px;
+  max-width: 345px;
+  margin-top: 20px;
   box-shadow:
   0 2.8px 2.2px rgba(0, 0, 0, 0.034),
   0 6.7px 5.3px rgba(0, 0, 0, 0.048),

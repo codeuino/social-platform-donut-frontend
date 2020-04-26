@@ -2,14 +2,23 @@ import React, { Component } from "react";
 import "./pinned-posts.scss";
 import Navigation from "../dashboard/navigation/navigation";
 import Updates from "../dashboard/updates/updates";
-import PinPosts from '../pinned-posts/posts/pinPosts';
+import PinPosts from "../pinned-posts/posts/pinPosts";
+import pinnedPostsLoading from "../../placeholderLoading/pinnedPostsLoading/pinnedPostsLoading";
+import orgUpdatesLoading from "../../placeholderLoading/orgUpdatesLoading/orgUpdatesLoading";
 
 class PinnedPosts extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      pinned_posts: true
+      isLoading: true,
+      pinned_posts: true,
     };
+  }
+
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({ isLoading: false });
+    }, 1000);
   }
 
   render() {
@@ -19,10 +28,10 @@ class PinnedPosts extends Component {
           <Navigation posts={this.state.pinned_posts}></Navigation>
         </div>
         <div className="news">
-          <PinPosts/>
-        </div> 
+          {this.state.isLoading ? pinnedPostsLoading() : <PinPosts />}
+        </div>
         <div className="promotions">
-          <Updates></Updates>
+          {this.state.isLoading ? orgUpdatesLoading() : <Updates />}
         </div>
       </div>
     );
