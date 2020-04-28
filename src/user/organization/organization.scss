@@ -13,7 +13,6 @@
   }
   .news {
     flex: 3;
-    margin-left: 200px;
     .notify-user {
       display: flex;
       padding: 20px 0px 20px 30px;
@@ -76,4 +75,8 @@
       flex:1;
     }
   }
+}
+.orgupdatesloading{
+  margin-top: -10px;
+  margin-left: 30px;
 }
