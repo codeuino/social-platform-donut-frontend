@@ -1,32 +1,42 @@
-import React, { Component } from "react";
+import React from "react";
+import { makeStyles } from '@material-ui/core/styles';
 import "./pinned-posts.scss";
-import Navigation from "../dashboard/navigation/navigation";
-import Updates from "../dashboard/updates/updates";
 import PinPosts from '../pinned-posts/posts/pinPosts';
+import NavBar from "../dashboard/navigation/navbar";
+import Updates from "../dashboard/updates/updates";
+import ScopedCssBaseline from '@material-ui/core/ScopedCssBaseline';
 
-class PinnedPosts extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      pinned_posts: true
-    };
-  }
+const styles = makeStyles( (theme) => ({
+  root: {
+    display: 'flex',
+  },
+  content: {
+    flexGrow: 1,
+    padding: theme.spacing(3),
+  },
+  dv: {
+    display: 'flex',
+  },
+}));
 
-  render() {
-    return (
-      <div className="pinned-posts">
-        <div className="navigation">
-          <Navigation posts={this.state.pinned_posts}></Navigation>
+export default function PinnedPosts(props){
+  const classes = styles();
+  const [post, setPost] = React.useState(true);
+  return (
+    <div className={classes.root}>
+      <ScopedCssBaseline />
+      <NavBar post={post}/>
+        <div className={classes.content}>
+          <div className={classes.dv}>
+            <div className="news">
+              <PinPosts/>
+            </div> 
+            <div className="promotions">
+              <Updates></Updates>
+            </div>
+          </div>
         </div>
-        <div className="news">
-          <PinPosts/>
-        </div> 
-        <div className="promotions">
-          <Updates></Updates>
-        </div>
-      </div>
-    );
-  }
+    </div>
+  );
 }
 
-export default PinnedPosts;

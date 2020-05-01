@@ -3,7 +3,6 @@ import Project_list from "../../../jsonData/projects";
 import EditIcon from '@material-ui/icons/Edit';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import LanguageIcon from '@material-ui/icons/Language';
-import Navigation from "../../dashboard/navigation/navigation";
 import { Card, Button, Badge, Col, Row } from "react-bootstrap";
 import "./proj-info.scss";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
@@ -13,6 +12,7 @@ import { EditProject } from "../popups/edit-project";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { DeleteProject } from "../popups/delete-project";
 import { makeStyles,Grid, Fab, CardActionArea, CardActions, CardContent, CardMedia, Typography} from "@material-ui/core";
+import NavBar from "../../dashboard/navigation/navbar";
 
 
 class ProjInfo extends Component {
@@ -84,7 +84,7 @@ class ProjInfo extends Component {
     return (
       <div className="organization">
         <div className="navigation">
-          <Navigation proj={this.state.proj}></Navigation>
+          <NavBar proj={this.state.proj}></NavBar>
         </div>
         <div className="news">
           <Fab

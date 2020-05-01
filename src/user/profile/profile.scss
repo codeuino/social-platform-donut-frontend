@@ -1,19 +1,9 @@
-.profile {
-  display: flex;
-  min-height: 100vh;
-  height: auto;
-  font-family: Muli, sans-serif;
-  .navigation {
-    flex: 0.5;
-    border-right: solid 1px #dfe9f1;
-  }
   h2 {
     font-size: 22px;
     font-weight: 650;
   }
   .news {
     flex: 3;
-    margin-left: 200px;
     .notify-user {
       display: flex;
       padding: 20px 0px 20px 30px;
@@ -50,4 +40,3 @@
       }
     }
   }
-}

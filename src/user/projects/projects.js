@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import "./projects.scss";
-import Navigation from "../dashboard/navigation/navigation";
+import NavBar from "../dashboard/navigation/navbar";
 import Project_list from "../../jsonData/projects";
 import { makeStyles,Grid , Card, CardActionArea, CardActions, CardContent, CardMedia, Typography} from "@material-ui/core";
 import { Button } from "react-bootstrap";
 import Popups from "../../common/Popups";
+import Organization from "../organization/organization";
 
 
 class Projects extends Component {
@@ -70,7 +71,7 @@ class Projects extends Component {
     return (
       <div className="organization">
         <div className="navigation">
-          <Navigation proj={this.state.proj}></Navigation>
+          <NavBar proj={this.state.proj}></NavBar>
         </div>
         <div className="news projects">
           <div className={useStyles.root}>

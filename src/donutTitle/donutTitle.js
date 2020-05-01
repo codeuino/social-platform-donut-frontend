@@ -32,5 +32,12 @@ const DonutTitleSmall = () => {
     )
 }
 
+const DonutSmall = () => {
+    return (
+        <div className="main-donut-logo-small">
+            <img src={donut} alt="donut logo" className="rotateDonut" onClick={rotateDonut} />
+        </div>
+    )
+}
 
-export { DonutTitle, DonutTitleSmall };
+export { DonutTitle, DonutTitleSmall, DonutSmall };

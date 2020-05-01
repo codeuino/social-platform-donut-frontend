@@ -7,10 +7,12 @@ export class Info extends Component{
     // eslint-disable-next-line
     constructor(props) {
         super(props);
-        this.state = {user: '', roomID: '', startJitsi: false, disable: true};
+        this.state = {user: '', roomID: '', startJitsi: false, disable: true,
+      show: this.props.open};
     
         this.handleChange = this.handleChange.bind(this);
         this.closeJitsi = this.closeJitsi.bind(this);
+        this.handleClose = this.handleClose.bind(this);
       }
       handleChange = (event, params) => {
         event.preventDefault();
@@ -21,14 +23,19 @@ export class Info extends Component{
           true : false });
       };
       closeJitsi = ()=>this.setState({
-        startJitsi: false
-        
+        startJitsi: false  
       });
+      handleClose = ()=>this.setState({
+        show: true
+      })
 
     render(){      
+      console.log("modal loads", this.state.show);
     return (
       <Modal
         {...this.props}
+        show={this.state.show}
+        onHide={this.handleClose}
         size="md"
         aria-labelledby="contained-modal-title-vcenter"
         centered>
@@ -61,7 +68,7 @@ export class Info extends Component{
             {this.state.startJitsi ? <JitsiMeet show={this.state.startJitsi}
             onHide={this.closeJitsi} user={this.state.user} 
             roomID={this.state.roomID}/> : null}
-            <Button variant="outline-primary" onClick={this.props.onHide}>Cancel</Button>
+            <Button variant="outline-primary" onClick={this.handleClose}>Cancel</Button>
           </div>
         </div>
       </Modal>

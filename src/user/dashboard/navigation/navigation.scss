@@ -1,9 +1,7 @@
 .navigation {
   height: 100%;
-  width: 200px;
-  position: fixed;
-  overflow-x: hidden;
-  z-index: 1;
+  position: sticky;
+  z-index: 2;
   top: 0;
   .list-group {
     .list-group-item {

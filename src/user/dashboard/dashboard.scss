@@ -4,12 +4,11 @@
   height: auto;
   font-family: Muli, sans-serif;
   .navigation {
-    flex: 0.5;
+    flex: 0.48;
     border-right: solid 1px #dfe9f1;
   }
   .news {
     flex: 2;
-    margin-left: 200px;
     .notify-user {
       display: flex;
       padding: 20px 0px 20px 30px;

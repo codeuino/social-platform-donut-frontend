@@ -1,22 +1,9 @@
-.organization {
-  display: flex;
-  min-height: 100vh;
-  height: auto;
-  font-family: Muli, sans-serif;
-  .navigation {
-    flex: 0.5;
-    border-right: solid 1px #dfe9f1;
-  }
-  h2 {
-    font-size: 20px;
-    font-weight: bold;
-  }
+
   .news {
     flex: 3;
-    margin-left: 200px;
     .notify-user {
       display: flex;
-      padding: 20px 0px 20px 30px;
+      padding: 20px 0px 20px 10px;
     }
   }
   .org{
@@ -35,7 +22,7 @@
     .posts {
       h2 {
         margin: 0;
-        padding: 10px 0 10px 30px;
+        padding: 10px 0 10px 60px;
       }
       min-height: 30px;
       height: auto;
@@ -43,7 +30,7 @@
       flex-direction: column;
       .categories {
         display: flex;
-        margin: 10px 0px 10px 20px;
+        margin: 10px 0px 10px 40px;
         .category-type {
           padding: 4px 36px;
           border: solid 1px #007bff;
@@ -59,7 +46,7 @@
       }
       .about-us {
         width: 100vh;
-        margin: 10px 0px 0 27px;
+        margin: 10px 0px 0 50px;
         .title {
           font-size: x-large;
           color: black;
@@ -72,8 +59,11 @@
         }
       }
     }
+    .sideinfo{
+      margin-left: 150px;
+    }
     .org-updates {
       flex:1;
     }
   }
-}
+

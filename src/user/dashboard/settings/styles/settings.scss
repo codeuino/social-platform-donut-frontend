@@ -1,13 +1,3 @@
-.settings {
-  display: flex;
-  min-height: 100vh;
-  height: auto;
-  font-family: Muli, sans-serif;
-
-  .navigation {
-    flex: 0.5;
-    border-right: solid 1px #dfe9f1;
-  }
   .setting-sidebar {
     border-left: solid 1px #dfe9f1;
   }
@@ -18,4 +8,4 @@
   .options {
     color: rgba(0, 0, 0, 0.5);
   }
-}
+
