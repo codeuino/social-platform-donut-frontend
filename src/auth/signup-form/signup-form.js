@@ -19,20 +19,110 @@ class SignUpForm extends Component {
       shortDescription:"",
       password: "",
       cnfPassword: "",
-      error:{}
+      error:{ msg: "" },
+      isValidEmail: true,
+      isValidPassword: true,
+      isValidPhone: true,
+      isValidDesc: true,
+      isMatched: true, 
+      isValidForm: false
     };
   }
 
+  componentWillReceiveProps(nextProps){
+    if(nextProps.error?.msg.length > 0) {
+      this.setState({ 
+        error: { 
+          msg: 'Something went wrong, Please recheck the input!'
+      }})
+    }
+  }
   
   onChange = (e) => {
-    this.setState({ [e.target.name]:e.target.value })
-}
+    const { name, value } = e.target;
+    this.setState({ [name]: value }, () => {
+      this.validateFields(name, value);
+    })
+  }
 
+  validateFields = (fieldName, value) => {
+    const { 
+      isMatched, 
+      isValidDesc, 
+      isValidEmail, 
+      isValidPassword, 
+      isValidPhone,
+    } = this.state;
+
+    let validPass = isValidPassword;
+    let validEmail = isValidEmail;
+    let validDesc = isValidDesc;
+    let validPhone = isValidPhone;
+    let matched = isMatched;
+    
+    switch(fieldName) {
+      case 'email': {
+        validEmail = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
+        break;
+      }
+      case 'password': {
+        validPass = value.length >= 6;
+        break;
+      }
+      case 'phone': {
+        validPhone = value.length === 10;
+        break;
+      }
+      case 'shortDescription': {
+        validDesc = value.length >= 10;
+        break;
+      }
+      case 'cnfPassword': {
+        matched = this.state.password === value.toString();
+        break;
+      }
+      default:
+        break;
+    }
+
+    this.setState({
+      isMatched: matched,
+      isValidEmail: validEmail,
+      isValidDesc: validDesc,
+      isValidPassword: validPass,
+      isValidPhone: validPhone
+    }, this.validateForm)
+  
+  }
+
+  validateForm = () => {
+    const { 
+      isMatched, 
+      isValidDesc, 
+      isValidEmail, 
+      isValidPassword, 
+      isValidPhone 
+    } = this.state;
+    
+    if(isMatched && isValidDesc && isValidEmail && isValidPassword && isValidPhone){
+      this.setState({ isValidForm: true })
+    } else {
+      this.setState({ isValidForm : false })
+    }
+  }
 
   onSubmit = (e) => {
     e.preventDefault();
-    const {firstName, lastName, email, phone, shortDescription, password, cnfPassword } = this.state;
-    if(password === cnfPassword){
+    const {
+      firstName, 
+      lastName, 
+      email, 
+      phone, 
+      shortDescription, 
+      password, 
+      isValidForm 
+    } = this.state;
+    if(isValidForm){
       const newUser = {
         name:{
           firstName : firstName,
@@ -44,25 +134,16 @@ class SignUpForm extends Component {
         info: {
           about: {
             shortDescription: shortDescription
+          }
         }
-      }
       }
       this.props.registerUser(newUser, this.props.history);
     }
     else{
-      this.props.history.push('/');
+      this.setState({ 
+        error: { msg: 'Something went wrong, please check the input!'}
+      })
     }
-    const emptyForm = {
-      firstName: "",
-      lastName: "",
-      email: "",
-      phone: "",
-      shortDescription:"",
-      password: "",
-      cnfPassword: "",
-      error:{}
-    }
-    this.setState({emptyForm});
   }
 
   render() {
@@ -71,7 +152,23 @@ class SignUpForm extends Component {
         flexGrow: 1,
       },
     }));
-    const {firstName, lastName, email, phone, shortDescription, password, cnfPassword } = this.state;
+    const {
+      firstName, 
+      lastName, 
+      email, 
+      phone, 
+      shortDescription, 
+      password, 
+      cnfPassword,
+      isValidPassword,
+      isValidEmail,
+      isValidPhone, 
+      isValidDesc,
+      isMatched,
+      isValidForm,
+      error
+    } = this.state;
+    
     return (
       <div className="signup-details">
         <Form className={useStyles.root} onSubmit={this.onSubmit}>
@@ -85,8 +182,9 @@ class SignUpForm extends Component {
                 size="small"
                 name="firstName"
                 value={firstName}
-                 onChange={this.onChange}
+                onChange={this.onChange}
                 variant="outlined"
+                required = {true}
               />
             </Grid>
             <Grid item xs={6}>
@@ -98,8 +196,9 @@ class SignUpForm extends Component {
                 size="small"
                 name="lastName"
                 value={lastName}
-                 onChange={this.onChange}
+                onChange={this.onChange}
                 variant="outlined"
+                required = {true}
               />
             </Grid>
             <Grid item xs={12}>
@@ -111,9 +210,15 @@ class SignUpForm extends Component {
                 size="small"
                 name="email"
                 value={email}
-                 onChange={this.onChange}
+                onChange={this.onChange}
                 variant="outlined"
+                required = {true}
               />
+              <ul className="list-unstyled">
+                <li id="validation_msg">
+                  {!isValidEmail ? 'Invalid email!' : null }
+                </li>
+              </ul>
             </Grid>
             <Grid item xs={12}>
               <TextField
@@ -124,9 +229,15 @@ class SignUpForm extends Component {
                 size="small"
                 name="phone"
                 value={phone}
-                 onChange={this.onChange}
+                onChange={this.onChange}
                 variant="outlined"
+                required = {true}
               />
+              <ul className="list-unstyled">
+                <li id="validation_msg">
+                  {!isValidPhone ? 'Invalid phone number!' : null }
+                </li>
+              </ul>
             </Grid>
             <Grid item xs={12}>
             <TextField
@@ -137,9 +248,15 @@ class SignUpForm extends Component {
               size="small"
               name="shortDescription"
               value={shortDescription}
-               onChange={this.onChange}
+              onChange={this.onChange}
               variant="outlined"
+              required = {true}
             />
+            <ul className="list-unstyled">
+              <li id="validation_msg">
+                {!isValidDesc ? 'Should be at least 10 characters long!' : null }
+              </li>
+            </ul>
           </Grid>
             <Grid item xs={12}>
               <TextField
@@ -150,9 +267,15 @@ class SignUpForm extends Component {
                 size="small"
                 name="password"
                 value={password}
-                 onChange={this.onChange}
+                onChange={this.onChange}
                 variant="outlined"
+                required = {true}
               />
+              <ul className="list-unstyled">
+                <li id="validation_msg">
+                  {!isValidPassword ? 'Should be at least 6 characters long!' : null }
+                </li>
+              </ul>
             </Grid>
             <Grid item xs={12}>
               <TextField
@@ -163,10 +286,21 @@ class SignUpForm extends Component {
                 size="small"
                 name="cnfPassword"
                 value={cnfPassword}
-                 onChange={this.onChange}
+                onChange={this.onChange}
                 variant="outlined"
+                required = {true}
               />
+              <ul className="list-unstyled">
+                <li id="validation_msg">
+                  {!isMatched ? 'Password doesn\'t matched!' : null }
+                </li>
+              </ul>
             </Grid>
+            <ul className="list-unstyled">
+              <li id="validation_msg">
+                { error?.msg.length > 0 ? error.msg : null }
+              </li>
+            </ul>
             <Button
               className="savebtn"
               type="submit"
