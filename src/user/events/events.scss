@@ -1,0 +1,106 @@
+.organization {
+  display: flex;
+  min-height: 100vh;
+  height: auto;
+  font-family: Muli, sans-serif;
+  .events {
+      margin-top: 2vh;
+
+  }
+} 
+
+.event-location1{
+  color:rgb(14, 19, 14);
+}
+
+.event-location2{
+  color:rgb(91, 189, 91);
+}
+
+.timing3{
+  color:rgb(207, 37, 31);
+}
+
+.timing2{
+  color:rgb(14, 19, 14);
+}
+
+.timing1{
+  color:rgb(91, 189, 91);
+}
+
+.cancelled{
+  background-color: rgb(207, 37, 31);
+  width: 10px;
+  margin: 1px;
+  text-align: center;
+ height: 100%;
+  font-size: 30px;
+}
+
+  .div-upcoming {
+    background-color: rgb(91, 189, 91);
+    width: 10px;
+    margin: 1px;
+    text-align: center;
+   height: 100%;
+    font-size: 30px;
+  }
+
+  .div-past {
+    background-color: rgb(163, 161, 161);
+    width: 10px;
+    margin: 1px;
+    text-align: center;
+   height: 100%;
+    font-size: 30px;
+  }
+
+  .div2 {
+    background-color: #ffffff;
+    width: auto;
+    text-align: center;
+    font-size: 5rem;
+  }
+
+  .div3 {
+    background-color: #ffffff;
+    width: auto;
+    text-align: center;
+    font-size: 1.45rem;
+    .day{
+      font-weight: 25px;
+    }
+    .year{
+      color: #5d5d5d;
+    }
+}
+
+.inside{
+    margin-right: 2vw;
+    margin-left: 2vw;
+  }
+
+.number{
+  font-size: 30px;
+}
+.eventName {
+  font-weight: bold;
+  color: #000000;;
+}
+
+.short-des{
+font-weight: 100;
+font-size: smaller;
+color: #5d5d5d;
+}
+
+.createdAt{
+text-align: center;
+font-size: 12px;
+font-weight: bold;
+}
+.event-card{
+max-width: 345px;
+margin-top: 20px;
+} 
