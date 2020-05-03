@@ -52,7 +52,7 @@ class Events extends Component {
                     {Item.isCancelled ? (
                       <div className="cancelled">{""}</div>
                     ) : (
-                      <div className="div1">{""}</div>
+                      <div className="div-upcoming">{""}</div>
                     )}
                   </Col>
                   <Col sm={5} xs={12}>
@@ -124,7 +124,7 @@ class Events extends Component {
                   {Item.isCancelled ? (
                     <div className="cancelled">{""}</div>
                   ) : (
-                    <div className="div4">{""}</div>
+                    <div className="div-past">{""}</div>
                   )}
                   </Col>
                   <Col sm={5} xs={12}>
