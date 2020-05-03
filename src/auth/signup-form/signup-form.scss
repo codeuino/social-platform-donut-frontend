@@ -6,7 +6,6 @@
     }
   }
 
-
   .savebtn{
     display: flex;
     padding: 8px 50px;
@@ -16,7 +15,10 @@
     button {
       padding: 8px 50px;
     }
-  
+    
   }  
-
+  #validation_msg {
+    color: rgb(247, 134, 134);
+    font-size: 15px;
+  }
 }
