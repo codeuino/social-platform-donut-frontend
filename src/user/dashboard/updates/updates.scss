@@ -2,10 +2,12 @@
   min-height: 300px;
   margin: 30px 0 20px 40px;
   h1 {
-    font-size: 22px;
-    text-align: left;
-    font-weight: bold;
-    margin-bottom: 20px;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    color: #000000;
   }
   .org-updates {
     min-height: 300px;
@@ -14,17 +16,23 @@
     overflow: auto;
     .img-desc {
       h2 {
-        font-size: 22px;
-        font-weight: bold;
+        font-family: Inter;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 14px;
+        color: #000000;
       }
       p {
-        font-size: 16px;
-        margin: 0;
+        font-family: Inter;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 12px;
+
+        color: rgba(29, 33, 41, 0.5);
       }
     }
     .image {
       padding: 14px 14px;
-    } 
+    }
   }
 }
-
