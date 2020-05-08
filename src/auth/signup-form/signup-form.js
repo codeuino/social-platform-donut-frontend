@@ -303,14 +303,16 @@ class SignUpForm extends Component {
               </ul>
             </Col>
           </Row>
-          <Button
-            className="savebtn"
-            type="submit"
-            variant="primary"
-            color="primary"
-          >
-            <span className="signupbtn-text">SignUp</span>
-          </Button>
+          <div className="cta-signup">
+            <Button
+              className="signupbtn"
+              type="submit"
+              variant="primary"
+              color="primary"
+            >
+              <span className="signupbtn-text">SignUp</span>
+            </Button>
+          </div>
         </Form>
       </div>
     );

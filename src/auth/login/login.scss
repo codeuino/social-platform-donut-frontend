@@ -94,10 +94,11 @@
   }
 }
 
-.selectorbtn {
-  padding: 1vh;
-  border: 1px solid rgb(211, 220, 228);
-  border-radius: 3px;
-  width: 46%;
+.button-column {
+  text-align: center;
   margin: 0 auto;
+  .selectorbtn {
+    border: 1px solid rgb(211, 220, 228);
+    width: 55%;
+  }
 }

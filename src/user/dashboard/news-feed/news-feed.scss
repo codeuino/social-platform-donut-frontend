@@ -384,6 +384,20 @@
             margin-top: 0px;
           }
         }
+
+        .optionbtn {
+          background: #1a73e8;
+          border-radius: 100px;
+          .optionbtn-text {
+            font-family: Inter;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 19px;
+
+            color: #ffffff;
+          }
+        }
       }
     }
   }
@@ -430,6 +444,7 @@
             border-radius: 5px;
             text-align: left;
             resize: none;
+            margin-left: 0;
           }
         }
       }
@@ -455,6 +470,29 @@
       margin-bottom: 10px;
       color: #1a73e8;
       font-weight: 500;
+    }
+  }
+}
+
+.posts {
+  .category {
+    .category-btn {
+      background-color: white;
+      font-family: Inter;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 22px;
+
+      &:hover {
+        background-color: #1a73e8;
+        color: white;
+      }
+
+      &:focus {
+        background-color: #1a73e8;
+        color: white;
+      }
     }
   }
 }

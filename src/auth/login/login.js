@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Tab, Tabs, Button } from "react-bootstrap";
+import { Button, Row, Col } from "react-bootstrap";
 import LoginForm from "../login-form/login-form";
 import SignUpForm from "../signup-form/signup-form";
 import { DonutTitle } from "../../donutTitle/donutTitle";
@@ -55,34 +55,40 @@ class Login extends Component {
                 ? "Or Sign In with"
                 : "Or SignUp with"}
             </p>
-            <a
-              href="http://localhost:4000/auth/google"
-              style={{ padding: "1vh" }}
-            >
-              <Button
-                className="selectorbtn"
-                type="submit"
-                variant="primary"
-                color="primary"
-                size="sm"
-              >
-                <span className="selectorbtn-content">Google</span>
-              </Button>
-            </a>
-            <a
-              href="http://localhost:4000/auth/github"
-              style={{ padding: "1vh" }}
-            >
-              <Button
-                className="selectorbtn"
-                type="submit"
-                variant="primary"
-                color="primary"
-                size="sm"
-              >
-                <span className="selectorbtn-content">Github</span>
-              </Button>
-            </a>
+            <Row>
+              <Col className="button-column">
+                <a
+                  href="http://localhost:4000/auth/google"
+                  style={{ padding: "1vh" }}
+                >
+                  <Button
+                    className="selectorbtn"
+                    type="submit"
+                    variant="primary"
+                    color="primary"
+                    size="sm"
+                  >
+                    <span className="selectorbtn-content">Google</span>
+                  </Button>
+                </a>
+              </Col>
+              <Col className="button-column">
+                <a
+                  href="http://localhost:4000/auth/github"
+                  style={{ padding: "1vh" }}
+                >
+                  <Button
+                    className="selectorbtn"
+                    type="submit"
+                    variant="primary"
+                    color="primary"
+                    size="sm"
+                  >
+                    <span className="selectorbtn-content">Github</span>
+                  </Button>
+                </a>
+              </Col>
+            </Row>
             <p className="login-text-selector">
               {this.state.activeForm === "login"
                 ? "Don't have an account? "

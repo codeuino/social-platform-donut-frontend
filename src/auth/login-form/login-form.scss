@@ -11,7 +11,8 @@
     justify-content: center;
     margin-top: 30px;
     button {
-      padding: 8px 50px;
+      padding: 8px 10px;
+      border-radius: 30px;
     }
   }
 }
@@ -28,7 +29,6 @@
 }
 
 .loginbtn {
-  padding: 1vh;
   border: 1px solid rgb(211, 220, 228);
   border-radius: 3px;
   width: 45%;
@@ -37,7 +37,6 @@
 .loginbtn-text {
   font-family: Inter;
   font-style: normal;
-  font-weight: 600;
   font-size: 16px;
   line-height: 24px;
 }
