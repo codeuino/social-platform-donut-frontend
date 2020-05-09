@@ -53,9 +53,16 @@
   }
 }
 
-.jitsi{
-  margin-left: 12.5px;
+.jitsi {
+  display: flex;
   color: rgba(0, 0, 0, 0.5);
+}
+.jitsi-meet{
+  height: 21px;
+  width: 21px;
+  color: rgba(0, 0, 0, 0.5);
+  margin-right: 15px;
+  margin-left: 2px;
 }
 
 .navigation{
@@ -81,5 +88,8 @@
 
 .log-button{
   margin-left: -8.5px; 
+  position: fixed;
+  z-index: 999;
   color: rgba(0, 0, 0, 0.5);
+  bottom: 2em;
 }
