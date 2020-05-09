@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import { ListGroup, Button } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
+import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { DonutTitleSmall } from "../../../donutTitle/donutTitle";
 import "./navigation.scss";
-import {Logout} from "../../profile/popups/logout";
+import Logout from "../../profile/popups/logout";
 import logo from "../../../svgs/logout.svg";
+import {Info} from "../../integrations/NameForm";
 
 class Navigation extends Component {
   state = { logout:false };
@@ -12,7 +14,14 @@ class Navigation extends Component {
     let cancel =()=>this.setState({
       logout:false
     });
+    let close = ()=>this.setState({
+      open: false
+    });
     const divStyle = {
+      position: "absolute",
+      bottom: '4.5em'
+    };
+    const divStyle2 = {
       position: "absolute",
       bottom: 0
     };
@@ -90,6 +99,46 @@ class Navigation extends Component {
               <b>Organization</b>
             </NavLink>
           </ListGroup.Item>
+          
+          <ListGroup.Item className={this.props.event ? "active" : "inactive"}>
+          <svg  width="38"
+          height="38"
+          viewBox="0 0 20 20"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="icon">
+        
+            <path 
+            d="M15.94,10.179l-2.437-0.325l1.62-7.379c0.047-0.235-0.132-0.458-0.372-0.458H5.25c-0.241,0-0.42,0.223-0.373,0.458l1.634,7.376L4.06,10.179c-0.312,0.041-0.446,0.425-0.214,0.649l2.864,2.759l-0.724,3.947c-0.058,0.315,0.277,0.554,0.559,0.401l3.457-1.916l3.456,1.916c-0.419-0.238,0.56,0.439,0.56-0.401l-0.725-3.947l2.863-2.759C16.388,10.604,16.254,10.22,15.94,10.179M10.381,2.778h3.902l-1.536,6.977L12.036,9.66l-1.655-3.546V2.778z M5.717,2.778h3.903v3.335L7.965,9.66L7.268,9.753L5.717,2.778zM12.618,13.182c-0.092,0.088-0.134,0.217-0.11,0.343l0.615,3.356l-2.938-1.629c-0.057-0.03-0.122-0.048-0.184-0.048c-0.063,0-0.128,0.018-0.185,0.048l-2.938,1.629l0.616-3.356c0.022-0.126-0.019-0.255-0.11-0.343l-2.441-2.354l3.329-0.441c0.128-0.017,0.24-0.099,0.295-0.215l1.435-3.073l1.435,3.073c0.055,0.116,0.167,0.198,0.294,0.215l3.329,0.441L12.618,13.182z"            fill="black"
+            fill-opacity="0.5"
+            className="path-name" />
+          </svg>
+
+          <NavLink to="/events" className="link">
+            <b>Events</b>
+          </NavLink>
+        </ListGroup.Item>
+          
+          <ListGroup.Item className={this.props.proj ? "active" : "inactive"}>
+          <svg  width="38"
+          height="38"
+          viewBox="0 0 20 20"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="icon">
+        
+            <path 
+            d="M17.222,5.041l-4.443-4.414c-0.152-0.151-0.356-0.235-0.571-0.235h-8.86c-0.444,0-0.807,0.361-0.807,0.808v17.602c0,0.448,0.363,0.808,0.807,0.808h13.303c0.448,0,0.808-0.36,0.808-0.808V5.615C17.459,5.399,17.373,5.192,17.222,5.041zM15.843,17.993H4.157V2.007h7.72l3.966,3.942V17.993z" 
+            fill="black"
+            fill-opacity="0.5"
+            className="path-name" />
+          </svg>
+
+          <NavLink to="/projects" className="link">
+            <b>Projects</b>
+          </NavLink>
+        </ListGroup.Item>
+
           <ListGroup.Item
             className={this.props.profile ? "active" : "inactive"}
           >
@@ -108,11 +157,12 @@ class Navigation extends Component {
                 className="path-name"
               />
             </svg>
-            <NavLink to="profile" className="link">
+            <NavLink to="/profile" className="link">
               <b>Account</b>
             </NavLink>
           </ListGroup.Item>
-          <ListGroup.Item style={{position: "absolute", bottom: "50px"}}>
+          <ListGroup.Item style={divStyle}  
+          className={this.props.settings ? "active" : "inactive"}>
             <svg
               width="38"
               height="38"
@@ -126,11 +176,13 @@ class Navigation extends Component {
                 fill-opacity="0.5"
               />
             </svg>
-            Settings
+            <NavLink to="/settings" className="link">
+              <b>Settings</b>
+            </NavLink>
           </ListGroup.Item>
-          <ListGroup.Item style={divStyle}>
-            <Button variant="link" size="sm" style=
-            {{"margin-left": "-8.5px", color: "rgba(0, 0, 0, 0.5)"}} onClick={
+          <ListGroup.Item style={divStyle2}
+          className={this.props.logout ? "active" : "inactive"}>
+            <Button variant="link" size="sm" className="log-button" onClick={
               ()=>this.setState({logout:true})}>
             <img class="logout" src={logo} alt="L"></img>
             <b>Logout</b>
@@ -138,10 +190,27 @@ class Navigation extends Component {
             <Logout show={this.state.logout}
               onHide={cancel} />
           </ListGroup.Item>
+          <ListGroup.Item>
+            <Button variant="outline-secondary" size="sm" className="jitsi" onClick={
+              () => this.setState({open:true})}>
+            <b>Jitsi Meet</b>
+            </Button>
+            {this.state.open ? <Info show={this.state.open}  onHide={close}/> : null}
+          </ListGroup.Item>
+
         </ListGroup>
       </div>
     );
   }
+}
+
+Navigation.propTypes = {
+  dashboard: PropTypes.bool,
+  post: PropTypes.bool,
+  org: PropTypes.bool,
+  profile: PropTypes.bool,
+  settings: PropTypes.bool,
+  logout: PropTypes.bool
 }
 
 export default Navigation;
