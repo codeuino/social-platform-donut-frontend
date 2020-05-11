@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { ListGroup, Button } from "react-bootstrap";
-import { NavLink } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { NavLink } from "react-router-dom";
+import PropTypes from "prop-types";
 import { DonutTitleSmall } from "../../../donutTitle/donutTitle";
 import "./navigation.scss";
 import Logout from "../../profile/popups/logout";
@@ -10,14 +10,16 @@ import {Info} from "../../integrations/NameForm";
 import JitsiMeets from '../../../images/jitsi.png'
 
 class Navigation extends Component {
-  state = { logout:false };
+  state = { logout: false };
   render() {
-    let cancel =()=>this.setState({
-      logout:false
-    });
-    let close = ()=>this.setState({
-      open: false
-    });
+    let cancel = () =>
+      this.setState({
+        logout: false,
+      });
+    let close = () =>
+      this.setState({
+        open: false,
+      });
     const divStyle = {
       position: "fixed",
       bottom: '5em'
@@ -31,7 +33,11 @@ class Navigation extends Component {
       <div className="navigation">
         <ListGroup>
           <ListGroup.Item>
-            <NavLink to="/dashboard"><div className="donut-title"><DonutTitleSmall /></div></NavLink>
+            <NavLink to="/dashboard">
+              <div className="donut-title">
+                <DonutTitleSmall />
+              </div>
+            </NavLink>
           </ListGroup.Item>
           <ListGroup.Item
             className={dashboard ? "active" : "inactive"}
@@ -208,7 +214,6 @@ class Navigation extends Component {
             </div>
             {this.state.open ? <Info show={this.state.open}  onHide={close}/> : null}
           </ListGroup.Item>
-
         </ListGroup>
       </div>
     );
@@ -221,7 +226,7 @@ Navigation.propTypes = {
   org: PropTypes.bool,
   profile: PropTypes.bool,
   settings: PropTypes.bool,
-  logout: PropTypes.bool
-}
+  logout: PropTypes.bool,
+};
 
 export default Navigation;

@@ -11,12 +11,13 @@
     justify-content: center;
     margin-top: 30px;
     button {
-      padding: 8px 50px;
+      padding: 8px 10px;
+      border-radius: 30px;
     }
   }
 }
 
-.forgot-password{
+.forgot-password {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -27,11 +28,15 @@
   font-size: 15px;
 }
 
-.loginbtn{
-  background: #ffffff;
-  color: #000000;
-  padding: 1vh;
+.loginbtn {
   border: 1px solid rgb(211, 220, 228);
   border-radius: 3px;
   width: 45%;
+}
+
+.loginbtn-text {
+  font-family: Inter;
+  font-style: normal;
+  font-size: 16px;
+  line-height: 24px;
 }

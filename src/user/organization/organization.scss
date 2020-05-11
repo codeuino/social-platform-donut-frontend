@@ -18,12 +18,12 @@
       padding: 20px 0px 20px 30px;
     }
   }
-  .org{
+  .org {
     display: flex;
     .posts-profile {
       flex: 2;
     }
-    .updat{
+    .updat {
       margin-top: 40px;
       flex: 0.95;
     }
@@ -32,6 +32,7 @@
     display: flex;
     flex-direction: row;
     .posts {
+      flex-grow: 2;
       h2 {
         margin: 0;
         padding: 10px 0 10px 30px;
@@ -57,7 +58,6 @@
         }
       }
       .about-us {
-        width: 100vh;
         margin: 10px 0px 0 27px;
         .title {
           font-size: x-large;
@@ -72,11 +72,12 @@
       }
     }
     .org-updates {
-      flex:1;
+      flex: 1;
+      flex-grow: 3;
     }
   }
 }
-.orgupdatesloading{
+.orgupdatesloading {
   margin-top: -10px;
   margin-left: 30px;
 }

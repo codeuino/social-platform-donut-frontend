@@ -1,11 +1,10 @@
 import React, { Component } from "react";
-import Popups from '../../common/Popups';
-import { Form } from "react-bootstrap";
+import Popups from "../../common/Popups";
+import { Form, Button } from "react-bootstrap";
 import "./login-form.scss";
 import { withRouter } from "react-router-dom";
-import { connect } from 'react-redux';
-import { loginUser } from '../../actions/authAction';
-import { Grid, TextField, Button  } from '@material-ui/core';
+import { connect } from "react-redux";
+import { loginUser } from "../../actions/authAction";
 
 class LoginForm extends Component {
   constructor(props) {
@@ -18,11 +17,11 @@ class LoginForm extends Component {
       optionValue: "",
       error: false,
       isValidEmail: true,
-      isValidForm: false
+      isValidForm: false,
     };
   }
   componentWillReceiveProps(nextProps) {
-    if(nextProps.error?.msg.length > 0){
+    if (nextProps.error?.msg.length > 0) {
       this.setState({ error: true });
     }
   }
@@ -30,125 +29,113 @@ class LoginForm extends Component {
   onSubmit = (e) => {
     const { isValidForm } = this.state;
     e.preventDefault();
-    if(isValidForm){
+    if (isValidForm) {
       this.props.loginUser(this.state, this.props.history);
     } else {
-      this.setState({ isValidForm: false })
+      this.setState({ isValidForm: false });
     }
-  }
+  };
 
-  onChange = (e) =>{
+  onChange = (e) => {
     const { name, value } = e.target;
     this.setState({ [name]: value }, () => {
-      this.validateField(name, value)
-    })
-  }
+      this.validateField(name, value);
+    });
+  };
 
-  validateField =(fieldName, value) => {
+  validateField = (fieldName, value) => {
     const { isValidEmail } = this.state;
     let validEmail = isValidEmail;
 
-    switch(fieldName) {
-      case 'email': {
+    switch (fieldName) {
+      case "email": {
         validEmail = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
         break;
       }
       default:
         break;
     }
-    
-    this.setState({
-      isValidEmail: validEmail
-    }, this.validateForm)
-  }
+
+    this.setState(
+      {
+        isValidEmail: validEmail,
+      },
+      this.validateForm
+    );
+  };
 
   validateForm = () => {
     const { isValidEmail } = this.state;
     this.setState({ isValidForm: isValidEmail });
-  }
+  };
 
   render() {
-   const { email,password, error, isValidForm, isValidEmail } = this.state
-   
-   const handleToggle = (e) => {
-    const targetName = e.target.name;
-    this.setState({
-      modalShow: true,
-      option: targetName
-    });
-  }
+    const { email, password, error, isValidForm, isValidEmail } = this.state;
 
-  return (
-    <div className="login-details">
-      <Form onSubmit={this.onSubmit}>
-        <Grid container spacing={3}>
-          <Grid item xs={12}>
-            <TextField
-              id="outlined-primary"
-              label="Email"
+    const handleToggle = (e) => {
+      const targetName = e.target.name;
+      this.setState({
+        modalShow: true,
+        option: targetName,
+      });
+    };
+
+    return (
+      <div className="login-details">
+        <Form onSubmit={this.onSubmit}>
+          <Form.Group controlId="formBasicEmail">
+            <Form.Label>Email address</Form.Label>
+            <Form.Control
+              required
               type="email"
-              fullWidth
-              size="small"
+              placeholder="abc@gmail.com"
               name="email"
-              value={email}
               onChange={this.onChange}
-              variant="outlined"
-              required = {true}
             />
-            <ul className="list-unstyled">
-              <li id="validation_msg">
-                {error ? 'Please recheck your credential!' : null }
-                {!isValidEmail ? 'Invalid Email!' : null }
-              </li>
-            </ul>
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            id="outlined-primary"
-            label="Password"
-            type="password"
-            fullWidth
-            size="small"
-            name="password"
-            value={password}
-            onChange={this.onChange}
-            variant="outlined"
-            required = {true}
-          />
-        </Grid>
-       </Grid>
+          </Form.Group>
+          <Form.Group controlId="formBasicPassword">
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              required
+              type="password"
+              placeholder="***********"
+              name="password"
+              onChange={this.onChange}
+            />
+          </Form.Group>
           <div className="cta-login">
             <Button
-            variant="contained" color="primary"
+              className="loginbtn"
               type="submit"
-              >
-              Login
+              variant="primary"
+              color="primary"
+            >
+              <span className="loginbtn-text">Login</span>
             </Button>
           </div>
         </Form>
-        <a 
-          className ="forgot-password" 
-          href="javascript:void(0)"  
-          onClick={handleToggle} 
+        <a
+          className="forgot-password"
+          href="javascript:void(0)"
+          onClick={handleToggle}
           name="password"
-          >
+        >
           Forgot Password?
         </a>
-        <Popups 
+        <Popups
           option={this.state.option}
           optionValue={this.state.optionValue}
           modalShow={this.state.modalShow}
         />
-        </div>
+      </div>
     );
   }
 }
 
-
-// map state to props 
+// map state to props
 const mapStateToProps = (state) => ({
   auth: state.auth,
-  error: state.error
+  error: state.error,
 });
 
 export default connect(mapStateToProps, { loginUser })(withRouter(LoginForm));
