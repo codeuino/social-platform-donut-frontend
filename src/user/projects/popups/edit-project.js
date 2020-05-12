@@ -1,29 +1,27 @@
 import React, { Component } from "react";
 import { Modal, Button, Row, Col, Form } from "react-bootstrap";
-import "./popups.scss";
 export class EditProject extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      Proj_name: '',
-      version: '',
-      short_des: '',
-      long_des: '',
-      github_link: '',
-      bitbucket_link: '',
-      host_link: '',
-      img_link: ''
-    }
-   this.trigger=0
-   this.onChange = this.onChange.bind(this);
+      Proj_name: "",
+      version: "",
+      short_des: "",
+      long_des: "",
+      github_link: "",
+      bitbucket_link: "",
+      host_link: "",
+      img_link: "",
+    };
+    this.trigger = 0;
+    this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  componentWillReceiveProps(nextProps){
-      if(this.trigger<1)
-         this.setState({...nextProps.data})
-         this.trigger = this.trigger+1;
-        }
+  componentWillReceiveProps(nextProps) {
+    if (this.trigger < 1) this.setState({ ...nextProps.data });
+    this.trigger = this.trigger + 1;
+  }
 
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
@@ -31,12 +29,10 @@ export class EditProject extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-const EditProject = this.state
+    const EditProject = this.state;
 
     console.log("Edited Project", EditProject);
   }
-
-
 
   render() {
     return (
@@ -53,7 +49,7 @@ const EditProject = this.state
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <Form  onSubmit={this.onSubmit}>
+            <Form onSubmit={this.onSubmit}>
               <Row className="form-content">
                 <Col className="p-0" sm={12}>
                   <Form.Label className="label">Project Name</Form.Label>

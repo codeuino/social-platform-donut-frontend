@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Modal, Form, Col } from "react-bootstrap";
 import PropTypes from "prop-types";
 
-const AddEventModal = (props) => {
+const AddProjectModal = (props) => {
   return (
     <Modal
       show={props.show}
@@ -17,8 +17,8 @@ const AddEventModal = (props) => {
         style={props.borderStyle}
       >
         <Modal.Title className="modal__title" style={props.borderStyle}>
-          <div className="modal__main-title">New Event</div>
-          <div className="modal__mini-title">ABOUT THE EVENT</div>
+          <div className="modal__main-title">New Project</div>
+          <div className="modal__mini-title">ABOUT THE PROJECT</div>
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className="modal__body" style={props.borderStyle}>
@@ -29,17 +29,19 @@ const AddEventModal = (props) => {
               controlId="formGridEmail"
               className="modal__group"
             >
-              <Form.Label className="modal__label">Event Name</Form.Label>
-              <Form.Control type="email" placeholder="Type here.." />
+              <Form.Label className="modal__label">Project Name</Form.Label>
+              <Form.Control type="text" placeholder="Type here.." />
             </Form.Group>
-
-            <Form.Group
-              as={Col}
-              controlId="formGridPassword"
-              className="modal__group"
-            >
-              <Form.Label className="modal__label">Location</Form.Label>
-              <Form.Control type="password" placeholder="Where do you live?" />
+          </Form.Row>
+          <Form.Row className="modal__row">
+            <Form.Group as={Col} className="modal__group">
+              <Form.Label className="modal__label">
+                Project Contributers
+              </Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Who all contributed to the project?"
+              />
             </Form.Group>
           </Form.Row>
           <Form.Row className="modal__row">
@@ -48,31 +50,33 @@ const AddEventModal = (props) => {
               controlId="formGridEmail"
               className="modal__group"
             >
-              <Form.Label className="modal__label">Date</Form.Label>
-              <Form.Control type="email" placeholder="DD/MM/YY" />
-            </Form.Group>
-
-            <Form.Group
-              as={Col}
-              controlId="formGridPassword"
-              className="modal__group"
-            >
-              <Form.Label className="modal__label">Time</Form.Label>
-              <Form.Control type="password" placeholder="10:00 AM" />
-            </Form.Group>
-          </Form.Row>
-          <Form.Row className="modal__row">
-            <Form.Group
-              as={Col}
-              controlId="formGridEmail"
-              className="modal__group"
-            >
-              <Form.Label className="modal__label">Post Description</Form.Label>
+              <Form.Label className="modal__label">
+                Project Description
+              </Form.Label>
               <Form.Control
                 as="textarea"
                 className="modal__post"
-                placeholder="What do you want to tell people about the event?"
+                placeholder="What do you want to tell people about the project?"
               />
+            </Form.Group>
+          </Form.Row>
+          <Form.Row className="modal__row">
+            <Form.Group
+              as={Col}
+              controlId="formGridEmail"
+              className="modal__group"
+            >
+              <Form.Label className="modal__label">Github Link</Form.Label>
+              <Form.Control type="text" placeholder="Enter Github Link" />
+            </Form.Group>
+
+            <Form.Group
+              as={Col}
+              controlId="formGridPassword"
+              className="modal__group"
+            >
+              <Form.Label className="modal__label">Other Link</Form.Label>
+              <Form.Control type="text" placeholder="Enter Other Links" />
             </Form.Group>
           </Form.Row>
         </Form>
@@ -88,10 +92,10 @@ const AddEventModal = (props) => {
     </Modal>
   );
 };
-AddEventModal.propTypes = {
+AddProjectModal.propTypes = {
   onClick: PropTypes.func,
   show: PropTypes.bool,
   style: PropTypes.object,
 };
 
-export default AddEventModal;
+export default AddProjectModal;
