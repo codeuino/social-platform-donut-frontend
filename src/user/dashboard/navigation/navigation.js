@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import PropTypes from "prop-types";
 import { DonutTitleSmall } from "../../../donutTitle/donutTitle";
 import "./navigation.scss";
-import Logout from "../../profile/popups/logout";
+import Logout from "../../profile/popups/Logout";
 import logo from "../../../svgs/logout.svg";
 import { Info } from "../../integrations/NameForm";
 
@@ -215,7 +215,7 @@ class Navigation extends Component {
               <img class="logout" src={logo} alt="L"></img>
               <b>Logout</b>
             </Button>
-            <Logout show={this.state.logout} onHide={cancel} />
+            <Logout show={this.state.logout} handleClose={cancel} />
           </ListGroup.Item>
           <ListGroup.Item className="inactive">
             <p className="logo-text">CODEUINO</p>
