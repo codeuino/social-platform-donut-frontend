@@ -17,6 +17,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Button } from "react-bootstrap";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import AddEventModal from "./popups/AddEventModal";
+import AddProjectModal from "./popups/AddProjectModal";
 import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import ChatBubbleIcon from "@material-ui/icons/ChatBubble";
@@ -80,17 +81,26 @@ export default function PinPosts(props) {
   const classes = styles();
   const [type, changeType] = React.useState("All");
   const [first, second] = React.useState("f");
-  const [show, setShow] = React.useState(false);
+  const [showProject, setShowProject] = React.useState(false);
+  const [showEvent, setShowEvent] = React.useState(false);
 
   let handleClick = (atrb) => () => {
     changeType(atrb);
     second("s");
   };
-  let handleShow = () => {
-    setShow(true);
+  let handleShow = (modalName) => {
+    if (modalName === "project") {
+      setShowProject(true);
+    } else if (modalName === "event") {
+      setShowEvent(true);
+    }
   };
-  let handleClose = () => {
-    setShow(false);
+  let handleClose = (modalName) => {
+    if (modalName === "project") {
+      setShowProject(false);
+    } else if (modalName === "event") {
+      setShowEvent(false);
+    }
   };
   let posts = feed.map((newsItem) => {
     if (
@@ -330,7 +340,9 @@ export default function PinPosts(props) {
               >
                 <Button
                   variant="primary"
-                  onClick={handleShow}
+                  onClick={() => {
+                    handleShow("event");
+                  }}
                   className="optionbtn"
                 >
                   <svg
@@ -347,8 +359,19 @@ export default function PinPosts(props) {
                   </svg>
                   <span className="optionbtn-text">Event</span>
                 </Button>
-                <AddEventModal show={show} handleClose={handleClose} />
-                <Button variant="primary" className="optionbtn">
+                <AddEventModal
+                  show={showEvent}
+                  handleClose={() => {
+                    handleClose("event");
+                  }}
+                />
+                <Button
+                  variant="primary"
+                  className="optionbtn"
+                  onClick={() => {
+                    handleShow("project");
+                  }}
+                >
                   <svg
                     width="38"
                     height="38"
@@ -363,6 +386,12 @@ export default function PinPosts(props) {
                   </svg>
                   <span className="optionbtn-text">Project</span>
                 </Button>
+                <AddProjectModal
+                  show={showProject}
+                  handleClose={() => {
+                    handleClose("project");
+                  }}
+                />
               </ButtonGroup>
             </div>
           </div>
