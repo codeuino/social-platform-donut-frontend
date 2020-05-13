@@ -9,7 +9,6 @@
     "axios": "^0.19.1",
     "boostrap": "^2.0.0",
     "node-sass": "^4.13.0",
-    "prop-types": "^15.7.2",
     "react": "^16.12.0",
     "react-bootstrap": "^1.0.0-beta.16",
     "react-cookies": "^0.1.1",
