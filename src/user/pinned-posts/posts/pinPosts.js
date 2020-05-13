@@ -70,10 +70,10 @@ export default function PinPosts(props){
         changeType(atrb);
         second('s');
     };
-    let posts = feed.map((newsItem) => {
+    let posts = feed.map((newsItem, index) => {
             if(newsItem.type === "Project" && (type === 'All' || type === newsItem.type)){
                 return(
-                <div className="grid">
+                <div className="grid" key={index}>
                     <Paper elevation={1} className={classes.paper}>
                         <Card className={classes.root}>
                             <CardMedia className="projimg"
@@ -136,7 +136,7 @@ export default function PinPosts(props){
                 </div>  )
             }else if(newsItem.type === "Event" && (type === 'All' || type === newsItem.type)){
                 return(
-                <div className="grid">
+                <div div className = "grid" key={index}>
                     <Paper elevation={1} className={classes.paper}>
                         <Card className={classes.root}>
                             <CardMedia className="eventimg"
@@ -216,7 +216,7 @@ export default function PinPosts(props){
                 </div>)
             }else if(newsItem.type === "Donut" && (type === 'All' || type === newsItem.type)){
                 return(
-                <div className="grid">
+                <div className="grid" key={index}>
                     <Paper elevation={1} className={classes.paper}>
                         <Card className={classes.root}>
                             <List className={classes.listStyle}>
@@ -275,9 +275,9 @@ export default function PinPosts(props){
             <h1>Pinned Posts</h1>
             <div className="categories">
                 { (first === 'f') ? 
-                <Button autofocus variant="contained" className="btn active"
+                <Button autoFocus variant="contained" className="btn active"
                 onClick={handleClick('All')}>All</Button> :
-                <Button autofocus variant="contained" className="btn"
+                <Button autoFocus variant="contained" className="btn"
                 onClick={handleClick('All')}>All</Button> }
                 <span className="space"></span>
                 <Button variant="contained" className="btn"
