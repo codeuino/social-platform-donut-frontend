@@ -44,7 +44,6 @@ class Projects extends Component {
               className="img"
               image={Item.image}
             />
-
             <CardContent>
               <Typography gutterBottom variant="h5" component="h2">
                 {Item.Proj_name}
@@ -55,13 +54,9 @@ class Projects extends Component {
             </CardContent>
           </CardActionArea>
           <CardActions>
-
-
-        
-          <Button size="small"  href={`/${Item._id}/proj-info`} variant="light">
-        <strong>See More</strong>
+            <Button size="small"  href={`/${Item._id}/proj-info`} variant="light">
+                <strong>See More</strong>
             </Button>
-      
           </CardActions>
         </Card>
       </Grid>

@@ -54,8 +54,15 @@
 }
 
 .jitsi {
-  margin-left: 12.5px;
+  display: flex;
   color: rgba(0, 0, 0, 0.5);
+}
+.jitsi-meet{
+  height: 21px;
+  width: 21px;
+  color: rgba(0, 0, 0, 0.5);
+  margin-right: 15px;
+  margin-left: 2px;
 }
 
 .navigation {
@@ -79,17 +86,10 @@
   margin-left: 2px;
 }
 
-.log-button {
-  margin-left: -8.5px;
+.log-button{
+  margin-left: -8.5px; 
+  position: fixed;
+  z-index: 999;
   color: rgba(0, 0, 0, 0.5);
-}
-
-.logo-text {
-  font-family: Inter;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 12px;
-  text-align: center;
-  letter-spacing: 3.6px;
-  color: rgba(0, 0, 0, 0.5);
+  bottom: 2em;
 }

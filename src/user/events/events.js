@@ -5,44 +5,99 @@ import Event_list from "../../jsonData/events";
 import { Row, Col } from "react-bootstrap";
 import "./events.scss";
 import Popups from './popups/popups';
+import DeleteEvent from "./popups/DeleteEvent";
+import EditEvent from "./popups/EditEvent";
 
 class Events extends Component {
   constructor(props) {
     super(props);
     this.state = {
       event: true,
-    modalShow: false,
-    optionValue: {}
+      modalShow: false,
+      optionValue: {},
+      delete: false,
+      edit: false
     }
   }
 
   render() {
     const setOptionValue = (targetId) => {
-        const event = Event_list.filter(
-      (x) => x._id === targetId
-    );         
-          this.setState({optionValue: event[0]})
+        const event = Event_list.filter((x) => x._id === targetId);         
+        this.setState({optionValue: event[0]})
     }
+
     const handleToggle = (e) => {
       const targetId = e.target.id;
       console.log("-handletoggel",targetId)
-      this.setState({
-        modalShow: true
-      });
+      this.setState({ modalShow: true });
       setOptionValue(targetId);
     }
+    
     var RefinedDay = (d) => {
       const day = d.slice(0, 3);
       return day;
     };
 
-    var RefinedYear = (d) => {
+    const editEvent = (e) => {
+      e.preventDefault();
+      this.setState({ modalShow: false, edit: true })
+    }
+
+    const handleDelete = (e) => {
+      this.setState({ modalShow: false, delete: true })
+    }
+
+    const cancel = () => {
+      this.setState({ delete: false, edit: false })
+    }
+
+    const RefinedYear = (d) => {
       const month = d.slice(4, 7);
       const year = d.slice(11, 15);
       return month + " " + year;
     };
-    let Events = Event_list.map((Item) => (
-      <Grid item xs={6} sm={4}>
+
+  const FooterOfEvents = ({ Item }) => {
+    return (
+      <div className="row">
+        <DeleteEvent 
+          show={this.state.delete} 
+          onHide={cancel}
+          eventId={Item._id}
+        />
+        <EditEvent 
+          show={this.state.edit}
+          onHide={cancel}
+          eventId={Item._id}
+        />
+        <div className="col-md-6 col-sm-12 col-lg-6">
+          <span>
+            <a 
+              className="mr-3"
+              href="javascript: void(0)" 
+              onClick={editEvent}
+              >Edit</a>
+            <a 
+              href="javascript: void(0)"
+              onClick={handleDelete}
+              >Delete</a>
+            </span>
+        </div>
+        <div className="col-md-6">
+          <a 
+            href="javascript:void(0)" 
+            onClick={handleToggle} 
+            style={{float: "right"}} 
+            id={Item._id}
+            >See More
+          </a>
+        </div>
+    </div>
+    )
+  }
+
+    let Events = Event_list.map((Item, index) => (
+      <Grid item xs={6} sm={4} key={index}>
         {Date.parse(Item.eventDate) >= Date.parse(new Date()) ? (
           <Card>
             <CardActions>
@@ -109,7 +164,9 @@ class Events extends Component {
                     )}
                   </Grid>
                   <Grid item sm={12}>
-               <span><a href="javascript:void(0)" onClick={handleToggle} style={{float: "right"}} id={Item._id}>See More</a></span>
+                    <FooterOfEvents 
+                      Item={Item} 
+                    />
                   </Grid>
                 </div>
               </Grid>
@@ -181,7 +238,7 @@ class Events extends Component {
                   )}
                   </Grid>
                   <Grid item sm={12}>
-                   <span><a href="javascript:void(0)" onClick={handleToggle} style={{float: "right"}} id={Item._id}>See More</a></span>
+                     <FooterOfEvents Item={Item} />
                   </Grid>
                 </div>
               </Grid>
@@ -205,10 +262,10 @@ class Events extends Component {
           </div>
         </div>
         <Popups 
-        option={this.state.option}
-        optionValue={this.state.optionValue}
-        modalShow={this.state.modalShow}
-      />
+          option={this.state.option}
+          optionValue={this.state.optionValue}
+          modalShow={this.state.modalShow}
+        />
       </div>
     );
   }
