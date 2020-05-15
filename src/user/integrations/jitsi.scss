@@ -1,19 +1,40 @@
+.containerStyle{
+    height: 600px;
+    width: 770px;
+}
+.container{
+    width: 60%;
+    height: 90%;
+}
+.display2{
+    justify-content:space-between;
+}
+.base{
+    height: 450px;
+    width: 450px;
+    background-color: red;
+    position: relative;
+    right: 200px;
+}
 .heading{
     margin-top: 20px;
 }
 .title{
-    font-size: 22px;
+    font-size: 25px;
     font-weight: 700;
     line-height: 29px;
     color: #1A73E8;
+   // margin-left: 6px;
 }
 .about{
     font-weight: 500;
-    font-size: 10px;
+    font-size: 13px;
     line-height: 14px;
     letter-spacing: 0.2em;
     color: #90949C;
     margin-top:10px;
+    margin-bottom: 5px;
+   // margin-left: 6px;
 }
 .message{
     font-weight: 500;
@@ -24,15 +45,14 @@
     margin-top:15px;
     margin-bottom: 20px;
 }
-.extra{
-    margin-bottom: 20px;
-    margin-left: -15px;
-}
+
 .label{
     font-weight: 600;
-    font-size: 12px;
+    font-size: 15px;
     color:#000000;
     margin-bottom: 3px;
+    margin-top: 5px;
+   // margin-left: 3px;
 }
 .form-input{
     font-family: Inter;
@@ -40,6 +60,7 @@
     font-weight: 300;
     font-size: 13px;
     line-height: 16px;
+    //margin-left: 3px;
 }
 .form-content{
     margin-top:-2%;
@@ -47,9 +68,9 @@
     justify-content:space-between;
 }
 .form-footer{
-    margin-top: 0;
+    margin-top: -5px;
     Button{
-        width:90px;
+        width: auto;
         margin-right: 20px;
         margin-bottom: 30px;
         border-radius: 100px;
@@ -62,39 +83,4 @@
 }
 .contain{
     margin-top: -3px;
-}
-.photo{
-    margin-top: 3px;
-    height: 43px;
-    width: 43px; 
-} 
-.user{
-    margin-top: 2px;
-    font-size: 1.1em;
-    color: black;    
-}
-.descr{
-    font-size: 0.8em;
-    color: rgb(90, 84, 84);
-    margin-top: -13px;   
-}
-.follow-link{
-    margin-top: 3px;
-    padding: 8px;
-    font-size: 14px;
-    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
-    border-radius: 20px;
-    width: 80px;
-    height: 35px;
-    font-family: Inter;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 17px;
-    text-align: center;
-}
-.follower{
-    margin-top: 10px;
-    margin-bottom: 10px;
-    justify-content:space-between;
 }
