@@ -8,18 +8,28 @@ import Logout from "../../profile/popups/Logout";
 import logo from "../../../svgs/logout.svg";
 import {Info} from "../../integrations/NameForm";
 import JitsiMeets from '../../../images/jitsi.png'
+import ComminytPng from '../../../images/community.png'
+import CommunitySetting from "../Community/CommunitySetting";
 
 class Navigation extends Component {
-  state = { logout: false };
+  state = { 
+    logout: false,
+    org: false
+ };
   render() {
-    let cancel = () =>
+    const cancel = () =>
       this.setState({
         logout: false,
       });
-    let close = () =>
+    const close = () =>
       this.setState({
         open: false,
       });
+    const closeOrgSetting = () => {
+      this.setState({
+        org: false
+      })
+    }
     const divStyle = {
       position: "fixed",
       bottom: '5em'
@@ -217,6 +227,18 @@ class Navigation extends Component {
             </div>
             {this.state.open ? (
               <Info show={this.state.open} onHide={close} />
+            ) : null}
+          </ListGroup.Item>
+          <ListGroup.Item>
+            <div
+              className="community"
+              onClick={() => this.setState({ org: true })}
+            >
+              <img src={ComminytPng} alt="community_settings" className="community_settings link" />
+              <b>Org settings</b>
+            </div>
+            {this.state.org ? (
+              <CommunitySetting show={this.state.org} onHide={closeOrgSetting} />
             ) : null}
           </ListGroup.Item>
         </ListGroup>
