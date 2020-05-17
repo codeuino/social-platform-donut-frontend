@@ -1,0 +1,184 @@
+.dashboard-content {
+  padding: 30px;
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+
+  .searchbar-container {
+    flex-grow: 0.5;
+    .searchbar {
+      border-radius: 25px;
+    }
+    .dashboard-title {
+      margin-top: 15px;
+      .title-text {
+        font-family: Inter;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 36px;
+        line-height: 44px;
+        color: #000000;
+      }
+    }
+    .button-container {
+      .posts {
+        .category {
+          text-align: left;
+          margin-left: 0px;
+          margin-top: 20px;
+          .category-btn {
+            background-color: white;
+            font-family: Inter;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 18px;
+            line-height: 22px;
+
+            &:hover {
+              background-color: #1a73e8;
+              color: white;
+            }
+
+            &:focus {
+              background-color: #1a73e8;
+              color: white;
+            }
+          }
+        }
+      }
+    }
+  }
+  .proposal-container {
+    margin-top: 20px;
+    flex-grow: 5;
+    .proposals {
+      .single-proposal {
+        display: inline-block;
+        counter-increment: item-counter;
+        width: 100%;
+        margin-bottom: 15px;
+        border: solid 1px #dfe9f1;
+        box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+        .user-info {
+          display: flex;
+          padding: 8px;
+          .image {
+            width: 38px;
+            height: 38px;
+            img {
+              width: 100%;
+              height: 100%;
+              border-radius: 2px;
+            }
+          }
+          .img-desc {
+            margin-left: 10px;
+            h2 {
+              font-family: Inter;
+              font-style: normal;
+              font-weight: 600;
+              font-size: 18px;
+              line-height: 22px;
+              margin: 3px;
+              /* identical to box height */
+            }
+            small {
+              font-family: Inter;
+              font-style: normal;
+              font-weight: normal;
+              font-size: 12px;
+              line-height: 15px;
+              color: #90949c;
+              margin: 0;
+            }
+            .proposal-date {
+              font-family: Inter;
+              font-style: normal;
+              font-weight: normal;
+              font-size: 12px;
+              line-height: 15px;
+
+              color: #90949c;
+            }
+          }
+          .status-btn-draft {
+            background-color: white;
+            padding: 4px 36px;
+            border: solid 1px #eb5757;
+            border-radius: 100px;
+            color: #eb5757;
+            margin: 0 5px;
+            height: 30px;
+            cursor: default;
+          }
+          .status-btn-submitted {
+            background-color: white;
+            padding: 4px 36px;
+            border: solid 1px #90949c;
+            border-radius: 100px;
+            color: #90949c;
+            margin: 0 5px;
+            height: 30px;
+            cursor: default;
+          }
+          .status-btn-accepted {
+            background-color: white;
+            padding: 4px 36px;
+            border: solid 1px #27ae60;
+            border-radius: 100px;
+            color: #27ae60;
+            margin: 0 5px;
+            height: 30px;
+            cursor: default;
+          }
+          .dropdown-container {
+            margin-left: auto;
+            margin-right: 5px;
+          }
+        }
+        .proposal-content {
+          display: flex;
+          .proposal-details {
+            flex: 3;
+            font-family: Inter;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 17px;
+            padding: 10px;
+
+            color: #1d2129;
+          }
+          .proposal-options {
+            flex: 1.5;
+            text-align: center;
+            padding: 20px;
+            .option-btn {
+              background-color: white;
+              color: #007bff;
+              padding: 4px 40px;
+              border: solid 1px #1a73e8;
+              border-radius: 100px;
+              margin: 0 10px;
+              height: 30px;
+              cursor: pointer;
+              &.active {
+                background: #007bff;
+                color: white;
+              }
+              .option-text {
+                font-family: Inter;
+                font-style: normal;
+                font-weight: 500;
+                font-size: 14px;
+                line-height: 22px;
+                /* identical to box height */
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
