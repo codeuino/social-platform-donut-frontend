@@ -22,12 +22,12 @@
   width: 50px;
 }
 
-.navigation{
-  .list-group{
-    .active{
+.navigation {
+  .list-group {
+    .active {
       background-color: rgba(26, 115, 232, 0.1);
       .link {
-        color : #1A73E8
+        color: #1a73e8;
       }
     }
   }
@@ -47,29 +47,57 @@
   .list-group {
     .list-group-item {
       svg {
-        padding-right : 20px
+        padding-right: 20px;
       }
     }
   }
 }
+.community {
+  display: flex;
+  color: rgba(0, 0, 0, 0.5);
+}
+.community_settings {
+  color: rgba(0, 0, 0, 0.5);
+  margin-right: 15px;
+  height: 20px;
+}
 
-.navigation{
+.jitsi {
+  display: flex;
+  color: rgba(0, 0, 0, 0.5);
+}
+.jitsi-meet {
+  height: 21px;
+  width: 21px;
+  color: rgba(0, 0, 0, 0.5);
+  margin-right: 15px;
+}
+
+.navigation {
   .list-group {
     .active {
-      .icon{
-        .path-name{
-          fill : #1A73E8;
-          fill-opacity : 10
+      .icon {
+        .path-name {
+          fill: #1a73e8;
+          fill-opacity: 10;
         }
       }
     }
   }
 }
 
-.logout{
+.logout {
   height: 21px;
   width: 21px;
   color: rgba(0, 0, 0, 0.5);
   margin-right: 15px;
   margin-left: 2px;
+}
+
+.log-button{
+  margin-left: -8.5px; 
+  position: fixed;
+  z-index: 999;
+  color: rgba(0, 0, 0, 0.5);
+  bottom: 2em;
 }
