@@ -14,6 +14,9 @@ class Navigation extends Component {
     return (
       <div className="navigation">
         <ListGroup>
+          <ListGroup.Item className="community_header">
+            <p className="header_text">Community Settings</p>
+          </ListGroup.Item>
           <ListGroup.Item className={profile ? "active" : "inactive"}>
             <svg
               width="38"

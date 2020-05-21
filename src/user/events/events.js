@@ -255,7 +255,7 @@ class Events extends Component {
         </div>
         <div className="news events">
           <div className="container">
-            <h1>All Events</h1>
+            <h1 className="event_header">All Events</h1>
             <Grid container spacing={3}>
               {Events}
             </Grid>

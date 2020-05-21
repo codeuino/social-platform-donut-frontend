@@ -8,8 +8,8 @@ import Logout from "../../profile/popups/Logout";
 import logo from "../../../svgs/logout.svg";
 import {Info} from "../../integrations/NameForm";
 import JitsiMeets from '../../../images/jitsi.png'
-import ComminytPng from '../../../images/community.png'
-import CommunitySetting from "../Community/CommunitySetting";
+// import ComminytPng from '../../../images/community.png'
+// import CommunitySetting from "../Community/CommunitySetting";
 
 class Navigation extends Component {
   state = { 
@@ -25,11 +25,11 @@ class Navigation extends Component {
       this.setState({
         open: false,
       });
-    const closeOrgSetting = () => {
-      this.setState({
-        org: false
-      })
-    }
+    // const closeOrgSetting = () => {
+    //   this.setState({
+    //     org: false
+    //   })
+    // }
     const divStyle = {
       position: "fixed",
       bottom: '5em'
@@ -38,7 +38,7 @@ class Navigation extends Component {
       position: "fixed",
       bottom: "2em"
     };
-    const { dashboard, posts, org,  event, proj, profile, logout, settings } = this.props;
+    const { dashboard, posts, org, orgSettings,  event, proj, profile, logout, settings } = this.props;
     return (
       <div className="navigation">
         <ListGroup>
@@ -48,7 +48,7 @@ class Navigation extends Component {
                 <DonutTitleSmall />
               </div>
             </NavLink>
-          </ListGroup.Item>
+          </ListGroup.Item><hr/>
           <ListGroup.Item className={dashboard ? "active" : "inactive"}>
             <svg
               width="38"
@@ -229,17 +229,26 @@ class Navigation extends Component {
               <Info show={this.state.open} onHide={close} />
             ) : null}
           </ListGroup.Item>
-          <ListGroup.Item>
-            <div
-              className="community"
-              onClick={() => this.setState({ org: true })}
+          <ListGroup.Item className={orgSettings ? "active" : "inactive"} style={{alignItems: 'baseline'}}>
+            <svg 
+              width = "35"
+              height = "35"
+              viewBox = "0 0 18 18"
+              fill = "none"
+              xmlns = "http://www.w3.org/2000/svg"
+              className = "icon"
             >
-              <img src={ComminytPng} alt="community_settings" className="community_settings link" />
-              <b>Org settings</b>
-            </div>
-            {this.state.org ? (
-              <CommunitySetting show={this.state.org} onHide={closeOrgSetting} />
-            ) : null}
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M8.50214 0.402641C8.95768 0.140138 9.47421 0.00195312 10 0.00195312C10.5258 0.00195312 11.0424 0.140149 11.4979 0.402673C11.4986 0.403074 11.4993 0.403475 11.5 0.403877L18.5 4.40387C18.9556 4.66692 19.334 5.04515 19.5973 5.50062C19.8606 5.95609 19.9995 6.47279 20 6.99888V15.0009C19.9995 15.527 19.8606 16.0437 19.5973 16.4992C19.334 16.9547 18.9556 17.3329 18.5 17.5959L18.4961 17.5981L11.5 21.5959C11.4994 21.5963 11.4988 21.5966 11.4982 21.597C11.0426 21.8596 10.5259 21.9979 10 21.9979C9.4741 21.9979 8.95745 21.8596 8.50185 21.597C8.50123 21.5966 8.50062 21.5963 8.5 21.5959L1.50386 17.5981L1.5 17.5959C1.04439 17.3329 0.66597 16.9547 0.402692 16.4992C0.139414 16.0437 0.000539601 15.527 0 15.0009V6.99888C0.000539601 6.47279 0.139414 5.95609 0.402692 5.50062C0.66597 5.04515 1.04439 4.66692 1.5 4.40388L1.50386 4.40165L8.50214 0.402641ZM10 2.00195C9.82446 2.00195 9.65202 2.04816 9.5 2.13593L9.49614 2.13815L2.5 6.13593C2.49947 6.13623 2.49895 6.13654 2.49842 6.13684C2.34726 6.22448 2.22169 6.35021 2.13423 6.50151C2.04654 6.65321 2.00025 6.82528 2 7.0005V14.9993C2.00025 15.1745 2.04654 15.3466 2.13423 15.4983C2.22169 15.6496 2.34726 15.7753 2.49842 15.863C2.49895 15.8633 2.49947 15.8636 2.5 15.8639L9.5 19.8639C9.65202 19.9516 9.82446 19.9979 10 19.9979C10.1755 19.9979 10.348 19.9516 10.5 19.8639L10.5039 19.8617L17.5 15.8639C17.5005 15.8636 17.5011 15.8633 17.5016 15.863C17.6527 15.7753 17.7783 15.6496 17.8658 15.4983C17.9535 15.3465 17.9998 15.1742 18 14.9989V7.00093C17.9998 6.82556 17.9535 6.65333 17.8658 6.50151C17.7783 6.35021 17.6527 6.22449 17.5016 6.13685C17.5011 6.13654 17.5005 6.13623 17.5 6.13593L10.5 2.13594C10.348 2.04817 10.1755 2.00195 10 2.00195Z" fill="#1A73E8"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M0.404578 5.45916C0.68112 4.9811 1.29285 4.81773 1.77091 5.09428L10.0002 9.85462L18.2295 5.09428C18.7075 4.81773 19.3193 4.9811 19.5958 5.45916C19.8723 5.93722 19.709 6.54895 19.2309 6.82549L10.5009 11.8755C10.1911 12.0547 9.80923 12.0547 9.49946 11.8755L0.769462 6.82549C0.2914 6.54895 0.128037 5.93722 0.404578 5.45916Z" fill="#1A73E8"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M10 10C10.5523 10 11 10.4477 11 11V21.08C11 21.6323 10.5523 22.08 10 22.08C9.44772 22.08 9 21.6323 9 21.08V11C9 10.4477 9.44772 10 10 10Z"
+             fill = "black"
+             fillOpacity = "0.5"
+             className = "path-name"
+            />
+            </svg>
+            <NavLink to="/org-settings" className="link">
+              <b>Org Settings</b>
+            </NavLink>
           </ListGroup.Item>
         </ListGroup>
       </div>
@@ -251,6 +260,7 @@ Navigation.propTypes = {
   dashboard: PropTypes.bool,
   post: PropTypes.bool,
   org: PropTypes.bool,
+  orgSettings: PropTypes.bool,
   profile: PropTypes.bool,
   settings: PropTypes.bool,
   logout: PropTypes.bool,
