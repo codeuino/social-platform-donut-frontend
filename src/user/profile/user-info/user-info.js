@@ -3,9 +3,17 @@ import "./user-info.scss";
 import { Button } from "react-bootstrap";
 import { Avatar } from "@material-ui/core";
 import EditProfile from "./../popups/EditProfile";
-import { Followers } from "../popups/Followers";
+import Followers from "../popups/Followers";
+
 class UserInfo extends Component {
-  state = { editProfile: false, followersList: false };
+  constructor(props) {
+    super(props);
+    this.state = {
+      editProfile: false,
+      followersList: false
+    }
+  }
+
   render() {
     let cancel = () =>
       this.setState({
@@ -23,7 +31,7 @@ class UserInfo extends Component {
           </div>
           <div className="edit-option">
             <Button
-              variant="primary"
+              className="useredit"
               onClick={() => this.setState({ editProfile: true })}
             >
               User Edit

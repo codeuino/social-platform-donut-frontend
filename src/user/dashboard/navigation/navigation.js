@@ -8,8 +8,6 @@ import Logout from "../../profile/popups/Logout";
 import logo from "../../../svgs/logout.svg";
 import {Info} from "../../integrations/NameForm";
 import JitsiMeets from '../../../images/jitsi.png'
-// import ComminytPng from '../../../images/community.png'
-// import CommunitySetting from "../Community/CommunitySetting";
 
 class Navigation extends Component {
   state = { 

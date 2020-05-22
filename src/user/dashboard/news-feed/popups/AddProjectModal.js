@@ -7,7 +7,7 @@ const AddProjectModal = (props) => {
     <Modal
       show={props.show}
       onHide={props.handleClose}
-      animation={false}
+      animation={true}
       className="modal"
       centered
     >

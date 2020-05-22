@@ -49,6 +49,13 @@
 
             color: $color-modal-message;
           }
+          .upload_community_logo {
+            height: 15vw;
+            width: 20vw;
+            margin-left: -0.7em;
+            margin-top: -0.3em;
+            border-radius: 50%;
+          }
         }
       }
       .modal__secondary-title {
@@ -66,7 +73,9 @@
       margin-top: 15px;
       margin-bottom: 10px;
       justify-content: space-between;
-
+      .modal__name__container {
+        display: flex;
+      }
       .modal__followerPhoto {
         margin-top: 3px;
         height: 43px;
@@ -101,6 +110,21 @@
         line-height: 15px;
 
         color: #1a73e8;
+      }
+      .modal__remove__followButton {
+        border: 1px solid #EB5757;
+        box-sizing: border-box;
+        box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
+        border-radius: 34px;
+        background: transparent;
+        .remove_followText {
+          font-family: Inter;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 12px;
+          line-height: 15px;
+          color: #EB5757;
+        }
       }
     }
   }
@@ -146,4 +170,9 @@
       }
     }
   }
+}
+.modal-content {
+  border-radius: 7px;
+  max-height: 90vh;
+  overflow-y: scroll;
 }
