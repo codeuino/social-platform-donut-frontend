@@ -1,16 +1,13 @@
-.dashboard {
+.discussion {
   display: flex;
   min-height: 100vh;
   height: auto;
   font-family: Muli, sans-serif;
-  .dashboard__navigation {
+  .discussion__navigation {
     flex: 1;
     border-right: solid 1px #dfe9f1;
   }
-  .dashboard__content {
-    flex: 4;
-  }
-  .dashboard__rightpanel {
-    flex: 2;
+  .discussion__content {
+    flex: 5.5;
   }
 }

@@ -14,6 +14,7 @@ import Maintenance from "./maintenance/maintenance";
 import Events from "./user/events/events";
 import UserProposalDashboard from "./user/proposals/UserProposalDashboard/UserProposalDashboard";
 import AdminProposalDashboard from "./user/proposals/AdminProposalDashboard/AdminProposalDashboard";
+import ProposalDiscussion from "./user/proposals/ProposalDiscussion/ProposalDiscussion";
 
 const Router = () => (
   <BrowserRouter>
@@ -30,6 +31,16 @@ const Router = () => (
       <PrivateRoute exact path="/projects" component={Projects} />
       <PrivateRoute exact path="/events" component={Events} />
       <PrivateRoute exact path="/proposal" component={UserProposalDashboard} />
+      <PrivateRoute
+        exact
+        path="/adminproposal"
+        component={AdminProposalDashboard}
+      />
+      <PrivateRoute
+        exact
+        path="/proposalDiscussion"
+        component={ProposalDiscussion}
+      />
       <PrivateRoute
         exact
         path="/adminproposal"

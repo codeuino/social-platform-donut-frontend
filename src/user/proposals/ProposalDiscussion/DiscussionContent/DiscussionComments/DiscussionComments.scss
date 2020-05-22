@@ -1,0 +1,84 @@
+.commentbox {
+  .comments {
+    .comment-title {
+      margin-top: 10px;
+      font-family: Inter;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 22px;
+      line-height: 27px;
+
+      color: #000000;
+    }
+    .comments-containers {
+      border: solid 1px #dfe9f1;
+      overflow: auto;
+      border-radius: 5px;
+      margin: 5px 5px -1px 5px;
+      max-height: 73vh;
+
+      .comment-item {
+        display: flex;
+        padding: none;
+        .image-container {
+          flex: 1;
+          .user-image {
+            width: 30px;
+            height: 30px;
+          }
+        }
+        .comment-container {
+          flex: 6;
+          border: solid 1px #dfe9f1;
+
+          border-radius: 5px;
+          padding: 3px;
+          .commenting-user {
+            font-family: Inter;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 150%;
+            /* or 21px */
+
+            color: #000000;
+          }
+          .commented-section {
+            margin-top: 2px;
+            font-family: Inter;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 150%;
+            /* or 21px */
+
+            color: rgba(29, 33, 41, 0.5);
+          }
+          .comment-text {
+            margin-top: 2px;
+            font-family: Inter;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 14px;
+
+            /* or 21px */
+
+            color: rgba(21, 21, 21, 0.91);
+          }
+        }
+      }
+    }
+    .chat-container {
+      border: solid 1px #dfe9f1;
+      margin-bottom: 20px;
+
+      margin-left: 5px;
+      margin-right: 5px;
+      padding: 10px;
+
+      .textinput {
+        border-radius: 25px;
+      }
+    }
+  }
+}

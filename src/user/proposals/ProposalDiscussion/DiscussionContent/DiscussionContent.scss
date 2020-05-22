@@ -1,0 +1,97 @@
+.discussion-content {
+  padding: 30px;
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  .discussion-toppanel {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+    .discussion-title {
+      flex-grow: 5;
+
+      .title-text {
+        font-family: Inter;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 36px;
+        line-height: 44px;
+
+        color: #1d2129;
+      }
+    }
+    .discussion-buttons {
+      flex-grow: 1;
+      text-align: right;
+      .option-btn {
+        background-color: white;
+        color: #007bff;
+        padding: 4px 40px;
+        border: solid 1px #1a73e8;
+        border-radius: 100px;
+        margin: 0 10px;
+        height: 30px;
+        cursor: pointer;
+        &.active {
+          background: #007bff;
+          color: white;
+        }
+        .option-text {
+          font-family: Inter;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 16px;
+          line-height: 19px;
+          /* identical to box height */
+        }
+      }
+    }
+  }
+  .discussion-bottompanel {
+    flex-grow: 4;
+    display: flex;
+
+    .proposal-preview {
+      margin-top: 20px;
+      flex: 2;
+      display: flex;
+      flex-direction: column;
+      max-height: 80vh;
+
+      .proposal-text {
+        overflow: auto;
+        flex-grow: 4;
+        font-family: Inter;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 18px;
+        line-height: 22px;
+
+        color: #1d2129;
+      }
+      .attached-images {
+        padding: 10px 10px 0px 0px;
+        flex-grow: 1;
+        .images-title {
+          margin-top: 10px;
+          font-family: Inter;
+          font-style: normal;
+          font-weight: 600;
+          font-size: 22px;
+          line-height: 27px;
+
+          color: #000000;
+        }
+        .image-item {
+          max-height: 10em;
+          margin-right: 10px;
+          margin-left: 10px;
+        }
+      }
+    }
+    .comments {
+      flex: 1;
+      padding-left: 10px;
+    }
+  }
+}
