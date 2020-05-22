@@ -7,7 +7,7 @@
     margin: 140px 0 0 0;
     .logo {
       padding-bottom: 20px;
-      h2 {        
+      h2 {
         padding: 34px 10px 0 20px;
         color: #2d2d2d;
         font-size: 34px;
@@ -22,7 +22,7 @@
       }
     }
     h1 {
-      font-family: 'Playfair Display', serif;
+      font-family: "Playfair Display", serif;
       color: #000000;
       font-size: 50px;
       font-style: normal;
@@ -55,5 +55,50 @@
         display: none;
       }
     }
+  }
+}
+
+.login-text {
+  font-family: "Inter";
+  font-size: 12px;
+  color: #90949c;
+}
+
+.selectorbtn-content {
+  font-family: "Inter";
+  font-size: 12px;
+  line-height: 17px;
+  font-style: normal;
+  font-weight: 600;
+  text-align: center;
+}
+
+.form-header {
+  font-family: Playfair Display;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 34px;
+  line-height: 45px;
+  text-align: center;
+}
+
+.login-text-selector {
+  font-family: "Inter";
+  font-size: 14px;
+  color: #90949c;
+  margin-top: 20px;
+  text-align: center;
+  .selector-text {
+    color: #1a73e8;
+    cursor: pointer;
+  }
+}
+
+.button-column {
+  text-align: center;
+  margin: 0 auto;
+  .selectorbtn {
+    border: 1px solid rgb(211, 220, 228);
+    width: 55%;
   }
 }

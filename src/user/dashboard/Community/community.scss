@@ -1,0 +1,27 @@
+.main_section {
+  display: flex;
+  flex-direction: row;
+  justify-items: center;
+  flex-wrap: wrap;
+  // max-height: 90vh;
+  .left_nav {
+    max-width: 20%;
+    width: 20vw;
+    border-right: 1px solid #CCCCCC;
+    overflow-y: auto;
+  }
+  .right_section{
+    width: 80vw;
+    max-width: 75%;
+    overflow-y: auto;
+  }
+}
+.header_text {
+  font-family: Inter sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 21px;
+  letter-spacing: 0.25px;
+  color: #2D2D2D;
+}

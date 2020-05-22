@@ -2,42 +2,64 @@
   display: flex;
   flex-direction: row;
   border: solid 1px #dfe9f1;
-  min-height: 198px;
-  height: auto;
+  height: 269px;
+
   flex: 0.5 1;
   align-items: center;
   .org-image {
     flex: 0.5;
     text-align: center;
     margin: 35px 0;
+    .useredit {
+      margin-top: 10px;
+      border-radius: 20px;
+      font-size: 14px;
+    }
+    .org-pic {
+      display: inline-block;
+      .orgpic {
+        width: 182px;
+        height: 182px;
+      }
+    }
   }
   .org-data {
     flex: 1;
     padding: 10px 14px;
     h1 {
-      color: #0069d9;
-      font-size: 20px;
-      font-weight: bold;
-      margin: 0;
-      padding: 0;
+      font-family: Inter;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 32px;
+      line-height: 39px;
+      /* identical to box height */
+
+      color: #1a73e8;
     }
     .profession {
-      color: #748391;
-      font-size: 14px;
+      color: #90949c;
+      font-size: 12px;
+      font-weight: 600;
       margin: 4px 0;
-      padding: 0;
+      line-height: 0%;
     }
     .place {
-      color: #2c3e50;
+      font-family: Inter;
+      font-style: normal;
+      font-weight: normal;
       font-size: 12px;
-      margin: 4px 0;
-      padding: 0;
+      line-height: 15px;
+
+      color: #90949c;
     }
     .desc {
-      color: #5d5d5d;
+      font-family: Inter;
+      font-style: normal;
+      font-weight: normal;
       font-size: 14px;
-      margin: 0;
-      padding: 0;
+      line-height: 17px;
+
+      color: #1d2129;
     }
     .social-icons {
       .btn-primary {
@@ -76,4 +98,8 @@
       }
     }
   }
+}
+
+.org-followbtn {
+  margin: 10px;
 }

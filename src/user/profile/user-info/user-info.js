@@ -1,36 +1,46 @@
 import React, { Component } from "react";
 import "./user-info.scss";
 import { Button } from "react-bootstrap";
-import {EditProfile} from "./../popups/edit-profile";
-import {Followers} from "./../popups/followers"
+import { Avatar } from "@material-ui/core";
+import EditProfile from "./../popups/EditProfile";
+import { Followers } from "../popups/Followers";
 class UserInfo extends Component {
-  state = { editProfile:false, followersList:false };
+  state = { editProfile: false, followersList: false };
   render() {
-    let cancel =()=>this.setState({
-      editProfile:false
-    });
-    let cancelf =()=>this.setState({
-      followersList:false
-    });
+    let cancel = () =>
+      this.setState({
+        editProfile: false,
+      });
+    let cancelf = () =>
+      this.setState({
+        followersList: false,
+      });
     return (
       <div className="user-details">
         <div className="user-image">
           <div className="user-pic">
-            <img src="" alt="" />
+            <Avatar className="userpic"></Avatar>
           </div>
           <div className="edit-option">
-            <Button variant="primary" onClick={
-              ()=>this.setState({editProfile:true})}>User Edit</Button>
-              <EditProfile show={this.state.editProfile}
-              onHide={cancel} />
+            <Button
+              variant="primary"
+              onClick={() => this.setState({ editProfile: true })}
+            >
+              User Edit
+            </Button>
+            <EditProfile show={this.state.editProfile} onHide={cancel} />
           </div>
         </div>
         <div className="user-data">
           <h1>
-            Dhanus Rajendra <Button variant="primary" onClick={
-              ()=>this.setState({followersList:true})}>Follow</Button>
-              <Followers show={this.state.followersList}
-              onHide={cancelf} />
+            Dhanus Rajendra{" "}
+            <Button
+              variant="primary"
+              onClick={() => this.setState({ followersList: true })}
+            >
+              Follow
+            </Button>
+            <Followers show={this.state.followersList} onHide={cancelf} />
           </h1>
           <p className="profession">Front end developer</p>
           <p className="place">Bengaluru, Karnataka</p>

@@ -5,13 +5,42 @@
       color: #00abff;
     }
   }
-  .cta-register {
+  .cta-signup {
     display: flex;
     align-items: center;
     justify-content: center;
     margin-top: 30px;
     button {
+      padding: 8px 10px;
+      border-radius: 30px;
+    }
+  }
+  .savebtn {
+    display: flex;
+    padding: 8px 50px;
+    margin: 10px auto;
+    align-items: center;
+    justify-content: center;
+    button {
       padding: 8px 50px;
     }
   }
+  #validation_msg {
+    color: rgb(247, 134, 134);
+    font-size: 15px;
+  }
+}
+
+.signupbtn {
+  border: 1px solid rgb(211, 220, 228);
+  border-radius: 3px;
+  width: 45%;
+}
+
+.signupbtn-text {
+  font-family: Inter;
+  font-style: normal;
+
+  font-size: 16px;
+  line-height: 24px;
 }

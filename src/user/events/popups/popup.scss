@@ -1,0 +1,52 @@
+.info-eventName{
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.info-common{
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    color:rgb(117, 114, 114);
+   
+}
+
+.info-cancelled{
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    color:rgb(202, 25, 25);   
+}
+.info-slots-no{
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    color:black;
+}
+
+.info-description{
+    font-size: 15px;
+    text-align: justify;
+    color:rgb(56, 55, 55);
+}
+
+.form-footer {
+    margin-top: 0;
+    Button {
+        width: 90px;
+        margin-right: 20px;
+        margin-bottom: 30px;
+        border-radius: 100px;
+        font-weight: 600;
+    }
+    .savebtn {
+        background-color: #1A73E8;
+    }
+}
+.modal-backdrop {
+    background-color: rgba(0,0,0, 0.1) !important;
+}
+.modal-backdrop.in{
+    opacity: 0.5;
+}
