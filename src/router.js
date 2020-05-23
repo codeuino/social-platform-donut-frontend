@@ -12,6 +12,7 @@ import ProjInfo from "./user/projects/proj-info/proj-info";
 import PrivateRoute from "./common/PrivateRoute";
 import Maintenance from "./maintenance/maintenance";
 import Events from "./user/events/events";
+import Admin from "./user/Admin/Admin";
 
 
 const Router = () => (
@@ -28,6 +29,7 @@ const Router = () => (
       <PrivateRoute exact path="/settings" component={Settings}/>
       <PrivateRoute exact path="/projects" component={Projects}/>
       <PrivateRoute exact path="/events" component={Events}/>
+       <PrivateRoute exact path="/admin" component={Admin}/>
       <Route component={NotFound} />
     </Switch>
   </BrowserRouter>
