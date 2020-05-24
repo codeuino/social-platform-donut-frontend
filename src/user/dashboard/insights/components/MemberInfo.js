@@ -38,7 +38,7 @@ class MemberInfo extends Component {
     ];
     let popOverContent = (
       <Popover>
-        <Popover.Title as="h2">{`Options`}</Popover.Title>
+        <Popover.Title as="h2">{``}</Popover.Title>
         <Popover.Content>
           <div className="list_group" style={{ listStyle: "none" }}>
             <Button 

@@ -17,7 +17,8 @@ class Navigation extends Component {
           <ListGroup.Item className="community_header">
             <p className="header_text">Community Settings</p>
           </ListGroup.Item>
-          <ListGroup.Item className={profile ? "active" : "inactive"}>
+          <ListGroup.Item className={profile ? "active" : "inactive"} 
+            onClick={() => this.handleParentView("profile")}>
             <svg
               width="38"
               height="38"
@@ -37,12 +38,13 @@ class Navigation extends Component {
             <a
               href="javascript:void(0)"
               className="link"
-              onClick={() => this.handleParentView("profile")}
             >
-              <b>Profile</b>
+              <b className="left__nav__text">Profile</b>
             </a>
           </ListGroup.Item>
-          <ListGroup.Item className={settings ? "active" : "inactive"}>
+          <ListGroup.Item className={settings ? "active" : "inactive"}
+            onClick={() => this.handleParentView("settings")}
+          >
             <svg
               width="38"
               height="38"
@@ -62,12 +64,13 @@ class Navigation extends Component {
             <a
               href="javascript:void(0)"
               className="link"
-              onClick={() => this.handleParentView("settings")}
             >
-              <b>Settings</b>
+              <b id="left__nav__text">Settings</b>
             </a>
           </ListGroup.Item>
-          <ListGroup.Item className={permission ? "active" : "inactive"}>
+          <ListGroup.Item className={permission ? "active" : "inactive"}
+            onClick={() => this.handleParentView("permission")}
+          >
             <svg
               width="38"
               height="38"
@@ -87,13 +90,14 @@ class Navigation extends Component {
             <a
               href="javascript:void(0)"
               className="link"
-              onClick={() => this.handleParentView("permission")}
             >
-              <b>Permissions</b>
+              <b className="left__nav__text">Permissions</b>
             </a>
           </ListGroup.Item>
 
-          <ListGroup.Item className={authentication ? "active" : "inactive"}>
+          <ListGroup.Item className={authentication ? "active" : "inactive"}
+            onClick={() => this.handleParentView("authentication")}
+          >
             <svg
               width="38"
               height="38"
@@ -113,9 +117,8 @@ class Navigation extends Component {
             <a
               href="javascript: void(0)"
               className="link"
-              onClick={() => this.handleParentView("authentication")}
             >
-              <b>Authentication</b>
+              <b className="left__nav__text">Authentication</b>
             </a>
           </ListGroup.Item>
         </ListGroup>

@@ -34,3 +34,43 @@
     }
   }
 }
+// mobile 
+@media screen and (max-width: 768px) {
+  .overall_container{
+    .org_settings_view {
+     .main_section {
+       .left_nav {
+         .navigation {
+           .list-group {
+             .link {
+               display: none;
+             }
+             .header_text {
+               font-size: 10px;
+             }
+           }
+         }
+       }
+     }
+    }
+  }
+}
+
+// tablet 
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .overall_container {
+    .org_settings_view {
+      .main_section {
+        .left_nav {
+          .navigation {
+            .list-group {
+              .link {
+                font-size: 5px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

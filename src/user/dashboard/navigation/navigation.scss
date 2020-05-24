@@ -1,6 +1,7 @@
-.navigation {
+.main-navigation {
   .list-group {
     .list-group-item {
+      white-space: nowrap;
       cursor: pointer;
       border: none;
       font-style: normal;
@@ -22,7 +23,7 @@
   width: 50px;
 }
 
-.navigation {
+.main-navigation {
   .list-group {
     .active {
       background-color: rgba(26, 115, 232, 0.1);
@@ -33,7 +34,7 @@
   }
 }
 
-.navigation {
+.main-navigation {
   .list-group {
     .inactive {
       .link {
@@ -43,11 +44,11 @@
   }
 }
 
-.navigation {
+.main-navigation {
   .list-group {
     .list-group-item {
       svg {
-        padding-right: 20px;
+        padding: 0px 10px 0px 10px;
       }
     }
   }
@@ -65,6 +66,11 @@
 .jitsi {
   display: flex;
   color: rgba(0, 0, 0, 0.5);
+  padding: 0px 10px 0px 10px;
+}
+
+.community {
+  padding: 0px 10px 0px 10px;
 }
 .jitsi-meet {
   height: 21px;
@@ -73,7 +79,7 @@
   margin-right: 15px;
 }
 
-.navigation {
+.main-navigation {
   .list-group {
     .active {
       .icon {
@@ -94,14 +100,14 @@
   margin-left: 2px;
 }
 
-.log-button{
-  margin-left: -8.5px; 
+.log-button {
+  margin-left: -8.5px;
   position: fixed;
   z-index: 999;
   color: rgba(0, 0, 0, 0.5);
   bottom: 2em;
 }
-.navigation {
+.main-navigation {
   hr {
     margin-bottom: 0;
   }

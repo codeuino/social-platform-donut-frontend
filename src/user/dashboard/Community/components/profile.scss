@@ -14,10 +14,11 @@
     font-family: Inter;
     font-style: normal;
     font-weight: 500;
-    font-size: 1.1em;
     line-height: 22px;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.3em;
     color: #000000;
+    font-size: 1em;
+    letter-spacing: 0.1em;
   }
   .container {
     .form {
@@ -41,10 +42,11 @@
         color: #1A73E8;
       }
       .upload_img {
-        width: 161px;
-        height: 141px;
-        left: 547px;
-        top: 179px;
+        width: 12vw;
+        border: 1px solid #CCCCCC;
+        box-sizing: border-box;
+        border-radius: 5px;
+        margin-right: 1em;
       }
       .save_btn {
         background: #1A73E8;
