@@ -1,33 +1,42 @@
 .main-donut-logo {
-    padding: 0;
+  padding: 0;
 }
 
-.main-donut-logo img {   
-    height: 70px;
-    margin-bottom: 0px;
+.main-donut-logo img {
+  height: 70px;
+  margin-bottom: 0px;
+}
+
+.main-donut-logo-mobile {
+  display: flex;
+  padding: 0px 10px 0px 10px;
+}
+
+.main-donut-logo-mobile img {
+  height: 27px;
+  margin-bottom: 0px;
 }
 
 .main-donut-logo-small {
-    display: flex;
+  display: flex;
 }
 
-.main-donut-logo-small img {   
-    height: 27px;
-    margin-bottom: 0px;
+.main-donut-logo-small img {
+  height: 27px;
+  margin-bottom: 0px;
 }
 
 @keyframes infiniteRotate {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 @media only screen and (max-width: 700px) {
-
-    .main-donut-logo img {
-        height: 40px;
-    }
+  .main-donut-logo img {
+    height: 40px;
+  }
 }
