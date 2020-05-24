@@ -75,6 +75,7 @@ class Register extends Component {
                 type="submit"
                 variant="primary"
                 color="primary"
+                onClick={() => this.props.toggle('activate')}
               >
                 <span className="register-text">Register as an Admin</span>
               </Button>

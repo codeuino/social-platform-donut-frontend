@@ -48,6 +48,7 @@ class Login extends Component {
                 type="submit"
                 variant="primary"
                 color="primary"
+                onClick={() => this.props.toggle('setup')}
               >
                 <span className="login-text">Login as an Admin</span>
               </Button>

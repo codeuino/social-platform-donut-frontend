@@ -39,7 +39,7 @@
 
         letter-spacing: 0.1px;
 
-        color: #1A73E8;
+        color: #1a73e8;
       }
     }
   }
@@ -59,7 +59,7 @@
   .list-group {
     .list-group-item {
       svg {
-        padding-right: 20px;
+        padding: 0px 10px 0px 10px;
       }
     }
   }
@@ -68,6 +68,11 @@
 .jitsi {
   display: flex;
   color: rgba(0, 0, 0, 0.5);
+  padding: 0px 10px 0px 10px;
+}
+
+.community {
+  padding: 0px 10px 0px 10px;
 }
 .navigation {
   .list-group {
@@ -81,4 +86,3 @@
     }
   }
 }
-

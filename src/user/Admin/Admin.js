@@ -81,12 +81,14 @@ class Admin extends Component {
             {view === "login" ? (
               <Login toggle={this.toggleView.bind(this)} />
             ) : null}
-            {activate ? adminEmailVerification : null}
-            {setup ? setupContent : null}
+            {view === "activate" ? adminEmailVerification : null}
+            {view === "setup" ? setupContent : null}
           </div>
         </div>
         <div className="main__footer">
-          <div className = { view === "login" ? "stick__to__bottom" : null } >
+          <div className = {
+            (view === "login" || view === "setup" || view === "activate" ) ? "stick__to__bottom" : null
+          } >
             <img
             src={ExtraDonuts}
             alt="extra__donuts"
