@@ -1,6 +1,5 @@
 .navigation {
   box-sizing: border-box;
-  width: 90%;
   height: 80vh;
   left: 0px;
   top: -1px;
@@ -26,6 +25,17 @@
 }
 
 .navigation {
+  .community_header {
+     .header_text {
+       font-family: Inter;
+       font-style: normal;
+       font-weight: 500;
+       font-size: 1.1em;
+       line-height: 1.3em;
+       letter-spacing: 0.25px;
+       color: #9E9E9E;
+     }
+  }
   .list-group {
     .active {
       background-color: rgba(26, 115, 232, 0.1);

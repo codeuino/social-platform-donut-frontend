@@ -1,27 +1,26 @@
 import React, { Component } from "react";
-import { ListGroup, Button, OverlayTrigger, Tooltip } from "react-bootstrap";
+import { ListGroup, Button,  OverlayTrigger, Tooltip } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import PropTypes from "prop-types";
+import "./navigation.scss";
+import Logout from "../../profile/popups/Logout";
+import logo from "../../../svgs/logout.svg";
+import {Info} from "../../integrations/NameForm";
+import JitsiMeets from '../../../images/jitsi.png'
 import {
   DonutTitleSmall,
   DonutIconSmall,
 } from "../../../donutTitle/donutTitle";
-import "./navigation.scss";
-import Logout from "../../profile/popups/Logout";
-import logo from "../../../svgs/logout.svg";
-import { Info } from "../../integrations/NameForm";
-import JitsiMeets from "../../../images/jitsi.png";
 import ComminytPng from "../../../images/community.png";
 import CommunitySetting from "../Community/CommunitySetting";
 import { Desktop, Mobile, Default, Tablet } from "../../../utils/breakpoints";
 import SVGIcon from "../../../utils/SVGIcon";
 
 class Navigation extends Component {
-  state = {
+  state = { 
     logout: false,
-    org: false,
-  };
-
+    org: false
+ };
   render() {
     function renderTooltip(props) {
       return (
@@ -30,7 +29,6 @@ class Navigation extends Component {
         </Tooltip>
       );
     }
-
     const ListItem = (props) => {
       const item = props.isMobile ? (
         <ListGroup.Item className={props.className}>
@@ -49,7 +47,6 @@ class Navigation extends Component {
 
       return item;
     };
-
     const cancel = () =>
       this.setState({
         logout: false,
@@ -58,29 +55,20 @@ class Navigation extends Component {
       this.setState({
         open: false,
       });
-    const closeOrgSetting = () => {
-      this.setState({
-        org: false,
-      });
-    };
+    // const closeOrgSetting = () => {
+    //   this.setState({
+    //     org: false
+    //   })
+    // }
     const divStyle = {
       position: "fixed",
-      bottom: "5em",
+      bottom: '5em'
     };
     const divStyle2 = {
       position: "fixed",
-      bottom: "2em",
+      bottom: "2em"
     };
-    const {
-      dashboard,
-      posts,
-      org,
-      event,
-      proj,
-      profile,
-      logout,
-      settings,
-    } = this.props;
+    const { dashboard, posts, org, orgSettings,  event, proj, profile, logout, settings } = this.props;
     return (
       <div className="main-navigation">
         <Desktop>
@@ -92,6 +80,7 @@ class Navigation extends Component {
                 </div>
               </NavLink>
             </ListGroup.Item>
+            <hr />
 
             <ListItem
               name="Dashboard"
@@ -159,25 +148,11 @@ class Navigation extends Component {
                 <Info show={this.state.open} onHide={close} />
               ) : null}
             </ListGroup.Item>
-            <ListGroup.Item>
-              <div
-                className="community"
-                onClick={() => this.setState({ org: true })}
-              >
-                <img
-                  src={ComminytPng}
-                  alt="community_settings"
-                  className="community_settings link"
-                />
-                <b>Org settings</b>
-              </div>
-              {this.state.org ? (
-                <CommunitySetting
-                  show={this.state.org}
-                  onHide={closeOrgSetting}
-                />
-              ) : null}
-            </ListGroup.Item>
+            <ListItem
+              className={this.props.orgSettings ? "active" : "inactive"}
+              link="/org-settings"
+              name="Org settings"
+            />
           </ListGroup>
         </Desktop>
 
@@ -262,24 +237,12 @@ class Navigation extends Component {
                 <Info show={this.state.open} onHide={close} />
               ) : null}
             </ListGroup.Item>
-            <ListGroup.Item>
-              <div
-                className="community"
-                onClick={() => this.setState({ org: true })}
-              >
-                <img
-                  src={ComminytPng}
-                  alt="community_settings"
-                  className="community_settings link"
-                />
-              </div>
-              {this.state.org ? (
-                <CommunitySetting
-                  show={this.state.org}
-                  onHide={closeOrgSetting}
-                />
-              ) : null}
-            </ListGroup.Item>
+            <ListItem
+              className={this.props.orgSettings ? "active" : "inactive"}
+              link="/org-settings"
+              name="Org settings"
+              isMobile={true}
+            />
           </ListGroup>
         </Mobile>
       </div>
@@ -291,6 +254,7 @@ Navigation.propTypes = {
   dashboard: PropTypes.bool,
   post: PropTypes.bool,
   org: PropTypes.bool,
+  orgSettings: PropTypes.bool,
   profile: PropTypes.bool,
   settings: PropTypes.bool,
   logout: PropTypes.bool,

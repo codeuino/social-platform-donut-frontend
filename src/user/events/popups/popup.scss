@@ -1,15 +1,18 @@
 .info-eventName{
-    font-size: 25px;
+    font-size: 1.7em;
     font-weight: bold;
     text-align: center;
+    font-family: Inter;
 }
 
 .info-common{
-    font-size: 20px;
+    font-family: Inter;
+    font-style: normal;
     font-weight: bold;
+    font-size: 1.1em;
+    line-height: 1.3em;
+    color: #2D2D2D;
     text-align: center;
-    color:rgb(117, 114, 114);
-   
 }
 
 .info-cancelled{
@@ -26,9 +29,12 @@
 }
 
 .info-description{
-    font-size: 15px;
-    text-align: justify;
-    color:rgb(56, 55, 55);
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1.1em;
+    line-height: 1.3em;
+    color: #2D2D2D;
 }
 
 .form-footer {

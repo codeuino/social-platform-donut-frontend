@@ -5,6 +5,16 @@
   font-family: Muli, sans-serif;
   .events {
       margin-top: 2vh;
+      .container {
+        .event_header {
+          font-family: Inter;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 1.5em;
+          line-height: 1.3em;
+          color: #2D2D2D;
+        }
+      }
   }
 } 
 
@@ -59,7 +69,7 @@
     background-color: #ffffff;
     width: auto;
     text-align: center;
-    font-size: 5rem;
+    font-size: 3rem;
   }
 
   .div3 {
@@ -89,11 +99,14 @@
 }
 
 .short-des{
-  font-weight: 100;
-  font-size: smaller;
-  color: #5d5d5d;
   text-align: justify;
   text-overflow: ellipsis;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1em;
+  line-height: 1.3em;
+  color: #2D2D2D;
 }
 
 .createdAt{

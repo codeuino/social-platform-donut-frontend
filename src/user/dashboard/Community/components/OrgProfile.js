@@ -38,12 +38,12 @@ class OrgProfile extends Component {
             <Form className="form">
               <Form.Group>
                 <Form.Label htmlFor="label_text" className="label_text">
-                  Logo
+                  LOGO
                 </Form.Label>
               </Form.Group>
               <Form.Group>
                 <div className="box">
-                  <img src={logo || UploadImg} alt="Upload" className="upload_img"/>
+                  <img src={logo || UploadImg} alt="Upload" className="upload_img img-fluid"/>
                   <Button 
                     className="upload_btn"
                     onChange={this.UploadNewLogo}
@@ -53,7 +53,7 @@ class OrgProfile extends Component {
               </Form.Group>
               <Form.Group>
                 <Form.Label htmlFor="label_text" className="label_text mt-0">
-                  About
+                  ABOUT
                 </Form.Label>
                 <Form.Control
                   type="text"
@@ -68,7 +68,7 @@ class OrgProfile extends Component {
               </Form.Group>
               <Form.Group>
                 <Form.Label htmlFor="label_text" className="label_text">
-                  Short description
+                  SHORT DESCRIPTION
                 </Form.Label>
                 <Form.Control
                   as="textarea"
@@ -84,7 +84,7 @@ class OrgProfile extends Component {
               </Form.Group>
               <Form.Group>
                 <Form.Label htmlFor="exampleText" className="label_text">
-                  Long description
+                  LONG DESCRIPTION
                 </Form.Label>
                 <Form.Control
                   as="textarea"
@@ -102,11 +102,11 @@ class OrgProfile extends Component {
               </Form.Group>
               <Form.Group>
                 <Form.Label htmlFor="deactivate" className="label_text">
-                  Deactivation
+                  Do you want to deactivate ?
                 </Form.Label>
               </Form.Group>
               <Form.Group>
-                <Button className="btn-secondary button-outline-danger deactivate_btn" onClick={this.deactivateOrg}>
+                <Button className="btn-danger button-outline-danger deactivate_btn" onClick={this.deactivateOrg}>
                   Deactivate
                 </Button>
               </Form.Group>

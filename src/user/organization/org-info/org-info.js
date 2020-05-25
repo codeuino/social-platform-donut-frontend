@@ -2,8 +2,24 @@ import React, { Component } from "react";
 import "./org-info.scss";
 import { Button } from "react-bootstrap";
 import { Avatar } from "@material-ui/core";
+import EditInfo from "../popups/EditInfo";
 
 class OrgInfo extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      editOrg: false
+    }
+  }
+  onEditOrg = () => {
+    console.log('Edit org is clicked!')
+    this.setState({ editOrg: true })
+  }
+  closeEditPop = () => {
+    console.log('Closing edit pop');
+    this.setState({ editOrg: false })
+  }
+
   render() {
     return (
       <div className="org-details">
@@ -12,10 +28,11 @@ class OrgInfo extends Component {
             <Avatar alt="Organisation-DP" className="orgpic" src=""></Avatar>
           </div>
           <div className="edit-option">
-            <Button variant="primary" className="useredit">
+            <Button variant="primary" className="useredit" onClick={this.onEditOrg}>
               User Edit
             </Button>
           </div>
+          <EditInfo show={this.state.editOrg} onHide={this.closeEditPop} />
         </div>
         <div className="org-data">
           <h1>
