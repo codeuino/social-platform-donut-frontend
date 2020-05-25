@@ -6,13 +6,15 @@ import OrgProfile from './components/OrgProfile';
 import OrgPermission from './components/OrgPermission'
 import OrgSetting from './components/OrgSettings'
 import OrgAuth from './components/OrgAuth'
+import Navigation from '../navigation/navigation'
 
 class CommunitySetting extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      org: true,
       option: {
-        profile: false,
+        profile: true,
         settings: false,
         permission: false,
         authentication: false
@@ -26,46 +28,36 @@ class CommunitySetting extends Component {
    const keys = Object.keys(this.state.option)
    let item = keys.filter(k => k === name)
    console.log('item ', item)
+   this.setState({ option: { profile: false }})
    this.setState({ option: { [name]: true }})
    this.setState({ view: name })
   }
   render() {
     const { view } = this.state;
     return (
-      <Modal
-        {...this.props}
-        size="xl"
-        aria-labelledby="contained-modal-title-vcenter"
-        dialogClassName="modal-90w"
-        centered
-      >
-        <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-            <p className="header_text">Community Settings</p>
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <div className="main_section">
-            <div className="left_nav">
-              <LeftNav
-                data={{
-                  option: this.state.option,
-                  changeOption: this.changeOption.bind(this),
-                }}
-              />
-            </div>
-            <div className="right_section">
-              {view === "profile" ? <OrgProfile /> : null}
-              {view === "permission" ? <OrgPermission /> : null}
-              {view === "settings" ? <OrgSetting /> : null}
-              {view === "authentication" ? <OrgAuth /> : null}
+      <div className="overall_container">
+        <div className="main_navigation">
+          <Navigation orgSettings={this.state.org} />
+        </div>
+        <div className="org_settings_view">
+            <div className="main_section">
+              <div className="left_nav">
+                <LeftNav
+                  data={{
+                    option: this.state.option,
+                    changeOption: this.changeOption.bind(this),
+                  }}
+                />
+              </div>
+              <div className="right_section">
+                {view === "profile" ? <OrgProfile /> : null}
+                {view === "permission" ? <OrgPermission /> : null}
+                {view === "settings" ? <OrgSetting /> : null}
+                {view === "authentication" ? <OrgAuth /> : null}
+              </div>
             </div>
           </div>
-        </Modal.Body>
-        {/* <Modal.Footer>
-          <Button onClick={this.props.onHide}>Close</Button>
-        </Modal.Footer> */}
-      </Modal>
+      </div>
     );
   }
 }

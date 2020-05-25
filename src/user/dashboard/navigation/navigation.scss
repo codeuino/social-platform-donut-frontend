@@ -26,7 +26,7 @@
 .main-navigation {
   .list-group {
     .active {
-      // background-color: rgba(26, 115, 232, 0.1);
+      background-color: rgba(26, 115, 232, 0.1);
       .link {
         color: #1a73e8;
       }
@@ -48,7 +48,7 @@
   .list-group {
     .list-group-item {
       svg {
-        padding: 30px;
+        padding: 0px 10px 0px 10px;
       }
     }
   }
@@ -106,4 +106,9 @@
   z-index: 999;
   color: rgba(0, 0, 0, 0.5);
   bottom: 2em;
+}
+.main-navigation {
+  hr {
+    margin-bottom: 0;
+  }
 }

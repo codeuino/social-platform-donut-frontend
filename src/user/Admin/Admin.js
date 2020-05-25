@@ -47,7 +47,7 @@ class Admin extends Component {
           <p className="setup__subtitle">A verification mail has been sent to your mail. Activate the admin account by clicking on the link. </p>
           <div className="setup__button__container">
             <Button className="setup__button">
-              Set up you Community
+              <a href="/setup">Set up you Community</a>
             </Button>
           </div>
         </div>

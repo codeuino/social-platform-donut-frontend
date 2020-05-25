@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   List,
   Card,
@@ -26,6 +26,7 @@ import EventIcon from "@material-ui/icons/Event";
 import feed from "../../../jsonData/news-feed";
 import "../../pinned-posts/posts/posts.scss";
 import "./news-feed.scss";
+import AddPostModal from "./popups/AddPostModal";
 
 const styles = makeStyles((theme) => ({
   root: {
@@ -79,15 +80,17 @@ const styles = makeStyles((theme) => ({
 
 export default function PinPosts(props) {
   const classes = styles();
-  const [type, changeType] = React.useState("All");
-  const [first, second] = React.useState("f");
-  const [showProject, setShowProject] = React.useState(false);
-  const [showEvent, setShowEvent] = React.useState(false);
+  const [type, changeType] = useState("All");
+  const [first, second] = useState("f");
+  const [showProject, setShowProject] = useState(false);
+  const [showEvent, setShowEvent] = useState(false);
+  const [writePost, showPostModal] = useState(false);
 
   let handleClick = (atrb) => () => {
     changeType(atrb);
     second("s");
   };
+
   let handleShow = (modalName) => {
     if (modalName === "project") {
       setShowProject(true);
@@ -95,6 +98,7 @@ export default function PinPosts(props) {
       setShowEvent(true);
     }
   };
+  
   let handleClose = (modalName) => {
     if (modalName === "project") {
       setShowProject(false);
@@ -102,6 +106,15 @@ export default function PinPosts(props) {
       setShowEvent(false);
     }
   };
+
+  let openPostModal = () => {
+    showPostModal(true)
+  }
+
+  let closePostModal = () => {
+    showPostModal(false)
+  }
+  
   let posts = feed.map((newsItem) => {
     if (
       newsItem.type === "Project" &&
@@ -148,7 +161,7 @@ export default function PinPosts(props) {
                       </IconButton>
                     ) : null}
                     <IconButton edge="end" className={classes.icon}>
-                      <MoreHorizIcon className={classes.horiz} />
+                      {/* <MoreHorizIcon className={classes.horiz} /> */}
                     </IconButton>
                   </ListItemSecondaryAction>
                 </ListItem>
@@ -237,7 +250,7 @@ export default function PinPosts(props) {
                       </IconButton>
                     ) : null}
                     <IconButton edge="end" className={classes.icon}>
-                      <MoreHorizIcon className={classes.horiz} />
+                      {/* <MoreHorizIcon className={classes.horiz} /> */}
                     </IconButton>
                   </ListItemSecondaryAction>
                 </ListItem>
@@ -294,7 +307,7 @@ export default function PinPosts(props) {
                       </IconButton>
                     ) : null}
                     <IconButton edge="end" className={classes.icon}>
-                      <MoreHorizIcon className={classes.horiz} />
+                      {/* <MoreHorizIcon className={classes.horiz} /> */}
                     </IconButton>
                   </ListItemSecondaryAction>
                 </ListItem>
@@ -329,9 +342,17 @@ export default function PinPosts(props) {
       <div className="news-feed">
         <div className="post-article">
           <div className="article">
-            <Paper component="form" className="post-input">
-              <InputBase placeholder="Write a Post.." />
+            <Paper
+              component="form"
+              className="post-input"
+              onClick={openPostModal}
+            >
+              <InputBase placeholder="Write a Post.." readOnly={true} />
             </Paper>
+            <AddPostModal
+              show={writePost}
+              onHide={closePostModal}
+            />
             <div className="cta">
               <ButtonGroup
                 variant="outlined"

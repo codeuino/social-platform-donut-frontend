@@ -14,6 +14,11 @@
       margin-top: 10px;
       border-radius: 20px;
       font-size: 14px;
+      .useredit {
+        margin-top: 10px;
+        border-radius: 20px;
+        font-size: 14px;
+      }
     }
     .user-pic {
       display: inline-block;
@@ -24,7 +29,7 @@
     }
   }
   .user-data {
-    flex: 1;
+    flex: 3;
     padding: 10px 14px;
     h1 {
       color: #0069d9;
