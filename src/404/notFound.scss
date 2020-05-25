@@ -30,10 +30,9 @@
     justify-content: center;
 }
 
-.title__donut img {
-    height: 165px;
+.title_donut {
+    width: 150px;
     padding: 7px 0px;
-    animation: infiniteRotate 3s infinite none;
 }
 
 @keyframes infiniteRotate {
@@ -82,8 +81,9 @@
         margin: 40px 0px 0px 15px;       
     }
 
-    .title__donut img {
-        height: 130px;
+    .title_donut {
+        max-width: 100px;
+        max-height: 100px;
         padding: 7px 0px;
     }
 

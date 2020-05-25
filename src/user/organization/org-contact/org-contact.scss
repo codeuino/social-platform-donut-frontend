@@ -1,0 +1,40 @@
+.contact {
+    height: auto;
+    font-family: Muli, sans-serif;
+    margin-left: 20px;
+    .contact-us {
+        font-weight: 600;
+        display: flex;
+        flex-direction: column;
+        .email-content {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            .designation {
+                text-align: right;
+                color: rgba(0, 0, 0, 0.5);
+                font-weight: 650;
+            }
+            .initial {
+                color: rgba(0, 0, 0, 0.5);
+                font-weight: 550;
+            }
+            .hidden {
+                visibility: hidden;
+            }
+            .email-info {
+                display: flex;
+                flex-direction: column;
+                .info {
+                    display: flex;
+                    flex-direction: row;
+                    .avatar {
+                        width: 25px;
+                        height: 25px;
+                        margin-right: 5px;
+                    }
+                }
+            }
+        }
+    }
+}

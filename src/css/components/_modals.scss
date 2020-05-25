@@ -1,0 +1,178 @@
+.modal {
+  .modal__header {
+    .modal__title {
+      .modal__main-title {
+        font-family: $font-family-Inter;
+        font-style: normal;
+        font-weight: $font-weight-bold;
+        font-size: 32px;
+        line-height: 39px;
+        color: $color-modal-title;
+      }
+      .modal__mini-title {
+        font-family: $font-family-Inter;
+        font-style: normal;
+        font-weight: $font-weight-normal;
+        font-size: 12px;
+        line-height: 19px;
+        color: $color-modal-miniheader;
+        letter-spacing: 0.2em;
+        padding-top: 5px;
+      }
+    }
+  }
+  .modal__body {
+    .modal__form {
+      .modal__row {
+        .modal__group {
+          .modal__label {
+            font-family: $font-family-Inter;
+            font-weight: $font-weight-normal;
+            font-size: 14px;
+            color: $color-modal-form-label;
+            margin-bottom: 3px;
+            line-height: 17px;
+          }
+          .modal__post {
+            border: 0.75px solid $color-modal-field-border;
+            box-sizing: border-box;
+            border-radius: 5px;
+            text-align: left;
+            resize: none;
+          }
+          .modal__message {
+            font-family: $font-family-Inter;
+            font-style: normal;
+            font-weight: $font-weight-normal;
+            font-size: 14px;
+            line-height: 17px;
+
+            color: $color-modal-message;
+          }
+          .upload_community_logo {
+            height: 15vw;
+            width: 20vw;
+            margin-left: -0.7em;
+            margin-top: -0.3em;
+            border-radius: 50%;
+          }
+        }
+      }
+      .modal__secondary-title {
+        font-family: $font-family-Inter;
+        font-style: normal;
+        font-weight: $font-weight-normal;
+        font-size: 12px;
+        line-height: 19px;
+        color: $color-modal-miniheader;
+        letter-spacing: 0.2em;
+        padding-top: 18px;
+      }
+    }
+    .modal__follower {
+      margin-top: 15px;
+      margin-bottom: 10px;
+      justify-content: space-between;
+      .modal__name__container {
+        display: flex;
+      }
+      .modal__followerPhoto {
+        margin-top: 3px;
+        height: 43px;
+        width: 43px;
+      }
+      .modal__followerName {
+        font-family: $font-family-Inter;
+        font-style: normal;
+        font-weight: $font-weight-bold;
+        font-size: 18px;
+        display: block;
+        color: $color-modal-follower-name;
+      }
+      .modal__followerDescription {
+        font-family: $font-family-Inter;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 12px;
+        color: $color-modal-follower-description;
+        display: block;
+      }
+      .modal__followButton {
+        background: #fff;
+        box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
+        border-radius: 34px;
+      }
+      .modal__followText {
+        font-family: $font-family-Inter;
+        font-style: normal;
+        font-weight: $font-weight-normal;
+        font-size: 12px;
+        line-height: 15px;
+
+        color: #1a73e8;
+      }
+      .modal__remove__followButton {
+        border: 1px solid #EB5757;
+        box-sizing: border-box;
+        box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
+        border-radius: 34px;
+        background: transparent;
+        .remove_followText {
+          font-family: Inter;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 12px;
+          line-height: 15px;
+          color: #EB5757;
+        }
+      }
+    }
+  }
+  .modal__buttons {
+    .modal__save {
+      background: $color-modal-button-active;
+      box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
+      border-radius: 34px;
+      width: 104px;
+      height: 42px;
+      margin-right: 20px;
+      margin-bottom: 10px;
+      margin-left: 14px;
+      .modal__buttontext {
+        font-family: $font-family-Inter;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 22px;
+        /* identical to box height */
+
+        color: #ffffff;
+      }
+    }
+    .modal__cancel {
+      border: 1px solid #1a73e8;
+      background: $color-modal-button-inactive;
+      box-sizing: border-box;
+      box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
+      border-radius: 34px;
+      margin-right: 20px;
+      margin-bottom: 10px;
+      width: 104px;
+      height: 42px;
+      .modal__buttontext {
+        font-family: $font-family-Inter;
+        font-style: normal;
+        font-weight: $font-weight-normal;
+        font-size: 18px;
+        line-height: 22px;
+        /* identical to box height */
+        color: #1a73e8;
+      }
+    }
+  }
+}
+.modal-content {
+  border-radius: 7px;
+  max-height: 90vh;
+  overflow-y: scroll;
+}

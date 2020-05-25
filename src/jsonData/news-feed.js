@@ -12,7 +12,9 @@ const newsFeed = [
         upvotes: 810,
         downVotes: 185,
         eventImage: null,
-        type: 'Donut'
+        type: 'Donut',
+        schedule: false,
+        note: false
     },
     {
         _id: 2,
@@ -25,7 +27,9 @@ const newsFeed = [
         eventImage: eventImg2,
         type: 'Project',
         projectName: 'Some Huge Project Name',
-        projectOwner: 'Neilson'
+        projectOwner: 'Neilson',
+        schedule: false,
+        note: true
     },
     {
         _id: 3,
@@ -36,7 +40,9 @@ const newsFeed = [
         upvotes: 104,
         downVotes: 25,
         eventImage: null,
-        type: 'Donut'
+        type: 'Donut',
+        schedule: false,
+        note: false
     },
     {
         _id: 4,
@@ -47,19 +53,25 @@ const newsFeed = [
         upvotes: 810,
         downVotes: 185,
         eventImage: null,
-        type: 'Donut'
+        type: 'Donut',
+        schedule: false,
+        note: false
     },
+    
     {
         _id: 5,
         imgSrc: profileImg,
         createdBy: 'Marjorie Alexander',
         created: 'June 5, 2018 4:31 AM',
-        eventName: 'Christmas Party',
         details: 'ex sit ex laboris adipisicing enim eiusmod proident exercitation ea fugiat in mollit pariatur occaecat ut nostrud ullamco ex official',
-        upvotes: 80,
-        downVotes: 15,
-        eventImage: eventImg,
-        type: 'Event'
+        upvotes: 810,
+        downVotes: 185,
+        eventImage: eventImg2,
+        type: 'Project',
+        projectName: 'Some Huge Project Name',
+        projectOwner: 'Neilson',
+        schedule: false,
+        note: true
     },
     {
         _id: 6,
@@ -70,18 +82,38 @@ const newsFeed = [
         upvotes: 80,
         downVotes: 15,
         eventImage: null,
-        type: 'Donut'
+        type: 'Donut',
+        schedule: false,
+        note: false
     },
     {
         _id: 7,
         imgSrc: profileImg,
         createdBy: 'Marjorie Alexander',
         created: 'June 5, 2018 4:31 AM',
+        eventName: 'Christmas Party',
+        details: 'ex sit ex laboris adipisicing enim eiusmod proident exercitation ea fugiat in mollit pariatur occaecat ut nostrud ullamco ex official',
+        upvotes: 80,
+        downVotes: 15,
+        eventImage: eventImg,
+        type: 'Event',
+        schedule: true,
+        note: false
+    },
+    {
+        _id: 8,
+        imgSrc: profileImg,
+        createdBy: 'Marjorie Alexander',
+        created: 'June 5, 2018 4:31 AM',
+        details: 'ex sit ex laboris adipisicing enim eiusmod proident exercitation ea fugiat in mollit pariatur occaecat ut nostrud ullamco ex official',
+        eventName: 'Christmas Party',
         details: 'ex sit ex laboris adipisicing enim eiusmod proident exercitation ea fugiat in mollit pariatur occaecat ut nostrud ullamco ex official',
         upvotes: 810,
         downVotes: 185,
-        eventImage: null,
-        type: 'Donut'
+        eventImage: eventImg,
+        type: 'Event',
+        schedule: true,
+        note: false
     },
 ]
 

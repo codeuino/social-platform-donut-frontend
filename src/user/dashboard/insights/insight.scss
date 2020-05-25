@@ -1,0 +1,89 @@
+.insight_main_container {
+  display: flex;
+  .insight_left_nav {
+     width: 15%;
+     left: -1px;
+     top: -1px;
+     height: 100vh;
+     border: 1px solid #CCCCCC;
+     box-sizing: border-box;
+  }
+  .right_view_container {
+    .right_view {
+      margin-top: 10px;
+      .right_view_header {
+        font-family: Qanelas;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 1.7em;
+        line-height: 20px;
+        color: #000000;
+      }
+      .right_view_content {
+        .switch_btn {
+          display: flex;
+          .org_btn {
+            width: 11vw;
+            height: 5vh;
+            background: #1A73E8;
+            border-radius: 100px;
+            padding: 0.3em;
+            margin-right: 1em;
+          }
+          .member_btn {
+            width: 11vw;
+            height: 5vh;
+            background: rgb(250, 251, 252);
+            border-radius: 100px;
+            color: #1A73E8;
+            padding: 0.3em;
+          }
+        }
+        .community_overview {
+           .community_overview_header {
+             padding-top: 0.7em;
+             font-family: Qanelas;
+             font-style: normal;
+             font-weight: 600;
+             font-size: 1.3em;
+             line-height: 27px;
+             color: #000000;
+           }
+        }
+        .overview_stats {
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          .stat_box {
+            padding: 2em;
+            width: 15vw;
+            height: 22vh;
+            min-width: 150px;
+            background: #FFFFFF;
+            border: 1px solid #CCCCCC;
+            box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-right: 2vw;
+            margin-bottom: 1vw;
+            .stat_header {
+              font-family: Inter;
+              font-style: normal;
+              font-weight: bold;
+              font-size: 4vw;
+              color: #000000;
+            }
+            .stat_para {
+              font-family: Inter;
+              font-style: normal;
+              font-weight: 500;
+              font-size: 1.2vw;
+              text-align: center;
+              color: rgba(0, 0, 0, 0.4);
+              padding-bottom: 0.7em;
+            }
+          }
+        }
+      }
+    }
+  }
+}

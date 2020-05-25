@@ -1,0 +1,58 @@
+.info-eventName{
+    font-size: 1.7em;
+    font-weight: bold;
+    text-align: center;
+    font-family: Inter;
+}
+
+.info-common{
+    font-family: Inter;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 1.1em;
+    line-height: 1.3em;
+    color: #2D2D2D;
+    text-align: center;
+}
+
+.info-cancelled{
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    color:rgb(202, 25, 25);   
+}
+.info-slots-no{
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    color:black;
+}
+
+.info-description{
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1.1em;
+    line-height: 1.3em;
+    color: #2D2D2D;
+}
+
+.form-footer {
+    margin-top: 0;
+    Button {
+        width: 90px;
+        margin-right: 20px;
+        margin-bottom: 30px;
+        border-radius: 100px;
+        font-weight: 600;
+    }
+    .savebtn {
+        background-color: #1A73E8;
+    }
+}
+.modal-backdrop {
+    background-color: rgba(0,0,0, 0.1) !important;
+}
+.modal-backdrop.in{
+    opacity: 0.5;
+}
