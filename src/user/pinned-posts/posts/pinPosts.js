@@ -1,4 +1,4 @@
-import React from 'react';
+import React , { useState } from 'react';
 import {List, Card, Button, Paper, ListItem, ListItemAvatar, Avatar, ListItemText, ListItemSecondaryAction, IconButton, CardMedia} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
@@ -8,7 +8,11 @@ import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 import EventNoteIcon from '@material-ui/icons/EventNote';
 import EventIcon from '@material-ui/icons/Event';
 import feed from '../../../jsonData/news-feed';
+import ReplyIcon from '@material-ui/icons/Reply';
+
+
 import "./posts.scss";
+import { Comment } from '../../dashboard/news-feed/popups/comment';
 
 const styles = makeStyles((theme) => ({
     root: {
@@ -63,13 +67,20 @@ const styles = makeStyles((theme) => ({
 
 export default function PinPosts(props){
     const classes = styles();
-    const [type, changeType] = React.useState('All');
-    const [first, second] = React.useState('f');
+    const [type, changeType] = useState('All');
+    const [first, second] = useState('f');
+    const [showComment, toggle] = useState(false);
+    const [commentId, setCommentId] = useState('');
     
     let handleClick = atrb => () => {
         changeType(atrb);
         second('s');
     };
+    let commentToggle = (postId) => {
+        console.log("Comment toggle clicked!", postId);
+        setCommentId(postId);
+        toggle(!showComment);
+    }
     let posts = feed.map((newsItem, index) => {
             if(newsItem.type === "Project" && (type === 'All' || type === newsItem.type)){
                 return(
@@ -125,11 +136,15 @@ export default function PinPosts(props){
                                     <span className="down-vote">{newsItem.downVotes}</span>
                                     <span className="com-btn">
                                         <ChatBubbleIcon className={classes.chat}/>
-                                        <Button>
+                                        <Button 
+                                        onClick = {
+                                            commentToggle.bind(this, newsItem._id)
+                                        } >
                                             <span className="comment">Comment</span>
                                         </Button>
                                     </span>
                                 </ListItem>
+                                 <Comment show={showComment && newsItem._id === commentId} onHide={toggle}/>
                             </List>
                         </Card>
                     </Paper>
@@ -205,11 +220,15 @@ export default function PinPosts(props){
                                     <span className="down-vote">{newsItem.downVotes}</span>
                                     <span className="com-btn">
                                         <ChatBubbleIcon className={classes.chat}/>
-                                        <Button>
+                                        <Button 
+                                        onClick = {
+                                            commentToggle.bind(this, newsItem._id)
+                                        } >
                                             <span className="comment">Comment</span>
                                         </Button>
                                     </span>
                                 </ListItem>
+                                <Comment show={showComment && newsItem._id === commentId} onHide={toggle}/>
                             </List>
                         </Card>
                     </Paper>
@@ -256,11 +275,15 @@ export default function PinPosts(props){
                                     <span className="down-vote">{newsItem.downVotes}</span>
                                     <span className="com-btn">
                                         <ChatBubbleIcon className={classes.chat}/>
-                                        <Button>
+                                        <Button className = "comment-btn"
+                                        onClick = {
+                                            commentToggle.bind(this, newsItem._id)
+                                        } >
                                             <span className="comment">Comment</span>
                                         </Button>
                                     </span>
                                 </ListItem>
+                                 <Comment show={showComment && newsItem._id === commentId} onHide={toggle}/>
                             </List>
                         </Card>
                     </Paper>

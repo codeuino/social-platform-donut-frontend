@@ -2,27 +2,27 @@ import React, { Component } from "react";
 import { Modal, Button, Row, Col, Image, Form } from "react-bootstrap";
 import logo from "../../../svgs/logo-image.jpg";
 
-class Members extends Component {
+class Admins extends Component {
   constructor(props) {
     super(props);
     this.state = {
       text: 'Follow'
     }
   }
-  onFollowClick = (index) => {
-    console.log('Start following!', index);
-    // SEND REQUEST TO FOLLOW USER WITH ID = INDEX
+  onRemoveClick = (index) => {
+    console.log('Removing admin!', index);
+    // SEND REQUEST TO REMOVE USER WITH ID = INDEX FROM ADMINISTRATORs LIST
   }
 
   render() {
-    const membersList = [
+    const adminList = [
       {name: 'John Doe', desc : 'UI/UX'},
       {name: 'John Doe', desc : 'UI/UX'},
       {name: 'John Doe', desc : 'UI/UX'},
       {name: 'John Doe', desc : 'UI/UX'},
       {name: 'John Doe', desc : 'UI/UX'}
     ] 
-    let members = membersList.map((item, index) => (
+    let admins = adminList.map((item, index) => (
       <Row className="modal__member" id="p1" key={index}>
         <div className="member__image">
           <Image className="modal__memberPhoto" src={logo} alt="I" rounded />
@@ -34,7 +34,7 @@ class Members extends Component {
         <div className="member__btn__container">
           <Button
             className="btn-danger modal__remove__followButton"
-            onClick={this.onFollowClick.bind(this, index)}
+            onClick={this.onRemoveClick.bind(this, index)}
           >
             <span className="remove_followText">Remove</span>
           </Button>
@@ -51,15 +51,15 @@ class Members extends Component {
       >
         <Modal.Header closeButton className="modal__header">
           <Modal.Title className="modal__title">
-            <div className="modal__main-title">Members</div>
+            <div className="modal__main-title">Administrators</div>
             <input type="text" placeholder="Search" className="modal__search" />
           </Modal.Title>
         </Modal.Header>
         <Modal.Body className="modal__body">
-          <div className="modal__mini-title">COMMUNITY MEMBERS</div>
-          {members}
+          <div className="modal__mini-title">COMMUNITY ADMINISTRATORS</div>
+          {admins}
           <div className="add__member">
-            <h3 className="modal__mini-title">ADD MEMBER</h3>
+            <h3 className="modal__mini-title">ADD ADMINISTRATOR</h3>
             <div className="add__member__form">
               <Form.Label htmlFor="email" className="email__header">
                 Email
@@ -71,12 +71,12 @@ class Members extends Component {
                 ></Form.Control>
                 <Button className="invite__btn">Invite</Button>
               </div>
-              <div className="share__btn__container">
+              {/* <div className="share__btn__container">
                 <p className="share__text">or share invite on</p>
                 <Button className="invite__btn">Facebook</Button>
                 <Button className="invite__btn">LinkedIn</Button>
                 <Button className="invite__btn">Twitter</Button>
-              </div>
+              </div> */}
             </div>
           </div>
         </Modal.Body>
@@ -84,4 +84,4 @@ class Members extends Component {
     );
   }
 }
-export default Members;
+export default Admins;
