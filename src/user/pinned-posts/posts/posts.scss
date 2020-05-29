@@ -93,6 +93,26 @@
     }
   }
 }
+.rep-btn {
+  .reply-btn {
+    background-color: white;
+    border: none;
+
+    &:hover {
+      background-color: white;
+    }
+
+    .reply-text {
+      font-family: Inter;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 15px;
+
+      color: rgba(0, 0, 0, 0.4);
+    }
+  }
+}
 
 .up-vote {
   color: #1eb025;
@@ -107,7 +127,7 @@
 }
 .post {
   column-count: 2;
-  width: 100%;
+  width: 139%;
   counter-reset: item-counter;
   margin-left: 25px;
   margin-top: 10px;
@@ -117,6 +137,9 @@
     .com-btn {
       position: absolute;
       right: 5px;
+    }
+    .rep-btn {
+      right: 60%;
     }
     .eventimg {
       position: relative;

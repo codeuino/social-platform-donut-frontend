@@ -21,25 +21,25 @@ class Followers extends Component {
     ];
     let followers = followersList.map((item, index) => (
       <Row className="modal__follower" id="p1" key={index}>
-        <Col md={2}>
+        <div className="follower__image">
           <Image
             className="modal__followerPhoto"
             src={logo}
             alt="I"
             rounded
           />
-        </Col>
-        <Col md={7}>
+        </div>
+        <div className="follower__content">
           <span className="modal__followerName">{item.name}</span>
           <span className="modal__followerDescription">
             {item.desg}
           </span>
-        </Col>
-        <Col md={3}>
+        </div>
+        <div className="follower__btn__container">
           <Button className="modal__followButton" variant="outline-primary">
             <span className="modal__followText">Follow</span>
           </Button>
-        </Col>
+        </div>
     </Row>
     ))
     return (
@@ -54,10 +54,11 @@ class Followers extends Component {
         <Modal.Header closeButton className="modal__header">
           <Modal.Title className="modal__title">
             <div className="modal__main-title">Followers</div>
-            <div className="modal__mini-title">PEOPLE WHO FOLLOW YOU</div>
+            <input type="text" placeholder="Search" className="modal__search" />
           </Modal.Title>
         </Modal.Header>
         <Modal.Body className="modal__body">
+          <div className="modal__mini-title">PEOPLE WHO FOLLOW YOU</div>
           {followers}
         </Modal.Body>
       </Modal>
