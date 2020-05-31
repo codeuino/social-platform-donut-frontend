@@ -366,8 +366,14 @@
 .down-vote small {
   color: #ff0000;
 }
-
+.news__feed__container {
+  .post {
+    width: 139%;
+    margin-bottom: 17px;
+  }
+}
 .news-feed {
+  width: 110%;
   .post-article {
     .article {
       .post-input {
@@ -404,6 +410,7 @@
 }
 
 .posts {
+   width: 140%;
   .category {
     .category-btn {
       background-color: white;
@@ -423,5 +430,30 @@
         color: white;
       }
     }
+  }
+}
+.grid {
+  .rep-btn {
+    .reply-text {
+      color: red($color: #000000);
+    }
+  }
+  .show__comment__section {
+    .comment__input{
+      .comment__wrap {
+        display: flex;
+        .comment__img {
+          min-width: 56px;
+          padding-left: 16px;
+          margin-right: 7px;
+        }
+        .comment__field {
+          width: 70%;
+        }
+      }
+    }
+  }
+  .hide__comment__section {
+    display: none;
   }
 }

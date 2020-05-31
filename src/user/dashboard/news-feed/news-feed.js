@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   List,
   Card,
@@ -15,7 +15,6 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button } from "react-bootstrap";
-import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import AddEventModal from "./popups/AddEventModal";
 import AddProjectModal from "./popups/AddProjectModal";
 import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
@@ -23,14 +22,17 @@ import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import ChatBubbleIcon from "@material-ui/icons/ChatBubble";
 import EventNoteIcon from "@material-ui/icons/EventNote";
 import EventIcon from "@material-ui/icons/Event";
+import ReplyIcon from '@material-ui/icons/Reply';
 import feed from "../../../jsonData/news-feed";
 import "../../pinned-posts/posts/posts.scss";
 import "./news-feed.scss";
+import AddPostModal from "./popups/AddPostModal";
+import { Comment } from "./popups/comment";
 
 const styles = makeStyles((theme) => ({
   root: {
     padding: 0,
-    minWidth: "320px",
+    minWidth: "50%",
   },
   listStyle: {
     paddingBottom: 0,
@@ -72,6 +74,11 @@ const styles = makeStyles((theme) => ({
     padding: "0px",
     fontSize: "18px",
   },
+  reply: {
+    color: "rgba(0, 0, 0, 0.4)",
+    fontSize: "36px",
+    paddingLeft: "17px"
+  },
   paper: {
     marginBottom: "15px",
   },
@@ -79,15 +86,19 @@ const styles = makeStyles((theme) => ({
 
 export default function PinPosts(props) {
   const classes = styles();
-  const [type, changeType] = React.useState("All");
-  const [first, second] = React.useState("f");
-  const [showProject, setShowProject] = React.useState(false);
-  const [showEvent, setShowEvent] = React.useState(false);
+  const [type, changeType] = useState("All");
+  const [first, second] = useState("f");
+  const [showProject, setShowProject] = useState(false);
+  const [showEvent, setShowEvent] = useState(false);
+  const [writePost, showPostModal] = useState(false);
+  const [showComment, toggle] = useState(false);
+  const [commentId, setCommentId] = useState('');
 
   let handleClick = (atrb) => () => {
     changeType(atrb);
     second("s");
   };
+
   let handleShow = (modalName) => {
     if (modalName === "project") {
       setShowProject(true);
@@ -95,6 +106,7 @@ export default function PinPosts(props) {
       setShowEvent(true);
     }
   };
+  
   let handleClose = (modalName) => {
     if (modalName === "project") {
       setShowProject(false);
@@ -102,6 +114,21 @@ export default function PinPosts(props) {
       setShowEvent(false);
     }
   };
+
+  let openPostModal = () => {
+    showPostModal(true)
+  }
+
+  let closePostModal = () => {
+    showPostModal(false)
+  }
+
+  let commentToggle = (postId) => {
+    console.log("Comment toggle clicked!", postId);
+    setCommentId(postId);
+    toggle(!showComment);
+  }
+  
   let posts = feed.map((newsItem) => {
     if (
       newsItem.type === "Project" &&
@@ -148,7 +175,7 @@ export default function PinPosts(props) {
                       </IconButton>
                     ) : null}
                     <IconButton edge="end" className={classes.icon}>
-                      <MoreHorizIcon className={classes.horiz} />
+                      {/* <MoreHorizIcon className={classes.horiz} /> */}
                     </IconButton>
                   </ListItemSecondaryAction>
                 </ListItem>
@@ -165,11 +192,15 @@ export default function PinPosts(props) {
                   <span className="down-vote">{newsItem.downVotes}</span>
                   <span className="com-btn">
                     <ChatBubbleIcon className={classes.chat} />
-                    <Button className="comment-btn">
+                    <Button
+                      className="comment-btn"
+                      onClick={commentToggle.bind(this, newsItem._id)}
+                    >
                       <span className="comment-text">Comment</span>
                     </Button>
                   </span>
                 </ListItem>
+                <Comment show={showComment && newsItem._id === commentId} onHide={toggle}/>
               </List>
             </Card>
           </Paper>
@@ -237,7 +268,7 @@ export default function PinPosts(props) {
                       </IconButton>
                     ) : null}
                     <IconButton edge="end" className={classes.icon}>
-                      <MoreHorizIcon className={classes.horiz} />
+                      {/* <MoreHorizIcon className={classes.horiz} /> */}
                     </IconButton>
                   </ListItemSecondaryAction>
                 </ListItem>
@@ -254,11 +285,17 @@ export default function PinPosts(props) {
                   <span className="down-vote">{newsItem.downVotes}</span>
                   <span className="com-btn">
                     <ChatBubbleIcon className={classes.chat} />
-                    <Button className="comment-btn" variant="primary">
+                    <Button
+                      Button
+                      className="comment-btn"
+                      variant="primary"
+                      onClick={commentToggle.bind(this, newsItem._id)}
+                    >
                       <span className="comment-text">Comment</span>
                     </Button>
                   </span>
                 </ListItem>
+                <Comment show={showComment && newsItem._id === commentId} onHide={toggle}/>
               </List>
             </Card>
           </Paper>
@@ -294,7 +331,7 @@ export default function PinPosts(props) {
                       </IconButton>
                     ) : null}
                     <IconButton edge="end" className={classes.icon}>
-                      <MoreHorizIcon className={classes.horiz} />
+                      {/* <MoreHorizIcon className={classes.horiz} /> */}
                     </IconButton>
                   </ListItemSecondaryAction>
                 </ListItem>
@@ -311,11 +348,16 @@ export default function PinPosts(props) {
                   <span className="down-vote">{newsItem.downVotes}</span>
                   <span className="com-btn">
                     <ChatBubbleIcon className={classes.chat} />
-                    <Button className="comment-btn">
+                    <Button
+                      Button
+                      className="comment-btn"
+                      onClick={commentToggle.bind(this, newsItem._id)}
+                    >
                       <span className="comment-text">Comment</span>
                     </Button>
                   </span>
                 </ListItem>
+                <Comment show={showComment && newsItem._id === commentId} onHide={toggle}/>
               </List>
             </Card>
           </Paper>
@@ -325,13 +367,18 @@ export default function PinPosts(props) {
   });
 
   return (
-    <div>
+    <div className="news__feed__container">
       <div className="news-feed">
         <div className="post-article">
           <div className="article">
-            <Paper component="form" className="post-input">
-              <InputBase placeholder="Write a Post.." />
+            <Paper
+              component="form"
+              className="post-input"
+              onClick={openPostModal}
+            >
+              <InputBase placeholder="Write a Post.." readOnly={true} />
             </Paper>
+            <AddPostModal show={writePost} onHide={closePostModal} />
             <div className="cta">
               <ButtonGroup
                 variant="outlined"
@@ -359,12 +406,6 @@ export default function PinPosts(props) {
                   </svg>
                   <span className="optionbtn-text">Event</span>
                 </Button>
-                <AddEventModal
-                  show={showEvent}
-                  handleClose={() => {
-                    handleClose("event");
-                  }}
-                />
                 <Button
                   variant="primary"
                   className="optionbtn"
@@ -386,15 +427,21 @@ export default function PinPosts(props) {
                   </svg>
                   <span className="optionbtn-text">Project</span>
                 </Button>
-                <AddProjectModal
-                  show={showProject}
-                  handleClose={() => {
-                    handleClose("project");
-                  }}
-                />
               </ButtonGroup>
             </div>
           </div>
+          <AddEventModal
+            show={showEvent}
+            handleClose={() => {
+              handleClose("event");
+            }}
+          />
+          <AddProjectModal
+            show={showProject}
+            handleClose={() => {
+              handleClose("project");
+            }}
+          />
         </div>
       </div>
       <div className="posts">

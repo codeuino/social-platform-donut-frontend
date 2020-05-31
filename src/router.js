@@ -16,6 +16,10 @@ import UserProposalDashboard from "./user/proposals/UserProposalDashboard/UserPr
 import AdminProposalDashboard from "./user/proposals/AdminProposalDashboard/AdminProposalDashboard";
 import ProposalDiscussion from "./user/proposals/ProposalDiscussion/ProposalDiscussion";
 import ProposalEditor from "./user/proposals/ProposalEditor/ProposalEditor";
+import Admin from "./user/Admin/Admin";
+import Setup from "./user/setup/Setup";
+import CommunitySetting from "./user/dashboard/Community/CommunitySetting";
+import Insight from "./user/dashboard/insights/Insight";
 
 const Router = () => (
   <BrowserRouter>
@@ -48,6 +52,10 @@ const Router = () => (
         component={AdminProposalDashboard}
       />
       <PrivateRoute exact path="/proposaleditor" component={ProposalEditor} />
+      <PrivateRoute exact path="/setup" component={Setup} />
+      <PrivateRoute exact path="/org-settings" component={CommunitySetting} />
+      <PrivateRoute exact path="/insight" component={Insight} />
+      <PrivateRoute exact path="/admin" component={Admin} />
       <Route component={NotFound} />
     </Switch>
   </BrowserRouter>
