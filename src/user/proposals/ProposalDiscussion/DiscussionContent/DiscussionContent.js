@@ -1,14 +1,100 @@
 import React, { Component } from "react";
 import "./DiscussionContent.scss";
-import { Button, Container, Row, Col, Image } from "react-bootstrap";
+import { Button, Container, Row, Col, Image, ListGroup } from "react-bootstrap";
 import DiscussionComments from "./DiscussionComments/DiscussionComments";
 import eventImg from "../../../../svgs/event-img-1.svg";
+import userIcon2 from "../../../../images/userIcon2.jpg";
+import RequestChanges from "../DiscussionPopups/RequestChanges";
 
 class DiscussionContent extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { comments: [], showModal: false, selectedText: "" };
   }
+
+  componentDidMount() {
+    this.processComments();
+  }
+  processComments = () => {
+    let comments = [];
+
+    for (let i = 0; i < 6; i++) {
+      comments.push(
+        <ListGroup.Item>
+          <div className="comment-item">
+            <div className="image-container">
+              <Image
+                src={userIcon2}
+                alt="icon"
+                rounded
+                className="user-image"
+              />
+            </div>
+            <div className="comment-container">
+              <div className="commenting-user">Devesh</div>
+              <div className="commented-section">
+                "Lorem ipsum dolor sit amet"
+              </div>
+              <div className="comment-text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation
+              </div>
+            </div>
+          </div>
+        </ListGroup.Item>
+      );
+    }
+    this.setState({
+      comments: comments,
+    });
+  };
+
+  handleTextSelction = () => {
+    if (window.getSelection().toString().length > 0) {
+      this.setState(
+        {
+          selectedText: window.getSelection().toString(),
+        },
+        () => {
+          this.setState({
+            showModal: true,
+          });
+        }
+      );
+    }
+  };
+
+  handleComment = (text) => {
+    let comments = this.state.comments;
+
+    comments.push(
+      <ListGroup.Item>
+        <div className="comment-item">
+          <div className="image-container">
+            <Image src={userIcon2} alt="icon" rounded className="user-image" />
+          </div>
+          <div className="comment-container">
+            <div className="commenting-user">Devesh</div>
+            <div className="commented-section">{this.state.selectedText}</div>
+            <div className="comment-text">{text}</div>
+          </div>
+        </div>
+      </ListGroup.Item>
+    );
+
+    this.setState({
+      comments: comments,
+      selectedText: "",
+    });
+  };
+
+  handleClose = () => {
+    this.setState({
+      showModal: false,
+    });
+  };
+
   render() {
     return (
       <div className="discussion-content">
@@ -25,7 +111,7 @@ class DiscussionContent extends Component {
         </div>
         <div className="discussion-bottompanel">
           <div className="proposal-preview">
-            <div className="proposal-text">
+            <div className="proposal-text" onMouseUp={this.handleTextSelction}>
               <p>
                 Fugiat esse aliquip sint culpa. Nulla amet ipsum non commodo
                 veniam velit officia dolor laborum et aliquip ad velit veniam.
@@ -104,8 +190,16 @@ class DiscussionContent extends Component {
             </div>
           </div>
           <div className="comments">
-            <DiscussionComments />
+            <DiscussionComments commentItems={this.state.comments} />
           </div>
+          <RequestChanges
+            show={this.state.showModal}
+            handleClose={() => {
+              this.handleClose();
+            }}
+            handleComment={this.handleComment}
+            selectedText={this.state.selectedText}
+          />
         </div>
       </div>
     );

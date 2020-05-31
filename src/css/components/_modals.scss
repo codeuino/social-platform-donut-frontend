@@ -49,6 +49,11 @@
 
             color: $color-modal-message;
           }
+          .modal__textSelection {
+            font-style: italic;
+            display: block;
+            color: #6c757d;
+          }
         }
       }
       .modal__secondary-title {

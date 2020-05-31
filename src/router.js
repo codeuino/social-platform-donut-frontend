@@ -15,6 +15,7 @@ import Events from "./user/events/events";
 import UserProposalDashboard from "./user/proposals/UserProposalDashboard/UserProposalDashboard";
 import AdminProposalDashboard from "./user/proposals/AdminProposalDashboard/AdminProposalDashboard";
 import ProposalDiscussion from "./user/proposals/ProposalDiscussion/ProposalDiscussion";
+import ProposalEditor from "./user/proposals/ProposalEditor/ProposalEditor";
 
 const Router = () => (
   <BrowserRouter>
@@ -46,6 +47,7 @@ const Router = () => (
         path="/adminproposal"
         component={AdminProposalDashboard}
       />
+      <PrivateRoute exact path="/proposaleditor" component={ProposalEditor} />
       <Route component={NotFound} />
     </Switch>
   </BrowserRouter>

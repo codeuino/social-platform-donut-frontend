@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import Navigation from "../../dashboard/navigation/navigation";
+import EditorContent from "./EditorContent/EditorContent";
 
 class ProposalEditor extends Component {
   constructor(props) {
@@ -6,7 +8,16 @@ class ProposalEditor extends Component {
     this.state = {};
   }
   render() {
-    return <div></div>;
+    return (
+      <div className="editor">
+        <div className="editor__navigation">
+          <Navigation dashboard={this.state.dashboard} />
+        </div>
+        <div className="editor__content">
+          <EditorContent />
+        </div>
+      </div>
+    );
   }
 }
 
