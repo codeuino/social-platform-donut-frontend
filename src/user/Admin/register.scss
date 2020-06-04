@@ -1,0 +1,362 @@
+
+.main__container {
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
+  max-height: 90vh;
+
+  background: #FFFFFF;
+  .main__content {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 50px;
+    .donut__text__container {
+      flex-grow: 1.8;
+      flex-shrink: 1;
+      flex-basis: 0%;
+      margin: 80px 0 0 0;
+      min-width: 500px;
+      .donut__logo {
+        padding-bottom: 20px;
+      }
+      .tagline__title {
+        font-family: "Playfair Display",
+        serif;
+        color: #000000;
+        font-size: 4.1vw;
+        font-style: normal;
+        font-weight: bold;
+        padding-bottom: 20px;
+        line-height: 1.5em;
+        max-width: 80%;
+      }
+      .tagline__subtitle {
+        font-family: Inter;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 1.5vw;
+        line-height: 140%;
+        color: #90949C;
+        max-width: 80%;
+      }
+    }
+    .admin__register {
+      flex: 1 1;
+      margin-top: 2rem;
+      .register-details {
+        display: flex;
+        flex-direction: row;
+        border: solid 1px #dfe9f1;
+        min-height: 198px;
+        height: auto;
+        align-items: center;
+        .form-group {
+          label {
+            color: #00abff;
+            font-size: 1.2vw;
+          }
+        }
+        .form-control {
+          font-size: 1vw;
+        }
+
+        .cta-register {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding-bottom: 1em;
+          button {
+            background: #1A73E8;
+            border-radius: 30px;
+            width: 22vw;
+          }
+        }
+        .user__data {
+          padding: 30px;
+          box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.1);
+          min-height: 380px;
+          height: auto;
+          flex: 1 1;
+          .form__header {
+            text-align: center;
+            font-family: "Playfair Display";
+            font-style: normal;
+            font-weight: bold;
+            font-size: 2vw;
+            line-height: 3vw;
+            text-align: center;
+          }
+          .register__infos {
+            padding: 15px 0;
+            .form__group__label {
+              color: #00abff;
+            }
+          }
+          .already__account {
+            text-align: center;
+
+            .link {
+              cursor: pointer;
+              color: #1A73E8;
+
+              :hover {
+                text-decoration: underline;
+              }
+            }
+          }
+        }
+      }
+      .login-details {
+        display: flex;
+        flex-direction: row;
+        border: solid 1px #dfe9f1;
+        min-height: 198px;
+        height: auto;
+        align-items: center;
+        padding: 0;
+
+        .form-group {
+          label {
+            color: #00abff;
+            font-size: 1.2vw;
+          }
+        }
+
+        .form-control {
+          font-size: 1vw;
+        }
+
+        .cta-login {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding-bottom: 1em;
+          button {
+            background: #1A73E8;
+            border-radius: 30px;
+            width: 22vw;
+          }
+        }
+        .loginbtn {
+          border: 1px solid rgb(211, 220, 228);
+          border-radius: 3px;
+          width: 45%;
+        }
+
+        .login-text {
+          font-family: Inter;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 1.2vw;
+          line-height: 20px;
+          color: #FFFFFF;
+        }
+
+        .user__data {
+          padding: 30px;
+          box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.1);
+          min-height: 380px;
+          height: auto;
+          flex: 1 1;
+
+          .form__header {
+            text-align: center;
+            font-family: "Playfair Display";
+            font-style: normal;
+            font-weight: bold;
+            font-size: 2vw;
+            line-height: 3vw;
+            text-align: center;
+          }
+
+          .login__infos {
+            .form__group__label {
+              color: #00abff;
+            }
+          }
+          .already__account {
+            text-align: center;
+
+            .link {
+              cursor: pointer;
+              color: #1A73E8;
+
+              :hover {
+                text-decoration: underline;
+              }
+            }
+          }
+        }
+      }
+      .main__footer {
+        margin-top: 5%;
+
+        .extra__donuts {
+          width: 50%;
+        }
+      }
+      
+
+      #validation_msg {
+        color: rgb(247, 134, 134);
+        font-size: 15px;
+      }
+
+      .registerbtn {
+        border: 1px solid rgb(211, 220, 228);
+        border-radius: 3px;
+        width: 45%;
+      }
+
+      .register-text {
+        font-family: Inter;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 1.2vw;
+        line-height: 20px;
+        color: #FFFFFF;
+      }
+      .email__verification__box {
+        background: #FFFFFF;
+        box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
+        margin-top: 21vh;
+        max-width: 370px;
+        .inside__email__verification__box {
+          padding: 2.5vw;
+          max-height: 400px;
+          .email__header {
+            font-family: "Playfair Display";
+            font-style: normal;
+            font-weight: bold;
+            font-size: 1.6vw;
+            line-height: 2vw;
+            text-align: center;
+            color: #000000;
+          }
+          .email__subtitle {
+            font-family: Inter;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 1vw;
+            line-height: 137.2%;
+            color: #2D2D2D;
+            opacity: 0.75;
+            text-align: justify;
+            padding-bottom: 2px;
+          }
+          .verify__button__container {
+            text-align: center;
+            .verify__button{
+              background: #EB5757;
+              border-radius: 100px;
+              font-family: Inter;
+              font-style: normal;
+              font-weight: normal;
+              font-size: 1vw;
+              line-height: 1.3vw;
+              color: #FFFFFF;
+              width: 15vw;
+            }
+          }
+        }
+      }
+       .setup__box {
+         background: #FFFFFF;
+         box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
+         margin-top: 21vh;
+         max-width: 370px;
+
+         .inside__setup__box {
+           padding: 2.5vw;
+           max-height: 400px;
+
+           .setup__header {
+             font-family: "Playfair Display";
+             font-style: normal;
+             font-weight: bold;
+             font-size: 1.6vw;
+             line-height: 2vw;
+             text-align: center;
+             color: #000000;
+           }
+
+           .setup__subtitle {
+             font-family: Inter;
+             font-style: normal;
+             font-weight: normal;
+             font-size: 1vw;
+             line-height: 137.2%;
+             color: #2D2D2D;
+             opacity: 0.75;
+             text-align: justify;
+             padding-bottom: 2px;
+           }
+
+           .setup__button__container {
+             text-align: center;
+
+             .setup__button {
+               background: #1EB025;
+               border-radius: 100px;
+               font-size: 1vw;
+               line-height: 1.3vw;
+               color: #FFFFFF;
+               width: 15vw;
+               font-family: Inter;
+               font-style: normal;
+               font-weight: normal;
+               a {
+                 color: #FFFFFF;
+                 text-decoration: none;
+               }
+             }
+           }
+         }
+       }
+    }
+  }
+  .donut__shadow {
+    display: flex;
+    justify-content: flex-end;
+    float: right;
+    height: 18vh;
+    margin-top: -9vh;
+    opacity: 0.1;
+    width: 15vw;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .main__container {
+     .main__footer {
+       margin-top: 10vh;
+       .extra__donuts {
+         width: 50%;
+       }
+     }
+  }
+}
+// tablet
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .main__container {
+     .main__footer {
+       margin-top: 5vh;
+       .extra__donuts {
+         width: 50%;
+       }
+     }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .main__container {
+    .main__footer {
+      .stick__to__bottom {
+        margin-top: 19vh;
+      }
+    }
+  }
+}
+

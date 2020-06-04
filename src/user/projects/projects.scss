@@ -1,0 +1,30 @@
+.organization {
+    display: flex;
+    min-height: 100vh;
+    font-family: Muli, sans-serif;
+    .navigation {
+      flex: 0.5;
+      border-right: solid 1px #dfe9f1;
+    }
+
+    .projects {
+        margin-top: 2vh;
+
+        img{
+          height: 20rem;
+          width:auto;
+        }
+          
+      .create{
+        position:fixed;
+        z-index: 2;
+        right:5rem;
+        bottom:5rem;
+      }
+
+      strong {
+        color:#1A73E8;
+      }
+    
+    }
+  }  

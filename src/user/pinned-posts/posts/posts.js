@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./posts.scss";
-import gsoc from "../../../images/gsoc.png";
+import userIcon2 from "../../../images/gsoc.png";
 
 class Posts extends Component {
   state = { date: new Date() };
