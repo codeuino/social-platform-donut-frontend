@@ -11,6 +11,8 @@ import topBarLoading from "../../placeholderLoading/topBarLoading/topBarLoading"
 import orgUpdatesLoading from "../../placeholderLoading/orgUpdatesLoading/orgUpdatesLoading";
 import contactLoading from "../../placeholderLoading/contactLoading/contactLoading";
 import cardLoading from "../../placeholderLoading/cardLoading/cardLoading";
+import { Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 class Organization extends Component {
   constructor(props) {
@@ -67,12 +69,21 @@ class Organization extends Component {
             )}
 
             <div className="sideinfo">
+              <Link
+                to={{
+                  pathname: "/proposaleditor",
+                  state: {
+                    proposalId: "new",
+                  },
+                }}
+              >
+                <Button className="proposal-btn">Propose an Idea</Button>
+              </Link>
               {this.state.isLoading ? (
                 <div className="orgupdatesloading">{orgUpdatesLoading()}</div>
               ) : (
                 <div className="org-updates">
-                  {" "}
-                  <Updates></Updates>{" "}
+                  <Updates></Updates>
                 </div>
               )}
 

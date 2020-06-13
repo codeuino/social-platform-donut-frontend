@@ -31,6 +31,7 @@
   .org-info {
     display: flex;
     flex-direction: row;
+    padding-right: 10px;
     .posts {
       flex-grow: 2;
       h2 {
@@ -74,6 +75,19 @@
     .org-updates {
       flex: 1;
       flex-grow: 3;
+    }
+
+    .proposal-btn {
+      height: 50px;
+      width: 90%;
+      margin-left: 40px;
+      font-family: Inter;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 27px;
+
+      color: #ffffff;
     }
   }
 }
