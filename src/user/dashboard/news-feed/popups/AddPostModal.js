@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Modal, Form, Col } from "react-bootstrap";
 import PropTypes from "prop-types";
 
@@ -6,13 +6,12 @@ const AddPostModal = (props) => {
   const [content, setContent] = useState("");
 
   const onChange = (event) => {
-    console.log("Setting content value! ", event.target.value);
     setContent(event.target.value);
   };
 
-  const createPost = (content) => {
+  const createPost = async (content) => {
     console.log("Creating the post ", content);
-    // ADD REQUEST TO
+    props.onHide()
   };
 
   return (
@@ -55,7 +54,7 @@ const AddPostModal = (props) => {
         </Form>
       </Modal.Body>
       <div className="modal__buttons">
-        <Button onClick={props.onHide} className="modal__save">
+        <Button onClick={createPost.bind(this, content)} className="modal__save">
           <span className="modal__buttontext">Post</span>
         </Button>
         <Button onClick={props.onHide} className="modal__cancel">
