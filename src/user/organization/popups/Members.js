@@ -6,24 +6,28 @@ class Members extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      text: 'Follow'
+      text: 'Follow',
+      members: []
     }
   }
-  onFollowClick = (index) => {
-    console.log('Start following!', index);
-    // SEND REQUEST TO FOLLOW USER WITH ID = INDEX
+
+  onRemoveClick = (index) => {
+    console.log('Blocking !', index);
+    // SEND REQUEST TO REMOVE USER WITH ID = INDEX
+  }
+
+  componentWillReceiveProps(nextProps) {
+    let membersInfo = [] 
+    nextProps.members.forEach((member) => {
+      membersInfo.push({ name: member.name.firstName + ' ' + member.name.lastName, desc: member.info.about.designation || 'UI/UX' , _id: member._id })
+    })
+    this.setState({ members: membersInfo })
   }
 
   render() {
-    const membersList = [
-      {name: 'John Doe', desc : 'UI/UX'},
-      {name: 'John Doe', desc : 'UI/UX'},
-      {name: 'John Doe', desc : 'UI/UX'},
-      {name: 'John Doe', desc : 'UI/UX'},
-      {name: 'John Doe', desc : 'UI/UX'}
-    ] 
-    let members = membersList.map((item, index) => (
-      <Row className="modal__member" id="p1" key={index}>
+    const membersList = [ ...this.state.members] 
+    let members = membersList.map((item) => (
+      <Row className="modal__member" id="p1" key={item._id}>
         <div className="member__image">
           <Image className="modal__memberPhoto" src={logo} alt="I" rounded />
         </div>
@@ -34,7 +38,7 @@ class Members extends Component {
         <div className="member__btn__container">
           <Button
             className="btn-danger modal__remove__followButton"
-            onClick={this.onFollowClick.bind(this, index)}
+            onClick={this.onRemoveClick.bind(this, item._id)}
           >
             <span className="remove_followText">Remove</span>
           </Button>

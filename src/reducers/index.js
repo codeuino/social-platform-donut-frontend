@@ -5,6 +5,8 @@ import userReducers from './userReducer';
 import errorReducer from './errorReducer';
 import requestStatus from './requestStatus';
 import notificationReducer from './notificationReducer'
+import dashboardReducer from './dashboardReducer'
+import insightReducer from './insightReducer';
 
 const rootReducer = combineReducers({
   auth: authReducers,
@@ -12,6 +14,8 @@ const rootReducer = combineReducers({
   user: userReducers,
   notification: notificationReducer,
   error: errorReducer,
+  dashboard: dashboardReducer,
+  insight: insightReducer,
   status: requestStatus
 });
 

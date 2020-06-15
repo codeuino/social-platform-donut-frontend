@@ -46,11 +46,11 @@ class Notifications extends Component {
     // set notifications 
     const { platformNotifications, userNotifications } = nextProps.notification
     let allNotifications = [];
-    if(platformNotifications) {
-      allNotifications = [...allNotifications, ...platformNotifications]
-    }
     if(userNotifications) {
       allNotifications = [...allNotifications, ...userNotifications]
+    }
+    if (platformNotifications) {
+      allNotifications = [...allNotifications, ...platformNotifications]
     }
     this.setState({ customNotifications: allNotifications }, () => {
       console.log('all notification ', this.state)

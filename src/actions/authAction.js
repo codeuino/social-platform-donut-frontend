@@ -14,7 +14,7 @@ export const registerUser = (userInfo, history) => async (dispatch) => {
     
     if(res.status === 201) { 
       dispatch(setRequestStatus(true));
-      history.push('/dashboard');
+      history.push('/');
     }
 
   } catch(error) {
@@ -86,15 +86,26 @@ export const changePassword = (passObj) => async (dispatch) => {
 
 
 // to logout user 
-export const logoutUser = () => {
-  // remove token from the localStorage 
-  localStorage.removeItem('jwtToken');
-  // delete authorization from the header 
-  setAuthToken(false);
-  // set user to {}
-  setCurrentUser({});
-  // move to home 
-  window.location.href = "/";
+export const logoutUser = () => async (dispatch) => {
+  try { 
+     console.log('Logging out!!')
+     // clear token from backend 
+     const res = await axios.post('/user/logout')
+     if (res.status === 200) {
+      // remove token from the localStorage 
+      localStorage.removeItem('jwtToken');
+      // remove userID 
+      localStorage.removeItem('userId')
+      // delete authorization from the header 
+      setAuthToken(false);
+      // set user to {}
+      setCurrentUser({});
+      // move to home 
+      window.location.href = "/";
+     }
+  } catch (error) {
+    dispatch(errorHandler(error))
+  }
 }
 
 export const setCurrentUser = (decodedData) => {

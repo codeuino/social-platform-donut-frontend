@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Button, Modal, Form, Col } from "react-bootstrap";
 import PropTypes from "prop-types";
+import { connect } from 'react-redux';
+import { createPost } from '../../../../actions/dashboardAction'
 
 const AddPostModal = (props) => {
   const [content, setContent] = useState("");
@@ -9,8 +11,12 @@ const AddPostModal = (props) => {
     setContent(event.target.value);
   };
 
-  const createPost = async (content) => {
+  const createPostClick = async (content) => {
     console.log("Creating the post ", content);
+    const obj = {
+      content: content
+    }
+    props.createPost(obj)
     props.onHide()
   };
 
@@ -54,7 +60,7 @@ const AddPostModal = (props) => {
         </Form>
       </Modal.Body>
       <div className="modal__buttons">
-        <Button onClick={createPost.bind(this, content)} className="modal__save">
+        <Button Button onClick = {createPostClick.bind(this, content)} className = "modal__save" >
           <span className="modal__buttontext">Post</span>
         </Button>
         <Button onClick={props.onHide} className="modal__cancel">
@@ -64,10 +70,18 @@ const AddPostModal = (props) => {
     </Modal>
   );
 };
+
 AddPostModal.propTypes = {
   onHide: PropTypes.func,
   show: PropTypes.bool,
   style: PropTypes.object,
 };
 
-export default AddPostModal;
+// map state to props 
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  error: state.error,
+  dashboard: state.dashboard
+})
+
+export default connect(mapStateToProps, { createPost })(AddPostModal);

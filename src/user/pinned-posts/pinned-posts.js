@@ -31,7 +31,7 @@ class PinnedPosts extends Component {
           {this.state.isLoading ? pinnedPostsLoading() : <PinPosts />}
         </div>
         <div className="promotions">
-          {this.state.isLoading ? orgUpdatesLoading() : <Updates />}
+          {/* {this.state.isLoading ? orgUpdatesLoading() : <Updates />} */}
         </div>
       </div>
     );

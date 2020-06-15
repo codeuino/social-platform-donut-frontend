@@ -22,35 +22,36 @@
    });
 
    state.socket.on('Password update', (data) => {
-     console.log('Password updated!');
-     addToNotification({
-       imgSrc: donutIcon,
-       heading: 'Forgot password!',
-       content: `${data.data}`,
-       tag: 'Update'
-     })
+     let userId = JSON.stringify(localStorage.getItem("userId"));
+     if(userId === data.userId) {
+      addToNotification({
+        imgSrc: donutIcon,
+        heading: "Forgot password!",
+        content: `${data.data}`,
+        tag: "Update",
+      });
+     }
    })
 
    state.socket.on('Account activate', (data) => {
-     console.log('Password updated!');
-     addToNotification({
-       imgSrc: donutIcon,
-       heading: 'Account activate',
-       content: `${data.data}`,
-       tag: 'Activate'
-     })
+     let userId = JSON.stringify(localStorage.getItem('userId'))
+     if(userId === data.userId){
+       addToNotification({
+        imgSrc: donutIcon,
+        heading: 'Account activate',
+        content: `${data.data}`,
+        tag: 'Activate'
+      })
+     }
    })
 
    state.socket.on('New follower', (data) => {
-     console.log('New follower');
      let userId = JSON.stringify(localStorage.getItem('userId'))
-     console.log('userId ', userId)
-     console.log('data ', JSON.parse(data))
-     if (userId === data.data.obj) {
+     if (userId === data.followId) {
       addToNotification({
         imgSrc: donutIcon,
         heading: 'New follower',
-        content: `${data.data.obj.name} started following you!`,
+        content: `${data.name} started following you!`,
         tag: 'Follower'
       })
      }
