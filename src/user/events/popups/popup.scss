@@ -39,6 +39,7 @@
 
 .form-footer {
     margin-top: 0;
+    margin-left: 2px;
     Button {
         width: 90px;
         margin-right: 20px;
@@ -51,7 +52,7 @@
     }
 }
 .modal-backdrop {
-    background: rgba(0, 0, 0, 0.6) !important;
+    background: rgba(0, 0, 0, 0.2) !important;
 }
 .modal-backdrop.in{
     opacity: 0.5;

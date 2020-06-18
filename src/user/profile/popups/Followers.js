@@ -11,15 +11,17 @@ class Followers extends Component {
     }
   }
   render() {
-    const { borderStyle, onHide } = this.props
-    let followersList = [
-      {name: 'John Doe', desg: 'UI/UX'},
-      {name: 'John Doe', desg: 'UI/UX'},
-      {name: 'John Doe', desg: 'UI/UX'},
-      {name: 'John Doe', desg: 'UI/UX'},
-      {name: 'John Doe', desg: 'UI/UX'}
-    ];
-    let followers = followersList.map((item, index) => (
+    const { borderStyle, onHide, followers } = this.props
+    let followersList = []
+    
+    for(const follower in followers) {
+      let tempObj = {}
+      tempObj.name = followers[follower].name.firstName + ' ' + followers[follower].name.lastName;
+      tempObj.desg = followers[follower].info.about.designation || 'NA';
+      followersList.push(tempObj)
+    }
+
+    let followersContent = followersList.map((item, index) => (
       <Row className="modal__follower" id="p1" key={index}>
         <div className="follower__image">
           <Image
@@ -59,7 +61,7 @@ class Followers extends Component {
         </Modal.Header>
         <Modal.Body className="modal__body">
           <div className="modal__mini-title">PEOPLE WHO FOLLOW YOU</div>
-          {followers}
+          {followersContent}
         </Modal.Body>
       </Modal>
     );

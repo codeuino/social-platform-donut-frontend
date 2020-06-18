@@ -187,7 +187,7 @@ class SignUpForm extends Component {
                 <Form.Control
                   value={firstName}
                   type="text"
-                  placeholder=""
+                  placeholder = "First Name"
                   name="firstName"
                   onChange={this.onChange}
                   required
@@ -200,7 +200,7 @@ class SignUpForm extends Component {
                 <Form.Control
                   value={lastName}
                   type="text"
-                  placeholder=""
+                  placeholder="Last Name"
                   name="lastName"
                   onChange={this.onChange}
                   required
@@ -215,7 +215,7 @@ class SignUpForm extends Component {
                 <Form.Control
                   value={email}
                   type="email"
-                  placeholder=""
+                  placeholder="Email"
                   name="email"
                   onChange={this.onChange}
                   required
@@ -232,7 +232,7 @@ class SignUpForm extends Component {
                 <Form.Label>Phone Number</Form.Label>
                 <Form.Control
                   type="number"
-                  placeholder=""
+                  placeholder="Phone"
                   name="phone"
                   value={phone}
                   onChange={this.onChange}
@@ -250,7 +250,7 @@ class SignUpForm extends Component {
             <Form.Label>Description</Form.Label>
             <Form.Control
               type="text"
-              placeholder=""
+              placeholder="Short bio"
               name="shortDescription"
               value={shortDescription}
               onChange={this.onChange}
@@ -270,7 +270,7 @@ class SignUpForm extends Component {
                 <Form.Control
                   value={password}
                   type="password"
-                  placeholder=""
+                  placeholder="*******"
                   name="password"
                   onChange={this.onChange}
                   required
@@ -289,7 +289,7 @@ class SignUpForm extends Component {
                 <Form.Label>Confirm Password</Form.Label>
                 <Form.Control
                   type="password"
-                  placeholder=""
+                  placeholder="*******"
                   name="cnfPassword"
                   value={cnfPassword}
                   onChange={this.onChange}
@@ -298,7 +298,7 @@ class SignUpForm extends Component {
               </Form.Group>
               <ul className="list-unstyled">
                 <li id="validation_msg">
-                  {error?.msg.length > 0 ? error.msg : null}
+                  {/* {error?.msg.length > 0 ? error.msg : null} */}
                 </li>
               </ul>
             </Col>

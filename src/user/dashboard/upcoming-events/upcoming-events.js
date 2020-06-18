@@ -1,20 +1,43 @@
 import React, { Component } from "react";
 import "./upcoming-events.scss";
 import events from '../../../jsonData/upcoming-events';
+import donutIcon from '../../../svgs/donut-icon.svg'
+import { connect } from "react-redux";
+import { upcomingEvents } from '../../../actions/dashboardAction'
 
 class UpcomingEvents extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      comingEvents: []
+    }
+  }
+
+  // fetch upcoming events from the db
+  componentWillMount() {
+    this.props.upcomingEvents()
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log('nextProps ', nextProps)
+    this.setState({ comingEvents: nextProps.dashboard.upcomingEvents }, () => {
+      console.log('upcoming events ', this.state)
+    })
+  }
+
   render() {
-    let upcomingEvents = events.map((event,i)=>{
+    let events = this.state.comingEvents;
+    let upcomingEvents = events.map((event, i) => {
       return (
         <div key={i}>
           <div className="event-container"> 
             <div className="img-container">
-              <img alt="event-icon" src={event.imgSrc}></img>
+              <img alt="event-icon" src={donutIcon}></img>
             </div>
             <div className="event-description">
-              <h6>{event.createdBy}</h6>
-              {event.tag ? <button type="button" className="tag">{event.tag}</button> : <div></div>}
-              <p>{event.description}</p>
+              <h6>{event.eventName}</h6>
+              {event.isOnline ? <button type="button" className="tag">{"Online"}</button> : <div></div>}
+              <p>{event.description.shortDescription}</p>
             </div>
           </div>
         </div>
@@ -32,5 +55,10 @@ class UpcomingEvents extends Component {
     );
   }
 }
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  error: state.error,
+  dashboard: state.dashboard
+})
 
-export default UpcomingEvents;
+export default connect(mapStateToProps, { upcomingEvents })(UpcomingEvents);

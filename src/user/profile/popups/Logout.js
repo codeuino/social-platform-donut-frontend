@@ -19,7 +19,7 @@ class Logout extends Component {
       <Modal
         show={this.props.show}
         onHide={this.props.handleClose}
-        animation={false}
+        animation={true}
         className="modal"
         centered
       >
@@ -45,8 +45,9 @@ class Logout extends Component {
           </Form>
         </Modal.Body>
         <div className="modal__buttons">
-          <Button onClick={this.props.handleClose} className="modal__save">
-            <span className="modal__buttontext">Save</span>
+          <Button Button onClick = {this.onLogoutClick}
+          className = "modal__save" >
+            <span className="modal__buttontext">Logout</span>
           </Button>
           <Button onClick={this.props.handleClose} className="modal__cancel">
             <span className="modal__buttontext">Cancel</span>

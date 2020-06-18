@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 import React, { Component } from "react";
 import { Modal, Button, Row, Col, Image, Form } from "react-bootstrap";
 import logo from "../../../svgs/logo-image.jpg";
@@ -6,7 +7,8 @@ class Admins extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      text: 'Follow'
+      text: 'Follow',
+      admins: []
     }
   }
   onRemoveClick = (index) => {
@@ -14,16 +16,18 @@ class Admins extends Component {
     // SEND REQUEST TO REMOVE USER WITH ID = INDEX FROM ADMINISTRATORs LIST
   }
 
+  componentWillReceiveProps(nextProps) {
+    let adminsInfo = []
+    nextProps.admins?.forEach((admin) => {
+      adminsInfo.push({ name: admin.name.firstName + ' ' + admin.name.lastName, desc: admin.info.about?.designation, _id: admin._id })
+    })
+    this.setState({ admins: adminsInfo })
+  }
+
   render() {
-    const adminList = [
-      {name: 'John Doe', desc : 'UI/UX'},
-      {name: 'John Doe', desc : 'UI/UX'},
-      {name: 'John Doe', desc : 'UI/UX'},
-      {name: 'John Doe', desc : 'UI/UX'},
-      {name: 'John Doe', desc : 'UI/UX'}
-    ] 
-    let admins = adminList.map((item, index) => (
-      <Row className="modal__member" id="p1" key={index}>
+    const adminList = [...this.state.admins] 
+    let admins = adminList.map((item) => (
+      <Row className="modal__member" id="p1" key={item._id}>
         <div className="member__image">
           <Image className="modal__memberPhoto" src={logo} alt="I" rounded />
         </div>
@@ -34,7 +38,7 @@ class Admins extends Component {
         <div className="member__btn__container">
           <Button
             className="btn-danger modal__remove__followButton"
-            onClick={this.onRemoveClick.bind(this, index)}
+            onClick={this.onRemoveClick.bind(this, item._id)}
           >
             <span className="remove_followText">Remove</span>
           </Button>

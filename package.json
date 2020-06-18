@@ -24,9 +24,11 @@
     "react-redux": "^7.2.0",
     "react-responsive": "^8.0.3",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.3.0",
+    "react-scripts": "^3.4.0",
+    "react-toastify": "^6.0.5",
     "redux": "^4.0.5",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "socket.io-client": "^2.3.0"
   },
   "proxy": "http://localhost:5000",
   "scripts": {
