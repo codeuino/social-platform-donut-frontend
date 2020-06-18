@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Modal, Button, Row, Col, Image, Form } from "react-bootstrap";
+import { connect } from 'react-redux';
+import { removeUser } from '../../../actions/usersAction'
 import logo from "../../../svgs/logo-image.jpg";
 
 class Members extends Component {
@@ -11,17 +13,20 @@ class Members extends Component {
     }
   }
 
-  onRemoveClick = (index) => {
-    console.log('Blocking !', index);
+  onRemoveClick = (userId) => {
+    console.log('Removing !', userId);
     // SEND REQUEST TO REMOVE USER WITH ID = INDEX
+    this.props.removeUser(userId)
   }
 
   componentWillReceiveProps(nextProps) {
     let membersInfo = [] 
     nextProps.members.forEach((member) => {
-      membersInfo.push({ name: member.name.firstName + ' ' + member.name.lastName, desc: member.info.about.designation || 'UI/UX' , _id: member._id })
+      membersInfo.push({ name: member.name.firstName + ' ' + member.name.lastName, desc: member.info.about.designation || 'UI/UX' , _id: member._id, isRemoved: member?.isRemoved || false })
     })
-    this.setState({ members: membersInfo })
+    this.setState({ members: membersInfo }, () => {
+      console.log('members ', this.state)
+    })
   }
 
   render() {
@@ -37,10 +42,15 @@ class Members extends Component {
         </div>
         <div className="member__btn__container">
           <Button
-            className="btn-danger modal__remove__followButton"
+            className = {
+              Boolean(item.isRemoved === true) ? 'modal__removed__followButton' :
+              'modal__remove__followButton'
+            }
             onClick={this.onRemoveClick.bind(this, item._id)}
           >
-            <span className="remove_followText">Remove</span>
+            <span className="remove_followText">
+              {Boolean(item.isRemoved === true) ? (<span>Removed</span>) : (<span>Remove</span>)}
+            </span>
           </Button>
         </div>
       </Row>
@@ -88,4 +98,12 @@ class Members extends Component {
     );
   }
 }
-export default Members;
+// map state to props 
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  error: state.error,
+  user: state.user,
+  status: state.status
+})
+
+export default connect(mapStateToProps, { removeUser })(Members);

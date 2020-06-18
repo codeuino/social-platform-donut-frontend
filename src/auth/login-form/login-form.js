@@ -21,9 +21,7 @@ class LoginForm extends Component {
     };
   }
   componentWillReceiveProps(nextProps) {
-    if (nextProps.error?.msg.length > 0) {
-      this.setState({ error: true });
-    }
+    console.log('nextProps ', nextProps)
   }
 
   onSubmit = (e) => {
