@@ -2,27 +2,67 @@ import React, { Component } from "react";
 import { Modal, Button, Row, Col, Image } from "react-bootstrap";
 import PropTypes from 'prop-types';
 import logo from "../../../svgs/logo-image.jpg";
+import { connect } from 'react-redux'
+import { followUser, unFollowUser } from '../../../actions/usersAction'
 
 class Followers extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      text: 'Follow'
+      text: 'Follow',
+      followings: [],
+      status: false
     }
   }
+
+  follow = (userId) => {
+    console.log('started following user ', userId)
+    this.props.followUser(userId)
+  }
+
+  unFollow = (userId) => {
+    console.log('started unfollowing ', userId)
+    this.props.unFollowUser(userId)
+  }
+
+  checkFollowing = (userId = 0) => {
+    let followingArray = this.state.followings.map(follow => follow._id)
+    let isFollowing = followingArray.includes(userId) ? true : false
+    console.log('isFollowing ', isFollowing)
+    return isFollowing
+  }
+
+  onFollowUnFollowClick = (userId, text) => {
+    console.log('userId text ', userId + " " + text)
+    if(text === 'Follow') {
+      this.follow(userId)
+    }
+    if(text === 'UnFollow') {
+      this.unFollow(userId)
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log('nextProps ', nextProps)
+    this.setState({ followings: nextProps.followings })
+  }
+
   render() {
-    const { borderStyle, onHide, followers } = this.props
+    const { borderStyle, onHide, followers, followings, show } = this.props
     let followersList = []
     
     for(const follower in followers) {
       let tempObj = {}
       tempObj.name = followers[follower].name.firstName + ' ' + followers[follower].name.lastName;
       tempObj.desg = followers[follower].info.about.designation || 'NA';
+      tempObj._id = followers[follower]._id
+      this.checkFollowing(tempObj._id) ? tempObj.text = 'UnFollow' : tempObj.text = 'Follow'
       followersList.push(tempObj)
     }
 
-    let followersContent = followersList.map((item, index) => (
-      <Row className="modal__follower" id="p1" key={index}>
+
+    let followersContent = followersList.map((item) => (
+      <Row className="modal__follower" id="p1" key={item._id}>
         <div className="follower__image">
           <Image
             className="modal__followerPhoto"
@@ -38,15 +78,16 @@ class Followers extends Component {
           </span>
         </div>
         <div className="follower__btn__container">
-          <Button className="modal__followButton" variant="outline-primary">
-            <span className="modal__followText">Follow</span>
+          <Button className={Boolean(item.text === 'Follow') ? 'modal__followButton' : 'modal__unFollowButton'} variant="outline-primary" onClick={this.onFollowUnFollowClick.bind(this, item._id, item.text)}>
+            <span className={Boolean(item.text === 'Follow') ? 'modal__followText' : 'modal__unFollowText'}>{item.text}</span>
           </Button>
         </div>
     </Row>
     ))
     return (
       <Modal
-        {...this.props}
+        onHide={onHide}
+        show={show}
         size="md"
         aria-labelledby="contained-modal-title-vcenter"
         className="modal"
@@ -71,6 +112,17 @@ class Followers extends Component {
 Followers.propTypes = {
   onHide: PropTypes.func,
   show: PropTypes.bool,
-  borderStyle: PropTypes.object
+  borderStyle: PropTypes.object,
+  followers: PropTypes.array,
+  followings: PropTypes.array
 }
-export default Followers;
+
+// map state to props 
+const mapStateToProps = (state) => ({ 
+  auth: state.auth,
+  error: state.error,
+  user: state.user,
+  status: state.status
+})
+
+export default connect(mapStateToProps, { followUser, unFollowUser })(Followers);

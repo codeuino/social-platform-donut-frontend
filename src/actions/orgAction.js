@@ -9,6 +9,22 @@ export const registerCommunity  = (orgInfo) => async (dispatch) => {
     dispatch(setRequestStatus(false))
     if (res.status === 201) {
       dispatch(setRequestStatus(true))
+      localStorage.setItem('orgId', JSON.stringify(res.data.org._id))
+    }
+  } catch (error) {
+    dispatch(errorHandler(error))
+  }
+}
+
+// REMOVE ADMIN
+export const removeAdmin = (userId) => async (dispatch) => {
+  try {
+    let orgId = localStorage.getItem('orgId')
+    const res = await axios.patch(`/org/remove/${orgId}/${userId}`)
+    dispatch(setRequestStatus(false))
+    if (res.status === 200) {
+      dispatch(setRequestStatus(true))
+      console.log('admin removed ', userId)
     }
   } catch (error) {
     dispatch(errorHandler(error))

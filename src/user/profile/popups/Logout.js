@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Modal, Button, Form, Col } from "react-bootstrap";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
 import { logoutUser } from "../../../actions/authAction";
 
 class Logout extends Component {
@@ -63,4 +62,4 @@ const mapStateToProps = (state) => ({
   error: state.error,
 });
 
-export default connect(mapStateToProps, { logoutUser })(withRouter(Logout));
+export default connect(mapStateToProps, { logoutUser })((Logout));

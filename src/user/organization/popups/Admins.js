@@ -1,6 +1,8 @@
 /* eslint-disable no-unused-expressions */
 import React, { Component } from "react";
 import { Modal, Button, Row, Col, Image, Form } from "react-bootstrap";
+import { connect } from 'react-redux'
+import { removeAdmin } from '../../../actions/orgAction'
 import logo from "../../../svgs/logo-image.jpg";
 
 class Admins extends Component {
@@ -11,9 +13,10 @@ class Admins extends Component {
       admins: []
     }
   }
-  onRemoveClick = (index) => {
-    console.log('Removing admin!', index);
+  onRemoveClick = (userId) => {
+    console.log('Removing admin!', userId);
     // SEND REQUEST TO REMOVE USER WITH ID = INDEX FROM ADMINISTRATORs LIST
+    this.props.removeAdmin(userId)
   }
 
   componentWillReceiveProps(nextProps) {
@@ -88,4 +91,12 @@ class Admins extends Component {
     );
   }
 }
-export default Admins;
+
+// map state to props 
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  error: state.error,
+  status: state.status
+})
+
+export default connect(mapStateToProps, { removeAdmin })(Admins)

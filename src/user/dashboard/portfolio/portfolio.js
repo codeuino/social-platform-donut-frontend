@@ -5,7 +5,7 @@ import Followers from "../../profile/popups/Followers";
 import Admins from "../../organization/popups/Admins";
 import { connect } from 'react-redux'
 import { getMembers, getPersonalOverview } from '../../../actions/insightAction'
-import { getProfile } from '../../../actions/usersAction'
+import { getProfile, followUser, unFollowUser } from '../../../actions/usersAction'
 
 class Portfolio extends Component {
   constructor(props) {
@@ -41,7 +41,9 @@ class Portfolio extends Component {
     let info = insight.personalOverview
     let followers = user.userProfile.followers
     let followings = user.userProfile.followings;
-    this.setState({ members: members, admins: admins, personalInfo: info, followers: followers, followings: followings })
+    this.setState({ members: members, admins: admins, personalInfo: info, followers: followers, followings: followings }, () => {
+      console.log('state ', this.state);
+    })
   }
 
   showMembers = () => {
@@ -83,7 +85,7 @@ class Portfolio extends Component {
             <h1><b>{followers?.length || 0}</b></h1>
             <h3>Followers</h3>
           </div>
-          <Followers show={this.state.followersList} onHide={this.closeFollowersList} followers={followers}/>
+          <Followers show={this.state.followersList} onHide={this.closeFollowersList} followers={followers} followings={followings} />
           <div className="item">
             <h1><b>{personalInfo.events || 0}</b></h1>
             <h3>Events Organized</h3>
