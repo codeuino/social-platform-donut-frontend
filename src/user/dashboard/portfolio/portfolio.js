@@ -5,7 +5,7 @@ import Followers from "../../profile/popups/Followers";
 import Admins from "../../organization/popups/Admins";
 import { connect } from 'react-redux'
 import { getMembers, getPersonalOverview } from '../../../actions/insightAction'
-import { getProfile, followUser, unFollowUser } from '../../../actions/usersAction'
+import { getProfile } from '../../../actions/usersAction'
 
 class Portfolio extends Component {
   constructor(props) {

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { errorHandler } from '../utils/errorHandler';
 import { setRequestStatus } from '../utils/setRequestStatus';
+import { GET_ALL_EVENTS } from './types';
 
 // DELETE EVENT REQUEST 
 export const deleteEvent = (eventId) => async (dispatch) => {
@@ -36,6 +37,24 @@ export const createEvent = (eventInfo, history) => async (dispatch) => {
     if(res.status === 201){
       dispatch(setRequestStatus(true))
       history.push('/events');
+    }
+  } catch(error) {
+    dispatch(errorHandler(error))
+  }
+}
+
+// GET ALL EVENTS 
+export const getAllEvents = (pagination = 10, page = 1) => async (dispatch) => {
+  try {
+    const res = await axios.get(`/event/all?pagination=${pagination}&page=${page}`)
+    dispatch(setRequestStatus(false))
+    if(res.status === 200) {
+      dispatch(setRequestStatus(true))
+      console.log('all events ', res.data.events)
+      dispatch({
+        type: GET_ALL_EVENTS,
+        payload: res.data.events
+      })
     }
   } catch(error) {
     dispatch(errorHandler(error))

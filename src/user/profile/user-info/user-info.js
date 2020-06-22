@@ -10,11 +10,30 @@ class UserInfo extends Component {
     super(props);
     this.state = {
       editProfile: false,
-      followersList: false
+      followersList: false,
+      name: '',
+      designation: '',
+      location: '',
+      shortDesc: '',
+      website: ''
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    console.log('nextProps ', nextProps.userProfile)
+    const name = nextProps.userProfile?.name || "NA"
+    const about = nextProps.userProfile.info?.about;
+    this.setState({ 
+      name: `${name?.firstName + " " + name?.lastName}`,
+      designation: about?.designation,
+      shortDesc: about?.shortDescription,
+      location: about?.location,
+      website: about?.website
+    })
+  }
+
   render() {
+    const { designation, website, location, shortDesc, name } = this.state
     let cancel = () =>
       this.setState({
         editProfile: false,
@@ -41,20 +60,19 @@ class UserInfo extends Component {
         </div>
         <div className="user-data">
           <h1>
-            Dhanus Rajendra{" "}
-            <Button
+            {name || "NA"}{" "}
+            {/* <Button
               variant="primary"
               onClick={() => this.setState({ followersList: true })}
             >
               Follow
             </Button>
-            <Followers show={this.state.followersList} onHide={cancelf} />
+            <Followers show={this.state.followersList} onHide={cancelf} /> */}
           </h1>
-          <p className="profession">Front end developer</p>
-          <p className="place">Bengaluru, Karnataka</p>
+          <p className="profession">{designation || "NA" }</p>
+          <p className="place">{location ||  "NA"}</p>
           <p className="desc">
-            where millions of people gather together every day to imagine,
-            create
+            {shortDesc || "Short description"}
           </p>
           <div className="social-icons">
             <Button variant="primary">Facebook</Button>

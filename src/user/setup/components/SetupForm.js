@@ -21,6 +21,7 @@ class SetupForm extends Component {
       <div className="setup_form_main_content">
         <div className="setup_header">
           <h3 className="community_text">Community Setup </h3>
+            {values.error ? (<p style={{color: "red"}}>{values.error}</p>): null}
           <p>1 / 2</p>
         </div>
         <div className="setup_content">
@@ -28,7 +29,6 @@ class SetupForm extends Component {
             <div className="col-md-6">
               <Form>
                 <p className="setup_title">ABOUT</p>
-                  {values.error ? (<p style={{color: "red"}}>{values.error}</p>): null}
                  <Form.Group>
                    <Form.Label htmlFor="label_text" className="label_text mt-0">
                     Community Name

@@ -10,6 +10,10 @@ import orgUpdatesLoading from "../../placeholderLoading/orgUpdatesLoading/orgUpd
 import notifyUsersLoading from "../../placeholderLoading/notifyUsersLoading/notifyUsersLoading";
 import portfolioLoading from "../../placeholderLoading/portfolioLoading/portfolioLoading";
 import newsFeedLoading from "../../placeholderLoading/newsFeedLoading/newsFeedLoading";
+import { connect } from 'react-redux'
+import { getAllEvents } from "../../actions/eventAction";
+import { getAllPosts } from "../../actions/postAction";
+import { getAllProjects } from "../../actions/projectAction";
 
 class Dashboard extends Component {
   constructor(props) {
@@ -17,17 +21,45 @@ class Dashboard extends Component {
     this.state = {
       dashboard: true,
       isLoading: true,
+      allPosts: [],
+      allProjects: [],
+      allEvents: [],
+      allMix: []
     };
   }
 
   componentDidMount() {
     setTimeout(() => {
+      this.props.getAllEvents();
+    })
+    setTimeout(() => {
+      this.props.getAllPosts()
+    })
+    setTimeout(() => {
+      this.props.getAllProjects()
+    })
+    setTimeout(() => {
       this.setState({ isLoading: false });
     }, 1000);
   }
 
+  componentWillReceiveProps(nextProps) {
+    console.log('dashboard ', nextProps)
+    const { event, project, post } = nextProps
+    let all = [...event?.allEvents, ...post?.allPosts, ...project?.allProjects]
+    this.setState({
+      allEvents: event?.allEvents,
+      allPosts: post?.allPosts,
+      allProjects: project?.allProjects,
+      allMix: all
+    }, () => {
+      console.log('updated dashboard ', this.state)
+    })
+  }
+
   render() {
-    return (
+    const { allMix, allEvents, allProjects, allPosts } = this.state
+    return ( 
       <div className="dashboard">
         <div className="navigation">
           <Navigation dashboard={this.state.dashboard}></Navigation>
@@ -41,10 +73,10 @@ class Dashboard extends Component {
               <Notifications></Notifications>
             </div>
           )}
-          {this.state.isLoading ? newsFeedLoading() : <NewsFeed></NewsFeed>}
+          {this.state.isLoading ? newsFeedLoading() : <NewsFeed allMix={allMix} allProjects={allProjects} allPosts={allPosts} allEvents={allEvents}/>}
         </div>
         <div className="promotions">
-          {this.state.isLoading ? portfolioLoading() : <Portfolio></Portfolio>}
+          {this.state.isLoading ? portfolioLoading() : <Portfolio />}
           {/* {this.state.isLoading ? orgUpdatesLoading() : <Updates></Updates>} */}
         </div>
       </div>
@@ -52,4 +84,13 @@ class Dashboard extends Component {
   }
 }
 
-export default Dashboard;
+// map state to props 
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  error: state.error,
+  event: state.event,
+  post: state.post,
+  project: state.project
+})
+
+export default connect(mapStateToProps, { getAllEvents, getAllPosts, getAllProjects })(Dashboard);

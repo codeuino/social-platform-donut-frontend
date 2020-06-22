@@ -7,6 +7,7 @@ import OrgPermission from './components/OrgPermission'
 import OrgSetting from './components/OrgSettings'
 import OrgAuth from './components/OrgAuth'
 import Navigation from '../navigation/navigation'
+import { connect } from 'react-redux'
 
 class CommunitySetting extends Component {
   constructor(props) {
@@ -61,4 +62,10 @@ class CommunitySetting extends Component {
     );
   }
 }
-export default CommunitySetting;
+
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  error: state.error,
+  org: state.org
+})
+export default connect(mapStateToProps)(CommunitySetting);
