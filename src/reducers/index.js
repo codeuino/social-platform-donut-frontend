@@ -7,6 +7,9 @@ import requestStatus from './requestStatus';
 import notificationReducer from './notificationReducer'
 import dashboardReducer from './dashboardReducer'
 import insightReducer from './insightReducer';
+import orgReducer from './orgReducer';
+import eventReducer from './eventReducer';
+import projectReducer from './projectReducer';
 
 const rootReducer = combineReducers({
   auth: authReducers,
@@ -16,6 +19,9 @@ const rootReducer = combineReducers({
   error: errorReducer,
   dashboard: dashboardReducer,
   insight: insightReducer,
+  org: orgReducer,
+  event: eventReducer,
+  project: projectReducer,
   status: requestStatus
 });
 

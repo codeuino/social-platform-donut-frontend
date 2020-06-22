@@ -1,18 +1,20 @@
-/* eslint-disable no-unused-expressions */
 import React, { Component } from "react";
 import { Modal, Button, Row, Col, Image, Form } from "react-bootstrap";
 import { connect } from 'react-redux'
 import { removeAdmin } from '../../../actions/orgAction'
 import logo from "../../../svgs/logo-image.jpg";
+import { getMember } from '../../../actions/insightAction'
 
 class Admins extends Component {
   constructor(props) {
     super(props);
     this.state = {
       text: 'Follow',
-      admins: []
+      admins: [],
+      query: ''
     }
   }
+
   onRemoveClick = (userId) => {
     console.log('Removing admin!', userId);
     // SEND REQUEST TO REMOVE USER WITH ID = INDEX FROM ADMINISTRATORs LIST
@@ -20,14 +22,50 @@ class Admins extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    let adminsInfo = []
-    nextProps.admins?.forEach((admin) => {
-      adminsInfo.push({ name: admin.name.firstName + ' ' + admin.name.lastName, desc: admin.info.about?.designation, _id: admin._id })
-    })
-    this.setState({ admins: adminsInfo })
+    console.log('nextProps ', nextProps)
+    const { query } = this.state;
+    const { insight } = nextProps
+    let res = [];
+    if (query) {
+      let allMembers = insight.member;
+      console.log("allmembers ", allMembers);
+      let allAdmins = []
+      for(let i in allMembers) {
+        if(allMembers[i].isAdmin === true) {
+          allAdmins.push(allMembers[i]);
+        }
+      }
+      res = this.mapHelper(allAdmins);
+    } else {
+      let allAdmins = nextProps.admins;
+      res = this.mapHelper(allAdmins);
+    }
+    this.setState({ admins: res })
+  }
+
+   mapHelper = (allAdmins) => {
+     let adminInfo = []
+     if (allAdmins.length > 0) {
+      allAdmins.forEach((admin) => {
+        adminInfo.push({ name: admin.name.firstName + ' ' + admin.name.lastName, desc: admin.info.about?.designation, _id: admin._id, isRemoved: admin?.isRemoved || false })
+      })
+     }
+    return adminInfo
+  }
+
+  onChange = (e) => {
+    this.setState({ query: e.target.value })
+  }
+
+  onKeyPress = (e) => {
+    const { query } = this.state
+    if(e.key === 'Enter') {
+      this.props.getMember(query)
+    }
   }
 
   render() {
+    const { onHide, show } = this.props
     const adminList = [...this.state.admins] 
     let admins = adminList.map((item) => (
       <Row className="modal__member" id="p1" key={item._id}>
@@ -43,14 +81,17 @@ class Admins extends Component {
             className="btn-danger modal__remove__followButton"
             onClick={this.onRemoveClick.bind(this, item._id)}
           >
-            <span className="remove_followText">Remove</span>
+            <span className="remove_followText">
+               {Boolean(item.isRemoved === true) ? (<span>Removed</span>) : (<span>Remove</span>)}
+            </span>
           </Button>
         </div>
       </Row>
     )); 
     return (
       <Modal
-        {...this.props}
+        onHide={onHide}
+        show={show}
         size="md"
         aria-labelledby="contained-modal-title-vcenter"
         className="modal"
@@ -59,7 +100,14 @@ class Admins extends Component {
         <Modal.Header closeButton className="modal__header">
           <Modal.Title className="modal__title">
             <div className="modal__main-title">Administrators</div>
-            <input type="text" placeholder="Search" className="modal__search" />
+            <input 
+              type="text" 
+              placeholder="Search" 
+              className="modal__search"
+              value={this.state.query}
+              onChange={this.onChange}
+              onKeyPress={this.onKeyPress}
+            />
           </Modal.Title>
         </Modal.Header>
         <Modal.Body className="modal__body">
@@ -96,7 +144,8 @@ class Admins extends Component {
 const mapStateToProps = (state) => ({
   auth: state.auth,
   error: state.error,
+  insight: state.insight,
   status: state.status
 })
 
-export default connect(mapStateToProps, { removeAdmin })(Admins)
+export default connect(mapStateToProps, { removeAdmin, getMember })(Admins)

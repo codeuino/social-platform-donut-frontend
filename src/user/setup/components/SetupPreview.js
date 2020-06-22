@@ -19,6 +19,8 @@ class SetupPreview extends Component {
   onFinish = (event) => {
     event.preventDefault();
     console.log('finishing the setup!');
+    // set theme in localStorage 
+    localStorage.setItem('theme', JSON.stringify(this.state.color))
     this.props.onFinish();
   }
   
@@ -29,6 +31,7 @@ class SetupPreview extends Component {
   
   onChangeColor = (e) => {
     console.log('color changed ', e.target.value);
+    console.log(this.props)
     this.setState({ color: e.target.value }, this.switchPreview(e.target.value))
   }
   
@@ -57,16 +60,16 @@ class SetupPreview extends Component {
     }
   }
   render() {
-    const { values, handleThemeChange } = this.props;
+    const { values } = this.props;
     return (
       <div className="setup_form_main_content">
         <div className="setup_header">
           <h3 className="community_text">Community Setup </h3>
+          {values.error ? (<p style={{color: "red"}}>{values.error}</p>): null}
           <p>2 / 2</p>
         </div>
         <div className="setup_content">
           <div className="row form_content">
-             {values.error ? (<p style={{color: "red"}}>{values.error}</p>): null}
             <div className="col-md-6">
               <Form>
                 <p className="setup_title">THEME</p>
@@ -83,7 +86,7 @@ class SetupPreview extends Component {
                   </Form.Label>
                   <Form.Control
                     as="select"
-                    onChange={handleThemeChange('color')}
+                    onChange={this.onChangeColor}
                     style={{ color: this.state.color }}
                   >
                     <option value="aqua" style={{ color: "aqua" }}>

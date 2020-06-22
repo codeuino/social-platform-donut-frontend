@@ -72,8 +72,6 @@ class Setup extends Component {
         }]
       }
     }
-    // store theme in local storage 
-    localStorage.setItem('theme', JSON.stringify(color));
     this.props.registerCommunity(orgObj)
   }
 
@@ -115,7 +113,6 @@ class Setup extends Component {
           return (
             <SetupPreview
               nextStep={this.onNext}
-              handleThemeChange={this.handleThemeChange}
               onFinish={this.onFinish}
               prevStep={this.onPrev}
               values={values}

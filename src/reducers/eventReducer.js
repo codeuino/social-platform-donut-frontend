@@ -1,14 +1,14 @@
-import { GET_ALL_POSTS } from '../actions/types'
+import { GET_ALL_EVENTS } from '../actions/types'
 const initialState = {
-  allPosts: []
+  allEvents: []
 }
 
 export default (state = initialState, action) => {
   switch(action.type) {
-    case GET_ALL_POSTS: {
+    case GET_ALL_EVENTS: {
       return {
         ...state,
-        allPosts: action.payload
+        allEvents: action.payload
       }
     }
     default:{

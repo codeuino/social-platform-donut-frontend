@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import logo from "../../../svgs/logo-image.jpg";
 import { connect } from 'react-redux'
 import { followUser, unFollowUser } from '../../../actions/usersAction'
+import { getMember } from '../../../actions/insightAction'
 
 class Followers extends Component {
   constructor(props) {
@@ -51,13 +52,15 @@ class Followers extends Component {
     const { borderStyle, onHide, followers, followings, show } = this.props
     let followersList = []
     
-    for(const follower in followers) {
-      let tempObj = {}
-      tempObj.name = followers[follower].name.firstName + ' ' + followers[follower].name.lastName;
-      tempObj.desg = followers[follower].info.about.designation || 'NA';
-      tempObj._id = followers[follower]._id
-      this.checkFollowing(tempObj._id) ? tempObj.text = 'UnFollow' : tempObj.text = 'Follow'
-      followersList.push(tempObj)
+    if(followers && followers.length > 0) {
+      for (const follower in followers) {
+        let tempObj = {}
+        tempObj.name = followers[follower].name.firstName + ' ' + followers[follower].name.lastName;
+        tempObj.desg = followers[follower].info.about.designation || 'NA';
+        tempObj._id = followers[follower]._id
+        this.checkFollowing(tempObj._id) ? tempObj.text = 'UnFollow' : tempObj.text = 'Follow'
+        followersList.push(tempObj)
+      }
     }
 
 
@@ -122,7 +125,8 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
   error: state.error,
   user: state.user,
+  insight: state.insight,
   status: state.status
 })
 
-export default connect(mapStateToProps, { followUser, unFollowUser })(Followers);
+export default connect(mapStateToProps, { followUser, unFollowUser, getMember })(Followers);
