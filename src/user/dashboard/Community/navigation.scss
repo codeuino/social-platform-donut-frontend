@@ -40,6 +40,7 @@
     .active {
       background-color: rgba(26, 115, 232, 0.1);
       .link {
+        text-decoration: none;
         font-family: Inter;
         font-style: normal;
         font-weight: bold;
@@ -59,6 +60,7 @@
   .list-group {
     .inactive {
       .link {
+        text-decoration: none;
         color: rgba(0, 0, 0, 0.5);
       }
     }

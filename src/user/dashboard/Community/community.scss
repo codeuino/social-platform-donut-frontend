@@ -1,7 +1,7 @@
 .overall_container{
   display: flex;
   .main_navigation {
-    width: 15%;
+    width: auto;
     left: -1px;
     top: -1px;
     height: 100vh;
@@ -10,6 +10,7 @@
   }
   .org_settings_view {
     margin-top: 35px;
+    margin-left: 14.3%;
     .main_section {
       display: flex;
       flex-direction: row;
