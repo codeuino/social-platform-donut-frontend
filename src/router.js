@@ -43,7 +43,7 @@ const Router = () => (
       />
       <PrivateRoute
         exact
-        path="/proposalDiscussion"
+        path="/proposaldiscussion"
         component={ProposalDiscussion}
       />
       <PrivateRoute

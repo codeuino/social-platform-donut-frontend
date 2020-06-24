@@ -59,8 +59,7 @@
       max-height: 80vh;
 
       .proposal-text {
-        overflow: auto;
-        flex-grow: 4;
+        flex: 4;
         font-family: Inter;
         font-style: normal;
         font-weight: normal;
@@ -70,8 +69,8 @@
         color: #1d2129;
       }
       .attached-images {
-        padding: 10px 10px 0px 0px;
-        flex-grow: 1;
+        padding: 0px 10px 0px 0px;
+        flex: 1;
         .images-title {
           margin-top: 10px;
           font-family: Inter;
@@ -83,7 +82,7 @@
           color: #000000;
         }
         .image-item {
-          max-height: 10em;
+          max-height: 8em;
           margin-right: 10px;
           margin-left: 10px;
         }

@@ -41,6 +41,7 @@ function StyledDropzone(props) {
         "Please save the proposal as a draft before attaching images"
       );
     } else {
+      console.log(props);
       let formData = new FormData();
       formData.append("file", acceptedFiles[0]);
       const URL = `http://localhost:5000/proposal/attach/${props.idContent}`;

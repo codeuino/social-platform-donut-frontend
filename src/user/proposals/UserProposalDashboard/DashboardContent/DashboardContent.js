@@ -234,14 +234,26 @@ class DashboardContent extends Component {
                           <span className="option-text">Edit</span>
                         </Button>
                       </Link>
-                      <Button
-                        variant="primary"
-                        className="option-btn"
-                        size="sm"
-                        active
+                      <Link
+                        to={{
+                          pathname: "/proposaldiscussion",
+                          state: {
+                            proposalId: proposalItem._id,
+                            isAdmin: false,
+                            userId: this.state.userId,
+                            token: this.state.token,
+                          },
+                        }}
                       >
-                        <span className="option-text">View</span>
-                      </Button>
+                        <Button
+                          active
+                          variant="primary"
+                          className="option-btn"
+                          size="sm"
+                        >
+                          <span className="option-text">View</span>
+                        </Button>
+                      </Link>
                     </div>
                   </div>
                 </div>

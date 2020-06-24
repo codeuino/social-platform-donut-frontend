@@ -1,13 +1,5 @@
 import React, { Component } from "react";
-import {
-  Button,
-  Container,
-  Row,
-  Col,
-  Image,
-  ListGroup,
-  Form,
-} from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import "./EditorContent.scss";
 import MdEditor from "react-markdown-editor-lite";
 import MarkdownIt from "markdown-it";
@@ -17,6 +9,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import StyledDropzone from "./DropZone";
 import { Link } from "react-router-dom";
+import { Editor } from "@tinymce/tinymce-react";
 
 //Separately importing styles related to the markdown editor
 import "./index.css";
@@ -76,7 +69,6 @@ class EditorContent extends Component {
 
   //Obtain proposal data from the server
   getData = () => {
-    console.log("getDtata called");
     fetch("http://localhost:5000/proposal/" + this.state.proposalId, {
       method: "GET",
       headers: {
@@ -240,6 +232,14 @@ class EditorContent extends Component {
   componentWillUnmount() {
     clearInterval(this.state.idVar);
   }
+  handleTinyEditorChange = (content, editor) => {
+    console.log("Content was updated:", content);
+
+    this.setState({
+      draftEnabled: true,
+      currentText: content,
+    });
+  };
 
   render() {
     return (
@@ -311,7 +311,7 @@ class EditorContent extends Component {
             <div>
               {!this.state.newProposal ? (
                 <StyledDropzone
-                  idContent={this.state.proposalId}
+                  idContent={this.props.location.state.proposalId}
                   token={this.state.token}
                 />
               ) : (
@@ -321,11 +321,83 @@ class EditorContent extends Component {
           </div>
         </div>
         <div className="proposal-bottompanel">
-          <MdEditor
-            style={{ width: "100%", maxHeight: "100%", marginTop: "10px" }}
-            renderHTML={(text) => mdParser.render(text)}
-            onChange={this.handleEditorChange}
+          <Editor
+            apiKey="lvp9xf6bvvm3nkaupm67ffzf50ve8femuaztgg7rkgkmsws3"
             value={this.state.markdownString}
+            initialValue="<p>This is the initial content of the editor</p>"
+            init={{
+              height: "100%",
+              width: "50%",
+              menubar: false,
+              plugins: [
+                "advlist autolink lists link image charmap print preview anchor",
+                "searchreplace visualblocks code fullscreen",
+                "insertdatetime media table paste code help wordcount",
+                "textpattern",
+              ],
+              textpattern_patterns: [
+                { start: "#", format: "h1" },
+                { start: "##", format: "h2" },
+                { start: "###", format: "h3" },
+                { start: "####", format: "h4" },
+                { start: "#####", format: "h5" },
+                { start: "######", format: "h6" },
+                { start: "* ", cmd: "InsertUnorderedList" },
+                { start: "- ", cmd: "InsertUnorderedList" },
+                {
+                  start: "1. ",
+                  cmd: "InsertOrderedList",
+                  value: { "list-style-type": "decimal" },
+                },
+                {
+                  start: "1) ",
+                  cmd: "InsertOrderedList",
+                  value: { "list-style-type": "decimal" },
+                },
+                {
+                  start: "a. ",
+                  cmd: "InsertOrderedList",
+                  value: { "list-style-type": "lower-alpha" },
+                },
+                {
+                  start: "a) ",
+                  cmd: "InsertOrderedList",
+                  value: { "list-style-type": "lower-alpha" },
+                },
+                {
+                  start: "i. ",
+                  cmd: "InsertOrderedList",
+                  value: { "list-style-type": "lower-roman" },
+                },
+                {
+                  start: "i) ",
+                  cmd: "InsertOrderedList",
+                  value: { "list-style-type": "lower-roman" },
+                },
+              ],
+              toolbar:
+                "undo redo | formatselect | bold italic backcolor | \
+             alignleft aligncenter alignright alignjustify | \
+             bullist numlist outdent indent | removeformat | help",
+            }}
+            onEditorChange={this.handleTinyEditorChange}
+          />
+          <Editor
+            disabled={true}
+            apiKey="lvp9xf6bvvm3nkaupm67ffzf50ve8femuaztgg7rkgkmsws3"
+            initialValue="<p>This is the initial content of the editor</p>"
+            init={{
+              height: "100%",
+              width: "50%",
+              menubar: false,
+              plugins: [
+                "advlist autolink lists link image charmap print preview anchor",
+                "searchreplace visualblocks code fullscreen",
+                "insertdatetime media table paste code help wordcount",
+              ],
+              toolbar: false,
+            }}
+            onEditorChange={this.handleTinyEditorChange}
           />
         </div>
         {this.state.startSave ? (

@@ -5,20 +5,97 @@ import DiscussionComments from "./DiscussionComments/DiscussionComments";
 import eventImg from "../../../../svgs/event-img-1.svg";
 import userIcon2 from "../../../../images/userIcon2.jpg";
 import RequestChanges from "../DiscussionPopups/RequestChanges";
+import { withRouter } from "react-router-dom";
+import { Remarkable } from "remarkable";
+import parse from "html-react-parser";
+import { Editor } from "@tinymce/tinymce-react";
+
+const md = new Remarkable({
+  html: true, // Enable HTML tags in source
+  xhtmlOut: false, // Use '/' to close single tags (<br />)
+  breaks: false, // Convert '\n' in paragraphs into <br>
+  langPrefix: "language-", // CSS language prefix for fenced blocks
+
+  // Enable some language-neutral replacement + quotes beautification
+  typographer: false,
+
+  // Double + single quotes replacement pairs, when typographer enabled,
+  // and smartquotes on. Set doubles to '«»' for Russian, '„“' for German.
+  quotes: "“”‘’",
+
+  // Highlighter function. Should return escaped HTML,
+  // or '' if the source string is not changed
+  highlight: function (/*str, lang*/) {
+    return "";
+  },
+});
 
 class DiscussionContent extends Component {
   constructor(props) {
     super(props);
-    this.state = { comments: [], showModal: false, selectedText: "" };
+    this.state = {
+      comments: [],
+      showModal: false,
+      selectedText: "",
+      proposalId: "",
+      isAdmin: false,
+      proposalTitle: "",
+      markdownString: "",
+      proposalDescription: "",
+      commentList: [],
+    };
   }
 
+  //Token would be passed down from the
   componentDidMount() {
-    this.processComments();
+    const { proposalId, isAdmin, userId, token } = this.props.location.state;
+
+    this.setState(
+      {
+        proposalId: proposalId,
+        isAdmin: isAdmin,
+        userId: userId,
+        token: token,
+      },
+      () => {
+        console.log(this.state);
+        this.getData();
+      }
+    );
   }
+
+  getData = () => {
+    console.log("getDtata called");
+    fetch("http://localhost:5000/proposal/" + this.state.proposalId, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: this.state.token,
+      },
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((resData) => {
+        console.log(resData);
+        this.setState(
+          {
+            proposalTitle: resData.proposal.title,
+            markdownString: resData.proposal.content,
+            proposalDescription: resData.proposal.proposalDescription,
+            commentList: resData.proposal.comments,
+          },
+          () => {
+            this.processComments();
+          }
+        );
+      });
+  };
+
   processComments = () => {
     let comments = [];
 
-    for (let i = 0; i < 6; i++) {
+    this.state.commentList.forEach((commentItem) => {
       comments.push(
         <ListGroup.Item>
           <div className="comment-item">
@@ -31,20 +108,13 @@ class DiscussionContent extends Component {
               />
             </div>
             <div className="comment-container">
-              <div className="commenting-user">Devesh</div>
-              <div className="commented-section">
-                "Lorem ipsum dolor sit amet"
-              </div>
-              <div className="comment-text">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation
-              </div>
+              <div className="commenting-user">{commentItem.userName}</div>
+              <div className="comment-text">{commentItem.comment}</div>
             </div>
           </div>
         </ListGroup.Item>
       );
-    }
+    });
     this.setState({
       comments: comments,
     });
@@ -100,7 +170,7 @@ class DiscussionContent extends Component {
       <div className="discussion-content">
         <div className="discussion-toppanel">
           <div className="discussion-title">
-            <span className="title-text">Proposal Title Here</span>
+            <span className="title-text">{this.state.proposalTitle}</span>
           </div>
           <div className="discussion-desc"></div>
           <div className="discussion-buttons">
@@ -112,74 +182,25 @@ class DiscussionContent extends Component {
         <div className="discussion-bottompanel">
           <div className="proposal-preview">
             <div className="proposal-text" onMouseUp={this.handleTextSelction}>
-              <p>
-                Fugiat esse aliquip sint culpa. Nulla amet ipsum non commodo
-                veniam velit officia dolor laborum et aliquip ad velit veniam.
-                Consequat mollit consequat adipisicing duis consectetur duis non
-                fugiat et in elit consectetur sint. Mollit id aliqua commodo
-                duis sint non. Officia sunt consectetur et officia officia ad
-                officia aliquip qui enim aliquip officia minim. Minim consequat
-                duis deserunt aliqua qui consectetur tempor ex aliquip occaecat
-                ad veniam consectetur. Dolor et laboris sit esse laborum ex
-                deserunt nisi magna eiusmod. Mollit non ipsum laboris nulla
-                commodo enim elit magna amet. Quis officia incididunt aute elit
-                veniam ullamco ea elit reprehenderit. Pariatur exercitation ut
-                quis occaecat esse consectetur eu eiusmod ut et exercitation.
-                Nisi pariatur eu deserunt aliqua cillum dolore. Dolore duis
-                laboris occaecat incididunt minim aliqua.
-              </p>
-              <p>
-                Heading Irure mollit mollit proident amet sunt ea deserunt do
-                anim proident mollit. Aliquip fugiat quis ipsum est nisi ut
-                magna excepteur aliquip reprehenderit occaecat. Ea enim officia
-                labore consectetur et ad. Mollit ut duis nulla amet dolor minim
-                laborum amet cillum velit. Incididunt elit quis ipsum velit esse
-                eu adipisicing sint voluptate ea ipsum. Ullamco pariatur
-                incididunt tempor qui voluptate id deserunt tempor. Consectetur
-                mollit aute consequat ut non amet fugiat eiusmod. Cupidatat
-                velit ea eu veniam proident irure ullamco dolor aliquip nisi
-                minim. Nisi consequat sit ea anim duis in id mollit ipsum aute
-                mollit commodo excepteur occaecat. Aliqua magna sunt in et duis
-                veniam. Cillum in sunt sint officia. Dolor aliqua irure dolor
-                adipisicing et culpa. Heading Cupidatat pariatur exercitation
-                enim adipisicing qui labore officia cupidatat. Proident amet
-                minim cupidatat proident velit in ea sint velit. Duis
-                adipisicing excepteur cupidatat consequat ex non cupidatat ea
-                non. Commodo ad anim. Cupidatat pariatur exercitation enim
-                adipisicing qui labore officia cupidatat. Proident amet minim
-                cupidatat proident velit in ea sint velit. Duis adipisicing
-                excepteur cupidatat consequat ex non cupidatat ea non. Commodo
-                ad anim.Cupidatat pariatur exercitation enim adipisicing qui
-                labore officia cupidatat. Proident amet minim cupidatat proident
-                velit in ea sint velit. Duis adipisicing excepteur cupidatat
-                consequat ex non cupidatat ea non. Commodo ad anim.
-              </p>
-              <p>
-                Heading Irure mollit mollit proident amet sunt ea deserunt do
-                anim proident mollit. Aliquip fugiat quis ipsum est nisi ut
-                magna excepteur aliquip reprehenderit occaecat. Ea enim officia
-                labore consectetur et ad. Mollit ut duis nulla amet dolor minim
-                laborum amet cillum velit. Incididunt elit quis ipsum velit esse
-                eu adipisicing sint voluptate ea ipsum. Ullamco pariatur
-                incididunt tempor qui voluptate id deserunt tempor. Consectetur
-                mollit aute consequat ut non amet fugiat eiusmod. Cupidatat
-                velit ea eu veniam proident irure ullamco dolor aliquip nisi
-                minim. Nisi consequat sit ea anim duis in id mollit ipsum aute
-                mollit commodo excepteur occaecat. Aliqua magna sunt in et duis
-                veniam. Cillum in sunt sint officia. Dolor aliqua irure dolor
-                adipisicing et culpa. Heading Cupidatat pariatur exercitation
-                enim adipisicing qui labore officia cupidatat. Proident amet
-                minim cupidatat proident velit in ea sint velit. Duis
-                adipisicing excepteur cupidatat consequat ex non cupidatat ea
-                non. Commodo ad anim. Cupidatat pariatur exercitation enim
-                adipisicing qui labore officia cupidatat. Proident amet minim
-                cupidatat proident velit in ea sint velit. Duis adipisicing
-                excepteur cupidatat consequat ex non cupidatat ea non. Commodo
-                ad anim.Cupidatat pariatur exercitation enim adipisicing qui
-                labore officia cupidatat. Proident amet minim cupidatat proident
-                velit in ea sint velit. Duis adipisicing excepteur cupidatat
-                consequat ex non cupidatat ea non. Commodo ad anim.
-              </p>
+              {/* <p>{parse(md.render(this.state.markdownString))}</p> */}
+              <Editor
+                value={this.state.markdownString}
+                disabled={true}
+                apiKey="lvp9xf6bvvm3nkaupm67ffzf50ve8femuaztgg7rkgkmsws3"
+                initialValue="<p>This is the initial content of the editor</p>"
+                init={{
+                  height: "100%",
+                  width: "100%",
+                  menubar: false,
+                  plugins: [
+                    "advlist autolink lists link image charmap print preview anchor",
+                    "searchreplace visualblocks code fullscreen",
+                    "insertdatetime media table paste code help wordcount",
+                  ],
+                  toolbar: false,
+                }}
+                onEditorChange={this.handleTinyEditorChange}
+              />
             </div>
             <div className="attached-images">
               <div className="images-title">Attached Images</div>
@@ -190,10 +211,16 @@ class DiscussionContent extends Component {
             </div>
           </div>
           <div className="comments">
-            <DiscussionComments commentItems={this.state.comments} />
+            <DiscussionComments
+              commentItems={this.state.comments}
+              proposalId={this.state.proposalId}
+              userId={this.state.userId}
+              token={this.state.token}
+              getData={this.getData}
+            />
           </div>
           <RequestChanges
-            show={this.state.showModal}
+            show={this.state.showModal && this.state.isAdmin}
             handleClose={() => {
               this.handleClose();
             }}
@@ -206,4 +233,4 @@ class DiscussionContent extends Component {
   }
 }
 
-export default DiscussionContent;
+export default withRouter(DiscussionContent);

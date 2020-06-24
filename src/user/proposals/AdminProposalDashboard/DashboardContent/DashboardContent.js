@@ -2,12 +2,143 @@ import React, { Component } from "react";
 import { Button, Form, Col, Image } from "react-bootstrap";
 import "./DashboardContent.scss";
 import userIcon2 from "../../../../images/userIcon2.jpg";
+import { Link } from "react-router-dom";
 
 class DashboardContent extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      token:
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWVlZWY5OTdhZTUyZDJlN2NjNmFhZjEiLCJpYXQiOjE1OTI3MTcyMTB9.ZmIn4pIuwWygI_YJrBo8CIhpIhmwZmAE5wsoDhVcpE8",
+      userId: "5eeeef997ae52d2e7cc6aaf1",
+      proposals: [],
+      displayItems: [],
+    };
   }
+
+  componentDidMount() {
+    this.getProposalsByUserId();
+    this.getAllProposals();
+  }
+
+  getAllProposals() {
+    fetch(`http://localhost:5000/proposal/all`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: this.state.token,
+      },
+      body: JSON.stringify({
+        userId: this.state.userId,
+      }),
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((resData) => {
+        console.log(resData);
+        this.setState({
+          proposals: resData.proposals,
+          displayItems: resData.proposals,
+        });
+      });
+  }
+
+  getProposalsByUserId() {
+    fetch(`http://localhost:5000/proposal/user/${this.state.userId}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: this.state.token,
+      },
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((resData) => {
+        console.log(resData);
+        this.setState({
+          proposals: resData.proposal,
+          displayItems: resData.proposal,
+        });
+      });
+  }
+
+  handleSearchBarChange = (evt) => {
+    const value = evt.target.value.toLowerCase();
+    const proposals = this.state.proposals;
+    let results = [];
+
+    if (value.length === 0) {
+      this.setState({
+        displayItems: proposals,
+      });
+    } else {
+      proposals.forEach((item) => {
+        if (item.title.toLowerCase().includes(value)) {
+          results.push(item);
+        }
+      });
+
+      this.setState({
+        displayItems: results,
+      });
+    }
+  };
+
+  handleButtonClick = (name) => {
+    const proposals = this.state.proposals;
+    let results = [];
+
+    switch (name) {
+      case "All":
+        this.setState({
+          displayItems: proposals,
+        });
+        break;
+      case "Accepted":
+        proposals.forEach((item) => {
+          if (item.proposalStatus === "ACCEPTED") {
+            results.push(item);
+          }
+        });
+        this.setState({
+          displayItems: results,
+        });
+        break;
+      case "Submitted":
+        proposals.forEach((item) => {
+          if (item.proposalStatus === "SUBMITTED") {
+            results.push(item);
+          }
+        });
+        this.setState({
+          displayItems: results,
+        });
+        break;
+      case "Draft":
+        proposals.forEach((item) => {
+          if (item.proposalStatus === "DRAFT") {
+            results.push(item);
+          }
+        });
+        this.setState({
+          displayItems: results,
+        });
+        break;
+      case "Rejected":
+        proposals.forEach((item) => {
+          if (item.proposalStatus === "REJECTED") {
+            results.push(item);
+          }
+        });
+        this.setState({
+          displayItems: results,
+        });
+        break;
+    }
+  };
+
   render() {
     return (
       <div className="dashboard-content">
@@ -17,6 +148,7 @@ class DashboardContent extends Component {
               as="input"
               placeholder="search"
               className="searchbar"
+              onChange={this.handleSearchBarChange}
             />
           </Form>
           <div className="dashboard-title">
@@ -25,22 +157,44 @@ class DashboardContent extends Component {
           <div className="button-container">
             <div className="posts">
               <div className="category">
-                <Button variant="primary" className="category-btn">
+                <Button
+                  name="All"
+                  variant="primary"
+                  className="category-btn"
+                  onClick={() => this.handleButtonClick("All")}
+                >
                   <span className="btn-content">All</span>
                 </Button>
                 <span className="space"></span>
-                <Button variant="primary" className="category-btn">
+                <Button
+                  variant="primary"
+                  className="category-btn"
+                  name="Accepted"
+                  onClick={() => this.handleButtonClick("Accepted")}
+                >
                   <span className="btn-content">Accepted</span>
                 </Button>
                 <span className="space"></span>
-                <Button variant="primary" className="category-btn">
-                  <span className="btn-content">Under Review</span>
+                <Button
+                  variant="primary"
+                  className="category-btn"
+                  onClick={() => this.handleButtonClick("Submitted")}
+                >
+                  <span className="btn-content">Submitted</span>
                 </Button>
                 <span className="space"></span>
-                <Button variant="primary" className="category-btn">
-                  <span className="btn-content">Drafts</span>
+                <Button
+                  variant="primary"
+                  className="category-btn"
+                  onClick={() => this.handleButtonClick("Draft")}
+                >
+                  <span className="btn-content">Draft</span>
                 </Button>
-                <Button variant="primary" className="category-btn">
+                <Button
+                  variant="primary"
+                  className="category-btn"
+                  onClick={() => this.handleButtonClick("Rejected")}
+                >
                   <span className="btn-content">Rejected</span>
                 </Button>
               </div>
@@ -50,123 +204,69 @@ class DashboardContent extends Component {
 
         <div className="proposal-container">
           <div className="proposals">
-            <div className="single-proposal">
-              <div className="user-info">
-                <div className="image">
-                  <Image src={userIcon2} alt="icon" rounded />
+            {this.state.displayItems.map((proposalItem, index) => {
+              return (
+                <div className="single-proposal" key={index}>
+                  <div className="user-info">
+                    <div className="image">
+                      <Image src={userIcon2} alt="icon" rounded />
+                    </div>
+                    <div className="img-desc">
+                      <h2>{proposalItem.title}</h2>
+                      <p className="proposal-date">{proposalItem.createdAt}</p>
+                    </div>
+                    {proposalItem.proposalStatus === "DRAFT" ? (
+                      <Button
+                        variant="primary"
+                        className="status-btn"
+                        size="sm"
+                      >
+                        <span className="btn-content">
+                          {proposalItem.proposalStatus}
+                        </span>
+                      </Button>
+                    ) : (
+                      <Button
+                        variant="primary"
+                        className="status-btn-submitted"
+                        size="sm"
+                      >
+                        <span className="btn-content">
+                          {proposalItem.proposalStatus}
+                        </span>
+                      </Button>
+                    )}
+                  </div>
+                  <div className="proposal-content">
+                    <div className="proposal-details">
+                      {proposalItem.proposalDescription}
+                    </div>
+                    <div className="proposal-options">
+                      <Link
+                        to={{
+                          pathname: "/proposaldiscussion",
+                          state: {
+                            proposalId: proposalItem._id,
+                            isAdmin: true,
+                            token: this.state.token,
+                            userId: this.state.userId,
+                          },
+                        }}
+                      >
+                        <Button
+                          active
+                          variant="primary"
+                          className="option-btn"
+                          size="sm"
+                        >
+                          <span className="option-text">View</span>
+                        </Button>
+                      </Link>
+                    </div>
+                  </div>
                 </div>
-                <div className="img-desc">
-                  <h2>Admin panel in donut dashboard</h2>
-                  <p className="proposal-date">June 5, 2018 4:31 AM</p>
-                </div>
-                <Button
-                  variant="primary"
-                  className="status-btn-draft"
-                  size="sm"
-                >
-                  <span className="btn-content">Draft</span>
-                </Button>
-              </div>
-              <div className="proposal-content">
-                <div className="proposal-details">
-                  ex sit ex laboris adipisicing enim eiusmod proident
-                  exercitation ea fugiat in llit pariatur occaecat ut nostrud
-                  ullamco ex official ex sit ex laboris adipisicing enim eiusmod
-                  proident exercitation ea...
-                </div>
-                <div className="proposal-options">
-                  <Button variant="primary" className="option-btn" size="sm">
-                    <span className="option-text">Edit</span>
-                  </Button>
-                  <Button
-                    variant="primary"
-                    className="option-btn"
-                    size="sm"
-                    active
-                  >
-                    <span className="option-text">View</span>
-                  </Button>
-                </div>
-              </div>
-            </div>
-            <div className="single-proposal">
-              <div className="user-info">
-                <div className="image">
-                  <Image src={userIcon2} alt="icon" rounded />
-                </div>
-                <div className="img-desc">
-                  <h2>Admin panel in donut dashboard</h2>
-                  <p className="proposal-date">June 5, 2018 4:31 AM</p>
-                </div>
-                <Button
-                  variant="primary"
-                  className="status-btn-submitted"
-                  size="sm"
-                >
-                  <span className="btn-content">Submitted</span>
-                </Button>
-              </div>
-              <div className="proposal-content">
-                <div className="proposal-details">
-                  ex sit ex laboris adipisicing enim eiusmod proident
-                  exercitation ea fugiat in llit pariatur occaecat ut nostrud
-                  ullamco ex official ex sit ex laboris adipisicing enim eiusmod
-                  proident exercitation ea...
-                </div>
-                <div className="proposal-options">
-                  <Button variant="primary" className="option-btn" size="sm">
-                    <span className="option-text">Edit</span>
-                  </Button>
-                  <Button
-                    variant="primary"
-                    className="option-btn"
-                    size="sm"
-                    active
-                  >
-                    <span className="option-text">View</span>
-                  </Button>
-                </div>
-              </div>
-            </div>
-            <div className="single-proposal">
-              <div className="user-info">
-                <div className="image">
-                  <Image src={userIcon2} alt="icon" rounded />
-                </div>
-                <div className="img-desc">
-                  <h2>Admin panel in donut dashboard</h2>
-                  <p className="proposal-date">June 5, 2018 4:31 AM</p>
-                </div>
-                <Button
-                  variant="primary"
-                  className="status-btn-accepted"
-                  size="sm"
-                >
-                  <span className="btn-content">Accepted</span>
-                </Button>
-              </div>
-              <div className="proposal-content">
-                <div className="proposal-details">
-                  ex sit ex laboris adipisicing enim eiusmod proident
-                  exercitation ea fugiat in llit pariatur occaecat ut nostrud
-                  ullamco ex official ex sit ex laboris adipisicing enim eiusmod
-                  proident exercitation ea...
-                </div>
-                <div className="proposal-options">
-                  <Button variant="primary" className="option-btn" size="sm">
-                    <span className="option-text">Edit</span>
-                  </Button>
-                  <Button
-                    variant="primary"
-                    className="option-btn"
-                    size="sm"
-                    active
-                  >
-                    <span className="option-text">View</span>
-                  </Button>
-                </div>
-              </div>
-            </div>
+              );
+            })}
           </div>
         </div>
       </div>

@@ -10,8 +10,10 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.4.0",
     "@testing-library/user-event": "^7.2.1",
+    "@tinymce/tinymce-react": "^3.6.0",
     "axios": "^0.19.1",
     "boostrap": "^2.0.0",
+    "html-react-parser": "^0.13.0",
     "jwt-decode": "^2.2.0",
     "markdown-it": "^11.0.0",
     "node-sass": "^4.13.0",
@@ -31,7 +33,8 @@
     "react-spinners": "^0.8.3",
     "react-toastify": "^6.0.5",
     "redux": "^4.0.5",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "remarkable": "^2.0.1"
   },
   "proxy": "http://localhost:5000",
   "scripts": {
