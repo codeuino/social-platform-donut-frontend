@@ -3,7 +3,7 @@
   .modal-content {
     border-radius: 10px;
     max-height: 70vh;
-    width: 66%;
+    // width: 66%;
     border: 0px;
     overflow-y: scroll;
     overflow-x: hidden;
@@ -168,6 +168,15 @@
         text-align: center;
         padding: 0px;
       }
+      .modal__unFollowButton {
+        background: #007bff;
+        box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
+        border-radius: 34px;
+        width: 83px;
+        height: 4.5vh;
+        text-align: center;
+        padding: 0px;
+      }
       .modal__followText {
         font-family: $font-family-Inter;
         font-style: normal;
@@ -176,6 +185,15 @@
         line-height: 15px;
 
         color: #1a73e8;
+      }
+       .modal__unFollowText {
+        font-family: $font-family-Inter;
+        font-style: normal;
+        font-weight: $font-weight-normal;
+        font-size: 12px;
+        line-height: 15px;
+
+        color: #ffff;
       }
     }
     .modal__member {
@@ -189,7 +207,7 @@
         border: 1px solid #e6e6e5;
         border-radius: 5px;
         min-width: 56px;
-        margin-left: 10px;
+        // margin-left: 10px;
         padding: 5px;
       }
 
@@ -244,6 +262,26 @@
           font-size: 12px;
           line-height: 15px;
           color: #eb5757;
+        }
+      }
+      .modal__removed__followButton {
+        border: 1px solid #eb5757;
+        box-sizing: border-box;
+        box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
+        border-radius: 34px;
+        background: #eb5757;
+        width: 83px;
+        height: 4.5vh;
+        text-align: center;
+        padding: 0px;
+
+        .remove_followText {
+          font-family: Inter;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 12px;
+          line-height: 15px;
+          color: #ffff;
         }
       }
     }

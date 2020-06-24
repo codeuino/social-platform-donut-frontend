@@ -6,6 +6,8 @@ import AboutDonut from './components/AboutDonut'
 import SetupForm from './components/SetupForm'
 import ShadowDonut from '../../images/shadowDonut.png'
 import SetupPreview from './components/SetupPreview'
+import { connect } from 'react-redux'
+import { registerCommunity } from '../../actions/orgAction'
 
 class Setup extends Component {
   constructor(props) {
@@ -16,15 +18,24 @@ class Setup extends Component {
       shortDesc: '',
       longDesc : '',
       website: '',
-      fb: '',
+      email: '',
       github: '',
-      theme: ''
+      color: '',
+      chatPlatform: '',
+      error: null
     }
   }
   // Handle fields change
   handleChange = input => e => {
     this.setState({ [input]: e.target.value });
   };
+
+  // Handle theme change
+  handleThemeChange = input => e => {
+    this.setState({ [input]: e.target.value }, () => {
+      console.log('this.state ', this.state)
+    })
+  }
 
   onNext = () => {
     const { step } = this.state;
@@ -43,14 +54,40 @@ class Setup extends Component {
       console.log('state is : ', this.state)
     })
   }
+
   onFinish = () => {
-    console.log('Finish message from setup page!');
+    console.log('Finish message from setup page!', this.state);
+    const { communityName, shortDesc, longDesc, email, website, chatPlatform, color } = this.state
+    const orgObj = {
+      name: communityName,
+      description: {
+        shortDescription: shortDesc,
+        longDescription: longDesc
+      },
+      contactInfo: {
+        email: email,
+        website: website,
+        chattingPlatform: [{
+          link: chatPlatform
+        }]
+      }
+    }
+    this.props.registerCommunity(orgObj)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { msg } = nextProps.error;
+    if (msg == null || msg == undefined) {
+      window.location.href = "/dashboard";
+    } else {
+      this.setState({ error: msg });
+    }
   }
 
   render() {
     const { step } = this.state;
-    const { communityName, website, fb, github, shortDesc, longDesc, theme } = this.state;
-    const values = { communityName, website, fb, github, shortDesc, longDesc, theme };
+    const { communityName, website, email, github, shortDesc, longDesc, color, chatPlatform, error } = this.state;
+    const values = { communityName, website, email, github, shortDesc, longDesc, color, chatPlatform, error };
     const returnStep = (step) => {
       switch (step) {
         case 0: {
@@ -76,7 +113,6 @@ class Setup extends Component {
           return (
             <SetupPreview
               nextStep={this.onNext}
-              handleChange={this.handleChange}
               onFinish={this.onFinish}
               prevStep={this.onPrev}
               values={values}
@@ -104,4 +140,12 @@ class Setup extends Component {
     )
   }
 }
-export default Setup;
+
+// map state to props 
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  error: state.error,
+  status: state.status
+})
+
+export default connect(mapStateToProps, { registerCommunity })(Setup);

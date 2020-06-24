@@ -1,40 +1,83 @@
 import React, { Component } from 'react'
 import { Form, Button } from "react-bootstrap";
 import UploadImg from '../../../../images/upload.jpg'
+import { connect } from 'react-redux'
+import { getOrgProfile, updateOrgProfile, deactivateOrg } from '../../../../actions/orgAction'
 import './profile.scss'
 
 class OrgProfile extends Component {
   constructor(props){
     super(props);
     this.state = {
-      logo: UploadImg,
+      isDeactivated: false,
+      logo: null,
       orgName: "",
       desc: {
         short: "",
         long: ""
-      }
+      },
+      error: ''
     }
   }
+
+  // fetch data on page load 
+  componentWillMount() {
+    this.props.getOrgProfile()
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log('nextProps ', nextProps)
+    const { name, description } = nextProps.org.org;
+    let info = {
+      short: description.shortDescription,
+      long: description.longDescription,
+    };
+    const { isDeactivated } = nextProps.org
+    this.setState({ orgName: name, desc: info, isDeactivated: isDeactivated }, () => {
+      console.log('org info ', this.state)
+    })
+    const { msg } = nextProps.error
+    this.setState({ error: msg })
+  }
+
   handleChange = (event) => {
     const { name, value } = event.target;
     this.setState({ [name] : value })
   }
+
   deactivateOrg = () => {
     console.log('Org deactivate clicked!');
+    this.props.deactivateOrg()
   }
+
   updateInfo = () => {
     console.log('Update info clicked!');
+    const { orgName, desc } = this.state
+    const updatedInfo = {
+      description: {
+        shortDescription: desc.short,
+        longDescription: desc.long,
+      },
+      name: orgName
+    };
+    this.props.updateOrgProfile(updatedInfo)
   }
-  UploadNewLogo = () => {
-    console.log('Upload logo clicked!')
+
+  onFileChange = (e) => {
+    console.log('Upload logo clicked!', e.target.files[0])
+    this.setState({ logo: URL.createObjectURL(e.target.files[0]) }, () => {
+      console.log("logo set ", this.state);
+    });
   }
+
   render() {
-    const { logo, orgName, desc } = this.state;
+    const { logo, orgName, desc, error, isDeactivated } = this.state;
     return (
       <div className="container">
         <div className="profile_content">
           <div className="container">
-             <p className="org_profile_text">Organization Profile</p>
+            <p className="org_profile_text">Organization Profile</p>
+              {/* {Boolean(error !== null) ? (<p style={{color: "red"}}>{error}</p>): null } */}
             <Form className="form">
               <Form.Group>
                 <Form.Label htmlFor="label_text" className="label_text">
@@ -43,11 +86,14 @@ class OrgProfile extends Component {
               </Form.Group>
               <Form.Group>
                 <div className="box">
-                  <img src={logo || UploadImg} alt="Upload" className="upload_img img-fluid"/>
-                  <Button 
-                    className="upload_btn"
-                    onChange={this.UploadNewLogo}
-                    >Upload new
+                  <img
+                    src={logo || UploadImg}
+                    alt="Upload"
+                    className="upload_img img-fluid"
+                  />
+                  <input type="file" name="logo" onChange={this.onFileChange} className="default__input__file" id="selectFile"/>
+                  <Button className="upload_btn" onClick={() => { document.getElementById('selectFile').click() } }>
+                    Upload new
                   </Button>
                 </div>
               </Form.Group>
@@ -98,7 +144,9 @@ class OrgProfile extends Component {
                 />
               </Form.Group>
               <Form.Group>
-                <Button className="save_btn" onClick={this.updateInfo}>Save</Button>
+                <Button className="save_btn" onClick={this.updateInfo}>
+                  Save
+                </Button>
               </Form.Group>
               <Form.Group>
                 <Form.Label htmlFor="deactivate" className="label_text">
@@ -106,8 +154,11 @@ class OrgProfile extends Component {
                 </Form.Label>
               </Form.Group>
               <Form.Group>
-                <Button className="btn-danger button-outline-danger deactivate_btn" onClick={this.deactivateOrg}>
-                  Deactivate
+                <Button
+                  className={isDeactivated ? 'deactivated_btn' : 'btn-danger button-outline-danger deactivate_btn' }
+                  onClick={this.deactivateOrg}
+                >
+                  {isDeactivated ? (<span>Deactivated</span>) : (<span>Deactivate</span>)}
                 </Button>
               </Form.Group>
             </Form>
@@ -117,4 +168,12 @@ class OrgProfile extends Component {
     );
   }
 }
-export default  OrgProfile;
+
+// map state to props 
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  error: state.error,
+  org: state.org
+})
+
+export default connect(mapStateToProps, { getOrgProfile, updateOrgProfile, deactivateOrg })(OrgProfile);

@@ -1,14 +1,14 @@
-import { GET_ALL_POSTS } from '../actions/types'
+import { GET_ALL_PROJECTS } from '../actions/types'
 const initialState = {
-  allPosts: []
+  allProjects: []
 }
 
 export default (state = initialState, action) => {
   switch(action.type) {
-    case GET_ALL_POSTS: {
+    case GET_ALL_PROJECTS: {
       return {
         ...state,
-        allPosts: action.payload
+        allProjects: action.payload
       }
     }
     default:{
