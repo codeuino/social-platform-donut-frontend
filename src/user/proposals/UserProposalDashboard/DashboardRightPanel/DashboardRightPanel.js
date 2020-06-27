@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./DashboardRightPanel.scss";
 import Comments from "./Comments/Comments";
-import OtherIdeas from "./OtherIdeas/OtherIdeas";
+import Notifications from "./Notifications/Notifications";
 
 class DashboardRightPanel extends Component {
   constructor(props) {
@@ -11,11 +11,8 @@ class DashboardRightPanel extends Component {
   render() {
     return (
       <div className="panel">
-        <div className="panel-comments">
-          <Comments />
-        </div>
         <div className="panel-ideas">
-          <OtherIdeas />
+          <Notifications />
         </div>
       </div>
     );

@@ -1,34 +1,13 @@
 import React, { Component } from "react";
 import "./DiscussionContent.scss";
-import { Button, Container, Row, Col, Image, ListGroup } from "react-bootstrap";
+import { Button, Badge, Image, ListGroup } from "react-bootstrap";
 import DiscussionComments from "./DiscussionComments/DiscussionComments";
 import eventImg from "../../../../svgs/event-img-1.svg";
 import userIcon2 from "../../../../images/userIcon2.jpg";
 import RequestChanges from "../DiscussionPopups/RequestChanges";
-import { withRouter } from "react-router-dom";
-import { Remarkable } from "remarkable";
-import parse from "html-react-parser";
+import { withRouter, Link } from "react-router-dom";
 import { Editor } from "@tinymce/tinymce-react";
-
-const md = new Remarkable({
-  html: true, // Enable HTML tags in source
-  xhtmlOut: false, // Use '/' to close single tags (<br />)
-  breaks: false, // Convert '\n' in paragraphs into <br>
-  langPrefix: "language-", // CSS language prefix for fenced blocks
-
-  // Enable some language-neutral replacement + quotes beautification
-  typographer: false,
-
-  // Double + single quotes replacement pairs, when typographer enabled,
-  // and smartquotes on. Set doubles to '«»' for Russian, '„“' for German.
-  quotes: "“”‘’",
-
-  // Highlighter function. Should return escaped HTML,
-  // or '' if the source string is not changed
-  highlight: function (/*str, lang*/) {
-    return "";
-  },
-});
+import Carousel, { Modal, ModalGateway } from "react-images";
 
 class DiscussionContent extends Component {
   constructor(props) {
@@ -43,6 +22,11 @@ class DiscussionContent extends Component {
       markdownString: "",
       proposalDescription: "",
       commentList: [],
+      author: "",
+      images: [{ source: "../../../../images/userIcon2.jpg" }],
+      imageModalOpen: false,
+      proposalState: "",
+      variant: "danger",
     };
   }
 
@@ -77,13 +61,32 @@ class DiscussionContent extends Component {
         return res.json();
       })
       .then((resData) => {
-        console.log(resData);
+        const images = [];
+        resData.proposal.attachments.forEach((item, index) => {
+          images.push({ source: item.fileLink });
+        });
+
+        let variant;
+
+        switch (resData.proposal.proposalStatus) {
+          case "DRAFT":
+            variant = "danger";
+            break;
+          case "SUBMITTED":
+            variant = "secondary";
+            break;
+        }
+
         this.setState(
           {
             proposalTitle: resData.proposal.title,
             markdownString: resData.proposal.content,
             proposalDescription: resData.proposal.proposalDescription,
             commentList: resData.proposal.comments,
+            author: resData.proposal.creator,
+            proposalState: resData.proposal.proposalStatus,
+            variant: variant,
+            images: images,
           },
           () => {
             this.processComments();
@@ -120,7 +123,12 @@ class DiscussionContent extends Component {
     });
   };
 
+  toggleModal = () => {
+    this.setState((state) => ({ imageModalOpen: !state.imageModalOpen }));
+  };
+
   handleTextSelction = () => {
+    console.log("text selection called");
     if (window.getSelection().toString().length > 0) {
       this.setState(
         {
@@ -166,28 +174,44 @@ class DiscussionContent extends Component {
   };
 
   render() {
+    const { imageModalOpen, images } = this.state;
     return (
       <div className="discussion-content">
         <div className="discussion-toppanel">
           <div className="discussion-title">
-            <span className="title-text">{this.state.proposalTitle}</span>
+            <span className="title-text">
+              {this.state.proposalTitle}{" "}
+              <h5>
+                <Badge variant={this.state.variant}>
+                  {this.state.proposalState}
+                </Badge>
+              </h5>
+            </span>
           </div>
+          <div></div>
           <div className="discussion-desc"></div>
           <div className="discussion-buttons">
-            <Button variant="primary" className="option-btn" size="sm" active>
-              <span className="option-text">Edit</span>
-            </Button>
+            <Link
+              to={{
+                pathname: "/proposaleditor",
+                state: {
+                  proposalId: this.state.proposalId,
+                },
+              }}
+            >
+              <Button variant="primary" className="option-btn" size="sm" active>
+                <span className="option-text">Edit</span>
+              </Button>
+            </Link>
           </div>
         </div>
         <div className="discussion-bottompanel">
           <div className="proposal-preview">
             <div className="proposal-text" onMouseUp={this.handleTextSelction}>
-              {/* <p>{parse(md.render(this.state.markdownString))}</p> */}
               <Editor
                 value={this.state.markdownString}
                 disabled={true}
                 apiKey="lvp9xf6bvvm3nkaupm67ffzf50ve8femuaztgg7rkgkmsws3"
-                initialValue="<p>This is the initial content of the editor</p>"
                 init={{
                   height: "100%",
                   width: "100%",
@@ -204,10 +228,48 @@ class DiscussionContent extends Component {
             </div>
             <div className="attached-images">
               <div className="images-title">Attached Images</div>
-              <Row>
-                <Image src={eventImg} rounded className="image-item" />
-                <Image src={eventImg} rounded className="image-item" />
-              </Row>
+              <div
+                style={{
+                  overflow: "hidden",
+                  marginLeft: "2",
+                  marginRight: "2",
+                }}
+              >
+                {images.map((item, index) => {
+                  return (
+                    <div
+                      style={{
+                        boxSizing: "border-box",
+                        float: "left",
+                        margin: "2px",
+                        marginRight: "10px",
+                        overflow: "hidden",
+                        paddingBottom: "16%",
+                        position: "relative",
+                        width: `calc(25% - ${2 * 2}px)`,
+
+                        "&:hover": {
+                          opacity: 0.9,
+                        },
+                      }}
+                    >
+                      <img
+                        onClick={this.toggleModal}
+                        src={item.source}
+                        style={{ maxWidth: "100%", position: "absolute" }}
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+
+              <ModalGateway>
+                {imageModalOpen ? (
+                  <Modal onClose={this.toggleModal}>
+                    <Carousel views={this.state.images} />
+                  </Modal>
+                ) : null}
+              </ModalGateway>
             </div>
           </div>
           <div className="comments">
@@ -217,6 +279,9 @@ class DiscussionContent extends Component {
               userId={this.state.userId}
               token={this.state.token}
               getData={this.getData}
+              isAuthor={this.state.author === this.state.userId}
+              author={this.state.author}
+              handleComment={this.handleComment}
             />
           </div>
           <RequestChanges

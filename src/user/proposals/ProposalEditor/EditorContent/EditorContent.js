@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Form } from "react-bootstrap";
+import { Button, Form, Badge } from "react-bootstrap";
 import "./EditorContent.scss";
 import MdEditor from "react-markdown-editor-lite";
 import MarkdownIt from "markdown-it";
@@ -135,7 +135,7 @@ class EditorContent extends Component {
           Authorization: this.state.token,
         },
         body: JSON.stringify({
-          title: this.state.title,
+          title: this.state.proposalTitle,
           content: this.state.currentText,
           proposalStatus: "DRAFT",
           creator: this.state.userId,
@@ -233,8 +233,6 @@ class EditorContent extends Component {
     clearInterval(this.state.idVar);
   }
   handleTinyEditorChange = (content, editor) => {
-    console.log("Content was updated:", content);
-
     this.setState({
       draftEnabled: true,
       currentText: content,
@@ -327,7 +325,7 @@ class EditorContent extends Component {
             initialValue="<p>This is the initial content of the editor</p>"
             init={{
               height: "100%",
-              width: "50%",
+              width: "100%",
               menubar: false,
               plugins: [
                 "advlist autolink lists link image charmap print preview anchor",
@@ -379,23 +377,6 @@ class EditorContent extends Component {
                 "undo redo | formatselect | bold italic backcolor | \
              alignleft aligncenter alignright alignjustify | \
              bullist numlist outdent indent | removeformat | help",
-            }}
-            onEditorChange={this.handleTinyEditorChange}
-          />
-          <Editor
-            disabled={true}
-            apiKey="lvp9xf6bvvm3nkaupm67ffzf50ve8femuaztgg7rkgkmsws3"
-            initialValue="<p>This is the initial content of the editor</p>"
-            init={{
-              height: "100%",
-              width: "50%",
-              menubar: false,
-              plugins: [
-                "advlist autolink lists link image charmap print preview anchor",
-                "searchreplace visualblocks code fullscreen",
-                "insertdatetime media table paste code help wordcount",
-              ],
-              toolbar: false,
             }}
             onEditorChange={this.handleTinyEditorChange}
           />

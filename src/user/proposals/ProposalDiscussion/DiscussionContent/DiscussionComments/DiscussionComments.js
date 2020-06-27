@@ -12,7 +12,7 @@ class DiscussionComments extends Component {
     };
   }
 
-  handleComment = () => {
+  handleComment = (text) => {
     fetch("http://localhost:5000/proposal/comment", {
       method: "POST",
       headers: {
@@ -23,8 +23,12 @@ class DiscussionComments extends Component {
         userId: this.props.userId,
         proposalId: this.props.proposalId,
         comment: this.state.commentContent,
+        isAuthor: this.props.isAuthor,
+        author: this.props.author,
       }),
     });
+
+    this.props.handleComment(this.state.commentContent);
 
     this.setState({
       commentContent: "",
