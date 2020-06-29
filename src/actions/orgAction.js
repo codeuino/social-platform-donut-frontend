@@ -11,6 +11,7 @@ export const registerCommunity  = (orgInfo) => async (dispatch) => {
     if (res.status === 201) {
       dispatch(setRequestStatus(true))
       localStorage.setItem('orgId', JSON.stringify(res.data.org._id))
+      dispatch(getOrgProfile())
     }
   } catch (error) {
     dispatch(errorHandler(error))
@@ -61,6 +62,7 @@ export const getOrgProfile = () => async (dispatch) => {
 export const updateOrgProfile = (updatedInfo) => async (dispatch) => {
   try {
     let orgId = localStorage.getItem('orgId')
+    console.log('updatedInfo ', updatedInfo);
     const res = await axios.patch(`/org/${orgId}`, updatedInfo)
     dispatch(setRequestStatus(false));
     if(res.status === 200) {

@@ -1,22 +1,35 @@
 import React , { useState, useEffect } from 'react';
-import {List, Card, Button, Paper, ListItem, ListItemAvatar, Avatar, ListItemText, ListItemSecondaryAction, IconButton, CardMedia} from '@material-ui/core';
+import {
+    List, 
+    Card,
+    Button, 
+    Paper, 
+    ListItem, 
+    ListItemAvatar, 
+    Avatar, 
+    ListItemText, 
+    // ListItemSecondaryAction, 
+    IconButton, 
+    CardMedia
+} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
+// import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+// import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
-import EventNoteIcon from '@material-ui/icons/EventNote';
-import EventIcon from '@material-ui/icons/Event';
-import feed from '../../../jsonData/news-feed';
-import ReplyIcon from '@material-ui/icons/Reply';
+// import EventNoteIcon from '@material-ui/icons/EventNote';
+// import EventIcon from '@material-ui/icons/Event';
+// import feed from '../../../jsonData/news-feed';
+// import ReplyIcon from '@material-ui/icons/Reply';
 import { connect } from 'react-redux'
 import { getEventsCreatedByUser, getProjectCreatedByUser } from '../../../actions/usersAction'
 import "./posts.scss";
-import { Comment } from '../../dashboard/news-feed/popups/comment';
+import Comment from '../../dashboard/news-feed/popups/comment';
 import { withRouter } from 'react-router-dom';
 import profileImg from '../../../svgs/evt-creator.svg';
 import eventImg from "../../../svgs/event-img-1.svg";
 import eventImg2 from "../../../svgs/event-img-2.svg";
+import { getAllPinnedPosts } from '../../../actions/postAction'
 
 const styles = makeStyles((theme) => ({
     root: {
@@ -75,7 +88,7 @@ function PinPosts(props){
     const [first, second] = useState('f');
     const [showComment, toggle] = useState(false);
     const [commentId, setCommentId] = useState('');
-    const [all, setAll] = useState([])
+    // const [all, setAll] = useState([])
     const [userEvents, setEvents] = useState([])
     const [userPosts, setPosts] = useState([])
     const [userProjects, setAllProjects] = useState([])
@@ -83,15 +96,19 @@ function PinPosts(props){
     useEffect(() => {
         console.log('props from PinPosts ', props)
         if(props.match?.path === '/pinned-posts') {
-            console.log('fetch all the pinned posts!')
+            console.log('fetch all the pinned posts!', props)
+            props.getAllPinnedPosts()
+            setTimeout(() => {
+                setPosts(props.posts?.pinnedPosts);
+            })
         }
         // debugger;
         if(props.match?.path === '/profile'){
             setEvents(props.userEvents)
             setAllProjects(props.userProjects || [])
             setPosts(props.userPosts)
-            let all = [...userEvents, ...userProjects, ...userPosts]
-            setAll(all)
+            // let all = [...userEvents, ...userProjects, ...userPosts]
+            // setAll(all)
         }
     }, [props])
     
@@ -108,7 +125,7 @@ function PinPosts(props){
         toggle(!showComment);
     }
 
-    let userProjectsContent = userProjects.map((newsItem) => {
+    let userProjectsContent = userProjects?.map((newsItem) => {
         return (
             <div className="grid" key={newsItem?._id}>
             <Paper elevation={1} className={classes.paper}>
@@ -133,7 +150,7 @@ function PinPosts(props){
                                 </Avatar>
                             </ListItemAvatar>
                             <ListItemText className="main">
-                                <h2>{newsItem?.createdBy?.name?.firstName + " " + newsItem?.createdBy?.name?.lastName}</h2>
+                                <h2>{newsItem?.createdBy?.name?.firstName + " " + newsItem?.createdBy?.name?.lastName || "No Name"}</h2>
                                 <small>{newsItem?.createdAt}</small>
                             </ListItemText>
                             {/* <ListItemSecondaryAction>
@@ -178,7 +195,7 @@ function PinPosts(props){
         )
     })
 
-    let userEventsContent = userEvents.map((newsItem, index) => {
+    let userEventsContent = userEvents?.map((newsItem, index) => {
         return (
             <div div className = "grid" key={index}>
             <Paper elevation={1} className={classes.paper}>
@@ -261,14 +278,14 @@ function PinPosts(props){
         )
     });
 
-    let userPostsContent = userPosts.map((newsItem, index) => {
+    let userPostsContent = userPosts?.map((newsItem, index) => {
         return (
           <div className="grid" key={index}>
             <Paper elevation={1} className={classes.paper}>
               <Card className={classes.root}>
-                  <CardMedia className="projimg"
+                  {/* <CardMedia className="projimg"
                     image={newsItem?.image || eventImg } title="Post Image">
-                </CardMedia>
+                </CardMedia> */}
                 <List className={classes.listStyle}>
                   <ListItem className={classes.listStyle2}>
                     <ListItemAvatar>
@@ -372,7 +389,8 @@ const mapStateToProps = (state) => ({
     auth: state.auth,
     error: state.error,
     user: state.user,
-    status: state.status
+    status: state.status,
+    posts: state.post
 })
 
-export default connect(mapStateToProps , { getEventsCreatedByUser, getProjectCreatedByUser })(withRouter(PinPosts));
+export default connect(mapStateToProps , { getEventsCreatedByUser, getProjectCreatedByUser, getAllPinnedPosts })(withRouter(PinPosts));

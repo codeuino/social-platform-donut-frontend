@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { ListGroup, Button,  OverlayTrigger, Tooltip } from "react-bootstrap";
+import { ListGroup, Button } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import PropTypes from "prop-types";
 import "./navigation.scss";
@@ -11,9 +11,9 @@ import {
   DonutTitleSmall,
   DonutIconSmall,
 } from "../../../donutTitle/donutTitle";
-import ComminytPng from "../../../images/community.png";
-import CommunitySetting from "../Community/CommunitySetting";
-import { Desktop, Mobile, Default, Tablet } from "../../../utils/breakpoints";
+// import ComminytPng from "../../../images/community.png";
+// import CommunitySetting from "../Community/CommunitySetting";
+import { Desktop, Mobile } from "../../../utils/breakpoints";
 import SVGIcon from "../../../utils/SVGIcon";
 
 class Navigation extends Component {
@@ -22,13 +22,13 @@ class Navigation extends Component {
     org: false
  };
   render() {
-    function renderTooltip(props) {
-      return (
-        <Tooltip id="button-tooltip" {...props}>
-          Simple tooltip
-        </Tooltip>
-      );
-    }
+    // function renderTooltip(props) {
+    //   return (
+    //     <Tooltip id="button-tooltip" {...props}>
+    //       Simple tooltip
+    //     </Tooltip>
+    //   );
+    // }
     const ListItem = (props) => {
       const item = props.isMobile ? (
         <ListGroup.Item className={props.className}>
@@ -55,20 +55,15 @@ class Navigation extends Component {
       this.setState({
         open: false,
       });
-    // const closeOrgSetting = () => {
-    //   this.setState({
-    //     org: false
-    //   })
-    // }
-    const divStyle = {
-      position: "fixed",
-      bottom: '5em'
-    };
+    // const divStyle = {
+    //   position: "fixed",
+    //   bottom: '5em'
+    // };
     const divStyle2 = {
       position: "fixed",
       bottom: "2em"
     };
-    const { dashboard, posts, org, orgSettings,  event, proj, profile, logout, settings } = this.props;
+    const { logout } = this.props;
     return (
       <div className="main-navigation">
         <Desktop>

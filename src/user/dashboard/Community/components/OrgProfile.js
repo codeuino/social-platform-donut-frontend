@@ -12,10 +12,8 @@ class OrgProfile extends Component {
       isDeactivated: false,
       logo: null,
       orgName: "",
-      desc: {
-        short: "",
-        long: ""
-      },
+      shortDesc: "",
+      longDesc: "",
       error: ''
     }
   }
@@ -26,14 +24,9 @@ class OrgProfile extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('nextProps ', nextProps)
     const { name, description } = nextProps.org.org;
-    let info = {
-      short: description.shortDescription,
-      long: description.longDescription,
-    };
     const { isDeactivated } = nextProps.org
-    this.setState({ orgName: name, desc: info, isDeactivated: isDeactivated }, () => {
+    this.setState({ orgName: name, shortDesc: description.shortDescription, longDesc: description.longDescription, isDeactivated: isDeactivated }, () => {
       console.log('org info ', this.state)
     })
     const { msg } = nextProps.error
@@ -42,7 +35,9 @@ class OrgProfile extends Component {
 
   handleChange = (event) => {
     const { name, value } = event.target;
-    this.setState({ [name] : value })
+    this.setState({ [name] : value }, () => {
+      console.log('state ', this.state)
+    })
   }
 
   deactivateOrg = () => {
@@ -52,15 +47,16 @@ class OrgProfile extends Component {
 
   updateInfo = () => {
     console.log('Update info clicked!');
-    const { orgName, desc } = this.state
-    const updatedInfo = {
+    const { orgName, shortDesc, longDesc } = this.state
+    const info = {
       description: {
-        shortDescription: desc.short,
-        longDescription: desc.long,
+        shortDescription: shortDesc,
+        longDescription: longDesc,
       },
       name: orgName
     };
-    this.props.updateOrgProfile(updatedInfo)
+    console.log('updatedInfo ', info)
+    this.props.updateOrgProfile(info)
   }
 
   onFileChange = (e) => {
@@ -71,7 +67,14 @@ class OrgProfile extends Component {
   }
 
   render() {
-    const { logo, orgName, desc, error, isDeactivated } = this.state;
+    const { 
+      logo, 
+      orgName, 
+      shortDesc, 
+      longDesc, 
+      // error, 
+      isDeactivated
+     } = this.state;
     return (
       <div className="container">
         <div className="profile_content">
@@ -118,13 +121,13 @@ class OrgProfile extends Component {
                 </Form.Label>
                 <Form.Control
                   as="textarea"
-                  name="shortDescription"
+                  name="shortDesc"
                   id="exampleText"
                   placeholder="Short description"
                   className="placeholder_text"
                   required={true}
                   onChange={this.handleChange}
-                  defaultValue={desc.short}
+                  defaultValue={shortDesc}
                   rows="1"
                 />
               </Form.Group>
@@ -138,7 +141,7 @@ class OrgProfile extends Component {
                   placeholder="Long description"
                   required={true}
                   className="placeholder_text"
-                  defaultValue={desc.long}
+                  defaultValue={longDesc}
                   onChange={this.handleChange}
                   name="longDesc"
                 />
@@ -176,4 +179,8 @@ const mapStateToProps = (state) => ({
   org: state.org
 })
 
-export default connect(mapStateToProps, { getOrgProfile, updateOrgProfile, deactivateOrg })(OrgProfile);
+export default connect(mapStateToProps, {
+   getOrgProfile, 
+   updateOrgProfile, 
+   deactivateOrg
+})(OrgProfile);

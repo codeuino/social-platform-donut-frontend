@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./upcoming-events.scss";
-import events from '../../../jsonData/upcoming-events';
+// import events from '../../../jsonData/upcoming-events';
 import donutIcon from '../../../svgs/donut-icon.svg'
 import { connect } from "react-redux";
 import { upcomingEvents } from '../../../actions/dashboardAction'

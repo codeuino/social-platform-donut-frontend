@@ -60,7 +60,13 @@ class OrgPermission extends Component {
   }
 
   render() {
-    const { canChangeEmail, canChangeName, sendInvite, canCreateManage, error } = this.state
+    const { 
+      canChangeEmail, 
+      canChangeName, 
+      // sendInvite, 
+      // canCreateManage, 
+      // error
+     } = this.state
     return (
       <div className="container">
         <div className="permission_content">

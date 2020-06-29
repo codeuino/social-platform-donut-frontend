@@ -28,7 +28,6 @@ const AddProjectModal = (props) => {
   }
 
   const onCreateProjectClick = () => {
-    console.log('creating project!')
     const projectInfo = {
       projectName,
       description : {
@@ -37,6 +36,7 @@ const AddProjectModal = (props) => {
       },
       links: [{ githubLink: githubLink }, {bitbucketLink: bitbucketLink}]
     }
+    console.log('creating project!', projectInfo)
     props.createProject(projectInfo)
     props.handleClose()
   }

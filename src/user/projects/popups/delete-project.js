@@ -1,11 +1,20 @@
 import React, { Component } from "react";
 import { Modal, Button } from "react-bootstrap";
+import { connect } from 'react-redux'
+import { deleteProjectById } from '../../../actions/projectAction'
+import { withRouter } from 'react-router-dom'
 
-export class DeleteProject extends Component {
+class DeleteProject extends Component {
+  onRemove = () => {
+    console.log('deleting project', this.props.projectId);
+    this.props.deleteProjectById(this.props.projectId, this.props.history);
+  }
   render() {
+    const { show, onHide } = this.props
     return (
       <Modal
-        {...this.props}
+        show={show}
+        onHide={onHide}
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
@@ -15,10 +24,20 @@ export class DeleteProject extends Component {
           </Modal.Title>
         </Modal.Header>
         <Modal.Footer>
-          <Button variant="danger">Remove</Button>
-          <Button variant="light">Keep It</Button>
+          <Button variant="danger" onClick={this.onRemove}>Remove</Button>
+          <Button variant="light" onClick={onHide}>Keep It</Button>
         </Modal.Footer>
       </Modal>
     );
   }
 }
+
+// map state to props 
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  error: state.error,
+  project: state.project
+})
+
+export default connect(mapStateToProps, { deleteProjectById })(withRouter(DeleteProject));
+

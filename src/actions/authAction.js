@@ -1,4 +1,4 @@
-import { SET_CURRENT_USER } from './types';
+import { SET_CURRENT_USER, GET_USER_PROFILE } from './types';
 import axios from 'axios';
 import { setAuthToken } from '../utils/setAuthToken';
 import jwt_decode from 'jwt-decode';
@@ -14,6 +14,10 @@ export const registerUser = (userInfo, history) => async (dispatch) => {
     
     if(res.status === 201) { 
       dispatch(setRequestStatus(true));
+      dispatch({
+        type: GET_USER_PROFILE,
+        payload: res.data.user
+      })
       history.push('/');
     }
 

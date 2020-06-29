@@ -57,7 +57,7 @@ class Setup extends Component {
 
   onFinish = () => {
     console.log('Finish message from setup page!', this.state);
-    const { communityName, shortDesc, longDesc, email, website, chatPlatform, color } = this.state
+    const { communityName, shortDesc, longDesc, email, website, chatPlatform } = this.state
     const orgObj = {
       name: communityName,
       description: {
@@ -77,7 +77,7 @@ class Setup extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { msg } = nextProps.error;
-    if (msg == null || msg == undefined) {
+    if (msg == null || msg === undefined) {
       window.location.href = "/dashboard";
     } else {
       this.setState({ error: msg });

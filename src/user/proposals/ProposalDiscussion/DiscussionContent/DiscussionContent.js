@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./DiscussionContent.scss";
-import { Button, Container, Row, Col, Image, ListGroup } from "react-bootstrap";
+import { Button, Row, Image, ListGroup } from "react-bootstrap";
 import DiscussionComments from "./DiscussionComments/DiscussionComments";
 import eventImg from "../../../../svgs/event-img-1.svg";
 import userIcon2 from "../../../../images/userIcon2.jpg";

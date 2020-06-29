@@ -55,7 +55,13 @@ class OrgAuth extends Component {
 
 
   render() {
-    const { email, github, gitlab, google, error } = this.state
+    const { 
+      email, 
+      github, 
+      gitlab, 
+      google, 
+      // error
+     } = this.state
     return (
       <div className="container">
         <div className="auth_content">

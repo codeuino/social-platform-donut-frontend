@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import { Modal, Button, Row, Col, Image, Form } from "react-bootstrap";
+import { Modal, Button, Row, Image, Form } from "react-bootstrap";
 import { connect } from 'react-redux';
 import { removeUser } from '../../../actions/usersAction'
 import { getMember } from '../../../actions/insightAction'
 import logo from "../../../svgs/logo-image.jpg";
+import { checkRemoveRight } from '../../dashboard/utils/checkDeleteRights'
 
 class Members extends Component {
   constructor(props) {
@@ -11,14 +12,17 @@ class Members extends Component {
     this.state = {
       text: 'Follow',
       members: [],
-      query: ''
+      query: '',
+      isAdmin: ''
     }
   }
 
   onRemoveClick = (userId) => {
     console.log('Removing !', userId);
     // SEND REQUEST TO REMOVE USER WITH ID = INDEX
-    this.props.removeUser(userId)
+    if(this.state.isAdmin) {
+      this.props.removeUser(userId);
+    }
   }
 
   onChange = (e) => {
@@ -34,8 +38,14 @@ class Members extends Component {
 
   onSearchClick = () => {
     const { query } = this.state;
-    console.log('')
+    console.log('query ', query);
     this.props.getMember(query);
+  }
+
+  componentDidMount() {
+    checkRemoveRight() 
+    ? this.setState({ isAdmin: true }) 
+    : this.setState({ isAdmin: false })
   }
 
   componentWillReceiveProps(nextProps) {
@@ -66,6 +76,7 @@ class Members extends Component {
 
   render() {
     const { onHide, show } = this.props
+    const { isAdmin } = this.state
     const membersList = [ ...this.state.members] 
     let members = membersList.map((item) => (
       <Row className="modal__member" id="p1" key={item._id}>
@@ -85,7 +96,10 @@ class Members extends Component {
             onClick={this.onRemoveClick.bind(this, item._id)}
           >
             <span className="remove_followText">
-              {Boolean(item.isRemoved === true) ? (<span>Removed</span>) : (<span>Remove</span>)}
+              {Boolean(item.isRemoved === true) 
+                ? (<span>Removed</span>) 
+                : isAdmin ? (<span>Remove</span>) : (<span>New!</span>)
+              }
             </span>
           </Button>
         </div>
@@ -112,6 +126,12 @@ class Members extends Component {
               onChange={this.onChange}
               onKeyPress={this.onKeyPress}
             />
+            <Button
+              className="search_btn"
+              onClick={this.onSearchClick}
+            >
+              Search
+            </Button>
           </Modal.Title>
         </Modal.Header>
         <Modal.Body className="modal__body">

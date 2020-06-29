@@ -37,7 +37,7 @@ class Portfolio extends Component {
   componentWillReceiveProps(nextProps) {
     const { insight, user} = nextProps
     let members = insight.allMembers
-    let admins = insight.allMembers.filter(member => member.isAdmin == true);
+    let admins = insight.allMembers.filter(member => member.isAdmin === true);
     let info = insight.personalOverview
     let followers = user.userProfile.followers
     let followings = user.userProfile.followings;

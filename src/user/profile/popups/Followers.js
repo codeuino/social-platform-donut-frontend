@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Modal, Button, Row, Col, Image } from "react-bootstrap";
+import { Modal, Button, Row, Image } from "react-bootstrap";
 import PropTypes from 'prop-types';
 import logo from "../../../svgs/logo-image.jpg";
 import { connect } from 'react-redux'
@@ -49,7 +49,7 @@ class Followers extends Component {
   }
 
   render() {
-    const { borderStyle, onHide, followers, followings, show } = this.props
+    const { borderStyle, onHide, followers, show } = this.props
     let followersList = []
     
     if(followers && followers.length > 0) {

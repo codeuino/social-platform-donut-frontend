@@ -27,7 +27,7 @@ class EditProfile extends Component {
 
   onSave = (e) => {
     e.preventDefault();
-    const { firstName, lastName, designation, location, website, github, shortDesc, longDesc } = this.state
+    const { firstName, lastName, designation, location, website, shortDesc, longDesc } = this.state
     const info = {
       name: {
         firstName,
@@ -66,7 +66,7 @@ class EditProfile extends Component {
 
   render() {
     const { borderStyle, onHide, show } = this.props
-    const { firstName, lastName, shortDesc, location, github, linkedIn, fb, designation, website, longDesc } = this.state
+    const { firstName, lastName, shortDesc, location, designation, website, longDesc } = this.state
      return (
        <Modal onHide={onHide} show={show} className="modal">
          <Modal.Header

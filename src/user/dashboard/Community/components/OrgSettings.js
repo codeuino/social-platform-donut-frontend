@@ -59,7 +59,12 @@ class OrgSettings extends Component {
   }
 
   render() {
-    const { enableEmail, language, time, error } = this.state;
+    const { 
+      enableEmail, 
+      // language, 
+      // time, 
+      // error
+     } = this.state;
     return (
       <div className="container">
         <div className="settings_content">
