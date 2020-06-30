@@ -1,4 +1,4 @@
-import { SET_CURRENT_USER, RESPONSE_MSG, SET_ADMIN, BLOCK_USER, UNBLOCK_USER, REMOVE_USER } from "../actions/types"
+import { SET_CURRENT_USER, RESPONSE_MSG, SET_ADMIN, BLOCK_USER, UNBLOCK_USER, REMOVE_USER, PASSWORD_CHANGE_REQUEST_SUCCESS, PASSWORD_SUCCESSFULLY_CHANGED } from "../actions/types"
 
 const initialState = {
   // make it false later, default is set to true so that contributors don't need to login for test
@@ -6,6 +6,8 @@ const initialState = {
   isAdmin: false,
   isBlocked: false,
   isRemoved: false,
+  resetPassReq: null,
+  passUpdated: false,
   user: {},
   response_msg: ""
 }
@@ -17,6 +19,18 @@ export default (state = initialState, action) => {
         ...state,
         isAuthenticated: Boolean(typeof action.payload === 'object' && Object.keys(action.payload).length !== 0),
         user: action.payload
+      }
+    }
+    case PASSWORD_CHANGE_REQUEST_SUCCESS: {
+      return {
+        ...state,
+        resetPassReq: action.payload
+      }
+    }
+    case PASSWORD_SUCCESSFULLY_CHANGED: {
+      return {
+        ...state,
+        passUpdated: action.payload
       }
     }
     case BLOCK_USER: {

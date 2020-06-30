@@ -5,6 +5,8 @@ import { MdVerifiedUser } from 'react-icons/md';
 import { FaUserSlash } from 'react-icons/fa';
 import { connect } from 'react-redux';
 import { forgotPassword, changePassword } from '../actions/authAction';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
  
 class Popups extends Component {
   constructor(props){
@@ -20,16 +22,26 @@ class Popups extends Component {
       option: "",
       optionValue: "",
       newPass: "",
-      cnfPass: ""
+      cnfPass: "",
+      requested: false
     }
   }
   
   componentWillReceiveProps(nextProps){
+    console.log('nextProps in common ', nextProps)
     this.setState({
       show: nextProps.modalShow,
       option: nextProps.option,
       optionValue: nextProps.optionValue
     });
+    const { currentStep, requested } = this.state
+    if (nextProps.auth.resetPassReq !== null && requested) {
+      toast.success('Link sent to your registered email!')
+      let step = currentStep >= 2 ? 2 : currentStep + 1
+      this.setState({
+        currentStep: step 
+      })
+    } 
   }
  
   handleClose = () => {
@@ -54,8 +66,8 @@ class Popups extends Component {
 
   changePassword = (e) => {
     e.preventDefault();
-    const { newPass } = this.state;
-    const { auth, changePassword, status } = this.props;
+    const { newPass, success } = this.state;
+    const { auth, changePassword } = this.props;
     
     const passObj = { 
       password: newPass,
@@ -66,30 +78,21 @@ class Popups extends Component {
     changePassword(passObj);
 
     // show notification on sidebar if done successfully 
-    if(status.success) {
+    if(success) {
       console.log("Successfully changed the password!");
     }
   }
   
   forgotPasswordRequest = () => {
     const { email } = this.state;
-    const { forgotPassword, status } = this.props;
+    const { forgotPassword } = this.props;
     
     console.log("forgot password request sending...")
-    forgotPassword(email);
-    
-    let { currentStep } = this.state;
-    // move to next step if forgot password request successful
-    if(status.success){
-      currentStep = currentStep >= 2 ? 2 : currentStep + 1
-      this.setState({
-        currentStep: currentStep
-      })
-    } else {
-      // show error message in popup 
-      console.log("Something went wrong!!");
+    const emailObj = {
+      email: email
     }
-
+    this.setState({ requested: true })
+    forgotPassword(emailObj);
   }
     
 
@@ -305,12 +308,25 @@ function Step2(props) {
   if (props.currentStep !== 2) {
     return null
   } 
-  return(
+  return (
     <React.Fragment>
-    <div className="form-group">
-      <label htmlFor="password">Check your email to get the link of reset the password. If it doesnot appear within few minutes, check the spam folder.</label>
-          
-    </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+      <div className="form-group">
+        <label htmlFor="password">
+          Check your email to get the link of reset the password. If it doesnot
+          appear within few minutes, check the spam folder.
+        </label>
+      </div>
     </React.Fragment>
   );
 }

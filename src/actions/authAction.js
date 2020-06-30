@@ -1,4 +1,4 @@
-import { SET_CURRENT_USER, GET_USER_PROFILE } from './types';
+import { SET_CURRENT_USER, GET_USER_PROFILE, PASSWORD_SUCCESSFULLY_CHANGED, PASSWORD_CHANGE_REQUEST_SUCCESS } from './types';
 import axios from 'axios';
 import { setAuthToken } from '../utils/setAuthToken';
 import jwt_decode from 'jwt-decode';
@@ -57,13 +57,17 @@ export const loginUser = (userInfo, history) => async (dispatch) => {
 // forgot password 
 export const forgotPassword = (email) => async (dispatch) => {
   try {
-    const res = await axios.post('/user/password_reset', email);
+    const res = await axios.patch('/user/password_reset/request/', email);
     dispatch(setRequestStatus(false));
     
     if(res.status === 200){
       dispatch(setRequestStatus(true));
       console.log("Forgot password request sent!!");
       forgotPasswordToken = res.data.token;
+      dispatch({
+        type: PASSWORD_CHANGE_REQUEST_SUCCESS,
+        payload: res.data.token
+      })
     }
 
   } catch (error) {
@@ -74,13 +78,17 @@ export const forgotPassword = (email) => async (dispatch) => {
 // update password 
 export const changePassword = (passObj) => async (dispatch) => {
   try {
-    const res = await axios.post(`/user/password_reset/${forgotPasswordToken}`, passObj);
+    const res = await axios.patch(`/user/password_reset/${forgotPasswordToken}`, passObj);
     dispatch(setRequestStatus(false));
 
     if(res.status === 200){
       dispatch(setRequestStatus(true));
       console.log("Password updated!", res.data);
       // show password updated notification from here 
+      dispatch({
+        type: PASSWORD_SUCCESSFULLY_CHANGED,
+        payload: res.data.updated
+      })
     }
     
   } catch(error) {
