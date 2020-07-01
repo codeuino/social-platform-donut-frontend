@@ -10,6 +10,11 @@ import "react-toastify/dist/ReactToastify.css";
 import StyledDropzone from "./DropZone";
 import { Link } from "react-router-dom";
 import { Editor } from "@tinymce/tinymce-react";
+import { connect } from "react-redux";
+import {
+  createProposal,
+  getProposal,
+} from "../../../../actions/proposalActions";
 
 //Separately importing styles related to the markdown editor
 import "./index.css";
@@ -45,6 +50,10 @@ class EditorContent extends Component {
     };
   }
 
+  componentWillReceiveProps(nextProps) {
+    console.log("Proposals nextProps ", nextProps);
+  }
+
   componentDidMount() {
     //This means proposal is previosuly saved
     if (this.props.location.state.proposalId !== "new") {
@@ -55,7 +64,9 @@ class EditorContent extends Component {
           proposalId: this.props.location.state.proposalId,
         },
         () => {
-          this.getData();
+          setTimeout(() => {
+            this.props.getProposal(this.props.location.state.proposalId);
+          });
         }
       );
     }
@@ -69,27 +80,29 @@ class EditorContent extends Component {
 
   //Obtain proposal data from the server
   getData = () => {
-    fetch("http://localhost:5000/proposal/" + this.state.proposalId, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: this.state.token,
-      },
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .then((resData) => {
-        console.log(resData);
-        this.setState({
-          proposalTitle: resData.proposal.title,
-          markdownString: resData.proposal.content,
-          proposalDescription: resData.proposal.proposalDescription,
-          lastText: resData.proposal.content,
-          currentText: resData.proposal.content,
-          startSave: true,
-        });
-      });
+    this.props.getProposal(this.props.location.state.proposalId);
+
+    // fetch("http://localhost:5000/proposal/" + this.state.proposalId, {
+    //   method: "GET",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     Authorization: this.state.token,
+    //   },
+    // })
+    //   .then((res) => {
+    //     return res.json();
+    //   })
+    //   .then((resData) => {
+    //     console.log(resData);
+    //     this.setState({
+    //       proposalTitle: resData.proposal.title,
+    //       markdownString: resData.proposal.content,
+    //       proposalDescription: resData.proposal.proposalDescription,
+    //       lastText: resData.proposal.content,
+    //       currentText: resData.proposal.content,
+    //       startSave: true,
+    //     });
+    //   });
   };
 
   //Update the content of the proposal
@@ -128,40 +141,49 @@ class EditorContent extends Component {
   createProposal = () => {
     this.setState({ isSaving: true });
     setTimeout(() => {
-      fetch("http://localhost:5000/proposal", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: this.state.token,
-        },
-        body: JSON.stringify({
-          title: this.state.proposalTitle,
-          content: this.state.currentText,
-          proposalStatus: "DRAFT",
-          creator: this.state.userId,
-        }),
-      })
-        .then((res) => {
-          return res.json();
-        })
-        .then((resData) => {
-          this.setState(
-            {
-              newProposal: false,
-              proposalId: resData.proposal._id,
-              isSaving: false,
-              lastSaved: new Date().toTimeString().substring(0, 8),
-            },
-            () => {
-              toast.success("Proposal Drafted Successfully!");
-              let idVar = setInterval(this.saveProposal, 20000);
-              this.setState({
-                idVar: idVar,
-                startSave: true,
-              });
-            }
-          );
-        });
+      let proposalInfo = {
+        title: this.state.proposalTitle,
+        content: this.state.currentText,
+        proposalStatus: "DRAFT",
+        creator: localStorage.getItem("userId"),
+      };
+
+      this.props.createProposal(proposalInfo);
+
+      // fetch("http://localhost:5000/proposal", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //     Authorization: this.state.token,
+      //   },
+      //   body: JSON.stringify({
+      //     title: this.state.proposalTitle,
+      //     content: this.state.currentText,
+      //     proposalStatus: "DRAFT",
+      //     creator: this.state.userId,
+      //   }),
+      // })
+      // .then((res) => {
+      //   return res.json();
+      // })
+      // .then((resData) => {
+      //   this.setState(
+      //     {
+      //       newProposal: false,
+      //       proposalId: resData.proposal._id,
+      //       isSaving: false,
+      //       lastSaved: new Date().toTimeString().substring(0, 8),
+      //     },
+      //     () => {
+      //       toast.success("Proposal Drafted Successfully!");
+      //       let idVar = setInterval(this.saveProposal, 20000);
+      //       this.setState({
+      //         idVar: idVar,
+      //         startSave: true,
+      //       });
+      //     }
+      //   );
+      // });
     }, 2000);
   };
 
@@ -253,7 +275,7 @@ class EditorContent extends Component {
                   name="proposalTitle"
                   className="searchbar"
                   onChange={this.handleChange}
-                  value={this.state.proposalTitle}
+                  value={this.props.proposalTitle}
                 />
                 <Form.Label>Short Description</Form.Label>
                 <Form.Control
@@ -428,4 +450,12 @@ class EditorContent extends Component {
   }
 }
 
-export default withRouter(EditorContent);
+const mapStateToProps = (state) => ({
+  createdProposal: state.createdProposal,
+  fetchedProposal: state.fetchedProposal,
+  proposalIsFetched: state.proposalIsFetched,
+});
+
+export default connect(mapStateToProps, { createProposal, getProposal })(
+  withRouter(EditorContent)
+);

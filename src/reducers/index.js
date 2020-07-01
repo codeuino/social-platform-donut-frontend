@@ -1,15 +1,16 @@
-import { combineReducers } from 'redux';
-import authReducers from './authReducer';
-import postReducers from './postReducer';
-import userReducers from './userReducer';
-import errorReducer from './errorReducer';
-import requestStatus from './requestStatus';
-import notificationReducer from './notificationReducer'
-import dashboardReducer from './dashboardReducer'
-import insightReducer from './insightReducer';
-import orgReducer from './orgReducer';
-import eventReducer from './eventReducer';
-import projectReducer from './projectReducer';
+import { combineReducers } from "redux";
+import authReducers from "./authReducer";
+import postReducers from "./postReducer";
+import userReducers from "./userReducer";
+import errorReducer from "./errorReducer";
+import requestStatus from "./requestStatus";
+import notificationReducer from "./notificationReducer";
+import dashboardReducer from "./dashboardReducer";
+import insightReducer from "./insightReducer";
+import orgReducer from "./orgReducer";
+import eventReducer from "./eventReducer";
+import projectReducer from "./projectReducer";
+import proposalReducer from "./proposalReducer";
 
 const rootReducer = combineReducers({
   auth: authReducers,
@@ -22,7 +23,8 @@ const rootReducer = combineReducers({
   org: orgReducer,
   event: eventReducer,
   project: projectReducer,
-  status: requestStatus
+  status: requestStatus,
+  proposal: proposalReducer,
 });
 
 export default rootReducer;

@@ -4,12 +4,12 @@
   height: 100vh;
   flex-direction: column;
   .discussion-toppanel {
-    flex-grow: 1;
+    flex: 0.5;
+
     display: flex;
     flex-direction: row;
     .discussion-title {
       flex-grow: 5;
-
       .title-text {
         font-family: Inter;
         font-style: normal;
@@ -48,15 +48,14 @@
     }
   }
   .discussion-bottompanel {
-    flex-grow: 4;
+    flex: 4;
     display: flex;
 
     .proposal-preview {
-      margin-top: 20px;
       flex: 2;
       display: flex;
       flex-direction: column;
-      max-height: 80vh;
+      max-height: 85vh;
 
       .proposal-text {
         flex: 4;

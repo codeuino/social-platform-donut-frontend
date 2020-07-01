@@ -226,51 +226,6 @@ class DiscussionContent extends Component {
                 onEditorChange={this.handleTinyEditorChange}
               />
             </div>
-            <div className="attached-images">
-              <div className="images-title">Attached Images</div>
-              <div
-                style={{
-                  overflow: "hidden",
-                  marginLeft: "2",
-                  marginRight: "2",
-                }}
-              >
-                {images.map((item, index) => {
-                  return (
-                    <div
-                      style={{
-                        boxSizing: "border-box",
-                        float: "left",
-                        margin: "2px",
-                        marginRight: "10px",
-                        overflow: "hidden",
-                        paddingBottom: "16%",
-                        position: "relative",
-                        width: `calc(25% - ${2 * 2}px)`,
-
-                        "&:hover": {
-                          opacity: 0.9,
-                        },
-                      }}
-                    >
-                      <img
-                        onClick={this.toggleModal}
-                        src={item.source}
-                        style={{ maxWidth: "100%", position: "absolute" }}
-                      />
-                    </div>
-                  );
-                })}
-              </div>
-
-              <ModalGateway>
-                {imageModalOpen ? (
-                  <Modal onClose={this.toggleModal}>
-                    <Carousel views={this.state.images} />
-                  </Modal>
-                ) : null}
-              </ModalGateway>
-            </div>
           </div>
           <div className="comments">
             <DiscussionComments
@@ -282,6 +237,7 @@ class DiscussionContent extends Component {
               isAuthor={this.state.author === this.state.userId}
               author={this.state.author}
               handleComment={this.handleComment}
+              images={this.state.images}
             />
           </div>
           <RequestChanges

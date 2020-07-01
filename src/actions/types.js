@@ -1,6 +1,6 @@
-export const  GET_CURRENT_USER = "GET_CURRENT_USER";
-export const  SET_CURRENT_USER = "SET_CURRENT_USER";
-export const  RESPONSE_MSG = "RESPONSE_MSG";
+export const GET_CURRENT_USER = "GET_CURRENT_USER";
+export const SET_CURRENT_USER = "SET_CURRENT_USER";
+export const RESPONSE_MSG = "RESPONSE_MSG";
 export const GET_ERRORS = "GET_ERRORS";
 export const SET_ERROR = "SET_ERROR";
 export const SET_STATUS = "SET_STATUS";
@@ -27,3 +27,5 @@ export const GET_ALL_EVENTS = "GET_ALL_EVENTS";
 export const GET_ALL_PROJECTS = "GET_ALL_PROJECTS";
 export const GET_ALL_POSTS = "GET_ALL_POSTS";
 export const GET_USER_POSTS = "GET_USER_POSTS";
+export const CREATE_PROPOSAL = "CREATE_PROPOSAL";
+export const GET_PROPOSAL = "GET_PROPOSAL";
