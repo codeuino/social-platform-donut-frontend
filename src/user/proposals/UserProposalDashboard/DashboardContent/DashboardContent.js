@@ -3,41 +3,37 @@ import { Button, Form, Col, Image } from "react-bootstrap";
 import "./DashboardContent.scss";
 import userIcon2 from "../../../../images/userIcon2.jpg";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import {
+  getProposalsByUser,
+  getAllProposals,
+} from "../../../../actions/proposalActions";
 
 class DashboardContent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      token:
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWRjYjE4ZjIxNWRhNzRjMThkM2YyNzQiLCJpYXQiOjE1OTE1MjE2Nzl9.q3g5Ah_rtjPIrH7z183fVmUBTv_A4OjEoL673zeG250",
-      userId: "5edcb18f215da74c18d3f274",
+      userId: localStorage.getItem("userId"),
       proposals: [],
       displayItems: [],
+      allProposals: [],
+      userProposals: [],
     };
   }
 
   componentDidMount() {
-    this.getProposalsByUserId();
+    this.props.getAllProposals();
+    this.props.getProposalsByUser(this.state.userId);
   }
 
-  getProposalsByUserId() {
-    fetch(`http://localhost:5000/proposal/user/${this.state.userId}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: this.state.token,
-      },
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .then((resData) => {
-        console.log(resData);
-        this.setState({
-          proposals: resData.proposal,
-          displayItems: resData.proposal,
-        });
-      });
+  componentWillReceiveProps(nextProps) {
+    const { allProposals, userProposals } = nextProps;
+
+    this.setState({
+      allProposals: allProposals,
+      userProposals: userProposals,
+      displayItems: allProposals,
+    });
   }
 
   handleSearchBarChange = (evt) => {
@@ -63,13 +59,15 @@ class DashboardContent extends Component {
   };
 
   handleButtonClick = (name) => {
-    const proposals = this.state.proposals;
+    const proposals = this.state.userProposals;
+    const allProposals = this.state.allProposals;
+
     let results = [];
 
     switch (name) {
       case "All":
         this.setState({
-          displayItems: proposals,
+          displayItems: allProposals,
         });
         break;
       case "Accepted":
@@ -139,7 +137,7 @@ class DashboardContent extends Component {
                   className="category-btn"
                   onClick={() => this.handleButtonClick("All")}
                 >
-                  <span className="btn-content">All</span>
+                  <span className="btn-content">All Proposals</span>
                 </Button>
                 <span className="space"></span>
                 <Button
@@ -218,22 +216,24 @@ class DashboardContent extends Component {
                       {proposalItem.proposalDescription}
                     </div>
                     <div className="proposal-options">
-                      <Link
-                        to={{
-                          pathname: "/proposaleditor",
-                          state: {
-                            proposalId: proposalItem._id,
-                          },
-                        }}
-                      >
-                        <Button
-                          variant="primary"
-                          className="option-btn"
-                          size="sm"
+                      {proposalItem.creator === this.state.userId ? (
+                        <Link
+                          to={{
+                            pathname: "/proposaleditor",
+                            state: {
+                              proposalId: proposalItem._id,
+                            },
+                          }}
                         >
-                          <span className="option-text">Edit</span>
-                        </Button>
-                      </Link>
+                          <Button
+                            variant="primary"
+                            className="option-btn"
+                            size="sm"
+                          >
+                            <span className="option-text">Edit</span>
+                          </Button>
+                        </Link>
+                      ) : null}
                       <Link
                         to={{
                           pathname: "/proposaldiscussion",
@@ -241,7 +241,8 @@ class DashboardContent extends Component {
                             proposalId: proposalItem._id,
                             isAdmin: false,
                             userId: this.state.userId,
-                            token: this.state.token,
+                            isCreator:
+                              proposalItem.creator === this.state.userId,
                           },
                         }}
                       >
@@ -266,4 +267,12 @@ class DashboardContent extends Component {
   }
 }
 
-export default DashboardContent;
+const mapStateToProps = (state) => ({
+  allProposals: state.proposal.allProposals,
+  userProposals: state.proposal.userProposals,
+});
+
+export default connect(mapStateToProps, {
+  getProposalsByUser,
+  getAllProposals,
+})(DashboardContent);

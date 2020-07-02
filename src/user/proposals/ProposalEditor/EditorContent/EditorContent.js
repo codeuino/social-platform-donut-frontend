@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { Button, Form, Badge } from "react-bootstrap";
 import "./EditorContent.scss";
-import MdEditor from "react-markdown-editor-lite";
-import MarkdownIt from "markdown-it";
 import { withRouter } from "react-router-dom";
 import { BeatLoader } from "react-spinners";
 import { toast, ToastContainer } from "react-toastify";
@@ -14,16 +12,13 @@ import { connect } from "react-redux";
 import {
   createProposal,
   getProposal,
+  saveProposal,
+  submitProposal,
+  deleteProposal,
 } from "../../../../actions/proposalActions";
 
 //Separately importing styles related to the markdown editor
 import "./index.css";
-
-const mdParser = new MarkdownIt({
-  html: true,
-  linkify: true,
-  typographer: true,
-});
 
 class EditorContent extends Component {
   constructor(props) {
@@ -31,19 +26,12 @@ class EditorContent extends Component {
     this.state = {
       currentText: "",
       lastText: "",
-
       newProposal: false,
-
-      //hard coding values for demo
-      token:
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWRjYjE4ZjIxNWRhNzRjMThkM2YyNzQiLCJpYXQiOjE1OTE1MjE2Nzl9.q3g5Ah_rtjPIrH7z183fVmUBTv_A4OjEoL673zeG250",
-      userId: "5edcb18f215da74c18d3f274",
-
       proposalTitle: "",
       proposalId: "",
+      proposalStatus: "DRAFT",
       markdownString: "",
       proposalDescription: "",
-
       startSave: false,
       isSaving: false,
       lastSaved: new Date().toTimeString().substring(0, 8),
@@ -51,7 +39,34 @@ class EditorContent extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log("Proposals nextProps ", nextProps);
+    const { fetchedProposal, createdProposal } = nextProps;
+
+    if (Object.keys(fetchedProposal).length !== 0) {
+      this.setState({
+        proposalTitle: fetchedProposal.title,
+        proposalDescription: fetchedProposal.proposalDescription,
+        markdownString: fetchedProposal.content,
+        proposalId: fetchedProposal._id,
+        proposalStatus: fetchedProposal.proposalStatus,
+      });
+    }
+    if (Object.keys(createProposal).length !== 0) {
+      this.setState(
+        {
+          isSaving: false,
+          newProposal: false,
+          proposalId: createdProposal._id,
+          lastSaved: new Date().toTimeString().substring(0, 8),
+        },
+        () => {
+          let idVar = setInterval(this.saveProposal, 20000);
+          this.setState({
+            idVar: idVar,
+            startSave: true,
+          });
+        }
+      );
+    }
   }
 
   componentDidMount() {
@@ -62,6 +77,7 @@ class EditorContent extends Component {
         {
           idVar: idVar,
           proposalId: this.props.location.state.proposalId,
+          startSave: true,
         },
         () => {
           setTimeout(() => {
@@ -78,62 +94,24 @@ class EditorContent extends Component {
     }
   }
 
-  //Obtain proposal data from the server
-  getData = () => {
-    this.props.getProposal(this.props.location.state.proposalId);
-
-    // fetch("http://localhost:5000/proposal/" + this.state.proposalId, {
-    //   method: "GET",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     Authorization: this.state.token,
-    //   },
-    // })
-    //   .then((res) => {
-    //     return res.json();
-    //   })
-    //   .then((resData) => {
-    //     console.log(resData);
-    //     this.setState({
-    //       proposalTitle: resData.proposal.title,
-    //       markdownString: resData.proposal.content,
-    //       proposalDescription: resData.proposal.proposalDescription,
-    //       lastText: resData.proposal.content,
-    //       currentText: resData.proposal.content,
-    //       startSave: true,
-    //     });
-    //   });
-  };
-
   //Update the content of the proposal
   saveProposal = () => {
     let { lastText, currentText } = this.state;
 
     if (lastText !== currentText) {
       this.setState({ isSaving: true });
+      let proposalInfo = {
+        title: this.state.proposalTitle,
+        description: this.state.proposalDescription,
+        content: this.state.currentText,
+        proposalId: this.state.proposalId,
+      };
+
       setTimeout(() => {
-        fetch(`http://localhost:5000/proposal/${this.state.proposalId}`, {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: this.state.token,
-          },
-          body: JSON.stringify({
-            title: this.state.proposalTitle,
-            description: this.state.proposalDescription,
-            content: this.state.currentText,
-          }),
-        })
-          .then((res) => {
-            return res.json();
-          })
-          .then((resData) => {
-            this.setState({
-              lastText: currentText,
-              isSaving: false,
-              lastSaved: new Date().toTimeString().substring(0, 8),
-            });
-          });
+        this.props.saveProposal(proposalInfo);
+        this.setState({
+          isSaving: false,
+        });
       }, 2000);
     }
   };
@@ -146,65 +124,30 @@ class EditorContent extends Component {
         content: this.state.currentText,
         proposalStatus: "DRAFT",
         creator: localStorage.getItem("userId"),
+        description: this.state.proposalDescription,
       };
 
       this.props.createProposal(proposalInfo);
 
-      // fetch("http://localhost:5000/proposal", {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //     Authorization: this.state.token,
-      //   },
-      //   body: JSON.stringify({
-      //     title: this.state.proposalTitle,
-      //     content: this.state.currentText,
-      //     proposalStatus: "DRAFT",
-      //     creator: this.state.userId,
-      //   }),
-      // })
-      // .then((res) => {
-      //   return res.json();
-      // })
-      // .then((resData) => {
-      //   this.setState(
-      //     {
-      //       newProposal: false,
-      //       proposalId: resData.proposal._id,
-      //       isSaving: false,
-      //       lastSaved: new Date().toTimeString().substring(0, 8),
-      //     },
-      //     () => {
-      //       toast.success("Proposal Drafted Successfully!");
-      //       let idVar = setInterval(this.saveProposal, 20000);
-      //       this.setState({
-      //         idVar: idVar,
-      //         startSave: true,
-      //       });
-      //     }
-      //   );
-      // });
+      let idVar = setInterval(this.saveProposal, 20000);
+      this.setState({
+        idVar: idVar,
+        startSave: true,
+        newProposal: false,
+      });
     }, 2000);
   };
 
   submitProposal = () => {
-    fetch("http://localhost:5000/proposal/change/" + this.state.proposalId, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: this.state.token,
-      },
-      body: JSON.stringify({
-        proposalStatus: "SUBMITTED",
-      }),
-    }).then((res) => {
-      setTimeout(() => {
-        this.props.history.push("/proposal");
-      }, 3000);
-      toast.success(
-        "Proposal Successfully Submitted! Redirecting to dashboard"
-      );
-    });
+    const proposalData = {
+      proposalId: this.state.proposalId,
+      proposalStatus: "SUBMITTED",
+    };
+    this.props.submitProposal(proposalData);
+    setTimeout(() => {
+      this.props.history.push("/proposal");
+    }, 3000);
+    toast.success("Proposal Successfully Submitted! Redirecting to dashboard");
   };
 
   handleEditorChange = ({ html, text }) => {
@@ -234,26 +177,17 @@ class EditorContent extends Component {
   };
 
   handleDeleteProposal = () => {
-    fetch("http://localhost:5000/proposal/", {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: this.state.token,
-      },
-      body: JSON.stringify({
-        proposalId: this.state.proposalId,
-      }),
-    }).then((res) => {
-      setTimeout(() => {
-        this.props.history.push("/proposal");
-      }, 3000);
-      toast.error("Proposal Deleted Successfully. Redirecting to dashboard");
-    });
+    this.props.deleteProposal(this.state.proposalId);
+    setTimeout(() => {
+      this.props.history.push("/proposal");
+    }, 3000);
+    toast.error("Proposal Deleted Successfully. Redirecting to dashboard");
   };
 
   componentWillUnmount() {
     clearInterval(this.state.idVar);
   }
+
   handleTinyEditorChange = (content, editor) => {
     this.setState({
       draftEnabled: true,
@@ -275,7 +209,7 @@ class EditorContent extends Component {
                   name="proposalTitle"
                   className="searchbar"
                   onChange={this.handleChange}
-                  value={this.props.proposalTitle}
+                  value={this.state.proposalTitle}
                 />
                 <Form.Label>Short Description</Form.Label>
                 <Form.Control
@@ -315,24 +249,23 @@ class EditorContent extends Component {
                 </Link>
               </React.Fragment>
             )}
-            <Button variant="primary" className="option-btn" size="sm">
-              <span className="option-text">Send For Review</span>
-            </Button>
-            <Button
-              active
-              variant="primary"
-              className="option-btn"
-              size="sm"
-              active
-              onClick={this.onSubmitHandler}
-            >
-              <span className="option-text">Submit</span>
-            </Button>
+            {this.state.proposalStatus === "DRAFT" ? (
+              <Button
+                active
+                variant="primary"
+                className="option-btn"
+                size="sm"
+                active
+                onClick={this.onSubmitHandler}
+              >
+                <span className="option-text">Submit</span>
+              </Button>
+            ) : null}
+
             <div>
               {!this.state.newProposal ? (
                 <StyledDropzone
                   idContent={this.props.location.state.proposalId}
-                  token={this.state.token}
                 />
               ) : (
                 <div></div>
@@ -451,11 +384,15 @@ class EditorContent extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  createdProposal: state.createdProposal,
-  fetchedProposal: state.fetchedProposal,
-  proposalIsFetched: state.proposalIsFetched,
+  createdProposal: state.proposal.createdProposal,
+  fetchedProposal: state.proposal.fetchedProposal,
+  proposalIsFetched: state.proposal.proposalIsFetched,
 });
 
-export default connect(mapStateToProps, { createProposal, getProposal })(
-  withRouter(EditorContent)
-);
+export default connect(mapStateToProps, {
+  createProposal,
+  getProposal,
+  saveProposal,
+  submitProposal,
+  deleteProposal,
+})(withRouter(EditorContent));

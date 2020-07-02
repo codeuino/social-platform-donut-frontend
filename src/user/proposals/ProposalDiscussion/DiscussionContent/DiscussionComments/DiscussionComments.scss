@@ -82,6 +82,17 @@
       .textinput {
         border-radius: 25px;
       }
+
+      .textinput-container {
+        .form-text {
+          display: inline-block;
+          margin-right: 10px;
+          width: 70%;
+        }
+        .form-button {
+          width: 25%;
+        }
+      }
     }
   }
   .images {
@@ -95,6 +106,28 @@
       line-height: 27px;
       margin-top: 0px;
       color: #000000;
+    }
+    .gallery {
+      overflow: hidden;
+      margin-left: 2;
+      margin-right: 2;
+      padding: 12px;
+      border: 1px solid #dfe9f1;
+      height: 100%;
+      .gallery-item {
+        box-sizing: border-box;
+        float: left;
+        margin: 2px;
+        margin-right: 10px;
+        overflow: hidden;
+        padding-bottom: 16%;
+        position: relative;
+        width: calc(25% - 4px);
+        .image-item {
+          max-width: 100%;
+          position: absolute;
+        }
+      }
     }
   }
 }

@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import "./DiscussionContent.scss";
 import { Button, Badge, Image, ListGroup } from "react-bootstrap";
 import DiscussionComments from "./DiscussionComments/DiscussionComments";
-import eventImg from "../../../../svgs/event-img-1.svg";
 import userIcon2 from "../../../../images/userIcon2.jpg";
 import RequestChanges from "../DiscussionPopups/RequestChanges";
 import { withRouter, Link } from "react-router-dom";
 import { Editor } from "@tinymce/tinymce-react";
-import Carousel, { Modal, ModalGateway } from "react-images";
+import { connect } from "react-redux";
+import { getProposal } from "../../../../actions/proposalActions";
 
 class DiscussionContent extends Component {
   constructor(props) {
@@ -42,58 +42,45 @@ class DiscussionContent extends Component {
         token: token,
       },
       () => {
-        console.log(this.state);
-        this.getData();
+        this.props.getProposal(this.state.proposalId);
       }
     );
   }
 
-  getData = () => {
-    console.log("getDtata called");
-    fetch("http://localhost:5000/proposal/" + this.state.proposalId, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: this.state.token,
+  componentWillReceiveProps(nextProps) {
+    const { fetchedProposal } = nextProps;
+    const images = [];
+    let variant = "";
+
+    fetchedProposal.attachments.forEach((item, index) => {
+      images.push({ source: item.fileLink });
+    });
+
+    switch (fetchedProposal.proposalStatus) {
+      case "DRAFT":
+        variant = "danger";
+        break;
+      case "SUBMITTED":
+        variant = "secondary";
+        break;
+    }
+
+    this.setState(
+      {
+        proposalTitle: fetchedProposal.title,
+        markdownString: fetchedProposal.content,
+        proposalDescription: fetchedProposal.proposalDescription,
+        commentList: fetchedProposal.comments,
+        author: fetchedProposal.creator,
+        proposalState: fetchedProposal.proposalStatus,
+
+        images: images,
       },
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .then((resData) => {
-        const images = [];
-        resData.proposal.attachments.forEach((item, index) => {
-          images.push({ source: item.fileLink });
-        });
-
-        let variant;
-
-        switch (resData.proposal.proposalStatus) {
-          case "DRAFT":
-            variant = "danger";
-            break;
-          case "SUBMITTED":
-            variant = "secondary";
-            break;
-        }
-
-        this.setState(
-          {
-            proposalTitle: resData.proposal.title,
-            markdownString: resData.proposal.content,
-            proposalDescription: resData.proposal.proposalDescription,
-            commentList: resData.proposal.comments,
-            author: resData.proposal.creator,
-            proposalState: resData.proposal.proposalStatus,
-            variant: variant,
-            images: images,
-          },
-          () => {
-            this.processComments();
-          }
-        );
-      });
-  };
+      () => {
+        this.processComments();
+      }
+    );
+  }
 
   processComments = () => {
     let comments = [];
@@ -254,4 +241,10 @@ class DiscussionContent extends Component {
   }
 }
 
-export default withRouter(DiscussionContent);
+const mapStateToProps = (state) => ({
+  fetchedProposal: state.proposal.fetchedProposal,
+});
+
+export default connect(mapStateToProps, { getProposal })(
+  withRouter(DiscussionContent)
+);
