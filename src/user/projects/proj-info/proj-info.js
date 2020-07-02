@@ -26,7 +26,8 @@ class ProjInfo extends Component {
       projectInfo: {},
       deleteProject: false,
       githubLink: '',
-      bitBucketLink: ''
+      bitBucketLink: '',
+      techStacks: []
     };
   }
 
@@ -41,7 +42,7 @@ class ProjInfo extends Component {
   componentWillReceiveProps(nextProps) {
     console.log('nextProps ', nextProps)
     const { singleProject } = nextProps.project
-    this.setState({ projectInfo: singleProject }, () => {
+    this.setState({ projectInfo: singleProject, techStacks: singleProject.techStacks }, () => {
       console.log('updating project info state ', this.state)
     })
     const { links } = singleProject
@@ -49,7 +50,7 @@ class ProjInfo extends Component {
   }
 
   render() {
-    const { projectInfo, editProject, proj, deleteProject, githubLink, bitBucketLink } = this.state
+    const { projectInfo, editProject, proj, deleteProject, githubLink, bitBucketLink, techStacks } = this.state
 
     let cancel = () =>{
       this.setState({
@@ -100,6 +101,13 @@ class ProjInfo extends Component {
     //   </Grid>
     // ));
 
+    let variant = ["primary", "secondary", "success", "danger", "warning", "light", "dark"]
+    const techBadge = techStacks?.map((techs, index) => (
+      <>
+        <Badge pill variant={variant[index]} key={index}>{techs}</Badge>{" "}
+      </>
+    ))
+
     return (
       <div className="organization">
         <div className="navigation">
@@ -109,8 +117,9 @@ class ProjInfo extends Component {
           <Fab
             className="back"
             href="/projects"
-            color="primary"
+            color="default"
             aria-label="add"
+            ml-2
           >
             <ArrowBackIcon />
           </Fab>
@@ -169,32 +178,8 @@ class ProjInfo extends Component {
                   />
                     <br></br>
                     <div className="tech-stack">
-                  <Badge pill variant="primary">
-                    React
-                  </Badge>{" "}
-                  <Badge pill variant="secondary">
-                    Passport
-                  </Badge>{" "}
-                  <Badge pill variant="success">
-                    Nodejs
-                  </Badge>{" "}
-                  <Badge pill variant="danger">
-                    Bootstrap
-                  </Badge>{" "}
-                  <br></br>
-                  <Badge pill variant="warning">
-                    Mongoose
-                  </Badge>{" "}
-                  <Badge pill variant="info">
-                    JWT
-                  </Badge>{" "}
-                  <Badge pill variant="light">
-                    Material-ui
-                  </Badge>{" "}
-                  <Badge pill variant="dark">
-                    Redux
-                  </Badge>
-                </div>
+                      {techBadge}
+                    </div>
                   </Col>
                 </Row>
 

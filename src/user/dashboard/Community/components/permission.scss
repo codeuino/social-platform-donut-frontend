@@ -17,6 +17,9 @@
         border: 0.75px solid #90949C;
         background: #FFFFFF;
         box-sizing: border-box;
+        .hide {
+          display: none;
+        }
       }
       .placeholder_text {
         color: #C9C9C9;

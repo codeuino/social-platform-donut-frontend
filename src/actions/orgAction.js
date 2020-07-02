@@ -68,10 +68,11 @@ export const updateOrgProfile = (updatedInfo) => async (dispatch) => {
     if(res.status === 200) {
       dispatch(setRequestStatus(true))
       console.log('org profile updated!', res.data)
-      dispatch({
-        type: UPDATE_ORG_PROFILE,
-        payload: res.data.organization
-      })
+      dispatch(getOrgProfile());
+      // dispatch({
+      //   type: UPDATE_ORG_PROFILE,
+      //   payload: res.data.organization
+      // })
     }
   } catch(error) {
     dispatch(errorHandler(error))

@@ -1,4 +1,4 @@
-import { GET_USER_PROFILE, GET_ALL_MEMBERS, UPDATE_USER_PROFILE, GET_USER_EVENTS, GET_USER_PROJECTS, GET_USER_POSTS } from './types'
+import { GET_USER_PROFILE, GET_ALL_MEMBERS, UPDATE_USER_PROFILE, GET_USER_EVENTS, GET_USER_PROJECTS, GET_USER_POSTS, GET_INVITE_LINK, PROCESS_INVITE_LINK } from './types'
 import { errorHandler } from '../utils/errorHandler'
 import axios from 'axios'
 import { setRequestStatus } from '../utils/setRequestStatus'
@@ -156,5 +156,41 @@ export const getPostsCreatedByUser = (pagination = 10, page = 1) => async (dispa
     }
   } catch (error) {
     dispatch(errorHandler(error))
+  }
+}
+
+// GET INVITE LINK 
+export const getInviteLink = () => async (dispatch) => {
+  try {
+    const res = await axios.get('/user/invite')
+    dispatch(setRequestStatus(false));
+    if(res.status === 200) {
+      dispatch(setRequestStatus(true));
+      console.log('Fetching invite link ', res.data.inviteLink)
+      dispatch({
+        type: GET_INVITE_LINK,
+        payload: res.data.inviteLink
+      })
+    }
+  } catch (error) {
+    dispatch(errorHandler(error))
+  }
+}
+
+// PROCESS INVITE LINK 
+export const processInviteToken = (token) => async (dispatch) => {
+  try {
+    const res = await axios.get(`/user/invite/${token}`)
+    dispatch(setRequestStatus(false));
+    if(res.status === 200) {
+      dispatch(setRequestStatus(true))
+      console.log('Processing the invite link ', res.data);
+      dispatch({
+        type: PROCESS_INVITE_LINK,
+        payload: res.data.success || res.data.msg
+      })
+    }
+  } catch(error) {
+    dispatch(errorHandler(error));
   }
 }

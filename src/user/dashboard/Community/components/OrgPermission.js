@@ -63,15 +63,15 @@ class OrgPermission extends Component {
     const { 
       canChangeEmail, 
       canChangeName, 
-      // sendInvite, 
-      // canCreateManage, 
+      sendInvite, 
+      canCreateManage, 
       // error
      } = this.state
     return (
       <div className="container">
         <div className="permission_content">
           <div className="container">
-             <p className="org_permission_text">Organization Permission</p>
+            <p className="org_permission_text">Organization Permission</p>
             <Form className="form">
               <Form.Group>
                 <Form.Label htmlFor="header_text" className="header_text">
@@ -82,14 +82,19 @@ class OrgPermission extends Component {
                 <Form.Label htmlFor="label_text" className="sub_header_text">
                   Are invitations required for joining the organization?
                 </Form.Label>
-                <Form.Control 
-                  as = "select"
-                  className = "select_option"
-                  name = "sendInvite" 
+                <Form.Control
+                  as="select"
+                  className="select_option"
+                  name="sendInvite"
+                  value={sendInvite}
                   onChange={this.onChange}
                 >
-                  <option value="BOTH">Yes. Admins and Members can send invitations</option>
-                  <option value="ADMINS">Yes. Only Admins can send invitations</option>
+                  <option value="BOTH">
+                    Yes. Admins and Members can send invitations
+                  </option>
+                  <option value="ADMINS">
+                    Yes. Only Admins can send invitations
+                  </option>
                   <option value="NONE">No one can send invitations</option>
                 </Form.Control>
               </Form.Group>
@@ -143,10 +148,30 @@ class OrgPermission extends Component {
                 >
                   Who can create and manage user groups
                 </Form.Label>
-                <Form.Control as="select" name="canCreateManage" className="select_option" onChange={this.onChange}>
-                  <option value="BOTH">Admins and Members </option>
-                  <option value="ADMINS">Only Admins</option>
-                  <option value="MEMBERS">Only Members </option>
+                <Form.Control
+                  as="select"
+                  name="canCreateManage"
+                  className="select_option"
+                  onChange={this.onChange}
+                >
+                  <option
+                    value="BOTH"
+                    selected={canCreateManage === "BOTH"}
+                  >
+                    BOTH
+                  </option>
+                  <option
+                    value="ADMINS"
+                    selected={canCreateManage === "ADMINS"}
+                  >
+                    Only Admins
+                  </option>
+                  <option
+                    value="MEMBERS"
+                    selected={canCreateManage === "MEMBERS"}
+                  >
+                    Only Members
+                  </option>
                 </Form.Control>
               </Form.Group>
               <Form.Group>

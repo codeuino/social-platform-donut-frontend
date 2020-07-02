@@ -60,7 +60,7 @@ const AddPostModal = (props) => {
         </Form>
       </Modal.Body>
       <div className="modal__buttons">
-        <Button Button onClick = {createPostClick.bind(this, content)} className = "modal__save" >
+        <Button onClick = {createPostClick.bind(this, content)} className = "modal__save" >
           <span className="modal__buttontext">Post</span>
         </Button>
         <Button onClick={props.onHide} className="modal__cancel">
