@@ -2,6 +2,9 @@ import axios from 'axios'
 import { setRequestStatus } from '../utils/setRequestStatus'
 import { errorHandler } from '../utils/errorHandler'
 import { GET_ALL_UPCOMING_EVENTS } from './types'
+import { getAllEvents } from './eventAction'
+import { getAllPosts } from './postAction'
+import { getAllProjects } from './projectAction'
 
 // GET UPCOMING EVENTS
 export const upcomingEvents = () => async (dispatch) => {
@@ -29,6 +32,7 @@ export const createPost = (postInfo) => async (dispatch) => {
     if (res.status === 201) {
       dispatch(setRequestStatus(true))
       console.log('post created ', res.data)
+      dispatch(getAllPosts())
     }
   } catch (error) {
     dispatch(errorHandler(error))
@@ -43,6 +47,7 @@ export const createEvent = (eventInfo) => async (dispatch) => {
     if (res.status === 201) {
       dispatch(setRequestStatus(true))
       console.log('event created ', res.data)
+      dispatch(getAllEvents())
     }
   } catch (error) {
     dispatch(errorHandler(error))
@@ -58,6 +63,7 @@ export const createProject = (projectInfo) => async (dispatch) => {
     if (res.status === 201) {
       dispatch(setRequestStatus(true))
       console.log('project created ', res.data)
+      dispatch(getAllProjects())
     }
   } catch (error) {
     dispatch(errorHandler(error))

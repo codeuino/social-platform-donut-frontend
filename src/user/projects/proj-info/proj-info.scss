@@ -9,29 +9,29 @@
 }
 
 .proj_img{
-  height:20rem;
- width:auto; 
+  height:15rem;
+  margin-left: 1vw;
+  max-width: 23vw;
+  max-height: 42vh;
+  height: 39vh;
 }
-
-.img {
- height:20rem;
- width:auto;
-}
-
 
 .project-info {
   flex: 1;
   padding: 10px 14px;
   h1 {
-    color: #0069d9;
+    color: #2D2D2D;
     font-size: 40px;
-    font-weight: bold;
+    font-weight: 500;
     margin: 0;
     padding: 0;
   }
 
   .createAt{
-    color: #2c3e50;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    color: #2D2D2D;
     font-size: 12px;
     margin: 4px 0;
     padding: 0;
@@ -40,53 +40,70 @@
     margin-top: 3vh;
   }
   .short_des {
-    color: #748391;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    color: #2D2D2D;
     font-size: 18px;
-    font-weight: bold;
+    font-weight: 500;
     margin: 4px 0;
     padding: 0;
+    text-align: justify;
+    max-width: 80%;
   }
 
   .place {
-    color: #2c3e50;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    color: #2D2D2D;
     font-size: 12px;
     margin: 4px 0;
     padding: 0;
+    margin-bottom: 5%;
   }
   .desc {
-    color: #5d5d5d;
-    font-size: 14px;
-    margin: 0;
-    padding: 0;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1.5em;
+    line-height: 1.3em;
+    color: #2D2D2D;
+    text-align: justify;
+    max-width: 83%;
   }
 }
 
 .description{
   h1{
-    color: #0069d9;
-    font-size: 30px;
+    font-family: Inter;
+    font-style: normal;
+    color: #2D2D2D;
+    font-size: 27px;
     margin: 0;
-    font-weight: bold;
+    font-weight: 500;
     padding: 0;
-    text-align: center;
+    text-align: left;
+    margin-left: 2%;
   }
  
   .desc {
-    color: #5d5d5d;
-    font-size: 14px;
-    margin: auto;
-    font-weight: 100;
-    padding: 20px;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1.2em;
+    line-height: 1.3em;
+    color: #2D2D2D;
+    margin-left: 2%;
+    max-width: 83%;
   }
-
-
-  margin-top: 2vh;
+  margin-top: 5vh;
 }
 
 
 .maintainers{
   h1{
-    color: #0069d9;
+    color: #2D2D2D;
     font-size: 30px;
     font-weight: bold;
     margin: 0;

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Modal, Button, Row, Col, Form} from 'react-bootstrap';
 import "./popup.scss";
 import { connect } from 'react-redux';
-import { updateEvent, deleteEvent } from '../../../actions/eventAction';
+import { updateEvent, deleteEvent, getEventById } from '../../../actions/eventAction';
 import PropTypes from 'prop-types'
 
 
@@ -18,14 +18,48 @@ class EditEvent extends Component {
     };
   }
 
-  componentDidMount = () => {
-    // FETCH THE EVENT DETAILS ON POPUP GETS TRIGGERED (INTEGRATION)
-    console.log("Fetching the event details!");
-  };
+
+  componentWillReceiveProps(nextProps) {
+    console.log('edit ', nextProps)
+    const { eventInfo } = nextProps
+    const { eventName, description, eventDate, location } = eventInfo
+    this.setState({ 
+      eventName: eventName, 
+      shortDesc: description?.shortDescription, 
+      longDesc: description?.longDescription,
+      location: location,
+      date: eventDate
+    }, () => {
+      console.log('edit state ', this.state)
+    })
+  }
 
   onChange = (event) => {
     const { name, value } = event.target;
     this.setState({ [name]: value });
+  };
+
+  refineDate = (d) => {
+    const date = d.split("T")
+    const eventDate = date[0].slice(-2)
+    return eventDate;
+  }
+
+  refineTime = (d) => {
+    const time = d.split("T");
+    const eventTime = time[1].slice(0, 5)
+    return eventTime;
+  }
+
+  refineDay = (d) => {
+    const day = d.slice(0, 3);
+    return day;
+  };
+
+  refineYear = (d) => {
+    const month = d.slice(4, 7);
+    const year = d.slice(11, 15);
+    return month + " " + year;
   };
 
   updateEvent = (e) => {
@@ -49,7 +83,7 @@ class EditEvent extends Component {
 
   render() {
     const { show, onHide } = this.props;
-
+    const { eventName, shortDesc, longDesc, location } =this.state
     return (
       <Modal
         show={show}
@@ -75,6 +109,7 @@ class EditEvent extends Component {
                   placeholder="Event name.."
                   size="sm"
                   name="eventName"
+                  defaultValue={eventName}
                   onChange={this.onChange}
                   required={true}
                 />
@@ -88,6 +123,7 @@ class EditEvent extends Component {
                 placeholder="Write a few lines about event.."
                 size="sm"
                 name="shortDesc"
+                defaultValue={shortDesc}
                 onChange={this.onChange}
                 required={true}
               />
@@ -100,6 +136,7 @@ class EditEvent extends Component {
                 placeholder="Write a details of event.."
                 size="sm"
                 name="longDesc"
+                defaultValue={longDesc}
                 onChange={this.onChange}
                 required={true}
               />
@@ -112,6 +149,7 @@ class EditEvent extends Component {
                 placeholder="Event location.."
                 size="sm"
                 name="location"
+                defaultValue={location}
                 onChange={this.onChange}
                 required={true}
               />
@@ -124,6 +162,7 @@ class EditEvent extends Component {
                 placeholder="Event date.."
                 size="sm"
                 name="date"
+                // defaultValue={this.refineDate(date)}
                 onChange={this.onChange}
                 required={true}
               />
@@ -146,12 +185,15 @@ class EditEvent extends Component {
 EditEvent.propTypes = {
   show: PropTypes.bool.isRequired,
   onHide: PropTypes.func.isRequired,
-  eventId: PropTypes.string.isRequired
+  eventId: PropTypes.string.isRequired,
+  eventInfo: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state) => ({
+  auth: state.auth,
+  status: state.status,
   error: state.error,
-  statue: state.status
+  event: state.event
 })
 
-export default connect(mapStateToProps, { updateEvent, deleteEvent })((EditEvent))
+export default connect(mapStateToProps, { updateEvent, deleteEvent, getEventById })((EditEvent))

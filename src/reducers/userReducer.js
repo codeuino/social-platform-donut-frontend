@@ -1,9 +1,10 @@
-import { GET_USER_PROFILE, UPDATE_USER_PROFILE, GET_USER_EVENTS, GET_USER_PROJECTS, GET_USER_POSTS } from '../actions/types'
+import { GET_USER_PROFILE, UPDATE_USER_PROFILE, GET_USER_EVENTS, GET_USER_PROJECTS, GET_USER_POSTS, GET_INVITE_LINK } from '../actions/types'
 const initialState = {
   userProfile: {},
   userEvents: [],
   userProjects: [],
-  userPosts: []
+  userPosts: [],
+  inviteLink: ''
 }
 
 export default (state = initialState, action) => {
@@ -36,6 +37,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         userProfile: action.payload
+      }
+    }
+    case GET_INVITE_LINK: {
+      return {
+        ...state,
+        inviteLink: action.payload
       }
     }
     default: {

@@ -11,13 +11,17 @@ class Popups extends Component {
     this.state = {
       show: false,
       optionValue: {},
+      eventInfo: {},
+      isCancelled: false
     };
   }
 
   componentWillReceiveProps(nextProps) {
+    console.log('popups ', nextProps)
     this.setState({
       show: nextProps.modalShow,
-      optionValue: nextProps.optionValue,
+      optionValue: nextProps?.optionValue,
+      eventInfo: nextProps?.eventInfo
     });
   }
 
@@ -25,20 +29,32 @@ class Popups extends Component {
     this.setState({ show: false });
   };
 
-  render() {
-    let {
-      eventName,
-      rsvpYes,
-      rsvpNo,
-      rsvpMaybe,
-      description,
-      slots,
-      eventDate,
-      isOnline,
-      location,
-      isCancelled,
-    } = this.state.optionValue;
+  RefineDate = (d) => {
+    const date = d.split("T")
+    const eventDate = date[0].slice(-2)
+    return eventDate;
+  }
 
+  RefineTime = (d) => {
+    const time = d.split("T");
+    const eventTime = time[1].slice(0, 5)
+    return eventTime;
+  }
+
+  RefinedDay = (d) => {
+    const day = d.slice(0, 3);
+    return day;
+  };
+
+  RefinedYear = (d) => {
+    const month = d.slice(4, 7);
+    const year = d.slice(11, 15);
+    return month + " " + year;
+  };
+
+
+  render() {
+    const { eventName, eventDate, description, location, isOnline, slots, rsvpMaybe, rsvpNo, rsvpYes } = this.state.eventInfo
     return (
       <Modal
         size="lg"
@@ -57,13 +73,13 @@ class Popups extends Component {
               </Col>
               <Col xs={6} md={4}>
                 {eventName ? (
-                  <p className="info-eventName">{eventName}</p>
+                  <p className="info-eventName">{eventName || "EventName"}</p>
                 ) : null}
               </Col>
               <Col xs={6} md={4}>
                 {slots ? (
                   <p className="info-common">
-                    Slots : <span className="info-common-no">{slots}</span>
+                    Slots : <span className="info-common-no">{slots || 0}</span>
                   </p>
                 ) : null}
               </Col>
@@ -71,21 +87,32 @@ class Popups extends Component {
             <Row className="show-grid">
               <Col xs={6} md={4}>
                 {eventDate ? (
-                  <p className="info-common">{eventDate.slice(0, 16)}</p>
+                  <p className="info-common">{this.RefineDate(eventDate)}</p>
                 ) : null}
               </Col>
               <Col xs={6} md={4}>
                 {eventDate ? (
-                  <p className="info-common">{eventDate.slice(16, 33)}</p>
+                  <p className="info-common">
+                    {" "}
+                    {this.RefinedDay(
+                      new Date(Date.parse(eventDate)).toString()
+                    )}
+                    ,
+                    {this.RefinedYear(
+                      new Date(Date.parse(eventDate)).toString()
+                    )}
+                  </p>
                 ) : null}
               </Col>
               <Col xs={6} md={4}>
-                {isCancelled ? (
+                {this.state.isCancelled ? (
                   <p className="info-cancelled">CANCELLED</p>
                 ) : { isOnline } ? (
-                  <p className="info-common">Online</p>
+                  <p className="info-common">
+                    {isOnline ? "Online" : "Offline"}
+                  </p>
                 ) : (
-                  <p className="info-common">{location}</p>
+                  <p className="info-common">{location || "Location"}</p>
                 )}
               </Col>
             </Row>
@@ -94,7 +121,7 @@ class Popups extends Component {
               <Col xs={12} md={12}>
                 {description ? (
                   <p className="info-description">
-                    {description.longDescription}
+                    {description?.longDescription}
                   </p>
                 ) : null}
               </Col>
@@ -104,7 +131,9 @@ class Popups extends Component {
                 {rsvpYes ? (
                   <p className="info-common">
                     Attending :{" "}
-                    <span className="info-common-no">{rsvpYes.length}</span>
+                    <span className="info-common-no">
+                      {rsvpYes?.length || 0}
+                    </span>
                   </p>
                 ) : null}
               </Col>
@@ -112,7 +141,9 @@ class Popups extends Component {
                 {rsvpYes ? (
                   <p className="info-common">
                     Might Attend :{" "}
-                    <span className="info-common-no">{rsvpMaybe.length}</span>
+                    <span className="info-common-no">
+                      {rsvpMaybe?.length || 0}
+                    </span>
                   </p>
                 ) : null}
               </Col>
@@ -120,7 +151,9 @@ class Popups extends Component {
                 {rsvpYes ? (
                   <p className="info-common">
                     Not Attending :{" "}
-                    <span className="info-common-no">{rsvpNo.length}</span>
+                    <span className="info-common-no">
+                      {rsvpNo?.length || 0}
+                    </span>
                   </p>
                 ) : null}
               </Col>
@@ -134,7 +167,6 @@ class Popups extends Component {
 
 Popups.propTypes = {
   modalShow: PropTypes.bool.isRequired,
-  option: PropTypes.string.isRequired,
   optionValue: PropTypes.any.isRequired,
 };
 

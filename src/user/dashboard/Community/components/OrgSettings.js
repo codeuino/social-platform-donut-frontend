@@ -13,7 +13,8 @@ class OrgSettings extends Component {
       enableEmail: true,
       language: "",
       time: "",
-      error: ''
+      error: '',
+      editingTime: ''
     };
   }
 
@@ -35,9 +36,10 @@ class OrgSettings extends Component {
       settings: {
         enableEmail,
         language,
-        time
-      }
+        timeFormat: time
+      },
     };
+    console.log('updating settings ', info);
     this.props.updateSettings(info)
   }
 
@@ -59,7 +61,14 @@ class OrgSettings extends Component {
   }
 
   render() {
-    const { enableEmail, language, time, error } = this.state;
+    const { 
+      enableEmail, 
+      language, 
+      time, 
+      editingTime,
+      // editing
+      // error
+     } = this.state;
     return (
       <div className="container">
         <div className="settings_content">
@@ -74,6 +83,7 @@ class OrgSettings extends Component {
                   as="select"
                   className="select_option"
                   name="editing"
+                  value={editingTime}
                   onChange={this.onChange}
                 >
                   <option value="10">Upto 10 min after posting</option>
@@ -140,11 +150,27 @@ class OrgSettings extends Component {
                   as="select"
                   name="language"
                   className="select_option"
+                  value={language}
                   onChange={this.onChange}
                 >
-                  <option value="English">English</option>
-                  <option value="French">French</option>
-                  <option value="German">German</option>
+                  <option
+                    value="English"
+                    selected={language === "English"}
+                  >
+                    English
+                  </option>
+                  <option
+                    value="French"
+                    selected={language === "French"}
+                  >
+                    French
+                  </option>
+                  <option
+                    value="German"
+                    selected={language === "German"}
+                  >
+                    German
+                  </option>
                 </Form.Control>
               </Form.Group>
               <Form.Group>
@@ -158,10 +184,19 @@ class OrgSettings extends Component {
                   as="select"
                   name="time"
                   className="select_option"
+                  value={time}
                   onChange={this.onChange}
                 >
-                  <option value="12">12 hr clock (05:00 PM)</option>
-                  <option value="24">24 hr clock (13:00)</option>
+                  <option 
+                    value="12"
+                    selected={time === "12" }
+                    >12 hr clock (05:00 PM)
+                  </option>
+                  <option 
+                    value="24"
+                    selected={time === "24" }
+                  >24 hr clock (13:00)
+                  </option>
                 </Form.Control>
               </Form.Group>
               <Form.Group>

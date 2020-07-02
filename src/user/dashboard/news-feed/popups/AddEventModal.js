@@ -1,4 +1,4 @@
-import React,  { useState, useEffect } from "react";
+import React,  { useState } from "react";
 import { Button, Modal, Form, Col } from "react-bootstrap";
 import PropTypes from "prop-types";
 import { connect } from 'react-redux';
@@ -30,6 +30,7 @@ const AddEventModal = (props) => {
   const onEventTime = (event) => {
     setEventTime(event.target.value)
   }
+
   const onCreateEventClick = () => {
     const obj = {
       location,
@@ -38,11 +39,14 @@ const AddEventModal = (props) => {
       description: {
         shortDescription,
         longDescription
-      }
+      },
+      eventTime: eventTime
     }
+    console.log('creating event ', obj);
     props.createEvent(obj)
     props.handleClose()
   }
+
 
   return (
     <Modal
@@ -142,7 +146,7 @@ const AddEventModal = (props) => {
         </Form>
       </Modal.Body>
       <div className="modal__buttons">
-        <Button Button onClick = {onCreateEventClick}
+        <Button onClick = {onCreateEventClick}
         className = "modal__save" >
           <span className="modal__buttontext">Save</span>
         </Button>

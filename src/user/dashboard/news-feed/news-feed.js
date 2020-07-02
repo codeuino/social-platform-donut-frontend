@@ -9,7 +9,7 @@ import {
   ListItemAvatar,
   Avatar,
   ListItemText,
-  ListItemSecondaryAction,
+  // ListItemSecondaryAction,
   IconButton,
   CardMedia,
 } from "@material-ui/core";
@@ -18,17 +18,18 @@ import { Button } from "react-bootstrap";
 import AddEventModal from "./popups/AddEventModal";
 import AddProjectModal from "./popups/AddProjectModal";
 import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
-import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
+// import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import ChatBubbleIcon from "@material-ui/icons/ChatBubble";
-import EventNoteIcon from "@material-ui/icons/EventNote";
-import EventIcon from "@material-ui/icons/Event";
-import ReplyIcon from '@material-ui/icons/Reply';
-import feed from "../../../jsonData/news-feed";
+// import EventNoteIcon from "@material-ui/icons/EventNote";
+// import EventIcon from "@material-ui/icons/Event";
+// import ReplyIcon from '@material-ui/icons/Reply';
+// import feed from "../../../jsonData/news-feed";
 import "../../pinned-posts/posts/posts.scss";
 import "./news-feed.scss";
 import AddPostModal from "./popups/AddPostModal";
-import { Comment } from "./popups/comment";
+import Comment  from "./popups/comment";
 import { connect } from 'react-redux'
+import { getAllCommentsOfPost } from '../../../actions/commentAction'
 import profileImg from '../../../svgs/evt-creator.svg';
 import eventImg from "../../../svgs/event-img-1.svg";
 import eventImg2 from "../../../svgs/event-img-2.svg";
@@ -97,17 +98,19 @@ function NewsFeed(props) {
   const [writePost, showPostModal] = useState(false);
   const [showComment, toggle] = useState(false);
   const [commentId, setCommentId] = useState('');
-  const [all, setAll] = useState([]);
+  // const [all, setAll] = useState([]);
   const [events, setEvents] = useState([]);
   const [projects, setAllProjects] = useState([]);
   const [posts, setAllPosts] = useState([]);
+  // const [allCommentsOfPost, setAllCommentsOfPost] = useState({})
 
   useEffect(() => {
     console.log("useEffect from news-feed ", props);
     setEvents(props?.allEvents);
     setAllProjects(props?.allProjects);
     setAllPosts(props?.allPosts);
-    setAll(props?.allMix);
+    // setAll(props?.allMix);
+    // setAllCommentsOfPost(props?.comment?.allComments)
   }, [props]);
 
   let handleClick = (atrb) => () => {
@@ -141,18 +144,19 @@ function NewsFeed(props) {
 
   let commentToggle = (postId) => {
     console.log("Comment toggle clicked!", postId);
+    props.getAllCommentsOfPost(postId)
     setCommentId(postId);
     toggle(!showComment);
   }
   
-  let postContent = posts.map((post) => {
+  let postContent = posts?.map((post) => {
     return (
         <div className="grid" key={post._id}>
         <Paper elevation={1} className={classes.paper}>
           <Card className={classes.root}>
-              <CardMedia className="projimg"
+              {/* <CardMedia className="projimg"
                 image={post?.image || eventImg } title="Post Image">
-            </CardMedia>
+            </CardMedia> */}
             <List className={classes.listStyle}>
               <ListItem className={classes.listStyle2}>
                 <ListItemAvatar>
@@ -196,10 +200,6 @@ function NewsFeed(props) {
                   </Button>
                 </span>
               </ListItem>
-              <Comment
-                show={showComment && post._id === commentId}
-                onHide={toggle}
-              />
             </List>
           </Card>
         </Paper>
@@ -207,7 +207,7 @@ function NewsFeed(props) {
     )
   })
 
-  let projectsContent = projects.map((project) => {
+  let projectsContent = projects?.map((project) => {
     return (
       <div className="grid" key={project?._id}>
             <Paper elevation={1} className={classes.paper}>
@@ -269,7 +269,6 @@ function NewsFeed(props) {
                                 </Button>
                             </span>
                         </ListItem>
-                            <Comment show={showComment && project._id === commentId} onHide={toggle}/>
                     </List>
                 </Card>
             </Paper>
@@ -277,7 +276,7 @@ function NewsFeed(props) {
     )
   })
 
-  let eventsContent = events.map((event) => {
+  let eventsContent = events?.map((event) => {
     return (
        <div div className = "grid" key={event._id}>
             <Paper elevation={1} className={classes.paper}>
@@ -352,10 +351,14 @@ function NewsFeed(props) {
                                 </Button>
                             </span>
                         </ListItem> */}
-                        <Comment show={showComment && event._id === commentId} onHide={toggle}/>
                     </List>
                 </Card>
             </Paper>
+            <Comment
+                show={showComment}
+                onHide={toggle}
+                postId={commentId}
+              />
         </div>
     )
   })
@@ -463,7 +466,7 @@ function NewsFeed(props) {
               </Button>
             ) : (
               <Button
-                autofocus
+                autoFocus
                 variant="primary"
                 className="category-btn"
                 onClick={handleClick("All")}
@@ -519,7 +522,8 @@ const mapStateToProps = (state) => ({
   error: state.error,
   event: state.event,
   post: state.post,
-  status: state.status
+  status: state.status,
+  comment: state.comment
 })
 
-export default connect(mapStateToProps)(NewsFeed)
+export default connect(mapStateToProps, { getAllCommentsOfPost })(NewsFeed)

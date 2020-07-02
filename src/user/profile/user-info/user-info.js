@@ -3,7 +3,7 @@ import "./user-info.scss";
 import { Button } from "react-bootstrap";
 import { Avatar } from "@material-ui/core";
 import EditProfile from "./../popups/EditProfile";
-import Followers from "../popups/Followers";
+// import Followers from "../popups/Followers";
 
 class UserInfo extends Component {
   constructor(props) {
@@ -33,15 +33,15 @@ class UserInfo extends Component {
   }
 
   render() {
-    const { designation, website, location, shortDesc, name } = this.state
+    const { designation, location, shortDesc, name } = this.state
     let cancel = () =>
       this.setState({
         editProfile: false,
       });
-    let cancelf = () =>
-      this.setState({
-        followersList: false,
-      });
+    // let cancelf = () =>
+    //   this.setState({
+    //     followersList: false,
+    //   });
     return (
       <div className="user-details">
         <div className="user-image">

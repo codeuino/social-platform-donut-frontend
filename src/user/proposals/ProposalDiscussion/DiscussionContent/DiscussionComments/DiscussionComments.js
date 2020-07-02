@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import userIcon2 from "../../../../../images/userIcon2.jpg";
+// import userIcon2 from "../../../../../images/userIcon2.jpg";
 import { Form, ListGroup } from "react-bootstrap";
 import "./DiscussionComments.scss";
 

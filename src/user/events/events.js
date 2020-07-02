@@ -1,12 +1,15 @@
 import React, { Component } from "react";
 import Navigation from "../dashboard/navigation/navigation";
 import { Grid ,CardActions, Card} from "@material-ui/core";
-import Event_list from "../../jsonData/events";
+// import Event_list from "../../jsonData/events";
 import { Row, Col } from "react-bootstrap";
 import "./events.scss";
 import Popups from './popups/popups';
 import DeleteEvent from "./popups/DeleteEvent";
 import EditEvent from "./popups/EditEvent";
+import { connect } from 'react-redux'
+import { getAllEvents } from '../../actions/eventAction'
+import { checkDeleteRights } from '../dashboard/utils/checkDeleteRights'
 
 class Events extends Component {
   constructor(props) {
@@ -16,77 +19,101 @@ class Events extends Component {
       modalShow: false,
       optionValue: {},
       delete: false,
-      edit: false
+      edit: false, 
+      allEvents: [],
+      eventId: '',
+      singleEvent: {}
     }
   }
 
+  componentWillMount() {
+    setTimeout(() => {
+      this.props.getAllEvents()
+    })
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log('events nextProps', nextProps)
+    const { allEvents } = nextProps.event
+    this.setState({ allEvents: allEvents, isAdmin: nextProps.auth?.isAdmin }, () => {
+      console.log('updating all events ', this.state)
+    })
+  }
+
+  
   render() {
-    const setOptionValue = (targetId) => {
-        const event = Event_list.filter((x) => x._id === targetId);         
-        this.setState({optionValue: event[0]})
+    const { allEvents } = this.state
+    // const setOptionValue = (targetId) => {
+    //     const event = Event_list.filter((x) => x._id === targetId);         
+    //     this.setState({optionValue: event[0]})
+    // }
+
+    const handleToggle = (eventId, event) => {
+      console.log("-handletoggel",eventId)
+      this.setState({ modalShow: true, eventId: eventId, singleEvent: event });
     }
 
-    const handleToggle = (e) => {
-      const targetId = e.target.id;
-      console.log("-handletoggel",targetId)
-      this.setState({ modalShow: true });
-      setOptionValue(targetId);
+    const RefineDate = (d) => {
+      const date = d.split("T")
+      const eventDate = date[0].slice(-2)
+      return eventDate; 
+    }
+
+    const RefineTime = (d) => {
+      const time = d.split("T");
+      const eventTime = time[1].slice(0, 5)
+      return eventTime;
     }
     
-    var RefinedDay = (d) => {
+    const RefinedDay = (d) => {
       const day = d.slice(0, 3);
       return day;
     };
 
-    const editEvent = (e) => {
-      e.preventDefault();
-      this.setState({ modalShow: false, edit: true })
+    const RefinedYear = (d) => {
+       const month = d.slice(4, 7);
+       const year = d.slice(11, 15);
+       return month + " " + year;
+     };
+
+    const editEvent = (eventId, eventInfo) => {
+      console.log('eventId ', eventId)
+      this.setState({ modalShow: false, edit: true, eventId:  eventId, singleEvent: eventInfo })
     }
 
-    const handleDelete = (e) => {
-      this.setState({ modalShow: false, delete: true })
+    const handleDelete = (eventId) => {
+      console.log('eventId ', eventId)
+      this.setState({ modalShow: false, delete: true, eventId: eventId })
     }
 
     const cancel = () => {
       this.setState({ delete: false, edit: false })
     }
 
-    const RefinedYear = (d) => {
-      const month = d.slice(4, 7);
-      const year = d.slice(11, 15);
-      return month + " " + year;
-    };
-
   const FooterOfEvents = ({ Item }) => {
     return (
       <div className="row">
-        <DeleteEvent 
-          show={this.state.delete} 
-          onHide={cancel}
-          eventId={Item._id}
-        />
-        <EditEvent 
-          show={this.state.edit}
-          onHide={cancel}
-          eventId={Item._id}
-        />
         <div className="col-md-6 col-sm-12 col-lg-6">
           <span>
-            <a 
-              className="mr-3"
-              href="javascript: void(0)" 
-              onClick={editEvent}
-              >Edit</a>
-            <a 
-              href="javascript: void(0)"
-              onClick={handleDelete}
-              >Delete</a>
+            {checkDeleteRights(Item.createdBy._id) ? (
+            <>
+              <a 
+                className="mr-3"
+                href="javascript: void(0)" 
+                onClick={editEvent.bind(this, Item._id, Item)}
+                >Edit</a>
+              <a 
+                href="javascript: void(0)"
+                onClick={handleDelete.bind(this, Item._id)}
+                >Delete</a>
+            </>
+            ) : null }
             </span>
         </div>
         <div className="col-md-6">
           <a 
             href="javascript:void(0)" 
-            onClick={handleToggle} 
+            onClick={handleToggle.bind(this, Item._id, Item)} 
             style={{float: "right"}} 
             id={Item._id}
             >See More
@@ -96,42 +123,40 @@ class Events extends Component {
     )
   }
 
-    let Events = Event_list.map((Item, index) => (
-      <Grid item xs={6} sm={4} key={index}>
+    let Events = allEvents?.map((Item, index) => (
+      <Grid item xs = {6} sm = {4} key = {index} className = "card__container" >
         {Date.parse(Item.eventDate) >= Date.parse(new Date()) ? (
           <Card>
             <CardActions>
               <Grid container spacing={1}>
                 <Row>
-                  <Col xs={2}>
+                  <Col xs={1}>
                     {Item.isCancelled ? (
                       <div className="cancelled">{""}</div>
                     ) : (
                       <div className="div-upcoming">{""}</div>
                     )}
                   </Col>
-                  <Col sm={5} xs={12}>
-                    <div className="div2">
-                      {new Date(Date.parse(Item.eventDate)).getDate()}
-                    </div>
+                  <Col sm={3} xs={12}>
+                    <div className="div2">{RefineDate(Item?.eventDate)}</div>
                   </Col>
                   <Col sm={5} xs={12}>
                     <div className="div3">
                       {RefinedDay(
-                        new Date(Date.parse(Item.eventDate)).toString()
+                        new Date(Date.parse(Item?.eventDate)).toString()
                       )}
                       ,
                       {RefinedYear(
-                        new Date(Date.parse(Item.eventDate)).toString()
+                        new Date(Date.parse(Item?.eventDate)).toString()
                       )}
                     </div>
                   </Col>
                 </Row>
                 <div className="inside">
                   <Grid item xs={12}>
-                    <p className="eventName">{Item.eventName}</p>
+                    <p className="eventName">{Item?.eventName}</p>
                     <p className="short-des">
-                      {Item.description.shortDescription}
+                      {Item?.description?.shortDescription}
                     </p>
                   </Grid>
                   <Grid item sm={12}>
@@ -139,24 +164,24 @@ class Events extends Component {
                       Time :
                       {Item.isCancelled ? (
                         <span className="timing3">
-                          {new Date(Date.parse(Item.eventDate)).toTimeString()}
+                          {RefineTime(Item?.eventDate)}
                         </span>
                       ) : (
                         <span className="timing1">
-                          {new Date(Date.parse(Item.eventDate)).toTimeString()}
+                          {RefineTime(Item?.eventDate)}
                         </span>
                       )}
                     </p>
                   </Grid>
                   <Grid item sm={12}>
-                    {!Item.isCancelled ? (
-                      Item.isOnline ? (
+                    {!Item?.isCancelled ? (
+                      Item?.isOnline ? (
                         <p className="event-location1">
                           <span className="timing1">Online</span>
                         </p>
                       ) : (
                         <p className="event-location1">
-                          <span className="timing1">{Item.location}</span>
+                          <span className="timing1">{Item?.location}</span>
                         </p>
                       )
                     ) : (
@@ -164,9 +189,7 @@ class Events extends Component {
                     )}
                   </Grid>
                   <Grid item sm={12}>
-                    <FooterOfEvents 
-                      Item={Item} 
-                    />
+                    <FooterOfEvents Item={Item} />
                   </Grid>
                 </div>
               </Grid>
@@ -177,16 +200,16 @@ class Events extends Component {
             <CardActions>
               <Grid container spacing={1}>
                 <Row>
-                  <Col xs={2}>
-                  {Item.isCancelled ? (
-                    <div className="cancelled">{""}</div>
-                  ) : (
-                    <div className="div-past">{""}</div>
-                  )}
+                  <Col xs={1}>
+                    {Item.isCancelled ? (
+                      <div className="cancelled">{""}</div>
+                    ) : (
+                      <div className="div-past">{""}</div>
+                    )}
                   </Col>
-                  <Col sm={5} xs={12}>
+                  <Col sm={3} xs={12}>
                     <div className="div2">
-                      {new Date(Date.parse(Item.eventDate)).getDate()}
+                      {RefineDate(Item?.eventDate)}
                     </div>
                   </Col>
                   <Col sm={5} xs={12}>
@@ -213,32 +236,32 @@ class Events extends Component {
                       Time :
                       {Item.isCancelled ? (
                         <span className="timing3">
-                          {new Date(Date.parse(Item.eventDate)).toTimeString()}
+                          {RefineTime(Item?.eventDate)}
                         </span>
                       ) : (
-                        <span className="timing2">
-                          {new Date(Date.parse(Item.eventDate)).toTimeString()}
+                        <span className="timing1">
+                          {RefineTime(Item?.eventDate)}
                         </span>
                       )}
                     </p>
                   </Grid>
                   <Grid item sm={12}>
-                  {!Item.isCancelled ? (
-                    Item.isOnline ? (
-                      <p className="event-location1">
-                        <span className="timing2">Online</span>
-                      </p>
+                    {!Item.isCancelled ? (
+                      Item.isOnline ? (
+                        <p className="event-location1">
+                          <span className="timing2">Online</span>
+                        </p>
+                      ) : (
+                        <p className="event-location1">
+                          <span className="timing2">{Item.location}</span>
+                        </p>
+                      )
                     ) : (
-                      <p className="event-location1">
-                        <span className="timing2">{Item.location}</span>
-                      </p>
-                    )
-                  ) : (
-                    <p className="timing3">CANCELLED</p>
-                  )}
+                      <p className="timing3">CANCELLED</p>
+                    )}
                   </Grid>
                   <Grid item sm={12}>
-                     <FooterOfEvents Item={Item} />
+                    <FooterOfEvents Item={Item} />
                   </Grid>
                 </div>
               </Grid>
@@ -256,19 +279,37 @@ class Events extends Component {
         <div className="news events">
           <div className="container">
             <h1 className="event_header">All Events</h1>
-            <Grid container spacing={3}>
+            <Grid container spacing={3} >
               {Events}
             </Grid>
           </div>
         </div>
-        <Popups 
+        <Popups
           option={this.state.option}
           optionValue={this.state.optionValue}
           modalShow={this.state.modalShow}
+          eventInfo={this.state.singleEvent}
+        />
+        <DeleteEvent
+          show={this.state.delete}
+          onHide={cancel}
+          eventId={this.state.eventId}
+        />
+        <EditEvent
+          show={this.state.edit}
+          onHide={cancel}
+          eventId={this.state.eventId}
+          eventInfo={this.state.singleEvent}
         />
       </div>
     );
   }
 }
+// map state to props 
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  error: state.error,
+  event: state.event
+})
 
-export default Events;
+export default connect(mapStateToProps, { getAllEvents })(Events);

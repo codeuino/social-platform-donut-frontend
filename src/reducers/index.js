@@ -10,6 +10,8 @@ import insightReducer from './insightReducer';
 import orgReducer from './orgReducer';
 import eventReducer from './eventReducer';
 import projectReducer from './projectReducer';
+import adminReducers from './adminReducers';
+import commentReducer from './commentReducer';
 
 const rootReducer = combineReducers({
   auth: authReducers,
@@ -22,6 +24,8 @@ const rootReducer = combineReducers({
   org: orgReducer,
   event: eventReducer,
   project: projectReducer,
+  admin: adminReducers,
+  comment: commentReducer,
   status: requestStatus
 });
 

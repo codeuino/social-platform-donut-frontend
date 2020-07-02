@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { Form, Button, Row, Col } from "react-bootstrap";
-import { TextField } from "@material-ui/core";
 import "./signup-form.scss";
-import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 import { registerUser } from "../../actions/authAction";
@@ -172,9 +170,9 @@ class SignUpForm extends Component {
       isValidEmail,
       isValidPhone,
       isValidDesc,
-      isMatched,
-      isValidForm,
-      error,
+      // isMatched,
+      // isValidForm,
+      // error,
     } = this.state;
 
     return (

@@ -69,6 +69,15 @@
           color: black;
           font-weight: bold;
         }
+        .short__desc, .long__desc {
+           font-family: Inter;
+           font-style: normal;
+           font-weight: normal;
+           font-size: 14px;
+           line-height: 17px;
+           color: #1d2129;
+           text-align: justify;
+        }
       }
     }
     .org-updates {

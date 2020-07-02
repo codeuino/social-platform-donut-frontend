@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-import { Form, Button, Col, Row } from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
 import './register.scss'
 import SmallDonut from '../../images/small_donut.png'
 import ExtraDonuts from '../../images/extra-donuts.png'
 import DonutShadow from '../../images/shadow.png'
 import Register from './components/Register'
 import Login from './components/Login'
+import { connect } from 'react-redux'
 
 class Admin extends Component {
   constructor(props) {
@@ -20,11 +21,13 @@ class Admin extends Component {
       view: 'register'
     }
   }
+
   toggleView = (name) => {
     this.setState({ view: name })
   }
+
   render() {
-    const { email, name, password, cnfPass, register, setup, activate, login, view } = this.state;
+    const {  view } = this.state;
     
     let adminEmailVerification = (
       <div className="email__verification__box">
@@ -100,4 +103,11 @@ class Admin extends Component {
     );
   }
 }
-export default Admin;
+// map state to props 
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  error: state.error,
+  admin: state.admin
+})
+
+export default connect(mapStateToProps)(Admin);

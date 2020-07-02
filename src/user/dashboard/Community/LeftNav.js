@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { ListGroup, Button } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
+import { ListGroup } from "react-bootstrap";
 import PropTypes from "prop-types";
 import "./navigation.scss";
 
