@@ -1,12 +1,23 @@
 import React, { Component } from "react";
 import "./org-contact.scss";
 import { Card, Avatar, CardContent } from '@material-ui/core';
+import { connect } from 'react-redux'
+import { getOrgProfile } from '../../../actions/orgAction'
 
 class OrgContact extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            website: '',
+            email: '',
+            admins: [],
+            moderators: []
         };
+    }
+    componentWillReceiveProps(nextProps) {
+        console.log('org contacts ', nextProps)
+        const { contactInfo } = nextProps.org?.org
+        this.setState({website: contactInfo?.website, email: contactInfo?.email })
     }
     render() {
         return (
@@ -25,12 +36,12 @@ class OrgContact extends Component {
                         </div>
                         <div className="email-content">
                             <p className='initial'>Website</p>
-                            <p className='info'>{this.props.website}</p>
+                            <p className='info'>{this.state.website}</p>
                             <p className='hidden'>Community</p>
                         </div>
                         <div className='email-content'>
-                            <p className="initial">Contact</p>
-                            <p className='info'>{this.props.contactinfo}</p>
+                            <p className="initial">Community email</p>
+                            <p className='info'>{this.state.email}</p>
                             <p></p>
                         </div>
                     </CardContent>
@@ -39,4 +50,10 @@ class OrgContact extends Component {
         )
     }
 }
-export default OrgContact;
+// map state to props 
+const mapStateToProps = (state) => ({
+    auth: state.auth,
+    error: state.error,
+    org: state.org
+})
+export default connect(mapStateToProps,  { getOrgProfile })(OrgContact);

@@ -33,6 +33,7 @@ class OrgAuth extends Component {
         gitlab
       }
     }
+    console.log('updating auth settings ', info);
     this.props.updateSettings(info)
   }
 
@@ -45,17 +46,25 @@ class OrgAuth extends Component {
     const { authentication } = nextProps.org.org.options;
     console.log("authentication ", authentication);
     const { email, google, github, gitlab } = authentication;
-    this.setState({ email, google, github, gitlab }, () => {
+    this.setState({
+          email,
+          google,
+          github,
+          gitlab,
+          error: nextProps.error.msg
+        }, () => {
       console.log("updated state", this.state);
     });
-    this.setState({ error: nextProps.error.msg }, () => {
-      console.log('state ', this.state)
-    })
   }
 
-
   render() {
-    const { email, github, gitlab, google, error } = this.state
+    const { 
+      email, 
+      github, 
+      gitlab, 
+      google, 
+      // error
+     } = this.state
     return (
       <div className="container">
         <div className="auth_content">

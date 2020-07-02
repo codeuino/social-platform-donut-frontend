@@ -14,8 +14,11 @@ class DeleteEvent extends Component {
     }
   }
 
-  deleteEventClick = (e) => {
-    e.preventDefault();
+  componentWillReceiveProps(nextProps){
+    console.log('deleteEvent ', nextProps)
+  }
+
+  deleteEventClick = () => {
     console.log("Clicked on delete event")
     this.props.deleteEvent(this.props.eventId);
     if(this.props.status.success){
@@ -26,7 +29,7 @@ class DeleteEvent extends Component {
   }
 
   render() {
-    const { show, onHide, eventId } = this.props;
+    const { show, onHide } = this.props;
     return (
       <div>
         <Modal

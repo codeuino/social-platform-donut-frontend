@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Modal, Button, Form, Row, Col} from 'react-bootstrap';
+import {Modal, Button, Form, Row} from 'react-bootstrap';
 import {JitsiMeet} from './Jitsi';
 import "./jitsi.scss";
 
@@ -17,7 +17,7 @@ export class Info extends Component{
         params === "user"
           ? this.setState({ user: event.target.value })
           : this.setState({ roomID: event.target.value });
-          this.setState({disable: (this.state.roomID == '' || this.state.user == '') ?
+          this.setState({disable: (this.state.roomID === '' || this.state.user === '') ?
           true : false });
       };
       closeJitsi = ()=>this.setState({

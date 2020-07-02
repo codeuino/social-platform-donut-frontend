@@ -31,6 +31,14 @@
         color: #1a73e8;
       }
     }
+    span {
+      .active {
+        background-color: rgba(26, 115, 232, 0.1);
+        .link {
+          color: #1a73e8;
+        }
+      }
+    }
   }
 }
 
@@ -41,6 +49,14 @@
         color: rgba(0, 0, 0, 0.5);
       }
     }
+    span {
+      .active {
+        background-color: rgba(26, 115, 232, 0.1);
+        .link {
+          color: #1a73e8;
+        }
+      }
+    }
   }
 }
 
@@ -49,6 +65,11 @@
     .list-group-item {
       svg {
         padding: 0px 10px 0px 10px;
+      }
+      span {
+        svg {
+          padding: 0px;
+        }
       }
     }
   }

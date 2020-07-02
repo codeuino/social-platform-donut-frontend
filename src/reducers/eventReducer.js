@@ -1,6 +1,7 @@
-import { GET_ALL_EVENTS } from '../actions/types'
+import { GET_ALL_EVENTS, GET_EVENT_BY_ID } from '../actions/types'
 const initialState = {
-  allEvents: []
+  allEvents: [],
+  event: {}
 }
 
 export default (state = initialState, action) => {
@@ -9,6 +10,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         allEvents: action.payload
+      }
+    }
+    case GET_EVENT_BY_ID: {
+      return {
+        ...state,
+        event: action.payload
       }
     }
     default:{

@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Modal, Button} from 'react-bootstrap'
 import LeftNav from './LeftNav'
 import './community.scss'
 import OrgProfile from './components/OrgProfile';

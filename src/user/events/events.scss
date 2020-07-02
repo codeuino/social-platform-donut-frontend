@@ -14,6 +14,13 @@
           line-height: 1.3em;
           color: #2D2D2D;
         }
+        .card__container {
+          max-width: 33.33%;
+        }
+        .MuiCard-root {
+          overflow: hidden;
+          height: 42vh;
+        }
       }
   }
 } 
@@ -77,6 +84,8 @@
     width: auto;
     text-align: center;
     font-size: 1.45rem;
+    margin-left: 5vw;
+    margin-right: -12vw;
     .day{
       font-weight: 25px;
     }
@@ -100,14 +109,20 @@
 
 .short-des{
   text-align: justify;
-  text-overflow: ellipsis;
   font-family: Inter;
   font-style: normal;
   font-weight: normal;
   font-size: 1em;
   line-height: 1.3em;
   color: #2D2D2D;
-}
+  /* white-space: nowrap; */
+  max-width: 259px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  }
 
 .createdAt{
   text-align: center;

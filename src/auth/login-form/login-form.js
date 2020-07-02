@@ -68,8 +68,6 @@ class LoginForm extends Component {
   };
 
   render() {
-    const { email, password, error, isValidForm, isValidEmail } = this.state;
-
     const handleToggle = (e) => {
       const targetName = e.target.name;
       this.setState({

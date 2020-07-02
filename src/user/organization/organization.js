@@ -11,8 +11,8 @@ import topBarLoading from "../../placeholderLoading/topBarLoading/topBarLoading"
 import orgUpdatesLoading from "../../placeholderLoading/orgUpdatesLoading/orgUpdatesLoading";
 import contactLoading from "../../placeholderLoading/contactLoading/contactLoading";
 import cardLoading from "../../placeholderLoading/cardLoading/cardLoading";
-import { Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { getOrgProfile } from "../../actions/orgAction";
 
 class Organization extends Component {
   constructor(props) {
@@ -20,16 +20,31 @@ class Organization extends Component {
     this.state = {
       org: true,
       isLoading: true,
+      orgProfile: {},
     };
   }
 
   componentDidMount() {
     setTimeout(() => {
+      this.props.getOrgProfile();
+    });
+    setTimeout(() => {
       this.setState({ isLoading: false });
     }, 1000);
   }
 
+  componentWillReceiveProps(nextProps) {
+    console.log("organization ", nextProps);
+    this.setState({ orgProfile: nextProps.org?.org });
+  }
+
   render() {
+    const { orgProfile } = this.state;
+    const {
+      // name,
+      description,
+      // contactInfo
+    } = orgProfile;
     return (
       <div className="organization">
         <div className="navigation">
@@ -49,7 +64,7 @@ class Organization extends Component {
               cardLoading()
             ) : (
               <div className="posts">
-                <h2>Posts</h2>
+                {/* <h2>Posts</h2> */}
                 <div className="categories">
                   <div className="category-type active">About Us</div>
                   <div className="category-type">Donuts</div>
@@ -58,11 +73,17 @@ class Organization extends Component {
                 </div>
                 <Card className="about-us">
                   <CardContent>
-                    <div className="title">Codeuino</div>
-                    <div className="subtitle">{orginfo.question_1}</div>
-                    <p>{orginfo.description_1}</p>
-                    <div className="subtitle">{orginfo.question_1}</div>
-                    <p>{orginfo.description_1}</p>
+                    <div className="title">{orgProfile?.name}</div>
+                    <div className="subtitle">Short description </div>
+                    <p className="short__desc">
+                      {description?.shortDescription ||
+                        "Short details of organization"}
+                    </p>
+                    <div className="subtitle">About us in details</div>
+                    <p className="long__desc">
+                      {description?.longDescription ||
+                        "Long description of the organization"}
+                    </p>
                   </CardContent>
                 </Card>
               </div>
@@ -105,5 +126,11 @@ class Organization extends Component {
     );
   }
 }
+// map state to props
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  error: state.error,
+  org: state.org,
+});
 
-export default Organization;
+export default connect(mapStateToProps, { getOrgProfile })(Organization);

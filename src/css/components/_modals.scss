@@ -30,9 +30,18 @@
         letter-spacing: 0.2em;
         padding-top: 5px;
       }
+      .search_btn {
+        width: 6vw;
+        height: 5vh;
+        background: rgb(250, 251, 252);
+        border-radius: 100px;
+        color: #1A73E8;
+        padding: 0.3em;
+        margin-left: 1em;
+      }
     }
     .modal__search {
-      width: 100%;
+      width: 50%;
       border: 1px solid #cccccc;
       box-sizing: border-box;
       border-radius: 5px;
@@ -201,7 +210,7 @@
       border-radius: 20px;
       margin-top: 15px;
       margin-bottom: 10px;
-      justify-content: center;
+      margin-left: 10px;
       align-items: center;
       .member__image {
         border: 1px solid #e6e6e5;
@@ -214,6 +223,7 @@
       .member__content {
         padding-left: 10px;
         padding-right: 10px;
+        margin-right: 40px;
         width: 50%;
       }
 

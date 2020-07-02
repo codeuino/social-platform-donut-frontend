@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Modal, Button, Row, Col, Image, Form } from "react-bootstrap";
+import { Modal, Button, Row, Image, Form } from "react-bootstrap";
 import { connect } from 'react-redux'
 import { removeAdmin } from '../../../actions/orgAction'
 import logo from "../../../svgs/logo-image.jpg";
@@ -64,6 +64,11 @@ class Admins extends Component {
     }
   }
 
+  onSearchClick = () => {
+    const { query } = this.state
+    this.props.getMember(query)
+  }
+
   render() {
     const { onHide, show } = this.props
     const adminList = [...this.state.admins] 
@@ -100,14 +105,17 @@ class Admins extends Component {
         <Modal.Header closeButton className="modal__header">
           <Modal.Title className="modal__title">
             <div className="modal__main-title">Administrators</div>
-            <input 
-              type="text" 
-              placeholder="Search" 
+            <input
+              type="text"
+              placeholder="Search"
               className="modal__search"
               value={this.state.query}
               onChange={this.onChange}
               onKeyPress={this.onKeyPress}
             />
+            <Button className="search_btn" onClick={this.onSearchClick}>
+              Search
+            </Button>
           </Modal.Title>
         </Modal.Header>
         <Modal.Body className="modal__body">

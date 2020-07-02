@@ -10,6 +10,7 @@ const AddProjectModal = (props) => {
   const [long, setLongDescription] = useState("")
   const [githubLink, setGithubLink] = useState("")
   const [bitbucketLink, setBitbucketLink] = useState("")
+  const [stacks, setTechStacks] = useState("")
 
   const onProjectName = (event) => {
     setProjectName(event.target.value)
@@ -27,19 +28,28 @@ const AddProjectModal = (props) => {
     setBitbucketLink(event.target.value)
   }
 
+  const onTechStacks = (event) => {
+    const stacks = event.target.value;
+    console.log('stacks ', stacks);
+    setTechStacks(stacks)
+  }
+
   const onCreateProjectClick = () => {
-    console.log('creating project!')
+    const techStacks = stacks.split(',');
     const projectInfo = {
       projectName,
       description : {
         short,
         long
       },
+      techStacks,
       links: [{ githubLink: githubLink }, {bitbucketLink: bitbucketLink}]
     }
+    console.log('creating project!', projectInfo)
     props.createProject(projectInfo)
     props.handleClose()
   }
+
   return (
     <Modal
       show={props.show}
@@ -127,6 +137,20 @@ const AddProjectModal = (props) => {
                 type="text" 
                 placeholder="Enter bitbucket Link"
                 onChange={onBitBucketLink} 
+              />
+            </Form.Group>
+          </Form.Row>
+          <Form.Row className="modal__row">
+            <Form.Group
+              as={Col}
+              controlId="formGridEmail"
+              className="modal__group"
+            >
+              <Form.Label className="modal__label">Tech stacks</Form.Label>
+              <Form.Control 
+                type="text" 
+                placeholder="Input tech stacks separated by comma.."
+                onChange={onTechStacks}
               />
             </Form.Group>
           </Form.Row>

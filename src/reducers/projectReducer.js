@@ -1,6 +1,7 @@
-import { GET_ALL_PROJECTS } from '../actions/types'
+import { GET_ALL_PROJECTS, GET_SINGLE_PROJECT } from '../actions/types'
 const initialState = {
-  allProjects: []
+  allProjects: [],
+  singleProject: {}
 }
 
 export default (state = initialState, action) => {
@@ -9,6 +10,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         allProjects: action.payload
+      }
+    }
+    case GET_SINGLE_PROJECT: {
+      return {
+        ...state,
+        singleProject: action.payload
       }
     }
     default:{

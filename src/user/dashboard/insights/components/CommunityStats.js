@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-import { Form, Button } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import './community.scss'
-import Navigation from '../../navigation/navigation';
 import { connect } from 'react-redux'
 import { getMember, getMembers, getOrgOverview, getPersonalOverview } from '../../../../actions/insightAction'
 

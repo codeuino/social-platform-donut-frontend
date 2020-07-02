@@ -65,6 +65,11 @@
     font-size: 0.8em;
     color: rgb(90, 84, 84);
     margin-top: -13px;   
+    max-width: 52ch;
+    .delete__icon {
+        color: rgb(82, 82, 82);
+        float: right;
+    }
 }
 
 .user_comment{

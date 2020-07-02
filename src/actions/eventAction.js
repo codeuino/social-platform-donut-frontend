@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { errorHandler } from '../utils/errorHandler';
 import { setRequestStatus } from '../utils/setRequestStatus';
-import { GET_ALL_EVENTS } from './types';
+import { GET_ALL_EVENTS, GET_EVENT_BY_ID } from './types';
 
 // DELETE EVENT REQUEST 
 export const deleteEvent = (eventId) => async (dispatch) => {
@@ -10,6 +10,7 @@ export const deleteEvent = (eventId) => async (dispatch) => {
     dispatch(setRequestStatus(false));
     if(res.status === 200){
       dispatch(setRequestStatus(true));
+      dispatch(getAllEvents())
     }
   } catch(error) {
     dispatch(errorHandler(error))
@@ -23,6 +24,7 @@ export const updateEvent = (eventId, updatedInfo) => async (dispatch) => {
     dispatch(setRequestStatus(false));
     if(res.status === 200){
       dispatch(setRequestStatus(true));
+      dispatch(getAllEvents())
     }
   } catch(error) {
     dispatch(errorHandler(error))
@@ -54,6 +56,25 @@ export const getAllEvents = (pagination = 10, page = 1) => async (dispatch) => {
       dispatch({
         type: GET_ALL_EVENTS,
         payload: res.data.events
+      })
+    }
+  } catch(error) {
+    dispatch(errorHandler(error))
+  }
+}
+
+// GET EVENT BY ID 
+export const getEventById = (eventId) => async (dispatch) => {
+  try {
+    console.log('fetching event ', eventId)
+    const res = await axios.get(`/event/${eventId}`)
+    dispatch(setRequestStatus(false))
+    if(res.status === 200){
+      dispatch(setRequestStatus(true))
+      console.log('fetching event by id ', res.data.event)
+      dispatch({
+        type: GET_EVENT_BY_ID,
+        payload: res.data.event
       })
     }
   } catch(error) {

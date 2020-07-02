@@ -1,9 +1,12 @@
 import React, { Component } from "react";
-import { Modal, Button, Row, Col, Image, Form } from "react-bootstrap";
+import { Modal, Button, Row, Image, Form } from "react-bootstrap";
 import { connect } from 'react-redux';
-import { removeUser } from '../../../actions/usersAction'
+import { removeUser, getInviteLink } from '../../../actions/usersAction'
 import { getMember } from '../../../actions/insightAction'
 import logo from "../../../svgs/logo-image.jpg";
+import { checkRemoveRight } from '../../dashboard/utils/checkDeleteRights'
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 class Members extends Component {
   constructor(props) {
@@ -11,14 +14,18 @@ class Members extends Component {
     this.state = {
       text: 'Follow',
       members: [],
-      query: ''
+      query: '',
+      isAdmin: '',
+      inviteLink: null
     }
   }
 
   onRemoveClick = (userId) => {
     console.log('Removing !', userId);
     // SEND REQUEST TO REMOVE USER WITH ID = INDEX
-    this.props.removeUser(userId)
+    if(this.state.isAdmin) {
+      this.props.removeUser(userId);
+    }
   }
 
   onChange = (e) => {
@@ -34,8 +41,19 @@ class Members extends Component {
 
   onSearchClick = () => {
     const { query } = this.state;
-    console.log('')
+    console.log('query ', query);
     this.props.getMember(query);
+  }
+
+  onGetInviteLink = () => {
+    console.log('Get invite link clicked!');
+    this.props.getInviteLink();
+  }
+
+  componentDidMount() {
+    checkRemoveRight() 
+    ? this.setState({ isAdmin: true }) 
+    : this.setState({ isAdmin: false })
   }
 
   componentWillReceiveProps(nextProps) {
@@ -49,7 +67,7 @@ class Members extends Component {
       let allMembers = nextProps.insight.allMembers
       res = this.mapHelper(allMembers)
     }
-    this.setState({ members: res }, () => {
+    this.setState({ members: res, inviteLink: nextProps.user.inviteLink }, () => {
       console.log("members ", this.state);
     });
   }
@@ -64,8 +82,21 @@ class Members extends Component {
     return membersInfo
   }
 
+  copyToClipBoard = async (link) => {
+    try {
+      await navigator.clipboard.writeText(link);
+      if(this.state.inviteLink !== null){
+        toast.success('Link copied to clipboard!');
+      }
+    } catch (error) {
+      toast.error('Something went wrong!');
+      console.log('error ', error)
+    }
+  }
+
   render() {
     const { onHide, show } = this.props
+    const { isAdmin, inviteLink } = this.state
     const membersList = [ ...this.state.members] 
     let members = membersList.map((item) => (
       <Row className="modal__member" id="p1" key={item._id}>
@@ -85,7 +116,10 @@ class Members extends Component {
             onClick={this.onRemoveClick.bind(this, item._id)}
           >
             <span className="remove_followText">
-              {Boolean(item.isRemoved === true) ? (<span>Removed</span>) : (<span>Remove</span>)}
+              {Boolean(item.isRemoved === true) 
+                ? (<span>Removed</span>) 
+                : isAdmin ? (<span>Remove</span>) : (<span>New!</span>)
+              }
             </span>
           </Button>
         </div>
@@ -112,6 +146,12 @@ class Members extends Component {
               onChange={this.onChange}
               onKeyPress={this.onKeyPress}
             />
+            <Button
+              className="search_btn"
+              onClick={this.onSearchClick}
+            >
+              Search
+            </Button>
           </Modal.Title>
         </Modal.Header>
         <Modal.Body className="modal__body">
@@ -121,14 +161,17 @@ class Members extends Component {
             <h3 className="modal__mini-title">ADD MEMBER</h3>
             <div className="add__member__form">
               <Form.Label htmlFor="email" className="email__header">
-                Email
+                Get invite link
               </Form.Label>
               <div className="add__member__input__container">
                 <Form.Control
                   as="input"
-                  placeholder=" Enter their email"
+                  placeholder="Copy invite link to share"
+                  defaultValue={inviteLink}
+                  readOnly={true}
+                  onClick={this.copyToClipBoard.bind(this, inviteLink)}
                 ></Form.Control>
-                <Button className="invite__btn">Invite</Button>
+                <Button className="invite__btn" onClick={this.onGetInviteLink}>Get Link</Button>
               </div>
               <div className="share__btn__container">
                 <p className="share__text">or share invite on</p>
@@ -139,6 +182,17 @@ class Members extends Component {
             </div>
           </div>
         </Modal.Body>
+        <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+          />
       </Modal>
     );
   }
@@ -152,4 +206,4 @@ const mapStateToProps = (state) => ({
   status: state.status
 })
 
-export default connect(mapStateToProps, { removeUser, getMember })(Members);
+export default connect(mapStateToProps, { removeUser, getMember, getInviteLink })(Members);
