@@ -19,7 +19,7 @@
           .active_btn {
             width: 11vw;
             height: 5vh;
-            background: #1a73e8;
+            background: #1A73E8;
             border-radius: 100px;
             padding: 0.3em;
             margin-right: 1em;
@@ -29,7 +29,7 @@
             height: 5vh;
             background: rgb(250, 251, 252);
             border-radius: 100px;
-            color: #1a73e8;
+            color: #1A73E8;
             padding: 0.3em;
             margin-right: 1em;
           }
@@ -37,8 +37,8 @@
         .members_overview {
           width: 90vw;
           .search_bar {
-            background: #ffffff;
-            border: 1.5px solid #cccccc;
+            background: #FFFFFF;
+            border: 1.5px solid #CCCCCC;
             border-radius: 100px;
             width: 39.5%;
             padding: 0.4em;
@@ -61,8 +61,8 @@
             margin-top: 1em;
             .single_member {
               display: flex;
-              background: #ffffff;
-              border: 1px solid #cccccc;
+              background: #FFFFFF;
+              border: 1px solid #CCCCCC;
               box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
               padding-top: 0.7em;
               padding-left: 0.7em;
@@ -78,7 +78,7 @@
                 height: 60px;
                 background-blend-mode: normal;
                 border-radius: 5px;
-                border: 1px solid #cccccc;
+                border: 1px solid #CCCCCC;
                 margin-right: 0.7em;
               }
               .member_details {
@@ -88,21 +88,21 @@
                   .row {
                     width: 29vw;
                   }
-                  .member_name {
-                    font-family: Inter;
-                    font-style: normal;
-                    font-weight: 600;
-                    font-size: 1.2em;
-                    line-height: 1.5em;
-                    color: #1a73e8;
-                  }
-                  .hamburger {
+                   .member_name {
+                     font-family: Inter;
+                     font-style: normal;
+                     font-weight: 600;
+                     font-size: 1.2em;
+                     line-height: 1.5em;
+                     color: #1A73E8;
+                   }
+                   .hamburger {
                     .dotted_hamberger {
                       clear: both;
                       float: right;
                       cursor: pointer;
                     }
-                  }
+                   }
                 }
                 .member_designation {
                   font-family: Inter;
@@ -111,7 +111,7 @@
                   font-size: 0.9em;
                   line-height: 0%;
                   letter-spacing: 0.15em;
-                  color: #90949c;
+                  color: #90949C;
                   margin-top: -0.5em;
                 }
 
@@ -121,13 +121,13 @@
                   font-weight: normal;
                   font-size: 0.5em;
                   line-height: 10px;
-                  color: #90949c;
+                  color: #90949C;
                   margin-top: -0.7em;
                 }
               }
             }
           }
-          input[type="text"] {
+          input[type=text] {
             padding: 0.5em;
           }
         }
@@ -143,20 +143,20 @@
   text-align: center;
   .overlay_list_btn {
     cursor: pointer;
-    background: transparent;
-    border-radius: 100px;
-    font-family: Inter;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 1em;
-    line-height: 1.1em;
-    color: #eb5757;
-    border: 1px solid #eb5757;
-    box-sizing: border-box;
-    padding-bottom: 0.4em;
+     background: transparent;
+     border-radius: 100px;
+     font-family: Inter;
+     font-style: normal;
+     font-weight: normal;
+     font-size: 1em;
+     line-height: 1.1em;
+     color: #EB5757;
+     border: 1px solid #EB5757;
+     box-sizing: border-box;
+     padding-bottom: 0.4em;
   }
   .overlay_list_btn:hover {
     background: transparent;
-    color: #eb5757;
+    color: #EB5757;
   }
 }
