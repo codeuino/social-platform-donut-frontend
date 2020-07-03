@@ -16,12 +16,14 @@ class DiscussionComments extends Component {
   }
 
   handleComment = (text) => {
+    const { userId, proposalId, isAuthor, author } = this.props;
+
     const commentData = {
-      userId: this.props.userId,
-      proposalId: this.props.proposalId,
+      userId: userId,
+      proposalId: proposalId,
       comment: this.state.commentContent,
-      isAuthor: this.props.isAuthor,
-      author: this.props.author,
+      isAuthor: isAuthor,
+      author: author,
     };
     this.props.commentProposal(commentData);
     this.props.handleComment(this.state.commentContent);

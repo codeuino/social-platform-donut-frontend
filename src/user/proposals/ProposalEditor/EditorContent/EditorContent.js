@@ -124,7 +124,7 @@ class EditorContent extends Component {
         content: this.state.currentText,
         proposalStatus: "DRAFT",
         creator: localStorage.getItem("userId"),
-        description: this.state.proposalDescription,
+        proposalDescription: this.state.proposalDescription,
       };
 
       this.props.createProposal(proposalInfo);

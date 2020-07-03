@@ -13,6 +13,8 @@ import contactLoading from "../../placeholderLoading/contactLoading/contactLoadi
 import cardLoading from "../../placeholderLoading/cardLoading/cardLoading";
 import { connect } from "react-redux";
 import { getOrgProfile } from "../../actions/orgAction";
+import { Link } from "react-router-dom";
+import { Button } from "react-bootstrap";
 
 class Organization extends Component {
   constructor(props) {
