@@ -10,7 +10,7 @@ codeuino's open source social platform <br><br>
 
 </div>
 
-#### For frontend of this repo move to [this](https://github.com/codeuino/frontened) repository.
+#### For frontend of this repo move to [this](https://github.com/codeuino/social-platform-donut-frontend) repository.
 
 <div align='center'>
 <img style="border:1px black solid;" height=165px src="READMEassets/signup_community.png">
@@ -131,7 +131,7 @@ Note: For windows user, run this command using [git bash](https://git-scm.com/do
 
 All feedback and suggestions are welcome!
 
-* 💬 Join the community on [Slack](https://join.slack.com/t/codeuino/shared_invite/enQtMzcxOTQwNzE4NzcxLWEyNzUxYjI0ZThiNWUyYWI5MzJlMTNmODMxN2NjMTcxODJkZmFhNTVkYmUyOTQ1YzgzNTlmMTVkYzVhMzdmNTQ )
+* 💬 Join the community on [Slack](https://codeuino.slack.com)
 * 📣 Stay up to date on new features and announcements on the following:
   - [@Mailing List](codeuino-devel@googlegroups.com).
   - [@Discussion Portal](https://groups.google.com/d/forum/codeuino-devel).
