@@ -13,6 +13,7 @@ class Comments extends Component {
     this.state = {
       socket: socket,
       notifications: [],
+      commentNotifications: [],
     };
   }
 
@@ -50,6 +51,7 @@ class Comments extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    console.log(nextProps);
     nextProps.proposalNotifications.forEach((notification, index) => {
       let createdTime = new Date(notification.createdAt)
         .toString()
@@ -57,18 +59,18 @@ class Comments extends Component {
       notification.createdAt = createdTime.toString();
     });
 
-    this.setState(
-      {
-        notifications: [
-          ...this.state.notifications,
-          ...nextProps.proposalNotifications,
-          ...nextProps.userProposalNotifications,
-        ],
-      },
-      () => {
-        this.organizaNotifications();
-      }
-    );
+    this.setState({
+      notifications: [
+        ...this.state.notifications,
+        ...nextProps.proposalNotifications,
+      ],
+    });
+
+    if (nextProps.userNotification !== null) {
+      this.setState({
+        commentNotifications: nextProps.userNotification,
+      });
+    }
   }
 
   organizaNotifications = () => {
@@ -84,7 +86,7 @@ class Comments extends Component {
   };
 
   render() {
-    const notifications = [...this.state.notifications];
+    const notifications = [...this.state.commentNotifications];
     return (
       <div className="ideas">
         <div className="ideas-title">Comments</div>
@@ -133,7 +135,7 @@ class Comments extends Component {
 
 const mapStateToProps = (state) => ({
   proposalNotifications: state.notification.proposalNotifications,
-  userProposalNotifications: state.proposal.userNotifications,
+  userNotification: state.proposal.userNotification,
 });
 
 export default connect(mapStateToProps, {

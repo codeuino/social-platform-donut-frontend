@@ -25,6 +25,8 @@ class DiscussionComments extends Component {
       isAuthor: isAuthor,
       author: author,
     };
+
+    console.log(commentData);
     this.props.commentProposal(commentData);
     this.props.handleComment(this.state.commentContent);
     this.setState({
