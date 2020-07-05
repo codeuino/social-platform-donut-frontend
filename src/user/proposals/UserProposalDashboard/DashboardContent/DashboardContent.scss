@@ -171,4 +171,10 @@
       }
     }
   }
+  .pagination-container {
+    text-align: center;
+    .pagination-item {
+      display: inline-block;
+    }
+  }
 }

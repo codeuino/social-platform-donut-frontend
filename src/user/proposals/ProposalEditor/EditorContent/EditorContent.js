@@ -203,7 +203,7 @@ class EditorContent extends Component {
             <span className="title-text">Write your Proposal</span>
             <div className="form-container">
               <Form>
-                <Form.Label>Proposal Title</Form.Label>
+                <Form.Label className="field-title">Proposal Title</Form.Label>
                 <Form.Control
                   as="input"
                   name="proposalTitle"
@@ -211,7 +211,9 @@ class EditorContent extends Component {
                   onChange={this.handleChange}
                   value={this.state.proposalTitle}
                 />
-                <Form.Label>Short Description</Form.Label>
+                <Form.Label className="field-title">
+                  Short Description
+                </Form.Label>
                 <Form.Control
                   name="proposalDescription"
                   as="textarea"
