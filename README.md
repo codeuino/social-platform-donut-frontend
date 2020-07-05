@@ -6,7 +6,7 @@
 
 codeuino's open source social platform <br><br>
 
-[![Slack Status](https://img.shields.io/badge/slack-chat-yellow.svg?logo=slack)](https://codeuino.slack.com)    [![PRs Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?logo=github)](http://makeapullrequest.com) [![Issues Open](https://img.shields.io/github/issues-raw/codeuino/Social-Platform-Donut.svg?color=orange&logo=github)](https://github.com/codeuino/Social-Platform-Donut/issues) [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg?logo=github)](https://www.gnu.org/licenses/gpl-3.0)
+[![Slack Status](https://img.shields.io/badge/slack-chat-yellow.svg?logo=slack)](https://slack.codeuino.org/)    [![PRs Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?logo=github)](http://makeapullrequest.com) [![Issues Open](https://img.shields.io/github/issues-raw/codeuino/Social-Platform-Donut.svg?color=orange&logo=github)](https://github.com/codeuino/Social-Platform-Donut/issues) [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg?logo=github)](https://www.gnu.org/licenses/gpl-3.0)
 
 </div>
 
@@ -131,11 +131,11 @@ Note: For windows user, run this command using [git bash](https://git-scm.com/do
 
 All feedback and suggestions are welcome!
 
-* 💬 Join the community on [Slack](https://codeuino.slack.com)
+* 💬 Join the community on [Slack](https://slack.codeuino.org/)
 * 📣 Stay up to date on new features and announcements on the following:
-  - [@Mailing List](codeuino-devel@googlegroups.com).
+  - [@Mailing List](mailto:codeuino-devel@googlegroups.com).
   - [@Discussion Portal](https://groups.google.com/d/forum/codeuino-devel).
-  - [@Codeuino Wiki](wiki.codeuino.org).
+  - [@Codeuino Wiki](https://docs.codeuino.org/).
 
 
 ## Sponsors/Partners
