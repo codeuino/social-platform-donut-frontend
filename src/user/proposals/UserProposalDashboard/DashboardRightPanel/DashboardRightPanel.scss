@@ -1,8 +1,12 @@
 .panel {
   display: flex;
+  flex-direction: column;
 
   .panel-ideas {
-    margin-top: 10px;
-    height: 100%;
+    flex-grow: 1;
+  }
+
+  .panel-comments {
+    flex-grow: 1;
   }
 }
