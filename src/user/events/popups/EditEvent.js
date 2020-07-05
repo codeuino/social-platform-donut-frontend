@@ -172,7 +172,7 @@ class EditEvent extends Component {
             <Button onClick={this.updateEvent} className="savebtn">
               Save
             </Button>
-            <Button variant="outline-primary" onClick={this.props.onHide}>
+            <Button variant="outline-primary" className="cancelbtn" onClick={this.props.onHide}>
               Cancel
             </Button>
           </div>

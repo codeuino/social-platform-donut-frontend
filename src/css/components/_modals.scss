@@ -347,9 +347,9 @@
     .modal__save {
       background: $color-modal-button-active;
       box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
-      border-radius: 34px;
-      width: 104px;
-      height: 42px;
+      // border-radius: 34px;
+      width: 80px;
+      height: 38.5px;
       margin-right: 20px;
       margin-bottom: 10px;
       margin-left: 14px;
@@ -357,7 +357,7 @@
         font-family: $font-family-Inter;
         font-style: normal;
         font-weight: bold;
-        font-size: 18px;
+        font-size: 14px;
         line-height: 22px;
         /* identical to box height */
 
@@ -368,17 +368,16 @@
       border: 1px solid #1a73e8;
       background: $color-modal-button-inactive;
       box-sizing: border-box;
-      box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
-      border-radius: 34px;
+      // border-radius: 34px;
       margin-right: 20px;
       margin-bottom: 10px;
-      width: 104px;
-      height: 42px;
+      width: 80px;
+      height: 38.5px;
       .modal__buttontext {
         font-family: $font-family-Inter;
         font-style: normal;
         font-weight: $font-weight-normal;
-        font-size: 18px;
+        font-size: 14px;
         line-height: 22px;
         /* identical to box height */
         color: #1a73e8;

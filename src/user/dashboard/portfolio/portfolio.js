@@ -71,34 +71,34 @@ class Portfolio extends Component {
         <div className="items-list">
           <div className="item members_list" onClick={this.showMembers}>
             <h1><b>{members.length || 0}</b></h1>
-            <h3>Members</h3>
+            <h3 className="portfolio__text">Members</h3><hr/>
           </div>
           <Members show={this.state.membersList} onHide={this.closeMembersList} members={members} />
             <div className = "item admins__list" onClick={this.showAdminLists}>
               <h1><b> {admins.length || 0}</b></h1>
-              <h3>Administrators</h3> 
+              <h3 className="portfolio__text">Administrators</h3>
             </div>
             <Admins show={this.state.adminList} onHide={this.hideAdminLists} admins={admins}/>
           </div>
         <div className="items-list">
           <div className = "item followers__pointer" onClick = { this.showFollowersList } >
             <h1><b>{followers?.length || 0}</b></h1>
-            <h3>Followers</h3>
+            <h3 className="portfolio__text">Followers</h3><hr/>
           </div>
           <Followers show={this.state.followersList} onHide={this.closeFollowersList} followers={followers} followings={followings} />
           <div className="item">
             <h1><b>{personalInfo.events || 0}</b></h1>
-            <h3>Events Organized</h3>
+            <h3 className="portfolio__text">Events Organized</h3>
           </div>
         </div>
         <div className="items-list">
           <div className="item">
             <h1><b>{personalInfo.projects || 0 }</b></h1>
-            <h3>Projects</h3>
+            <h3 className="portfolio__text">Projects</h3><hr/>
           </div>
           <div className="item">
             <h1><b>{followings?.length || 0}</b></h1>
-            <h3>Following</h3>
+            <h3 className="portfolio__text">Following</h3>
           </div>
         </div>
       </div>

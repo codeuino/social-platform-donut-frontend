@@ -4,7 +4,6 @@ import Navigation from "../dashboard/navigation/navigation";
 import UserInfo from "./user-info/user-info";
 import Portfolio from "../dashboard/portfolio/portfolio";
 import PinPosts from "../pinned-posts/posts/pinPosts";
-// import Updates from "../dashboard/updates/updates";
 import { connect } from 'react-redux'
 import { getProfile, getEventsCreatedByUser, getProjectCreatedByUser, getPostsCreatedByUser } from '../../actions/usersAction' 
 import { getAllPinnedPosts } from '../../actions/postAction'

@@ -18,12 +18,7 @@ import { Button } from "react-bootstrap";
 import AddEventModal from "./popups/AddEventModal";
 import AddProjectModal from "./popups/AddProjectModal";
 import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
-// import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import ChatBubbleIcon from "@material-ui/icons/ChatBubble";
-// import EventNoteIcon from "@material-ui/icons/EventNote";
-// import EventIcon from "@material-ui/icons/Event";
-// import ReplyIcon from '@material-ui/icons/Reply';
-// import feed from "../../../jsonData/news-feed";
 import "../../pinned-posts/posts/posts.scss";
 import "./news-feed.scss";
 import AddPostModal from "./popups/AddPostModal";
@@ -40,11 +35,14 @@ const styles = makeStyles((theme) => ({
     minWidth: "50%",
   },
   listStyle: {
-    paddingBottom: 0,
+    background: "#ffffff",
+    border: "1px solid #cccccc",
+    boxShadow: "1px 2px 5px rgba(0, 0, 0, 0.1)",
+    borderRadius: "5px"
   },
   listStyle2: {
     paddingTop: 0,
-    marginTop: "-4px",
+    marginTop: "-4px"
   },
   info: {
     position: "absolute",
@@ -98,19 +96,15 @@ function NewsFeed(props) {
   const [writePost, showPostModal] = useState(false);
   const [showComment, toggle] = useState(false);
   const [commentId, setCommentId] = useState('');
-  // const [all, setAll] = useState([]);
   const [events, setEvents] = useState([]);
   const [projects, setAllProjects] = useState([]);
   const [posts, setAllPosts] = useState([]);
-  // const [allCommentsOfPost, setAllCommentsOfPost] = useState({})
 
   useEffect(() => {
     console.log("useEffect from news-feed ", props);
     setEvents(props?.allEvents);
     setAllProjects(props?.allProjects);
     setAllPosts(props?.allPosts);
-    // setAll(props?.allMix);
-    // setAllCommentsOfPost(props?.comment?.allComments)
   }, [props]);
 
   let handleClick = (atrb) => () => {
@@ -154,9 +148,6 @@ function NewsFeed(props) {
         <div className="grid" key={post._id}>
         <Paper elevation={1} className={classes.paper}>
           <Card className={classes.root}>
-              {/* <CardMedia className="projimg"
-                image={post?.image || eventImg } title="Post Image">
-            </CardMedia> */}
             <List className={classes.listStyle}>
               <ListItem className={classes.listStyle2}>
                 <ListItemAvatar>
@@ -168,20 +159,6 @@ function NewsFeed(props) {
                   <h2>{post?.userId?.name?.firstName + " " + post?.userId?.name?.lastName}</h2>
                   <small>{post?.createdAt}</small>
                 </ListItemText>
-                {/* <ListItemSecondaryAction>
-                  {post.note === true ? (
-                    <IconButton edge="end" className={classes.icon}>
-                      <EventNoteIcon className={classes.event} />
-                    </IconButton>
-                  ) : post.schedule === true ? (
-                    <IconButton edge="end" className={classes.icon}>
-                      <EventIcon className={classes.event} />
-                    </IconButton>
-                  ) : null}
-                  <IconButton edge="end" className={classes.icon}>
-                    <MoreHorizIcon className={classes.horiz} />
-                  </IconButton>
-                </ListItemSecondaryAction> */}
               </ListItem>
               <div className="post-details2">{post?.content}</div>
               <ListItem>
@@ -235,36 +212,16 @@ function NewsFeed(props) {
                                 <h2>{project?.createdBy?.name?.firstName + " " + project?.createdBy?.name?.lastName}</h2>
                                 <small>{project?.createdAt}</small>
                             </ListItemText>
-                            {/* <ListItemSecondaryAction>
-                                { (project?.note === true) ?
-                                <IconButton edge="end" className={classes.icon}>
-                                    <EventNoteIcon className={classes.event}/>
-                                </IconButton> : (project.schedule === true) ?
-                                <IconButton edge="end" className={classes.icon}>
-                                    <EventIcon className={classes.event}/>
-                                </IconButton> : null }
-                                <IconButton edge="end" className={classes.icon}>
-                                    <MoreHorizIcon className={classes.horiz}/>
-                                </IconButton>
-                            </ListItemSecondaryAction> */}
                         </ListItem>
                         <div className="post-details2">{project?.description?.short}</div>
                         <ListItem>
-                            {/* <IconButton className={classes.vote}>
-                                <ArrowDropUpIcon className="up-vote"/>
-                            </IconButton>
-                            <span className="up-vote"> {project.upvotes}</span>
-                            <span className="space"></span>
-                            <IconButton className={classes.vote}>
-                                <ArrowDropDownIcon className="down-vote"/>
-                            </IconButton>
-                            <span className="down-vote">{project.downVotes}</span> */}
                             <span className="com-btn">
                                 <ChatBubbleIcon className={classes.chat}/>
                                 <Button 
-                                onClick = {
+                                  className = "comment-btn"
+                                  onClick = {
                                     commentToggle.bind(this, project._id)
-                                } >
+                                  } >
                                     <span className="comment">Comment</span>
                                 </Button>
                             </span>
@@ -317,40 +274,8 @@ function NewsFeed(props) {
                                 <h2>{event?.createdBy?.name?.firstName + " " + event?.createdBy?.name?.lastName}</h2>
                                 <small>{event?.createdAt}</small>
                             </ListItemText>
-                            {/* <ListItemSecondaryAction>
-                                { (event.note === true) ?
-                                <IconButton edge="end" className={classes.icon}>
-                                    <EventNoteIcon className={classes.event}/>
-                                </IconButton> : (event.schedule === true) ?
-                                <IconButton edge="end" className={classes.icon}>
-                                    <EventIcon className={classes.event}/>
-                                </IconButton> : null }
-                                <IconButton edge="end" className={classes.icon}>
-                                    <MoreHorizIcon className={classes.horiz}/>
-                                </IconButton>
-                            </ListItemSecondaryAction> */}
                         </ListItem>
                         <div className="post-details2">{event?.description?.shortDescription}</div>
-                        {/* <ListItem>
-                            <IconButton className={classes.vote}>
-                                <ArrowDropUpIcon className="up-vote"/>
-                            </IconButton>
-                            <span className="up-vote">{event.upvotes}</span>
-                            <span className="space"></span>
-                            <IconButton className={classes.vote}>
-                                <ArrowDropDownIcon className="down-vote"/>
-                            </IconButton>
-                            <span className="down-vote">{event.downVotes}</span>
-                            <span className="com-btn">
-                                <ChatBubbleIcon className={classes.chat}/>
-                                <Button 
-                                onClick = {
-                                    commentToggle.bind(this, event._id)
-                                } >
-                                    <span className="comment">Comment</span>
-                                </Button>
-                            </span>
-                        </ListItem> */}
                     </List>
                 </Card>
             </Paper>

@@ -38,12 +38,8 @@ class UserInfo extends Component {
       this.setState({
         editProfile: false,
       });
-    // let cancelf = () =>
-    //   this.setState({
-    //     followersList: false,
-    //   });
     return (
-      <div className="user-details">
+      <div className="user-detail">
         <div className="user-image">
           <div className="user-pic">
             <Avatar className="userpic"></Avatar>

@@ -49,7 +49,7 @@ class DeleteEvent extends Component {
             
             <div className="form-footer">
               <Button onClick={this.deleteEventClick} className="savebtn" size="sm">Yes</Button>
-              <Button variant="outline-primary" onClick={this.props.onHide} size="sm">No</Button>
+              <Button variant="outline-primary" className="cancelbtn" onClick={this.props.onHide} size="sm">No</Button>
             </div>
           </div>
       </Modal>

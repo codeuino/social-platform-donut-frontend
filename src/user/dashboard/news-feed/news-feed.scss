@@ -81,7 +81,7 @@
                   border-right: 1px solid rgba(204, 204, 204, 0.7);
                   .date-content {
                     width: 50%;
-                    margin: 0 auto;
+                    padding: 1vw;
                     small {
                       font-family: Inter;
                       font-style: normal;
@@ -367,8 +367,16 @@
   color: #ff0000;
 }
 .news__feed__container {
+  .news-feed {
+    .post-article{
+      .article {
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+  }
   .post {
-    width: 130%;
+    width: 140%;
     margin-bottom: 17px;
   }
 }
@@ -393,14 +401,13 @@
 
         .optionbtn {
           background: #1a73e8;
-          border-radius: 100px;
+          // border-radius: 100px;
           .optionbtn-text {
             font-family: Inter;
             font-style: normal;
             font-weight: 600;
             font-size: 16px;
             line-height: 19px;
-
             color: #ffffff;
           }
         }
@@ -455,5 +462,17 @@
   }
   .hide__comment__section {
     display: none;
+  }
+}
+.post {
+  .grid {
+    .com-btn {
+      .btn-primary {
+        background-color: #ffffff;
+        border-radius: 0px;
+        border: 0px;
+        margin-bottom: 6px;
+      }
+    }
   }
 }

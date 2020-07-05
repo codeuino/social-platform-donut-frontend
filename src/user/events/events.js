@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Navigation from "../dashboard/navigation/navigation";
 import { Grid ,CardActions, Card} from "@material-ui/core";
 // import Event_list from "../../jsonData/events";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Button } from "react-bootstrap";
 import "./events.scss";
 import Popups from './popups/popups';
 import DeleteEvent from "./popups/DeleteEvent";
@@ -111,13 +111,15 @@ class Events extends Component {
             </span>
         </div>
         <div className="col-md-6">
-          <a 
-            href="javascript:void(0)" 
+          <Button
+            size="sm"
+            variant="light"
             onClick={handleToggle.bind(this, Item._id, Item)} 
             style={{float: "right"}} 
             id={Item._id}
-            >See More
-          </a>
+            >
+              <span style={{color: "#007bff"}}>See More</span>
+          </Button>
         </div>
     </div>
     )

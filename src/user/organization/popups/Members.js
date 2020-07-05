@@ -47,7 +47,7 @@ class Members extends Component {
 
   onGetInviteLink = () => {
     console.log('Get invite link clicked!');
-    this.props.getInviteLink();
+    this.props.getInviteLink('user');
   }
 
   componentDidMount() {

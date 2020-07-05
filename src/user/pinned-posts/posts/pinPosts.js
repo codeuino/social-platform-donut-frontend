@@ -2,7 +2,6 @@ import React , { useState, useEffect } from 'react';
 import {
     List, 
     Card,
-    Button, 
     Paper, 
     ListItem, 
     ListItemAvatar, 
@@ -13,6 +12,7 @@ import {
     CardMedia
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { Button } from "react-bootstrap";
 // import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 // import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
@@ -355,19 +355,45 @@ function PinPosts(props){
             <h1>Pinned Posts</h1>
             <div className="categories">
                 { (first === 'f') ? 
-                <Button autoFocus variant="contained" className="btn active"
-                onClick={handleClick('All')}>All</Button> :
-                <Button autoFocus variant="contained" className="btn"
-                onClick={handleClick('All')}>All</Button> }
-                <span className="space"></span>
-                <Button variant="contained" className="btn"
-                onClick={handleClick('Donut')}>Posts</Button>
-                <span className="space"></span>
-                <Button variant="contained" className="btn"
-                onClick={handleClick('Event')}>Events</Button>
-                <span className="space"></span>
-                <Button variant="contained" className="btn"
-                onClick={handleClick('Project')}>Projects</Button>
+                <Button 
+                    active
+                    variant = "primary"
+                    className = "btn"
+                    onClick={handleClick('All')}
+                >
+                    <span className="btn-content">All</span>
+                </Button> :
+                <Button 
+                    variant = "primary"
+                    className = "btn"
+                    onClick={handleClick('All')}
+                    >
+                    <span className="btn-content">All</span>
+                </Button> }
+                    <span className="space"></span>
+                <Button 
+                    variant="primary" 
+                    className="btn"
+                    onClick={handleClick('Donut')}
+                >
+                    <span className="btn-content">Posts</span>
+                </Button>
+                    <span className="space"></span>
+                <Button 
+                    variant="primary" 
+                    className="btn"
+                    onClick={handleClick('Event')}
+                >
+                    <span className="btn-content">Events</span>
+                </Button>
+                    <span className="space"></span>
+                <Button 
+                    variant = "primary"
+                    className="btn"
+                    onClick={handleClick('Project')}
+                >
+                    <span className="btn-content">Projects</span>
+                </Button>
             </div>
         </div>
         <div className="post">

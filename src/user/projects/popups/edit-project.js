@@ -168,20 +168,20 @@ class EditProject extends Component {
                   />
                 </Col>
               </Row>
-              <div className="form-footer">
-                <Button
-                  onClick={this.onUpdateClick}
-                  type="submit"
-                  className="savebtn"
-                >
-                  Save
-                </Button>
-                <Button variant="outline-primary" onClick={onHide}>
-                  Cancel
-                </Button>
-              </div>
             </Form>
           </Modal.Body>
+          <div className="form-footer">
+            <Button
+              onClick={this.onUpdateClick}
+              type="submit"
+              className="savebtn"
+            >
+              Save
+            </Button>
+            <Button variant="outline-primary" className="cancelbtn" onClick={onHide}>
+              Cancel
+            </Button>
+          </div>
         </div>
       </Modal>
     );

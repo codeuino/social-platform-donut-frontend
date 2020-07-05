@@ -19,7 +19,7 @@ class Projects extends Component {
     };
   }
 
-  componentDidMount() {
+  componentWillMount() {
     setTimeout(() => {
       this.props.getAllProjects();
     })
@@ -93,11 +93,6 @@ class Projects extends Component {
             </Grid>
           </div>
         </div>
-        {/* <Popups
-          option={this.state.option}
-          optionValue={this.state.optionValue}
-          modalShow={this.state.modalShow}
-        /> */}
       </div>
     );
   }

@@ -4,6 +4,9 @@ import { connect } from 'react-redux'
 import { removeAdmin } from '../../../actions/orgAction'
 import logo from "../../../svgs/logo-image.jpg";
 import { getMember } from '../../../actions/insightAction'
+import { getInviteLink } from '../../../actions/usersAction'
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 class Admins extends Component {
   constructor(props) {
@@ -11,7 +14,8 @@ class Admins extends Component {
     this.state = {
       text: 'Follow',
       admins: [],
-      query: ''
+      query: '',
+      inviteLink: ''
     }
   }
 
@@ -40,7 +44,7 @@ class Admins extends Component {
       let allAdmins = nextProps.admins;
       res = this.mapHelper(allAdmins);
     }
-    this.setState({ admins: res })
+    this.setState({ admins: res, inviteLink: nextProps.user?.inviteLink })
   }
 
    mapHelper = (allAdmins) => {
@@ -69,8 +73,25 @@ class Admins extends Component {
     this.props.getMember(query)
   }
 
+  onGetInviteLink = () => {
+    this.props.getInviteLink('admin')
+  }
+
+  copyToClipBoard = async (link) => {
+    try {
+      await navigator.clipboard.writeText(link);
+      if (this.state.inviteLink !== null) {
+        toast.success('Link copied to clipboard!');
+      }
+    } catch (error) {
+      toast.error('Something went wrong!');
+      console.log('error ', error)
+    }
+  }
+
   render() {
     const { onHide, show } = this.props
+    const { inviteLink } = this.state
     const adminList = [...this.state.admins] 
     let admins = adminList.map((item) => (
       <Row className="modal__member" id="p1" key={item._id}>
@@ -125,14 +146,17 @@ class Admins extends Component {
             <h3 className="modal__mini-title">ADD ADMINISTRATOR</h3>
             <div className="add__member__form">
               <Form.Label htmlFor="email" className="email__header">
-                Email
+                Get invite link
               </Form.Label>
               <div className="add__member__input__container">
                 <Form.Control
                   as="input"
-                  placeholder=" Enter their email"
+                  defaultValue={inviteLink}
+                  readOnly={true}
+                  onClick={this.copyToClipBoard.bind(this, inviteLink)}
+                  placeholder="Get invite link"
                 ></Form.Control>
-                <Button className="invite__btn">Invite</Button>
+                <Button className="invite__btn" onClick={this.onGetInviteLink}>Get link</Button>
               </div>
               {/* <div className="share__btn__container">
                 <p className="share__text">or share invite on</p>
@@ -142,6 +166,17 @@ class Admins extends Component {
               </div> */}
             </div>
           </div>
+           <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+          />
         </Modal.Body>
       </Modal>
     );
@@ -153,7 +188,8 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
   error: state.error,
   insight: state.insight,
+  user: state.user,
   status: state.status
 })
 
-export default connect(mapStateToProps, { removeAdmin, getMember })(Admins)
+export default connect(mapStateToProps, { removeAdmin, getMember, getInviteLink })(Admins)

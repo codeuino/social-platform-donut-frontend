@@ -77,7 +77,6 @@ class Dashboard extends Component {
         </div>
         <div className="promotions">
           {this.state.isLoading ? portfolioLoading() : <Portfolio />}
-          {/* {this.state.isLoading ? orgUpdatesLoading() : <Updates></Updates>} */}
         </div>
       </div>
     );

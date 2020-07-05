@@ -5,12 +5,11 @@ import LanguageIcon from '@material-ui/icons/Language';
 import Navigation from "../../dashboard/navigation/navigation";
 import { Card, Button, Badge, Col, Row } from "react-bootstrap";
 import "./proj-info.scss";
-import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import proj_img from "../../../images/project.png";
 import EditProject from "../popups/edit-project";
 import DeleteIcon from "@material-ui/icons/Delete";
 import DeleteProject from "../popups/delete-project";
-import { makeStyles,Grid, Fab} from "@material-ui/core";
+import { makeStyles, Grid } from "@material-ui/core";
 // import { CardActionArea, CardActions, CardContent, CardMedia, Typography } from "@material-ui/core"
 import { connect } from 'react-redux'
 import { getProjectById } from '../../../actions/projectAction'
@@ -103,9 +102,9 @@ class ProjInfo extends Component {
 
     let variant = ["primary", "secondary", "success", "danger", "warning", "light", "dark"]
     const techBadge = techStacks?.map((techs, index) => (
-      <>
+      <React.Fragment key={index}>
         <Badge pill variant={variant[index]} key={index}>{techs}</Badge>{" "}
-      </>
+      </React.Fragment>
     ))
 
     return (
@@ -114,15 +113,6 @@ class ProjInfo extends Component {
           <Navigation proj={proj}></Navigation>
         </div>
         <div className="news">
-          <Fab
-            className="back"
-            href="/projects"
-            color="default"
-            aria-label="add"
-            ml-2
-          >
-            <ArrowBackIcon />
-          </Fab>
           <Row>
             <Col sm={4}>
               <Card.Img variant="top" className="proj_img" src={proj_img} />

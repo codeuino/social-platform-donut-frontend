@@ -1,15 +1,12 @@
-.user-details {
+.user-detail {
   display: flex;
   flex-direction: row;
   border: solid 1px #dfe9f1;
-  min-height: 198px;
-  height: auto;
   align-items: center;
-  flex: 0.5;
+  height: 268px;
   .user-image {
-    flex: 1;
     text-align: center;
-    margin: 35px 0;
+    margin: 35px 10px;
     .edit-option {
       margin-top: 10px;
       border-radius: 20px;
@@ -23,8 +20,8 @@
     .user-pic {
       display: inline-block;
       .userpic {
-        width: 120px;
-        height: 120px;
+        width: 182px;
+        height: 182px;
       }
     }
   }
@@ -59,16 +56,16 @@
     .social-icons {
       .btn-primary {
         margin: 5px 7px 0 0;
-        padding: 8px;
+        padding: 0.7em;
         font-size: 14px;
         box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
-        border-radius: 20px;
-        width: 80px;
-        height: 35px;
+        padding: 3px;
+        width: 10vw;
+        height: 2.5em;
         font-family: Inter;
         font-style: normal;
         font-weight: 600;
-        font-size: 14px;
+        font-size: 0.8em;
         line-height: 17px;
         text-align: center;
       }

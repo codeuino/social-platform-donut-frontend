@@ -23,15 +23,18 @@
     border-radius: 100px;
     color: #007bff;
     margin: 0 5px;
-    cursor: pointer;
-    &:focus {
-      background: #007bff;
-      color: white;
-    }
-    &.active {
-      background: #007bff;
-      color: white;
-    }
+   &:hover {
+     background-color: #1a73e8;
+     color: white;
+   }
+
+   &:focus {
+     background-color: #1a73e8;
+     color: white;
+   }
+  }
+  .btn-primary {
+    background-color: #fff;
   }
   .space {
     width: 10px;
@@ -52,7 +55,6 @@
     margin: 0 5px;
     cursor: pointer;
     &:focus {
-      background: #007bff;
       color: white;
       box-shadow: none;
     }
@@ -158,7 +160,7 @@
             border-right: 1px solid rgba(204, 204, 204, 0.7);
             .date-content {
               width: 50%;
-              margin: 0 auto;
+              padding: 1vw;
               small {
                 font-family: Inter;
                 font-style: normal;

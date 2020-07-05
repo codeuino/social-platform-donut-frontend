@@ -22,13 +22,6 @@ class Navigation extends Component {
     org: false
  };
   render() {
-    // function renderTooltip(props) {
-    //   return (
-    //     <Tooltip id="button-tooltip" {...props}>
-    //       Simple tooltip
-    //     </Tooltip>
-    //   );
-    // }
     const ListItem = (props) => {
       const item = props.isMobile ? (
         <ListGroup.Item className={props.className}>

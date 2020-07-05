@@ -160,9 +160,9 @@ export const getPostsCreatedByUser = (pagination = 10, page = 1) => async (dispa
 }
 
 // GET INVITE LINK 
-export const getInviteLink = () => async (dispatch) => {
+export const getInviteLink = (role) => async (dispatch) => {
   try {
-    const res = await axios.get('/user/invite')
+    const res = await axios.get(`/user/invite?role=${role}`)
     dispatch(setRequestStatus(false));
     if(res.status === 200) {
       dispatch(setRequestStatus(true));
@@ -187,7 +187,7 @@ export const processInviteToken = (token) => async (dispatch) => {
       console.log('Processing the invite link ', res.data);
       dispatch({
         type: PROCESS_INVITE_LINK,
-        payload: res.data.success || res.data.msg
+        payload: res.data.redirectTo || res.data.msg
       })
     }
   } catch(error) {
