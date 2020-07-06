@@ -1,0 +1,88 @@
+.editor-content {
+  padding: 30px;
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  .editor-toppanel {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+    .editor-title {
+      flex-grow: 5;
+      width: 60%;
+      .form-container {
+        margin-top: 10px;
+      }
+      .title-text {
+        font-family: Inter;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 36px;
+        line-height: 44px;
+
+        color: #1d2129;
+      }
+    }
+    .editor-buttons {
+      flex-grow: 1;
+      text-align: right;
+      .option-btn {
+        background: #fff;
+        border-radius: 100px;
+        padding: 4px 20px;
+        color: #007bff;
+        margin: 0 10px;
+        height: 40px;
+        max-width: 170px;
+        cursor: pointer;
+        &:active {
+          background: #fff;
+          color: #007bff;
+        }
+        &:hover {
+          background: #fff;
+          color: #007bff;
+        }
+        .option-text {
+          font-family: Inter;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 14px;
+          line-height: 19px;
+          /* identical to box height */
+        }
+      }
+    }
+  }
+  .proposal-bottompanel {
+    flex-grow: 5;
+    display: flex;
+  }
+
+  .last-saved {
+    margin: 10px;
+    font-family: Inter;
+    font-size: 12px;
+    font-weight: 400;
+    display: inline-block;
+  }
+
+  .save-container {
+    display: flex;
+    flex-direction: row;
+    .container-outer {
+      order: 4;
+      .save-spinner {
+        display: inline-block;
+        margin: 10px 10px 10px 0px;
+      }
+      .save-text {
+        margin: 10px;
+        font-family: Inter;
+        font-size: 10px;
+        font-weight: 400;
+        display: inline inline-block;
+      }
+    }
+  }
+}

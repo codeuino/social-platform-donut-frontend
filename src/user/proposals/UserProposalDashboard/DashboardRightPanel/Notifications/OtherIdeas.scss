@@ -11,10 +11,10 @@
   }
   .ideas-container {
     border: solid 1px #dfe9f1;
-    overflow: auto;
+    min-height: 90vh;
     border-radius: 5px;
     margin: 5px;
-    max-height: 300px;
+
     .idea-item {
       display: flex;
       padding: none;
