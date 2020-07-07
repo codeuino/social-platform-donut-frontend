@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./notifications.scss";
+import Btn from "../../../common/Button";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import donutIcon from '../../../svgs/donut-icon.svg'
@@ -81,7 +82,7 @@ class Notifications extends Component {
             </div>
             <div className="notification-description">
               <h6>{notification.heading}</h6>
-              {notification.tag ? <button type="button" className="tag">{notification.tag}</button> : <div></div>}
+              {notification.tag ? <Btn type="button" className="tag">{notification.tag}</Btn> : <div></div>}
               <p>{notification.content}</p>
             </div>
           </div>

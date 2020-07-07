@@ -15,6 +15,7 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button } from "react-bootstrap";
+import Btn from "../../../common/Button";
 import AddEventModal from "./popups/AddEventModal";
 import AddProjectModal from "./popups/AddProjectModal";
 import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
@@ -219,7 +220,7 @@ function NewsFeed(props) {
                                 <h3>{project?.projectName}</h3>
                                 <p>By {project?.projectOwner || "CODEUINO"}</p>
                                 <div className="view-project">
-                                    <Button className="view-project-btn">View Project</Button>
+                                    <Btn className="view-project-btn">View Project</Btn>
                                 </div>
                             </div>
                         </Paper>
@@ -301,7 +302,7 @@ function NewsFeed(props) {
                                     </div>
                                 </div>
                                 <div className="tag-container">
-                                    <Button className="tag-btn">+1 RSVP</Button>
+                                    <Btn className="tag-btn">+1 RSVP</Btn>
                                 </div>
                             </div>
                         </Paper>
@@ -393,7 +394,8 @@ function NewsFeed(props) {
                 color="primary"
                 aria-label="contained primary button group"
               >
-                <Button
+                <Btn
+                  style={{backgroundColor: "purple"}}
                   variant="primary"
                   onClick={() => {
                     handleShow("event");
@@ -413,8 +415,8 @@ function NewsFeed(props) {
                     />
                   </svg>
                   <span className="optionbtn-text">Event</span>
-                </Button>
-                <Button
+                </Btn>
+                <Btn
                   variant="primary"
                   className="optionbtn"
                   onClick={() => {
@@ -434,7 +436,7 @@ function NewsFeed(props) {
                     />
                   </svg>
                   <span className="optionbtn-text">Project</span>
-                </Button>
+                </Btn>
               </ButtonGroup>
             </div>
           </div>

@@ -34,7 +34,7 @@
         width: 6vw;
         height: 5vh;
         background: rgb(250, 251, 252);
-        border-radius: 100px;
+        font-family: Inter;
         color: #1A73E8;
         padding: 0.3em;
         margin-left: 1em;
@@ -257,8 +257,6 @@
       .modal__remove__followButton {
         border: 1px solid #eb5757;
         box-sizing: border-box;
-        box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
-        border-radius: 34px;
         background: transparent;
         width: 83px;
         height: 4.5vh;
@@ -309,9 +307,8 @@
           display: flex;
           .invite__btn {
             margin-left: 3px;
+            font-family: Inter;
             background: #1a73e8;
-            box-shadow: 1.26667px 2.53333px 6.33333px rgba(0, 0, 0, 0.1);
-            border-radius: 43.0667px;
             width: 83px;
             height: 4.5vh;
             padding: 0px;
@@ -322,9 +319,8 @@
           flex-wrap: wrap;
           .invite__btn {
             margin-right: 10px;
+            font-family: Inter;
             background: #1a73e8;
-            box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
-            border-radius: 20px;
             width: 83px;
             height: 4.5vh;
             padding: 0px;

@@ -198,10 +198,6 @@
                 margin-right: 15px;
                 margin-bottom: 15px;
                 .tag-btn {
-                  background: #1a73e8;
-                  border-radius: 15px;
-                  font-family: Inter;
-                  font-style: normal;
                   font-weight: 600;
                   font-size: 10px;
                   line-height: 12px;
@@ -253,16 +249,11 @@
                 display: flex;
                 justify-content: center;
                 .view-project-btn {
-                  background: #1a73e8;
-                  border-radius: 20px;
                   padding-left: 25px;
                   padding-right: 25px;
-                  font-family: Qanelas;
-                  font-style: normal;
                   font-weight: 600;
                   font-size: 10px;
                   line-height: 12px;
-                  color: #ffffff;
                 }
               }
             }
@@ -392,16 +383,11 @@
         }
 
         .optionbtn {
-          background: #1a73e8;
-          border-radius: 100px;
           .optionbtn-text {
-            font-family: Inter;
             font-style: normal;
             font-weight: 600;
             font-size: 16px;
             line-height: 19px;
-
-            color: #ffffff;
           }
         }
       }
@@ -413,6 +399,7 @@
    width: 140%;
   .category {
     .category-btn {
+      border-radius: .25rem;
       background-color: white;
       font-family: Inter;
       font-style: normal;
