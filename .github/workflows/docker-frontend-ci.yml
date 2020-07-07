@@ -10,7 +10,7 @@ on:
 
 env:
   IMAGE_NAME: donut-client:latest
-  REPO_NAME: codeuino
+  REPO_NAME: codeuino1
   REGISTRY_NAME: registry.hub.docker.com
 
 jobs:
