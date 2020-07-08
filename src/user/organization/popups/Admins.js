@@ -105,17 +105,19 @@ class Admins extends Component {
         <Modal.Header closeButton className="modal__header">
           <Modal.Title className="modal__title">
             <div className="modal__main-title">Administrators</div>
-            <input
-              type="text"
-              placeholder="Search"
-              className="modal__search"
-              value={this.state.query}
-              onChange={this.onChange}
-              onKeyPress={this.onKeyPress}
-            />
-            <Button className="search_btn" onClick={this.onSearchClick}>
-              Search
-            </Button>
+            <div className="vertical-align-row">
+              <input
+                type="text"
+                placeholder="Search"
+                className="modal__search"
+                value={this.state.query}
+                onChange={this.onChange}
+                onKeyPress={this.onKeyPress}
+              />
+              <Button className="search_btn" onClick={this.onSearchClick}>
+                Search
+              </Button>
+            </div>
           </Modal.Title>
         </Modal.Header>
         <Modal.Body className="modal__body">

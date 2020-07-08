@@ -137,21 +137,23 @@ class Members extends Component {
         <Modal.Header closeButton className="modal__header">
           <Modal.Title className="modal__title">
             <div className="modal__main-title">Members</div>
-            <input 
-              type="text"
-              placeholder="Search"
-              className="modal__search"
-              name="query"
-              value={this.state.query}
-              onChange={this.onChange}
-              onKeyPress={this.onKeyPress}
-            />
-            <Button
-              className="search_btn"
-              onClick={this.onSearchClick}
-            >
-              Search
-            </Button>
+            <div className="vertical-align-row">
+              <input 
+                type="text"
+                placeholder="Search"
+                className="modal__search"
+                name="query"
+                value={this.state.query}
+                onChange={this.onChange}
+                onKeyPress={this.onKeyPress}
+              />
+              <Button
+                className="search_btn"
+                onClick={this.onSearchClick}
+              >
+                Search
+              </Button>
+            </div>
           </Modal.Title>
         </Modal.Header>
         <Modal.Body className="modal__body">
@@ -163,7 +165,7 @@ class Members extends Component {
               <Form.Label htmlFor="email" className="email__header">
                 Get invite link
               </Form.Label>
-              <div className="add__member__input__container">
+              <div className="add__member__input__container vertical-align-row">
                 <Form.Control
                   as="input"
                   placeholder="Copy invite link to share"
