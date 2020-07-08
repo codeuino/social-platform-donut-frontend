@@ -50,8 +50,13 @@
         display: inline;
       }
       .tag {
+        border-radius: 31px;
         padding: 2px;
         border: 1px solid #007bff;
+        background-color: #1a73e8;
+        color: #fff;
+        font-family: Inter;
+        font-style: normal;
         font-weight: 600;
         font-size: 10px;
         line-height: 12px;
