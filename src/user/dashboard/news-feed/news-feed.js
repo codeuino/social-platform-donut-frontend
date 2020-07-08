@@ -220,7 +220,7 @@ function NewsFeed(props) {
                                 <h3>{project?.projectName}</h3>
                                 <p>By {project?.projectOwner || "CODEUINO"}</p>
                                 <div className="view-project">
-                                    <Btn className="view-project-btn">View Project</Btn>
+                                    <Button className="view-project-btn">View Project</Button>
                                 </div>
                             </div>
                         </Paper>
@@ -302,7 +302,7 @@ function NewsFeed(props) {
                                     </div>
                                 </div>
                                 <div className="tag-container">
-                                    <Btn className="tag-btn">+1 RSVP</Btn>
+                                    <Button className="tag-btn">+1 RSVP</Button>
                                 </div>
                             </div>
                         </Paper>
