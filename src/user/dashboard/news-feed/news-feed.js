@@ -395,7 +395,6 @@ function NewsFeed(props) {
                 aria-label="contained primary button group"
               >
                 <Btn
-                  style={{backgroundColor: "purple"}}
                   variant="primary"
                   onClick={() => {
                     handleShow("event");
