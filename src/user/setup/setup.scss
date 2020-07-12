@@ -4,14 +4,14 @@
   .donut_header_logo {
     padding-bottom: 1.3em;
     .donut_logo_text {
-      width: 15vw;
-      height: 10vh;
+      width: 177px;
+      height: 66px;
       padding-top: 1em;
     }
     .donut_shadow {
       float: right;
-      height: 20vh;
-      width: 29vh;
+      height: 150px;
+      width: 190px;
       margin-top: -80px;
     }
   }
@@ -36,5 +36,6 @@
     margin-left: 13.22%;
     margin-right: 13.22%;
     box-shadow: 1px 3px 18px rgba(0, 0, 0, 0.1);
+    position: relative;
   }
 }

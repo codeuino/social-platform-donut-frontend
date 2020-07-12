@@ -1,4 +1,4 @@
-import { GET_USER_PROFILE, GET_ALL_MEMBERS, UPDATE_USER_PROFILE, GET_USER_EVENTS, GET_USER_PROJECTS, GET_USER_POSTS, GET_INVITE_LINK, PROCESS_INVITE_LINK } from './types'
+import { GET_USER_PROFILE, GET_ALL_MEMBERS, UPDATE_USER_PROFILE, GET_USER_EVENTS, GET_USER_PROJECTS, GET_USER_POSTS, GET_INVITE_LINK, PROCESS_INVITE_LINK, SET_ADMIN } from './types'
 import { errorHandler } from '../utils/errorHandler'
 import axios from 'axios'
 import { setRequestStatus } from '../utils/setRequestStatus'
@@ -15,6 +15,13 @@ export const getProfile = () => async (dispatch)=> {
         type: GET_USER_PROFILE,
         payload: res.data.user
       })
+      // if user is admin
+      if(res.data.user.isAdmin === true) {
+        dispatch({
+          type: SET_ADMIN,
+          payload: true
+        })
+      }
     }
   } catch(error) {
     dispatch(errorHandler(error))

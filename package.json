@@ -32,6 +32,7 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.4.0",
     "react-spinners": "^0.8.3",
+    "react-switch": "^5.0.1",
     "react-toastify": "^6.0.5",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",

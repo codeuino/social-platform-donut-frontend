@@ -49,7 +49,6 @@
       }
       .save_btn {
         background: #1A73E8;
-        border-radius: 100px;
         font-family: Inter;
         font-style: normal;
         font-weight: normal;
@@ -60,10 +59,10 @@
         height: 30px;
         left: 200px;
         top: 100px;
+        padding: 2px;
       }
       .deactivate_btn {
         background: transparent;
-        border-radius: 100px;
         font-family: Inter;
         font-style: normal;
         font-weight: normal;
@@ -76,10 +75,10 @@
         height: 30px;
         left: 200px;
         top: 100px;
+        padding: 2px;
       }
       .deactivated_btn {
         background: #EB5757;
-        border-radius: 100px;
         font-family: Inter;
         font-style: normal;
         font-weight: normal;
@@ -98,6 +97,9 @@
         position:absolute;
         left: 0;
         top: 0;
+      }
+      .toggle__switch {
+        float: right;
       }
     }
   }

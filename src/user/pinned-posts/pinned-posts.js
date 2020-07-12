@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import "./pinned-posts.scss";
 import Navigation from "../dashboard/navigation/navigation";
-// import Updates from "../dashboard/updates/updates";
 import PinPosts from "../pinned-posts/posts/pinPosts";
 import pinnedPostsLoading from "../../placeholderLoading/pinnedPostsLoading/pinnedPostsLoading";
-// import orgUpdatesLoading from "../../placeholderLoading/orgUpdatesLoading/orgUpdatesLoading";
 
 class PinnedPosts extends Component {
   constructor(props) {

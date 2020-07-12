@@ -81,3 +81,18 @@ export const getEventById = (eventId) => async (dispatch) => {
     dispatch(errorHandler(error))
   }
 }
+
+// RSVP FOR EVENT SECTION
+export const rsvpYes = (eventId, info) => async (dispatch) => {
+  try {
+    const res = await axios.patch(`/event/rsvp/${eventId}`, info);
+    dispatch(setRequestStatus(false))
+    if(res.status === 200) {
+      dispatch(setRequestStatus(true));
+      console.log('Doing rsvp for the event', res.data);
+      dispatch(getAllEvents());
+    }
+  } catch (error) {
+    dispatch(errorHandler(error))
+  }
+}

@@ -17,7 +17,9 @@ class EditProfile extends Component {
       linkedIn: '',
       designation: '',
       website: '',
-      longDesc: ''
+      longDesc: '',
+      canChangeName: '',
+      // canChangeEmail: ''
     }
   }
 
@@ -50,6 +52,7 @@ class EditProfile extends Component {
   componentWillReceiveProps(nextProps) {
     console.log('nextProps ', nextProps)
     const { userProfile } = nextProps.user
+    const permissions = nextProps?.org?.org?.options?.permissions
     const about = userProfile.info?.about
     this.setState({ 
       firstName: userProfile.name?.firstName,
@@ -58,7 +61,9 @@ class EditProfile extends Component {
       designation: about?.designation, 
       longDesc: about?.longDescription, 
       shortDesc: about?.shortDescription,
-      location: about?.location
+      location: about?.location,
+      // canChangeEmail: permissions?.canChangeEmail,
+      canChangeName: permissions?.canChangeName
      }, () => {
       console.log('updated state ', this.state)
     })
@@ -66,7 +71,17 @@ class EditProfile extends Component {
 
   render() {
     const { borderStyle, onHide, show } = this.props
-    const { firstName, lastName, shortDesc, location, designation, website, longDesc } = this.state
+    const { 
+      firstName, 
+      lastName, 
+      shortDesc, 
+      location, 
+      designation, 
+      website, 
+      longDesc, 
+      canChangeName
+      // canChangeEmail
+     } = this.state
      return (
        <Modal onHide={onHide} show={show} className="modal">
          <Modal.Header
@@ -74,7 +89,7 @@ class EditProfile extends Component {
            className="modal__header"
            aria-labelledby="contained-modal-title-vcenter"
            style={borderStyle}
-           centered={true}
+           centered="true"
          >
            <Modal.Title className="modal__title" style={borderStyle}>
              <div className="modal__main-title">Edit Profile</div>
@@ -96,6 +111,7 @@ class EditProfile extends Component {
                    defaultValue={firstName}
                    name="firstName"
                    onChange={this.onChange}
+                   readOnly={!canChangeName}
                  />
                </Form.Group>
 
@@ -111,6 +127,7 @@ class EditProfile extends Component {
                    defaultValue={lastName}
                    name="lastName"
                    onChange={this.onChange}
+                   readOnly={!canChangeName}
                  />
                </Form.Group>
              </Form.Row>
@@ -246,7 +263,8 @@ EditProfile.propTypes = {
 const mapStateToProps = (state) => ({
   auth: state.auth,
   error: state.error,
-  user: state.user
+  user: state.user,
+  org: state.org
 })
 
 export default connect(mapStateToProps, { updateProfile })(EditProfile);

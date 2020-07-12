@@ -4,6 +4,7 @@ import UploadImg from '../../../../images/upload.jpg'
 import { connect } from 'react-redux'
 import { getOrgProfile, updateOrgProfile, deactivateOrg } from '../../../../actions/orgAction'
 import './profile.scss'
+import ToggleSwitch from './Toggle/ToggleSwitch';
 
 class OrgProfile extends Component {
   constructor(props){
@@ -14,19 +15,26 @@ class OrgProfile extends Component {
       orgName: "",
       shortDesc: "",
       longDesc: "",
-      error: ''
+      error: '',
+      isMaintenance: false
     }
   }
 
   // fetch data on page load 
-  componentWillMount() {
+  componentDidMount() {
     this.props.getOrgProfile()
   }
 
   componentWillReceiveProps(nextProps) {
     const { name, description } = nextProps.org.org;
-    const { isDeactivated } = nextProps.org
-    this.setState({ orgName: name, shortDesc: description.shortDescription, longDesc: description.longDescription, isDeactivated: isDeactivated }, () => {
+    const { isDeactivated, isMaintenance } = nextProps.org
+    this.setState({ 
+      orgName: name, 
+      shortDesc: description.shortDescription, 
+      longDesc: description.longDescription,
+      isDeactivated: isDeactivated, 
+      isMaintenance: isMaintenance
+    }, () => {
       console.log('org info ', this.state)
     })
     const { msg } = nextProps.error
@@ -73,19 +81,24 @@ class OrgProfile extends Component {
       shortDesc, 
       longDesc, 
       // error, 
-      isDeactivated
+      isDeactivated,
+      isMaintenance
      } = this.state;
     return (
       <div className="container">
         <div className="profile_content">
           <div className="container">
             <p className="org_profile_text">Organization Profile</p>
-              {/* {Boolean(error !== null) ? (<p style={{color: "red"}}>{error}</p>): null } */}
+            {/* {Boolean(error !== null) ? (<p style={{color: "red"}}>{error}</p>): null } */}
             <Form className="form">
               <Form.Group>
                 <Form.Label htmlFor="label_text" className="label_text">
                   LOGO
                 </Form.Label>
+                <span className="toggle__switch">
+                  <span className="label_text mr-2">Maintenance</span>
+                  <ToggleSwitch isMaintenance={isMaintenance} />
+                </span>
               </Form.Group>
               <Form.Group>
                 <div className="box">
@@ -94,8 +107,19 @@ class OrgProfile extends Component {
                     alt="Upload"
                     className="upload_img img-fluid"
                   />
-                  <input type="file" name="logo" onChange={this.onFileChange} className="default__input__file" id="selectFile"/>
-                  <Button className="upload_btn" onClick={() => { document.getElementById('selectFile').click() } }>
+                  <input
+                    type="file"
+                    name="logo"
+                    onChange={this.onFileChange}
+                    className="default__input__file"
+                    id="selectFile"
+                  />
+                  <Button
+                    className="upload_btn"
+                    onClick={() => {
+                      document.getElementById("selectFile").click();
+                    }}
+                  >
                     Upload new
                   </Button>
                 </div>
@@ -158,10 +182,18 @@ class OrgProfile extends Component {
               </Form.Group>
               <Form.Group>
                 <Button
-                  className={isDeactivated ? 'deactivated_btn' : 'btn-danger button-outline-danger deactivate_btn' }
+                  className={
+                    isDeactivated
+                      ? "deactivated_btn"
+                      : "btn-danger button-outline-danger deactivate_btn"
+                  }
                   onClick={this.deactivateOrg}
                 >
-                  {isDeactivated ? (<span>Deactivated</span>) : (<span>Deactivate</span>)}
+                  {isDeactivated ? (
+                    <span>Deactivated</span>
+                  ) : (
+                    <span>Deactivate</span>
+                  )}
                 </Button>
               </Form.Group>
             </Form>

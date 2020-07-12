@@ -5,8 +5,6 @@ import UpcomingEvents from "./upcoming-events/upcoming-events";
 import Notifications from "./notifications/notifications";
 import Portfolio from "./portfolio/portfolio";
 import NewsFeed from "./news-feed/news-feed";
-// import Updates from "./updates/updates";
-// import orgUpdatesLoading from "../../placeholderLoading/orgUpdatesLoading/orgUpdatesLoading";
 import notifyUsersLoading from "../../placeholderLoading/notifyUsersLoading/notifyUsersLoading";
 import portfolioLoading from "../../placeholderLoading/portfolioLoading/portfolioLoading";
 import newsFeedLoading from "../../placeholderLoading/newsFeedLoading/newsFeedLoading";

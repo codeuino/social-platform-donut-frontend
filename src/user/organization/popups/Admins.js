@@ -5,6 +5,7 @@ import { removeAdmin } from '../../../actions/orgAction'
 import logo from "../../../svgs/logo-image.jpg";
 import { getMember } from '../../../actions/insightAction'
 import { getInviteLink } from '../../../actions/usersAction'
+import { getOrgProfile } from '../../../actions/orgAction'
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -15,7 +16,8 @@ class Admins extends Component {
       text: 'Follow',
       admins: [],
       query: '',
-      inviteLink: ''
+      inviteLink: '',
+      whoCanSendInvite: ''
     }
   }
 
@@ -28,7 +30,8 @@ class Admins extends Component {
   componentWillReceiveProps(nextProps) {
     console.log('nextProps ', nextProps)
     const { query } = this.state;
-    const { insight } = nextProps
+    const { insight, org } = nextProps
+    const permissions = org?.org?.options?.permissions
     let res = [];
     if (query) {
       let allMembers = insight.member;
@@ -44,7 +47,11 @@ class Admins extends Component {
       let allAdmins = nextProps.admins;
       res = this.mapHelper(allAdmins);
     }
-    this.setState({ admins: res, inviteLink: nextProps.user?.inviteLink })
+    this.setState({
+      admins: res,
+      inviteLink: nextProps.user?.inviteLink,
+      whoCanSendInvite: permissions?.sendInvite
+    });
   }
 
    mapHelper = (allAdmins) => {
@@ -91,7 +98,7 @@ class Admins extends Component {
 
   render() {
     const { onHide, show } = this.props
-    const { inviteLink } = this.state
+    const { inviteLink, whoCanSendInvite } = this.state
     const adminList = [...this.state.admins] 
     let admins = adminList.map((item) => (
       <Row className="modal__member" id="p1" key={item._id}>
@@ -126,17 +133,19 @@ class Admins extends Component {
         <Modal.Header closeButton className="modal__header">
           <Modal.Title className="modal__title">
             <div className="modal__main-title">Administrators</div>
-            <input
-              type="text"
-              placeholder="Search"
-              className="modal__search"
-              value={this.state.query}
-              onChange={this.onChange}
-              onKeyPress={this.onKeyPress}
-            />
-            <Button className="search_btn" onClick={this.onSearchClick}>
-              Search
-            </Button>
+            <Row style={{ marginLeft: "0px" }}>
+              <input
+                type="text"
+                placeholder="Search"
+                className="modal__search"
+                value={this.state.query}
+                onChange={this.onChange}
+                onKeyPress={this.onKeyPress}
+              />
+              <Button className="search_btn" onClick={this.onSearchClick}>
+                Search
+              </Button>
+            </Row>
           </Modal.Title>
         </Modal.Header>
         <Modal.Body className="modal__body">
@@ -156,7 +165,15 @@ class Admins extends Component {
                   onClick={this.copyToClipBoard.bind(this, inviteLink)}
                   placeholder="Get invite link"
                 ></Form.Control>
-                <Button className="invite__btn" onClick={this.onGetInviteLink}>Get link</Button>
+                <Button
+                  className="invite__btn"
+                  onClick={this.onGetInviteLink}
+                  disabled={Boolean(
+                    whoCanSendInvite !== "ADMINS" || whoCanSendInvite !== "BOTH"
+                  ) ? false : true }
+                >
+                  Get link
+                </Button>
               </div>
               {/* <div className="share__btn__container">
                 <p className="share__text">or share invite on</p>
@@ -166,7 +183,7 @@ class Admins extends Component {
               </div> */}
             </div>
           </div>
-           <ToastContainer
+          <ToastContainer
             position="top-right"
             autoClose={5000}
             hideProgressBar={false}
@@ -189,7 +206,8 @@ const mapStateToProps = (state) => ({
   error: state.error,
   insight: state.insight,
   user: state.user,
-  status: state.status
+  status: state.status,
+  org: state.org
 })
 
-export default connect(mapStateToProps, { removeAdmin, getMember, getInviteLink })(Admins)
+export default connect(mapStateToProps, { removeAdmin, getMember, getInviteLink, getOrgProfile })(Admins)

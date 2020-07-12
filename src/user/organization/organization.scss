@@ -104,3 +104,9 @@
   margin-top: -10px;
   margin-left: 30px;
 }
+.form-control:disabled,
+.form-control[readonly] {
+  background-color: #e9ecef;
+  opacity: 1;
+  font-family: "Inter";
+}

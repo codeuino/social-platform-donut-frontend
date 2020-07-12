@@ -14,7 +14,7 @@ import {
   CardMedia,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { Button } from "react-bootstrap";
+import { Button, } from "react-bootstrap";
 import AddEventModal from "./popups/AddEventModal";
 import AddProjectModal from "./popups/AddProjectModal";
 import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
@@ -25,9 +25,12 @@ import AddPostModal from "./popups/AddPostModal";
 import Comment  from "./popups/comment";
 import { connect } from 'react-redux'
 import { getAllCommentsOfPost } from '../../../actions/commentAction'
+import { upVotePost } from '../../../actions/postAction' 
 import profileImg from '../../../svgs/evt-creator.svg';
 import eventImg from "../../../svgs/event-img-1.svg";
 import eventImg2 from "../../../svgs/event-img-2.svg";
+import { withRouter } from 'react-router-dom'
+import { rsvpYes } from '../../../actions/eventAction'
 
 const styles = makeStyles((theme) => ({
   root: {
@@ -90,7 +93,7 @@ const styles = makeStyles((theme) => ({
 function NewsFeed(props) {
   const classes = styles();
   const [type, changeType] = useState("All");
-  const [first, second] = useState("f");
+  // const [first, second] = useState("f");
   const [showProject, setShowProject] = useState(false);
   const [showEvent, setShowEvent] = useState(false);
   const [writePost, showPostModal] = useState(false);
@@ -105,11 +108,12 @@ function NewsFeed(props) {
     setEvents(props?.allEvents);
     setAllProjects(props?.allProjects);
     setAllPosts(props?.allPosts);
-  }, [props]);
+  }, [props.allEvents, props.allPosts, props.allProjects, props]);
 
   let handleClick = (atrb) => () => {
+    console.log('attr ', atrb);
     changeType(atrb);
-    second("s");
+    // second("s");
   };
 
   let handleShow = (modalName) => {
@@ -142,6 +146,24 @@ function NewsFeed(props) {
     setCommentId(postId);
     toggle(!showComment);
   }
+
+  let onUpvote = (postId) => {
+    console.log('upvote clicked!', postId);
+    props.upVotePost(postId)
+  }
+
+  let onRsvpYes = (eventId) => {
+    console.log('On rsvp yes ', eventId);
+    const info = {
+      yes: localStorage.getItem('userId')
+    }
+    props.rsvpYes(eventId, info);
+  }
+
+  let onViewProject = (projectId) => {
+    console.log('Redirecting to project ', projectId);
+    props.history.push(`/${projectId}/proj-info`);
+  }
   
   let postContent = posts?.map((post) => {
     return (
@@ -162,7 +184,10 @@ function NewsFeed(props) {
               </ListItem>
               <div className="post-details2">{post?.content}</div>
               <ListItem>
-                <IconButton className={classes.vote}>
+                <IconButton 
+                  className={classes.vote}
+                  onClick={() => onUpvote(post._id)}
+                  >
                   <ArrowDropUpIcon className="up-vote" />
                 </IconButton>
                 <span className="up-vote">{post?.votes?.upVotes?.user.length}</span>
@@ -196,7 +221,12 @@ function NewsFeed(props) {
                                 <h3>{project?.projectName}</h3>
                                 <p>By {project?.projectOwner || "CODEUINO"}</p>
                                 <div className="view-project">
-                                    <Button className="view-project-btn">View Project</Button>
+                                    <Button 
+                                      className="view-project-btn"
+                                      onClick={() => onViewProject(project._id)}
+                                    >
+                                        View Project
+                                    </Button>
                                 </div>
                             </div>
                         </Paper>
@@ -235,7 +265,7 @@ function NewsFeed(props) {
 
   let eventsContent = events?.map((event) => {
     return (
-       <div div className = "grid" key={event._id}>
+       <div className = "grid" key={event._id}>
             <Paper elevation={1} className={classes.paper}>
                 <Card className={classes.root}>
                     <CardMedia className="eventimg"
@@ -258,7 +288,12 @@ function NewsFeed(props) {
                                     </div>
                                 </div>
                                 <div className="tag-container">
-                                    <Button className="tag-btn">+1 RSVP</Button>
+                                    <Button 
+                                      className="tag-btn"
+                                      onClick={() => onRsvpYes(event._id)}
+                                    >
+                                        +1 RSVP
+                                    </Button>
                                 </div>
                             </div>
                         </Paper>
@@ -377,8 +412,8 @@ function NewsFeed(props) {
           />
         </div>
       </div>
-      <div className="posts">
-        <div className="category">
+      {/* <div className="posts">
+        <span className="category">
           <span className="to-centre">
             {first === "f" ? (
               <Button
@@ -424,18 +459,64 @@ function NewsFeed(props) {
               <span className="btn-content">Projects</span>
             </Button>
           </span>
-        </div>
+        </span>
+      </div> */}
+      <div className="tabs__container">
+        <span className="nav__tab container">
+          <ul className="nav__list__container">
+            <li
+              className={
+                type === "All"
+                  ? "nav__single__tab selected"
+                  : "nav__single__tab"
+              }
+              onClick={handleClick("All")}
+            >
+              All
+            </li>
+            <li
+              className={
+                type === "Post"
+                  ? "nav__single__tab selected"
+                  : "nav__single__tab"
+              }
+              onClick={handleClick("Post")}
+            >
+              Posts
+            </li>
+            <li
+              className={
+                type === "Event"
+                  ? "nav__single__tab selected"
+                  : "nav__single__tab"
+              }
+              onClick={handleClick("Event")}
+            >
+              Events
+            </li>
+            <li
+              className={
+                type === "Project"
+                  ? "nav__single__tab selected"
+                  : "nav__single__tab"
+              }
+              onClick={handleClick("Project")}
+            >
+              Projects
+            </li>
+          </ul>
+        </span>
       </div>
       <div className="post">
-        {Boolean(type !== 'All') ?
-         content 
-         :
-         <>
-          {postContent}
-          {eventsContent}
-          {projectsContent}
-         </>
-       }
+        {Boolean(type !== "All") ? (
+          content
+        ) : (
+          <>
+            {postContent}
+            {eventsContent}
+            {projectsContent}
+          </>
+        )}
       </div>
     </div>
   );
@@ -451,4 +532,8 @@ const mapStateToProps = (state) => ({
   comment: state.comment
 })
 
-export default connect(mapStateToProps, { getAllCommentsOfPost })(NewsFeed)
+export default connect(mapStateToProps, {
+  getAllCommentsOfPost,
+  upVotePost,
+  rsvpYes
+})(withRouter(NewsFeed))

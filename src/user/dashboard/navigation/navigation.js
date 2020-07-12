@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { ListGroup, Button } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import "./navigation.scss";
 import Logout from "../../profile/popups/Logout";
@@ -147,11 +147,11 @@ class Navigation extends Component {
         <Mobile>
           <ListGroup className="list-group">
             <ListGroup.Item>
-              <NavLink to="/dashboard">
+              <Link to="/dashboard">
                 <div className="donut-title">
                   <DonutIconSmall />
                 </div>
-              </NavLink>
+              </Link>
             </ListGroup.Item>
             <ListItem
               name="Dashboard"

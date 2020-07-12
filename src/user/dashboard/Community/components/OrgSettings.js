@@ -43,7 +43,7 @@ class OrgSettings extends Component {
     this.props.updateSettings(info)
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.getOrgProfile()
   }
 
@@ -155,19 +155,16 @@ class OrgSettings extends Component {
                 >
                   <option
                     value="English"
-                    selected={language === "English"}
                   >
                     English
                   </option>
                   <option
                     value="French"
-                    selected={language === "French"}
                   >
                     French
                   </option>
                   <option
                     value="German"
-                    selected={language === "German"}
                   >
                     German
                   </option>
@@ -189,12 +186,10 @@ class OrgSettings extends Component {
                 >
                   <option 
                     value="12"
-                    selected={time === "12" }
                     >12 hr clock (05:00 PM)
                   </option>
                   <option 
                     value="24"
-                    selected={time === "24" }
                   >24 hr clock (13:00)
                   </option>
                 </Form.Control>
