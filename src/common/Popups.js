@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
-import { Modal, Button, Form } from 'react-bootstrap';
+import { Modal, Button, Form, Col } from 'react-bootstrap';
 import { MdVerifiedUser } from 'react-icons/md';
 import { FaUserSlash } from 'react-icons/fa';
 import { connect } from 'react-redux';
@@ -160,10 +160,10 @@ nextButton(){
       </Form>
     );
     const updateUsername = (
-      <Form>
-        <div className="row">
-          <div className="col-md-9">
-             <Form.Group controlId="formBasicEmail">
+      <Form className="modal__form">
+        <Form.Row className="modal__row">
+          <Form.Group as={Col} className="modal__group">
+             <Form.Label className="modal__label" controlId="formBasicEmail" />
               <Form.Control 
                 type="text"
                 placeholder="Enter your username"
@@ -171,14 +171,13 @@ nextButton(){
                 defaultValue={optionValue}
                 name="username"
               />
-            </Form.Group>
-          </div>
-          <div className="col-md-3">
-            <Button className="btn btn-light" type="button" onClick={this.handleSubmit}>
-              Save
+          </Form.Group>
+        </Form.Row>
+          <div className="modal__buttons">
+            <Button className="modal__save" onClick={this.handleSubmit}>
+              <span className="modal__buttontext">Save</span>
             </Button>
           </div>
-        </div>
       </Form>
     );
 
@@ -219,7 +218,7 @@ nextButton(){
    )
     const updatePassword = (
       <React.Fragment>
-      <form onSubmit={this.handleSubmit}>
+      <Form className="modal__form" onSubmit={this.handleSubmit}>
         <Step1 
           currentStep={this.state.currentStep} 
           onChange={this.onChange}
@@ -232,7 +231,7 @@ nextButton(){
       
         {this.nextButton()}
 
-      </form>
+      </Form>
       </React.Fragment>
     );
     const deactivateAccount = (
@@ -261,11 +260,21 @@ nextButton(){
       </div>
     )
     return (
-       <Modal show={this.state.show} onHide={this.handleClose} animation={false} centered>
-        <Modal.Header closeButton>
-          <Modal.Title>Update { " " + option }</Modal.Title>
+       <Modal 
+        show={this.state.show} 
+        onHide={this.handleClose} 
+        animation={true} 
+        centered
+        className="modal"
+        >
+        <Modal.Header closeButton className="modal__header">
+          <Modal.Title className="modal__title">
+            <div className="modal__main-title">
+              Update { " " + option }
+            </div>
+          </Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body className="modal__body">
           {Boolean(option === "name") ? updateName : null}
           {Boolean(option === "email") ? updateEmail: null}
           {Boolean(option === "username") ? updateUsername: null}
@@ -287,18 +296,24 @@ function Step1(props) {
     return null
   } 
   return(
-    <div className="form-group">
-      <label htmlFor="email">Registered-Email address</label>
-      <input
-        className="form-control"
-        id="email"
-        name="email"
-        type="text"
-        placeholder="abc@gmail.com"
-        value={props.email}
-        onChange={props.onChange}
-        />
-    </div>
+    <Form.Row className="modal__row">
+      <Form.Group as={Col} className="modal__group">
+        <Form.Label 
+          htmlFor="email" 
+          className="modal__label"
+          >
+            Registered-Email address
+        </Form.Label>
+        <Form.Control
+          id="email"
+          name="email"
+          type="text"
+          placeholder="abc@gmail.com"
+          value={props.email}
+          onChange={props.onChange}
+          />
+      </Form.Group>
+    </Form.Row>
   );
 }
 

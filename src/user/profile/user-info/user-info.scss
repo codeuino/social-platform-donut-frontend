@@ -4,16 +4,17 @@
   border: solid 1px #dfe9f1;
   align-items: center;
   height: 268px;
+  min-width: 58%;
   .user-image {
     text-align: center;
     margin: 35px 10px;
     .edit-option {
       margin-top: 10px;
-      border-radius: 20px;
+      // border-radius: 20px;
       font-size: 14px;
       .useredit {
         margin-top: 10px;
-        border-radius: 20px;
+        // border-radius: 20px;
         font-size: 14px;
       }
     }
@@ -29,27 +30,44 @@
     flex: 3;
     padding: 10px 14px;
     h1 {
-      color: #0069d9;
+      color: #1a73e8;
       font-size: 20px;
       font-weight: bold;
       margin: 0;
       padding: 0;
+      font-family: "Inter";
     }
     .profession {
-      color: #748391;
-      font-size: 14px;
       margin: 4px 0;
       padding: 0;
+      font-family: "Inter";
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 17px;
+      color: #1d2129;
+      text-align: justify;
     }
     .place {
       color: #2c3e50;
-      font-size: 12px;
+      font-family: "Inter";
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 17px;
+      color: #1d2129;
+      text-align: justify;
       margin: 4px 0;
       padding: 0;
     }
     .desc {
-      color: #5d5d5d;
+      font-family: "Inter";
+      font-style: normal;
+      font-weight: normal;
       font-size: 14px;
+      line-height: 17px;
+      color: #1d2129;
+      text-align: justify;
       margin: 0;
       padding: 0;
     }
@@ -69,6 +87,19 @@
         line-height: 17px;
         text-align: center;
       }
+    }
+    .fa_icon__container {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: -10vh;
+      .fa__icon {
+        font-size: 30px;
+        padding: 3px;
+        cursor: pointer;
+      }
+    }
+    .user__infos {
+      padding: 5px;
     }
   }
 }

@@ -26,7 +26,7 @@ class Events extends Component {
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     setTimeout(() => {
       this.props.getAllEvents()
     })
@@ -43,10 +43,6 @@ class Events extends Component {
   
   render() {
     const { allEvents } = this.state
-    // const setOptionValue = (targetId) => {
-    //     const event = Event_list.filter((x) => x._id === targetId);         
-    //     this.setState({optionValue: event[0]})
-    // }
 
     const handleToggle = (eventId, event) => {
       console.log("-handletoggel",eventId)

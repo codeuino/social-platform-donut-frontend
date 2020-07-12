@@ -22,7 +22,7 @@ class Portfolio extends Component {
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     setTimeout(() => {
       this.props.getMembers();
     })

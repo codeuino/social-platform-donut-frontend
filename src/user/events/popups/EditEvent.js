@@ -82,101 +82,102 @@ class EditEvent extends Component {
   };
 
   render() {
-    const { show, onHide } = this.props;
+    const { show, onHide, borderStyle } = this.props;
     const { eventName, shortDesc, longDesc, location } =this.state
     return (
       <Modal
         show={show}
         onHide={onHide}
-        size="md"
-        aria-labelledby="contained-modal-title-vcenter"
+        className="modal"
+        animation={true}
         centered
       >
-        <div className="container">
-          <Modal.Header closeButton className="heading border border-0 p-0">
-            <Modal.Title id="contained-modal-title-vcenter">
-              <div className="title">Edit Event</div>
-              <div className="about">Event Information</div>
-            </Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <Row className="form-content">
-              <Col className="p-0" sm={12}>
-                <Form.Label className="label">Event Name</Form.Label>
-                <Form.Control
-                  className="form-input"
-                  type="text"
-                  placeholder="Event name.."
-                  size="sm"
-                  name="eventName"
-                  defaultValue={eventName}
-                  onChange={this.onChange}
-                  required={true}
-                />
-              </Col>
-            </Row>
-            <Row className="form-content">
-              <Form.Label className="label">Short description</Form.Label>
-              <Form.Control
-                className="form-input"
-                as="textarea"
-                placeholder="Write a few lines about event.."
-                size="sm"
-                name="shortDesc"
-                defaultValue={shortDesc}
-                onChange={this.onChange}
-                required={true}
-              />
-            </Row>
-            <Row className="form-content">
-              <Form.Label className="label">Long description</Form.Label>
-              <Form.Control
-                className="form-input"
-                as="textarea"
-                placeholder="Write a details of event.."
-                size="sm"
-                name="longDesc"
-                defaultValue={longDesc}
-                onChange={this.onChange}
-                required={true}
-              />
-            </Row>
-            <Row>
-              <Form.Label className="label">Location</Form.Label>
-              <Form.Control
-                className="form-input"
-                type="text"
-                placeholder="Event location.."
-                size="sm"
-                name="location"
-                defaultValue={location}
-                onChange={this.onChange}
-                required={true}
-              />
-            </Row>
-            <Row>
-              <Form.Label className="label">Event Date</Form.Label>
-              <Form.Control
-                className="form-input"
-                type="text"
-                placeholder="Event date.."
-                size="sm"
-                name="date"
-                // defaultValue={this.refineDate(date)}
-                onChange={this.onChange}
-                required={true}
-              />
-            </Row>
+        <Modal.Header closeButton className ="modal__header" style = {borderStyle} >
+          <Modal.Title className = "modal__title" style = {borderStyle} >
+            <div className="modal__main-title">Edit Event</div>
+            <div className="modal__mini-title">Event Information</div>
+          </Modal.Title>
+        </Modal.Header>
+          <Modal.Body className="modal__body">
+            <Form className="modal__form">
+              <Form.Row className="modal__row">
+                <Form.Group className="modal__group" as={Col}>
+                  <Form.Label className="modal__label">Event Name</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Event name.."
+                      name="eventName"
+                      defaultValue={eventName}
+                      onChange={this.onChange}
+                      required={true}
+                    />
+                </Form.Group>
+              </Form.Row>
+              <Form.Row className="modal__row">
+                <Form.Group className="modal__group" as={Col}>
+                  <Form.Label className="modal__label">Short description</Form.Label>
+                    <Form.Control
+                      as="textarea"
+                      placeholder="Write a few lines about event.."
+                      name="shortDesc"
+                      defaultValue={shortDesc}
+                      onChange={this.onChange}
+                      required={true}
+                    />
+                </Form.Group>
+              </Form.Row>
+              <Form.Row className="modal__row">
+                <Form.Group className="modal__group" as={Col}>
+                  <Form.Label className="modal__label">Long description</Form.Label>
+                    <Form.Control
+                      as="textarea"
+                      placeholder="Write a details of event.."
+                      name="longDesc"
+                      defaultValue={longDesc}
+                      onChange={this.onChange}
+                      required={true}
+                    />
+                </Form.Group>
+              </Form.Row>
+              <Form.Row className="modal__row">
+                <Form.Group className="modal__group" as={Col}>
+                  <Form.Label className="modal__label">Location</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Event location.."
+                      name="location"
+                      defaultValue={location}
+                      onChange={this.onChange}
+                      required={true}
+                    />
+                </Form.Group>
+              </Form.Row>
+              <Form.Row className="modal__row">
+                <Form.Group className="modal__group" as={Col}>
+                  <Form.Label className="modal__label">Event Date</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Event date.."
+                      name="date"
+                      // defaultValue={this.refineDate(date)}
+                      onChange={this.onChange}
+                      required={true}
+                    />
+              </Form.Group>
+              </Form.Row>
+            </Form>
           </Modal.Body>
-          <div className="form-footer">
-            <Button onClick={this.updateEvent} className="savebtn">
-              Save
+          <div className="modal__buttons">
+            <Button onClick={this.updateEvent} className="modal__save">
+               <span className="modal__buttontext">Save</span>
             </Button>
-            <Button variant="outline-primary" className="cancelbtn" onClick={this.props.onHide}>
-              Cancel
+            <Button
+              className="modal__cancel"
+              onClick={this.props.onHide}
+            >
+               <span className="modal__buttontext">Cancel</span>
             </Button>
           </div>
-        </div>
       </Modal>
     );
   }

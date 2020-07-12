@@ -108,3 +108,15 @@
     height: 38px;
   }
 }
+
+.login__options {
+  display: flex;
+  justify-content: space-around;
+  .google__login {
+    height: 30px;
+  }
+  .github__login {
+    height: 30px;
+    width: 30px;
+  }
+}

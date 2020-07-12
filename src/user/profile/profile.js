@@ -7,6 +7,7 @@ import PinPosts from "../pinned-posts/posts/pinPosts";
 import { connect } from 'react-redux'
 import { getProfile, getEventsCreatedByUser, getProjectCreatedByUser, getPostsCreatedByUser } from '../../actions/usersAction' 
 import { getAllPinnedPosts } from '../../actions/postAction'
+import { getOrgProfile } from '../../actions/orgAction'
 
 class Profile extends Component {
   constructor(props) {
@@ -22,13 +23,14 @@ class Profile extends Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     console.log("match", this.props.match?.path);
     const path = this.props.match?.path;
     if (path === "/profile") {
       console.log("checking profile");
       setTimeout(() => {
          this.props.getProfile();
+         this.props.getOrgProfile();
       })
       setTimeout(() => {
         this.props.getPostsCreatedByUser();
@@ -102,7 +104,7 @@ const mapStateToProps = (state) => ({
   user: state.user,
   posts: state.post,
   event: state.event,
-  project: state.project
+  project: state.project,
 })
 
 export default connect(mapStateToProps, { 
@@ -110,5 +112,6 @@ export default connect(mapStateToProps, {
   getEventsCreatedByUser, 
   getProjectCreatedByUser,
   getPostsCreatedByUser,
-  getAllPinnedPosts
+  getAllPinnedPosts,
+  getOrgProfile
 })(Profile);

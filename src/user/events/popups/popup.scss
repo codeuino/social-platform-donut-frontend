@@ -37,9 +37,18 @@
     color: #2D2D2D;
 }
 
+.edit__event__title {
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 27px;
+    line-height: 29px;
+    color: #1a73e8;
+    padding-bottom: 3px;
+    margin-bottom: 2px;
+}
 .form-footer {
     margin-top: 0;
-    margin-left: 3px;
     Button {
         margin-right: 20px;
         margin-bottom: 30px;

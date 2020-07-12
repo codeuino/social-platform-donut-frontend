@@ -14,7 +14,7 @@ class UpcomingEvents extends Component {
   }
 
   // fetch upcoming events from the db
-  componentWillMount() {
+  componentDidMount() {
     this.props.upcomingEvents()
   }
 

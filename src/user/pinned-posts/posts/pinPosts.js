@@ -7,29 +7,23 @@ import {
     ListItemAvatar, 
     Avatar, 
     ListItemText, 
-    // ListItemSecondaryAction, 
     IconButton, 
     CardMedia
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button } from "react-bootstrap";
-// import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
-// import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
-// import EventNoteIcon from '@material-ui/icons/EventNote';
-// import EventIcon from '@material-ui/icons/Event';
-// import feed from '../../../jsonData/news-feed';
-// import ReplyIcon from '@material-ui/icons/Reply';
 import { connect } from 'react-redux'
-import { getEventsCreatedByUser, getProjectCreatedByUser } from '../../../actions/usersAction'
 import "./posts.scss";
 import Comment from '../../dashboard/news-feed/popups/comment';
 import { withRouter } from 'react-router-dom';
 import profileImg from '../../../svgs/evt-creator.svg';
 import eventImg from "../../../svgs/event-img-1.svg";
 import eventImg2 from "../../../svgs/event-img-2.svg";
-import { getAllPinnedPosts } from '../../../actions/postAction'
+import { getAllPinnedPosts, upVotePost } from '../../../actions/postAction'
+import { getEventsCreatedByUser, getProjectCreatedByUser } from '../../../actions/usersAction'
+import { rsvpYes } from '../../../actions/eventAction'
 
 const styles = makeStyles((theme) => ({
     root: {
@@ -96,13 +90,9 @@ function PinPosts(props){
     useEffect(() => {
         console.log('props from PinPosts ', props)
         if(props.match?.path === '/pinned-posts') {
-            console.log('fetch all the pinned posts!', props)
             props.getAllPinnedPosts()
-            setTimeout(() => {
-                setPosts(props.posts?.pinnedPosts);
-            })
+            setPosts(props.posts?.pinnedPosts);
         }
-        // debugger;
         if(props.match?.path === '/profile'){
             setEvents(props.userEvents)
             setAllProjects(props.userProjects || [])
@@ -110,7 +100,7 @@ function PinPosts(props){
             // let all = [...userEvents, ...userProjects, ...userPosts]
             // setAll(all)
         }
-    }, [props])
+    }, [props.userEvents, props.userProjects, props.userPosts])
     
     let handleClick = atrb => () => {
         changeType(atrb);
@@ -125,19 +115,42 @@ function PinPosts(props){
         toggle(!showComment);
     }
 
-    let userProjectsContent = userProjects?.map((newsItem) => {
+    let onUpVoteClick = (postId) => {
+        console.log("On upvote clicked ", postId);
+        props.upVotePost(postId)
+    }
+
+    let onRsvpYes = (eventId) => {
+        console.log('On rsvp yes ', eventId);
+        const info = {
+            yes: localStorage.getItem('userId')
+        }
+        props.rsvpYes(eventId, info);
+    }
+
+    let onViewProject = (projectId) => {
+        console.log('Redirecting to project ', projectId);
+        props.history.push(`/${projectId}/proj-info`);
+    }
+
+    let userProjectsContent = userProjects?.map((project) => {
         return (
-            <div className="grid" key={newsItem?._id}>
+            <div className="grid" key={project?._id}>
             <Paper elevation={1} className={classes.paper}>
                 <Card className={classes.root}>
                     <CardMedia className="projimg"
-                        image={newsItem?.eventImage || eventImg } title="Project Image">
+                        image={project?.eventImage || eventImg } title="Project Image">
                         <Paper className={classes.info}>
                             <div className="project-details">
-                                <h3>{newsItem?.projectName}</h3>
-                                <p>By {newsItem?.projectOwner || "CODEUINO"}</p>
+                                <h3>{project?.projectName}</h3>
+                                <p>By {project?.projectOwner || "CODEUINO"}</p>
                                 <div className="view-project">
-                                    <Button className="view-project-btn">View Project</Button>
+                                    <Button 
+                                        className="view-project-btn"
+                                        onClick={() => onViewProject(project._id)}
+                                    >
+                                        View Project
+                                    </Button>
                                 </div>
                             </div>
                         </Paper>
@@ -146,48 +159,27 @@ function PinPosts(props){
                         <ListItem className={classes.listStyle2}>
                             <ListItemAvatar>
                                 <Avatar variant="square">
-                                    <img src={newsItem?.img || profileImg} alt="I"/>
+                                    <img src={project?.img || profileImg} alt="I"/>
                                 </Avatar>
                             </ListItemAvatar>
                             <ListItemText className="main">
-                                <h2>{newsItem?.createdBy?.name?.firstName + " " + newsItem?.createdBy?.name?.lastName || "No Name"}</h2>
-                                <small>{newsItem?.createdAt}</small>
+                                <h2>{project?.createdBy?.name?.firstName + " " + project?.createdBy?.name?.lastName || "No Name"}</h2>
+                                <small>{project?.createdAt}</small>
                             </ListItemText>
-                            {/* <ListItemSecondaryAction>
-                                { (newsItem?.note === true) ?
-                                <IconButton edge="end" className={classes.icon}>
-                                    <EventNoteIcon className={classes.event}/>
-                                </IconButton> : (newsItem.schedule === true) ?
-                                <IconButton edge="end" className={classes.icon}>
-                                    <EventIcon className={classes.event}/>
-                                </IconButton> : null }
-                                <IconButton edge="end" className={classes.icon}>
-                                    <MoreHorizIcon className={classes.horiz}/>
-                                </IconButton>
-                            </ListItemSecondaryAction> */}
                         </ListItem>
-                        <div className="post-details2">{newsItem?.description?.short}</div>
+                        <div className="post-details2">{project?.description?.short}</div>
                         <ListItem>
-                            {/* <IconButton className={classes.vote}>
-                                <ArrowDropUpIcon className="up-vote"/>
-                            </IconButton>
-                            <span className="up-vote"> {newsItem.upvotes}</span>
-                            <span className="space"></span>
-                            <IconButton className={classes.vote}>
-                                <ArrowDropDownIcon className="down-vote"/>
-                            </IconButton>
-                            <span className="down-vote">{newsItem.downVotes}</span> */}
                             <span className="com-btn">
                                 <ChatBubbleIcon className={classes.chat}/>
                                 <Button 
                                 onClick = {
-                                    commentToggle.bind(this, newsItem._id)
+                                    commentToggle.bind(this, project._id)
                                 } >
                                     <span className="comment">Comment</span>
                                 </Button>
                             </span>
                         </ListItem>
-                            <Comment show={showComment && newsItem._id === commentId} onHide={toggle}/>
+                            <Comment show={showComment && project._id === commentId} onHide={toggle}/>
                     </List>
                 </Card>
             </Paper>
@@ -195,32 +187,35 @@ function PinPosts(props){
         )
     })
 
-    let userEventsContent = userEvents?.map((newsItem, index) => {
+    let userEventsContent = userEvents?.map((event, index) => {
         return (
             <div div className = "grid" key={index}>
             <Paper elevation={1} className={classes.paper}>
                 <Card className={classes.root}>
                     <CardMedia className="eventimg"
-                        image={newsItem?.eventImage || eventImg2 } title="Event Image">
+                        image={event?.eventImage || eventImg2 } title="Event Image">
                         <Paper className={classes.info2}>
                             <div className="event-details">
-                                <h3>{newsItem?.eventName}</h3>
+                                <h3>{event?.eventName}</h3>
                                 <div className="event-schedule">
                                     <div className="event-date">
                                         <div className="date-content">
                                             <small>DATE</small>
-                                            <h4>{newsItem?.eventDate}</h4>
+                                            <h4>{event?.eventDate}</h4>
                                         </div>
                                     </div>
                                     <div className="event-time">
                                         <div className="time-content">
                                             <small>Location</small>
-                                            <h4>{newsItem?.location}</h4>
+                                            <h4>{event?.location}</h4>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="tag-container">
-                                    <Button className="tag-btn">+1 RSVP</Button>
+                                    <Button 
+                                     className="tag-btn"
+                                     onClick={() => onRsvpYes(event._id)}
+                                     >+1 RSVP</Button>
                                 </div>
                             </div>
                         </Paper>
@@ -229,48 +224,16 @@ function PinPosts(props){
                         <ListItem className={classes.listStyle2}>
                             <ListItemAvatar>
                                 <Avatar variant="square">
-                                    <img src={newsItem?.imgSrc || profileImg} alt="I"/>
+                                    <img src={event?.imgSrc || profileImg} alt="I"/>
                                 </Avatar>
                             </ListItemAvatar>
                             <ListItemText className="main">
-                                 <h2>{newsItem?.createdBy?.name?.firstName + " " + newsItem?.createdBy?.name?.lastName}</h2>
-                                <small>{newsItem?.createdAt}</small>
+                                 <h2>{event?.createdBy?.name?.firstName + " " + event?.createdBy?.name?.lastName}</h2>
+                                <small>{event?.createdAt}</small>
                             </ListItemText>
-                            {/* <ListItemSecondaryAction>
-                                { (newsItem.note === true) ?
-                                <IconButton edge="end" className={classes.icon}>
-                                    <EventNoteIcon className={classes.event}/>
-                                </IconButton> : (newsItem.schedule === true) ?
-                                <IconButton edge="end" className={classes.icon}>
-                                    <EventIcon className={classes.event}/>
-                                </IconButton> : null }
-                                <IconButton edge="end" className={classes.icon}>
-                                    <MoreHorizIcon className={classes.horiz}/>
-                                </IconButton>
-                            </ListItemSecondaryAction> */}
                         </ListItem>
-                        <div className="post-details2">{newsItem?.description?.shortDescription}</div>
-                        {/* <ListItem>
-                            <IconButton className={classes.vote}>
-                                <ArrowDropUpIcon className="up-vote"/>
-                            </IconButton>
-                            <span className="up-vote">{newsItem.upvotes}</span>
-                            <span className="space"></span>
-                            <IconButton className={classes.vote}>
-                                <ArrowDropDownIcon className="down-vote"/>
-                            </IconButton>
-                            <span className="down-vote">{newsItem.downVotes}</span>
-                            <span className="com-btn">
-                                <ChatBubbleIcon className={classes.chat}/>
-                                <Button 
-                                onClick = {
-                                    commentToggle.bind(this, newsItem._id)
-                                } >
-                                    <span className="comment">Comment</span>
-                                </Button>
-                            </span>
-                        </ListItem> */}
-                        <Comment show={showComment && newsItem._id === commentId} onHide={toggle}/>
+                        <div className="post-details2">{event?.description?.shortDescription}</div>
+                        <Comment show={showComment && event._id === commentId} onHide={toggle}/>
                     </List>
                 </Card>
             </Paper>
@@ -278,59 +241,50 @@ function PinPosts(props){
         )
     });
 
-    let userPostsContent = userPosts?.map((newsItem, index) => {
+    let userPostsContent = userPosts?.map((post, index) => {
         return (
           <div className="grid" key={index}>
             <Paper elevation={1} className={classes.paper}>
               <Card className={classes.root}>
                   {/* <CardMedia className="projimg"
-                    image={newsItem?.image || eventImg } title="Post Image">
+                    image={post?.image || eventImg } title="Post Image">
                 </CardMedia> */}
                 <List className={classes.listStyle}>
                   <ListItem className={classes.listStyle2}>
                     <ListItemAvatar>
                       <Avatar variant="square">
-                        <img src={newsItem?.img || profileImg} alt="I" />
+                        <img src={post?.img || profileImg} alt="I" />
                       </Avatar>
                     </ListItemAvatar>
                     <ListItemText className="main">
-                      <h2>{newsItem?.userId?.name?.firstName + " " + newsItem?.userId?.name?.lastName}</h2>
-                      <small>{newsItem?.createdAt}</small>
+                      <h2>{post?.userId?.name?.firstName + " " + post?.userId?.name?.lastName}</h2>
+                      <small>{post?.createdAt}</small>
                     </ListItemText>
-                    {/* <ListItemSecondaryAction>
-                      {newsItem.note === true ? (
-                        <IconButton edge="end" className={classes.icon}>
-                          <EventNoteIcon className={classes.event} />
-                        </IconButton>
-                      ) : newsItem.schedule === true ? (
-                        <IconButton edge="end" className={classes.icon}>
-                          <EventIcon className={classes.event} />
-                        </IconButton>
-                      ) : null}
-                      <IconButton edge="end" className={classes.icon}>
-                        <MoreHorizIcon className={classes.horiz} />
-                      </IconButton>
-                    </ListItemSecondaryAction> */}
                   </ListItem>
-                  <div className="post-details2">{newsItem?.content}</div>
+                  <div className="post-details2">{post?.content}</div>
                   <ListItem>
-                    <IconButton className={classes.vote}>
+                    <IconButton 
+                      className={classes.vote}
+                      onClick={() => onUpVoteClick(post._id)}
+                      >
                       <ArrowDropUpIcon className="up-vote" />
                     </IconButton>
-                    <span className="up-vote">{newsItem?.votes?.upVotes?.user.length}</span>
+                    <span className="up-vote">
+                     {post?.votes?.upVotes?.user.length}
+                    </span>
                     <span className="space"></span>
                     <span className="com-btn">
                       <ChatBubbleIcon className={classes.chat} />
                       <Button
                         className="comment-btn"
-                        onClick={commentToggle.bind(this, newsItem?._id)}
+                        onClick={commentToggle.bind(this, post?._id)}
                       >
                         <span className="comment">Comment</span>
                       </Button>
                     </span>
                   </ListItem>
                   <Comment
-                    show={showComment && newsItem._id === commentId}
+                    show={showComment && post._id === commentId}
                     onHide={toggle}
                   />
                 </List>
@@ -345,70 +299,108 @@ function PinPosts(props){
         posts = userProjectsContent
     }else if(type === "Event"){
         posts = userEventsContent
-    }else if(type === "Donut"){
+    }else if(type === "Post"){
         posts = userPostsContent
     } 
 
     return (
-        <div>
+      <div>
         <div className="posts">
-            <h1>Pinned Posts</h1>
-            <div className="categories">
-                { (first === 'f') ? 
-                <Button 
-                    active
-                    variant = "primary"
-                    className = "btn"
-                    onClick={handleClick('All')}
-                >
-                    <span className="btn-content">All</span>
-                </Button> :
-                <Button 
-                    variant = "primary"
-                    className = "btn"
-                    onClick={handleClick('All')}
-                    >
-                    <span className="btn-content">All</span>
-                </Button> }
-                    <span className="space"></span>
-                <Button 
-                    variant="primary" 
-                    className="btn"
-                    onClick={handleClick('Donut')}
-                >
-                    <span className="btn-content">Posts</span>
-                </Button>
-                    <span className="space"></span>
-                <Button 
-                    variant="primary" 
-                    className="btn"
-                    onClick={handleClick('Event')}
-                >
-                    <span className="btn-content">Events</span>
-                </Button>
-                    <span className="space"></span>
-                <Button 
-                    variant = "primary"
-                    className="btn"
-                    onClick={handleClick('Project')}
-                >
-                    <span className="btn-content">Projects</span>
-                </Button>
+          <h1>Pinned Posts</h1>
+          <div className="categories">
+            {/* <Button
+              active
+              variant="primary"
+              className="btn"
+              onClick={handleClick("All")}
+            >
+              <span className="btn-content">All</span>
+            </Button>
+            <span className="space"></span>
+            <Button
+              variant="primary"
+              className="btn"
+              onClick={handleClick("Post")}
+            >
+              <span className="btn-content">Posts</span>
+            </Button>
+            <span className="space"></span>
+            <Button
+              variant="primary"
+              className="btn"
+              onClick={handleClick("Event")}
+            >
+              <span className="btn-content">Events</span>
+            </Button>
+            <span className="space"></span>
+            <Button
+              variant="primary"
+              className="btn"
+              onClick={handleClick("Project")}
+            >
+              <span className="btn-content">Projects</span>
+            </Button> */}
+            <div className="tab__container">
+              <span className="nav__tab container">
+                <ul className="nav__list__container">
+                  <li
+                    className={
+                      type === "All"
+                        ? "nav__single__tab selected"
+                        : "nav__single__tab"
+                    }
+                    onClick={handleClick("All")}
+                  >
+                    All
+                  </li>
+                  <li
+                    className={
+                      type === "Post"
+                        ? "nav__single__tab selected"
+                        : "nav__single__tab"
+                    }
+                    onClick={handleClick("Post")}
+                  >
+                    Posts
+                  </li>
+                  <li
+                    className={
+                      type === "Event"
+                        ? "nav__single__tab selected"
+                        : "nav__single__tab"
+                    }
+                    onClick={handleClick("Event")}
+                  >
+                    Events
+                  </li>
+                  <li
+                    className={
+                      type === "Project"
+                        ? "nav__single__tab selected"
+                        : "nav__single__tab"
+                    }
+                    onClick={handleClick("Project")}
+                  >
+                    Projects
+                  </li>
+                </ul>
+              </span>
             </div>
+          </div>
         </div>
         <div className="post">
-            {
-                Boolean(type !== 'All') ? posts 
-                :
-                <>
-                {userEventsContent}
-                {userProjectsContent}
-                {userPostsContent}
-                </>
-            }
+          {Boolean(type !== "All") ? (
+            posts
+          ) : (
+            <>
+              {userEventsContent}
+              {userProjectsContent}
+              {userPostsContent}
+            </>
+          )}
         </div>
-        </div>
-    )
+      </div>
+    );
 };
 // map state to props 
 const mapStateToProps = (state) => ({
@@ -419,4 +411,4 @@ const mapStateToProps = (state) => ({
     posts: state.post
 })
 
-export default connect(mapStateToProps , { getEventsCreatedByUser, getProjectCreatedByUser, getAllPinnedPosts })(withRouter(PinPosts));
+export default connect(mapStateToProps , { getEventsCreatedByUser, getProjectCreatedByUser, getAllPinnedPosts, upVotePost, rsvpYes })(withRouter(PinPosts));
