@@ -23,6 +23,7 @@ class Organization extends Component {
       org: true,
       isLoading: true,
       orgProfile: {},
+      type: "About",
     };
   }
 
@@ -40,8 +41,12 @@ class Organization extends Component {
     this.setState({ orgProfile: nextProps.org?.org });
   }
 
+  handleClick = (type) => {
+    this.setState({ type: type })
+  }
+
   render() {
-    const { orgProfile } = this.state;
+    const { orgProfile, type } = this.state;
     const {
       // name,
       description,
@@ -68,10 +73,56 @@ class Organization extends Component {
               <div className="posts">
                 {/* <h2>Posts</h2> */}
                 <div className="categories">
-                  <div className="category-type active">About Us</div>
+                  {/* <div className="category-type active">About Us</div>
                   <div className="category-type">Donuts</div>
                   <div className="category-type">Events</div>
-                  <div className="category-type">Projects</div>
+                  <div className="category-type">Projects</div> */}
+                  <div className="ul__container">
+                    <span className="nav__tab container">
+                      <ul className="nav__list__container">
+                        <li
+                          className={
+                            type === "About"
+                              ? "nav__single__tab selected"
+                              : "nav__single__tab"
+                          }
+                          onClick={this.handleClick.bind(this, "About")}
+                        >
+                          Overview
+                        </li>
+                        <li
+                          className={
+                            type === "Post"
+                              ? "nav__single__tab selected"
+                              : "nav__single__tab"
+                          }
+                          onClick={this.handleClick.bind(this, "Post")}
+                        >
+                          Posts
+                        </li>
+                        <li
+                          className={
+                            type === "Event"
+                              ? "nav__single__tab selected"
+                              : "nav__single__tab"
+                          }
+                          onClick={this.handleClick.bind(this, "Event")}
+                        >
+                          Events
+                        </li>
+                        <li
+                          className={
+                            type === "Project"
+                              ? "nav__single__tab selected"
+                              : "nav__single__tab"
+                          }
+                          onClick={this.handleClick.bind(this, "Project")}
+                        >
+                          Projects
+                        </li>
+                      </ul>
+                    </span>
+                  </div>
                 </div>
                 <Card className="about-us">
                   <CardContent>

@@ -44,7 +44,7 @@ class Logout extends Component {
           </Form>
         </Modal.Body>
         <div className="modal__buttons">
-          <Button Button onClick = {this.onLogoutClick}
+          <Button onClick = {this.onLogoutClick}
           className = "modal__save" >
             <span className="modal__buttontext">Logout</span>
           </Button>

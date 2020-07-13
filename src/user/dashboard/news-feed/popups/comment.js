@@ -15,7 +15,8 @@ class Comment extends Component {
       content: "",
       allComments: [],
       postId: '',
-      userId: ''
+      userId: '',
+      count: 0
     };
   }
 

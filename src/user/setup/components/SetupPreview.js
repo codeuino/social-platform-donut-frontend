@@ -65,7 +65,7 @@ class SetupPreview extends Component {
       <div className="setup_form_main_content">
         <div className="setup_header">
           <h3 className="community_text">Community Setup </h3>
-          {values.error ? (<p style={{color: "red"}}>{values.error}</p>): null}
+          {values.error ? <p style={{ color: "red" }}>{values.error}</p> : null}
           <p>2 / 2</p>
         </div>
         <div className="setup_content">
@@ -89,7 +89,7 @@ class SetupPreview extends Component {
                     onChange={this.onChangeColor}
                     style={{ color: this.state.color }}
                   >
-                    <option value="aqua" style={{ color: "aqua" }}>
+                    <option value="aqua">
                       Blue
                     </option>
                     <option value="red" style={{ color: "red" }}>
@@ -118,7 +118,9 @@ class SetupPreview extends Component {
           </div>
         </div>
         <div className="switch_step">
-          <Button className="finish_btn" onClick={this.onFinish}>Finish</Button>
+          <Button className="finish_btn" onClick={this.onFinish}>
+            Finish
+          </Button>
           <Button className="prev_btn" onClick={this.onPrev}>
             Prev
           </Button>

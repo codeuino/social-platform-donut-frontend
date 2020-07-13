@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "./DashboardRightPanel.scss";
-import Comments from "./Comments/Comments";
 import Notifications from "./Notifications/Notifications";
 
 class DashboardRightPanel extends Component {

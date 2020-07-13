@@ -3,6 +3,7 @@ import { Button, Modal, Form, Col } from "react-bootstrap";
 import PropTypes from "prop-types";
 import { connect } from 'react-redux'
 import { createProject } from '../../../../actions/dashboardAction'
+import TagsInput from '../../../projects/Utils/TagsInput'
 
 const AddProjectModal = (props) => {
   const [projectName, setProjectName] = useState("")
@@ -11,6 +12,15 @@ const AddProjectModal = (props) => {
   const [githubLink, setGithubLink] = useState("")
   const [bitbucketLink, setBitbucketLink] = useState("")
   const [stacks, setTechStacks] = useState("")
+  const suggestedTags = [
+    'Node.js',
+    'MongoDB',
+    'Express.js',
+    'Java',
+    'C++',
+    'HTML',
+    'CSS'
+  ]
 
   const onProjectName = (event) => {
     setProjectName(event.target.value)
@@ -28,21 +38,19 @@ const AddProjectModal = (props) => {
     setBitbucketLink(event.target.value)
   }
 
-  const onTechStacks = (event) => {
-    const stacks = event.target.value;
-    console.log('stacks ', stacks);
-    setTechStacks(stacks)
+  const selectedTags = (tags) => {
+    console.log('selected tags are ', tags);
+    setTechStacks(tags);
   }
 
   const onCreateProjectClick = () => {
-    const techStacks = stacks.split(',');
     const projectInfo = {
       projectName,
       description : {
         short,
         long
       },
-      techStacks,
+      techStacks: stacks,
       links: [{ githubLink: githubLink }, {bitbucketLink: bitbucketLink}]
     }
     console.log('creating project!', projectInfo)
@@ -147,10 +155,14 @@ const AddProjectModal = (props) => {
               className="modal__group"
             >
               <Form.Label className="modal__label">Tech stacks</Form.Label>
-              <Form.Control 
+              {/* <Form.Control 
                 type="text" 
                 placeholder="Input tech stacks separated by comma.."
                 onChange={onTechStacks}
+              /> */}
+              <TagsInput 
+                selectedTags={selectedTags}
+                suggestedTags={suggestedTags}
               />
             </Form.Group>
           </Form.Row>

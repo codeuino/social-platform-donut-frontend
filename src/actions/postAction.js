@@ -38,3 +38,18 @@ export const getAllPinnedPosts = (pagination = 10, page = 1) => async (dispatch)
     dispatch(errorHandler(error))
   }
 }
+
+// UPVOTE POST
+export const upVotePost = (postId) => async (dispatch) => {
+  try {
+    const res = await axios.patch(`/post/upvote/${postId}`)
+    dispatch(setRequestStatus(false));
+    if(res.status === 200) {
+      dispatch(setRequestStatus(true));
+      console.log('successfully upvoted post ', res.data)
+      dispatch(getAllPosts());
+    }
+  } catch (error) {
+    dispatch(errorHandler(error))
+  }
+}

@@ -19,6 +19,7 @@ import Admin from "./user/Admin/Admin";
 import Setup from "./user/setup/Setup";
 import CommunitySetting from "./user/dashboard/Community/CommunitySetting";
 import Insight from "./user/dashboard/insights/Insight";
+import AdminRoute from "./common/AdminRoute";
 
 const Router = () => (
   <BrowserRouter>
@@ -42,7 +43,12 @@ const Router = () => (
       />
       <PrivateRoute exact path="/proposaleditor" component={ProposalEditor} />
       <PrivateRoute exact path="/setup" component={Setup} />
-      <PrivateRoute exact path="/org-settings" component={CommunitySetting} />
+      <AdminRoute
+        role = "admin"  
+        exact 
+        path="/org-settings" 
+        component={CommunitySetting} 
+      />
       <PrivateRoute exact path="/insight" component={Insight} />
       <PrivateRoute exact path="/admin" component={Admin} />
       <Route component={NotFound} />

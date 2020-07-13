@@ -1,30 +1,28 @@
-.user-details {
+.user-detail {
   display: flex;
   flex-direction: row;
   border: solid 1px #dfe9f1;
-  min-height: 198px;
-  height: auto;
   align-items: center;
-  flex: 0.5;
+  height: 268px;
+  min-width: 58%;
   .user-image {
-    flex: 1;
     text-align: center;
-    margin: 35px 0;
+    margin: 35px 10px;
     .edit-option {
       margin-top: 10px;
-      border-radius: 20px;
+      // border-radius: 20px;
       font-size: 14px;
       .useredit {
         margin-top: 10px;
-        border-radius: 20px;
+        // border-radius: 20px;
         font-size: 14px;
       }
     }
     .user-pic {
       display: inline-block;
       .userpic {
-        width: 120px;
-        height: 120px;
+        width: 182px;
+        height: 182px;
       }
     }
   }
@@ -32,46 +30,76 @@
     flex: 3;
     padding: 10px 14px;
     h1 {
-      color: #0069d9;
+      color: #1a73e8;
       font-size: 20px;
       font-weight: bold;
       margin: 0;
       padding: 0;
+      font-family: "Inter";
     }
     .profession {
-      color: #748391;
-      font-size: 14px;
       margin: 4px 0;
       padding: 0;
+      font-family: "Inter";
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 17px;
+      color: #1d2129;
+      text-align: justify;
     }
     .place {
       color: #2c3e50;
-      font-size: 12px;
+      font-family: "Inter";
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 17px;
+      color: #1d2129;
+      text-align: justify;
       margin: 4px 0;
       padding: 0;
     }
     .desc {
-      color: #5d5d5d;
+      font-family: "Inter";
+      font-style: normal;
+      font-weight: normal;
       font-size: 14px;
+      line-height: 17px;
+      color: #1d2129;
+      text-align: justify;
       margin: 0;
       padding: 0;
     }
     .social-icons {
       .btn-primary {
         margin: 5px 7px 0 0;
-        padding: 8px;
+        padding: 0.7em;
         font-size: 14px;
         box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
-        border-radius: 20px;
-        width: 80px;
-        height: 35px;
+        padding: 3px;
+        width: 10vw;
+        height: 2.5em;
         font-family: Inter;
         font-style: normal;
         font-weight: 600;
-        font-size: 14px;
+        font-size: 0.8em;
         line-height: 17px;
         text-align: center;
       }
+    }
+    .fa_icon__container {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: -10vh;
+      .fa__icon {
+        font-size: 30px;
+        padding: 3px;
+        cursor: pointer;
+      }
+    }
+    .user__infos {
+      padding: 5px;
     }
   }
 }

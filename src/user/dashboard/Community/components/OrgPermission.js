@@ -29,7 +29,7 @@ class OrgPermission extends Component {
     });
   };
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.getOrgProfile()
   }
 
@@ -152,23 +152,21 @@ class OrgPermission extends Component {
                   as="select"
                   name="canCreateManage"
                   className="select_option"
+                  value={canCreateManage}
                   onChange={this.onChange}
                 >
                   <option
                     value="BOTH"
-                    selected={canCreateManage === "BOTH"}
                   >
                     BOTH
                   </option>
                   <option
                     value="ADMINS"
-                    selected={canCreateManage === "ADMINS"}
                   >
                     Only Admins
                   </option>
                   <option
                     value="MEMBERS"
-                    selected={canCreateManage === "MEMBERS"}
                   >
                     Only Members
                   </option>

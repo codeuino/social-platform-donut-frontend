@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Modal, Button } from 'react-bootstrap';
+import { Modal, Button, Form } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import "./popup.scss";
@@ -33,25 +33,37 @@ class DeleteEvent extends Component {
     return (
       <div>
         <Modal
-            show={show}
-            onHide={onHide}
-            size="md"
-            aria-labelledby="contained-modal-title-vcenter"
-            centered
-            backdrop={true}>
-          <div className="container">
-            <Modal.Header closeButton className="heading border border-0 p-0">
-              <Modal.Title id="contained-modal-title-vcenter"> 
-                <div className="title">Delete Event?</div>
-                <div className="message">Are you sure you want to delete this event?</div>
-              </Modal.Title> 
-            </Modal.Header>
-            
-            <div className="form-footer">
-              <Button onClick={this.deleteEventClick} className="savebtn" size="sm">Yes</Button>
-              <Button variant="outline-primary" onClick={this.props.onHide} size="sm">No</Button>
-            </div>
-          </div>
+          show={show}
+          onHide={onHide}
+          centered
+          backdrop={true}
+          animation={true}
+          className="modal"    
+        >
+          <Modal.Header closeButton className="modal__header">
+            <Modal.Title className="modal__title"> 
+              <div className="modal__main-title">Delete Event?</div>
+              <div className="modal__mini-title">Are you sure you want to delete this event?</div>
+            </Modal.Title> 
+          </Modal.Header>
+          <Modal.Body className="modal__body">
+            <Form className="modal__form">
+              <div className="modal__buttons">
+                <Button 
+                  onClick={this.deleteEventClick} 
+                  className="modal__save" 
+                >
+                 <span className="modal__buttontext">Yes</span>
+                </Button>
+                <Button
+                 className="modal__cancel" 
+                 onClick={this.props.onHide} 
+                 >
+                  <span className="modal__buttontext">No</span>
+                </Button>
+              </div>
+            </Form>
+          </Modal.Body>
       </Modal>
     </div>
     )

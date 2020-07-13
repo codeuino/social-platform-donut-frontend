@@ -14,25 +14,23 @@ import {
   CardMedia,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { Button } from "react-bootstrap";
+import { Button, } from "react-bootstrap";
 import AddEventModal from "./popups/AddEventModal";
 import AddProjectModal from "./popups/AddProjectModal";
 import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
-// import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import ChatBubbleIcon from "@material-ui/icons/ChatBubble";
-// import EventNoteIcon from "@material-ui/icons/EventNote";
-// import EventIcon from "@material-ui/icons/Event";
-// import ReplyIcon from '@material-ui/icons/Reply';
-// import feed from "../../../jsonData/news-feed";
 import "../../pinned-posts/posts/posts.scss";
 import "./news-feed.scss";
 import AddPostModal from "./popups/AddPostModal";
 import Comment  from "./popups/comment";
 import { connect } from 'react-redux'
 import { getAllCommentsOfPost } from '../../../actions/commentAction'
+import { upVotePost } from '../../../actions/postAction' 
 import profileImg from '../../../svgs/evt-creator.svg';
 import eventImg from "../../../svgs/event-img-1.svg";
 import eventImg2 from "../../../svgs/event-img-2.svg";
+import { withRouter } from 'react-router-dom'
+import { rsvpYes } from '../../../actions/eventAction'
 
 const styles = makeStyles((theme) => ({
   root: {
@@ -40,11 +38,14 @@ const styles = makeStyles((theme) => ({
     minWidth: "50%",
   },
   listStyle: {
-    paddingBottom: 0,
+    background: "#ffffff",
+    border: "1px solid #cccccc",
+    boxShadow: "1px 2px 5px rgba(0, 0, 0, 0.1)",
+    borderRadius: "5px"
   },
   listStyle2: {
     paddingTop: 0,
-    marginTop: "-4px",
+    marginTop: "-4px"
   },
   info: {
     position: "absolute",
@@ -92,30 +93,27 @@ const styles = makeStyles((theme) => ({
 function NewsFeed(props) {
   const classes = styles();
   const [type, changeType] = useState("All");
-  const [first, second] = useState("f");
+  // const [first, second] = useState("f");
   const [showProject, setShowProject] = useState(false);
   const [showEvent, setShowEvent] = useState(false);
   const [writePost, showPostModal] = useState(false);
   const [showComment, toggle] = useState(false);
   const [commentId, setCommentId] = useState('');
-  // const [all, setAll] = useState([]);
   const [events, setEvents] = useState([]);
   const [projects, setAllProjects] = useState([]);
   const [posts, setAllPosts] = useState([]);
-  // const [allCommentsOfPost, setAllCommentsOfPost] = useState({})
 
   useEffect(() => {
     console.log("useEffect from news-feed ", props);
     setEvents(props?.allEvents);
     setAllProjects(props?.allProjects);
     setAllPosts(props?.allPosts);
-    // setAll(props?.allMix);
-    // setAllCommentsOfPost(props?.comment?.allComments)
-  }, [props]);
+  }, [props.allEvents, props.allPosts, props.allProjects, props]);
 
   let handleClick = (atrb) => () => {
+    console.log('attr ', atrb);
     changeType(atrb);
-    second("s");
+    // second("s");
   };
 
   let handleShow = (modalName) => {
@@ -148,15 +146,30 @@ function NewsFeed(props) {
     setCommentId(postId);
     toggle(!showComment);
   }
+
+  let onUpvote = (postId) => {
+    console.log('upvote clicked!', postId);
+    props.upVotePost(postId)
+  }
+
+  let onRsvpYes = (eventId) => {
+    console.log('On rsvp yes ', eventId);
+    const info = {
+      yes: localStorage.getItem('userId')
+    }
+    props.rsvpYes(eventId, info);
+  }
+
+  let onViewProject = (projectId) => {
+    console.log('Redirecting to project ', projectId);
+    props.history.push(`/${projectId}/proj-info`);
+  }
   
   let postContent = posts?.map((post) => {
     return (
         <div className="grid" key={post._id}>
         <Paper elevation={1} className={classes.paper}>
           <Card className={classes.root}>
-              {/* <CardMedia className="projimg"
-                image={post?.image || eventImg } title="Post Image">
-            </CardMedia> */}
             <List className={classes.listStyle}>
               <ListItem className={classes.listStyle2}>
                 <ListItemAvatar>
@@ -168,24 +181,13 @@ function NewsFeed(props) {
                   <h2>{post?.userId?.name?.firstName + " " + post?.userId?.name?.lastName}</h2>
                   <small>{post?.createdAt}</small>
                 </ListItemText>
-                {/* <ListItemSecondaryAction>
-                  {post.note === true ? (
-                    <IconButton edge="end" className={classes.icon}>
-                      <EventNoteIcon className={classes.event} />
-                    </IconButton>
-                  ) : post.schedule === true ? (
-                    <IconButton edge="end" className={classes.icon}>
-                      <EventIcon className={classes.event} />
-                    </IconButton>
-                  ) : null}
-                  <IconButton edge="end" className={classes.icon}>
-                    <MoreHorizIcon className={classes.horiz} />
-                  </IconButton>
-                </ListItemSecondaryAction> */}
               </ListItem>
               <div className="post-details2">{post?.content}</div>
               <ListItem>
-                <IconButton className={classes.vote}>
+                <IconButton 
+                  className={classes.vote}
+                  onClick={() => onUpvote(post._id)}
+                  >
                   <ArrowDropUpIcon className="up-vote" />
                 </IconButton>
                 <span className="up-vote">{post?.votes?.upVotes?.user.length}</span>
@@ -219,7 +221,12 @@ function NewsFeed(props) {
                                 <h3>{project?.projectName}</h3>
                                 <p>By {project?.projectOwner || "CODEUINO"}</p>
                                 <div className="view-project">
-                                    <Button className="view-project-btn">View Project</Button>
+                                    <Button 
+                                      className="view-project-btn"
+                                      onClick={() => onViewProject(project._id)}
+                                    >
+                                        View Project
+                                    </Button>
                                 </div>
                             </div>
                         </Paper>
@@ -235,36 +242,16 @@ function NewsFeed(props) {
                                 <h2>{project?.createdBy?.name?.firstName + " " + project?.createdBy?.name?.lastName}</h2>
                                 <small>{project?.createdAt}</small>
                             </ListItemText>
-                            {/* <ListItemSecondaryAction>
-                                { (project?.note === true) ?
-                                <IconButton edge="end" className={classes.icon}>
-                                    <EventNoteIcon className={classes.event}/>
-                                </IconButton> : (project.schedule === true) ?
-                                <IconButton edge="end" className={classes.icon}>
-                                    <EventIcon className={classes.event}/>
-                                </IconButton> : null }
-                                <IconButton edge="end" className={classes.icon}>
-                                    <MoreHorizIcon className={classes.horiz}/>
-                                </IconButton>
-                            </ListItemSecondaryAction> */}
                         </ListItem>
                         <div className="post-details2">{project?.description?.short}</div>
                         <ListItem>
-                            {/* <IconButton className={classes.vote}>
-                                <ArrowDropUpIcon className="up-vote"/>
-                            </IconButton>
-                            <span className="up-vote"> {project.upvotes}</span>
-                            <span className="space"></span>
-                            <IconButton className={classes.vote}>
-                                <ArrowDropDownIcon className="down-vote"/>
-                            </IconButton>
-                            <span className="down-vote">{project.downVotes}</span> */}
                             <span className="com-btn">
                                 <ChatBubbleIcon className={classes.chat}/>
                                 <Button 
-                                onClick = {
+                                  className = "comment-btn"
+                                  onClick = {
                                     commentToggle.bind(this, project._id)
-                                } >
+                                  } >
                                     <span className="comment">Comment</span>
                                 </Button>
                             </span>
@@ -278,7 +265,7 @@ function NewsFeed(props) {
 
   let eventsContent = events?.map((event) => {
     return (
-       <div div className = "grid" key={event._id}>
+       <div className = "grid" key={event._id}>
             <Paper elevation={1} className={classes.paper}>
                 <Card className={classes.root}>
                     <CardMedia className="eventimg"
@@ -301,7 +288,12 @@ function NewsFeed(props) {
                                     </div>
                                 </div>
                                 <div className="tag-container">
-                                    <Button className="tag-btn">+1 RSVP</Button>
+                                    <Button 
+                                      className="tag-btn"
+                                      onClick={() => onRsvpYes(event._id)}
+                                    >
+                                        +1 RSVP
+                                    </Button>
                                 </div>
                             </div>
                         </Paper>
@@ -317,40 +309,8 @@ function NewsFeed(props) {
                                 <h2>{event?.createdBy?.name?.firstName + " " + event?.createdBy?.name?.lastName}</h2>
                                 <small>{event?.createdAt}</small>
                             </ListItemText>
-                            {/* <ListItemSecondaryAction>
-                                { (event.note === true) ?
-                                <IconButton edge="end" className={classes.icon}>
-                                    <EventNoteIcon className={classes.event}/>
-                                </IconButton> : (event.schedule === true) ?
-                                <IconButton edge="end" className={classes.icon}>
-                                    <EventIcon className={classes.event}/>
-                                </IconButton> : null }
-                                <IconButton edge="end" className={classes.icon}>
-                                    <MoreHorizIcon className={classes.horiz}/>
-                                </IconButton>
-                            </ListItemSecondaryAction> */}
                         </ListItem>
                         <div className="post-details2">{event?.description?.shortDescription}</div>
-                        {/* <ListItem>
-                            <IconButton className={classes.vote}>
-                                <ArrowDropUpIcon className="up-vote"/>
-                            </IconButton>
-                            <span className="up-vote">{event.upvotes}</span>
-                            <span className="space"></span>
-                            <IconButton className={classes.vote}>
-                                <ArrowDropDownIcon className="down-vote"/>
-                            </IconButton>
-                            <span className="down-vote">{event.downVotes}</span>
-                            <span className="com-btn">
-                                <ChatBubbleIcon className={classes.chat}/>
-                                <Button 
-                                onClick = {
-                                    commentToggle.bind(this, event._id)
-                                } >
-                                    <span className="comment">Comment</span>
-                                </Button>
-                            </span>
-                        </ListItem> */}
                     </List>
                 </Card>
             </Paper>
@@ -452,8 +412,8 @@ function NewsFeed(props) {
           />
         </div>
       </div>
-      <div className="posts">
-        <div className="category">
+      {/* <div className="posts">
+        <span className="category">
           <span className="to-centre">
             {first === "f" ? (
               <Button
@@ -499,18 +459,64 @@ function NewsFeed(props) {
               <span className="btn-content">Projects</span>
             </Button>
           </span>
-        </div>
+        </span>
+      </div> */}
+      <div className="tabs__container">
+        <span className="nav__tab container">
+          <ul className="nav__list__container">
+            <li
+              className={
+                type === "All"
+                  ? "nav__single__tab selected"
+                  : "nav__single__tab"
+              }
+              onClick={handleClick("All")}
+            >
+              All
+            </li>
+            <li
+              className={
+                type === "Post"
+                  ? "nav__single__tab selected"
+                  : "nav__single__tab"
+              }
+              onClick={handleClick("Post")}
+            >
+              Posts
+            </li>
+            <li
+              className={
+                type === "Event"
+                  ? "nav__single__tab selected"
+                  : "nav__single__tab"
+              }
+              onClick={handleClick("Event")}
+            >
+              Events
+            </li>
+            <li
+              className={
+                type === "Project"
+                  ? "nav__single__tab selected"
+                  : "nav__single__tab"
+              }
+              onClick={handleClick("Project")}
+            >
+              Projects
+            </li>
+          </ul>
+        </span>
       </div>
       <div className="post">
-        {Boolean(type !== 'All') ?
-         content 
-         :
-         <>
-          {postContent}
-          {eventsContent}
-          {projectsContent}
-         </>
-       }
+        {Boolean(type !== "All") ? (
+          content
+        ) : (
+          <>
+            {postContent}
+            {eventsContent}
+            {projectsContent}
+          </>
+        )}
       </div>
     </div>
   );
@@ -526,4 +532,8 @@ const mapStateToProps = (state) => ({
   comment: state.comment
 })
 
-export default connect(mapStateToProps, { getAllCommentsOfPost })(NewsFeed)
+export default connect(mapStateToProps, {
+  getAllCommentsOfPost,
+  upVotePost,
+  rsvpYes
+})(withRouter(NewsFeed))

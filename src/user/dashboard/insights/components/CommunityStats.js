@@ -18,7 +18,7 @@ class CommunityStats extends Component {
     this.props.onTabChange(tabName);
   }
 
-  componentWillMount () { 
+  componentDidMount() {
     setTimeout(() => {
       this.props.getOrgOverview()
     })

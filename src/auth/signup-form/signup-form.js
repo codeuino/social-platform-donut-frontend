@@ -28,7 +28,7 @@ class SignUpForm extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.error?.msg.length > 0) {
+    if (nextProps.error?.msg?.length > 0) {
       this.setState({
         error: {
           msg: "Something went wrong, Please recheck the input!",

@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import "./projects.scss";
 import Navigation from "../dashboard/navigation/navigation";
-// import Project_list from "../../jsonData/projects";
 import { makeStyles,Grid , Card, CardActionArea, CardActions, CardContent, CardMedia, Typography} from "@material-ui/core";
 import { Button } from "react-bootstrap";
-// import Popups from "../../common/Popups";
 import { connect } from 'react-redux'
 import { createProject, getAllProjects } from '../../actions/projectAction'
 import projectImage from '../../images/project.png'
+import { withRouter } from "react-router-dom";
 
 class Projects extends Component {
   constructor(props) {
@@ -18,7 +17,6 @@ class Projects extends Component {
       allProjects: []
     };
   }
-
   componentDidMount() {
     setTimeout(() => {
       this.props.getAllProjects();
@@ -72,8 +70,12 @@ class Projects extends Component {
             </CardContent>
           </CardActionArea>
           <CardActions>
-            <Button size="small"  href={`/${Item._id}/proj-info`} variant="light">
-                <strong>See More</strong>
+            <Button 
+              size="small" 
+              onClick={() => this.props.history.push(`/${Item._id}/proj-info`)}
+              variant="light"
+            >
+              <strong>See More</strong>
             </Button>
           </CardActions>
         </Card>
@@ -93,11 +95,6 @@ class Projects extends Component {
             </Grid>
           </div>
         </div>
-        {/* <Popups
-          option={this.state.option}
-          optionValue={this.state.optionValue}
-          modalShow={this.state.modalShow}
-        /> */}
       </div>
     );
   }
@@ -110,4 +107,7 @@ const mapStateToProps = (state) => ({
   project: state.project
 })
 
-export default connect(mapStateToProps, { createProject, getAllProjects })(Projects);
+export default connect(mapStateToProps, {
+  createProject,
+  getAllProjects
+})(withRouter(Projects));

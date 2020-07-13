@@ -1,15 +1,15 @@
 .portfolio {
-  box-shadow: -1px 2px 2px -1px rgba(0, 0, 0, 0.1);
+  // box-shadow: -1px 2px 2px -1px rgba(0, 0, 0, 0.1);
   display: flex;
   text-align: center;
   border-top-right-radius: 2%;
   border-bottom-right-radius: 2%;
-  flex:0.5;
   height: 269px;
+  flex-direction: row;
   .items-list {
-    flex: 0.8;
     padding: 40px 0px;
     border: solid 1px #dfe9f1;
+    width: 10vw;
     .item {
       padding: 12px;
       h1 {
@@ -21,7 +21,7 @@
         margin-bottom: 0px;
       }
       h3 {
-        font-size: 15px;
+        font-size: 1vw;
         color: #4457a5;
         font-family: Inter;
         font-style: normal;
