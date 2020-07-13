@@ -1,4 +1,7 @@
 .main-navigation {
+  position: fixed;
+  height: 100vh;
+  border-right: solid 1px #dfe9f1;
   .list-group {
     .list-group-item {
       white-space: nowrap;
@@ -26,9 +29,11 @@
 .main-navigation {
   .list-group {
     .active {
+      text-decoration: none;
       background-color: rgba(26, 115, 232, 0.1);
       .link {
         color: #1a73e8;
+        background-color: transparent;
       }
     }
     span {
@@ -46,6 +51,7 @@
   .list-group {
     .inactive {
       .link {
+        text-decoration: none;
         color: rgba(0, 0, 0, 0.5);
       }
     }
@@ -64,6 +70,7 @@
   .list-group {
     .list-group-item {
       svg {
+        margin-right: 2.1875rem;
         padding: 0px 10px 0px 10px;
       }
       span {
@@ -96,8 +103,7 @@
 .jitsi-meet {
   height: 21px;
   width: 21px;
-  color: rgba(0, 0, 0, 0.5);
-  margin-right: 15px;
+  margin-right: 2.6875rem;
 }
 
 .main-navigation {
