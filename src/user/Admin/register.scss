@@ -54,12 +54,13 @@
         align-items: center;
         .form-group {
           label {
-            color: #00abff;
-            font-size: 1.2vw;
+            color: #1A73E8;
+            font-family: "Inter";
           }
         }
         .form-control {
           font-size: 1vw;
+          font-family: "Inter";
         }
 
         .cta-register {
@@ -69,8 +70,8 @@
           padding-bottom: 1em;
           button {
             background: #1A73E8;
-            border-radius: 30px;
-            width: 22vw;
+            // border-radius: 30px;
+            width: 24vw;
           }
         }
         .user__data {
@@ -91,11 +92,13 @@
           .register__infos {
             padding: 15px 0;
             .form__group__label {
-              color: #00abff;
+              color: #1a73e8;
+              font-family: "Inter";
             }
           }
           .already__account {
             text-align: center;
+            font-family: "Inter";
 
             .link {
               cursor: pointer;
@@ -116,11 +119,11 @@
         height: auto;
         align-items: center;
         padding: 0;
-
+        font-family: "Inter";
         .form-group {
           label {
-            color: #00abff;
-            font-size: 1.2vw;
+            color: #1a73e8;
+            font-family: "Inter";
           }
         }
 
@@ -135,8 +138,8 @@
           padding-bottom: 1em;
           button {
             background: #1A73E8;
-            border-radius: 30px;
-            width: 22vw;
+            // border-radius: 30px;
+            width: 24vw;
           }
         }
         .loginbtn {
@@ -173,7 +176,8 @@
 
           .login__infos {
             .form__group__label {
-              color: #00abff;
+              color: #1A73E8;
+              font-family: "Inter";
             }
           }
           .already__account {
@@ -321,10 +325,10 @@
     display: flex;
     justify-content: flex-end;
     float: right;
-    height: 18vh;
+    height: 169px;
     margin-top: -9vh;
     opacity: 0.1;
-    width: 15vw;
+    width: 200px;
   }
 }
 

@@ -3,6 +3,7 @@ import { Modal, Button } from "react-bootstrap";
 import { connect } from 'react-redux'
 import { deleteProjectById } from '../../../actions/projectAction'
 import { withRouter } from 'react-router-dom'
+import './popups.scss'
 
 class DeleteProject extends Component {
   onRemove = () => {
@@ -23,7 +24,10 @@ class DeleteProject extends Component {
             Delete This Project
           </Modal.Title>
         </Modal.Header>
-        <Modal.Footer>
+        <Modal.Body>
+          <p className="danger__text">This will permanently delete the project from the platform?</p>
+        </Modal.Body>
+        <Modal.Footer style={{ display: "flex", justifyContent: "flex-start"}} >
           <Button variant="danger" onClick={this.onRemove}>Remove</Button>
           <Button variant="light" onClick={onHide}>Keep It</Button>
         </Modal.Footer>

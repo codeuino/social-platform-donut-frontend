@@ -1,8 +1,17 @@
 .delete_project_title{
-    color:rgb(224, 101, 101);
+    // color: 
 }
 
 .delete_project_description{
     color:rgb(26, 24, 24);
     font-weight: 500;
+}
+.modal-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+.danger__text {
+    font-size: 17px;
+    color:rgb(224, 101, 101);
 }

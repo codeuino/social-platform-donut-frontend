@@ -1,8 +1,10 @@
 .signup-details {
   padding: 15px 0;
+  font-family: "Inter";
   .form-group {
     label {
-      color: #00abff;
+      color: #1a73e8;
+      font-family: "Inter";
     }
   }
   .cta-signup {
@@ -11,8 +13,12 @@
     justify-content: center;
     margin-top: 30px;
     button {
-      padding: 8px 10px;
-      border-radius: 30px;
+      // padding: 8px 10px;
+      width: 104px;
+      height: 38px;
+      background-color: #1a73e8;
+      // border-radius: 30px;
+
     }
   }
   .savebtn {
@@ -35,10 +41,11 @@
   border: 1px solid rgb(211, 220, 228);
   border-radius: 3px;
   width: 45%;
+  background-color: #1a73e8;
 }
 
 .signupbtn-text {
-  font-family: Inter;
+  font-family: "Inter";
   font-style: normal;
 
   font-size: 16px;

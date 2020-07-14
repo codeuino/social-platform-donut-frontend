@@ -23,7 +23,7 @@
     "react-cookies": "^0.1.1",
     "react-dom": "^16.12.0",
     "react-dropzone": "^11.0.1",
-    "react-icons": "^3.9.0",
+    "react-icons": "^3.10.0",
     "react-images": "^1.1.7",
     "react-lottie": "^1.2.3",
     "react-markdown-editor-lite": "^1.1.4",
@@ -32,6 +32,7 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.4.0",
     "react-spinners": "^0.8.3",
+    "react-switch": "^5.0.1",
     "react-toastify": "^6.0.5",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
@@ -40,7 +41,7 @@
   "proxy": "http://localhost:5000",
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && ./build.sh",
+    "build": "CI=false && react-scripts build && ./build.sh",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

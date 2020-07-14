@@ -4,6 +4,8 @@ import LoginForm from "../login-form/login-form";
 import SignUpForm from "../signup-form/signup-form";
 import { DonutTitle } from "../../donutTitle/donutTitle";
 import multipleDonuts from "../../images/extra-donuts.png";
+import GoogleLogin from '../../images/icons8-google-48.png'
+import { FaGoogle, FaGithub } from 'react-icons/fa'
 import "./login.scss";
 
 class Login extends Component {
@@ -55,40 +57,24 @@ class Login extends Component {
                 ? "Or Sign In with"
                 : "Or SignUp with"}
             </p>
-            <Row>
-              <Col className="button-column">
+            <div className="login__options">
+              <div className="">
                 <a
-                  href="http://localhost:4000/auth/google"
+                  href="http://localhost:5000/auth/google"
                   style={{ padding: "1vh" }}
                 >
-                  <Button
-                    className="selectorbtn"
-                    type="submit"
-                    variant="primary"
-                    color="primary"
-                    size="sm"
-                  >
-                    <span className="selectorbtn-content">Google</span>
-                  </Button>
+                  <img src={GoogleLogin} alt="Google" className="google__login"/>
                 </a>
-              </Col>
-              <Col className="button-column">
+              </div>
+              <div className="" >
                 <a
-                  href="http://localhost:4000/auth/github"
+                  href="http://localhost:5000/auth/github"
                   style={{ padding: "1vh" }}
                 >
-                  <Button
-                    className="selectorbtn"
-                    type="submit"
-                    variant="primary"
-                    color="primary"
-                    size="sm"
-                  >
-                    <span className="selectorbtn-content">Github</span>
-                  </Button>
+                  <FaGithub color="#24292e" className="github__login"/>
                 </a>
-              </Col>
-            </Row>
+              </div>
+            </div>
             <p className="login-text-selector">
               {this.state.activeForm === "login"
                 ? "Don't have an account? "

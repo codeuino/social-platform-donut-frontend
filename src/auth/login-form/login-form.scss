@@ -2,7 +2,8 @@
   padding: 15px 0;
   .form-group {
     label {
-      color: #00abff;
+      color: #1a73e8;
+      font-family: Inter;
     }
   }
   .cta-login {
@@ -11,8 +12,9 @@
     justify-content: center;
     margin-top: 30px;
     button {
-      padding: 8px 10px;
-      border-radius: 30px;
+      width: 104px;
+      background-color: #1a73e8;
+      // border-radius: 30px;
     }
   }
 }
@@ -22,6 +24,7 @@
   align-items: center;
   justify-content: center;
   margin-top: 10px;
+  color: #1a73e8;
 }
 #validation_msg {
   color: rgb(247, 134, 134);
@@ -30,7 +33,7 @@
 
 .loginbtn {
   border: 1px solid rgb(211, 220, 228);
-  border-radius: 3px;
+  // border-radius: 3px;
   width: 45%;
 }
 

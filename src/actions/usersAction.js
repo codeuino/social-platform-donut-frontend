@@ -1,4 +1,4 @@
-import { GET_USER_PROFILE, GET_ALL_MEMBERS, UPDATE_USER_PROFILE, GET_USER_EVENTS, GET_USER_PROJECTS, GET_USER_POSTS, GET_INVITE_LINK, PROCESS_INVITE_LINK } from './types'
+import { GET_USER_PROFILE, GET_ALL_MEMBERS, UPDATE_USER_PROFILE, GET_USER_EVENTS, GET_USER_PROJECTS, GET_USER_POSTS, GET_INVITE_LINK, PROCESS_INVITE_LINK, SET_ADMIN } from './types'
 import { errorHandler } from '../utils/errorHandler'
 import axios from 'axios'
 import { setRequestStatus } from '../utils/setRequestStatus'
@@ -15,6 +15,13 @@ export const getProfile = () => async (dispatch)=> {
         type: GET_USER_PROFILE,
         payload: res.data.user
       })
+      // if user is admin
+      if(res.data.user.isAdmin === true) {
+        dispatch({
+          type: SET_ADMIN,
+          payload: true
+        })
+      }
     }
   } catch(error) {
     dispatch(errorHandler(error))
@@ -160,9 +167,9 @@ export const getPostsCreatedByUser = (pagination = 10, page = 1) => async (dispa
 }
 
 // GET INVITE LINK 
-export const getInviteLink = () => async (dispatch) => {
+export const getInviteLink = (role) => async (dispatch) => {
   try {
-    const res = await axios.get('/user/invite')
+    const res = await axios.get(`/user/invite?role=${role}`)
     dispatch(setRequestStatus(false));
     if(res.status === 200) {
       dispatch(setRequestStatus(true));
@@ -187,7 +194,7 @@ export const processInviteToken = (token) => async (dispatch) => {
       console.log('Processing the invite link ', res.data);
       dispatch({
         type: PROCESS_INVITE_LINK,
-        payload: res.data.success || res.data.msg
+        payload: res.data.redirectTo || res.data.msg
       })
     }
   } catch(error) {

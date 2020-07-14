@@ -1,6 +1,7 @@
-import { GET_ORG_PROFILE, UPDATE_ORG_PROFILE, DEACTIVATE_ORG } from '../actions/types'
+import { GET_ORG_PROFILE, UPDATE_ORG_PROFILE, DEACTIVATE_ORG, TRIGGER_MAINTENANCE } from '../actions/types'
 const initialState = {
   isDeactivated: false,
+  isMaintenance: false,
   org: {}
 }
 
@@ -16,6 +17,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         org: action.payload
+      }
+    }
+    case TRIGGER_MAINTENANCE: {
+      return {
+        ...state,
+        isMaintenance: action.payload
       }
     }
     case DEACTIVATE_ORG : {

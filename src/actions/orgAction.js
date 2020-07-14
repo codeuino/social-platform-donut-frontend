@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { setRequestStatus } from '../utils/setRequestStatus'
 import { errorHandler } from '../utils/errorHandler'
-import { GET_ORG_PROFILE, UPDATE_ORG_PROFILE, DEACTIVATE_ORG, GET_ALL_MEMBERS } from './types'
+import { GET_ORG_PROFILE, UPDATE_ORG_PROFILE, DEACTIVATE_ORG, GET_ALL_MEMBERS, TRIGGER_MAINTENANCE } from './types'
 
 // CREATE COMMUNITY
 export const registerCommunity  = (orgInfo) => async (dispatch) => {
@@ -118,6 +118,26 @@ export const deactivateOrg = () => async (dispatch) => {
       );
     }
   } catch(error) {
+    dispatch(errorHandler(error))
+  }
+}
+
+// TRIGGER MAINTENANCE MODE
+export const TriggerMaintenance = () => async (dispatch) => {
+  try {
+    const orgId = localStorage.getItem('orgId')
+    const res = await axios.patch(`/org/${orgId}/maintenance`);
+    dispatch(setRequestStatus(false))
+    if(res.status === 200) {
+      dispatch(setRequestStatus(true))
+      // set maintenance to true in localStorage 
+      localStorage.setItem('isMaintenance', res.data.maintenance);
+      dispatch({
+        type: TRIGGER_MAINTENANCE,
+        payload: res.data.maintenance
+      })
+    }
+  } catch (error) {
     dispatch(errorHandler(error))
   }
 }

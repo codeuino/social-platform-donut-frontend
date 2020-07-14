@@ -52,9 +52,14 @@ class Popups extends Component {
     return month + " " + year;
   };
 
+  RefineTime = (d) => {
+    const time = d.split("T");
+    const eventTime = time[1].slice(0, 5)
+    return eventTime;
+  }
 
   render() {
-    const { eventName, eventDate, description, location, isOnline, slots, rsvpMaybe, rsvpNo, rsvpYes } = this.state.eventInfo
+    const { eventName, eventDate, description, location, isOnline, slots, rsvpMaybe, rsvpNo, rsvpYes, eventTime } = this.state.eventInfo
     return (
       <Modal
         size="lg"
@@ -86,18 +91,15 @@ class Popups extends Component {
             </Row>
             <Row className="show-grid">
               <Col xs={6} md={4}>
-                {eventDate ? (
-                  <p className="info-common">{this.RefineDate(eventDate)}</p>
+                {eventTime ? (
+                  <p className="info-common">Time : {this.RefineTime(eventDate)}</p>
                 ) : null}
               </Col>
               <Col xs={6} md={4}>
                 {eventDate ? (
                   <p className="info-common">
                     {" "}
-                    {this.RefinedDay(
-                      new Date(Date.parse(eventDate)).toString()
-                    )}
-                    ,
+                    {this.RefineDate(eventDate)}{" "}
                     {this.RefinedYear(
                       new Date(Date.parse(eventDate)).toString()
                     )}

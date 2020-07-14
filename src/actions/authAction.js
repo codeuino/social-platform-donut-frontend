@@ -1,4 +1,4 @@
-import { SET_CURRENT_USER, GET_USER_PROFILE, PASSWORD_SUCCESSFULLY_CHANGED, PASSWORD_CHANGE_REQUEST_SUCCESS } from './types';
+import { SET_CURRENT_USER, GET_USER_PROFILE, PASSWORD_SUCCESSFULLY_CHANGED, PASSWORD_CHANGE_REQUEST_SUCCESS, SET_ADMIN } from './types';
 import axios from 'axios';
 import { setAuthToken } from '../utils/setAuthToken';
 import jwt_decode from 'jwt-decode';
@@ -46,8 +46,19 @@ export const loginUser = (userInfo, history) => async (dispatch) => {
       const decodedData = await jwt_decode(token);
       localStorage.setItem('userId', decodedData._id)
       dispatch(setCurrentUser(decodedData));
-      history.push("/dashboard");
 
+      // update user role in localStorage
+      localStorage.setItem('admin', res.data.user.isAdmin)
+
+      // store orgId in localStorage
+      localStorage.setItem('orgId', res.data.user.orgId);
+
+      // if user is admin update admin in store 
+      dispatch({
+        type: SET_ADMIN,
+        payload: res.data.user.isAdmin
+      })
+      history.push("/dashboard");
     }
   } catch(error) {
       dispatch(errorHandler(error));
@@ -104,10 +115,10 @@ export const logoutUser = () => async (dispatch) => {
      // clear token from backend 
      const res = await axios.post('/user/logout')
      if (res.status === 200) {
-      // remove token from the localStorage 
-      localStorage.removeItem('jwtToken');
-      // remove userID 
-      localStorage.removeItem('userId')
+      // remove all keys from the localStorage except the orgId
+      const orgId = localStorage.getItem('orgId');
+      localStorage.clear()
+      localStorage.setItem('orgId', orgId)
       // delete authorization from the header 
       setAuthToken(false);
       // set user to {}

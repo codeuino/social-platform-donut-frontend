@@ -37,7 +37,7 @@ class OrgAuth extends Component {
     this.props.updateSettings(info)
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.getOrgProfile()
   }
 

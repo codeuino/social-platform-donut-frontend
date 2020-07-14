@@ -40,6 +40,9 @@ export const loginAdmin = (adminInfo, history) => async (dispatch) => {
      localStorage.setItem('userId', decodedData._id)
      dispatch(setCurrentUser(decodedData));
 
+     // update localStorage with admin status 
+     localStorage.setItem('admin', true)
+
      dispatch({
        type: SET_ADMIN,
        payload: true

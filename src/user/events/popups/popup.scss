@@ -37,22 +37,40 @@
     color: #2D2D2D;
 }
 
+.edit__event__title {
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 27px;
+    line-height: 29px;
+    color: #1a73e8;
+    padding-bottom: 3px;
+    margin-bottom: 2px;
+}
 .form-footer {
     margin-top: 0;
-    margin-left: 2px;
     Button {
-        width: 90px;
         margin-right: 20px;
         margin-bottom: 30px;
-        border-radius: 100px;
+        // border-radius: 100px;
+        border-radius: 0px;
         font-weight: 600;
     }
     .savebtn {
         background-color: #1A73E8;
+        border-radius: 0px;
+        padding: 1px;
+    }
+    .cancelbtn {
+        background-color: #ffffff;
+        border-radius: 0px;
+        width: 80px;
+        height: 32.85px;
+        padding: 1px;
     }
 }
 .modal-backdrop {
-    background: rgba(0, 0, 0, 0.2) !important;
+    background: rgba(0, 0, 0, 0.7) !important;
 }
 .modal-backdrop.in{
     opacity: 0.5;

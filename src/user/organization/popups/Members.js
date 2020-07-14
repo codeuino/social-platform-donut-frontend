@@ -3,6 +3,7 @@ import { Modal, Button, Row, Image, Form } from "react-bootstrap";
 import { connect } from 'react-redux';
 import { removeUser, getInviteLink } from '../../../actions/usersAction'
 import { getMember } from '../../../actions/insightAction'
+import { getOrgProfile } from '../../../actions/orgAction'
 import logo from "../../../svgs/logo-image.jpg";
 import { checkRemoveRight } from '../../dashboard/utils/checkDeleteRights'
 import { ToastContainer, toast } from "react-toastify";
@@ -16,7 +17,8 @@ class Members extends Component {
       members: [],
       query: '',
       isAdmin: '',
-      inviteLink: null
+      inviteLink: null,
+      whoCanSendInvite: ''
     }
   }
 
@@ -47,10 +49,11 @@ class Members extends Component {
 
   onGetInviteLink = () => {
     console.log('Get invite link clicked!');
-    this.props.getInviteLink();
+    this.props.getInviteLink('user');
   }
 
   componentDidMount() {
+    this.props.getOrgProfile()
     checkRemoveRight() 
     ? this.setState({ isAdmin: true }) 
     : this.setState({ isAdmin: false })
@@ -58,6 +61,7 @@ class Members extends Component {
 
   componentWillReceiveProps(nextProps) {
     console.log('nextProps ', nextProps)
+    const permissions = nextProps.org?.org?.options?.permissions
     const { query } = this.state
     let res = []
     if(query) {
@@ -67,7 +71,12 @@ class Members extends Component {
       let allMembers = nextProps.insight.allMembers
       res = this.mapHelper(allMembers)
     }
-    this.setState({ members: res, inviteLink: nextProps.user.inviteLink }, () => {
+    this.setState({ 
+      members: res, 
+      isAdmin: nextProps.user?.userProfile?.isAdmin,
+      inviteLink: nextProps.user.inviteLink,
+      whoCanSendInvite: permissions?.sendInvite
+    }, () => {
       console.log("members ", this.state);
     });
   }
@@ -137,21 +146,20 @@ class Members extends Component {
         <Modal.Header closeButton className="modal__header">
           <Modal.Title className="modal__title">
             <div className="modal__main-title">Members</div>
-            <input 
-              type="text"
-              placeholder="Search"
-              className="modal__search"
-              name="query"
-              value={this.state.query}
-              onChange={this.onChange}
-              onKeyPress={this.onKeyPress}
-            />
-            <Button
-              className="search_btn"
-              onClick={this.onSearchClick}
-            >
-              Search
-            </Button>
+            <Row style={{ marginLeft: "0px" }}>
+              <input
+                type="text"
+                placeholder="Search"
+                className="modal__search"
+                name="query"
+                value={this.state.query}
+                onChange={this.onChange}
+                onKeyPress={this.onKeyPress}
+              />
+              <Button className="search_btn" onClick={this.onSearchClick}>
+                Search
+              </Button>
+            </Row>
           </Modal.Title>
         </Modal.Header>
         <Modal.Body className="modal__body">
@@ -171,7 +179,13 @@ class Members extends Component {
                   readOnly={true}
                   onClick={this.copyToClipBoard.bind(this, inviteLink)}
                 ></Form.Control>
-                <Button className="invite__btn" onClick={this.onGetInviteLink}>Get Link</Button>
+                <Button 
+                  className="invite__btn" 
+                  onClick={this.onGetInviteLink}
+                  // disabled={isAdmin === false || whoCanSendInvite !== "BOTH" || whoCanSendInvite !== "ADMINS" }
+                >
+                  Get Link
+                </Button>
               </div>
               <div className="share__btn__container">
                 <p className="share__text">or share invite on</p>
@@ -183,16 +197,16 @@ class Members extends Component {
           </div>
         </Modal.Body>
         <ToastContainer
-            position="top-right"
-            autoClose={5000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-          />
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
       </Modal>
     );
   }
@@ -203,7 +217,8 @@ const mapStateToProps = (state) => ({
   error: state.error,
   user: state.user,
   insight: state.insight,
-  status: state.status
+  status: state.status,
+  org: state.org
 })
 
-export default connect(mapStateToProps, { removeUser, getMember, getInviteLink })(Members);
+export default connect(mapStateToProps, { removeUser, getMember, getInviteLink, getOrgProfile })(Members);
