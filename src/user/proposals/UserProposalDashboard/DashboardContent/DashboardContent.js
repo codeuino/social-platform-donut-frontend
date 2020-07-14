@@ -91,10 +91,7 @@ class DashboardContent extends Component {
             results.push(item);
           }
         });
-        this.setState({
-          displayItems: results,
-          pageCount: this.calculatePageCount(results.length),
-        });
+        this.handleStateChange(results)
         break;
       case "Submitted":
         proposals.forEach((item) => {
@@ -102,10 +99,7 @@ class DashboardContent extends Component {
             results.push(item);
           }
         });
-        this.setState({
-          displayItems: results,
-          pageCount: this.calculatePageCount(results.length),
-        });
+        this.handleStateChange(results)
         break;
       case "Draft":
         proposals.forEach((item) => {
@@ -113,10 +107,7 @@ class DashboardContent extends Component {
             results.push(item);
           }
         });
-        this.setState({
-          displayItems: results,
-          pageCount: this.calculatePageCount(results.length),
-        });
+        this.handleStateChange(results)
         break;
       case "Rejected":
         proposals.forEach((item) => {
@@ -124,13 +115,17 @@ class DashboardContent extends Component {
             results.push(item);
           }
         });
-        this.setState({
-          displayItems: results,
-          pageCount: this.calculatePageCount(results.length),
-        });
+        this.handleStateChange(results)
         break;
     }
   };
+
+  handleStateChange = (results)=> {
+    this.setState({
+      displayItems: results,
+      pageCount: this.calculatePageCount(results.length),
+    });
+  }
 
   handlePaginationClick = (e, index) => {
     e.preventDefault();
