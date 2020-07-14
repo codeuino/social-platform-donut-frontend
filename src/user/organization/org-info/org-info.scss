@@ -3,8 +3,6 @@
   flex-direction: row;
   border: solid 1px #dfe9f1;
   height: 269px;
-
-  flex: 0.5 1;
   align-items: center;
   .org-image {
     flex: 0.5;
@@ -12,7 +10,8 @@
     margin: 35px 0;
     .useredit {
       margin-top: 10px;
-      border-radius: 20px;
+      // border-radius: 20px;
+      font-family: "Inter";
       font-size: 14px;
     }
     .org-pic {
@@ -42,6 +41,7 @@
       font-weight: 600;
       margin: 4px 0;
       line-height: 0%;
+      padding-bottom: 10px;
     }
     .place {
       font-family: Inter;
@@ -58,8 +58,8 @@
       font-weight: normal;
       font-size: 14px;
       line-height: 17px;
-
       color: #1d2129;
+      text-align: justify;
     }
     .social-icons {
       display: flex;
@@ -68,7 +68,8 @@
         padding: 0.7em;
         font-size: 14px;
         box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
-        border-radius: 20px;
+        // border-radius: 20px;
+        padding: 3px;
         width: 10vw;
         height: 2.5em;
         font-family: Inter;

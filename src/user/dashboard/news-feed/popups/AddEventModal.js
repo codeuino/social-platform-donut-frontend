@@ -1,8 +1,53 @@
-import React from "react";
+import React,  { useState } from "react";
 import { Button, Modal, Form, Col } from "react-bootstrap";
 import PropTypes from "prop-types";
+import { connect } from 'react-redux';
+import { createEvent } from '../../../../actions/dashboardAction';
 
 const AddEventModal = (props) => {
+  const [eventName, setEventName] = useState("");
+  const [eventDate, setEventDate] = useState("");
+  const [location, setLocation] = useState("");
+  const [shortDescription, setShortDescription] = useState("");
+  const [longDescription, setLongDescription] = useState("");
+  const [eventTime, setEventTime] = useState("");
+
+  const onEventName = (event) => {
+    setEventName(event.target.value);
+  };
+  const onEventDate = (event) => {
+    setEventDate(event.target.value);
+  };
+  const onEventLocation = (event) => {
+    setLocation(event.target.value);
+  };
+  const onShortDesc = (event) => {
+    setShortDescription(event.target.value);
+  };
+  const onLongDesc = (event) => {
+    setLongDescription(event.target.value);
+  };
+  const onEventTime = (event) => {
+    setEventTime(event.target.value)
+  }
+
+  const onCreateEventClick = () => {
+    const obj = {
+      location,
+      eventName,
+      eventDate,
+      description: {
+        shortDescription,
+        longDescription
+      },
+      eventTime: eventTime
+    }
+    console.log('creating event ', obj);
+    props.createEvent(obj)
+    props.handleClose()
+  }
+
+
   return (
     <Modal
       show={props.show}
@@ -30,7 +75,11 @@ const AddEventModal = (props) => {
               className="modal__group"
             >
               <Form.Label className="modal__label">Event Name</Form.Label>
-              <Form.Control type="email" placeholder="Type here.." />
+              <Form.Control 
+                type="text"
+                placeholder="Type here.."
+                onChange={onEventName}
+              />
             </Form.Group>
 
             <Form.Group
@@ -39,7 +88,11 @@ const AddEventModal = (props) => {
               className="modal__group"
             >
               <Form.Label className="modal__label">Location</Form.Label>
-              <Form.Control type="password" placeholder="Where do you live?" />
+              <Form.Control 
+                type="text"
+                placeholder="Event location"
+                onChange={onEventLocation}
+              />
             </Form.Group>
           </Form.Row>
           <Form.Row className="modal__row">
@@ -49,7 +102,11 @@ const AddEventModal = (props) => {
               className="modal__group"
             >
               <Form.Label className="modal__label">Date</Form.Label>
-              <Form.Control type="email" placeholder="DD/MM/YY" />
+              <Form.Control 
+                type="text" 
+                placeholder="DD/MM/YY"
+                onChange={onEventDate}
+              />
             </Form.Group>
 
             <Form.Group
@@ -58,7 +115,11 @@ const AddEventModal = (props) => {
               className="modal__group"
             >
               <Form.Label className="modal__label">Time</Form.Label>
-              <Form.Control type="password" placeholder="10:00 AM" />
+              <Form.Control 
+                type="text"
+                placeholder="10:00 AM"
+                onChange={onEventTime}
+              />
             </Form.Group>
           </Form.Row>
           <Form.Row className="modal__row">
@@ -67,18 +128,26 @@ const AddEventModal = (props) => {
               controlId="formGridEmail"
               className="modal__group"
             >
-              <Form.Label className="modal__label">Post Description</Form.Label>
+              <Form.Label className="modal__label">Event Description</Form.Label>
               <Form.Control
                 as="textarea"
                 className="modal__post"
-                placeholder="What do you want to tell people about the event?"
+                placeholder="Short description"
+                onChange={onShortDesc}
+              /><br />
+              <Form.Control
+                as="textarea"
+                className="modal__post"
+                placeholder="Long description"
+                onChange={onLongDesc}
               />
             </Form.Group>
           </Form.Row>
         </Form>
       </Modal.Body>
       <div className="modal__buttons">
-        <Button onClick={props.handleClose} className="modal__save">
+        <Button onClick = {onCreateEventClick}
+        className = "modal__save" >
           <span className="modal__buttontext">Save</span>
         </Button>
         <Button onClick={props.handleClose} className="modal__cancel">
@@ -88,10 +157,18 @@ const AddEventModal = (props) => {
     </Modal>
   );
 };
+
 AddEventModal.propTypes = {
   onClick: PropTypes.func,
   show: PropTypes.bool,
   style: PropTypes.object,
 };
 
-export default AddEventModal;
+// map state to props 
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  error: state.error,
+  dashboard: state.dashboard
+})
+
+export default connect(mapStateToProps, { createEvent })(AddEventModal);

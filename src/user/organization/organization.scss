@@ -15,7 +15,7 @@
     flex: 3;
     .notify-user {
       display: flex;
-      padding: 20px 0px 20px 30px;
+      padding: 20px 10px 20px 30px;
     }
   }
   .org {
@@ -31,8 +31,10 @@
   .org-info {
     display: flex;
     flex-direction: row;
+    padding-right: 10px;
     .posts {
       flex-grow: 2;
+      margin-top: -1rem;
       h2 {
         margin: 0;
         padding: 10px 0 10px 30px;
@@ -56,6 +58,43 @@
             color: white;
           }
         }
+        .ul__container {
+          width: 140%;
+          margin-top: 10px;
+          display: flex;
+          .nav__tab {
+            .nav__list__container {
+              display: flex;
+              justify-content: flex-start;
+              align-items: center;
+              list-style: none;
+              border-bottom: 2px solid #eee;
+              transition: all .5s;
+              font-weight: 300;
+              color: #262727;
+
+              .nav__single__tab {
+                display: inline-block;
+                font-family: Inter;
+                font-style: normal;
+                font-weight: 500;
+                font-size: 18px;
+                line-height: 22px;
+                padding-left: 11px;
+                padding-right: 15px;
+                padding-bottom: 5px;
+                margin-left: 19px;
+                text-align: center;
+                cursor: pointer;
+
+                &.selected {
+                  border-bottom: 3px solid #337ab7;
+                  color: #1a73e8;
+                }
+              }
+            }
+          }
+        }
       }
       .about-us {
         margin: 10px 0px 0 27px;
@@ -69,15 +108,43 @@
           color: black;
           font-weight: bold;
         }
+        .short__desc, .long__desc {
+           font-family: Inter;
+           font-style: normal;
+           font-weight: normal;
+           font-size: 14px;
+           line-height: 17px;
+           color: #1d2129;
+           text-align: justify;
+        }
       }
     }
     .org-updates {
       flex: 1;
       flex-grow: 3;
     }
+
+    .proposal-btn {
+      height: 50px;
+      width: 90%;
+      margin-left: 40px;
+      font-family: Inter;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 27px;
+
+      color: #ffffff;
+    }
   }
 }
 .orgupdatesloading {
   margin-top: -10px;
   margin-left: 30px;
+}
+.form-control:disabled,
+.form-control[readonly] {
+  background-color: #e9ecef;
+  opacity: 1;
+  font-family: "Inter";
 }

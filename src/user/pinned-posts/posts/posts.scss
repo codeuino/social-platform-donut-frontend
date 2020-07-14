@@ -14,24 +14,65 @@
     flex-direction: column;
   }
 }
+
 .categories {
   display: flex;
   margin: 10px 0px 10px 20px;
+  .tab__container {
+    width: 100%;
+    margin-left: 0px;
+    margin-top: 0px;
+    .nav__tab {
+      .nav__list__container {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        list-style: none;
+        border-bottom: 2px solid #eee;
+        transition: all .5s;
+        font-weight: 300;
+        color: #262727;
+
+        .nav__single__tab {
+          display: inline-block;
+          font-family: Inter;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 18px;
+          line-height: 22px;
+          padding-left: 11px;
+          padding-right: 15px;
+          padding-bottom: 5px;
+          margin-left: 19px;
+          text-align: center;
+          cursor: pointer;
+
+          &.selected {
+            border-bottom: 3px solid #337ab7;
+            color: #1a73e8;
+          }
+        }
+      }
+    }
+  }
   .btn {
     padding: 8px 20px;
     border: solid 1px #007bff;
     border-radius: 100px;
     color: #007bff;
     margin: 0 5px;
-    cursor: pointer;
-    &:focus {
-      background: #007bff;
-      color: white;
-    }
-    &.active {
-      background: #007bff;
-      color: white;
-    }
+   &:hover {
+     background-color: #1a73e8;
+     color: white;
+   }
+
+   &:focus {
+     background-color: #1a73e8;
+     color: white;
+   }
+  }
+  .btn-primary {
+    background-color: #fff;
   }
   .space {
     width: 10px;
@@ -52,7 +93,6 @@
     margin: 0 5px;
     cursor: pointer;
     &:focus {
-      background: #007bff;
       color: white;
       box-shadow: none;
     }
@@ -66,6 +106,7 @@
     width: 10px;
   }
 }
+
 .post-details2 {
   font-size: 14px;
   padding-left: 10px;
@@ -158,7 +199,7 @@
             border-right: 1px solid rgba(204, 204, 204, 0.7);
             .date-content {
               width: 50%;
-              margin: 0 auto;
+              padding: 1vw;
               small {
                 font-family: Inter;
                 font-style: normal;

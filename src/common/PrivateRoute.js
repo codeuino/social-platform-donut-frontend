@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-function PrivateRoute({ component: Component , auth, ...rest}) {
+function PrivateRoute({ component: Component , auth, org, ...rest}) {
   return (
     <Route {...rest}
       render = { props => 
-        auth.isAuthenticated === true ? (
+        auth.isAuthenticated === true && org.isMaintenance === false ? (
           <Component {...props}/>
         ) : (
           <Redirect to= "/" />
@@ -23,7 +23,8 @@ PrivateRoute.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    auth: state.auth
+    auth: state.auth,
+    org: state.org
   }
 }
 export default connect(mapStateToProps)(PrivateRoute);

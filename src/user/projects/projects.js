@@ -1,22 +1,38 @@
 import React, { Component } from "react";
 import "./projects.scss";
 import Navigation from "../dashboard/navigation/navigation";
-import Project_list from "../../jsonData/projects";
 import { makeStyles,Grid , Card, CardActionArea, CardActions, CardContent, CardMedia, Typography} from "@material-ui/core";
 import { Button } from "react-bootstrap";
-import Popups from "../../common/Popups";
-
+import { connect } from 'react-redux'
+import { createProject, getAllProjects } from '../../actions/projectAction'
+import projectImage from '../../images/project.png'
+import { withRouter } from "react-router-dom";
 
 class Projects extends Component {
   constructor(props) {
     super(props);
     this.state = {
       proj: true,
-      deleteproject: false
+      deleteproject: false,
+      allProjects: []
     };
+  }
+  componentDidMount() {
+    setTimeout(() => {
+      this.props.getAllProjects();
+    })
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log('project ', nextProps)
+    const { allProjects } = nextProps.project
+    this.setState({ allProjects: allProjects }, () => {
+      console.log('projects state ', this.state)
+    })
   }
 
   render() {
+    const { allProjects } = this.state
     const useStyles = makeStyles((theme) => ({
       root: {
         flexGrow: 1,
@@ -35,27 +51,31 @@ class Projects extends Component {
       },
     });
 
-    let Projects = Project_list.map((Item) => (
-      <Grid item xs={6} sm={4}>
+    let Projects = allProjects.map((Item, index) => (
+      <Grid item xs = {6} sm = {4} key={index} className="card__container">
         <Card className={useStyles2.root}>
           <CardActionArea>
             <CardMedia
               component="img"
               className="img"
-              image={Item.image}
+              image={Item.image || projectImage}
             />
             <CardContent>
               <Typography gutterBottom variant="h5" component="h2">
-                {Item.Proj_name}
+                {Item.projectName || "Project Name"}
               </Typography>
-              <Typography variant="body2" color="textSecondary" component="p">
-                {Item.short_des}
+              <Typography variant="body2" color="textSecondary" component="p" className="short-des">
+                {Item.description?.shortDescription || "Short description of the project"}
               </Typography>
             </CardContent>
           </CardActionArea>
           <CardActions>
-            <Button size="small"  href={`/${Item._id}/proj-info`} variant="light">
-                <strong>See More</strong>
+            <Button 
+              size="small" 
+              onClick={() => this.props.history.push(`/${Item._id}/proj-info`)}
+              variant="light"
+            >
+              <strong>See More</strong>
             </Button>
           </CardActions>
         </Card>
@@ -68,20 +88,26 @@ class Projects extends Component {
           <Navigation proj={this.state.proj}></Navigation>
         </div>
         <div className="news projects">
+          <p id="project__header">All Projects</p>
           <div className={useStyles.root}>
-            <Grid container spacing={2}>
+            <Grid container spacing={3}>
               {Projects}
             </Grid>
           </div>
         </div>
-        <Popups
-          option={this.state.option}
-          optionValue={this.state.optionValue}
-          modalShow={this.state.modalShow}
-        />
       </div>
     );
   }
 }
 
-export default Projects;
+// map state to props 
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  error: state.error,
+  project: state.project
+})
+
+export default connect(mapStateToProps, {
+  createProject,
+  getAllProjects
+})(withRouter(Projects));

@@ -21,6 +21,7 @@ class SetupForm extends Component {
       <div className="setup_form_main_content">
         <div className="setup_header">
           <h3 className="community_text">Community Setup </h3>
+            {values.error ? (<p style={{color: "red"}}>{values.error}</p>): null}
           <p>1 / 2</p>
         </div>
         <div className="setup_content">
@@ -96,31 +97,31 @@ class SetupForm extends Component {
                 </Form.Group>
                  <Form.Group>
                    <Form.Label htmlFor="label_text" className="label_text mt-0">
-                    Facebook link
+                    Email
                   </Form.Label>
                   <Form.Control
-                    type="text"
-                    name="fb"
+                    type="email"
+                    name="email"
                     id="exampleText"
-                    placeholder="Facebook link"
+                    placeholder="Community Email"
                     className="placeholder_text"
-                    defaultValue={values.fb}
-                    onChange={handleChange('fb')}
+                    defaultValue={values.email}
+                    onChange={handleChange('email')}
                     required={true}
                   />
                 </Form.Group>
                 <Form.Group>
                   <Form.Label htmlFor="label_text" className="label_text mt-0">
-                    Github link
+                    Chat platform link
                   </Form.Label>
                   <Form.Control
                     type="text"
-                    name="github"
+                    name="chatPlatform"
                     id="exampleText"
-                    placeholder="Github link"
+                    placeholder="Chat platform"
                     className="placeholder_text"
-                    defaultValue={values.github}
-                    onChange={handleChange('github')}
+                    defaultValue={values.chatPlatform}
+                    onChange={handleChange('chatPlatform')}
                     required={true}
                   />
                 </Form.Group>
@@ -140,4 +141,5 @@ class SetupForm extends Component {
     );
   }
 }
+
 export default SetupForm;

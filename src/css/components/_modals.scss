@@ -3,10 +3,13 @@
   .modal-content {
     border-radius: 10px;
     max-height: 70vh;
-    width: 66%;
+    // width: 66%;
     border: 0px;
-    overflow-y: scroll;
+    // overflow-y: scroll;
     overflow-x: hidden;
+    background: #FFFFFF;
+    /* border: 1px solid #CCCCCC; */
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.5);
   }
   .modal__header {
     .modal__title {
@@ -30,9 +33,18 @@
         letter-spacing: 0.2em;
         padding-top: 5px;
       }
+      .search_btn {
+        width: 6vw;
+        height: 5vh;
+        background: rgb(250, 251, 252);
+        // border-radius: 100px;
+        color: #1A73E8;
+        padding: 0.3em;
+        margin-left: 1em;
+      }
     }
     .modal__search {
-      width: 100%;
+      width: 50%;
       border: 1px solid #cccccc;
       box-sizing: border-box;
       border-radius: 5px;
@@ -121,7 +133,8 @@
       border-radius: 20px;
       margin-top: 15px;
       margin-bottom: 10px;
-      justify-content: center;
+      // justify-content: center;
+      margin-left: 6px;
       align-items: center;
       .follower__image {
         border: 1px solid #e6e6e5;
@@ -161,8 +174,17 @@
       }
       .modal__followButton {
         background: #fff;
-        box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
-        border-radius: 34px;
+        // box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
+        // border-radius: 34px;
+        width: 83px;
+        height: 4.5vh;
+        text-align: center;
+        padding: 0px;
+      }
+      .modal__unFollowButton {
+        background: #007bff;
+        // box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
+        // border-radius: 34px;
         width: 83px;
         height: 4.5vh;
         text-align: center;
@@ -177,25 +199,35 @@
 
         color: #1a73e8;
       }
+       .modal__unFollowText {
+        font-family: $font-family-Inter;
+        font-style: normal;
+        font-weight: $font-weight-normal;
+        font-size: 12px;
+        line-height: 15px;
+
+        color: #ffff;
+      }
     }
     .modal__member {
       display: flex;
       border-radius: 20px;
       margin-top: 15px;
       margin-bottom: 10px;
-      justify-content: center;
+      margin-left: 10px;
       align-items: center;
       .member__image {
         border: 1px solid #e6e6e5;
         border-radius: 5px;
         min-width: 56px;
-        margin-left: 10px;
+        // margin-left: 10px;
         padding: 5px;
       }
 
       .member__content {
         padding-left: 10px;
         padding-right: 10px;
+        margin-right: 40px;
         width: 50%;
       }
 
@@ -229,8 +261,8 @@
       .modal__remove__followButton {
         border: 1px solid #eb5757;
         box-sizing: border-box;
-        box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
-        border-radius: 34px;
+        // box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
+        // border-radius: 34px;
         background: transparent;
         width: 83px;
         height: 4.5vh;
@@ -244,6 +276,26 @@
           font-size: 12px;
           line-height: 15px;
           color: #eb5757;
+        }
+      }
+      .modal__removed__followButton {
+        border: 1px solid #eb5757;
+        box-sizing: border-box;
+        // box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
+        // border-radius: 34px;
+        background: #eb5757;
+        width: 83px;
+        height: 4.5vh;
+        text-align: center;
+        padding: 0px;
+
+        .remove_followText {
+          font-family: Inter;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 12px;
+          line-height: 15px;
+          color: #ffff;
         }
       }
     }
@@ -262,11 +314,13 @@
           .invite__btn {
             margin-left: 3px;
             background: #1a73e8;
-            box-shadow: 1.26667px 2.53333px 6.33333px rgba(0, 0, 0, 0.1);
-            border-radius: 43.0667px;
+            // box-shadow: 1.26667px 2.53333px 6.33333px rgba(0, 0, 0, 0.1);
+            // border-radius: 43.0667px;
             width: 83px;
-            height: 4.5vh;
-            padding: 0px;
+            height: 5.2vh;
+            padding: 2px;
+            font-family: "Inter";
+            font-size: 13px;
           }
         }
         .share__btn__container {
@@ -275,14 +329,16 @@
           .invite__btn {
             margin-right: 10px;
             background: #1a73e8;
-            box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
-            border-radius: 20px;
+            // box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
+            // border-radius: 20px;
             width: 83px;
             height: 4.5vh;
             padding: 0px;
+            font-family: "Inter";
+            font-size: 13px;
           }
           .share__text {
-            font-family: Inter;
+            font-family: "Inter";
             font-style: normal;
             font-weight: normal;
             font-size: 13px;
@@ -299,9 +355,9 @@
     .modal__save {
       background: $color-modal-button-active;
       box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
-      border-radius: 34px;
-      width: 104px;
-      height: 42px;
+      // border-radius: 34px;
+      width: 80px;
+      height: 38.5px;
       margin-right: 20px;
       margin-bottom: 10px;
       margin-left: 14px;
@@ -309,7 +365,7 @@
         font-family: $font-family-Inter;
         font-style: normal;
         font-weight: bold;
-        font-size: 18px;
+        font-size: 14px;
         line-height: 22px;
         /* identical to box height */
 
@@ -320,17 +376,16 @@
       border: 1px solid #1a73e8;
       background: $color-modal-button-inactive;
       box-sizing: border-box;
-      box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
-      border-radius: 34px;
+      // border-radius: 34px;
       margin-right: 20px;
       margin-bottom: 10px;
-      width: 104px;
-      height: 42px;
+      width: 80px;
+      height: 38.5px;
       .modal__buttontext {
         font-family: $font-family-Inter;
         font-style: normal;
         font-weight: $font-weight-normal;
-        font-size: 18px;
+        font-size: 14px;
         line-height: 22px;
         /* identical to box height */
         color: #1a73e8;

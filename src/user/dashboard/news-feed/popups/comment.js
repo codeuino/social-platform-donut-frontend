@@ -1,39 +1,75 @@
 import React, { Component } from "react";
 import { Modal, Button, Row, Col, Form } from "react-bootstrap";
+import { connect } from 'react-redux';
+import { createComment, getAllCommentsOfPost, deleteComment } from '../../../../actions/commentAction'
 import "./comment.scss";
+// import comments from "../../../../jsonData/comments";
+import profile_img from '../../../../svgs/profile-icon.svg'
+import { MdDelete } from "react-icons/md";
+import { checkDeleteRights } from '../../../dashboard/utils/checkDeleteRights'
 
-import comments from "../../../../jsonData/comments";
-export class Comment extends Component {
-  // eslint-disable-next-line
+class Comment extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      comment: "",
+      content: "",
+      allComments: [],
+      postId: '',
+      userId: '',
+      count: 0
     };
-    this.onChange = this.onChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
   }
 
-  onChange(e) {
+  onChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  onSubmit(e) {
+  onPost = (e) => {
     e.preventDefault();
-    const comment = this.state;
-
-    console.log(comment);
+    const { content, postId } = this.state;
+    const commentInfo = {
+      content: content
+    }
+    this.props.createComment(postId, commentInfo)
+    console.log('submitting comment ', content, postId);
+    this.setState({ content: " "})
+    this.props.onHide()
   }
+
+  onDelete = (commentId) => {
+    console.log('deleting comment ', commentId)
+    this.props.deleteComment(commentId)
+  }
+
+  componentDidMount() {
+     const userId = JSON.stringify(localStorage.getItem("userId"));
+     console.log("checking rights ", userId);
+     this.setState({ userId: userId })
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log('comment state', nextProps)
+    const { postId, comment } = nextProps
+    this.setState({ postId: postId, allComments: comment?.allComments }, () => {
+      console.log('updated comment state ', this.state)
+    })
+  }
+
   render() {
-    var all_comments = comments.map((comment) => (
+    const { show, onHide } = this.props
+    const { allComments, content } = this.state
+    var all_comments = allComments.map((comment) => (
       <Row className="user_comment" id={comment._id}>
         <Col md={2}>
-          <img class="photo" src={comment.logo} alt="I"></img>
+          <img class="photo" src={profile_img || comment.userId?.image } alt="I"></img>
         </Col>
         <Col md={10}>
           <div className="contain">
-            <p className="user">{comment.name}</p>
-            <p className="comment">{comment.comment}</p>
+            <p className="user">{comment?.userId?.name?.firstName + " " + comment?.userId?.name?.lastName || "User name"}</p>
+            <p className="comment">{comment.content || "Comment content"}
+              {checkDeleteRights(comment.userId?._id) ? (<MdDelete size={20} className="delete__icon" onClick={this.onDelete.bind(this, comment._id)}
+              />) : null}
+            </p>
           </div>
         </Col>
       </Row>
@@ -41,7 +77,8 @@ export class Comment extends Component {
 
     return (
       <Modal
-        {...this.props}
+        show={show}
+        onHide={onHide}
         size="md"
         aria-labelledby="contained-modal-title-vcenter"
         centered
@@ -58,8 +95,8 @@ export class Comment extends Component {
                 <Form.Control
                   className="form-input"
                   as="textarea"
-                  name="comment"
-                  value={this.state.comment}
+                  name="content"
+                  value={content}
                   onChange={this.onChange}
                   placeholder="Write your mind here...."
                   size="sm"
@@ -68,7 +105,7 @@ export class Comment extends Component {
 
               <div className="form-footer">
                 <Button
-                  onClick={this.props.onHide}
+                  onClick={this.onPost}
                   type="submit"
                   className="savebtn"
                 >
@@ -77,10 +114,20 @@ export class Comment extends Component {
               </div>
             </Form>
             <div className="about">Other people who commented</div>
-            {all_comments}
+            {Boolean(allComments?.length > 0) ? all_comments : "Be the first to comment!"}
           </Modal.Body>
         </div>
       </Modal>
     );
   }
 }
+
+// map state to props 
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  error: state.error,
+  comment: state.comment,
+  post: state.post
+})
+
+export default connect(mapStateToProps, { getAllCommentsOfPost, createComment, deleteComment })(Comment);

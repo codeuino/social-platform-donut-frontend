@@ -1,4 +1,3 @@
-import React, { Component } from "react";
 import { useMediaQuery } from "react-responsive";
 
 const Desktop = ({ children }) => {

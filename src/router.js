@@ -13,13 +13,13 @@ import PrivateRoute from "./common/PrivateRoute";
 import Maintenance from "./maintenance/maintenance";
 import Events from "./user/events/events";
 import UserProposalDashboard from "./user/proposals/UserProposalDashboard/UserProposalDashboard";
-import AdminProposalDashboard from "./user/proposals/AdminProposalDashboard/AdminProposalDashboard";
 import ProposalDiscussion from "./user/proposals/ProposalDiscussion/ProposalDiscussion";
 import ProposalEditor from "./user/proposals/ProposalEditor/ProposalEditor";
 import Admin from "./user/Admin/Admin";
 import Setup from "./user/setup/Setup";
 import CommunitySetting from "./user/dashboard/Community/CommunitySetting";
 import Insight from "./user/dashboard/insights/Insight";
+import AdminRoute from "./common/AdminRoute";
 
 const Router = () => (
   <BrowserRouter>
@@ -38,22 +38,17 @@ const Router = () => (
       <PrivateRoute exact path="/proposal" component={UserProposalDashboard} />
       <PrivateRoute
         exact
-        path="/adminproposal"
-        component={AdminProposalDashboard}
-      />
-      <PrivateRoute
-        exact
-        path="/proposalDiscussion"
+        path="/proposaldiscussion"
         component={ProposalDiscussion}
-      />
-      <PrivateRoute
-        exact
-        path="/adminproposal"
-        component={AdminProposalDashboard}
       />
       <PrivateRoute exact path="/proposaleditor" component={ProposalEditor} />
       <PrivateRoute exact path="/setup" component={Setup} />
-      <PrivateRoute exact path="/org-settings" component={CommunitySetting} />
+      <AdminRoute
+        role = "admin"  
+        exact 
+        path="/org-settings" 
+        component={CommunitySetting} 
+      />
       <PrivateRoute exact path="/insight" component={Insight} />
       <PrivateRoute exact path="/admin" component={Admin} />
       <Route component={NotFound} />

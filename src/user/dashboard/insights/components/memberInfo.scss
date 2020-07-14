@@ -44,6 +44,16 @@
             padding: 0.4em;
             margin-top: 0.5em;
           }
+          .search_btn {
+            width: 11vw;
+            height: 5vh;
+            background: rgb(250, 251, 252);
+            border-radius: 100px;
+            color: #1A73E8;
+            padding: 0.3em;
+            margin-left: 1em;
+            height: 42.2px;
+          }
           .members_list {
             display: flex;
             padding: 0.3em;
@@ -126,7 +136,7 @@
   }
 }
 .list-group {
-  width: 14vw;
+  //  width: 14vw;
 }
 .popover-body {
   width: 9vw;

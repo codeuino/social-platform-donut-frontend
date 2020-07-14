@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
-import { Modal, Button, Form } from 'react-bootstrap';
+import { Modal, Button, Form, Col } from 'react-bootstrap';
 import { MdVerifiedUser } from 'react-icons/md';
 import { FaUserSlash } from 'react-icons/fa';
 import { connect } from 'react-redux';
 import { forgotPassword, changePassword } from '../actions/authAction';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
  
 class Popups extends Component {
   constructor(props){
@@ -20,16 +22,26 @@ class Popups extends Component {
       option: "",
       optionValue: "",
       newPass: "",
-      cnfPass: ""
+      cnfPass: "",
+      requested: false
     }
   }
   
   componentWillReceiveProps(nextProps){
+    console.log('nextProps in common ', nextProps)
     this.setState({
       show: nextProps.modalShow,
       option: nextProps.option,
       optionValue: nextProps.optionValue
     });
+    const { currentStep, requested } = this.state
+    if (nextProps.auth.resetPassReq !== null && requested) {
+      toast.success('Link sent to your registered email!')
+      let step = currentStep >= 2 ? 2 : currentStep + 1
+      this.setState({
+        currentStep: step 
+      })
+    } 
   }
  
   handleClose = () => {
@@ -54,8 +66,8 @@ class Popups extends Component {
 
   changePassword = (e) => {
     e.preventDefault();
-    const { newPass } = this.state;
-    const { auth, changePassword, status } = this.props;
+    const { newPass, success } = this.state;
+    const { auth, changePassword } = this.props;
     
     const passObj = { 
       password: newPass,
@@ -66,30 +78,21 @@ class Popups extends Component {
     changePassword(passObj);
 
     // show notification on sidebar if done successfully 
-    if(status.success) {
+    if(success) {
       console.log("Successfully changed the password!");
     }
   }
   
   forgotPasswordRequest = () => {
     const { email } = this.state;
-    const { forgotPassword, status } = this.props;
+    const { forgotPassword } = this.props;
     
     console.log("forgot password request sending...")
-    forgotPassword(email);
-    
-    let { currentStep } = this.state;
-    // move to next step if forgot password request successful
-    if(status.success){
-      currentStep = currentStep >= 2 ? 2 : currentStep + 1
-      this.setState({
-        currentStep: currentStep
-      })
-    } else {
-      // show error message in popup 
-      console.log("Something went wrong!!");
+    const emailObj = {
+      email: email
     }
-
+    this.setState({ requested: true })
+    forgotPassword(emailObj);
   }
     
 
@@ -157,10 +160,10 @@ nextButton(){
       </Form>
     );
     const updateUsername = (
-      <Form>
-        <div className="row">
-          <div className="col-md-9">
-             <Form.Group controlId="formBasicEmail">
+      <Form className="modal__form">
+        <Form.Row className="modal__row">
+          <Form.Group as={Col} className="modal__group">
+             <Form.Label className="modal__label" controlId="formBasicEmail" />
               <Form.Control 
                 type="text"
                 placeholder="Enter your username"
@@ -168,14 +171,13 @@ nextButton(){
                 defaultValue={optionValue}
                 name="username"
               />
-            </Form.Group>
-          </div>
-          <div className="col-md-3">
-            <Button className="btn btn-light" type="button" onClick={this.handleSubmit}>
-              Save
+          </Form.Group>
+        </Form.Row>
+          <div className="modal__buttons">
+            <Button className="modal__save" onClick={this.handleSubmit}>
+              <span className="modal__buttontext">Save</span>
             </Button>
           </div>
-        </div>
       </Form>
     );
 
@@ -216,7 +218,7 @@ nextButton(){
    )
     const updatePassword = (
       <React.Fragment>
-      <form onSubmit={this.handleSubmit}>
+      <Form className="modal__form" onSubmit={this.handleSubmit}>
         <Step1 
           currentStep={this.state.currentStep} 
           onChange={this.onChange}
@@ -229,7 +231,7 @@ nextButton(){
       
         {this.nextButton()}
 
-      </form>
+      </Form>
       </React.Fragment>
     );
     const deactivateAccount = (
@@ -258,11 +260,21 @@ nextButton(){
       </div>
     )
     return (
-       <Modal show={this.state.show} onHide={this.handleClose} animation={false} centered>
-        <Modal.Header closeButton>
-          <Modal.Title>Update { " " + option }</Modal.Title>
+       <Modal 
+        show={this.state.show} 
+        onHide={this.handleClose} 
+        animation={true} 
+        centered
+        className="modal"
+        >
+        <Modal.Header closeButton className="modal__header">
+          <Modal.Title className="modal__title">
+            <div className="modal__main-title">
+              Update { " " + option }
+            </div>
+          </Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body className="modal__body">
           {Boolean(option === "name") ? updateName : null}
           {Boolean(option === "email") ? updateEmail: null}
           {Boolean(option === "username") ? updateUsername: null}
@@ -284,18 +296,24 @@ function Step1(props) {
     return null
   } 
   return(
-    <div className="form-group">
-      <label htmlFor="email">Registered-Email address</label>
-      <input
-        className="form-control"
-        id="email"
-        name="email"
-        type="text"
-        placeholder="abc@gmail.com"
-        value={props.email}
-        onChange={props.onChange}
-        />
-    </div>
+    <Form.Row className="modal__row">
+      <Form.Group as={Col} className="modal__group">
+        <Form.Label 
+          htmlFor="email" 
+          className="modal__label"
+          >
+            Registered-Email address
+        </Form.Label>
+        <Form.Control
+          id="email"
+          name="email"
+          type="text"
+          placeholder="abc@gmail.com"
+          value={props.email}
+          onChange={props.onChange}
+          />
+      </Form.Group>
+    </Form.Row>
   );
 }
 
@@ -305,12 +323,25 @@ function Step2(props) {
   if (props.currentStep !== 2) {
     return null
   } 
-  return(
+  return (
     <React.Fragment>
-    <div className="form-group">
-      <label htmlFor="password">Check your email to get the link of reset the password. If it doesnot appear within few minutes, check the spam folder.</label>
-          
-    </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+      <div className="form-group">
+        <label htmlFor="password">
+          Check your email to get the link of reset the password. If it doesnot
+          appear within few minutes, check the spam folder.
+        </label>
+      </div>
     </React.Fragment>
   );
 }

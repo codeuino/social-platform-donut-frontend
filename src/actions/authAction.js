@@ -1,4 +1,4 @@
-import { SET_CURRENT_USER } from './types';
+import { SET_CURRENT_USER, GET_USER_PROFILE, PASSWORD_SUCCESSFULLY_CHANGED, PASSWORD_CHANGE_REQUEST_SUCCESS, SET_ADMIN } from './types';
 import axios from 'axios';
 import { setAuthToken } from '../utils/setAuthToken';
 import jwt_decode from 'jwt-decode';
@@ -14,7 +14,11 @@ export const registerUser = (userInfo, history) => async (dispatch) => {
     
     if(res.status === 201) { 
       dispatch(setRequestStatus(true));
-      history.push('/dashboard');
+      dispatch({
+        type: GET_USER_PROFILE,
+        payload: res.data.user
+      })
+      history.push('/');
     }
 
   } catch(error) {
@@ -40,9 +44,21 @@ export const loginUser = (userInfo, history) => async (dispatch) => {
       
       // update state with user
       const decodedData = await jwt_decode(token);
+      localStorage.setItem('userId', decodedData._id)
       dispatch(setCurrentUser(decodedData));
-      history.push("/dashboard");
 
+      // update user role in localStorage
+      localStorage.setItem('admin', res.data.user.isAdmin)
+
+      // store orgId in localStorage
+      localStorage.setItem('orgId', res.data.user.orgId);
+
+      // if user is admin update admin in store 
+      dispatch({
+        type: SET_ADMIN,
+        payload: res.data.user.isAdmin
+      })
+      history.push("/dashboard");
     }
   } catch(error) {
       dispatch(errorHandler(error));
@@ -52,13 +68,17 @@ export const loginUser = (userInfo, history) => async (dispatch) => {
 // forgot password 
 export const forgotPassword = (email) => async (dispatch) => {
   try {
-    const res = await axios.post('/user/password_reset', email);
+    const res = await axios.patch('/user/password_reset/request/', email);
     dispatch(setRequestStatus(false));
     
     if(res.status === 200){
       dispatch(setRequestStatus(true));
       console.log("Forgot password request sent!!");
       forgotPasswordToken = res.data.token;
+      dispatch({
+        type: PASSWORD_CHANGE_REQUEST_SUCCESS,
+        payload: res.data.token
+      })
     }
 
   } catch (error) {
@@ -69,13 +89,17 @@ export const forgotPassword = (email) => async (dispatch) => {
 // update password 
 export const changePassword = (passObj) => async (dispatch) => {
   try {
-    const res = await axios.post(`/user/password_reset/${forgotPasswordToken}`, passObj);
+    const res = await axios.patch(`/user/password_reset/${forgotPasswordToken}`, passObj);
     dispatch(setRequestStatus(false));
 
     if(res.status === 200){
       dispatch(setRequestStatus(true));
       console.log("Password updated!", res.data);
       // show password updated notification from here 
+      dispatch({
+        type: PASSWORD_SUCCESSFULLY_CHANGED,
+        payload: res.data.updated
+      })
     }
     
   } catch(error) {
@@ -85,15 +109,26 @@ export const changePassword = (passObj) => async (dispatch) => {
 
 
 // to logout user 
-export const logoutUser = () => {
-  // remove token from the localStorage 
-  localStorage.removeItem('jwtToken');
-  // delete authorization from the header 
-  setAuthToken(false);
-  // set user to {}
-  setCurrentUser({});
-  // move to home 
-  window.location.href = "/";
+export const logoutUser = () => async (dispatch) => {
+  try { 
+     console.log('Logging out!!')
+     // clear token from backend 
+     const res = await axios.post('/user/logout')
+     if (res.status === 200) {
+      // remove all keys from the localStorage except the orgId
+      const orgId = localStorage.getItem('orgId');
+      localStorage.clear()
+      localStorage.setItem('orgId', orgId)
+      // delete authorization from the header 
+      setAuthToken(false);
+      // set user to {}
+      setCurrentUser({});
+      // move to home 
+      window.location.href = "/";
+     }
+  } catch (error) {
+    dispatch(errorHandler(error))
+  }
 }
 
 export const setCurrentUser = (decodedData) => {

@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { Form, Button, Row, Col } from "react-bootstrap";
-import { TextField } from "@material-ui/core";
 import "./signup-form.scss";
-import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 import { registerUser } from "../../actions/authAction";
@@ -30,7 +28,7 @@ class SignUpForm extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.error?.msg.length > 0) {
+    if (nextProps.error?.msg?.length > 0) {
       this.setState({
         error: {
           msg: "Something went wrong, Please recheck the input!",
@@ -172,9 +170,9 @@ class SignUpForm extends Component {
       isValidEmail,
       isValidPhone,
       isValidDesc,
-      isMatched,
-      isValidForm,
-      error,
+      // isMatched,
+      // isValidForm,
+      // error,
     } = this.state;
 
     return (
@@ -187,7 +185,7 @@ class SignUpForm extends Component {
                 <Form.Control
                   value={firstName}
                   type="text"
-                  placeholder=""
+                  placeholder = "First Name"
                   name="firstName"
                   onChange={this.onChange}
                   required
@@ -200,7 +198,7 @@ class SignUpForm extends Component {
                 <Form.Control
                   value={lastName}
                   type="text"
-                  placeholder=""
+                  placeholder="Last Name"
                   name="lastName"
                   onChange={this.onChange}
                   required
@@ -215,7 +213,7 @@ class SignUpForm extends Component {
                 <Form.Control
                   value={email}
                   type="email"
-                  placeholder=""
+                  placeholder="Email"
                   name="email"
                   onChange={this.onChange}
                   required
@@ -232,7 +230,7 @@ class SignUpForm extends Component {
                 <Form.Label>Phone Number</Form.Label>
                 <Form.Control
                   type="number"
-                  placeholder=""
+                  placeholder="Phone"
                   name="phone"
                   value={phone}
                   onChange={this.onChange}
@@ -250,7 +248,7 @@ class SignUpForm extends Component {
             <Form.Label>Description</Form.Label>
             <Form.Control
               type="text"
-              placeholder=""
+              placeholder="Short bio"
               name="shortDescription"
               value={shortDescription}
               onChange={this.onChange}
@@ -270,7 +268,7 @@ class SignUpForm extends Component {
                 <Form.Control
                   value={password}
                   type="password"
-                  placeholder=""
+                  placeholder="*******"
                   name="password"
                   onChange={this.onChange}
                   required
@@ -289,7 +287,7 @@ class SignUpForm extends Component {
                 <Form.Label>Confirm Password</Form.Label>
                 <Form.Control
                   type="password"
-                  placeholder=""
+                  placeholder="*******"
                   name="cnfPassword"
                   value={cnfPassword}
                   onChange={this.onChange}
@@ -298,7 +296,7 @@ class SignUpForm extends Component {
               </Form.Group>
               <ul className="list-unstyled">
                 <li id="validation_msg">
-                  {error?.msg.length > 0 ? error.msg : null}
+                  {/* {error?.msg.length > 0 ? error.msg : null} */}
                 </li>
               </ul>
             </Col>

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Modal, Button, Form, Col } from "react-bootstrap";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
 import { logoutUser } from "../../../actions/authAction";
 
 class Logout extends Component {
@@ -19,7 +18,7 @@ class Logout extends Component {
       <Modal
         show={this.props.show}
         onHide={this.props.handleClose}
-        animation={false}
+        animation={true}
         className="modal"
         centered
       >
@@ -45,8 +44,9 @@ class Logout extends Component {
           </Form>
         </Modal.Body>
         <div className="modal__buttons">
-          <Button onClick={this.props.handleClose} className="modal__save">
-            <span className="modal__buttontext">Save</span>
+          <Button onClick = {this.onLogoutClick}
+          className = "modal__save" >
+            <span className="modal__buttontext">Logout</span>
           </Button>
           <Button onClick={this.props.handleClose} className="modal__cancel">
             <span className="modal__buttontext">Cancel</span>
@@ -62,4 +62,4 @@ const mapStateToProps = (state) => ({
   error: state.error,
 });
 
-export default connect(mapStateToProps, { logoutUser })(withRouter(Logout));
+export default connect(mapStateToProps, { logoutUser })((Logout));

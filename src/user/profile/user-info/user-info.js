@@ -3,28 +3,56 @@ import "./user-info.scss";
 import { Button } from "react-bootstrap";
 import { Avatar } from "@material-ui/core";
 import EditProfile from "./../popups/EditProfile";
-import Followers from "../popups/Followers";
+import { FaFacebookSquare, FaGithubSquare, FaLinkedin } from 'react-icons/fa'
+import { withRouter } from 'react-router-dom'
 
 class UserInfo extends Component {
   constructor(props) {
     super(props);
     this.state = {
       editProfile: false,
-      followersList: false
+      followersList: false,
+      name: '',
+      designation: '',
+      location: '',
+      shortDesc: '',
+      website: ''
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    console.log('nextProps ', nextProps.userProfile)
+    const name = nextProps.userProfile?.name || "NA"
+    const about = nextProps.userProfile.info?.about;
+    this.setState({ 
+      name: `${name?.firstName + " " + name?.lastName}`,
+      designation: about?.designation,
+      shortDesc: about?.shortDescription,
+      location: about?.location,
+      website: about?.website
+    })
+  }
+
+  onFbClick = () => {
+    // this.props.history.push()
+  }
+
+  onLinkedInClick = () => {
+
+  }
+
+  onGithubClick = () => {
+    
+  }
+
   render() {
+    const { designation, location, shortDesc, name } = this.state
     let cancel = () =>
       this.setState({
         editProfile: false,
       });
-    let cancelf = () =>
-      this.setState({
-        followersList: false,
-      });
     return (
-      <div className="user-details">
+      <div className="user-detail">
         <div className="user-image">
           <div className="user-pic">
             <Avatar className="userpic"></Avatar>
@@ -40,26 +68,39 @@ class UserInfo extends Component {
           </div>
         </div>
         <div className="user-data">
-          <h1>
-            Dhanus Rajendra{" "}
-            <Button
-              variant="primary"
-              onClick={() => this.setState({ followersList: true })}
-            >
-              Follow
-            </Button>
-            <Followers show={this.state.followersList} onHide={cancelf} />
-          </h1>
-          <p className="profession">Front end developer</p>
-          <p className="place">Bengaluru, Karnataka</p>
-          <p className="desc">
-            where millions of people gather together every day to imagine,
-            create
-          </p>
-          <div className="social-icons">
-            <Button variant="primary">Facebook</Button>
-            <Button variant="primary">Linkedin</Button>
-            <Button variant="primary">Github</Button>
+          <div className="fa_icon__container">
+            <span>
+              <FaFacebookSquare
+                color="#4457a5"
+                className="fa__icon"
+                onClick={this.onFbClick}
+              />
+            </span>
+            <span>
+              <FaGithubSquare
+                color="#24292e"
+                className="fa__icon"
+                onClick={this.onGithubClick}
+              />
+            </span>
+            <span>
+              <FaLinkedin
+                color="#1a73e8"
+                className="fa__icon"
+                onClick={this.onLinkedInClick}
+              />
+            </span>
+          </div>
+          <div className="user__infos">
+            <h1>{name || "NA"} </h1>
+            <p className="profession">{designation || "NA"}</p>
+            <p className="place">{location || "NA"}</p>
+            <p className="desc">{shortDesc || "Short description"}</p>
+            <div className="social-icons">
+              {/* <Button variant="primary">Facebook</Button> */}
+              {/* <Button variant="primary">Linkedin</Button> */}
+              {/* <Button variant="primary">Github</Button> */}
+            </div>
           </div>
         </div>
       </div>
@@ -67,4 +108,4 @@ class UserInfo extends Component {
   }
 }
 
-export default UserInfo;
+export default withRouter(UserInfo);

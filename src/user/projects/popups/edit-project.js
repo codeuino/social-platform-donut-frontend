@@ -1,43 +1,71 @@
 import React, { Component } from "react";
 import { Modal, Button, Row, Col, Form } from "react-bootstrap";
-export class EditProject extends Component {
+import { connect } from 'react-redux'
+import { updateProject } from '../../../actions/projectAction'
+
+class EditProject extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      Proj_name: "",
-      version: "",
-      short_des: "",
-      long_des: "",
-      github_link: "",
-      bitbucket_link: "",
-      host_link: "",
-      img_link: "",
+      projectName: '',
+      github_link: '',
+      bitbucket_link: '',
+      version: '',
+      long_des: '',
+      short_des: '',
+      img_link: '',
+      projectId: ''
     };
-    this.trigger = 0;
-    this.onChange = this.onChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.trigger < 1) this.setState({ ...nextProps.data });
-    this.trigger = this.trigger + 1;
+    console.log('edit nextProps ',nextProps);
+    const { projectName, description, links, version, _id, imgUrl } = nextProps.project.singleProject
+    this.setState({ 
+      projectName: projectName, 
+      long_des: description?.long, 
+      short_des: description?.short, 
+      github_link: links[0]?.githubLink ||  '', 
+      bitbucket_link: links[0]?.bitbucketLink ||  '', 
+      version: version || '',
+      img_link: imgUrl || '',
+      projectId: _id
+     },() => { 
+       console.log('edit project ', this.state)
+    });
   }
 
-  onChange(e) {
+  onChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  onSubmit(e) {
-    e.preventDefault();
-    const EditProject = this.state;
-
-    console.log("Edited Project", EditProject);
+  onUpdateClick = (e) => {
+    e.preventDefault()
+    const { projectName, projectId, github_link, bitbucket_link, version, long_des, short_des, img_link} = this.state
+    const info = {
+      projectName: projectName,
+      description: {
+        long: long_des,
+        short: short_des
+      },
+      version: version,
+      links: [{
+        githubLink: github_link,
+        bitbucketLink: bitbucket_link
+      }],
+      imgUrl: img_link
+    }
+    console.log('updating project ', info)
+    this.props.updateProject(projectId, info)
   }
 
   render() {
+    const { projectName, github_link, bitbucket_link, version, short_des, long_des, img_link } = this.state
+    const { show, onHide } = this.props
     return (
       <Modal
-        {...this.props}
+        show={show}
+        onHide={onHide}
         size="md"
         aria-labelledby="contained-modal-title-vcenter"
         centered
@@ -56,8 +84,8 @@ export class EditProject extends Component {
                   <Form.Control
                     className="form-input"
                     type="text"
-                    name="Proj_name"
-                    value={this.state.Proj_name}
+                    name="projectName"
+                    value={projectName}
                     onChange={this.onChange}
                     placeholder="Type here.."
                     size="sm"
@@ -68,9 +96,9 @@ export class EditProject extends Component {
                 <Form.Label className="label">Version</Form.Label>
                 <Form.Control
                   className="form-input"
-                  type="Number"
+                  type="text"
                   name="version"
-                  value={this.state.version}
+                  value={version}
                   onChange={this.onChange}
                   size="sm"
                 />
@@ -81,7 +109,7 @@ export class EditProject extends Component {
                   className="form-input"
                   as="textarea"
                   name="short_des"
-                  value={this.state.short_des}
+                  value={short_des}
                   onChange={this.onChange}
                   placeholder="Write a brief info about the project.."
                   size="sm"
@@ -93,7 +121,7 @@ export class EditProject extends Component {
                   className="form-input"
                   as="textarea"
                   name="long_des"
-                  value={this.state.long_des}
+                  value={long_des}
                   onChange={this.onChange}
                   placeholder="Whats the project is about.."
                   size="sm"
@@ -107,9 +135,9 @@ export class EditProject extends Component {
                     className="form-input"
                     type="text"
                     name="github_link"
-                    value={this.state.github_link}
+                    value={github_link}
                     onChange={this.onChange}
-                    placeholder="GitHub Profile"
+                    placeholder="GitHub Link"
                     size="sm"
                   />
                 </Col>
@@ -119,55 +147,53 @@ export class EditProject extends Component {
                     className="form-input"
                     type="text"
                     name="bitbucket_link"
-                    value={this.state.bitbucket_link}
+                    value={bitbucket_link}
                     onChange={this.onChange}
-                    placeholder="BitBucket Profile"
+                    placeholder="BitBucket Link"
                     size="sm"
                   />
                 </Col>
               </Row>
               <Row className="form-content">
                 <Col className="p-0" sm={5}>
-                  <Form.Label className="label">Hosted URL</Form.Label>
-                  <Form.Control
-                    className="form-input"
-                    type="text"
-                    name="host_link"
-                    value={this.state.host_link}
-                    onChange={this.onChange}
-                    placeholder="Hosted Profile"
-                    size="sm"
-                  />
-                </Col>
-                <Col className="p-0" sm={5}>
                   <Form.Label className="label">Image URL</Form.Label>
                   <Form.Control
                     className="form-input"
                     type="text"
                     name="img_link"
-                    value={this.state.img_link}
+                    value={img_link}
                     onChange={this.onChange}
                     placeholder="Image link"
                     size="sm"
                   />
                 </Col>
               </Row>
-              <div className="form-footer">
-                <Button
-                  onClick={this.props.onHide}
-                  type="submit"
-                  className="savebtn"
-                >
-                  Save
-                </Button>
-                <Button variant="outline-primary" onClick={this.props.onHide}>
-                  Cancel
-                </Button>
-              </div>
             </Form>
           </Modal.Body>
+          <div className="form-footer">
+            <Button
+              onClick={this.onUpdateClick}
+              type="submit"
+              className="savebtn"
+            >
+              Save
+            </Button>
+            <Button variant="outline-primary" className="cancelbtn" onClick={onHide}>
+              Cancel
+            </Button>
+          </div>
         </div>
       </Modal>
     );
   }
 }
+
+// map state to props 
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  error: state.error,
+  project: state.project
+})
+
+export default connect(mapStateToProps, { updateProject })(EditProject);
+

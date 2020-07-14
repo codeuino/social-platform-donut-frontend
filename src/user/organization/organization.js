@@ -11,6 +11,10 @@ import topBarLoading from "../../placeholderLoading/topBarLoading/topBarLoading"
 import orgUpdatesLoading from "../../placeholderLoading/orgUpdatesLoading/orgUpdatesLoading";
 import contactLoading from "../../placeholderLoading/contactLoading/contactLoading";
 import cardLoading from "../../placeholderLoading/cardLoading/cardLoading";
+import { connect } from "react-redux";
+import { getOrgProfile } from "../../actions/orgAction";
+import { Link } from "react-router-dom";
+import { Button } from "react-bootstrap";
 
 class Organization extends Component {
   constructor(props) {
@@ -18,16 +22,36 @@ class Organization extends Component {
     this.state = {
       org: true,
       isLoading: true,
+      orgProfile: {},
+      type: "About",
     };
   }
 
   componentDidMount() {
     setTimeout(() => {
+      this.props.getOrgProfile();
+    });
+    setTimeout(() => {
       this.setState({ isLoading: false });
     }, 1000);
   }
 
+  componentWillReceiveProps(nextProps) {
+    console.log("organization ", nextProps);
+    this.setState({ orgProfile: nextProps.org?.org });
+  }
+
+  handleClick = (type) => {
+    this.setState({ type: type })
+  }
+
   render() {
+    const { orgProfile, type } = this.state;
+    const {
+      // name,
+      description,
+      // contactInfo
+    } = orgProfile;
     return (
       <div className="organization">
         <div className="navigation">
@@ -47,32 +71,93 @@ class Organization extends Component {
               cardLoading()
             ) : (
               <div className="posts">
-                <h2>Posts</h2>
+                {/* <h2>Posts</h2> */}
                 <div className="categories">
-                  <div className="category-type active">About Us</div>
+                  {/* <div className="category-type active">About Us</div>
                   <div className="category-type">Donuts</div>
                   <div className="category-type">Events</div>
-                  <div className="category-type">Projects</div>
+                  <div className="category-type">Projects</div> */}
+                  <div className="ul__container">
+                    <span className="nav__tab container">
+                      <ul className="nav__list__container">
+                        <li
+                          className={
+                            type === "About"
+                              ? "nav__single__tab selected"
+                              : "nav__single__tab"
+                          }
+                          onClick={this.handleClick.bind(this, "About")}
+                        >
+                          Overview
+                        </li>
+                        <li
+                          className={
+                            type === "Post"
+                              ? "nav__single__tab selected"
+                              : "nav__single__tab"
+                          }
+                          onClick={this.handleClick.bind(this, "Post")}
+                        >
+                          Posts
+                        </li>
+                        <li
+                          className={
+                            type === "Event"
+                              ? "nav__single__tab selected"
+                              : "nav__single__tab"
+                          }
+                          onClick={this.handleClick.bind(this, "Event")}
+                        >
+                          Events
+                        </li>
+                        <li
+                          className={
+                            type === "Project"
+                              ? "nav__single__tab selected"
+                              : "nav__single__tab"
+                          }
+                          onClick={this.handleClick.bind(this, "Project")}
+                        >
+                          Projects
+                        </li>
+                      </ul>
+                    </span>
+                  </div>
                 </div>
                 <Card className="about-us">
                   <CardContent>
-                    <div className="title">Codeuino</div>
-                    <div className="subtitle">{orginfo.question_1}</div>
-                    <p>{orginfo.description_1}</p>
-                    <div className="subtitle">{orginfo.question_1}</div>
-                    <p>{orginfo.description_1}</p>
+                    <div className="title">{orgProfile?.name}</div>
+                    <div className="subtitle">Short description </div>
+                    <p className="short__desc">
+                      {description?.shortDescription ||
+                        "Short details of organization"}
+                    </p>
+                    <div className="subtitle">About us in details</div>
+                    <p className="long__desc">
+                      {description?.longDescription ||
+                        "Long description of the organization"}
+                    </p>
                   </CardContent>
                 </Card>
               </div>
             )}
 
             <div className="sideinfo">
+              <Link
+                to={{
+                  pathname: "/proposaleditor",
+                  state: {
+                    proposalId: "new",
+                  },
+                }}
+              >
+                <Button className="proposal-btn">Propose an Idea</Button>
+              </Link>
               {this.state.isLoading ? (
                 <div className="orgupdatesloading">{orgUpdatesLoading()}</div>
               ) : (
                 <div className="org-updates">
-                  {" "}
-                  <Updates></Updates>{" "}
+                  <Updates></Updates>
                 </div>
               )}
 
@@ -94,5 +179,11 @@ class Organization extends Component {
     );
   }
 }
+// map state to props
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  error: state.error,
+  org: state.org,
+});
 
-export default Organization;
+export default connect(mapStateToProps, { getOrgProfile })(Organization);

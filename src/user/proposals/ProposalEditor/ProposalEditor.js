@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Navigation from "../../dashboard/navigation/navigation";
 import EditorContent from "./EditorContent/EditorContent";
+import "./ProposalEditor.scss";
 
 class ProposalEditor extends Component {
   constructor(props) {

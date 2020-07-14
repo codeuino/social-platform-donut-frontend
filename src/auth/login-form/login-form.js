@@ -21,9 +21,7 @@ class LoginForm extends Component {
     };
   }
   componentWillReceiveProps(nextProps) {
-    if (nextProps.error?.msg.length > 0) {
-      this.setState({ error: true });
-    }
+    console.log('nextProps ', nextProps)
   }
 
   onSubmit = (e) => {
@@ -70,8 +68,6 @@ class LoginForm extends Component {
   };
 
   render() {
-    const { email, password, error, isValidForm, isValidEmail } = this.state;
-
     const handleToggle = (e) => {
       const targetName = e.target.name;
       this.setState({

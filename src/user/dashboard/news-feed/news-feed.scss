@@ -81,7 +81,7 @@
                   border-right: 1px solid rgba(204, 204, 204, 0.7);
                   .date-content {
                     width: 50%;
-                    margin: 0 auto;
+                    padding: 1vw;
                     small {
                       font-family: Inter;
                       font-style: normal;
@@ -367,8 +367,16 @@
   color: #ff0000;
 }
 .news__feed__container {
+  .news-feed {
+    .post-article{
+      .article {
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+  }
   .post {
-    width: 139%;
+    width: 140%;
     margin-bottom: 17px;
   }
 }
@@ -393,14 +401,13 @@
 
         .optionbtn {
           background: #1a73e8;
-          border-radius: 100px;
+          // border-radius: 100px;
           .optionbtn-text {
             font-family: Inter;
             font-style: normal;
             font-weight: 600;
             font-size: 16px;
             line-height: 19px;
-
             color: #ffffff;
           }
         }
@@ -411,6 +418,10 @@
 
 .posts {
    width: 140%;
+  //  margin-top: 25px;
+   margin-left: 20px;
+   margin-right: 10px;
+   margin-bottom: 24px;
   .category {
     .category-btn {
       background-color: white;
@@ -428,6 +439,43 @@
       &:focus {
         background-color: #1a73e8;
         color: white;
+      }
+    }
+  }
+}
+.tabs__container {
+  width: 140%;
+  margin-left: 27px;
+  margin-top: 10px;
+  .nav__tab {
+    .nav__list__container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      list-style: none;
+      border-bottom: 2px solid #eee;
+      transition: all .5s;
+      font-weight: 300;
+      color: #262727;
+
+      .nav__single__tab {
+        display: inline-block;
+        font-family: Inter;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 22px;
+        padding-left: 11px;
+        padding-right: 15px;
+        padding-bottom: 5px;
+        margin-left: 19px;
+        text-align: center;
+        cursor: pointer;
+
+        &.selected {
+          border-bottom: 3px solid #337ab7;
+          color: #1a73e8;
+        }
       }
     }
   }
@@ -455,5 +503,17 @@
   }
   .hide__comment__section {
     display: none;
+  }
+}
+.post {
+  .grid {
+    .com-btn {
+      .btn-primary {
+        background-color: #ffffff;
+        border-radius: 0px;
+        border: 0px;
+        margin-bottom: 6px;
+      }
+    }
   }
 }
