@@ -33,6 +33,7 @@ import { getAllCommentsOfPost } from '../../../actions/commentAction'
 import profileImg from '../../../svgs/evt-creator.svg';
 import eventImg from "../../../svgs/event-img-1.svg";
 import eventImg2 from "../../../svgs/event-img-2.svg";
+import parse from "html-react-parser";
 
 const styles = makeStyles((theme) => ({
   root: {
@@ -183,7 +184,7 @@ function NewsFeed(props) {
                   </IconButton>
                 </ListItemSecondaryAction> */}
               </ListItem>
-              <div className="post-details2">{post?.content}</div>
+              <div className="post-details2">{parse(post?.content)}</div>
               <ListItem>
                 <IconButton className={classes.vote}>
                   <ArrowDropUpIcon className="up-vote" />
