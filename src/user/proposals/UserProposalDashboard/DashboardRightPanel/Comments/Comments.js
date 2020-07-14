@@ -26,27 +26,23 @@ class Comments extends Component {
     this.props.getUserProposalNotifications(data);
 
     this.state.socket.on("new proposal created", (data) => {
-      data.newNotification = true;
-      data.createdAt = new Date().toString().substring(0, 24);
-      this.setState({
-        notifications: [...this.state.notifications, data],
-      });
+      this.handleNotification(data)
     });
 
     this.state.socket.on("proposal deleted", (data) => {
-      data.newNotification = true;
-      data.createdAt = new Date().toString().substring(0, 24);
-      this.setState({
-        notifications: [...this.state.notifications, data],
-      });
+      this.handleNotification(data)
     });
 
     this.state.socket.on("proposal submitted", (data) => {
-      data.newNotification = true;
-      data.createdAt = new Date().toString().substring(0, 24);
-      this.setState({
-        notifications: [...this.state.notifications, data],
-      });
+      this.handleNotification(data)
+    });
+  }
+
+  handleNotification = (data) => {
+    data.newNotification = true;
+    data.createdAt = new Date().toString().substring(0, 24);
+    this.setState({
+      notifications: [...this.state.notifications, data],
     });
   }
 
@@ -86,7 +82,7 @@ class Comments extends Component {
   };
 
   render() {
-    const notifications = [...this.state.commentNotifications];
+    const notifications = this.state.commentNotifications;
     return (
       <div className="ideas">
         <div className="ideas-title">Comments</div>
