@@ -13,6 +13,9 @@ class DashboardRightPanel extends Component {
         <div className="panel-ideas">
           <Notifications />
         </div>
+        <div className="panel-comments">
+          <Comments />
+        </div>
       </div>
     );
   }
