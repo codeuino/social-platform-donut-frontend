@@ -62,7 +62,7 @@ export class Info extends Component{
               {this.state.startJitsi ? <JitsiMeet show={this.state.startJitsi}
               onHide={this.closeJitsi} user={this.state.user} 
               roomID={this.state.roomID}/> : null}
-              <Button variant="outline-primary" onClick={this.props.onHide}>Cancel</Button>
+              <Button className="cancelbtn" variant="outline-primary" onClick={this.props.onHide}>Cancel</Button>
             </div>
           </Modal.Body>
         </div>
