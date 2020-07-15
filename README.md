@@ -74,6 +74,8 @@ using the command `git clone https://github.com/username/Social-Platform-Donut.g
 
     ```shell
     npm install
+    or 
+    yarn global add
     ```
 
 5. Setting up the local database instance 
@@ -97,6 +99,8 @@ using the command `git clone https://github.com/username/Social-Platform-Donut.g
 HURRAY! you have done it just start contributing to the project.
 
 Now open your browser and type the link `http://localhost:3000` to continue viewing project.
+
+Adding yarn support for the packages just type `yarn`in the cli and hit enter.
 
 Setting Up Database
 ------------
