@@ -24,7 +24,7 @@
     font-weight: 700;
     line-height: 29px;
     color: #1A73E8;
-   // margin-left: 6px;
+    margin-left: 3px;
 }
 .about{
     font-weight: 500;
@@ -34,7 +34,7 @@
     color: #90949C;
     margin-top:10px;
     margin-bottom: 5px;
-   // margin-left: 6px;
+    margin-left: 4px;
 }
 .message{
     font-weight: 500;
@@ -52,7 +52,7 @@
     color:#000000;
     margin-bottom: 3px;
     margin-top: 5px;
-   // margin-left: 3px;
+    margin-left: 3px;
 }
 .form-input{
     font-family: Inter;
@@ -60,24 +60,28 @@
     font-weight: 300;
     font-size: 13px;
     line-height: 16px;
-    //margin-left: 3px;
+    margin-left: 3px;
 }
 .form-content{
     margin-top:-2%;
     margin-bottom: 20px;
     justify-content:space-between;
 }
-.form-footer{
+.form-footer-jitsi{
     margin-top: -5px;
     Button{
         width: auto;
         margin-right: 20px;
         margin-bottom: 30px;
-        border-radius: 100px;
+        // border-radius: 100px;
         font-weight:600;
     }
-    .savebtn{
+    .joinbtn{
         background-color: #1A73E8;
+        width: 80px;
+        height: 4vh;
+        margin-left: -11px;
+        padding: 0;
     }
 
 }

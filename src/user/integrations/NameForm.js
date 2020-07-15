@@ -55,14 +55,16 @@ export class Info extends Component{
                 required/>
             </Row> 
           </Modal.Body>
-          <div className="form-footer">
-            <Button onClick={() => this.setState({startJitsi:true})} 
-              disabled={this.state.disable} className="savebtn">Join Call</Button>
-            {this.state.startJitsi ? <JitsiMeet show={this.state.startJitsi}
-            onHide={this.closeJitsi} user={this.state.user} 
-            roomID={this.state.roomID}/> : null}
-            <Button variant="outline-primary" onClick={this.props.onHide}>Cancel</Button>
-          </div>
+          <Modal.Body>
+            <div className="form-footer-jitsi">
+              <Button onClick={() => this.setState({startJitsi:true})} 
+                disabled={this.state.disable} className="joinbtn">Join Call</Button>
+              {this.state.startJitsi ? <JitsiMeet show={this.state.startJitsi}
+              onHide={this.closeJitsi} user={this.state.user} 
+              roomID={this.state.roomID}/> : null}
+              <Button variant="outline-primary" onClick={this.props.onHide}>Cancel</Button>
+            </div>
+          </Modal.Body>
         </div>
       </Modal>
     );
