@@ -1,0 +1,209 @@
+import React, { Component } from "react";
+import "./profile-feed.scss";
+import {
+  FaComments,
+  FaThumbtack,
+  FaGlobe,
+  FaStickyNote,
+  FaCalendar,
+} from "react-icons/fa";
+import { connect } from "react-redux";
+import {
+  getProfile,
+  getEventsCreatedByUser,
+  getProjectCreatedByUser,
+  getPostsCreatedByUser,
+} from "../../actions/usersAction";
+import { Card, Image } from "react-bootstrap";
+import { Circle } from "react-shapes";
+import ReadMe from "./ReadMe";
+import userIcon2 from "../../images/userIcon2.jpg";
+import parse from "html-react-parser";
+
+class ProfileFeed extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      type: "All",
+      userProfile: {},
+      userEvents: [],
+      userProjects: [],
+      userPosts: [],
+    };
+  }
+  componentDidMount() {
+    console.log(this.props);
+    setTimeout(() => {
+      this.props.getProfile();
+    });
+    setTimeout(() => {
+      this.props.getPostsCreatedByUser();
+    });
+    setTimeout(() => {
+      this.props.getEventsCreatedByUser();
+    });
+    setTimeout(() => {
+      this.props.getProjectCreatedByUser();
+    });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { userEvents, userProjects, userPosts } = nextProps.user;
+
+    this.setState(
+      {
+        userProfile: nextProps.user?.userProfile,
+        userEvents: userEvents,
+        userProjects: userProjects,
+        userPosts: userPosts,
+      },
+      () => {
+        console.log(this.state.userPosts);
+      }
+    );
+  }
+
+  handleClick = (atrb) => {
+    this.setState({
+      type: atrb,
+    });
+  };
+
+  render() {
+    const { type, userProfile, userPosts, userEvents } = this.state;
+
+    const events = userEvents.map((post, index) => {
+      return (
+        <div className="postItem">
+          <Card className="cardElement">
+            <div className="cardTitle">
+              <div className="imageContainer">
+                <Image src={userIcon2} rounded className="userImage" />
+              </div>
+              <div className="titleDetails">
+                <div className="postTitle">
+                  {`${post.createdBy.name.firstName} ${post.createdBy.name.lastName}`}
+                </div>
+                <dic className="postDate">{post.createdAt}</dic>
+              </div>
+            </div>
+            <div className="cardContent">
+              {post.description.shortDescription}
+            </div>
+            <div className="cardTag">
+              <Circle r={5} fill={{ color: "#9e4141" }} /> Event
+            </div>
+          </Card>
+        </div>
+      );
+    });
+
+    const posts = userPosts.map((post, index) => {
+      return (
+        <div className="postItem">
+          <Card className="cardElement">
+            <div className="cardTitle">
+              <div className="imageContainer">
+                <Image src={userIcon2} rounded className="userImage" />
+              </div>
+              <div className="titleDetails">
+                <div className="postTitle">
+                  {`${post.userId.name.firstName} ${post.userId.name.lastName}`}
+                </div>
+                <dic className="postDate">{post.createdAt}</dic>
+              </div>
+            </div>
+            <div className="cardContent">{parse(post.content)}</div>
+            <div className="cardTag">
+              <Circle r={5} fill={{ color: "#2409ba" }} /> Post
+            </div>
+          </Card>
+        </div>
+      );
+    });
+
+    const overviewContent = [...posts, ...events];
+
+    return (
+      <div>
+        <div className="feed-posts">
+          <div className="categories">
+            <div className="tab__container">
+              <span className="nav__tab container">
+                <ul className="nav__list__container">
+                  <li
+                    className={
+                      type === "All"
+                        ? "nav__single__tab selected"
+                        : "nav__single__tab"
+                    }
+                    onClick={() => this.handleClick("All")}
+                  >
+                    <FaGlobe className="tab__icon" />
+                    Overview
+                  </li>
+                  <li
+                    className={
+                      type === "Post"
+                        ? "nav__single__tab selected"
+                        : "nav__single__tab"
+                    }
+                    onClick={() => this.handleClick("Post")}
+                  >
+                    <FaComments className="tab__icon" />
+                    Pinned Posts
+                  </li>
+                  <li
+                    className={
+                      type === "Event"
+                        ? "nav__single__tab selected"
+                        : "nav__single__tab"
+                    }
+                    onClick={() => this.handleClick("Event")}
+                  >
+                    <FaCalendar className="tab__icon" />
+                    Events
+                  </li>
+                  <li
+                    className={
+                      type === "ReadMe"
+                        ? "nav__single__tab selected"
+                        : "nav__single__tab"
+                    }
+                    onClick={() => this.handleClick("ReadMe")}
+                  >
+                    <FaStickyNote className="tab__icon" />
+                    Read Me
+                  </li>
+                </ul>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div className="postsContainer">
+          {type === "ReadMe" ? <ReadMe /> : null}
+          <div className="gridContainer">
+            {type === "All" ? overviewContent : null}
+            {type === "Event" ? events : null}
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  error: state.error,
+  user: state.user,
+  posts: state.post,
+  event: state.event,
+  project: state.project,
+});
+
+export default connect(mapStateToProps, {
+  getProfile,
+  getEventsCreatedByUser,
+  getProjectCreatedByUser,
+  getPostsCreatedByUser,
+})(ProfileFeed);
