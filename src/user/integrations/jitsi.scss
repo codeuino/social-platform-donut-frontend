@@ -9,13 +9,6 @@
 .display2{
     justify-content:space-between;
 }
-.base{
-    height: 450px;
-    width: 450px;
-    background-color: red;
-    position: relative;
-    right: 200px;
-}
 .heading{
     margin-top: 20px;
 }
@@ -36,16 +29,6 @@
     margin-bottom: 5px;
     margin-left: 4px;
 }
-.message{
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 14px;
-    letter-spacing: 0.2em;
-    color: rgb(28, 30, 34);
-    margin-top:15px;
-    margin-bottom: 20px;
-}
-
 .label{
     font-weight: 600;
     font-size: 15px;
@@ -66,23 +49,6 @@
     margin-top:-2%;
     margin-bottom: 20px;
     justify-content:space-between;
-}
-.form-footer-jitsi{
-    margin-top: -5px;
-    Button{
-        width: auto;
-        margin-right: 20px;
-        margin-bottom: 30px;
-        // border-radius: 100px;
-        font-weight:600;
-    }
-    .joinbtn{
-        background-color: #1A73E8;
-        width: 80px;
-        height: 2.0em;
-        margin-left: 5px;
-        padding: 0;
-    }
 }
 .contain{
     margin-top: -3px;
