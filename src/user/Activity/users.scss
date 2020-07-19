@@ -1,0 +1,49 @@
+.activity__main__container {
+  margin-left: 18vw;
+  .main-navigation {
+    border-right: 1px solid #cccccc;
+  }
+  .header__text {
+    margin-top: 28px;
+    margin-left: -14vw;
+    .activity__header {
+      font-family: Inter;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 1.3em;
+      line-height: 21px;
+      letter-spacing: 0.25px;
+      color: #2D2D2D;
+      padding-bottom: 7px;
+    }
+  }
+}
+.timeline__container {
+  max-height: 75vh;
+  overflow-y: auto;
+  width: 75vw;
+  margin-top: 4px;
+  overflow-x: hidden;
+  margin-left: -150px;
+  margin-top: 27px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  .activity__link {
+    color: #1a73ed;
+    font-family: "Inter";
+    font-size: 14px;
+    cursor: pointer;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  .joined__on {
+    margin-top: -14px;
+    color: #cccccc;
+  }
+  .pagination__container {
+    position: fixed;
+    margin-top: 78vh;
+  }
+}

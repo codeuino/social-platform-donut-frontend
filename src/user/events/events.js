@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Navigation from "../dashboard/navigation/navigation";
-import { Grid ,CardActions, Card} from "@material-ui/core";
-// import Event_list from "../../jsonData/events";
+import { Grid ,CardActions, Card } from "@material-ui/core";
 import { Row, Col, Button } from "react-bootstrap";
 import "./events.scss";
 import Popups from './popups/popups';
@@ -10,6 +9,9 @@ import EditEvent from "./popups/EditEvent";
 import { connect } from 'react-redux'
 import { getAllEvents } from '../../actions/eventAction'
 import { checkDeleteRights } from '../dashboard/utils/checkDeleteRights'
+import { getOrgProfile } from '../../actions/orgAction'
+import Moment from 'react-moment'
+import { canEditCheck } from '../projects/Utils/CanEdit'
 
 class Events extends Component {
   constructor(props) {
@@ -19,58 +21,43 @@ class Events extends Component {
       modalShow: false,
       optionValue: {},
       delete: false,
-      edit: false, 
+      edit: false,
       allEvents: [],
-      eventId: '',
-      singleEvent: {}
-    }
+      eventId: "",
+      singleEvent: {},
+      editAllowed: true,
+      editingLimit: "",
+    };
   }
 
   componentDidMount() {
     setTimeout(() => {
       this.props.getAllEvents()
+      this.props.getOrgProfile()
     })
   }
 
   componentWillReceiveProps(nextProps) {
     console.log('events nextProps', nextProps)
     const { allEvents } = nextProps.event
-    this.setState({ allEvents: allEvents, isAdmin: nextProps.auth?.isAdmin }, () => {
+    this.setState({ 
+      allEvents: allEvents, 
+      isAdmin: nextProps.auth?.isAdmin,
+      editAllowed: nextProps.org.org?.options?.settings?.canEdit,
+      editingLimit: nextProps.org.org?.options?.settings?.editingLimit
+     }, () => {
       console.log('updating all events ', this.state)
     })
   }
 
   
   render() {
-    const { allEvents } = this.state
+    const { allEvents, editingLimit } = this.state
 
     const handleToggle = (eventId, event) => {
       console.log("-handletoggel",eventId)
       this.setState({ modalShow: true, eventId: eventId, singleEvent: event });
     }
-
-    const RefineDate = (d) => {
-      const date = d.split("T")
-      const eventDate = date[0].slice(-2)
-      return eventDate; 
-    }
-
-    const RefineTime = (d) => {
-      const time = d.split("T");
-      const eventTime = time[1].slice(0, 5)
-      return eventTime;
-    }
-    
-    const RefinedDay = (d) => {
-      const day = d.slice(0, 3);
-      return day;
-    };
-
-    const RefinedYear = (d) => {
-       const month = d.slice(4, 7);
-       const year = d.slice(11, 15);
-       return month + " " + year;
-     };
 
     const editEvent = (eventId, eventInfo) => {
       console.log('eventId ', eventId)
@@ -86,23 +73,31 @@ class Events extends Component {
       this.setState({ delete: false, edit: false })
     }
 
+    
+
   const FooterOfEvents = ({ Item }) => {
     return (
       <div className="row">
-        <div className="col-md-6 col-sm-12 col-lg-6">
+        <div className="footer__buttons col-md-6 col-sm-12 col-lg-6">
           <span>
             {checkDeleteRights(Item.createdBy._id) ? (
-            <>
-              <a 
-                className="mr-3"
-                href="javascript: void(0)" 
-                onClick={editEvent.bind(this, Item._id, Item)}
-                >Edit</a>
-              <a 
-                href="javascript: void(0)"
+            <div>
+              <span
+                className={
+                  !canEditCheck(editingLimit, Item.createdAt) 
+                  ? "disable__edit mr-3" 
+                  : "footer__btn mr-3"
+                }
+                onClick = {editEvent.bind(this, Item._id, Item)}
+                >Edit
+                </span>
+              <span
+                className="footer__btn"
                 onClick={handleDelete.bind(this, Item._id)}
-                >Delete</a>
-            </>
+              >
+                Delete
+              </span>
+            </div>
             ) : null }
             </span>
         </div>
@@ -122,7 +117,7 @@ class Events extends Component {
   }
 
     let Events = allEvents?.map((Item, index) => (
-      <Grid item xs = {6} sm = {4} key = {index} className = "card__container" >
+      <Grid item xs={6} sm={4} key={index} className="card__container">
         {Date.parse(Item.eventDate) >= Date.parse(new Date()) ? (
           <Card>
             <CardActions>
@@ -136,17 +131,13 @@ class Events extends Component {
                     )}
                   </Col>
                   <Col sm={3} xs={12}>
-                    <div className="div2">{RefineDate(Item?.eventDate)}</div>
+                    <Moment className="div2" format="D" withTitle>
+                      {Item?.eventDate}
+                    </Moment>
                   </Col>
                   <Col sm={5} xs={12}>
                     <div className="div3">
-                      {RefinedDay(
-                        new Date(Date.parse(Item?.eventDate)).toString()
-                      )}
-                      ,
-                      {RefinedYear(
-                        new Date(Date.parse(Item?.eventDate)).toString()
-                      )}
+                      <Moment format="ddd, MMM YYYY">{Item?.eventDate}</Moment>
                     </div>
                   </Col>
                 </Row>
@@ -162,11 +153,11 @@ class Events extends Component {
                       Time :
                       {Item.isCancelled ? (
                         <span className="timing3">
-                          {RefineTime(Item?.eventDate)}
+                          <Moment format="hh:mm A">{Item?.eventDate}</Moment>
                         </span>
                       ) : (
                         <span className="timing1">
-                          {RefineTime(Item?.eventDate)}
+                          <Moment format="hh:mm A">{Item?.eventDate}</Moment>
                         </span>
                       )}
                     </p>
@@ -206,19 +197,13 @@ class Events extends Component {
                     )}
                   </Col>
                   <Col sm={3} xs={12}>
-                    <div className="div2">
-                      {RefineDate(Item?.eventDate)}
-                    </div>
+                    <Moment className="div2" format="D" withTitle>
+                      {Item?.eventDate}
+                    </Moment>
                   </Col>
                   <Col sm={5} xs={12}>
                     <div className="div3">
-                      {RefinedDay(
-                        new Date(Date.parse(Item.eventDate)).toString()
-                      )}
-                      ,
-                      {RefinedYear(
-                        new Date(Date.parse(Item.eventDate)).toString()
-                      )}
+                      <Moment format="ddd, MMM YYYY">{Item?.eventDate}</Moment>
                     </div>
                   </Col>
                 </Row>
@@ -234,11 +219,11 @@ class Events extends Component {
                       Time :
                       {Item.isCancelled ? (
                         <span className="timing3">
-                          {RefineTime(Item?.eventDate)}
+                          <Moment format="hh:mm A">{Item?.eventDate}</Moment>
                         </span>
                       ) : (
                         <span className="timing1">
-                          {RefineTime(Item?.eventDate)}
+                          <Moment format="hh:mm A">{Item?.eventDate}</Moment>
                         </span>
                       )}
                     </p>
@@ -307,7 +292,8 @@ class Events extends Component {
 const mapStateToProps = (state) => ({
   auth: state.auth,
   error: state.error,
-  event: state.event
+  event: state.event,
+  org: state.org
 })
 
-export default connect(mapStateToProps, { getAllEvents })(Events);
+export default connect(mapStateToProps, { getAllEvents, getOrgProfile })(Events);

@@ -391,5 +391,24 @@
         color: #1a73e8;
       }
     }
+    .modal__delete {
+      border: 1px solid #eb5757;
+      background: $color-modal-button-inactive;
+      box-sizing: border-box;
+      // border-radius: 34px;
+      margin-right: 20px;
+      margin-bottom: 10px;
+      width: 80px;
+      height: 38.5px;
+      .modal__buttontext {
+        font-family: $font-family-Inter;
+        font-style: normal;
+        font-weight: $font-weight-normal;
+        font-size: 14px;
+        line-height: 22px;
+        /* identical to box height */
+        color: #eb5757;
+      }
+    }
   }
 }

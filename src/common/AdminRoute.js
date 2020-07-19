@@ -3,34 +3,28 @@ import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-function AdminRoute(props) {
-  // const [mount, setMount] = useState(false);
-  const [returnedRoute, setReturnedRoute] = useState("")
-
-  useEffect(() => {
-    switch(props.role) {
-      case "admin": {
-        return setReturnedRoute(
-          props.auth.isAuthenticated && (
-            props.auth.isAdmin || 
-            props.user.userProfile.isAdmin ||
-            props.admin.isAdmin ) ? (
-            <Route {...props} />
-          ) : (
-            <Redirect to="/dashboard" />
-          )
-        );
+function AdminRoute({ component: Component, auth, admin, user, ...rest }) {
+  return (
+    <Route
+      {...rest}
+      render={(props) =>
+        auth.isAuthenticated === true && (
+          auth.isAdmin === true || 
+          admin.isAdmin === true || 
+          localStorage.getItem('admin') === "true"
+        ) ? (
+          <Component {...props} />
+        ) : (
+          <Redirect to="/dashboard" />
+        )
       }
-      default: {
-        return setReturnedRoute(<Route {...props} />);
-      }
-    }
-  }, [props.role, props])
-  return <React.Fragment>{returnedRoute}</React.Fragment>;
+    />
+  );
 }
 
 AdminRoute.propTypes = {
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
+  org: PropTypes.object
 }
 
 const mapStateToProps = (state) => {

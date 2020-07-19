@@ -32,7 +32,7 @@ export const loginAdmin = (adminInfo, history) => async (dispatch) => {
      const token = res.data.token;
      dispatch(setRequestStatus(true));
 
-     localStorage.setItem("jwtToken", JSON.stringify(token));
+     localStorage.setItem("jwtToken", (token));
      setAuthToken(token);
 
      // update state with user

@@ -106,17 +106,15 @@
     background-color: #1a73e8;
     width: 104px;
     height: 38px;
-  }
-}
-
-.login__options {
-  display: flex;
-  justify-content: space-around;
-  .google__login {
-    height: 30px;
-  }
-  .github__login {
-    height: 30px;
-    width: 30px;
+    .google__login {
+      height: 20px;
+      width: 20px;
+      padding-right: 5px;
+    }
+    .github__login {
+      height: 20px;
+      width: 20px;
+      padding-right: 5px;
+    }
   }
 }
