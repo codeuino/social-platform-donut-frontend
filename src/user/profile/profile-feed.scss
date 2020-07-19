@@ -70,6 +70,7 @@
   // height: 43vh;
   // overflow: scroll;
   // overflow-x: hidden;
+  margin-top: -10px;
   .gridContainer {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -79,7 +80,7 @@
       margin-left: 10px;
 
       .cardElement {
-        height: auto;
+        height: 100%;
         padding: 10px;
         display: flex;
         flex-direction: column;

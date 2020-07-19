@@ -37,6 +37,7 @@
     "react-toastify": "^6.0.5",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
+    "showdown": "^1.9.1",
     "socket.io-client": "^2.3.0"
   },
   "proxy": "http://localhost:5000",

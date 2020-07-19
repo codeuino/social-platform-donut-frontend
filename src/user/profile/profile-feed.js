@@ -14,11 +14,14 @@ import {
   getProjectCreatedByUser,
   getPostsCreatedByUser,
 } from "../../actions/usersAction";
+
+import { resetComments } from "../../actions/commentAction";
 import { Card, Image } from "react-bootstrap";
 import { Circle } from "react-shapes";
 import ReadMe from "./ReadMe";
 import userIcon2 from "../../images/userIcon2.jpg";
 import parse from "html-react-parser";
+import PostContent from "./content/PostContent";
 
 class ProfileFeed extends Component {
   constructor(props) {
@@ -29,6 +32,8 @@ class ProfileFeed extends Component {
       userEvents: [],
       userProjects: [],
       userPosts: [],
+      displayPostContent: false,
+      displayingPost: 0,
     };
   }
   componentDidMount() {
@@ -69,12 +74,37 @@ class ProfileFeed extends Component {
     });
   };
 
+  handlePostCLick = (index, postId) => {
+    this.setState(
+      {
+        displayingPost: index,
+      },
+      () => {
+        this.setState({ displayPostContent: true, postId: postId });
+      }
+    );
+  };
+
+  handleOnHide = () => {
+    this.props.resetComments();
+    this.setState({
+      displayingPost: 0,
+      displayPostContent: false,
+    });
+  };
+
   render() {
-    const { type, userProfile, userPosts, userEvents } = this.state;
+    const {
+      type,
+      userProfile,
+      userPosts,
+      userEvents,
+      displayPostContent,
+    } = this.state;
 
     const events = userEvents.map((post, index) => {
       return (
-        <div className="postItem">
+        <div className="postItem" key={index}>
           <Card className="cardElement">
             <div className="cardTitle">
               <div className="imageContainer">
@@ -100,7 +130,10 @@ class ProfileFeed extends Component {
 
     const posts = userPosts.map((post, index) => {
       return (
-        <div className="postItem">
+        <div
+          className="postItem"
+          onClick={() => this.handlePostCLick(index, post._id)}
+        >
           <Card className="cardElement">
             <div className="cardTitle">
               <div className="imageContainer">
@@ -185,6 +218,12 @@ class ProfileFeed extends Component {
           <div className="gridContainer">
             {type === "All" ? overviewContent : null}
             {type === "Event" ? events : null}
+            <PostContent
+              show={this.state.displayPostContent}
+              displayingPost={this.state.displayingPost}
+              onHide={this.handleOnHide}
+              postId={this.state.postId}
+            />
           </div>
         </div>
       </div>
@@ -206,4 +245,5 @@ export default connect(mapStateToProps, {
   getEventsCreatedByUser,
   getProjectCreatedByUser,
   getPostsCreatedByUser,
+  resetComments,
 })(ProfileFeed);
