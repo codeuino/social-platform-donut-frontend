@@ -5,15 +5,9 @@ import { connect } from "react-redux";
 import { createPost } from "../../../../actions/dashboardAction";
 import { Editor } from "@tinymce/tinymce-react";
 import showdown from "showdown";
-import { CREATE_PROPOSAL } from "../../../../actions/types";
 
 const AddPostModal = (props) => {
   const [content, setContent] = useState("");
-  const [editorText, setText] = useState("");
-
-  const onChange = (event) => {
-    setContent(event.target.value);
-  };
 
   let converter = new showdown.Converter();
 

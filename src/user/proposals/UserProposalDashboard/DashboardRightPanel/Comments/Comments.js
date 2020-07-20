@@ -91,6 +91,7 @@ class Comments extends Component {
             {notifications.map((notification, index) => {
               return (
                 <ListGroup.Item
+                  key={index}
                   style={
                     notification.newNotification
                       ? { backgroundColor: "#E8F1FD" }
