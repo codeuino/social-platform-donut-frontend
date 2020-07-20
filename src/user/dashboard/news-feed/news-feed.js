@@ -29,6 +29,7 @@ import { upVotePost } from '../../../actions/postAction'
 import profileImg from '../../../svgs/evt-creator.svg';
 import eventImg from "../../../svgs/event-img-1.svg";
 import eventImg2 from "../../../svgs/event-img-2.svg";
+import parse from "html-react-parser";
 import { withRouter } from 'react-router-dom'
 import { rsvpYes } from '../../../actions/eventAction'
 
@@ -182,7 +183,7 @@ function NewsFeed(props) {
                   <small>{post?.createdAt}</small>
                 </ListItemText>
               </ListItem>
-              <div className="post-details2">{post?.content}</div>
+              <div className="post-details2">{parse(post?.content)}</div>
               <ListItem>
                 <IconButton 
                   className={classes.vote}
@@ -335,8 +336,8 @@ function NewsFeed(props) {
  }
 
   return (
-    <div className="news__feed__container">
-      <div className="news-feed">
+    <>
+        <div className="news-feed">
         <div className="post-article">
           <div className="article">
             <Paper
@@ -412,6 +413,7 @@ function NewsFeed(props) {
           />
         </div>
       </div>
+    <div className="news__feed__container">
       {/* <div className="posts">
         <span className="category">
           <span className="to-centre">
@@ -519,6 +521,7 @@ function NewsFeed(props) {
         )}
       </div>
     </div>
+    </>
   );
 }
 

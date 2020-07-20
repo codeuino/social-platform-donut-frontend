@@ -116,7 +116,7 @@ export const getUserProposalNotifications = (data) => async (dispatch) => {
       dispatch(setRequestStatus(true));
       dispatch({
         type: GET_USER_PROPOSAL_NOTIFICATIONS,
-        payload: res.data.proposal || res.data.msg,
+        payload: res.data.notifications || res.data.msg,
       });
     }
   } catch (error) {
