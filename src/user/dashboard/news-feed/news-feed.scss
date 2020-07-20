@@ -4,15 +4,16 @@
     height: 50px;
     .article {
       display: flex;
+      max-width: 100%;
       form {
-        flex: 1;
+        flex: 4;
         border: none;
         padding: 10px;
         max-height: 55px;
-        max-width: 1500px;
       }
     }
     .cta {
+      flex: 1;
       padding: 5px 8px;
       button {
         margin: 0 3px;
@@ -381,7 +382,6 @@
   }
 }
 .news-feed {
-  width: 110%;
   .post-article {
     .article {
       .post-input {
@@ -444,7 +444,8 @@
   }
 }
 .tabs__container {
-  width: 140%;
+  // width: 100%;
+  width: 93%;
   margin-left: 27px;
   margin-top: 10px;
   .nav__tab {
@@ -513,6 +514,81 @@
         border-radius: 0px;
         border: 0px;
         margin-bottom: 6px;
+      }
+    }
+  }
+}
+
+.postsContainer {
+  width: 83vw;
+  margin: 10px;
+  // height: 43vh;
+  // overflow: scroll;
+  // overflow-x: hidden;
+  margin-top: -10px;
+  .gridContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+    .postItem {
+      width: 100%;
+      margin-left: 10px;
+
+      .cardElement {
+        height: 100%;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        .cardTitle {
+          flex: 1;
+          display: flex;
+          .imageContainer {
+            flex: 1;
+            .userImage {
+              height: 40px;
+              width: 40px;
+            }
+          }
+          .titleDetails {
+            flex: 12;
+            .postTitle {
+              font-family: Inter;
+              font-style: normal;
+              font-weight: 600;
+              font-size: 18px;
+              line-height: 21px;
+              color: #000000;
+            }
+            .postDate {
+              font-family: Inter;
+              font-style: normal;
+              font-weight: normal;
+              font-size: 12px;
+              line-height: 15px;
+
+              color: rgba(29, 33, 41, 0.5);
+            }
+          }
+        }
+        .cardContent {
+          flex: 1;
+          font-family: Inter;
+          font-style: normal;
+          font-size: 14px;
+          font-weight: 300;
+          margin-top: 5px;
+          line-height: 21px;
+          color: #000000;
+        }
+
+        .cardTag {
+          font-family: Inter;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 12px;
+          line-height: 15px;
+          margin-top: 10px;
+        }
       }
     }
   }

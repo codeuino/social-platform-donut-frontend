@@ -69,12 +69,10 @@ class Dashboard extends Component {
             <div className="notify-user">
               <UpcomingEvents></UpcomingEvents>
               <Notifications></Notifications>
+              {this.state.isLoading ? portfolioLoading() : <Portfolio />}
             </div>
           )}
           {this.state.isLoading ? newsFeedLoading() : <NewsFeed allMix={allMix} allProjects={allProjects} allPosts={allPosts} allEvents={allEvents}/>}
-        </div>
-        <div className="promotions">
-          {this.state.isLoading ? portfolioLoading() : <Portfolio />}
         </div>
       </div>
     );
