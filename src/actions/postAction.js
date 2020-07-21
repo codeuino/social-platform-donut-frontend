@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { errorHandler } from '../utils/errorHandler';
 import { setRequestStatus } from '../utils/setRequestStatus';
-import { GET_ALL_POSTS, GET_ALL_PINNED_POSTS } from './types';
+import { GET_ALL_POSTS, GET_ALL_PINNED_POSTS, GET_SINGLE_POST } from './types';
 
 // GET ALL POSTS
 export const getAllPosts = (pagination = 10, page = 1) => async (dispatch) => {
@@ -43,9 +43,7 @@ export const getAllPinnedPosts = (pagination = 10, page = 1) => async (dispatch)
 export const upVotePost = (postId) => async (dispatch) => {
   try {
     const res = await axios.patch(`/post/upvote/${postId}`)
-    dispatch(setRequestStatus(false));
     if(res.status === 200) {
-      dispatch(setRequestStatus(true));
       console.log('successfully upvoted post ', res.data)
       dispatch(getAllPosts());
     }
@@ -53,3 +51,44 @@ export const upVotePost = (postId) => async (dispatch) => {
     dispatch(errorHandler(error))
   }
 }
+
+// GET POST BY ID 
+export const getPostById = (postId) => async (dispatch) => {
+  try {
+    console.log('postId from action ', postId)
+    const res = await axios.get(`/post/${postId}`);
+    if (res.status === 200) {
+      dispatch({
+        type: GET_SINGLE_POST,
+        payload: res.data.post
+      })
+    }
+  } catch (error) {
+    dispatch(errorHandler(error))
+  }
+}
+
+// UPDATE POST 
+export const updatePost = (postId, updatedInfo) => async (dispatch) => {
+  try {
+    console.log('updatedPostInfo ', updatedInfo)
+    const res = await axios.patch(`/post/${postId}`, updatedInfo)
+    if (res.status === 200) {
+      dispatch(getPostById(postId))
+    }
+  } catch (error) {
+    dispatch(errorHandler(error))
+  }
+} 
+
+// DELETE POST 
+export const deletePost = (postId) => async (dispatch) => {
+  try {
+    const res = await axios.delete(`/post/${postId}`)
+    if(res.status === 200) {
+      dispatch(getAllPosts())
+    }
+  } catch (error) {
+    dispatch(errorHandler(error))
+  }
+} 

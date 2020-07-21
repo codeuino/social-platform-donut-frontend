@@ -7,6 +7,8 @@ import OrgSetting from './components/OrgSettings'
 import OrgAuth from './components/OrgAuth'
 import Navigation from '../navigation/navigation'
 import { connect } from 'react-redux'
+import OrgMaintenance from './components/OrgMaintenance';
+import Users from '../../Activity/Users'
 
 class CommunitySetting extends Component {
   constructor(props) {
@@ -17,7 +19,8 @@ class CommunitySetting extends Component {
         profile: true,
         settings: false,
         permission: false,
-        authentication: false
+        authentication: false,
+        maintenance: false
       }
     };
   }
@@ -40,23 +43,26 @@ class CommunitySetting extends Component {
           <Navigation orgSettings={this.state.org} />
         </div>
         <div className="org_settings_view">
-            <div className="main_section">
-              <div className="left_nav">
-                <LeftNav
-                  data={{
-                    option: this.state.option,
-                    changeOption: this.changeOption.bind(this),
-                  }}
-                />
-              </div>
-              <div className="right_section">
-                {view === "profile" ? <OrgProfile /> : null}
-                {view === "permission" ? <OrgPermission /> : null}
-                {view === "settings" ? <OrgSetting /> : null}
-                {view === "authentication" ? <OrgAuth /> : null}
-              </div>
+          <div className="main_section">
+            <div className="left_nav">
+              <p className="header_text">Community Settings</p>
+              <LeftNav
+                data={{
+                  option: this.state.option,
+                  changeOption: this.changeOption.bind(this),
+                }}
+              />
+            </div>
+            <div className="right_section">
+              {view === "profile" ? <OrgProfile /> : null}
+              {view === "permission" ? <OrgPermission /> : null}
+              {view === "settings" ? <OrgSetting /> : null}
+              {view === "authentication" ? <OrgAuth /> : null}
+              {view === "maintenance" ? <OrgMaintenance /> : null}
+              {view === "activity" ? <Users /> : null }
             </div>
           </div>
+        </div>
       </div>
     );
   }

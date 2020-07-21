@@ -15,8 +15,7 @@ class OrgProfile extends Component {
       orgName: "",
       shortDesc: "",
       longDesc: "",
-      error: '',
-      isMaintenance: false
+      error: ''
     }
   }
 
@@ -27,13 +26,12 @@ class OrgProfile extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { name, description } = nextProps.org.org;
-    const { isDeactivated, isMaintenance } = nextProps.org
+    const { isDeactivated } = nextProps.org
     this.setState({ 
       orgName: name, 
-      shortDesc: description.shortDescription, 
-      longDesc: description.longDescription,
+      shortDesc: description?.shortDescription, 
+      longDesc: description?.longDescription,
       isDeactivated: isDeactivated, 
-      isMaintenance: isMaintenance
     }, () => {
       console.log('org info ', this.state)
     })
@@ -82,7 +80,6 @@ class OrgProfile extends Component {
       longDesc, 
       // error, 
       isDeactivated,
-      isMaintenance
      } = this.state;
     return (
       <div className="container">
@@ -95,10 +92,6 @@ class OrgProfile extends Component {
                 <Form.Label htmlFor="label_text" className="label_text">
                   LOGO
                 </Form.Label>
-                <span className="toggle__switch">
-                  <span className="label_text mr-2">Maintenance</span>
-                  <ToggleSwitch isMaintenance={isMaintenance} />
-                </span>
               </Form.Group>
               <Form.Group>
                 <div className="box">

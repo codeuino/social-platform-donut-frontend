@@ -8,14 +8,18 @@
     border: 1px solid #CCCCCC;
     box-sizing: border-box;
   }
-  .org_settings_view {
+  .user_activity_view {
     margin-top: 35px;
+    margin-left: 15vw;
+     margin-left: auto;
+     margin-right: auto;
     .main_section {
       display: flex;
       flex-direction: row;
       justify-items: center;
       flex-wrap: wrap;
       margin-top: -1.3em;
+      margin-left: -2vw;
       .left_nav {
         max-width: 20%;
         height: 50%;
@@ -37,6 +41,38 @@
         max-width: 75%;
         // overflow-y: auto;
         margin-top: -0.7em;
+      }
+      .timelines__container {
+        max-height: 90vh;
+        overflow-y: auto;
+        width: 75vw;
+        margin-top: 4px;
+        overflow-x: hidden;
+        margin-left: -150px;
+        margin-top: 27px;
+
+        .activity__header {
+          font-family: Inter;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 1.3em;
+          line-height: 21px;
+          letter-spacing: 0.25px;
+          color: #2D2D2D;
+          padding-bottom: 7px;
+          text-align: center;
+        }
+
+        .activity__link {
+          color: #1a73ed;
+          font-family: "Inter";
+          font-size: 14px;
+          cursor: pointer;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
       }
     }
   }

@@ -1,0 +1,36 @@
+.main__maintenance__container {
+  display: flex;
+  .description__container {
+    margin-left: 39px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    width: 100%;
+    .desc__text {
+      font-family: "Inter";
+      font-size: 17px;
+      color: #2D2D2D;
+      text-align: justify;
+      padding: 10px;
+    }
+    .maintenance__text {
+      font-family: Inter;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 1.3em;
+      line-height: 21px;
+      letter-spacing: 0.25px;
+      color: #2D2D2D;
+      padding-left: 10px;
+      padding-right: 10px;
+      padding-bottom: 10px;
+    }
+    .toggle__container {
+      display: flex;
+      margin-top: 1em;
+      justify-content: space-between;
+      .toggle__switch {
+        margin-left: 34vw;
+      }
+    }
+  }
+}

@@ -40,9 +40,9 @@ export const getPersonalOverview = () => async (dispatch) => {
 }
 
 // GET ALL MEMBERS 
-export const getMembers = () => async (dispatch) => {
+export const getMembers = (pagination = 10, page = 1) => async (dispatch) => {
   try {
-    const res = await axios.get('/org/members/all')
+    const res = await axios.get(`/org/members/all?pagination=${pagination}&page=${page}`)
     dispatch(setRequestStatus(false))
     if (res.status === 200) {
       dispatch(setRequestStatus(true))
