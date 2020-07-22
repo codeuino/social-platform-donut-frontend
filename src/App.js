@@ -8,6 +8,7 @@ import jwt_decode from "jwt-decode";
 import { setAuthToken } from "./utils/setAuthToken";
 import { setCurrentUser, logoutUser } from "./actions/authAction";
 import "./css/main.scss";
+import ReactGA from "react-ga";
 
 class App extends Component {
   componentDidMount() {
