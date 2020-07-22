@@ -2,15 +2,15 @@ import { SET_CURRENT_USER, RESPONSE_MSG, SET_ADMIN, BLOCK_USER, UNBLOCK_USER, RE
 
 const initialState = {
   // make it false later, default is set to true so that contributors don't need to login for test
-  isAuthenticated: true,
+  isAuthenticated: true, // localStorage.getItem("jwtToken").length > 1
   isAdmin: false,
   isBlocked: false,
   isRemoved: false,
   resetPassReq: null,
   passUpdated: false,
   user: {},
-  response_msg: ""
-}
+  response_msg: "",
+};
 
 export default (state = initialState, action) => {
   switch(action.type) {

@@ -11,7 +11,7 @@ export const createComment = (postId, comment) => async (dispatch) => {
     if(res.status === 201) {
       dispatch(setRequestStatus(true))
       console.log('created comment ', res.data.comment)
-      dispatch(getAllCommentsOfPost());
+      dispatch(getAllCommentsOfPost(postId));
     }
   } catch(error) {
     dispatch(errorHandler(error))

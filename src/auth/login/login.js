@@ -57,24 +57,44 @@ class Login extends Component {
                 ? "Or Sign In with"
                 : "Or SignUp with"}
             </p>
-            <div className="login__options">
-              <div className="">
+            <Row>
+              <Col className = "button-column">
                 <a
                   href="http://localhost:5000/auth/google"
                   style={{ padding: "1vh" }}
                 >
-                  <img src={GoogleLogin} alt="Google" className="google__login"/>
+                  <Button
+                    className="selectorbtn"
+                    type="submit"
+                    variant="primary"
+                    color="primary"
+                    size="sm"
+                  >
+                    <span className="selectorbtn-content">
+                      <img src={GoogleLogin} alt="Google" className="google__login"/>Google
+                    </span>
+                  </Button>
                 </a>
-              </div>
-              <div className="" >
+              </Col>
+              <Col className="button-column" >
                 <a
-                  href="http://localhost:5000/auth/github"
+                  href="http://localhost:5000/auth/google"
                   style={{ padding: "1vh" }}
                 >
-                  <FaGithub color="#24292e" className="github__login"/>
+                  <Button
+                    className="selectorbtn"
+                    type="submit"
+                    variant="primary"
+                    color="primary"
+                    size="sm"
+                  >
+                    <span className="selectorbtn-content">
+                      <FaGithub color="#24292e" className="github__login"/>Github
+                    </span>
+                  </Button>
                 </a>
-              </div>
-            </div>
+              </Col>
+            </Row>
             <p className="login-text-selector">
               {this.state.activeForm === "login"
                 ? "Don't have an account? "

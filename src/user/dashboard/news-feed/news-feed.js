@@ -336,8 +336,8 @@ function NewsFeed(props) {
  }
 
   return (
-    <div className="news__feed__container">
-      <div className="news-feed">
+    <>
+        <div className="news-feed">
         <div className="post-article">
           <div className="article">
             <Paper
@@ -413,6 +413,7 @@ function NewsFeed(props) {
           />
         </div>
       </div>
+    <div className="news__feed__container">
       {/* <div className="posts">
         <span className="category">
           <span className="to-centre">
@@ -520,6 +521,7 @@ function NewsFeed(props) {
         )}
       </div>
     </div>
+    </>
   );
 }
 

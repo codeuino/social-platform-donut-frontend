@@ -84,7 +84,7 @@
     width: auto;
     text-align: center;
     font-size: 1.45rem;
-    margin-left: 5vw;
+    margin-left: 7vw;
     margin-right: -12vw;
     .day{
       font-weight: 25px;
@@ -133,3 +133,14 @@
   max-width: 345px;
   margin-top: 20px;
 } 
+
+.footer__buttons {
+  .disable__edit {
+    pointer-events: none;
+  }
+  .footer__btn {
+    text-decoration: underline;
+    cursor: pointer;
+    color: #1a73ed;
+  }
+}
