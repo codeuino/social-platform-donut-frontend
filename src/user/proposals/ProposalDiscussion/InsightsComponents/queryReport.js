@@ -1,4 +1,4 @@
-import { format } from "date-fns";
+import moment from "moment";
 
 export const queryReport = (props) => {
   const {
@@ -11,6 +11,10 @@ export const queryReport = (props) => {
     filter,
   } = props;
 
+  const VIEW_ID = "224508578";
+  const QUERY_PATH = "/v4/reports:batchGet";
+  const QUERY_ROOT = "https://analyticsreporting.googleapis.com/";
+
   const requestDimensions = (dimensions) => {
     let result = [];
     dimensions.forEach((item) => {
@@ -21,18 +25,18 @@ export const queryReport = (props) => {
     return result;
   };
   return window.gapi.client.request({
-    path: "/v4/reports:batchGet",
-    root: "https://analyticsreporting.googleapis.com/",
+    path: QUERY_PATH,
+    root: QUERY_ROOT,
     method: "POST",
     body: {
       reportRequests: [
         {
-          viewId: viewID,
+          viewId: VIEW_ID,
           filtersExpression: filter,
           dateRanges: [
             {
-              startDate: format(new Date(startDate), "yyyy-MM-dd"),
-              endDate: format(new Date(endDate), "yyyy-MM-dd"),
+              startDate: moment(startDate).format("YYYY-MM-DD"),
+              endDate: moment(endDate).format("YYYY-MM-DD"),
             },
           ],
           metrics: [

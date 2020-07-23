@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { addDays } from "date-fns";
 import CustomDatePicker from "./DatePicker";
 import { queryReport } from "./queryReport";
 import "./ProposalViewsReport.scss";
 import { formatDate } from "./utils";
 import { Line } from "react-chartjs-2";
 import { ClockLoader } from "react-spinners";
+import moment from "moment";
 
 const ProposalViewsReport = (props) => {
   const INITIAL_STATE = {
@@ -14,8 +14,10 @@ const ProposalViewsReport = (props) => {
   };
 
   const [reportData, setReportData] = useState(INITIAL_STATE);
-  const [startDate, setStartDate] = useState(addDays(new Date(), -10));
-  const [endDate, setEndDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(
+    moment().add(-10, "days").toDate()
+  );
+  const [endDate, setEndDate] = useState(moment().toDate());
   const [totalViews, setTotalViews] = useState(0);
   const [isLoading, setLoading] = useState(true);
 
@@ -85,7 +87,6 @@ const ProposalViewsReport = (props) => {
   useEffect(() => {
     setLoading(true);
     const request = {
-      viewID: "224508578",
       startDate,
       endDate,
       metrics: "ga:pageviews",

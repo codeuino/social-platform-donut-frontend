@@ -1,9 +1,11 @@
+const CLIENT_ID =
+  "802671430978-i00tspvkpgf7bi91vgvjinba9kism1ac.apps.googleusercontent.com";
+const SCOPE = "https://www.googleapis.com/auth/analytics.readonly";
+
 const initAuth = () => {
-  const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
   return window.gapi.auth2.init({
-    client_id:
-      "802671430978-i00tspvkpgf7bi91vgvjinba9kism1ac.apps.googleusercontent.com",
-    scope: "https://www.googleapis.com/auth/analytics.readonly",
+    client_id: CLIENT_ID,
+    scope: SCOPE,
   });
 };
 

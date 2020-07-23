@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { addDays } from "date-fns";
 import { Pie } from "react-chartjs-2";
 import CustomDatePicker from "./DatePicker";
 import { queryReport } from "./queryReport";
 import { colors } from "./styles";
 import { ClockLoader } from "react-spinners";
+import moment from "moment";
 
 const BrowserReport = (props) => {
   const INITIAL_STATE = {
@@ -13,8 +13,10 @@ const BrowserReport = (props) => {
     colors: [],
   };
   const [reportData, setReportData] = useState(INITIAL_STATE);
-  const [startDate, setStartDate] = useState(addDays(new Date(), -10));
-  const [endDate, setEndDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(
+    moment().add(-10, "days").toDate()
+  );
+  const [endDate, setEndDate] = useState(moment().toDate());
   const [totalUsers, setTotalUsers] = useState(0);
   const [isLoading, setLoading] = useState(true);
 
@@ -52,7 +54,6 @@ const BrowserReport = (props) => {
   useEffect(() => {
     setLoading(true);
     const request = {
-      viewID: "224508578",
       startDate,
       endDate,
       metrics: "ga:users",
