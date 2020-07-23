@@ -30,7 +30,6 @@ if (token) {
 function App() {
   useEffect(() => {
     ReactGA.initialize("UA-173245995-1");
-    ReactGA.pageview("/homepage");
   });
   return (
     <Provider store={store}>
