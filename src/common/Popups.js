@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
-import { Modal, Button, Form, Col } from 'react-bootstrap';
+import { Modal, Button, Form, Col, Row } from 'react-bootstrap';
 import { MdVerifiedUser } from 'react-icons/md';
 import { FaUserSlash } from 'react-icons/fa';
 import { connect } from 'react-redux';
 import { forgotPassword, changePassword } from '../actions/authAction';
+import { activateDeactivateToggler } from '../actions/usersAction';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
  
@@ -32,8 +33,14 @@ class Popups extends Component {
     this.setState({
       show: nextProps.modalShow,
       option: nextProps.option,
-      optionValue: nextProps.optionValue
+      optionValue: nextProps.optionValue,
     });
+    if(nextProps.option === "name") {
+      this.setState({
+        firstName: nextProps?.optionValue?.firstName,
+        lastName: nextProps?.optionValue?.lastName
+      })
+    }
     const { currentStep, requested } = this.state
     if (nextProps.auth.resetPassReq !== null && requested) {
       toast.success('Link sent to your registered email!')
@@ -46,18 +53,40 @@ class Popups extends Component {
  
   handleClose = () => {
     this.setState({show : false });
+    this.props.toggler(false);
   }
  
-  handleSubmit = (e) => {
+  updateUserInfo = (e, option) => {
     e.preventDefault();
     // send request to server to update the data 
-    // ADD CODE HERE
+    if(option === "name") {
+      const { firstName, lastName } = this.state
+      const info = {
+        name: {
+          firstName,
+          lastName
+        }
+      }
+      this.props.updateProfile(info)
+      this.props.toggler(false);
+    }
+
+    if(option === "email") {
+      const { email } = this.state
+      const info = {
+        email: email
+      }
+      this.props.updateProfile(info);
+      this.props.toggler(false);
+    }
   }
  
-  handleDeactivateAccount = () => {
-    console.log("Deactivating account...");
+  handleDeactivateAccount = (e) => {
+    e.preventDefault();
+    console.log("Deactivating account...", this.state);
     // send request to the server to deactivate account 
-    // ADD CODE HERE
+    this.props.activateDeactivateToggler()
+    this.props.toggler(false);
   }
  
   onChange = (e) => {
@@ -115,34 +144,49 @@ nextButton(){
   render() {
     const { option, optionValue } = this.state;
     const updateName = (
-      <Form>
-        <div className="row">
-          <div className="col-md-9">
-             <Form.Group controlId="formBasicEmail">
-              <Form.Control 
+      <React.Fragment>
+        <Form className="modal__form">
+          <Form.Row className="modal__row">
+            <Form.Group as={Col} className="modal__group">
+              <Form.Label className="modal__label"> First name</Form.Label>
+              <Form.Control
                 type="text"
-                placeholder="Enter your name"
+                placeholder="First name"
                 onChange={this.onChange}
-                defaultValue={optionValue}
-                name="name"
+                defaultValue={optionValue?.firstName}
+                name="firstName"
               />
             </Form.Group>
-          </div>
-          <div className="col-md-3">
-            <Button className="btn btn-light" type="button" onClick={this.handleSubmit}>
-              Save
-            </Button>
-          </div>
+            <Form.Group as={Col} className="modal__group">
+              <Form.Label className="modal__label"> Last name</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Last name"
+                onChange={this.onChange}
+                defaultValue={optionValue?.lastName}
+                name="lastName"
+              />
+            </Form.Group>
+          </Form.Row>
+        </Form>
+        <div className="modal__setting__btn__container">
+          <Button
+            className="modal__save"
+            onClick={(e) => this.updateUserInfo(e, "name")}
+          >
+            <span className="modal__buttontext">Save</span>
+          </Button>
         </div>
-      </Form>
+      </React.Fragment>
     );
  
     const updateEmail = (
-      <Form>
-        <div className="row">
-          <div className="col-md-9">
-             <Form.Group controlId="formBasicName">
-              <Form.Control 
+      <React.Fragment>
+        <Form className="modal__form">
+          <Form.Row className="modal__row">
+            <Form.Group className="modal__group" as={Col}>
+              <Form.Label className="modal__label" />
+              <Form.Control
                 type="text"
                 placeholder="Enter email address"
                 onChange={this.onChange}
@@ -150,36 +194,19 @@ nextButton(){
                 name="email"
               />
             </Form.Group>
-          </div>
-          <div className="col-md-3">
-            <Button className="btn btn-light" type="button" onClick={this.handleSubmit}>
-              Save
-            </Button>
-          </div>
+          </Form.Row>
+        </Form>
+        <div className="modal__setting__btn__container">
+          <Button
+            className="modal__save"
+            onClick={(e) => this.updateUserInfo(e, "email")}
+          >
+            <span className="modal__buttontext">Save</span>
+          </Button>
         </div>
-      </Form>
+      </React.Fragment>
     );
-    const updateUsername = (
-      <Form className="modal__form">
-        <Form.Row className="modal__row">
-          <Form.Group as={Col} className="modal__group">
-             <Form.Label className="modal__label" controlId="formBasicEmail" />
-              <Form.Control 
-                type="text"
-                placeholder="Enter your username"
-                onChange={this.onChange}
-                defaultValue={optionValue}
-                name="username"
-              />
-          </Form.Group>
-        </Form.Row>
-          <div className="modal__buttons">
-            <Button className="modal__save" onClick={this.handleSubmit}>
-              <span className="modal__buttontext">Save</span>
-            </Button>
-          </div>
-      </Form>
-    );
+
 
 
    const resetPassword = (
@@ -235,16 +262,40 @@ nextButton(){
       </React.Fragment>
     );
     const deactivateAccount = (
-      <div className="container">
-        <p className="text text-center" style={{color: "red"}}><b>Are you sure ??</b></p>
+      <Form className="modal__form">
+        <Form.Row className="modal__row">
+          <Form.Group className="modal__group" as={Col}>
+            <div className="row">
+              <div className="col-md-4"></div>
+              <div className="col-md-4">
+                <span style={{ fontFamily: "Inter", color: "red" }}>
+                 Are you sure?
+                </span>
+              </div>
+              <div className="col-md-4"></div>
+            </div>
+          </Form.Group>
+        </Form.Row>
         <div className="row">
           <div className="col-md-2"></div>
-            <button className="btn btn-outline-success col-md-3" onClick={this.handleClose}>No</button>
+          <button
+            className="btn btn-outline-success col-md-3"
+            onClick={this.handleClose}
+            type="submit"
+          >
+            No
+          </button>
           <div className="col-md-2"></div>
-            <button className="btn btn-outline-danger col-md-3" onClick={this.handleDeactivateAccount}>Yes</button>
+          <button
+            className="btn btn-outline-danger col-md-3"
+            onClick={this.handleDeactivateAccount}
+            type="submit"
+          >
+            Yes
+          </button>
           <div className="col-md-2"></div>
         </div>
-      </div>
+      </Form>
     );
  
     const checkVerification = (
@@ -277,14 +328,11 @@ nextButton(){
         <Modal.Body className="modal__body">
           {Boolean(option === "name") ? updateName : null}
           {Boolean(option === "email") ? updateEmail: null}
-          {Boolean(option === "username") ? updateUsername: null}
           {Boolean(option === "password") ? updatePassword : null}
           {Boolean(option === "new-password") ? resetPassword : null}
           {Boolean(option === "account") ? deactivateAccount: null}
           {Boolean(option === "identity") ? checkVerification : null}
         </Modal.Body>
-        <Modal.Footer>
-        </Modal.Footer>
       </Modal>
     )
   }
@@ -356,8 +404,13 @@ const mapStateToProps = (state) => {
   return {
     auth: state.auth,
     status: state.status,
+    user: state.user,
     error: state.error
   }
 }
  
-export default connect( mapStateToProps, { forgotPassword, changePassword })(Popups);
+export default connect( mapStateToProps, { 
+  forgotPassword, 
+  changePassword, 
+  activateDeactivateToggler
+ })(Popups);

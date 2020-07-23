@@ -201,3 +201,16 @@ export const processInviteToken = (token) => async (dispatch) => {
     dispatch(errorHandler(error));
   }
 }
+
+// ACTIVATE DEACTIVATE TOGGLER 
+export const activateDeactivateToggler = () => async (dispatch) => {
+  try {
+    const res = await axios.patch(`/user/deactivate/toggler`)
+    if (res.status === 200) {
+      console.log('Deactivation toggler', res.data);
+      dispatch(getProfile());
+    }
+  } catch (error) {
+    dispatch(errorHandler(error))
+  }
+}
