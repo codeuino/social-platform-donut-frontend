@@ -1,0 +1,18 @@
+.datepicker-wrapper {
+  color: #35213d;
+  font-weight: 500;
+  .picker {
+    width: fit-content;
+    border-color: #a2c1f2;
+    border-radius: 10px;
+    background-color: #d3dded;
+    text-align: center;
+    line-height: 20px;
+    font-size: 1rem;
+    margin-bottom: 20px;
+  }
+}
+
+.datepicker-label {
+  padding-right: 5px;
+}

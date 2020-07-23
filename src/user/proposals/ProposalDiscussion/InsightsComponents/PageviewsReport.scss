@@ -1,0 +1,54 @@
+.report-wrapper {
+  max-width: 80%;
+  padding: 10px 0;
+  border-bottom: 1px solid #f0eee9;
+  .chart-title {
+    font-family: Qanelas;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 29px;
+    color: #1a73e8;
+    padding-bottom: 3px;
+    margin-bottom: 2px;
+  }
+  .chart-subtitle {
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 29px;
+    color: #1a73e8;
+    padding-bottom: 3px;
+    margin-bottom: 2px;
+  }
+  .datepicker-content {
+    width: 50vw;
+    display: flex;
+    justify-content: space-evenly;
+    margin: 0 auto;
+    font-family: Inter;
+    font-size: 13px;
+  }
+  .report-table {
+    width: 100%;
+
+    border-collapse: collapse;
+    th,
+    td {
+      border: 1px solid #ddd;
+      padding: 8px;
+    }
+    th {
+      background: black;
+      color: white;
+    }
+    .left-align {
+      text-align: left;
+    }
+  }
+  .loader {
+    margin: 0 auto;
+    text-align: center;
+  }
+}
