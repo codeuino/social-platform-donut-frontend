@@ -53,10 +53,10 @@ class EditProfile extends Component {
     console.log('nextProps ', nextProps)
     const { userProfile } = nextProps.user
     const permissions = nextProps?.org?.org?.options?.permissions
-    const about = userProfile.info?.about
+    const about = userProfile?.info?.about
     this.setState({ 
-      firstName: userProfile.name?.firstName,
-      lastName: userProfile.name?.lastName,
+      firstName: userProfile?.name?.firstName,
+      lastName: userProfile?.name?.lastName,
       website: about?.website,
       designation: about?.designation, 
       longDesc: about?.longDescription, 

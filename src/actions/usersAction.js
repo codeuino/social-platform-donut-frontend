@@ -2,11 +2,12 @@ import { GET_USER_PROFILE, GET_ALL_MEMBERS, UPDATE_USER_PROFILE, GET_USER_EVENTS
 import { errorHandler } from '../utils/errorHandler'
 import axios from 'axios'
 import { setRequestStatus } from '../utils/setRequestStatus'
+import { BASE_URL } from './baseApi'
 
 // GET USER PROFILE
 export const getProfile = () => async (dispatch)=> {
   try {
-    const res = await axios.get('/user/me')
+    const res = await axios.get(`${BASE_URL}/user/me`)
     dispatch(setRequestStatus(false))
     if (res.status === 200) {
       setRequestStatus(true)
@@ -35,7 +36,7 @@ export const followUser = (userId) => async (dispatch) => {
       followId: userId
     }
     console.log('followObj ', followObj)
-    const res = await axios.patch('/user/follow', followObj)
+    const res = await axios.patch(`${BASE_URL}/user/follow`, followObj)
     dispatch(setRequestStatus(false))
     if (res.status === 200) {
       dispatch(setRequestStatus(true))
@@ -57,7 +58,7 @@ export const unFollowUser = (userId) => async (dispatch) => {
       followId: userId
     }
     console.log('unfollowObj ', unFollowObj)
-    const res = await axios.patch('/user/unfollow', unFollowObj)
+    const res = await axios.patch(`${BASE_URL}/user/unfollow`, unFollowObj)
     dispatch(setRequestStatus(false))
     if (res.status === 200) {
       dispatch(setRequestStatus(true))
@@ -75,12 +76,12 @@ export const unFollowUser = (userId) => async (dispatch) => {
 // REMOVE USER
 export const removeUser = (userId) => async (dispatch) => {
   try {
-    const res = await axios.patch(`/user/remove/${userId}`)
+    const res = await axios.patch(`${BASE_URL}/user/remove/${userId}`)
     dispatch(setRequestStatus(false))
     if(res.status === 200) {
       dispatch(setRequestStatus(true))
       console.log('user removed ', userId)
-      const response = await axios.get('/org/members/all')
+      const response = await axios.get(`${BASE_URL}/org/members/all`)
       if (response.status === 200) {
         dispatch({
           type: GET_ALL_MEMBERS,
@@ -97,7 +98,7 @@ export const removeUser = (userId) => async (dispatch) => {
 export const updateProfile = (updatedInfo) => async (dispatch) => {
   try {
     console.log('updating ', updatedInfo)
-    const res = await axios.patch('/user/me', updatedInfo)
+    const res = await axios.patch(`${BASE_URL}/user/me`, updatedInfo)
     dispatch(setRequestStatus(false))
     if(res.status === 200) {
       dispatch(setRequestStatus(true))
@@ -115,7 +116,7 @@ export const updateProfile = (updatedInfo) => async (dispatch) => {
 // GET EVENTS CREATED BY USER 
 export const getEventsCreatedByUser = (pagination = 10, page = 1) => async (dispatch) => {
   try { 
-    const res = await axios.get(`event/me/all?pagination=${pagination}&page=${page}`);
+    const res = await axios.get(`${BASE_URL}/event/me/all?pagination=${pagination}&page=${page}`);
     dispatch(setRequestStatus(false))
     if(res.status === 200) {
       dispatch(setRequestStatus(true))
@@ -133,7 +134,7 @@ export const getEventsCreatedByUser = (pagination = 10, page = 1) => async (disp
 // GET ALL PROJECT CREATED BY A USER 
 export const getProjectCreatedByUser = (pagination = 10, page = 1) => async (dispatch) => {
   try { 
-    const res = await axios.get(`/project/me/all?pagination=${pagination}&page=${page}`);
+    const res = await axios.get(`${BASE_URL}/project/me/all?pagination=${pagination}&page=${page}`);
     dispatch(setRequestStatus(false))
     if(res.status === 200) {
       dispatch(setRequestStatus(true))
@@ -151,7 +152,7 @@ export const getProjectCreatedByUser = (pagination = 10, page = 1) => async (dis
 // GET POSTS CREATED BY USER 
 export const getPostsCreatedByUser = (pagination = 10, page = 1) => async (dispatch) => {
   try { 
-    const res = await axios.get(`/post/me/all?pagination=${pagination}&page=${page}`);
+    const res = await axios.get(`${BASE_URL}/post/me/all?pagination=${pagination}&page=${page}`);
     dispatch(setRequestStatus(false))
     if(res.status === 200) {
       dispatch(setRequestStatus(true))
@@ -169,7 +170,7 @@ export const getPostsCreatedByUser = (pagination = 10, page = 1) => async (dispa
 // GET INVITE LINK 
 export const getInviteLink = (role) => async (dispatch) => {
   try {
-    const res = await axios.get(`/user/invite?role=${role}`)
+    const res = await axios.get(`${BASE_URL}/user/invite?role=${role}`)
     dispatch(setRequestStatus(false));
     if(res.status === 200) {
       dispatch(setRequestStatus(true));
@@ -187,7 +188,7 @@ export const getInviteLink = (role) => async (dispatch) => {
 // PROCESS INVITE LINK 
 export const processInviteToken = (token) => async (dispatch) => {
   try {
-    const res = await axios.get(`/user/invite/${token}`)
+    const res = await axios.get(`${BASE_URL}/user/invite/${token}`)
     dispatch(setRequestStatus(false));
     if(res.status === 200) {
       dispatch(setRequestStatus(true))
@@ -205,7 +206,7 @@ export const processInviteToken = (token) => async (dispatch) => {
 // ACTIVATE DEACTIVATE TOGGLER 
 export const activateDeactivateToggler = () => async (dispatch) => {
   try {
-    const res = await axios.patch(`/user/deactivate/toggler`)
+    const res = await axios.patch(`${BASE_URL}/user/deactivate/toggler`)
     if (res.status === 200) {
       console.log('Deactivation toggler', res.data);
       dispatch(getProfile());

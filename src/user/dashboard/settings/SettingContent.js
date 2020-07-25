@@ -4,6 +4,7 @@ import './styles/settings.scss';
 import Popups from '../../../common/Popups';
 import { connect } from 'react-redux';
 import { getProfile } from '../../../actions/usersAction'
+import { getOrgProfile } from '../../../actions/orgAction'
 import './styles/SettingSidebar.scss';
 
 class SettingContent extends Component {
@@ -22,18 +23,22 @@ class SettingContent extends Component {
       },
       modalShow: false,
       option: "",
-      optionValue: ""
+      optionValue: "",
+      canChangeName: false,
+      canChangeEmail: false
     }
   }
 
   componentDidMount(){
     // here get the data from api and update the state 
     this.props.getProfile();
+    this.props.getOrgProfile();
   }
 
   componentWillReceiveProps(nextProps) {
     console.log('settings nextProps ', nextProps);
     const { userProfile } = nextProps?.user;
+    const permission = nextProps?.org?.org?.options?.permissions
     this.setState({  
       data: {
           ...this.state.data,
@@ -44,7 +49,9 @@ class SettingContent extends Component {
           },
           email: `${userProfile?.email}`,
           isActivated: userProfile?.isActivated
-      }
+      },
+      canChangeEmail: permission?.canChangeEmail,
+      canChangeName: permission?.canChangeName
     }, () => {
       console.log('setting state ', this.state)
     })
@@ -52,7 +59,7 @@ class SettingContent extends Component {
 
   render() {
     const { name, email, identity, isActivated } = this.state.data;
-    const { modalShow, option, optionValue } = this.state
+    const { modalShow, option, optionValue, canChangeEmail, canChangeName } = this.state
     const setOptionValue = (targetName) => {
       let value;
       Object.entries(this.state.data).filter(([key, val])=>{
@@ -100,7 +107,12 @@ class SettingContent extends Component {
               <div className="col-md-9">
                 <p className="options-value">
                   {name?.firstName} {name?.lastName}
-                  <span>
+                  <span 
+                    className={
+                        isActivated === false || canChangeName === false 
+                        ? "disable__link": ""
+                      }
+                    >
                     <a
                       href="javascript:void(0)"
                       onClick={handleToggle.bind(this, "name")}
@@ -120,7 +132,12 @@ class SettingContent extends Component {
               <div className="col-md-9">
                 <p className="options-value">
                   {email}
-                  <span>
+                  <span 
+                    className={
+                        isActivated === false || canChangeEmail === false 
+                        ? "disable__link" : ""
+                      }
+                     >
                     <a
                       href="javascript:void(0)"
                       onClick={handleToggle.bind(this, "email")}
@@ -185,6 +202,7 @@ class SettingContent extends Component {
 }
 // map state to props 
 const mapStateToProps = (state) => ({
-  user: state.user
+  user: state.user,
+  org: state.org
 })
-export default connect(mapStateToProps, { getProfile })(SettingContent);
+export default connect(mapStateToProps, { getProfile, getOrgProfile })(SettingContent);

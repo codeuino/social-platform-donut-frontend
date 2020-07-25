@@ -1,16 +1,25 @@
 import axios from 'axios'
 import { setRequestStatus } from '../utils/setRequestStatus'
 import { errorHandler } from '../utils/errorHandler'
-import { GET_ORG_PROFILE, UPDATE_ORG_PROFILE, DEACTIVATE_ORG, GET_ALL_MEMBERS, TRIGGER_MAINTENANCE } from './types'
+import { 
+  GET_ORG_PROFILE, 
+  UPDATE_ORG_PROFILE, 
+  DEACTIVATE_ORG, 
+  GET_ALL_MEMBERS, 
+  TRIGGER_MAINTENANCE
+ } from './types'
+
+import { BASE_URL } from './baseApi'
 
 // CREATE COMMUNITY
 export const registerCommunity  = (orgInfo) => async (dispatch) => {
   try {
-    const res = await axios.post('/org/', orgInfo)
+    const res = await axios.post(`${BASE_URL}/org/`, orgInfo)
     dispatch(setRequestStatus(false))
     if (res.status === 201) {
       dispatch(setRequestStatus(true))
-      localStorage.setItem('orgId', JSON.stringify(res.data.org._id))
+      console.log('org info ', res.data)
+      localStorage.setItem('orgId', res.data.org._id)
       dispatch(getOrgProfile())
     }
   } catch (error) {
@@ -22,12 +31,12 @@ export const registerCommunity  = (orgInfo) => async (dispatch) => {
 export const removeAdmin = (userId) => async (dispatch) => {
   try {
     let orgId = localStorage.getItem('orgId')
-    const res = await axios.patch(`/org/remove/${orgId}/${userId}`)
+    const res = await axios.patch(`${BASE_URL}/org/remove/${orgId}/${userId}`)
     dispatch(setRequestStatus(false))
     if (res.status === 200) {
       dispatch(setRequestStatus(true))
       console.log('admin removed ', userId)
-      const response = await axios.get('/org/members/all')
+      const response = await axios.get(`${BASE_URL}/org/members/all`)
       if (response.status === 200) {
         dispatch({
           type: GET_ALL_MEMBERS,
@@ -44,7 +53,7 @@ export const removeAdmin = (userId) => async (dispatch) => {
 export const getOrgProfile = () => async (dispatch) => {
   try {
     let orgId = localStorage.getItem('orgId')
-    const res = await axios.get(`/org/${orgId}`)
+    const res = await axios.get(`${BASE_URL}/org/${orgId}`)
     dispatch(setRequestStatus(false))
     if(res.status === 200) {
       dispatch(setRequestStatus(true))
@@ -63,7 +72,7 @@ export const updateOrgProfile = (updatedInfo) => async (dispatch) => {
   try {
     let orgId = localStorage.getItem('orgId')
     console.log('updatedInfo ', updatedInfo);
-    const res = await axios.patch(`/org/${orgId}`, updatedInfo)
+    const res = await axios.patch(`${BASE_URL}/org/${orgId}`, updatedInfo)
     dispatch(setRequestStatus(false));
     if(res.status === 200) {
       dispatch(setRequestStatus(true))
@@ -83,7 +92,7 @@ export const updateOrgProfile = (updatedInfo) => async (dispatch) => {
 export const updateSettings = (updatedInfo) => async (dispatch) => {
   try {
     let orgId = localStorage.getItem('orgId')
-    const res = await axios.patch(`/org/${orgId}/settings/update`, updatedInfo)
+    const res = await axios.patch(`${BASE_URL}/org/${orgId}/settings/update`, updatedInfo)
     dispatch(setRequestStatus(false))
     if(res.status === 200) {
       dispatch(setRequestStatus(true))
@@ -102,7 +111,7 @@ export const updateSettings = (updatedInfo) => async (dispatch) => {
 export const deactivateOrg = () => async (dispatch) => {
   try {
     let orgId = localStorage.getItem('orgId')
-    const res = await axios.patch(`/org/archive/${orgId}`);
+    const res = await axios.patch(`${BASE_URL}/org/archive/${orgId}`);
     dispatch(setRequestStatus(false))
     if(res.status === 200) {
       dispatch(setRequestStatus(true))
@@ -126,7 +135,7 @@ export const deactivateOrg = () => async (dispatch) => {
 export const TriggerMaintenance = () => async (dispatch) => {
   try {
     const orgId = localStorage.getItem('orgId')
-    const res = await axios.patch(`/org/${orgId}/maintenance`);
+    const res = await axios.patch(`${BASE_URL}/org/${orgId}/maintenance`);
     dispatch(setRequestStatus(false))
     if(res.status === 200) {
       dispatch(setRequestStatus(true))

@@ -60,7 +60,7 @@ class Activity extends Component {
   }
 
   render() {
-    const { dashboard, showEvent, showPost, showProject, eventId, postId } = this.state
+    const { showEvent, showPost, eventId, postId } = this.state
     const activity = [
       {
         type: 'Post',

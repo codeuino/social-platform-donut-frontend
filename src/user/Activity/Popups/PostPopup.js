@@ -16,7 +16,7 @@ class PostPopup extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('nextProps ', nextProps);
+    console.log('post nextProps ', nextProps);
     const post = nextProps?.post?.singlePost
     this.setState({
       postContent: post?.content || "",

@@ -2,11 +2,12 @@ import axios from 'axios';
 import { errorHandler } from '../utils/errorHandler';
 import { setRequestStatus } from '../utils/setRequestStatus';
 import { GET_ALL_POSTS, GET_ALL_PINNED_POSTS, GET_SINGLE_POST } from './types';
+import { BASE_URL } from './baseApi'
 
 // GET ALL POSTS
 export const getAllPosts = (pagination = 10, page = 1) => async (dispatch) => {
   try {
-    const res = await axios.get(`/post/all_posts?pagination=${pagination}&page=${page}`)
+    const res = await axios.get(`${BASE_URL}/post/all_posts?pagination=${pagination}&page=${page}`)
     dispatch(setRequestStatus(false))
     if(res.status === 200) {
       dispatch(setRequestStatus(true))
@@ -24,7 +25,7 @@ export const getAllPosts = (pagination = 10, page = 1) => async (dispatch) => {
 // GET ALL PINNED POSTS 
 export const getAllPinnedPosts = (pagination = 10, page = 1) => async (dispatch) => {
   try {
-    const res = await axios.get(`/post/all/pinned?pagination=${pagination}&page=${page}`)
+    const res = await axios.get(`${BASE_URL}/post/all/pinned?pagination=${pagination}&page=${page}`)
     dispatch(setRequestStatus(false))
     if(res.status === 200){
       dispatch(setRequestStatus(true))
@@ -42,7 +43,7 @@ export const getAllPinnedPosts = (pagination = 10, page = 1) => async (dispatch)
 // UPVOTE POST
 export const upVotePost = (postId) => async (dispatch) => {
   try {
-    const res = await axios.patch(`/post/upvote/${postId}`)
+    const res = await axios.patch(`${BASE_URL}/post/upvote/${postId}`)
     if(res.status === 200) {
       console.log('successfully upvoted post ', res.data)
       dispatch(getAllPosts());
@@ -56,7 +57,7 @@ export const upVotePost = (postId) => async (dispatch) => {
 export const getPostById = (postId) => async (dispatch) => {
   try {
     console.log('postId from action ', postId)
-    const res = await axios.get(`/post/${postId}`);
+    const res = await axios.get(`${BASE_URL}/post/${postId}`);
     if (res.status === 200) {
       dispatch({
         type: GET_SINGLE_POST,
@@ -72,7 +73,7 @@ export const getPostById = (postId) => async (dispatch) => {
 export const updatePost = (postId, updatedInfo) => async (dispatch) => {
   try {
     console.log('updatedPostInfo ', updatedInfo)
-    const res = await axios.patch(`/post/${postId}`, updatedInfo)
+    const res = await axios.patch(`${BASE_URL}/post/${postId}`, updatedInfo)
     if (res.status === 200) {
       dispatch(getPostById(postId))
     }
@@ -84,7 +85,7 @@ export const updatePost = (postId, updatedInfo) => async (dispatch) => {
 // DELETE POST 
 export const deletePost = (postId) => async (dispatch) => {
   try {
-    const res = await axios.delete(`/post/${postId}`)
+    const res = await axios.delete(`${BASE_URL}/post/${postId}`)
     if(res.status === 200) {
       dispatch(getAllPosts())
     }
