@@ -13,6 +13,7 @@ import projectReducer from "./projectReducer";
 import proposalReducer from "./proposalReducer";
 import adminReducers from "./adminReducers";
 import commentReducer from "./commentReducer";
+import analyticsReducer from './analyticsReducer';
 
 const rootReducer = combineReducers({
   auth: authReducers,
@@ -29,6 +30,7 @@ const rootReducer = combineReducers({
   proposal: proposalReducer,
   admin: adminReducers,
   comment: commentReducer,
+  analytics: analyticsReducer
 });
 
 export default rootReducer;

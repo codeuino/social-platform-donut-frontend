@@ -5,6 +5,8 @@ import { queryReport } from "./queryReport";
 import { colors } from "./styles";
 import { ClockLoader } from "react-spinners";
 import moment from "moment";
+import { connect } from "react-redux";
+import { getBrowserAnalytics } from '../../../../actions/analyticsAction';
 
 const BrowserReport = (props) => {
   const INITIAL_STATE = {
@@ -52,21 +54,24 @@ const BrowserReport = (props) => {
   };
 
   useEffect(() => {
-    setLoading(true);
-    const request = {
-      startDate,
-      endDate,
-      metrics: "ga:users",
-      dimensions: ["ga:browser"],
-      filter: `ga:pagePath==/${props.proposalId}`,
-    };
-    setTimeout(
-      () =>
-        queryReport(request)
-          .then((resp) => displayResults(resp))
-          .catch((error) => console.error(error)),
-      1500
-    );
+    
+    props.getBrowserAnalytics(startDate, endDate, props.proposalId)
+    console.log(props)
+    // setLoading(true);
+    // const request = {
+    //   startDate,
+    //   endDate,
+    //   metrics: "ga:users",
+    //   dimensions: ["ga:browser"],
+    //   filter: `ga:pagePath==/${props.proposalId}`,
+    // };
+    // setTimeout(
+    //   () =>
+    //     queryReport(request)
+    //       .then((resp) => displayResults(resp))
+    //       .catch((error) => console.error(error)),
+    //   1500
+    // );
   }, [startDate, endDate]);
 
   return (
@@ -101,4 +106,8 @@ const BrowserReport = (props) => {
   );
 };
 
-export default BrowserReport;
+const mapStateToProps = (state) => ({
+  browserAnalytics: state.analytics.browserAnalytics
+})
+
+export default connect(mapStateToProps, {getBrowserAnalytics}) (BrowserReport);
