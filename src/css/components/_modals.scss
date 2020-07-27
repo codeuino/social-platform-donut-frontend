@@ -2,16 +2,16 @@
   border-radius: 20px;
   .modal-content {
     border-radius: 10px;
-
+    max-height: 70vh;
     // width: 66%;
     border: 0px;
     // overflow-y: scroll;
     overflow-x: hidden;
-    background: #FFFFFF;
+    background: #ffffff;
     /* border: 1px solid #CCCCCC; */
     box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.5);
   }
- 
+
   .modal__header {
     .modal__title {
       .modal__main-title {
@@ -39,7 +39,7 @@
         height: 5vh;
         background: rgb(250, 251, 252);
         border-radius: 100px;
-        color: #1A73E8;
+        color: #1a73e8;
         padding: 0.3em;
         margin-left: 1em;
       }
@@ -52,12 +52,12 @@
         text-decoration: underline;
       }
       .delete__post__option {
-         float: right;
-         margin-left: 1vw;
-         font-size: 15px;
-         cursor: pointer;
-         border: 0px;
-         text-decoration: underline;
+        float: right;
+        margin-left: 1vw;
+        font-size: 15px;
+        cursor: pointer;
+        border: 0px;
+        text-decoration: underline;
       }
     }
     .modal__search {
@@ -80,6 +80,50 @@
   }
   .modal__body {
     overflow-y: scroll;
+    .tabs__container {
+      width: 100%;
+      margin-left: 0px;
+      margin-top: -20px;
+      .nav__tab {
+        .nav__list__container {
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          list-style: none;
+          border-bottom: 2px solid #eee;
+          transition: all 0.5s;
+          font-weight: 300;
+          color: #262727;
+
+          .nav__single__tab {
+            display: inline-block;
+            font-family: Inter;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 18px;
+            line-height: 22px;
+            padding-left: 11px;
+            padding-right: 15px;
+            padding-bottom: 5px;
+            margin-left: 19px;
+            text-align: center;
+            cursor: pointer;
+
+            &.selected {
+              border-bottom: 3px solid #337ab7;
+              color: #1a73e8;
+              .tab__icon {
+                margin-right: 5px;
+              }
+            }
+            .tab__icon {
+              margin-right: 5px;
+              font-size: 15px;
+            }
+          }
+        }
+      }
+    }
     .modal__mini-title {
       font-family: $font-family-Inter;
       font-style: normal;
