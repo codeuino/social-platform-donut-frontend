@@ -23,7 +23,7 @@ class UserInfo extends Component {
   componentWillReceiveProps(nextProps) {
     console.log('nextProps ', nextProps.userProfile)
     const name = nextProps.userProfile?.name || "NA"
-    const about = nextProps.userProfile.info?.about;
+    const about = nextProps.userProfile?.info?.about;
     this.setState({ 
       name: `${name?.firstName + " " + name?.lastName}`,
       designation: about?.designation,

@@ -2,11 +2,12 @@ import { GET_ALL_MEMBERS, GET_ORG_OVERVIEW, GET_PERSONAL_OVERVIEW, SEARCH_MEMBER
 import axios from 'axios'
 import { errorHandler } from '../utils/errorHandler'
 import { setRequestStatus } from '../utils/setRequestStatus'
+import { BASE_URL } from './baseApi'
 
 // GET ORGANIZATIONAL OVERVIEW
 export const getOrgOverview = () => async (dispatch) => {
   try {
-     const res = await axios.get('/org/overview/all')
+     const res = await axios.get(`${BASE_URL}/org/overview/all`)
      dispatch(setRequestStatus(false))
      if (res.status === 200) {
        dispatch(setRequestStatus(true))
@@ -24,7 +25,7 @@ export const getOrgOverview = () => async (dispatch) => {
 // GET PERSONAL OVERVIEW
 export const getPersonalOverview = () => async (dispatch) => {
   try {
-    const res = await axios.get('/user/overview')
+    const res = await axios.get(`${BASE_URL}/user/overview`)
     dispatch(setRequestStatus(false))
     if (res.status === 200) {
       dispatch(setRequestStatus(true))
@@ -42,7 +43,7 @@ export const getPersonalOverview = () => async (dispatch) => {
 // GET ALL MEMBERS 
 export const getMembers = (pagination = 10, page = 1) => async (dispatch) => {
   try {
-    const res = await axios.get(`/org/members/all?pagination=${pagination}&page=${page}`)
+    const res = await axios.get(`${BASE_URL}/org/members/all?pagination=${pagination}&page=${page}`)
     dispatch(setRequestStatus(false))
     if (res.status === 200) {
       dispatch(setRequestStatus(true))
@@ -61,7 +62,7 @@ export const getMembers = (pagination = 10, page = 1) => async (dispatch) => {
 export const getMember = (query) => async (dispatch) => {
   try {
     console.log('Looking for member ', query)
-    const res = await axios.get(`/org/members/all?search=${query}`)
+    const res = await axios.get(`${BASE_URL}/org/members/all?search=${query}`)
     dispatch(setRequestStatus(false))
     if (res.status === 200) {
       dispatch(setRequestStatus(true))
@@ -79,7 +80,7 @@ export const getMember = (query) => async (dispatch) => {
 // BLOCK A USER (BY ADMIN)
 export const blockUser = (userId) => async (dispatch) => {
   try {
-    const res = await axios.patch(`/user/block/${userId}`)
+    const res = await axios.patch(`${BASE_URL}/user/block/${userId}`)
     dispatch(setRequestStatus(false))
     if (res.status === 200) {
       dispatch(setRequestStatus(true))
@@ -97,7 +98,7 @@ export const blockUser = (userId) => async (dispatch) => {
 // UNBLOCK A USER (BY ADMIN)
 export const unBlockUser = (userId) => async (dispatch) => {
   try {
-    const res = await axios.patch(`/user/unblock/${userId}`)
+    const res = await axios.patch(`${BASE_URL}/user/unblock/${userId}`)
     dispatch(setRequestStatus(false))
     if (res.status === 200) {
       dispatch(setRequestStatus(true))

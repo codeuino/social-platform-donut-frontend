@@ -1,0 +1,43 @@
+.settings__right__container {
+  display: flex;
+ .settings__left__nav {
+  max-width: 17%;
+  height: 50%;
+  margin-top: 38px;
+  margin-left: 10px;
+ }
+ .settings__right__content {
+  width: 80vw;
+  max-width: 75%;
+  margin-top: 4vh;
+  margin-left: 21px;
+  .settings__header{
+    .settings__header__text {
+      font-family: Inter;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 1.3em;
+      line-height: 21px;
+      letter-spacing: 0.25px;
+      color: #2D2D2D;
+      padding-bottom: 7px;
+    }
+  }
+  .right__setting__option__content {
+    width: 56vw;
+    .deactivate___settings__btn {
+      &:hover {
+        background-color: #ffffff;
+      }
+      .deactivate__text {
+        font-size: 12px;
+        padding: 2px;
+        color: #eb5757;
+      }
+    }
+    .disable__link {
+      pointer-events: none;
+    }
+  }
+ }
+}

@@ -2,11 +2,12 @@ import axios from 'axios';
 import { errorHandler } from '../utils/errorHandler';
 import { setRequestStatus } from '../utils/setRequestStatus';
 import { GET_ALL_EVENTS, GET_EVENT_BY_ID } from './types';
+import { BASE_URL } from './baseApi'
 
 // DELETE EVENT REQUEST 
 export const deleteEvent = (eventId) => async (dispatch) => {
   try {
-    const res = await axios.delete(`/event/${eventId}`)
+    const res = await axios.delete(`${BASE_URL}/event/${eventId}`)
     dispatch(setRequestStatus(false));
     if(res.status === 200){
       dispatch(setRequestStatus(true));
@@ -20,7 +21,7 @@ export const deleteEvent = (eventId) => async (dispatch) => {
 // UPDATE EVENT REQUEST 
 export const updateEvent = (eventId, updatedInfo) => async (dispatch) => {
   try {
-    const res = await axios.patch(`/event/${eventId}`, updatedInfo);
+    const res = await axios.patch(`${BASE_URL}/event/${eventId}`, updatedInfo);
     dispatch(setRequestStatus(false));
     if(res.status === 200){
       dispatch(setRequestStatus(true));
@@ -34,7 +35,7 @@ export const updateEvent = (eventId, updatedInfo) => async (dispatch) => {
 // CREATE EVENT
 export const createEvent = (eventInfo, history) => async (dispatch) => {
   try {
-    const res = await axios.post('/event/', eventInfo)
+    const res = await axios.post(`${BASE_URL}/event/`, eventInfo)
     dispatch(setRequestStatus(false))
     if(res.status === 201){
       dispatch(setRequestStatus(true))
@@ -48,7 +49,7 @@ export const createEvent = (eventInfo, history) => async (dispatch) => {
 // GET ALL EVENTS 
 export const getAllEvents = (pagination = 10, page = 1) => async (dispatch) => {
   try {
-    const res = await axios.get(`/event/all?pagination=${pagination}&page=${page}`)
+    const res = await axios.get(`${BASE_URL}/event/all?pagination=${pagination}&page=${page}`)
     dispatch(setRequestStatus(false))
     if(res.status === 200) {
       dispatch(setRequestStatus(true))
@@ -67,7 +68,7 @@ export const getAllEvents = (pagination = 10, page = 1) => async (dispatch) => {
 export const getEventById = (eventId) => async (dispatch) => {
   try {
     console.log('fetching event ', eventId)
-    const res = await axios.get(`/event/${eventId}`)
+    const res = await axios.get(`${BASE_URL}/event/${eventId}`)
     dispatch(setRequestStatus(false))
     if(res.status === 200){
       dispatch(setRequestStatus(true))
@@ -85,7 +86,7 @@ export const getEventById = (eventId) => async (dispatch) => {
 // RSVP FOR EVENT SECTION
 export const rsvpYes = (eventId, info) => async (dispatch) => {
   try {
-    const res = await axios.patch(`/event/rsvp/${eventId}`, info);
+    const res = await axios.patch(`${BASE_URL}/event/rsvp/${eventId}`, info);
     dispatch(setRequestStatus(false))
     if(res.status === 200) {
       dispatch(setRequestStatus(true));

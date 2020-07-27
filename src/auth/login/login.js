@@ -5,7 +5,7 @@ import SignUpForm from "../signup-form/signup-form";
 import { DonutTitle } from "../../donutTitle/donutTitle";
 import multipleDonuts from "../../images/extra-donuts.png";
 import GoogleLogin from '../../images/icons8-google-48.png'
-import { FaGoogle, FaGithub } from 'react-icons/fa'
+import { FaGithub } from 'react-icons/fa'
 import "./login.scss";
 
 class Login extends Component {

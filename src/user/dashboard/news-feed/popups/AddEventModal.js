@@ -104,7 +104,7 @@ const AddEventModal = (props) => {
               <Form.Label className="modal__label">Date</Form.Label>
               <Form.Control 
                 type="text" 
-                placeholder="DD/MM/YY"
+                placeholder="YYYY/MM/DD"
                 onChange={onEventDate}
               />
             </Form.Group>
