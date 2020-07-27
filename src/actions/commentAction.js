@@ -2,11 +2,12 @@ import { GET_COMMENTS_OF_A_POST } from './types'
 import { errorHandler } from '../utils/errorHandler'
 import axios from 'axios'
 import { setRequestStatus } from '../utils/setRequestStatus'
+import { BASE_URL } from './baseApi'
 
 // CREATE COMMENT ON A PARTICULAR POST 
 export const createComment = (postId, comment) => async (dispatch) => {
   try {
-    const res = await axios.post(`/comment/${postId}`, comment)
+    const res = await axios.post(`${BASE_URL}/comment/${postId}`, comment)
     dispatch(setRequestStatus(false));
     if(res.status === 201) {
       dispatch(setRequestStatus(true))
@@ -21,7 +22,7 @@ export const createComment = (postId, comment) => async (dispatch) => {
 // GET ALL COMMENTS OF A POST
 export const getAllCommentsOfPost = (postId) => async (dispatch) => {
   try {
-    const res = await axios.get(`/comment/${postId}`)
+    const res = await axios.get(`${BASE_URL}/comment/${postId}`)
     dispatch(setRequestStatus(false))
     if(res.status === 200) {
       dispatch(setRequestStatus(true));
@@ -39,7 +40,7 @@ export const getAllCommentsOfPost = (postId) => async (dispatch) => {
 // UPDATE COMMENT OF A POST
 export const updateComment = (commentId, updatedComment) => async (dispatch) => {
   try {
-    const res = await axios.patch(`/comment/${commentId}`, updatedComment)
+    const res = await axios.patch(`${BASE_URL}/comment/${commentId}`, updatedComment)
     dispatch(setRequestStatus(false))
     if(res.status === 200) {
       dispatch(setRequestStatus(true))
@@ -54,7 +55,7 @@ export const updateComment = (commentId, updatedComment) => async (dispatch) => 
 // DELETE COMMENT
 export const deleteComment = (commentId) => async (dispatch) => {
   try {
-    const res = await axios.delete(`/comment/${commentId}`)
+    const res = await axios.delete(`${BASE_URL}/comment/${commentId}`)
     dispatch(setRequestStatus(false))
     if(res.status === 200) {
       dispatch(setRequestStatus(true));

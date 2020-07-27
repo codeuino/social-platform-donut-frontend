@@ -85,7 +85,12 @@ class Members extends Component {
     let membersInfo = [] 
     if(allMembers.length > 0) {
       allMembers.forEach((member) => {
-        membersInfo.push({ name: member.name.firstName + ' ' + member.name.lastName, desc: member.info.about.designation || 'UI/UX' , _id: member._id, isRemoved: member?.isRemoved || false })
+        membersInfo.push({ 
+          name: member.name.firstName + ' ' + member.name.lastName,
+          desc: member.info?.about?.designation || 'UI/UX' ,
+          _id: member._id, 
+          isRemoved: member?.isRemoved || false
+         })
       })
     }
     return membersInfo

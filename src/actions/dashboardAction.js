@@ -5,11 +5,12 @@ import { GET_ALL_UPCOMING_EVENTS } from './types'
 import { getAllEvents } from './eventAction'
 import { getAllPosts } from './postAction'
 import { getAllProjects } from './projectAction'
+import { BASE_URL } from './baseApi'
 
 // GET UPCOMING EVENTS
 export const upcomingEvents = () => async (dispatch) => {
   try {
-    const res = await axios.get('/event/upcoming')
+    const res = await axios.get(`${BASE_URL}/event/upcoming`)
     dispatch(setRequestStatus(false))
     if (res.status === 200) {
       dispatch(setRequestStatus(true))
@@ -27,7 +28,7 @@ export const upcomingEvents = () => async (dispatch) => {
 // CREATE POST
 export const createPost = (postInfo) => async (dispatch) => {
   try {
-    const res = await axios.post('/post/', postInfo)
+    const res = await axios.post(`${BASE_URL}/post/`, postInfo)
     dispatch(setRequestStatus(false))
     if (res.status === 201) {
       dispatch(setRequestStatus(true))
@@ -42,7 +43,7 @@ export const createPost = (postInfo) => async (dispatch) => {
 // CREATE EVENT
 export const createEvent = (eventInfo) => async (dispatch) => {
   try {
-    const res = await axios.post('/event/', eventInfo)
+    const res = await axios.post(`${BASE_URL}/event/`, eventInfo)
     dispatch(setRequestStatus(false))
     if (res.status === 201) {
       dispatch(setRequestStatus(true))
@@ -58,7 +59,7 @@ export const createEvent = (eventInfo) => async (dispatch) => {
 export const createProject = (projectInfo) => async (dispatch) => {
   try {
     console.log('projectInfo ', projectInfo)
-    const res = await axios.post('/project/', projectInfo)
+    const res = await axios.post(`${BASE_URL}/project/`, projectInfo)
     dispatch(setRequestStatus(false))
     if (res.status === 201) {
       dispatch(setRequestStatus(true))

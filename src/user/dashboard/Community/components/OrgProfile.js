@@ -4,7 +4,6 @@ import UploadImg from '../../../../images/upload.jpg'
 import { connect } from 'react-redux'
 import { getOrgProfile, updateOrgProfile, deactivateOrg } from '../../../../actions/orgAction'
 import './profile.scss'
-import ToggleSwitch from './Toggle/ToggleSwitch';
 
 class OrgProfile extends Component {
   constructor(props){

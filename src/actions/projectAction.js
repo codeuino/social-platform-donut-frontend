@@ -2,12 +2,13 @@ import axios from 'axios';
 import { errorHandler } from '../utils/errorHandler';
 import { setRequestStatus } from '../utils/setRequestStatus';
 import { GET_ALL_PROJECTS, GET_SINGLE_PROJECT } from './types';
+import { BASE_URL } from './baseApi'
 
 // CREATE PROJECT
 export const createProject = (projectInfo) => async (dispatch) => {
   try {
     console.log('projectInfo ', projectInfo)
-    const res = await axios.post('/project/', projectInfo)
+    const res = await axios.post(`${BASE_URL}/project/`, projectInfo)
     dispatch(setRequestStatus(false))
     if (res.status === 201) {
       dispatch(setRequestStatus(true))
@@ -21,7 +22,7 @@ export const createProject = (projectInfo) => async (dispatch) => {
 // GET ALL PROJECTS 
 export const getAllProjects = (pagination = 10, page = 1) => async (dispatch) => {
   try {
-    const res = await axios.get(`/project/?pagination=${pagination}&page=${page}`)
+    const res = await axios.get(`${BASE_URL}/project/?pagination=${pagination}&page=${page}`)
     dispatch(setRequestStatus(false))
     if(res.status === 200) {
       dispatch(setRequestStatus(true))
@@ -39,7 +40,7 @@ export const getAllProjects = (pagination = 10, page = 1) => async (dispatch) =>
 // GET PROJECT BY ID 
 export const getProjectById = (projectId) => async (dispatch) => {
   try {
-    const res = await axios.get(`/project/${projectId}`)
+    const res = await axios.get(`${BASE_URL}/project/${projectId}`)
     dispatch(setRequestStatus(false))
     if(res.status === 200) {
       dispatch(setRequestStatus(true));
@@ -56,7 +57,7 @@ export const getProjectById = (projectId) => async (dispatch) => {
 // UPDATE PROJECT 
 export const updateProject = (projectId, updatedInfo) => async (dispatch) => {
   try {
-    const res = await axios.patch(`/project/${projectId}`, updatedInfo)
+    const res = await axios.patch(`${BASE_URL}/project/${projectId}`, updatedInfo)
     dispatch(setRequestStatus(false))
     if(res.status === 200) {
       dispatch(setRequestStatus(true));
@@ -74,7 +75,7 @@ export const updateProject = (projectId, updatedInfo) => async (dispatch) => {
 // DELETE PROJECT BY ID
 export const deleteProjectById = (projectId, history) => async (dispatch) => {
   try {
-    const res = await axios.delete(`/project/${projectId}`)
+    const res = await axios.delete(`${BASE_URL}/project/${projectId}`)
     dispatch(setRequestStatus(false))
     if(res.status === 200) {
       dispatch(setRequestStatus(true))

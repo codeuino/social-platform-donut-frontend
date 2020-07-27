@@ -6,61 +6,75 @@ import {
   MdSecurity,
   MdLocationOn,
   MdNotifications,
-  MdRssFeed,
   MdBlock,
-  MdAddToQueue,
   MdLanguage
 } from "react-icons/md";
-import { FaUserTag } from "react-icons/fa"; 
-import "../../../dashboard/navigation/navigation.scss";
 
 class SettingSidebar extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+    }
+  }
   render() {
     const iconsSize = 40;
-    const { privacy, notification, location, posts, blocked, tagged } = this.props;
+    const { privacy, notification, location, blocked, language } = this.props;
     return (
-     <div className="navigation">
+      <div className="settings__navigation mt-4">
         <ListGroup>
-          <ListGroup.Item className={privacy ? "active mt-4" : "inactive mt-4"} >
-            <NavLink to="/privacy" className="link">
-              <b><MdSecurity size={iconsSize}/>Security and Privacy</b>
-            </NavLink>
-          </ListGroup.Item>
-          <ListGroup.Item className={location ? "active" : "inactive"}>
-            <NavLink to="/location" className="link">
-              <b><MdLocationOn size={iconsSize}/>Location</b>
-            </NavLink>
-          </ListGroup.Item>
           <ListGroup.Item
-            className={notification ? "active" : "inactive"}
+            className={privacy ? "active" : "inactive border__bottom"}
+          >
+            <NavLink to="/privacy" className="link">
+              <b>
+                <MdSecurity size={iconsSize} />
+                Security and Privacy
+              </b>
+            </NavLink>
+          </ListGroup.Item>
+
+          <ListGroup.Item
+            className={location ? "active" : "inactive border__bottom"}
+          >
+            <NavLink to="/location" className="link">
+              <b>
+                <MdLocationOn size={iconsSize} />
+                Location
+              </b>
+            </NavLink>
+          </ListGroup.Item>
+
+          <ListGroup.Item
+            className={notification ? "active" : "inactive border__bottom"}
           >
             <NavLink to="/notifications" className="link">
-              <b><MdNotifications size={iconsSize}/>Notification</b>
+              <b>
+                <MdNotifications size={iconsSize} />
+                Notification
+              </b>
             </NavLink>
           </ListGroup.Item>
-          <ListGroup.Item className={posts ? 'active' : 'inactive'}>
-            <NavLink to="allPosts" className="link">
-              <b><MdRssFeed size={iconsSize}/>Posts</b>
-            </NavLink>
-          </ListGroup.Item>
-          <ListGroup.Item className={blocked ? 'active' : 'inactive'}>
+
+
+          <ListGroup.Item className={blocked ? "active" : "inactive"}>
             <NavLink to="/blocked" className="link">
-              <b><MdBlock size={iconsSize}/>Blocked</b>
+              <b>
+                <MdBlock size={iconsSize} />
+                Blocked
+              </b>
             </NavLink>
           </ListGroup.Item>
-           <ListGroup.Item className={tagged ? 'active' : 'inactive'}>
+
+
+          <ListGroup.Item className={language ? "active" : "inactive"}>
             <NavLink to="/tagged" className="link">
-              <b><FaUserTag size={iconsSize}/>Timeline and Tagged</b>
+              <b>
+                <MdLanguage size={iconsSize} />
+                Language
+              </b>
             </NavLink>
           </ListGroup.Item>
-           <ListGroup.Item className={tagged ? 'active' : 'inactive'}>
-            <NavLink to="/tagged" className="link">
-              <b><MdLanguage size={iconsSize}/>Language</b>
-            </NavLink>
-          </ListGroup.Item>
-          <ListGroup.Item className="link">
-            <p><b><MdAddToQueue size={iconsSize}/>Apps Integrated</b></p>
-          </ListGroup.Item><hr/>
+
         </ListGroup>
       </div>
     );
