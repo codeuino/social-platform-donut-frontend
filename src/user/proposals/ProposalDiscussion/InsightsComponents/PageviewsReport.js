@@ -4,6 +4,8 @@ import { queryReport } from "./queryReport";
 import { ClockLoader } from "react-spinners";
 import "./PageviewsReport.scss";
 import moment from "moment";
+import { connect } from "react-redux";
+import { getMostViewedAnalytics } from "../../../../actions/analyticsAction";
 
 const PageviewsReport = (props) => {
   const [reportData, setReportData] = useState([]);
@@ -13,47 +15,36 @@ const PageviewsReport = (props) => {
   const [endDate, setEndDate] = useState(moment().toDate());
   const [totalPages, setTotalPages] = useState(0);
   const [isLoading, setLoading] = useState(true);
+  const {mostviewedAnalytics, getMostViewedAnalytics} = props
 
   const displayResults = (response) => {
-    const queryResult = response.result.reports[0].data.rows;
-    setTotalPages(queryResult.length);
-    const total = response.result.reports[0].data.totals[0].values[0];
+    setTotalPages(mostviewedAnalytics.totalResults);
+
     let newReportData = [];
-    queryResult.forEach((row, idx) => {
-      if (idx < 10) {
-        let tempObj = {
-          path: row.dimensions[0],
-          views: row.metrics[0].values[0],
-          perc: `${parseFloat((row.metrics[0].values[0] / total) * 100).toFixed(
-            1
-          )}%`,
-        };
-        newReportData.push(tempObj);
-      }
-    });
+    if(mostviewedAnalytics?.rows.length > 0){
+      mostviewedAnalytics.rows.forEach((row, idx) => {
+        if (idx < 10) {
+          let tempObj = {
+            path: row[0],
+            views: row[1],
+          };
+          newReportData.push(tempObj);
+        }
+      })
+    }
     setLoading(false);
     setReportData(newReportData);
   };
 
   useEffect(() => {
-    setLoading(true);
-    const request = {
-      startDate,
-      endDate,
-      metrics: "ga:pageviews",
-      dimensions: ["ga:pagePath"],
-      orderBy: {
-        fieldName: "ga:pageViews",
-        order: "DESCENDING",
-      },
-      filter: "ga:pagePath!=/homepage",
-    };
-    setTimeout(() => {
-      queryReport(request)
-        .then((resp) => displayResults(resp))
-        .catch((error) => console.error(error));
-    }, 1000);
+    setLoading(true)
+    getMostViewedAnalytics(startDate, endDate)
   }, [startDate, endDate]);
+
+  useEffect(()=> {
+    displayResults()
+    setLoading(false)
+  }, [mostviewedAnalytics])
 
   return (
     <div className="report-wrapper">
@@ -88,7 +79,6 @@ const PageviewsReport = (props) => {
             <tr>
               <th>Page</th>
               <th>Views</th>
-              <th>%</th>
             </tr>
           </thead>
           <tbody>
@@ -96,7 +86,6 @@ const PageviewsReport = (props) => {
               <tr key={id}>
                 <td className="left-align">{row.path}</td>
                 <td>{row.views}</td>
-                <td>{row.perc}</td>
               </tr>
             ))}
           </tbody>
@@ -106,4 +95,10 @@ const PageviewsReport = (props) => {
   );
 };
 
-export default PageviewsReport;
+const mapStateToProps = (state) => ({
+  mostviewedAnalytics: state.analytics.mostviewedAnalytics,
+});
+
+export default connect(mapStateToProps, { getMostViewedAnalytics })(
+  PageviewsReport
+);

@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Pie } from "react-chartjs-2";
 import { colors } from "./styles";
 import CustomDatePicker from "./DatePicker";
-import { queryReport } from "./queryReport";
 import { ClockLoader } from "react-spinners";
 import moment from "moment";
+import { connect } from 'react-redux';
+import { getCountryAnalytics } from '../../../../actions/analyticsAction'
 
 const CountriesReport = (props) => {
   const INITIAL_STATE = {
@@ -17,22 +18,21 @@ const CountriesReport = (props) => {
     moment().add(-10, "days").toDate()
   );
   const [endDate, setEndDate] = useState(moment().toDate());
-  const [totalCoutries, setTotalCountries] = useState(0);
-  const [totalUsers, setTotalUsers] = useState(0);
   const [isLoading, setLoading] = useState(true);
+  const {countryAnalytics, proposalId, getCountryAnalytics} = props
 
-  const displayResults = (response) => {
-    const queryResult = response.result.reports[0].data.rows;
-    setTotalUsers(response.result.reports[0].data.totals[0].values[0]);
-    setTotalCountries(queryResult.length);
+  const displayResults = () => {
     let labels = [];
     let values = [];
     let bgColors = [];
-    queryResult.forEach((row, idx) => {
-      labels.push(row.dimensions[0]);
-      values.push(row.metrics[0].values[0]);
-      bgColors.push(colors[idx]);
-    });
+
+    if(countryAnalytics.length > 0){
+      countryAnalytics.forEach((row, idx) => {
+        labels.push(row[0]);
+        values.push(row[1]);
+        bgColors.push(colors[idx]);
+      });
+    }
     setReportData({
       ...reportData,
       labels,
@@ -63,26 +63,14 @@ const CountriesReport = (props) => {
   };
 
   useEffect(() => {
-    setLoading(true);
-    const request = {
-      startDate,
-      endDate,
-      metrics: "ga:users",
-      dimensions: ["ga:country"],
-      orderBy: {
-        fieldName: "ga:users",
-        order: "DESCENDING",
-      },
-      filter: `ga:pagePath==/${props.proposalId}`,
-    };
-    setTimeout(
-      () =>
-        queryReport(request)
-          .then((resp) => displayResults(resp))
-          .catch((error) => console.error(error)),
-      1000
-    );
+    setLoading(true)
+    getCountryAnalytics(startDate, endDate, proposalId)
   }, [startDate, endDate]);
+
+  useEffect(()=> {
+    displayResults()
+    setLoading(false)
+  }, [countryAnalytics])
 
   return (
     <div className="report-wrapper">
@@ -117,4 +105,8 @@ const CountriesReport = (props) => {
   );
 };
 
-export default CountriesReport;
+const mapStateToProps = (state) => ({
+  countryAnalytics: state.analytics.countryAnalytics
+})
+
+export default connect(mapStateToProps, {getCountryAnalytics}) (CountriesReport);

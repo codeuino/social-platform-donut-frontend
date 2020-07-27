@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import CustomDatePicker from "./DatePicker";
-import { queryReport } from "./queryReport";
 import "./ProposalViewsReport.scss";
 import { formatDate } from "./utils";
 import { Line } from "react-chartjs-2";
 import { ClockLoader } from "react-spinners";
 import moment from "moment";
+import { connect } from 'react-redux'
+import { getProposalviewAnalytics} from '../../../../actions/analyticsAction'
 
 const ProposalViewsReport = (props) => {
   const INITIAL_STATE = {
@@ -18,23 +19,20 @@ const ProposalViewsReport = (props) => {
     moment().add(-10, "days").toDate()
   );
   const [endDate, setEndDate] = useState(moment().toDate());
-  const [totalViews, setTotalViews] = useState(0);
   const [isLoading, setLoading] = useState(true);
+  const {proposalviewAnalytics, proposalId, getProposalviewAnalytics} = props
 
   const displayResults = (response) => {
-    const queryResult = response.result.reports[0].data.rows;
-    const total = response.result.reports[0].data.totals[0].values[0];
-
+    console.log(proposalviewAnalytics)
     let chartLabels = [];
     let values = [];
 
-    queryResult.forEach((row, idx) => {
-      chartLabels.push(formatDate(row.dimensions[0]));
-      values.push(row.metrics[0].values[0]);
+    proposalviewAnalytics.forEach((row, idx) => {
+      chartLabels.push(formatDate(row[0]));
+      values.push(row[1]);
     });
     setReportData({ ...reportData, chartLabels, values });
     setLoading(false);
-    setTotalViews(total);
   };
 
   const data = {
@@ -85,31 +83,18 @@ const ProposalViewsReport = (props) => {
   };
 
   useEffect(() => {
-    setLoading(true);
-    const request = {
-      startDate,
-      endDate,
-      metrics: "ga:pageviews",
-      dimensions: ["ga:date"],
-      orderBy: {
-        fieldName: "ga:pageViews",
-        order: "DESCENDING",
-      },
-      filter: `ga:pagePath==/${props.proposalId}`,
-    };
-    setTimeout(
-      () =>
-        queryReport(request)
-          .then((resp) => displayResults(resp))
-          .catch((error) => console.error(error)),
-      1000
-    );
+    setLoading(true)
+    getProposalviewAnalytics(startDate, endDate, proposalId)
   }, [startDate, endDate]);
+
+  useEffect(()=> {
+    displayResults()
+    setLoading(false)
+  }, [proposalviewAnalytics])
 
   return (
     <div className="report-wrapper">
       <h2 className="chart-title">Proposal Views</h2>
-      <h3 className="chart-subtitle">{`Total proposal views - ${totalViews}`}</h3>
       <div className="datepicker-content">
         <CustomDatePicker
           placeholder={"Start date"}
@@ -139,4 +124,8 @@ const ProposalViewsReport = (props) => {
   );
 };
 
-export default ProposalViewsReport;
+const mapStateToProps = (state) => ({
+  proposalviewAnalytics: state.analytics.proposalviewAnalytics
+})
+
+export default connect(mapStateToProps, {getProposalviewAnalytics}) (ProposalViewsReport);

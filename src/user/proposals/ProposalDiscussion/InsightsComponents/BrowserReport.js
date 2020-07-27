@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Pie } from "react-chartjs-2";
 import CustomDatePicker from "./DatePicker";
-import { queryReport } from "./queryReport";
 import { colors } from "./styles";
 import { ClockLoader } from "react-spinners";
 import moment from "moment";
@@ -19,19 +18,18 @@ const BrowserReport = (props) => {
     moment().add(-10, "days").toDate()
   );
   const [endDate, setEndDate] = useState(moment().toDate());
-  const [totalUsers, setTotalUsers] = useState(0);
   const [isLoading, setLoading] = useState(true);
+  const {browserAnalytics, proposalId, getBrowserAnalytics} = props
 
-  const displayResults = (response) => {
-    const queryResult = response.result.reports[0].data.rows;
-    const total = response.result.reports[0].data.totals[0].values[0];
-    setTotalUsers(total);
+  const displayResults = () => {
     let labels = [];
     let values = [];
     let bgColors = [];
-    queryResult.forEach((row, id) => {
-      labels.push(row.dimensions[0]);
-      values.push(row.metrics[0].values[0]);
+
+    if(browserAnalytics.length > 0){
+      browserAnalytics.forEach((row, id) => {
+      labels.push(row[0]);
+      values.push(row[1]);
       bgColors.push(colors[id]);
     });
     setLoading(false);
@@ -41,6 +39,7 @@ const BrowserReport = (props) => {
       values,
       colors: bgColors,
     });
+    }
   };
 
   const data = {
@@ -54,25 +53,14 @@ const BrowserReport = (props) => {
   };
 
   useEffect(() => {
-    
-    props.getBrowserAnalytics(startDate, endDate, props.proposalId)
-    console.log(props)
-    // setLoading(true);
-    // const request = {
-    //   startDate,
-    //   endDate,
-    //   metrics: "ga:users",
-    //   dimensions: ["ga:browser"],
-    //   filter: `ga:pagePath==/${props.proposalId}`,
-    // };
-    // setTimeout(
-    //   () =>
-    //     queryReport(request)
-    //       .then((resp) => displayResults(resp))
-    //       .catch((error) => console.error(error)),
-    //   1500
-    // );
+    setLoading(true)
+    getBrowserAnalytics(startDate, endDate, proposalId)
   }, [startDate, endDate]);
+
+  useEffect(()=> {
+    displayResults()
+    setLoading(false)
+  }, [browserAnalytics])
 
   return (
     <div className="report-wrapper">

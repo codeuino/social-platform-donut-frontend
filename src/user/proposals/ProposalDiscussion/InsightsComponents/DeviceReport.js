@@ -5,6 +5,8 @@ import { queryReport } from "./queryReport";
 import { ClockLoader } from "react-spinners";
 import { colors } from "./styles";
 import moment from "moment";
+import { getDeviceAnalytics} from '../../../../actions/analyticsAction'
+import {connect} from 'react-redux'
 
 const DeviceReport = (props) => {
   const INITIAL_STATE = {
@@ -19,19 +21,20 @@ const DeviceReport = (props) => {
   const [endDate, setEndDate] = useState(moment().toDate());
   const [totalUsers, setTotalUsers] = useState(0);
   const [isLoading, setLoading] = useState(true);
+  const {deviceAnalytics, proposalId, getDeviceAnalytics} = props
 
-  const displayResults = (response) => {
-    const queryResult = response.result.reports[0].data.rows;
-    const total = response.result.reports[0].data.totals[0].values[0];
-    setTotalUsers(total);
+  const displayResults = () => {
     let labels = [];
     let values = [];
     let bgColors = [];
-    queryResult.forEach((row, id) => {
-      labels.push(row.dimensions[0]);
-      values.push(row.metrics[0].values[0]);
-      bgColors.push(colors[id]);
-    });
+
+    if(deviceAnalytics.length > 0){
+      deviceAnalytics.forEach((row, idx) => {
+        labels.push(row[0]);
+        values.push(row[1]);
+        bgColors.push(colors[idx]);
+      });
+    }
     setReportData({
       ...reportData,
       labels,
@@ -52,22 +55,14 @@ const DeviceReport = (props) => {
   };
 
   useEffect(() => {
-    setLoading(true);
-    const request = {
-      startDate,
-      endDate,
-      metrics: "ga:users",
-      dimensions: ["ga:deviceCategory"],
-      filter: `ga:pagePath==/${props.proposalId}`,
-    };
-    setTimeout(
-      () =>
-        queryReport(request)
-          .then((resp) => displayResults(resp))
-          .catch((error) => console.error(error)),
-      1500
-    );
+    setLoading(true)
+    getDeviceAnalytics(startDate, endDate, proposalId)
   }, [startDate, endDate]);
+
+  useEffect(()=> {
+    displayResults()
+    setLoading(false)
+  }, [deviceAnalytics])
 
   return (
     <div className="report-wrapper">
@@ -101,4 +96,8 @@ const DeviceReport = (props) => {
   );
 };
 
-export default DeviceReport;
+const mapStateToProps = (state) => ({
+  deviceAnalytics: state.analytics.deviceAnalytics
+})
+
+export default connect(mapStateToProps, {getDeviceAnalytics}) (DeviceReport);
