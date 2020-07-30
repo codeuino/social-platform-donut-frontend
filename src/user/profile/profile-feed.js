@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import "./profile-feed.scss";
 import {
   FaComments,
-  FaThumbtack,
   FaGlobe,
   FaStickyNote,
   FaCalendar,
@@ -53,7 +52,7 @@ class ProfileFeed extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { userEvents, userProjects, userPosts } = nextProps.user;
+    const { userEvents, userProjects, userPosts, userProfile } = nextProps.user;
 
     this.setState(
       {
@@ -61,9 +60,10 @@ class ProfileFeed extends Component {
         userEvents: userEvents,
         userProjects: userProjects,
         userPosts: userPosts,
+        longDescription: userProfile?.info?.about?.longDescription
       },
       () => {
-        console.log(this.state.userPosts);
+        console.log(this.state.longDescription);
       }
     );
   }
@@ -128,7 +128,8 @@ class ProfileFeed extends Component {
       );
     });
 
-    const posts = userPosts.map((post, index) => {
+    const posts = 
+    userPosts.map((post, index) => {
       return (
         <div
           className="postItem"
@@ -141,7 +142,7 @@ class ProfileFeed extends Component {
               </div>
               <div className="titleDetails">
                 <div className="postTitle">
-                  {`${post.userId.name.firstName} ${post.userId.name.lastName}`}
+                  {`${post?.userId.name.firstName} ${post?.userId.name.lastName}`}
                 </div>
                 <dic className="postDate">{post.createdAt}</dic>
               </div>
@@ -156,6 +157,7 @@ class ProfileFeed extends Component {
     });
 
     const overviewContent = [...posts, ...events];
+    const {longDescription}= this.state
 
     return (
       <div>
@@ -214,7 +216,7 @@ class ProfileFeed extends Component {
           </div>
         </div>
         <div className="postsContainer">
-          {type === "ReadMe" ? <ReadMe /> : null}
+          {type === "ReadMe" ? <ReadMe userProfile={userProfile}/> : null}
           <div className="gridContainer">
             {type === "All" ? overviewContent : null}
             {type === "Event" ? events : null}

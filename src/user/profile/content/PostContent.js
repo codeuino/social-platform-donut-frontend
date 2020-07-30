@@ -4,6 +4,7 @@ import "./PostContent.scss";
 import { connect } from "react-redux";
 import parse from "html-react-parser";
 import { getAllCommentsOfPost } from "../../../actions/commentAction";
+import userIcon2 from '../../../images/userIcon2.jpg'
 
 class PostContent extends Component {
   constructor(props) {
@@ -56,13 +57,13 @@ class PostContent extends Component {
                 <div className="user-post-info">
                   <div className="user-thumb">
                     <img
-                      src="https://randomuser.me/api/portraits/med/men/75.jpg"
+                      src={userIcon2}
                       className="img-responsive"
                     />
                   </div>
                   <div className="user-information">
-                    <p>{`${post.userId?.name.firstName} ${post.userId?.name.lastName}`}</p>
-                    <small>{post.createdAt}</small>
+                    <p>{`${post?.userId?.name.firstName} ${post?.userId?.name.lastName}`}</p>
+                    <small>{post?.createdAt}</small>
                   </div>
                 </div>
                 <div className="post-action">
@@ -71,7 +72,7 @@ class PostContent extends Component {
               </div>
 
               <div className="content-card-body simple-text-card">
-                <p>{post.content}</p>
+                <p>{post?.content}</p>
               </div>
             </div>
 
@@ -101,7 +102,7 @@ class PostContent extends Component {
               <div className="comment-input-holder">
                 <div className="user-thumb">
                   <img
-                    src="https://randomuser.me/api/portraits/med/men/75.jpg"
+                    src={userIcon2}
                     className="img-responsive"
                   />
                 </div>
@@ -119,7 +120,7 @@ class PostContent extends Component {
                     <div className="comment-item" key={index}>
                       <div className="user-icon">
                         <img
-                          src="https://randomuser.me/api/portraits/med/men/75.jpg"
+                          src={userIcon2}
                           className="img-responsive"
                           style={{ borderRadius: "50%" }}
                         />

@@ -27,11 +27,7 @@ class ReadMe extends Component {
   }
 
   componentDidMount() {
-    this.props.getProfile();
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const { userProfile } = nextProps.user;
+    const  userProfile  = this.props.userProfile;
     const about = userProfile.info?.about;
     let longDescription = true;
     if (!about.hasOwnProperty("longDescription")) {
