@@ -4,12 +4,13 @@ import { setAuthToken } from '../utils/setAuthToken';
 import jwt_decode from 'jwt-decode';
 import { errorHandler } from '../utils/errorHandler';
 import { setRequestStatus } from '../utils/setRequestStatus';
+import { BASE_URL } from './baseApi';
 let forgotPasswordToken = "";
 
 // to register user 
 export const registerUser = (userInfo, history) => async (dispatch) => {
   try {
-    const res = await axios.post('/user', userInfo);
+    const res = await axios.post(`${BASE_URL}/user`, userInfo);
     dispatch(setRequestStatus(false));
     
     if(res.status === 201) { 
@@ -31,15 +32,15 @@ export const loginUser = (userInfo, history) => async (dispatch) => {
   try {
     
     console.log("LOGGING IN...", userInfo);
-    
-    const res = await axios.post('/auth/login', userInfo);
+    console.log('base url ', BASE_URL);
+    const res = await axios.post(`${BASE_URL}/auth/login`, userInfo);
     dispatch(setRequestStatus(false));
     if(res.status === 200){
 
       const token = res.data.token;
       dispatch(setRequestStatus(true));
       
-      localStorage.setItem("jwtToken", JSON.stringify(token));
+      localStorage.setItem("jwtToken", (token));
       setAuthToken(token);
       
       // update state with user
@@ -68,7 +69,7 @@ export const loginUser = (userInfo, history) => async (dispatch) => {
 // forgot password 
 export const forgotPassword = (email) => async (dispatch) => {
   try {
-    const res = await axios.patch('/user/password_reset/request/', email);
+    const res = await axios.patch(`${BASE_URL}/user/password_reset/request/`, email);
     dispatch(setRequestStatus(false));
     
     if(res.status === 200){
@@ -89,7 +90,10 @@ export const forgotPassword = (email) => async (dispatch) => {
 // update password 
 export const changePassword = (passObj) => async (dispatch) => {
   try {
-    const res = await axios.patch(`/user/password_reset/${forgotPasswordToken}`, passObj);
+    const res = await axios.patch(
+      `${BASE_URL}/user/password_reset/${forgotPasswordToken}`,
+      passObj
+    );
     dispatch(setRequestStatus(false));
 
     if(res.status === 200){
@@ -113,7 +117,7 @@ export const logoutUser = () => async (dispatch) => {
   try { 
      console.log('Logging out!!')
      // clear token from backend 
-     const res = await axios.post('/user/logout')
+     const res = await axios.post(`${BASE_URL}/user/logout`)
      if (res.status === 200) {
       // remove all keys from the localStorage except the orgId
       const orgId = localStorage.getItem('orgId');

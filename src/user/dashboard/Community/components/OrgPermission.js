@@ -35,10 +35,15 @@ class OrgPermission extends Component {
 
   componentWillReceiveProps(nextProps) {
     console.log('nextProps ', nextProps)
-    const { permissions } = nextProps.org.org.options;
+    const { permissions } = nextProps.org?.org?.options;
     console.log('permissions ', permissions)
-    const { canChangeEmail, canChangeName, canCreateManage, sendInvite } = permissions
-    this.setState({ canChangeEmail: canChangeEmail, canChangeName: canChangeName, canCreateManage: canCreateManage, sendInvite: sendInvite }, () => {
+    this.setState({ 
+      canChangeEmail: permissions?.canChangeEmail, 
+      canChangeName: permissions?.canChangeName, 
+      canCreateManage: permissions?.canCreateManage, 
+      sendInvite: permissions?.sendInvite
+      
+    }, () => {
       console.log('updated state', this.state)
     })
     this.setState({ error: nextProps.error.msg }, () => {

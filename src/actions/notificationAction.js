@@ -6,11 +6,12 @@ import {
 import axios from "axios";
 import { errorHandler } from "../utils/errorHandler";
 import { setRequestStatus } from "../utils/setRequestStatus";
+import { BASE_URL } from './baseApi'
 
 // GET NOTIFICATIONS FOR WHOLE PLATFORM AS WELL AS FOR A USER
 export const getAllNotifications = () => async (dispatch) => {
   try {
-    const res = await axios.get("/notification/org/all");
+    const res = await axios.get(`${BASE_URL}/notification/org/all`);
     dispatch(setRequestStatus(false));
     if (res.status === 200) {
       dispatch(setRequestStatus(true));
@@ -29,7 +30,7 @@ export const getAllNotifications = () => async (dispatch) => {
 // GET NOTIFICATIONS FOR A USER
 export const getUserNotification = () => async (dispatch) => {
   try {
-    const res = await axios.get("/notification/user/all");
+    const res = await axios.get(`${BASE_URL}/notification/user/all`);
     dispatch(setRequestStatus(false));
     if (res.status === 200) {
       dispatch(setRequestStatus(true));
@@ -47,7 +48,7 @@ export const getUserNotification = () => async (dispatch) => {
 // GET PROPOSAL NOTIFICATIONS
 export const getProposalNotifications = () => async (dispatch) => {
   try {
-    const res = await axios.get("/notification/proposal/all");
+    const res = await axios.get(`${BASE_URL}/notification/proposal/all`);
     dispatch(setRequestStatus(false));
     if (res.status === 200) {
       dispatch(setRequestStatus(true));

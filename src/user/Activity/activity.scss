@@ -1,0 +1,118 @@
+.overall_container{
+  display: flex;
+  .main_navigation {
+    left: -1px;
+    top: -1px;
+    height: 100vh;
+    border: 1px solid #CCCCCC;
+    box-sizing: border-box;
+  }
+  .user_activity_view {
+    margin-top: 35px;
+    margin-left: 15vw;
+     margin-left: auto;
+     margin-right: auto;
+    .main_section {
+      display: flex;
+      flex-direction: row;
+      justify-items: center;
+      flex-wrap: wrap;
+      margin-top: -1.3em;
+      margin-left: -2vw;
+      .left_nav {
+        max-width: 20%;
+        height: 50%;
+        margin-top: 16px;
+        margin-left: 10px;
+         .header_text {
+           font-family: Inter;
+           font-style: normal;
+           font-weight: 500;
+           font-size: 18px;
+           line-height: 21px;
+           letter-spacing: 0.25px;
+           color: #9E9E9E;
+         }
+      }
+
+      .right_section {
+        width: 80vw;
+        max-width: 75%;
+        // overflow-y: auto;
+        margin-top: -0.7em;
+      }
+      .timelines__container {
+        max-height: 90vh;
+        overflow-y: auto;
+        width: 75vw;
+        margin-top: 4px;
+        overflow-x: hidden;
+        margin-left: -150px;
+        margin-top: 27px;
+
+        .activity__header {
+          font-family: Inter;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 1.3em;
+          line-height: 21px;
+          letter-spacing: 0.25px;
+          color: #2D2D2D;
+          padding-bottom: 7px;
+          text-align: center;
+        }
+
+        .activity__link {
+          color: #1a73ed;
+          font-family: "Inter";
+          font-size: 14px;
+          cursor: pointer;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+}
+// mobile 
+@media screen and (max-width: 768px) {
+  .overall_container{
+    .org_settings_view {
+     .main_section {
+       .left_nav {
+         .navigation {
+           .list-group {
+             .link {
+               display: none;
+             }
+             .header_text {
+               font-size: 10px;
+             }
+           }
+         }
+       }
+     }
+    }
+  }
+}
+
+// tablet 
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .overall_container {
+    .org_settings_view {
+      .main_section {
+        .left_nav {
+          .navigation {
+            .list-group {
+              .link {
+                font-size: 5px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

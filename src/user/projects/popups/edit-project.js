@@ -60,40 +60,49 @@ class EditProject extends Component {
   }
 
   render() {
-    const { projectName, github_link, bitbucket_link, version, short_des, long_des, img_link } = this.state
-    const { show, onHide } = this.props
+    const { 
+      projectName, 
+      github_link, 
+      bitbucket_link, 
+      version, 
+      short_des, 
+      long_des, 
+      img_link
+     } = this.state
+    const { show, onHide, borderStyle } = this.props
     return (
       <Modal
         show={show}
         onHide={onHide}
-        size="md"
-        aria-labelledby="contained-modal-title-vcenter"
+        className="modal"
+        animation={true}
         centered
       >
-        <div className="container">
-          <Modal.Header closeButton className="heading border border-0 p-0">
-            <Modal.Title id="contained-modal-title-vcenter">
-              <div className="title">Edit Project</div>
-            </Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <Form onSubmit={this.onSubmit}>
-              <Row className="form-content">
-                <Col className="p-0" sm={12}>
-                  <Form.Label className="label">Project Name</Form.Label>
-                  <Form.Control
-                    className="form-input"
-                    type="text"
-                    name="projectName"
-                    value={projectName}
-                    onChange={this.onChange}
-                    placeholder="Type here.."
-                    size="sm"
-                  />
-                </Col>
-              </Row>
-              <Row className="form-content">
-                <Form.Label className="label">Version</Form.Label>
+        <Modal.Header closeButton className="modal__header" style={borderStyle}>
+          <Modal.Title className="modal__title" style={borderStyle}>
+            <div className="modal__main-title">Edit Project</div>
+            <div className="modal__mini-title">Project Information</div>
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="modal__body">
+          <Form className="modal__form" onSubmit={this.onSubmit}>
+            <Form.Row className="modal__row">
+              <Form.Group className="modal__group" as={Col}>
+                <Form.Label className="modal__label">Project Name</Form.Label>
+                <Form.Control
+                  className="form-input"
+                  type="text"
+                  name="projectName"
+                  value={projectName}
+                  onChange={this.onChange}
+                  placeholder="Type here.."
+                  size="sm"
+                />
+              </Form.Group>
+            </Form.Row>
+            <Form.Row className="modal__row">
+              <Form.Group className="modal__group" as={Col}>
+                <Form.Label className="modal__label">Version</Form.Label>
                 <Form.Control
                   className="form-input"
                   type="text"
@@ -102,9 +111,13 @@ class EditProject extends Component {
                   onChange={this.onChange}
                   size="sm"
                 />
-              </Row>
-              <Row className="form-content">
-                <Form.Label className="label">Short Description</Form.Label>
+              </Form.Group>
+            </Form.Row>
+            <Form.Row className="modal__row">
+              <Form.Group className="modal__group" as={Col}>
+                <Form.Label className="modal__label">
+                  Short description
+                </Form.Label>
                 <Form.Control
                   className="form-input"
                   as="textarea"
@@ -114,9 +127,13 @@ class EditProject extends Component {
                   placeholder="Write a brief info about the project.."
                   size="sm"
                 />
-              </Row>
-              <Row className="form-content">
-                <Form.Label className="label">Long Description</Form.Label>
+              </Form.Group>
+            </Form.Row>
+            <Form.Row className="modal__row">
+              <Form.Group className="modal__group" as={Col}>
+                <Form.Label className="modal__label">
+                  Long description
+                </Form.Label>
                 <Form.Control
                   className="form-input"
                   as="textarea"
@@ -126,62 +143,58 @@ class EditProject extends Component {
                   placeholder="Whats the project is about.."
                   size="sm"
                 />
-              </Row>
-              <div className="about extra">Links of Project</div>
-              <Row className="form-content">
-                <Col className="p-0" sm={5}>
-                  <Form.Label className="label">GitHub URL</Form.Label>
-                  <Form.Control
-                    className="form-input"
-                    type="text"
-                    name="github_link"
-                    value={github_link}
-                    onChange={this.onChange}
-                    placeholder="GitHub Link"
-                    size="sm"
-                  />
-                </Col>
-                <Col className="p-0" sm={5}>
-                  <Form.Label className="label">BitBucket URL</Form.Label>
-                  <Form.Control
-                    className="form-input"
-                    type="text"
-                    name="bitbucket_link"
-                    value={bitbucket_link}
-                    onChange={this.onChange}
-                    placeholder="BitBucket Link"
-                    size="sm"
-                  />
-                </Col>
-              </Row>
-              <Row className="form-content">
-                <Col className="p-0" sm={5}>
-                  <Form.Label className="label">Image URL</Form.Label>
-                  <Form.Control
-                    className="form-input"
-                    type="text"
-                    name="img_link"
-                    value={img_link}
-                    onChange={this.onChange}
-                    placeholder="Image link"
-                    size="sm"
-                  />
-                </Col>
-              </Row>
-            </Form>
-          </Modal.Body>
-          <div className="form-footer">
-            <Button
-              onClick={this.onUpdateClick}
-              type="submit"
-              className="savebtn"
-            >
-              Save
-            </Button>
-            <Button variant="outline-primary" className="cancelbtn" onClick={onHide}>
-              Cancel
-            </Button>
-          </div>
+              </Form.Group>
+            </Form.Row>
+            <div className="about extra">Links of Project</div>
+            <Form.Row className="modal__row">
+              <Form.Group className="modal__group" as={Col}>
+                <Form.Label className="modal__label">GitHub URL</Form.Label>
+                <Form.Control
+                  className="form-input"
+                  type="text"
+                  name="github_link"
+                  value={github_link}
+                  onChange={this.onChange}
+                  placeholder="GitHub Link"
+                  size="sm"
+                />
+              </Form.Group>
+              <Form.Group className="modal__group" as={Col}>
+                <Form.Label className="modal__label">BitBucket URL</Form.Label>
+                <Form.Control
+                  className="form-input"
+                  type="text"
+                  name="bitbucket_link"
+                  value={bitbucket_link}
+                  onChange={this.onChange}
+                  placeholder="BitBucket Link"
+                  size="sm"
+                />
+              </Form.Group>
+            </Form.Row>
+            <Form.Row className="modal__row">
+              <Form.Group className="modal__group" as={Col}>
+                <Form.Label className="modal__label">Image URL</Form.Label>
+                <Form.Control
+                  className="form-input"
+                  type="text"
+                  name="img_link"
+                  value={img_link}
+                  onChange={this.onChange}
+                  placeholder="Image link"
+                  size="sm"
+                />
+              </Form.Group>
+            </Form.Row>
+          </Form>
+        </Modal.Body>
+        <div className="modal__buttons">
+          <Button onClick={this.onUpdateClick} className="modal__save">
+            <span className="modal__buttontext">Save</span>
+          </Button>
+          <Button className="modal__cancel" onClick={this.props.onHide}>
+            <span className="modal__buttontext">Cancel</span>
+          </Button>
         </div>
       </Modal>
     );

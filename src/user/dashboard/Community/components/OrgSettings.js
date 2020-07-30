@@ -9,12 +9,12 @@ class OrgSettings extends Component {
     super(props);
     this.state = {
       orgName: "",
-      editing: true,
       enableEmail: true,
       language: "",
       time: "",
       error: '',
-      editingTime: ''
+      editingLimit: 'Always',
+      canEdit: true
     };
   }
 
@@ -25,18 +25,21 @@ class OrgSettings extends Component {
   };
 
   toggleRadio = (e) => {
+    console.log(e.target.name, e.target.checked);
     this.setState({ [e.target.name]: e.target.checked }, () => {
       console.log("state ", this.state);
     });
   };
 
   updateInfo = () => {
-    const { enableEmail, language, time } = this.state
+    const { enableEmail, language, time, canEdit, editingLimit } = this.state
     const info = {
       settings: {
         enableEmail,
         language,
-        timeFormat: time
+        timeFormat: time,
+        canEdit,
+        editingLimit
       },
     };
     console.log('updating settings ', info);
@@ -49,14 +52,17 @@ class OrgSettings extends Component {
 
   componentWillReceiveProps(nextProps) {
     console.log('nextProps ', nextProps)
-    const { settings } = nextProps.org.org.options
+    const settings = nextProps.org.org.options?.settings
     console.log('settings ', settings)
-    const { enableEmail, language, timeFormat } = settings
-    this.setState({ enableEmail: enableEmail, language: language, time: timeFormat }, () => {
+    this.setState({ 
+      enableEmail: settings?.enableEmail, 
+      language: settings?.language, 
+      time: settings?.timeFormat,
+      canEdit: settings?.canEdit || true,
+      editingLimit: settings?.editingLimit || '',
+      error: nextProps.error?.msg
+    }, () => {
       console.log('updated state', this.state)
-    })
-    this.setState({ error: nextProps.error.msg }, () => {
-      console.log('state ', this.state)
     })
   }
 
@@ -65,8 +71,8 @@ class OrgSettings extends Component {
       enableEmail, 
       language, 
       time, 
-      editingTime,
-      // editing
+      editingLimit,
+      canEdit
       // error
      } = this.state;
     return (
@@ -82,29 +88,24 @@ class OrgSettings extends Component {
                 <Form.Control
                   as="select"
                   className="select_option"
-                  name="editing"
-                  value={editingTime}
+                  name="editingLimit"
+                  value={editingLimit}
                   onChange={this.onChange}
                 >
                   <option value="10">Upto 10 min after posting</option>
                   <option value="20">Upto 20 min after posting</option>
                   <option value="30">Upto 30 min after posting</option>
                   <option value="45">Upto 45 min after posting</option>
-                  <option value="always">Always</option>
+                  <option value="Always">Always</option>
                 </Form.Control>
               </Form.Group>
               <Form.Group>
                 <Form.Check
                   type="checkbox"
                   label="Users can edit the topic of any message"
-                  defaultChecked={true}
-                />
-              </Form.Group>
-              <Form.Group>
-                <Form.Check
-                  type="checkbox"
-                  label="Enable message edit history"
-                  defaultChecked={true}
+                  checked={canEdit}
+                  name="canEdit"
+                  onChange={this.toggleRadio}
                 />
               </Form.Group>
               <Form.Group>

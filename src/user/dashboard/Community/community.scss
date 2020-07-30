@@ -1,11 +1,10 @@
 .overall_container{
   display: flex;
   .main_navigation {
-    width: 15%;
     left: -1px;
     top: -1px;
     height: 100vh;
-    border: 1px solid #CCCCCC;
+    border-right: 1px solid #CCCCCC;
     box-sizing: border-box;
   }
   .org_settings_view {
@@ -16,19 +15,26 @@
       justify-items: center;
       flex-wrap: wrap;
       margin-top: -1.3em;
-      // max-height: 90vh;
       .left_nav {
         max-width: 20%;
-        border-right: 1px solid #CCCCCC;
-        overflow-y: auto;
-        height: 100vh;
-        margin-top: -0.7em;
+        height: 50%;
+        margin-top: 16px;
+        margin-left: 10px;
+         .header_text {
+           font-family: Inter;
+           font-style: normal;
+           font-weight: 500;
+           font-size: 18px;
+           line-height: 21px;
+           letter-spacing: 0.25px;
+           color: #9E9E9E;
+         }
       }
 
       .right_section {
         width: 80vw;
         max-width: 75%;
-        overflow-y: auto;
+        // overflow-y: auto;
         margin-top: -0.7em;
       }
     }

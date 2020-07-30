@@ -8,6 +8,8 @@ import { withRouter, Link } from "react-router-dom";
 import { Editor } from "@tinymce/tinymce-react";
 import { connect } from "react-redux";
 import { getProposal } from "../../../../actions/proposalActions";
+import InsightsModal from "../InsightsModal";
+import ReactGA from "react-ga";
 
 class DiscussionContent extends Component {
   constructor(props) {
@@ -27,12 +29,15 @@ class DiscussionContent extends Component {
       imageModalOpen: false,
       proposalState: "",
       variant: "danger",
+      displayInsights: false,
     };
   }
 
   //Token would be passed down from the
   componentDidMount() {
     const { proposalId, isAdmin, userId, token } = this.props.location.state;
+    console.log(proposalId);
+    ReactGA.pageview(`/${proposalId}`);
 
     this.setState(
       {
@@ -130,6 +135,14 @@ class DiscussionContent extends Component {
     }
   };
 
+  showInsights = () => {
+    this.setState({ displayInsights: true });
+  };
+
+  closeInsights = () => {
+    this.setState({ displayInsights: false });
+  };
+
   handleComment = (text) => {
     let comments = this.state.comments;
 
@@ -178,6 +191,15 @@ class DiscussionContent extends Component {
           <div></div>
           <div className="discussion-desc"></div>
           <div className="discussion-buttons">
+            <Button
+              variant="primary"
+              className="option-btn"
+              size="sm"
+              active
+              onClick={this.showInsights}
+            >
+              <span className="option-text">View Insights</span>
+            </Button>
             <Link
               to={{
                 pathname: "/proposaleditor",
@@ -227,6 +249,11 @@ class DiscussionContent extends Component {
               images={this.state.images}
             />
           </div>
+          <InsightsModal
+            show={this.state.displayInsights}
+            handleClose={this.closeInsights}
+            proposalId={this.state.proposalId}
+          />
           <RequestChanges
             show={this.state.showModal && this.state.isAdmin}
             handleClose={() => {

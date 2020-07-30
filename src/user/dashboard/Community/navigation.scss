@@ -1,16 +1,16 @@
-.navigation {
+.settings__navigation {
   box-sizing: border-box;
-  height: 80vh;
+  // height: 80vh;
   left: 0px;
   top: -1px;
 }
-.navigation {
+.settings__navigation {
   .list-group {
     .list-group-item {
       cursor: pointer;
-      border: none;
+      border: 1px solid #cccccc;
       font-style: normal;
-      font-weight: bold;
+      font-family: "Inter";
       font-size: 14px;
       line-height: 21px;
       letter-spacing: 0.1px;
@@ -24,21 +24,12 @@
   }
 }
 
-.navigation {
-  .community_header {
-     .header_text {
-       font-family: Inter;
-       font-style: normal;
-       font-weight: 500;
-       font-size: 1.1em;
-       line-height: 1.3em;
-       letter-spacing: 0.25px;
-       color: #9E9E9E;
-     }
-  }
+.settings__navigation {
   .list-group {
     .active {
+      border-left: 3px solid #1a73ed;
       background-color: rgba(26, 115, 232, 0.1);
+      // border-bottom: 1px solid #cccccc;
       .link {
         font-family: Inter;
         font-style: normal;
@@ -55,9 +46,10 @@
   }
 }
 
-.navigation {
+.settings__navigation {
   .list-group {
     .inactive {
+      // border-bottom: 1px solid #cccccc;
       .link {
         color: rgba(0, 0, 0, 0.5);
       }
@@ -65,7 +57,7 @@
   }
 }
 
-.navigation {
+.settings__navigation {
   .list-group {
     .list-group-item {
       svg {
@@ -84,7 +76,7 @@
 .community {
   padding: 0px 10px 0px 10px;
 }
-.navigation {
+.settings__navigation {
   .list-group {
     .active {
       .icon {

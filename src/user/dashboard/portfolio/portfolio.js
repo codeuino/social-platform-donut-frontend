@@ -39,9 +39,15 @@ class Portfolio extends Component {
     let members = insight.allMembers
     let admins = insight.allMembers.filter(member => member.isAdmin === true);
     let info = insight.personalOverview
-    let followers = user.userProfile.followers
-    let followings = user.userProfile.followings;
-    this.setState({ members: members, admins: admins, personalInfo: info, followers: followers, followings: followings }, () => {
+    let followers = user.userProfile?.followers
+    let followings = user.userProfile?.followings;
+    this.setState({ 
+      members: members, 
+      admins: admins, 
+      personalInfo: info, 
+      followers: followers, 
+      followings: followings
+     }, () => {
       console.log('state ', this.state);
     })
   }
