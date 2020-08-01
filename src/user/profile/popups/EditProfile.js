@@ -14,7 +14,8 @@ class EditProfile extends Component {
       location: '',
       github: '',
       fb: '',
-      linkedIn: '',
+      linkedin: '',
+      twitter: '',
       designation: '',
       website: '',
       longDesc: '',
@@ -29,7 +30,18 @@ class EditProfile extends Component {
 
   onSave = (e) => {
     e.preventDefault();
-    const { firstName, lastName, designation, location, website, shortDesc, longDesc } = this.state
+    const { 
+      firstName, 
+      lastName, 
+      designation, 
+      location, 
+      website, 
+      shortDesc, 
+      longDesc,
+      github,
+      linkedin,
+      twitter
+     } = this.state
     const info = {
       name: {
         firstName,
@@ -43,6 +55,11 @@ class EditProfile extends Component {
           location,
           website
         }
+      },
+      socialMedia: {
+        github,
+        linkedin,
+        twitter
       }
     }
     console.log('Updating data!', this.state)
@@ -54,6 +71,7 @@ class EditProfile extends Component {
     const { userProfile } = nextProps.user
     const permissions = nextProps?.org?.org?.options?.permissions
     const about = userProfile?.info?.about
+    const { socialMedia } = userProfile
     this.setState({ 
       firstName: userProfile?.name?.firstName,
       lastName: userProfile?.name?.lastName,
@@ -63,7 +81,10 @@ class EditProfile extends Component {
       shortDesc: about?.shortDescription,
       location: about?.location,
       // canChangeEmail: permissions?.canChangeEmail,
-      canChangeName: permissions?.canChangeName
+      canChangeName: permissions?.canChangeName,
+      github: socialMedia?.github,
+      twitter: socialMedia?.twitter,
+      linkedin: socialMedia?.linkedin
      }, () => {
       console.log('updated state ', this.state)
     })
@@ -79,8 +100,10 @@ class EditProfile extends Component {
       designation, 
       website, 
       longDesc, 
-      canChangeName
-      // canChangeEmail
+      canChangeName,
+      // canChangeEmail,
+      github,
+      linkedin,
      } = this.state
      return (
        <Modal onHide={onHide} show={show} className="modal">
@@ -191,7 +214,7 @@ class EditProfile extends Component {
                </Form.Group>
              </Form.Row>
              <div className="modal__secondary-title">PROFILE</div>
-             {/* <Form.Row className="modal__row">
+             <Form.Row className="modal__row">
                <Form.Group
                  as={Col}
                  controlId="formGridGithub"
@@ -216,12 +239,12 @@ class EditProfile extends Component {
                  <Form.Control
                    type="text"
                    placeholder="LinkedIn URL"
-                   defaultValue={linkedIn}
+                   defaultValue={linkedin}
                    name="linkedIn"
                    onChange={this.onChange}
                  />
                </Form.Group>
-             </Form.Row> */}
+             </Form.Row>
              <Form.Row className="modal__row">
                <Form.Group
                  as={Col}

@@ -16,7 +16,11 @@ class UserInfo extends Component {
       designation: '',
       location: '',
       shortDesc: '',
-      website: ''
+      website: '',
+      github: '',
+      twitter: '',
+      linkedin: '',
+      facebook: ''
     }
   }
 
@@ -24,25 +28,37 @@ class UserInfo extends Component {
     console.log('nextProps ', nextProps.userProfile)
     const name = nextProps.userProfile?.name || "NA"
     const about = nextProps.userProfile?.info?.about;
+    const { socialMedia } = nextProps.userProfile
     this.setState({ 
       name: `${name?.firstName + " " + name?.lastName}`,
       designation: about?.designation,
       shortDesc: about?.shortDescription,
       location: about?.location,
-      website: about?.website
+      website: about?.website,
+      github: socialMedia?.github,
+      twitter: socialMedia?.twitter,
+      linkedin: socialMedia?.linkedin,
+      facebook: socialMedia?.facebook
     })
   }
 
   onFbClick = () => {
     // this.props.history.push()
+    this.state.facebook 
+      ? window.open(`${this.state.facebook}`, '_blank')
+      : window.location.href = '/profile'
   }
 
   onLinkedInClick = () => {
-
+    this.state.linkedin 
+      ? window.open(`${this.state.linkedin}`, '_blank')
+      : window.location.href = '/profile'
   }
 
   onGithubClick = () => {
-    
+    this.state.github 
+      ? window.open(`${this.state.github}`, '_blank')
+      : window.location.href = '/profile'
   }
 
   render() {
