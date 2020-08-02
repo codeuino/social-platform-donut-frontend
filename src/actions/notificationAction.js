@@ -52,7 +52,7 @@ export const getProposalNotifications = () => async (dispatch) => {
     dispatch(setRequestStatus(false));
     if (res.status === 200) {
       dispatch(setRequestStatus(true));
-      console.log("Proposal notification ", res.data.notifications);
+      console.log("Proposal notification ", res.data?.notifications);
       dispatch({
         type: GET_PROPOSAL_NOTIFICATIONS,
         payload: res.data.notifications,
