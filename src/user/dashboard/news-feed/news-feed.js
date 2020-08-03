@@ -17,6 +17,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Button, Dropdown, FormControl } from "react-bootstrap";
 import AddEventModal from "./popups/AddEventModal";
 import AddProjectModal from "./popups/AddProjectModal";
+import PostReactionModal from './popups/PostReactionsModal'
 import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
 import ChatBubbleIcon from "@material-ui/icons/ChatBubble";
 import "../../pinned-posts/posts/posts.scss";
@@ -127,16 +128,17 @@ function NewsFeed(props) {
   const [showProject, setShowProject] = useState(false);
   const [showEvent, setShowEvent] = useState(false);
   const [writePost, showPostModal] = useState(false);
+  const [showReactions, setShowReactions] = useState(false)
   const [showComment, toggle] = useState(false);
   const [commentId, setCommentId] = useState('');
   const [events, setEvents] = useState([]);
   const [projects, setAllProjects] = useState([]);
   const [posts, setAllPosts] = useState([]);
+  const [votes, setVotes] = useState({})
   const [displayReactionContainer, setDisplayReactioContainer] = useState(false)
 
   useEffect(() => {
     console.log("useEffect from news-feed ", props);
-    console.log('USEEEEERRRRRRR', props.userId)
     setEvents(props?.allEvents);
     setAllProjects(props?.allProjects);
     setAllPosts(props?.allPosts);
@@ -195,6 +197,16 @@ function NewsFeed(props) {
   let onViewProject = (projectId) => {
     console.log('Redirecting to project ', projectId);
     props.history.push(`/${projectId}/proj-info`);
+  }
+
+  let openReactionsModal = (votes) => {
+    setVotes(votes)
+    setShowReactions(true)
+  }
+
+  let closeReactionsModal = () => {
+    setVotes({})
+    setShowReactions(false)
   }
   
   let postContent = posts?.map((post) => {
@@ -256,6 +268,7 @@ function NewsFeed(props) {
                     ></motion.img>
                   </div>
                 </div>
+                <span className="up-vote" onClick={()=> openReactionsModal(post.votes)}>{post?.votes?.upVotes?.user.length}</span>
                 <span className="com-btn">
                   <ChatBubbleIcon className={classes.chat} />
                   <Button
@@ -580,6 +593,7 @@ function NewsFeed(props) {
             {postContent}
             {eventsContent}
             {projectsContent}
+            <PostReactionModal show={showReactions} onHide={closeReactionsModal} votes={votes}/>
           </>
         )}
       </div>
