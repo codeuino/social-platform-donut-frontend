@@ -1,4 +1,4 @@
-import { GET_USER_PROFILE, GET_ALL_MEMBERS, UPDATE_USER_PROFILE, GET_USER_EVENTS, GET_USER_PROJECTS, GET_USER_POSTS, GET_INVITE_LINK, PROCESS_INVITE_LINK, SET_ADMIN } from './types'
+import { GET_USER_PROFILE, GET_ALL_MEMBERS, UPDATE_USER_PROFILE, GET_USER_EVENTS, GET_USER_PROJECTS, GET_USER_POSTS, GET_INVITE_LINK, PROCESS_INVITE_LINK, SET_ADMIN, CLEAR_INVITE_LINK } from './types'
 import { errorHandler } from '../utils/errorHandler'
 import axios from 'axios'
 import { setRequestStatus } from '../utils/setRequestStatus'
@@ -201,6 +201,14 @@ export const processInviteToken = (token) => async (dispatch) => {
   } catch(error) {
     dispatch(errorHandler(error));
   }
+}
+
+// CLEAR INVITE LINK 
+export const clearInviteLink = () => async (dispatch) => {
+  dispatch({
+    type: CLEAR_INVITE_LINK,
+    payload: ''
+  })
 }
 
 // ACTIVATE DEACTIVATE TOGGLER 

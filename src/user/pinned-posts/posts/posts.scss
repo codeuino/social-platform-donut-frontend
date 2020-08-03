@@ -187,7 +187,7 @@
       height: 300px;
       border-radius: 5px;
       .event-details {
-        // width: 90%;
+        width: 90%;
         margin: 5px auto;
         .event-schedule {
           display: flex;
@@ -210,15 +210,13 @@
                 color: rgba(29, 33, 41, 0.4);
                 mix-blend-mode: normal;
               }
-              h4 {
+              h3 {
                 font-family: Qanelas;
                 font-style: normal;
                 font-weight: 600;
-                font-size: 26px;
-                line-height: 32px;
+                font-size: 20px;
+                line-height: 24px;
                 color: #1d2129;
-                mix-blend-mode: normal;
-                margin-bottom: 0;
               }
               h5 {
                 font-family: Inter;
@@ -247,7 +245,7 @@
             border-bottom: 1px solid rgba(204, 204, 204, 0.7);
             border-left: 1px solid rgba(204, 204, 204, 0.7);
             .time-content {
-              width: 50%;
+              width: 90%;
               margin: 0 auto;
               small {
                 font-family: Inter;

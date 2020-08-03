@@ -67,6 +67,15 @@ class LoginForm extends Component {
     this.setState({ isValidForm: isValidEmail });
   };
 
+  // toggle Popups
+  toggle = (toggler) => {
+    this.setState({
+      modalShow: !this.state.modalShow
+    }, () => {
+      console.log('toggler ', this.state);
+    })
+  }
+
   render() {
     const handleToggle = (e) => {
       const targetName = e.target.name;
@@ -122,6 +131,7 @@ class LoginForm extends Component {
           option={this.state.option}
           optionValue={this.state.optionValue}
           modalShow={this.state.modalShow}
+          toggler={this.toggle}
         />
       </div>
     );
