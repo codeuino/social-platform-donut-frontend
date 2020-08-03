@@ -14,7 +14,7 @@ import {
   CardMedia,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { Button, } from "react-bootstrap";
+import { Button, Dropdown, FormControl } from "react-bootstrap";
 import AddEventModal from "./popups/AddEventModal";
 import AddProjectModal from "./popups/AddProjectModal";
 import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
@@ -32,6 +32,33 @@ import eventImg2 from "../../../svgs/event-img-2.svg";
 import parse from "html-react-parser";
 import { withRouter } from 'react-router-dom'
 import { rsvpYes } from '../../../actions/eventAction'
+import Like from "../../../images/Like.png";
+import Heart from "../../../images/Heart.png";
+import Happy from "../../../images/Happy.png";
+import DonutReaction from "../../../images/DonutReaction.png";
+import { motion } from 'framer-motion';
+import {FaEllipsisH} from 'react-icons/fa'
+
+const reactionVariant = {
+  hover: {
+    scale: 1.3,
+    opacity: 0.9,
+    rotate: [0, 10, 0, -10, 0],
+  }
+}
+
+const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
+  <a
+    href=""
+    ref={ref}
+    onClick={(e) => {
+      e.preventDefault();
+      onClick(e);
+    }}
+  >
+    {children}
+  </a>
+));
 
 const styles = makeStyles((theme) => ({
   root: {
@@ -91,6 +118,8 @@ const styles = makeStyles((theme) => ({
   },
 }));
 
+
+
 function NewsFeed(props) {
   const classes = styles();
   const [type, changeType] = useState("All");
@@ -103,9 +132,11 @@ function NewsFeed(props) {
   const [events, setEvents] = useState([]);
   const [projects, setAllProjects] = useState([]);
   const [posts, setAllPosts] = useState([]);
+  const [displayReactionContainer, setDisplayReactioContainer] = useState(false)
 
   useEffect(() => {
     console.log("useEffect from news-feed ", props);
+    console.log('USEEEEERRRRRRR', props.userId)
     setEvents(props?.allEvents);
     setAllProjects(props?.allProjects);
     setAllPosts(props?.allPosts);
@@ -182,17 +213,49 @@ function NewsFeed(props) {
                   <h2>{post?.userId?.name?.firstName + " " + post?.userId?.name?.lastName}</h2>
                   <small>{post?.createdAt}</small>
                 </ListItemText>
+                <Dropdown>
+                  <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
+                    <FaEllipsisH/>
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu>
+                    <Dropdown.Item eventKey="1">Edit</Dropdown.Item>
+                    <Dropdown.Item eventKey="2">Share</Dropdown.Item>
+                    <Dropdown.Item eventKey="3">Delete</Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
               </ListItem>
               <div className="post-details2">{parse(post?.content)}</div>
               <ListItem>
-                <IconButton 
+                {/* <IconButton 
                   className={classes.vote}
                   onClick={() => onUpvote(post._id)}
                   >
                   <ArrowDropUpIcon className="up-vote" />
                 </IconButton>
                 <span className="up-vote">{post?.votes?.upVotes?.user.length}</span>
-                <span className="space"></span>
+                <span className="space"></span> */}
+               <div className="reactions-container">
+                  <div className="reaction-element">
+                    <motion.img src={Like} alt="like-reaction" variants={reactionVariant}
+                      whileHover="hover"
+                    ></motion.img>
+                  </div>
+                  <div className="reaction-element">
+                  <motion.img src={Happy} alt="happy-reaction" variants={reactionVariant}
+                      whileHover="hover"
+                    ></motion.img>
+                  </div>
+                  <div className="reaction-element">
+                  <motion.img src={Heart} alt="heart-reaction" variants={reactionVariant}
+                      whileHover="hover"
+                    ></motion.img>
+                  </div>
+                  <div className="reaction-element">
+                  <motion.img src={DonutReaction} alt="donut-reaction" variants={reactionVariant}
+                      whileHover="hover"
+                    ></motion.img>
+                  </div>
+                </div>
                 <span className="com-btn">
                   <ChatBubbleIcon className={classes.chat} />
                   <Button
@@ -532,7 +595,8 @@ const mapStateToProps = (state) => ({
   event: state.event,
   post: state.post,
   status: state.status,
-  comment: state.comment
+  comment: state.comment,
+  userId: state.user.userProfile._id
 })
 
 export default connect(mapStateToProps, {

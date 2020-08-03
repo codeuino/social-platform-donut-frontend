@@ -17,6 +17,7 @@
     "chart.js": "^2.9.3",
     "dotenv": "^8.2.0",
     "env-cmd": "^10.1.0",
+    "framer-motion": "^2.3.0",
     "html-react-parser": "^0.13.0",
     "http-proxy-middleware": "^1.0.5",
     "jwt-decode": "^2.2.0",
