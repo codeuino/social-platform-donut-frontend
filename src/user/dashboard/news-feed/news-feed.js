@@ -17,36 +17,37 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Button, Dropdown, FormControl } from "react-bootstrap";
 import AddEventModal from "./popups/AddEventModal";
 import AddProjectModal from "./popups/AddProjectModal";
-import PostReactionModal from './popups/PostReactionsModal'
+import PostReactionModal from "./popups/PostReactionsModal";
 import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
 import ChatBubbleIcon from "@material-ui/icons/ChatBubble";
 import "../../pinned-posts/posts/posts.scss";
 import "./news-feed.scss";
 import AddPostModal from "./popups/AddPostModal";
-import Comment  from "./popups/comment";
-import { connect } from 'react-redux'
-import { getAllCommentsOfPost } from '../../../actions/commentAction'
-import { upVotePost } from '../../../actions/postAction' 
-import profileImg from '../../../svgs/evt-creator.svg';
+import Comment from "./popups/comment";
+import { connect } from "react-redux";
+import { getAllCommentsOfPost } from "../../../actions/commentAction";
+import { upVotePost } from "../../../actions/postAction";
+import profileImg from "../../../svgs/evt-creator.svg";
 import eventImg from "../../../svgs/event-img-1.svg";
 import eventImg2 from "../../../svgs/event-img-2.svg";
 import parse from "html-react-parser";
-import { withRouter } from 'react-router-dom'
-import { rsvpYes } from '../../../actions/eventAction'
+import { withRouter } from "react-router-dom";
+import { rsvpYes } from "../../../actions/eventAction";
 import Like from "../../../images/Like.png";
 import Heart from "../../../images/Heart.png";
 import Happy from "../../../images/Happy.png";
 import DonutReaction from "../../../images/DonutReaction.png";
-import { motion } from 'framer-motion';
-import {FaEllipsisH} from 'react-icons/fa'
+import { motion } from "framer-motion";
+import { FaEllipsisH } from "react-icons/fa";
+import ReactionsElement from "./ReactionsElement";
 
 const reactionVariant = {
   hover: {
     scale: 1.3,
     opacity: 0.9,
     rotate: [0, 10, 0, -10, 0],
-  }
-}
+  },
+};
 
 const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
   <a
@@ -70,11 +71,11 @@ const styles = makeStyles((theme) => ({
     background: "#ffffff",
     border: "1px solid #cccccc",
     boxShadow: "1px 2px 5px rgba(0, 0, 0, 0.1)",
-    borderRadius: "5px"
+    borderRadius: "5px",
   },
   listStyle2: {
     paddingTop: 0,
-    marginTop: "-4px"
+    marginTop: "-4px",
   },
   info: {
     position: "absolute",
@@ -112,14 +113,12 @@ const styles = makeStyles((theme) => ({
   reply: {
     color: "rgba(0, 0, 0, 0.4)",
     fontSize: "36px",
-    paddingLeft: "17px"
+    paddingLeft: "17px",
   },
   paper: {
     marginBottom: "15px",
   },
 }));
-
-
 
 function NewsFeed(props) {
   const classes = styles();
@@ -128,14 +127,16 @@ function NewsFeed(props) {
   const [showProject, setShowProject] = useState(false);
   const [showEvent, setShowEvent] = useState(false);
   const [writePost, showPostModal] = useState(false);
-  const [showReactions, setShowReactions] = useState(false)
+  const [showReactions, setShowReactions] = useState(false);
   const [showComment, toggle] = useState(false);
-  const [commentId, setCommentId] = useState('');
+  const [commentId, setCommentId] = useState("");
   const [events, setEvents] = useState([]);
   const [projects, setAllProjects] = useState([]);
   const [posts, setAllPosts] = useState([]);
-  const [votes, setVotes] = useState({})
-  const [displayReactionContainer, setDisplayReactioContainer] = useState(false)
+  const [votes, setVotes] = useState({});
+  const [displayReactionContainer, setDisplayReactioContainer] = useState(
+    false
+  );
 
   useEffect(() => {
     console.log("useEffect from news-feed ", props);
@@ -145,7 +146,7 @@ function NewsFeed(props) {
   }, [props.allEvents, props.allPosts, props.allProjects, props]);
 
   let handleClick = (atrb) => () => {
-    console.log('attr ', atrb);
+    console.log("attr ", atrb);
     changeType(atrb);
     // second("s");
   };
@@ -157,7 +158,7 @@ function NewsFeed(props) {
       setShowEvent(true);
     }
   };
-  
+
   let handleClose = (modalName) => {
     if (modalName === "project") {
       setShowProject(false);
@@ -167,51 +168,88 @@ function NewsFeed(props) {
   };
 
   let openPostModal = () => {
-    showPostModal(true)
-  }
+    showPostModal(true);
+  };
 
   let closePostModal = () => {
-    showPostModal(false)
-  }
+    showPostModal(false);
+  };
 
   let commentToggle = (postId) => {
     console.log("Comment toggle clicked!", postId);
-    props.getAllCommentsOfPost(postId)
+    props.getAllCommentsOfPost(postId);
     setCommentId(postId);
     toggle(!showComment);
-  }
+  };
 
   let onUpvote = (postId) => {
-    console.log('upvote clicked!', postId);
-    props.upVotePost(postId)
-  }
+    console.log("upvote clicked!", postId);
+    props.upVotePost(postId);
+  };
 
   let onRsvpYes = (eventId) => {
-    console.log('On rsvp yes ', eventId);
+    console.log("On rsvp yes ", eventId);
     const info = {
-      yes: localStorage.getItem('userId')
-    }
+      yes: localStorage.getItem("userId"),
+    };
     props.rsvpYes(eventId, info);
-  }
+  };
 
   let onViewProject = (projectId) => {
-    console.log('Redirecting to project ', projectId);
+    console.log("Redirecting to project ", projectId);
     props.history.push(`/${projectId}/proj-info`);
-  }
+  };
 
   let openReactionsModal = (votes) => {
-    setVotes(votes)
-    setShowReactions(true)
-  }
+    console.log(localStorage.getItem("userId"));
+    setVotes(votes);
+  };
 
   let closeReactionsModal = () => {
-    setVotes({})
-    setShowReactions(false)
-  }
-  
-  let postContent = posts?.map((post) => {
+    setVotes({});
+    setShowReactions(false);
+  };
+
+  useEffect(() => {
+    if (Object.keys(votes).length !== 0) {
+      setShowReactions(true);
+    }
+    console.log("use effect from votes");
+    console.log(votes);
+  }, [votes]);
+
+  let postContent = posts?.map((post, index) => {
+    // const reacted = post?.votes?.upVotes?.user.includes(
+    //   localStorage.getItem("userId")
+    // );
+
+    let reacted = "";
+    let reactionType = "";
+
+    if (post?.votes?.upVotes?.user.includes(localStorage.getItem("userId"))) {
+      reacted = true;
+      reactionType = "like";
+    } else if (
+      post?.votes?.heart?.user.includes(localStorage.getItem("userId"))
+    ) {
+      reacted = true;
+      reactionType = "heart";
+    } else if (
+      post?.votes?.happy?.user.includes(localStorage.getItem("userId"))
+    ) {
+      reacted = true;
+      reactionType = "happy";
+    } else if (
+      post?.votes?.donut?.user.includes(localStorage.getItem("userId"))
+    ) {
+      reacted = true;
+      reactionType = "donut";
+    }
+
+    const count = post?.votes?.upVotes?.user.length;
+
     return (
-        <div className="grid" key={post._id}>
+      <div className="grid" key={post._id}>
         <Paper elevation={1} className={classes.paper}>
           <Card className={classes.root}>
             <List className={classes.listStyle}>
@@ -222,12 +260,19 @@ function NewsFeed(props) {
                   </Avatar>
                 </ListItemAvatar>
                 <ListItemText className="main">
-                  <h2>{post?.userId?.name?.firstName + " " + post?.userId?.name?.lastName}</h2>
+                  <h2>
+                    {post?.userId?.name?.firstName +
+                      " " +
+                      post?.userId?.name?.lastName}
+                  </h2>
                   <small>{post?.createdAt}</small>
                 </ListItemText>
                 <Dropdown>
-                  <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
-                    <FaEllipsisH/>
+                  <Dropdown.Toggle
+                    as={CustomToggle}
+                    id="dropdown-custom-components"
+                  >
+                    <FaEllipsisH />
                   </Dropdown.Toggle>
                   <Dropdown.Menu>
                     <Dropdown.Item eventKey="1">Edit</Dropdown.Item>
@@ -246,29 +291,20 @@ function NewsFeed(props) {
                 </IconButton>
                 <span className="up-vote">{post?.votes?.upVotes?.user.length}</span>
                 <span className="space"></span> */}
-               <div className="reactions-container">
-                  <div className="reaction-element">
-                    <motion.img src={Like} alt="like-reaction" variants={reactionVariant}
-                      whileHover="hover"
-                    ></motion.img>
-                  </div>
-                  <div className="reaction-element">
-                  <motion.img src={Happy} alt="happy-reaction" variants={reactionVariant}
-                      whileHover="hover"
-                    ></motion.img>
-                  </div>
-                  <div className="reaction-element">
-                  <motion.img src={Heart} alt="heart-reaction" variants={reactionVariant}
-                      whileHover="hover"
-                    ></motion.img>
-                  </div>
-                  <div className="reaction-element">
-                  <motion.img src={DonutReaction} alt="donut-reaction" variants={reactionVariant}
-                      whileHover="hover"
-                    ></motion.img>
-                  </div>
-                </div>
-                <span className="up-vote" onClick={()=> openReactionsModal(post.votes)}>{post?.votes?.upVotes?.user.length}</span>
+                <ReactionsElement
+                  reacted={reacted}
+                  count={count}
+                  votes={post.votes}
+                  openModal={openReactionsModal}
+                  postId={post._id}
+                  reactionType={reactionType}
+                />
+                {/* <span
+                  className="up-vote"
+                  onClick={() => openReactionsModal(post.votes)}
+                >
+                  {post?.votes?.upVotes?.user.length}
+                </span> */}
                 <span className="com-btn">
                   <ChatBubbleIcon className={classes.chat} />
                   <Button
@@ -283,137 +319,148 @@ function NewsFeed(props) {
           </Card>
         </Paper>
       </div>
-    )
-  })
+    );
+  });
 
   let projectsContent = projects?.map((project) => {
     return (
       <div className="grid" key={project?._id}>
-            <Paper elevation={1} className={classes.paper}>
-                <Card className={classes.root}>
-                    <CardMedia className="projimg"
-                        image={project?.eventImage || eventImg } title="Project Image">
-                        <Paper className={classes.info}>
-                            <div className="project-details">
-                                <h3>{project?.projectName}</h3>
-                                <p>By {project?.projectOwner || "CODEUINO"}</p>
-                                <div className="view-project">
-                                    <Button 
-                                      className="view-project-btn"
-                                      onClick={() => onViewProject(project._id)}
-                                    >
-                                        View Project
-                                    </Button>
-                                </div>
-                            </div>
-                        </Paper>
-                    </CardMedia>
-                    <List className={classes.listStyle}>
-                        <ListItem className={classes.listStyle2}>
-                            <ListItemAvatar>
-                                <Avatar variant="square">
-                                    <img src={project?.img || profileImg} alt="I"/>
-                                </Avatar>
-                            </ListItemAvatar>
-                            <ListItemText className="main">
-                                <h2>{project?.createdBy?.name?.firstName + " " + project?.createdBy?.name?.lastName}</h2>
-                                <small>{project?.createdAt}</small>
-                            </ListItemText>
-                        </ListItem>
-                        <div className="post-details2">{project?.description?.short}</div>
-                        <ListItem>
-                            <span className="com-btn">
-                                <ChatBubbleIcon className={classes.chat}/>
-                                <Button 
-                                  className = "comment-btn"
-                                  onClick = {
-                                    commentToggle.bind(this, project._id)
-                                  } >
-                                    <span className="comment">Comment</span>
-                                </Button>
-                            </span>
-                        </ListItem>
-                    </List>
-                </Card>
-            </Paper>
-        </div>  
-    )
-  })
+        <Paper elevation={1} className={classes.paper}>
+          <Card className={classes.root}>
+            <CardMedia
+              className="projimg"
+              image={project?.eventImage || eventImg}
+              title="Project Image"
+            >
+              <Paper className={classes.info}>
+                <div className="project-details">
+                  <h3>{project?.projectName}</h3>
+                  <p>By {project?.projectOwner || "CODEUINO"}</p>
+                  <div className="view-project">
+                    <Button
+                      className="view-project-btn"
+                      onClick={() => onViewProject(project._id)}
+                    >
+                      View Project
+                    </Button>
+                  </div>
+                </div>
+              </Paper>
+            </CardMedia>
+            <List className={classes.listStyle}>
+              <ListItem className={classes.listStyle2}>
+                <ListItemAvatar>
+                  <Avatar variant="square">
+                    <img src={project?.img || profileImg} alt="I" />
+                  </Avatar>
+                </ListItemAvatar>
+                <ListItemText className="main">
+                  <h2>
+                    {project?.createdBy?.name?.firstName +
+                      " " +
+                      project?.createdBy?.name?.lastName}
+                  </h2>
+                  <small>{project?.createdAt}</small>
+                </ListItemText>
+              </ListItem>
+              <div className="post-details2">{project?.description?.short}</div>
+              <ListItem>
+                <span className="com-btn">
+                  <ChatBubbleIcon className={classes.chat} />
+                  <Button
+                    className="comment-btn"
+                    onClick={commentToggle.bind(this, project._id)}
+                  >
+                    <span className="comment">Comment</span>
+                  </Button>
+                </span>
+              </ListItem>
+            </List>
+          </Card>
+        </Paper>
+      </div>
+    );
+  });
 
   let eventsContent = events?.map((event) => {
     return (
-       <div className = "grid" key={event._id}>
-            <Paper elevation={1} className={classes.paper}>
-                <Card className={classes.root}>
-                    <CardMedia className="eventimg"
-                        image={event?.eventImage || eventImg2 } title="Event Image">
-                        <Paper className={classes.info2}>
-                            <div className="event-details">
-                                <h3>{event?.eventName}</h3>
-                                <div className="event-schedule">
-                                    <div className="event-date">
-                                        <div className="date-content">
-                                            <small>DATE</small>
-                                            <h4>{event?.eventDate}</h4>
-                                        </div>
-                                    </div>
-                                    <div className="event-time">
-                                        <div className="time-content">
-                                            <small>Location</small>
-                                            <h4>{event?.location}</h4>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="tag-container">
-                                    <Button 
-                                      className="tag-btn"
-                                      onClick={() => onRsvpYes(event._id)}
-                                    >
-                                        +1 RSVP
-                                    </Button>
-                                </div>
-                            </div>
-                        </Paper>
-                    </CardMedia>
-                    <List className={classes.listStyle}>
-                        <ListItem className={classes.listStyle2}>
-                            <ListItemAvatar>
-                                <Avatar variant="square">
-                                    <img src={event?.imgSrc || profileImg} alt="I"/>
-                                </Avatar>
-                            </ListItemAvatar>
-                            <ListItemText className="main">
-                                <h2>{event?.createdBy?.name?.firstName + " " + event?.createdBy?.name?.lastName}</h2>
-                                <small>{event?.createdAt}</small>
-                            </ListItemText>
-                        </ListItem>
-                        <div className="post-details2">{event?.description?.shortDescription}</div>
-                    </List>
-                </Card>
-            </Paper>
-            <Comment
-                show={showComment}
-                onHide={toggle}
-                postId={commentId}
-              />
-        </div>
-    )
-  })
+      <div className="grid" key={event._id}>
+        <Paper elevation={1} className={classes.paper}>
+          <Card className={classes.root}>
+            <CardMedia
+              className="eventimg"
+              image={event?.eventImage || eventImg2}
+              title="Event Image"
+            >
+              <Paper className={classes.info2}>
+                <div className="event-details">
+                  <h3>{event?.eventName}</h3>
+                  <div className="event-schedule">
+                    <div className="event-date">
+                      <div className="date-content">
+                        <small>DATE</small>
+                        <h4>{event?.eventDate}</h4>
+                      </div>
+                    </div>
+                    <div className="event-time">
+                      <div className="time-content">
+                        <small>Location</small>
+                        <h4>{event?.location}</h4>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="tag-container">
+                    <Button
+                      className="tag-btn"
+                      onClick={() => onRsvpYes(event._id)}
+                    >
+                      +1 RSVP
+                    </Button>
+                  </div>
+                </div>
+              </Paper>
+            </CardMedia>
+            <List className={classes.listStyle}>
+              <ListItem className={classes.listStyle2}>
+                <ListItemAvatar>
+                  <Avatar variant="square">
+                    <img src={event?.imgSrc || profileImg} alt="I" />
+                  </Avatar>
+                </ListItemAvatar>
+                <ListItemText className="main">
+                  <h2>
+                    {event?.createdBy?.name?.firstName +
+                      " " +
+                      event?.createdBy?.name?.lastName}
+                  </h2>
+                  <small>{event?.createdAt}</small>
+                </ListItemText>
+              </ListItem>
+              <div className="post-details2">
+                {event?.description?.shortDescription}
+              </div>
+            </List>
+          </Card>
+        </Paper>
+        <Comment show={showComment} onHide={toggle} postId={commentId} />
+      </div>
+    );
+  });
 
- let content;
- if (type === "Project") {
-  content = projectsContent
- }
- if (type === "Post") {
-  content = postContent
- }
- if (type === "Event") {
-  content = eventsContent
- }
+  let content;
+  if (type === "Project") {
+    content = projectsContent;
+  }
+  if (type === "Post") {
+    content = postContent;
+  }
+  if (type === "Event") {
+    content = eventsContent;
+  }
 
   return (
     <>
-        <div className="news-feed">
+      <div className="news-feed">
         <div className="post-article">
           <div className="article">
             <Paper
@@ -489,8 +536,8 @@ function NewsFeed(props) {
           />
         </div>
       </div>
-    <div className="news__feed__container">
-      {/* <div className="posts">
+      <div className="news__feed__container">
+        {/* <div className="posts">
         <span className="category">
           <span className="to-centre">
             {first === "f" ? (
@@ -539,70 +586,74 @@ function NewsFeed(props) {
           </span>
         </span>
       </div> */}
-      <div className="tabs__container">
-        <span className="nav__tab container">
-          <ul className="nav__list__container">
-            <li
-              className={
-                type === "All"
-                  ? "nav__single__tab selected"
-                  : "nav__single__tab"
-              }
-              onClick={handleClick("All")}
-            >
-              All
-            </li>
-            <li
-              className={
-                type === "Post"
-                  ? "nav__single__tab selected"
-                  : "nav__single__tab"
-              }
-              onClick={handleClick("Post")}
-            >
-              Posts
-            </li>
-            <li
-              className={
-                type === "Event"
-                  ? "nav__single__tab selected"
-                  : "nav__single__tab"
-              }
-              onClick={handleClick("Event")}
-            >
-              Events
-            </li>
-            <li
-              className={
-                type === "Project"
-                  ? "nav__single__tab selected"
-                  : "nav__single__tab"
-              }
-              onClick={handleClick("Project")}
-            >
-              Projects
-            </li>
-          </ul>
-        </span>
+        <div className="tabs__container">
+          <span className="nav__tab container">
+            <ul className="nav__list__container">
+              <li
+                className={
+                  type === "All"
+                    ? "nav__single__tab selected"
+                    : "nav__single__tab"
+                }
+                onClick={handleClick("All")}
+              >
+                All
+              </li>
+              <li
+                className={
+                  type === "Post"
+                    ? "nav__single__tab selected"
+                    : "nav__single__tab"
+                }
+                onClick={handleClick("Post")}
+              >
+                Posts
+              </li>
+              <li
+                className={
+                  type === "Event"
+                    ? "nav__single__tab selected"
+                    : "nav__single__tab"
+                }
+                onClick={handleClick("Event")}
+              >
+                Events
+              </li>
+              <li
+                className={
+                  type === "Project"
+                    ? "nav__single__tab selected"
+                    : "nav__single__tab"
+                }
+                onClick={handleClick("Project")}
+              >
+                Projects
+              </li>
+            </ul>
+          </span>
+        </div>
+        <div className="post">
+          {Boolean(type !== "All") ? (
+            content
+          ) : (
+            <>
+              {postContent}
+              {eventsContent}
+              {projectsContent}
+              <PostReactionModal
+                show={showReactions}
+                onHide={closeReactionsModal}
+                votes={votes}
+              />
+            </>
+          )}
+        </div>
       </div>
-      <div className="post">
-        {Boolean(type !== "All") ? (
-          content
-        ) : (
-          <>
-            {postContent}
-            {eventsContent}
-            {projectsContent}
-            <PostReactionModal show={showReactions} onHide={closeReactionsModal} votes={votes}/>
-          </>
-        )}
-      </div>
-    </div>
     </>
   );
 }
 
-// map state to props 
+// map state to props
 const mapStateToProps = (state) => ({
   auth: state.auth,
   error: state.error,
@@ -610,11 +661,10 @@ const mapStateToProps = (state) => ({
   post: state.post,
   status: state.status,
   comment: state.comment,
-  userId: state.user.userProfile._id
-})
+});
 
 export default connect(mapStateToProps, {
   getAllCommentsOfPost,
   upVotePost,
-  rsvpYes
-})(withRouter(NewsFeed))
+  rsvpYes,
+})(withRouter(NewsFeed));
