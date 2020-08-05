@@ -89,11 +89,12 @@ function PinPosts(props){
 
     useEffect(() => {
         console.log('props from PinPosts ', props)
-        if(props.match?.path === '/pinned-posts') {
+        let path = props.match?.path;
+        if(path === '/pinned-posts') {
             props.getAllPinnedPosts()
             setPosts(props.posts?.pinnedPosts);
         }
-        if(props.match?.path === '/profile'){
+        if(path === '/profile' || path === '/profile/:id'){
             setEvents(props.userEvents)
             setAllProjects(props.userProjects || [])
             setPosts(props.userPosts)

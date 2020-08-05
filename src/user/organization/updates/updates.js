@@ -9,7 +9,8 @@ const styles = makeStyles((theme) => ({
     paddingTop: "0px",
   },
 }));
-export default function Updates(props) {
+
+function Updates(props) {
   const classes = styles();
   var i;
   let upd = [];
@@ -35,3 +36,5 @@ export default function Updates(props) {
     </div>
   );
 }
+
+export default Updates;

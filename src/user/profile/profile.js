@@ -19,32 +19,32 @@ class Profile extends Component {
       userEvents: [],
       userProjects: [],
       userPosts: [],
-      pinnedPosts: []
+      pinnedPosts: [],
+      userId: ''
     };
   }
 
   componentDidMount() {
     console.log("match", this.props.match?.path);
-    const path = this.props.match?.path;
-    if (path === "/profile") {
-      console.log("checking profile");
-      setTimeout(() => {
-         this.props.getProfile();
-         this.props.getOrgProfile();
-      })
-      setTimeout(() => {
-        this.props.getPostsCreatedByUser();
-      })
-      setTimeout(() => {
-        this.props.getEventsCreatedByUser();
-      });
-      setTimeout(() => {
-        this.props.getProjectCreatedByUser();
-      });
-      setTimeout(() => {
-        this.props.getAllPinnedPosts()
-      })
-    }
+    const { path, params } = this.props.match;
+    const userId = params.id
+    console.log("checking profile", userId);
+    this.props.getProfile(userId)
+    setTimeout(() => {
+      this.props.getOrgProfile();
+    })
+    setTimeout(() => {
+      this.props.getPostsCreatedByUser(userId);
+    })
+    setTimeout(() => {
+      this.props.getEventsCreatedByUser(userId);
+    });
+    setTimeout(() => {
+      this.props.getProjectCreatedByUser(userId);
+    });
+    setTimeout(() => {
+      this.props.getAllPinnedPosts()
+    })
   }
 
   componentWillReceiveProps(nextProps) {
@@ -64,6 +64,8 @@ class Profile extends Component {
       userPosts: userPosts,
       pinnedPosts: pinnedPosts,
       all: all,
+    }, () => {
+      console.log('setting profile ', this.state)
     });
   }
 

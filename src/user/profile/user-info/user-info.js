@@ -5,6 +5,8 @@ import { Avatar } from "@material-ui/core";
 import EditProfile from "./../popups/EditProfile";
 import { FaFacebookSquare, FaGithubSquare, FaLinkedin } from 'react-icons/fa'
 import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { getProfile } from '../../../actions/usersAction'
 
 class UserInfo extends Component {
   constructor(props) {
@@ -16,20 +18,29 @@ class UserInfo extends Component {
       designation: '',
       location: '',
       shortDesc: '',
-      website: ''
+      website: '',
+      userId: ''
     }
   }
 
+  componentDidMount() {
+    const userId = this.props.match.params.id;
+    console.log('user-info props ', userId)
+    this.props.getProfile(userId)
+  }
+
   componentWillReceiveProps(nextProps) {
-    console.log('nextProps ', nextProps.userProfile)
-    const name = nextProps.userProfile?.name || "NA"
-    const about = nextProps.userProfile?.info?.about;
+    // console.log('userId ', this.props.match.params.id)
+    console.log('userInfo nextProps ', nextProps.user.userProfile)
+    const name = nextProps.user.userProfile?.name || "NA"
+    const about = nextProps.user.userProfile?.info?.about;
     this.setState({ 
       name: `${name?.firstName + " " + name?.lastName}`,
       designation: about?.designation,
       shortDesc: about?.shortDescription,
       location: about?.location,
-      website: about?.website
+      website: about?.website,
+      userId: nextProps.userProfile?._id
     })
   }
 
@@ -46,7 +57,7 @@ class UserInfo extends Component {
   }
 
   render() {
-    const { designation, location, shortDesc, name } = this.state
+    const { designation, location, shortDesc, name, userId } = this.state
     let cancel = () =>
       this.setState({
         editProfile: false,
@@ -58,12 +69,15 @@ class UserInfo extends Component {
             <Avatar className="userpic"></Avatar>
           </div>
           <div className="edit-option">
-            <Button
-              className="useredit"
-              onClick={() => this.setState({ editProfile: true })}
-            >
-              User Edit
-            </Button>
+            {Boolean(userId === localStorage.getItem('userId')) 
+              ? (<Button
+                  className="useredit"
+                  onClick={() => this.setState({ editProfile: true })}
+                >
+                  User Edit
+                </Button>)
+              : null
+            }
             <EditProfile show={this.state.editProfile} onHide={cancel} />
           </div>
         </div>
@@ -97,9 +111,6 @@ class UserInfo extends Component {
             <p className="place">{location || "NA"}</p>
             <p className="desc">{shortDesc || "Short description"}</p>
             <div className="social-icons">
-              {/* <Button variant="primary">Facebook</Button> */}
-              {/* <Button variant="primary">Linkedin</Button> */}
-              {/* <Button variant="primary">Github</Button> */}
             </div>
           </div>
         </div>
@@ -107,5 +118,9 @@ class UserInfo extends Component {
     );
   }
 }
+// map state to props 
+const mapStateToProps = (state) => ({
+  user: state.user
+})
 
-export default withRouter(UserInfo);
+export default connect(mapStateToProps, { getProfile })(withRouter(UserInfo));

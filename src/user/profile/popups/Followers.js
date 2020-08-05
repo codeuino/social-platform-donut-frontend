@@ -62,7 +62,7 @@ class Followers extends Component {
   // };
 
   componentWillReceiveProps(nextProps) {
-    console.log("nextProps ", nextProps);
+    console.log("followers nextProps ", nextProps);
     this.setState({ followings: nextProps.followings });
   }
 
@@ -75,10 +75,10 @@ class Followers extends Component {
       for (const follower in followers) {
         let tempObj = {};
         tempObj.name =
-          followers[follower].name.firstName +
+          followers[follower]?.name?.firstName +
           " " +
-          followers[follower].name.lastName;
-        tempObj.desg = followers[follower].info.about.designation || "NA";
+          followers[follower]?.name?.lastName;
+        tempObj.desg = followers[follower]?.info?.about?.designation || "NA";
         tempObj._id = followers[follower]._id;
         this.checkFollowing(tempObj._id)
           ? (tempObj.text = "UnFollow")

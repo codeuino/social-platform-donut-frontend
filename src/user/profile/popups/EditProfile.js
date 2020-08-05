@@ -19,7 +19,8 @@ class EditProfile extends Component {
       website: '',
       longDesc: '',
       canChangeName: '',
-      // canChangeEmail: ''
+      // canChangeEmail: '',
+      userId: ''
     }
   }
 
@@ -29,7 +30,7 @@ class EditProfile extends Component {
 
   onSave = (e) => {
     e.preventDefault();
-    const { firstName, lastName, designation, location, website, shortDesc, longDesc } = this.state
+    const { firstName, lastName, designation, location, website, shortDesc, longDesc, userId } = this.state
     const info = {
       name: {
         firstName,
@@ -45,8 +46,9 @@ class EditProfile extends Component {
         }
       }
     }
+    let id = userId || localStorage.getItem('userId')
     console.log('Updating data!', this.state)
-    this.props.updateProfile(info)
+    this.props.updateProfile(id, info)
   }
 
   componentWillReceiveProps(nextProps) {
@@ -63,7 +65,8 @@ class EditProfile extends Component {
       shortDesc: about?.shortDescription,
       location: about?.location,
       // canChangeEmail: permissions?.canChangeEmail,
-      canChangeName: permissions?.canChangeName
+      canChangeName: permissions?.canChangeName,
+      userId: userProfile?._id
      }, () => {
       console.log('updated state ', this.state)
     })

@@ -30,7 +30,7 @@ const Router = () => (
       <Route exact path="/maintenance" component={Maintenance}></Route>
       <PrivateRoute exact path="/dashboard" component={Dashboard} />
       <PrivateRoute exact path="/pinned-posts" component={PinnedPosts} />
-      <PrivateRoute exact path="/profile" component={Profile} />
+      <PrivateRoute exact path="/profile/:id" component={Profile} />
       <PrivateRoute exact path="/:id/proj-info" component={ProjInfo} />
       <PrivateRoute exact path="/organization" component={Organization} />
       <PrivateRoute exact path="/settings" component={Settings} />

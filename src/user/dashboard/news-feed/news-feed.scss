@@ -389,6 +389,7 @@
         border: 1px solid #cccccc;
         box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
         border-radius: 5px;
+        box-shadow: -1px 2px 0px -1px rgba(0, 0, 0, 0.1);
       }
       .cta {
         button {
@@ -473,7 +474,7 @@
         cursor: pointer;
 
         &.selected {
-          border-bottom: 3px solid #337ab7;
+          border-bottom: 3px solid #1a73e8;
           color: #1a73e8;
         }
       }
@@ -517,3 +518,6 @@
     }
   }
 }
+ .post .main h2 {
+   cursor: pointer;
+ }
