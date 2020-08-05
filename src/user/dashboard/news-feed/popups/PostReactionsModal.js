@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Modal, Form, Col, Row, Image } from "react-bootstrap";
+import { Button, Modal, Row, Image } from "react-bootstrap";
 import Like from "../../../../images/Like.png";
 import Happy from "../../../../images/Happy.png";
 import Heart from "../../../../images/Heart.png";
@@ -28,27 +28,83 @@ class PostReactionModal extends Component {
     });
   };
 
-  userInfo = this.props.votes?.upvotes?.user((user, index) => {
-    return (
-      <Row className="modal__member" id="p1" key={index}>
-        <div className="member__image">
-          <Image
-            className="modal__memberPhoto"
-            src={userIcon2}
-            alt="I"
-            rounded
-          />
-        </div>
-        <div className="member__content">
-          <span className="modal__memberName">Majorie Alexander</span>
-          {/* <span className="modal__memberDescription">{item.desc}</span> */}
-        </div>
-      </Row>
-    );
-  });
-
   render() {
     const { type } = this.state;
+
+    const upvotes = this.state.reactions?.upVotes?.user.map((user, index) => {
+      return (
+        <Row className="modal__member" id="p1" key={index}>
+          <div className="member__image">
+            <Image
+              className="modal__memberPhoto"
+              src={userIcon2}
+              alt="I"
+              rounded
+            />
+          </div>
+          <div className="member__content">
+            <span className="modal__memberName">Majorie Alexander</span>
+            <span className="modal__memberDescription">{user}</span>
+          </div>
+        </Row>
+      );
+    });
+
+    const hearts = this.state.reactions?.heart?.user.map((user, index) => {
+      return (
+        <Row className="modal__member" id="p1" key={index}>
+          <div className="member__image">
+            <Image
+              className="modal__memberPhoto"
+              src={userIcon2}
+              alt="I"
+              rounded
+            />
+          </div>
+          <div className="member__content">
+            <span className="modal__memberName">Majorie Alexander</span>
+            <span className="modal__memberDescription">{user}</span>
+          </div>
+        </Row>
+      );
+    });
+
+    const happy = this.state.reactions?.happy?.user.map((user, index) => {
+      return (
+        <Row className="modal__member" id="p1" key={index}>
+          <div className="member__image">
+            <Image
+              className="modal__memberPhoto"
+              src={userIcon2}
+              alt="I"
+              rounded
+            />
+          </div>
+          <div className="member__content">
+            <span className="modal__memberName">Majorie Alexander</span>
+            <span className="modal__memberDescription">{user}</span>
+          </div>
+        </Row>
+      );
+    });
+
+    const donut = this.state.reactions?.donut?.user.map((user, index) => {
+      return (
+        <Row className="modal__member" id="p1" key={index}>
+          <span className="modal__memberDescription">{user}</span>
+          <div className="member__image">
+            <Image className="modal__memberPhoto" src={userIcon2} alt="I" />
+          </div>
+          <div className="member__content">
+            <span className="modal__memberName">Majorie Alexander</span>
+            <span className="modal__memberDescription">{user}</span>
+          </div>
+        </Row>
+      );
+    });
+
+    const all = [upvotes, donut, hearts, happy];
+
     return (
       <Modal
         show={this.props.show}
@@ -135,28 +191,11 @@ class PostReactionModal extends Component {
               </ul>
             </span>
           </div>
-          {type === "All" ? (
-            this.state.reactions?.upVotes?.user.map((user, index) => {
-              return (
-                <Row className="modal__member" id="p1" key={index}>
-                  <div className="member__image">
-                    <Image
-                      className="modal__memberPhoto"
-                      src={userIcon2}
-                      alt="I"
-                      rounded
-                    />
-                  </div>
-                  <div className="member__content">
-                    <span className="modal__memberName">Majorie Alexander</span>
-                    {/* <span className="modal__memberDescription">{item.desc}</span> */}
-                  </div>
-                </Row>
-              );
-            })
-          ) : (
-            <div>not all</div>
-          )}
+          {type === "All" && all}
+          {type === "Like" && upvotes}
+          {type === "Heart" && hearts}
+          {type === "Happy" && happy}
+          {type === "Donut" && donut}
         </Modal.Body>
         <div className="modal__buttons">
           <Button onClick={this.props.onHide} className="modal__save">

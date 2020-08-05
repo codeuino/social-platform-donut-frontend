@@ -33,12 +33,7 @@ import eventImg2 from "../../../svgs/event-img-2.svg";
 import parse from "html-react-parser";
 import { withRouter } from "react-router-dom";
 import { rsvpYes } from "../../../actions/eventAction";
-import Like from "../../../images/Like.png";
-import Heart from "../../../images/Heart.png";
-import Happy from "../../../images/Happy.png";
-import DonutReaction from "../../../images/DonutReaction.png";
-import { motion } from "framer-motion";
-import { FaEllipsisH } from "react-icons/fa";
+import { FaEllipsisH, FaThumbtack } from "react-icons/fa";
 import ReactionsElement from "./ReactionsElement";
 
 const reactionVariant = {
@@ -219,10 +214,7 @@ function NewsFeed(props) {
   }, [votes]);
 
   let postContent = posts?.map((post, index) => {
-    // const reacted = post?.votes?.upVotes?.user.includes(
-    //   localStorage.getItem("userId")
-    // );
-
+    const votes = post?.votes;
     let reacted = "";
     let reactionType = "";
 
@@ -246,7 +238,11 @@ function NewsFeed(props) {
       reactionType = "donut";
     }
 
-    const count = post?.votes?.upVotes?.user.length;
+    const count =
+      votes.upVotes?.user.length +
+      votes.happy?.user.length +
+      votes.heart?.user.length +
+      votes.donut?.user.length;
 
     return (
       <div className="grid" key={post._id}>
@@ -267,6 +263,7 @@ function NewsFeed(props) {
                   </h2>
                   <small>{post?.createdAt}</small>
                 </ListItemText>
+                <FaThumbtack style={{ margin: "10px", width: "10px" }} />
                 <Dropdown>
                   <Dropdown.Toggle
                     as={CustomToggle}

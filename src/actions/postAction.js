@@ -99,3 +99,15 @@ export const deletePost = (postId) => async (dispatch) => {
     dispatch(errorHandler(error));
   }
 };
+
+// REMOVE REACTION
+export const removeReaction = (postId, type) => async (dispatch) => {
+  try {
+    const res = await axios.patch(`${BASE_URL}/post/removereaction/${postId}`, type);
+    if (res.status === 200) {
+      dispatch(getAllPosts());
+    }
+  } catch (error) {
+    dispatch(errorHandler(error));
+  }
+};

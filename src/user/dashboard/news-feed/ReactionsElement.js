@@ -6,12 +6,11 @@ import Heart from "../../../images/Heart.png";
 import Happy from "../../../images/Happy.png";
 import DonutReaction from "../../../images/DonutReaction.png";
 import { connect } from "react-redux";
-import { upVotePost } from "../../../actions/postAction";
+import { upVotePost, removeReaction } from "../../../actions/postAction";
 
 const reactionVariant = {
   hover: {
     scale: 1.3,
-    opacity: 0.9,
     rotate: [0, 10, 0, -10, 0],
   },
 };
@@ -21,26 +20,41 @@ class ReactionsElement extends Component {
     super(props);
     this.state = {
       reacted: this.props.reacted,
-      count: this.props.count,
+      count: this.props.count || 0,
       reaction: "like",
+      reactionType: this.props.reactionType,
     };
   }
 
+  componentDidMount() {}
+
   handleReaction = (reaction) => {
+    const { count } = this.state;
     const type = {
       reactionType: reaction,
     };
     this.setState({
       reacted: true,
-      reaction: reaction,
+      reactionType: reaction,
+      count: count + 1,
     });
     this.onUpVote(this.props.postId, type);
   };
 
-  handleNoReaction = () => {
+  handleNoReaction = (reaction) => {
+    let { count } = this.state;
+
+    const type = {
+      reactionType: reaction,
+      reacted: false,
+    };
+
     this.setState({
       reacted: false,
+      count: count - 1,
     });
+
+    this.props.removeReaction(this.props.postId, type);
   };
 
   onUpVote = (postId, type) => {
@@ -54,46 +68,50 @@ class ReactionsElement extends Component {
       <div className="reactions-container">
         {reacted ? (
           <div className="reaction-element">
-            {reaction === "like" && (
+            {reactionType === "like" && (
               <motion.img
                 src={Like}
                 alt="like-reaction"
                 variants={reactionVariant}
                 whileHover="hover"
-                onClick={() => this.handleNoReaction()}
+                onClick={() => this.handleNoReaction("like")}
               ></motion.img>
             )}
-            {reaction === "happy" && (
+            {reactionType === "happy" && (
               <motion.img
                 src={Happy}
                 alt="like-reaction"
                 variants={reactionVariant}
                 whileHover="hover"
-                onClick={() => this.handleNoReaction()}
+                onClick={() => this.handleNoReaction("happy")}
               ></motion.img>
             )}
-            {reaction === "heart" && (
+            {reactionType === "heart" && (
               <motion.img
                 src={Heart}
                 alt="like-reaction"
                 variants={reactionVariant}
                 whileHover="hover"
-                onClick={() => this.handleNoReaction()}
+                onClick={() => this.handleNoReaction("heart")}
               ></motion.img>
             )}
-            {reaction === "donut" && (
+            {reactionType === "donut" && (
               <motion.img
                 src={DonutReaction}
                 alt="like-reaction"
                 variants={reactionVariant}
                 whileHover="hover"
-                onClick={() => this.handleNoReaction()}
+                onClick={() => this.handleNoReaction("donut")}
               ></motion.img>
             )}
-            {count > 1 ? (
+            {count === 1 && (
               <span className="reaction-text">{`You reacted`}</span>
-            ) : (
-              <span className="reaction-text">{`You and ${count} others reacted.`}</span>
+            )}
+            {count > 1 && (
+              <span
+                className="reaction-text"
+                onClick={() => openModal(votes)}
+              >{`You and ${count - 1} others reacted.`}</span>
             )}
           </div>
         ) : (
@@ -142,10 +160,16 @@ class ReactionsElement extends Component {
                 whileHover="hover"
               ></motion.img>
             </div>
-            <span
-              className="reaction-text"
-              onClick={() => openModal(votes)}
-            >{`${count} reactions`}</span>
+
+            {count == 0 && (
+              <span className="reaction-text">{`${count} reactions`}</span>
+            )}
+            {count > 0 && (
+              <span
+                className="reaction-text"
+                onClick={() => openModal(votes)}
+              >{`${count} reactions`}</span>
+            )}
           </motion.div>
         )}
       </div>
@@ -153,4 +177,4 @@ class ReactionsElement extends Component {
   }
 }
 
-export default connect(null, { upVotePost })(ReactionsElement);
+export default connect(null, { upVotePost, removeReaction })(ReactionsElement);
