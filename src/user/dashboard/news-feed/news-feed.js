@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { Button, ButtonGroup } from 'react-bootstrap'
 import {
   List,
   Card,
   Paper,
   InputBase,
-  ButtonGroup,
   ListItem,
   ListItemAvatar,
   Avatar,
@@ -14,7 +14,6 @@ import {
   CardMedia,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { Button, } from "react-bootstrap";
 import AddEventModal from "./popups/AddEventModal";
 import AddProjectModal from "./popups/AddProjectModal";
 import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
@@ -32,6 +31,7 @@ import eventImg2 from "../../../svgs/event-img-2.svg";
 import parse from "html-react-parser";
 import { withRouter } from 'react-router-dom'
 import { rsvpYes } from '../../../actions/eventAction'
+import Moment from 'react-moment'
 
 const styles = makeStyles((theme) => ({
   root: {
@@ -180,7 +180,9 @@ function NewsFeed(props) {
                 </ListItemAvatar>
                 <ListItemText className="main">
                   <h2>{post?.userId?.name?.firstName + " " + post?.userId?.name?.lastName}</h2>
-                  <small>{post?.createdAt}</small>
+                  <Moment format="DD MMM YYYY">
+                    {post?.createdAt}
+                  </Moment>
                 </ListItemText>
               </ListItem>
               <div className="post-details2">{parse(post?.content)}</div>
@@ -241,7 +243,7 @@ function NewsFeed(props) {
                             </ListItemAvatar>
                             <ListItemText className="main">
                                 <h2>{project?.createdBy?.name?.firstName + " " + project?.createdBy?.name?.lastName}</h2>
-                                <small>{project?.createdAt}</small>
+                                <Moment format="DD MMM YYYY">{project?.createdAt}</Moment>
                             </ListItemText>
                         </ListItem>
                         <div className="post-details2">{project?.description?.short}</div>
@@ -277,14 +279,16 @@ function NewsFeed(props) {
                                 <div className="event-schedule">
                                     <div className="event-date">
                                         <div className="date-content">
-                                            <small>DATE</small>
-                                            <h4>{event?.eventDate}</h4>
+                                            <small>DATE</small><br/>
+                                            <Moment format="DD MMM YYYY">
+                                              {event?.eventDate}
+                                            </Moment>
                                         </div>
                                     </div>
                                     <div className="event-time">
                                         <div className="time-content">
                                             <small>Location</small>
-                                            <h4>{event?.location}</h4>
+                                            <h5>{event?.location}</h5>
                                         </div>
                                     </div>
                                 </div>
@@ -308,7 +312,7 @@ function NewsFeed(props) {
                             </ListItemAvatar>
                             <ListItemText className="main">
                                 <h2>{event?.createdBy?.name?.firstName + " " + event?.createdBy?.name?.lastName}</h2>
-                                <small>{event?.createdAt}</small>
+                                <Moment format="DD MMM YYYY">{event?.createdAt}</Moment>
                             </ListItemText>
                         </ListItem>
                         <div className="post-details2">{event?.description?.shortDescription}</div>
@@ -414,55 +418,6 @@ function NewsFeed(props) {
         </div>
       </div>
     <div className="news__feed__container">
-      {/* <div className="posts">
-        <span className="category">
-          <span className="to-centre">
-            {first === "f" ? (
-              <Button
-                active
-                variant="primary"
-                className="category-btn"
-                onClick={handleClick("All")}
-              >
-                <span className="btn-content">All</span>
-              </Button>
-            ) : (
-              <Button
-                autoFocus
-                variant="primary"
-                className="category-btn"
-                onClick={handleClick("All")}
-              >
-                All
-              </Button>
-            )}
-            <span className="space"></span>
-            <Button
-              variant="primary"
-              className="category-btn"
-              onClick={handleClick("Post")}
-            >
-              <span className="btn-content">Posts</span>
-            </Button>
-            <span className="space"></span>
-            <Button
-              variant="primary"
-              className="category-btn"
-              onClick={handleClick("Event")}
-            >
-              <span className="btn-content">Events</span>
-            </Button>
-            <span className="space"></span>
-            <Button
-              variant="primary"
-              className="category-btn"
-              onClick={handleClick("Project")}
-            >
-              <span className="btn-content">Projects</span>
-            </Button>
-          </span>
-        </span>
-      </div> */}
       <div className="tabs__container">
         <span className="nav__tab container">
           <ul className="nav__list__container">

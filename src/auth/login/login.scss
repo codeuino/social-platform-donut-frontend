@@ -1,3 +1,6 @@
+body {
+  max-height: 90vh;
+}
 .login-page {
   display: flex;
   flex-direction: row;
@@ -14,7 +17,7 @@
       }
     }
     .extra-donuts {
-      position: absolute;
+      position: fixed;
       bottom: 0;
       left: 0;
       img {
