@@ -11,8 +11,7 @@ class PostContent extends Component {
     super(props);
     this.state = {
       post: {},
-      commentsLoaded: false,
-      postId: "",
+      comments: null,
     };
   }
 

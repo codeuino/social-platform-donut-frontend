@@ -1,32 +1,14 @@
 import React, { Component } from "react";
 import { Card, Button } from "react-bootstrap";
 import "./ReadMe.scss";
-import { Editor } from "@tinymce/tinymce-react";
 import { updateProfile, getProfile } from "../../actions/usersAction";
 import { connect } from "react-redux";
+import ReadMeEditor from './ReadMeEditor'
+import ReadMePreview from './ReadMePreview'
 
 class ReadMe extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      longDescription: true,
-      displayEditor: false,
-      currentText: "",
-      firstName: "",
-      lastName: "",
-      shortDesc: "",
-      location: "",
-      github: "",
-      fb: "",
-      linkedIn: "",
-      designation: "",
-      website: "",
-      longDesc: "",
-      canChangeName: "",
-    };
-  }
-
-  componentDidMount() {
     const  userProfile  = this.props.userProfile;
     const about = userProfile.info?.about;
     let longDescription = true;
@@ -34,7 +16,10 @@ class ReadMe extends Component {
       longDescription = false;
     }
 
-    this.setState({
+    this.state = {
+      longDescription: true,
+      displayEditor: false,
+      currentText: "",
       firstName: userProfile.name?.firstName,
       lastName: userProfile.name?.lastName,
       website: about?.website,
@@ -43,7 +28,7 @@ class ReadMe extends Component {
       shortDesc: about?.shortDescription,
       location: about?.location,
       longDescription: longDescription,
-    });
+    };
   }
 
   handleCreateReadMe = () => {
@@ -127,22 +112,7 @@ class ReadMe extends Component {
                 </Button>
               </Card.Body>
             </Card>
-            <Editor
-              value={this.state.longDesc}
-              disabled={true}
-              apiKey="lvp9xf6bvvm3nkaupm67ffzf50ve8femuaztgg7rkgkmsws3"
-              init={{
-                height: "100%",
-                width: "100%",
-                menubar: false,
-                plugins: [
-                  "advlist autolink lists link image charmap print preview anchor",
-                  "searchreplace visualblocks code fullscreen",
-                  "insertdatetime media table paste code help wordcount",
-                ],
-                toolbar: false,
-              }}
-            />
+            <ReadMePreview longDesc={this.state.longDesc} />
           </div>
         ) : displayEditor ? (
           <div className="editorContainer">
@@ -158,66 +128,7 @@ class ReadMe extends Component {
                 </Button>
               </Card.Body>
             </Card>
-            <Editor
-              value={this.state.longDesc}
-              apiKey="lvp9xf6bvvm3nkaupm67ffzf50ve8femuaztgg7rkgkmsws3"
-              init={{
-                height: "100%",
-                width: "100%",
-                menubar: false,
-                plugins: [
-                  "advlist autolink lists link image charmap print preview anchor",
-                  "searchreplace visualblocks code fullscreen",
-                  "insertdatetime media table paste code help wordcount",
-                  "textpattern",
-                ],
-                textpattern_patterns: [
-                  { start: "#", format: "h1" },
-                  { start: "##", format: "h2" },
-                  { start: "###", format: "h3" },
-                  { start: "####", format: "h4" },
-                  { start: "#####", format: "h5" },
-                  { start: "######", format: "h6" },
-                  { start: "* ", cmd: "InsertUnorderedList" },
-                  { start: "- ", cmd: "InsertUnorderedList" },
-                  {
-                    start: "1. ",
-                    cmd: "InsertOrderedList",
-                    value: { "list-style-type": "decimal" },
-                  },
-                  {
-                    start: "1) ",
-                    cmd: "InsertOrderedList",
-                    value: { "list-style-type": "decimal" },
-                  },
-                  {
-                    start: "a. ",
-                    cmd: "InsertOrderedList",
-                    value: { "list-style-type": "lower-alpha" },
-                  },
-                  {
-                    start: "a) ",
-                    cmd: "InsertOrderedList",
-                    value: { "list-style-type": "lower-alpha" },
-                  },
-                  {
-                    start: "i. ",
-                    cmd: "InsertOrderedList",
-                    value: { "list-style-type": "lower-roman" },
-                  },
-                  {
-                    start: "i) ",
-                    cmd: "InsertOrderedList",
-                    value: { "list-style-type": "lower-roman" },
-                  },
-                ],
-                toolbar:
-                  "undo redo | formatselect | bold italic backcolor | \
-                    alignleft aligncenter alignright alignjustify | \
-                    bullist numlist outdent indent | removeformat | help",
-              }}
-              onEditorChange={this.handleEditorChange}
-            />
+            <ReadMeEditor longDesc={this.state.longDesc} onEditorChange={this.handleEditorChange}/>    
           </div>
         ) : (
           <Card className="readmeCard" style={{ backgroundColor: "#E8F1FD" }}>
