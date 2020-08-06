@@ -57,7 +57,6 @@ class Members extends Component {
     checkRemoveRight()
       ? this.setState({ isAdmin: true })
       : this.setState({ isAdmin: false });
-    this.props.getInviteLink("user");
   }
 
   componentWillReceiveProps(nextProps) {
