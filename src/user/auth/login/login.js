@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import { Button, Row, Col } from "react-bootstrap";
 import LoginForm from "../login-form/login-form";
 import SignUpForm from "../signup-form/signup-form";
-import { DonutTitle } from "../../donutTitle/donutTitle";
-import multipleDonuts from "../../images/extra-donuts.png";
-import GoogleLogin from '../../images/icons8-google-48.png'
+import { DonutTitle } from "../../../donutTitle/donutTitle";
+import multipleDonuts from "../../../assets/images/extra-donuts.png";
+import GoogleLogin from "../../../assets/images/icons8-google-48.png";
 import { FaGithub } from 'react-icons/fa'
 import "./login.scss";
 

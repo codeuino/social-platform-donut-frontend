@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Button, Form, Image } from "react-bootstrap";
 import "./DashboardContent.scss";
-import userIcon2 from "../../../../images/userIcon2.jpg";
+import userIcon2 from "../../../../assets/images/userIcon2.jpg";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import {
