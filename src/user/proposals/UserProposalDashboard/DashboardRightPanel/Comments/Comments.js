@@ -47,6 +47,7 @@ class Comments extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    console.log('RECEIVINGGGGGGGGGGGGG')
     console.log(nextProps);
     nextProps.proposalNotifications.forEach((notification, index) => {
       let createdTime = new Date(notification.createdAt)
@@ -88,7 +89,7 @@ class Comments extends Component {
         <div className="ideas-title">Comments</div>
         <div className="ideas-container">
           <ListGroup variant="flush">
-            {notifications.map((notification, index) => {
+            {notifications?.map((notification, index) => {
               return (
                 <ListGroup.Item
                   key={index}
