@@ -47,7 +47,7 @@ export const createEvent = (eventInfo, history) => async (dispatch) => {
 }
 
 // GET ALL EVENTS 
-export const getAllEvents = (pagination = 10, page = 1) => async (dispatch) => {
+export const getAllEvents = (pagination = 6, page = 1) => async (dispatch) => {
   try {
     const res = await axios.get(`${BASE_URL}/event/all?pagination=${pagination}&page=${page}`)
     dispatch(setRequestStatus(false))

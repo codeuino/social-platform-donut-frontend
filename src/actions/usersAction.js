@@ -170,7 +170,7 @@ export const getPostsCreatedByUser = (pagination = 10, page = 1) => async (dispa
 // GET INVITE LINK 
 export const getInviteLink = (role) => async (dispatch) => {
   try {
-    const res = await axios.get(`${BASE_URL}/user/invite?role=${role}`)
+    const res = await axios.get(`${BASE_URL}/user/link/invite?role=${role}`)
     dispatch(setRequestStatus(false));
     if(res.status === 200) {
       dispatch(setRequestStatus(true));

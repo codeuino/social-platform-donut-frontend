@@ -10,6 +10,7 @@ import { connect } from 'react-redux'
 import { getAllEvents } from '../../actions/eventAction'
 import { checkDeleteRights } from '../dashboard/utils/checkDeleteRights'
 import { getOrgProfile } from '../../actions/orgAction'
+import { Pagination } from 'antd'
 import Moment from 'react-moment'
 import { canEditCheck } from '../projects/Utils/CanEdit'
 
@@ -32,7 +33,7 @@ class Events extends Component {
 
   componentDidMount() {
     setTimeout(() => {
-      this.props.getAllEvents()
+      this.props.getAllEvents() // by default 6 events per page
       this.props.getOrgProfile()
     })
   }
@@ -48,6 +49,16 @@ class Events extends Component {
      }, () => {
       console.log('updating all events ', this.state)
     })
+  }
+
+  onShowSizeChange = (currentPage, pageSize) => {
+    console.log('currentPage pageSize ', currentPage, pageSize)
+    this.props.getAllEvents(pageSize, currentPage)
+  }
+
+  handlePagination = (pageNumber) => {
+    console.log('page number ', pageNumber);
+    this.props.getAllEvents(6, pageNumber)
   }
 
   
@@ -265,6 +276,15 @@ class Events extends Component {
             <Grid container spacing={3} >
               {Events}
             </Grid>
+          </div>
+          <div className="event__pagination__container">
+            <Pagination
+              showSizeChanger
+              onShowSizeChange={this.onShowSizeChange}
+              defaultCurrent={1}
+              total={100}
+              onChange={this.handlePagination}
+            />
           </div>
         </div>
         <Popups
