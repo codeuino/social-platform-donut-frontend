@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import Login from "./auth/login/login";
+import Login from "./user/auth/login/login";
 import Dashboard from "./user/dashboard/dashboard";
 import PinnedPosts from "./user/pinned-posts/pinned-posts";
 import Profile from "./user/profile/profile";

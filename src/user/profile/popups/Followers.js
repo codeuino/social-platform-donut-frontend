@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Modal, Button, Row, Image } from "react-bootstrap";
 import PropTypes from 'prop-types';
-import logo from "../../../svgs/logo-image.jpg";
+import logo from "../../../assets/svgs/logo-image.jpg";
 import { connect } from 'react-redux'
 import { followUser, unFollowUser } from '../../../actions/usersAction'
 import { getMember } from '../../../actions/insightAction'

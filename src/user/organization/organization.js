@@ -6,7 +6,7 @@ import Portfolio from "../dashboard/portfolio/portfolio";
 import { Card, CardContent } from "@material-ui/core";
 import Updates from "./updates/updates";
 import OrgContact from "./org-contact/OrgContact";
-import orginfo from "../../jsonData/orginfo";
+import orginfo from "../../assets/jsonData/orginfo";
 import topBarLoading from "../../placeholderLoading/topBarLoading/topBarLoading";
 import orgUpdatesLoading from "../../placeholderLoading/orgUpdatesLoading/orgUpdatesLoading";
 import contactLoading from "../../placeholderLoading/contactLoading/contactLoading";

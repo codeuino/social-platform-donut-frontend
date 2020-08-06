@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { removeUser, getInviteLink } from '../../../actions/usersAction'
 import { getMember } from '../../../actions/insightAction'
 import { getOrgProfile } from '../../../actions/orgAction'
-import logo from "../../../svgs/logo-image.jpg";
+import logo from "../../../assets/svgs/logo-image.jpg";
 import { checkRemoveRight } from '../../dashboard/utils/checkDeleteRights'
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

@@ -5,7 +5,7 @@ import { makeStyles,Grid , Card, CardActionArea, CardActions, CardContent, CardM
 import { Button } from "react-bootstrap";
 import { connect } from 'react-redux'
 import { createProject, getAllProjects } from '../../actions/projectAction'
-import projectImage from '../../images/project.png'
+import projectImage from '../../assets/images/project.png'
 import { withRouter } from "react-router-dom";
 
 class Projects extends Component {

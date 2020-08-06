@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { createComment, getAllCommentsOfPost, deleteComment } from '../../../../actions/commentAction'
 import "./comment.scss";
 // import comments from "../../../../jsonData/comments";
-import profile_img from '../../../../svgs/profile-icon.svg'
+import profile_img from '../../../../assets/svgs/profile-icon.svg'
 import { MdDelete } from "react-icons/md";
 import { checkDeleteRights } from '../../../dashboard/utils/checkDeleteRights'
 

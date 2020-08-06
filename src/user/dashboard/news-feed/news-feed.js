@@ -25,9 +25,9 @@ import Comment  from "./popups/comment";
 import { connect } from 'react-redux'
 import { getAllCommentsOfPost } from '../../../actions/commentAction'
 import { upVotePost } from '../../../actions/postAction' 
-import profileImg from '../../../svgs/evt-creator.svg';
-import eventImg from "../../../svgs/event-img-1.svg";
-import eventImg2 from "../../../svgs/event-img-2.svg";
+import profileImg from '../../../assets/svgs/evt-creator.svg';
+import eventImg from "../../../assets/svgs/event-img-1.svg";
+import eventImg2 from "../../../assets/svgs/event-img-2.svg";
 import parse from "html-react-parser";
 import { withRouter } from 'react-router-dom'
 import { rsvpYes } from '../../../actions/eventAction'

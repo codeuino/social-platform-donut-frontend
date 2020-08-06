@@ -4,9 +4,9 @@ import { NavLink, Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import "./navigation.scss";
 import Logout from "../../profile/popups/Logout";
-import logo from "../../../svgs/logout.svg";
+import logo from "../../../assets/svgs/logout.svg";
 import {Info} from "../../integrations/NameForm";
-import JitsiMeets from '../../../images/jitsi.png'
+import JitsiMeets from '../../../assets/images/jitsi.png'
 import {
   DonutTitleSmall,
   DonutIconSmall,

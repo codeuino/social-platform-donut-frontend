@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./DiscussionContent.scss";
 import { Button, Badge, Image, ListGroup } from "react-bootstrap";
 import DiscussionComments from "./DiscussionComments/DiscussionComments";
-import userIcon2 from "../../../../images/userIcon2.jpg";
+import userIcon2 from "../../../../assets/images/userIcon2.jpg";
 import RequestChanges from "../DiscussionPopups/RequestChanges";
 import { withRouter, Link } from "react-router-dom";
 import { Editor } from "@tinymce/tinymce-react";

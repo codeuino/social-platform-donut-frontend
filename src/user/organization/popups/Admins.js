@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Modal, Button, Row, Image, Form } from "react-bootstrap";
 import { connect } from 'react-redux'
 import { removeAdmin } from '../../../actions/orgAction'
-import logo from "../../../svgs/logo-image.jpg";
+import logo from "../../../assets/svgs/logo-image.jpg";
 import { getMember } from '../../../actions/insightAction'
 import { getInviteLink } from '../../../actions/usersAction'
 import { getOrgProfile } from '../../../actions/orgAction'

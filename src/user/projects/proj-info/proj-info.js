@@ -5,7 +5,7 @@ import LanguageIcon from '@material-ui/icons/Language';
 import Navigation from "../../dashboard/navigation/navigation";
 import { Card, Button, Badge, Col, Row } from "react-bootstrap";
 import "./proj-info.scss";
-import proj_img from "../../../images/project.png";
+import proj_img from "../../../assets/images/project.png";
 import EditProject from "../popups/edit-project";
 import DeleteIcon from "@material-ui/icons/Delete";
 import DeleteProject from "../popups/delete-project";
