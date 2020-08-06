@@ -13,7 +13,7 @@
       }
     }
     .cta {
-      padding: 5px 8px;
+      // padding: 5px 8px;
       button {
         margin: 0 3px;
       }
@@ -129,7 +129,7 @@
                   border-bottom: 1px solid rgba(204, 204, 204, 0.7);
                   border-left: 1px solid rgba(204, 204, 204, 0.7);
                   .time-content {
-                    width: 50%;
+                    width: 90%;
                     margin: 0 auto;
                     small {
                       font-family: Inter;
@@ -381,7 +381,7 @@
   }
 }
 .news-feed {
-  width: 110%;
+  width: 148%;
   .post-article {
     .article {
       .post-input {

@@ -22,6 +22,7 @@
     }
     .button-container {
       .posts {
+        margin-left: 0px;
         .category {
           text-align: left;
           margin-left: 0px;
@@ -148,8 +149,6 @@
               background-color: white;
               color: #007bff;
               padding: 4px 40px;
-              border: solid 1px #1a73e8;
-              border-radius: 100px;
               margin: 0 10px;
               height: 30px;
               cursor: pointer;

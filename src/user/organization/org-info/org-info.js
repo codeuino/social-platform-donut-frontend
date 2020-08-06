@@ -5,6 +5,7 @@ import { Avatar } from "@material-ui/core";
 import EditInfo from "../popups/EditInfo";
 import { connect } from 'react-redux';
 import { getOrgProfile } from '../../../actions/orgAction'
+import Moment from 'react-moment'
 
 class OrgInfo extends Component {
   constructor(props) {
@@ -65,7 +66,11 @@ class OrgInfo extends Component {
               Follow
             </Button> */}
           </h1>
-          <p className="profession">Created on: {createdAt || "NA"}</p>
+          <p className="profession mr-3">Created on: 
+            <Moment format="DD MMM YYYY">
+              {createdAt || "NA"}
+            </Moment>
+          </p>
           <p className="desc">
             {description?.shortDescription || "Short description of org "}
           </p>

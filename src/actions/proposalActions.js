@@ -9,10 +9,12 @@ import {
   GET_USER_PROPOSALS,
 } from "../actions/types";
 
+import { BASE_URL } from './baseApi'
+
 // CREATE PROPOSAL
 export const createProposal = (proposalInfo) => async (dispatch) => {
   try {
-    const res = await axios.post("/proposal", proposalInfo);
+    const res = await axios.post(`${BASE_URL}/proposal`, proposalInfo);
     dispatch(setRequestStatus(false));
     if (res.status === 201) {
       dispatch(setRequestStatus(true));
@@ -30,7 +32,7 @@ export const createProposal = (proposalInfo) => async (dispatch) => {
 // GET PROPOSAL DATA
 export const getProposal = (proposalId) => async (dispatch) => {
   try {
-    const res = await axios.get("/proposal/" + proposalId);
+    const res = await axios.get(`${BASE_URL}/proposal/${proposalId}`);
     dispatch(setRequestStatus(false));
     if (res.status === 200) {
       dispatch(setRequestStatus(true));
@@ -48,10 +50,7 @@ export const getProposal = (proposalId) => async (dispatch) => {
 // SAVE PROPOSAL DATA
 export const saveProposal = (proposalData) => async (dispatch) => {
   try {
-    const res = await axios.patch(
-      "/proposal/" + proposalData.proposalId,
-      proposalData
-    );
+    const res = await axios.patch(`${BASE_URL}/proposal/${proposalData.proposalId}`, proposalData);
     dispatch(setRequestStatus(false));
     if (res.status === 200) {
       dispatch(setRequestStatus(true));
@@ -65,10 +64,7 @@ export const saveProposal = (proposalData) => async (dispatch) => {
 export const submitProposal = (proposalData) => async (dispatch) => {
   console.log(proposalData);
   try {
-    const res = await axios.patch(
-      "/proposal/change/" + proposalData.proposalId,
-      proposalData
-    );
+    const res = await axios.patch(`${BASE_URL}/proposal/change/${proposalData.proposalId}`, proposalData);
     dispatch(setRequestStatus(false));
     if (res.status === 200) {
       dispatch(setRequestStatus(true));
@@ -81,7 +77,7 @@ export const submitProposal = (proposalData) => async (dispatch) => {
 // DELETE PROPOSAL
 export const deleteProposal = (proposalId) => async (dispatch) => {
   try {
-    const res = await axios.delete("/proposal", {
+    const res = await axios.delete(`${BASE_URL}/proposal`, {
       headers: {},
       data: { proposalId: proposalId },
     });
@@ -97,7 +93,7 @@ export const deleteProposal = (proposalId) => async (dispatch) => {
 // COMMENT ON PROPOSAL
 export const commentProposal = (commentData) => async (dispatch) => {
   try {
-    const res = await axios.post("/proposal/comment", commentData);
+    const res = await axios.post(`${BASE_URL}/proposal/comment`, commentData);
     dispatch(setRequestStatus(false));
     if (res.status === 200) {
       dispatch(setRequestStatus(true));
@@ -110,13 +106,13 @@ export const commentProposal = (commentData) => async (dispatch) => {
 // GET USER RELATED PROPOSAL NOTIFICATIONS
 export const getUserProposalNotifications = (data) => async (dispatch) => {
   try {
-    const res = await axios.post("/proposal/notifications", data);
+    const res = await axios.post(`${BASE_URL}/proposal/notifications`, data);
     console.log(res);
     if (res.status === 200) {
       dispatch(setRequestStatus(true));
       dispatch({
         type: GET_USER_PROPOSAL_NOTIFICATIONS,
-        payload: res.data.proposal || res.data.msg,
+        payload: res.data.notifications || res.data.msg,
       });
     }
   } catch (error) {
@@ -127,7 +123,7 @@ export const getUserProposalNotifications = (data) => async (dispatch) => {
 // GET ALL PROPOSALS
 export const getAllProposals = () => async (dispatch) => {
   try {
-    const res = await axios.post("/proposal/all");
+    const res = await axios.post(`${BASE_URL}/proposal/all`);
     dispatch(setRequestStatus(false));
     if (res.status === 200) {
       dispatch(setRequestStatus(true));
@@ -144,7 +140,7 @@ export const getAllProposals = () => async (dispatch) => {
 // GET PROPOSALS BY USER ID
 export const getProposalsByUser = (userId) => async (dispatch) => {
   try {
-    const res = await axios.get(`/proposal/user/${userId}`);
+    const res = await axios.get(`${BASE_URL}/proposal/user/${userId}`);
     dispatch(setRequestStatus(false));
     if (res.status === 200) {
       dispatch(setRequestStatus(true));

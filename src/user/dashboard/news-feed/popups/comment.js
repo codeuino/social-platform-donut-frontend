@@ -65,10 +65,14 @@ class Comment extends Component {
         </Col>
         <Col md={10}>
           <div className="contain">
-            <p className="user">{comment?.userId?.name?.firstName + " " + comment?.userId?.name?.lastName || "User name"}</p>
-            <p className="comment">{comment.content || "Comment content"}
-              {checkDeleteRights(comment.userId?._id) ? (<MdDelete size={20} className="delete__icon" onClick={this.onDelete.bind(this, comment._id)}
-              />) : null}
+            <p className="user">
+              {comment?.userId?.name?.firstName + " " + comment?.userId?.name?.lastName || "User name"}</p>
+            <p className="comment">
+              {comment.content || "Comment content"}
+              {checkDeleteRights(comment.userId?._id) 
+                ? (<MdDelete size={20} className="delete__icon" onClick={this.onDelete.bind(this, comment._id)}
+              />) 
+                : null}
             </p>
           </div>
         </Col>

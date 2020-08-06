@@ -69,6 +69,11 @@
         padding: 1px;
     }
 }
+.form-control:disabled,
+.form-control[readonly] {
+    background-color: #ffffff;
+}
+
 .modal-backdrop {
     background: rgba(0, 0, 0, 0.7) !important;
 }

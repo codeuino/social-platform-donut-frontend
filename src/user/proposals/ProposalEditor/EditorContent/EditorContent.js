@@ -50,7 +50,7 @@ class EditorContent extends Component {
         proposalStatus: fetchedProposal.proposalStatus,
       });
     }
-    if (Object.keys(createProposal).length !== 0) {
+    if (Object.keys(createdProposal).length !== 0) {
       this.setState(
         {
           isSaving: false,

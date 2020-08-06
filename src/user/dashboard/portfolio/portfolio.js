@@ -5,6 +5,7 @@ import Followers from "../../profile/popups/Followers";
 import Admins from "../../organization/popups/Admins";
 import { connect } from 'react-redux'
 import { getMembers, getPersonalOverview } from '../../../actions/insightAction'
+import { clearInviteLink } from '../../../actions/usersAction'
 import { getProfile } from '../../../actions/usersAction'
 
 class Portfolio extends Component {
@@ -39,9 +40,15 @@ class Portfolio extends Component {
     let members = insight.allMembers
     let admins = insight.allMembers.filter(member => member.isAdmin === true);
     let info = insight.personalOverview
-    let followers = user.userProfile.followers
-    let followings = user.userProfile.followings;
-    this.setState({ members: members, admins: admins, personalInfo: info, followers: followers, followings: followings }, () => {
+    let followers = user.userProfile?.followers
+    let followings = user.userProfile?.followings;
+    this.setState({ 
+      members: members, 
+      admins: admins, 
+      personalInfo: info, 
+      followers: followers, 
+      followings: followings
+     }, () => {
       console.log('state ', this.state);
     })
   }
@@ -51,6 +58,7 @@ class Portfolio extends Component {
   }
   closeMembersList = () => {
     this.setState({ membersList: false })
+    this.props.clearInviteLink()
   }
   showFollowersList = () => {
     this.setState({ followersList: true });
@@ -63,6 +71,7 @@ class Portfolio extends Component {
   }
   hideAdminLists = () => {
     this.setState({ adminList: false })
+    this.props.clearInviteLink()
   }
   render() {
     const { members, admins, personalInfo, followers, followings } = this.state
@@ -114,4 +123,9 @@ const mapStateToProps = (state) => ({
   user: state.user
 })
 
-export default connect(mapStateToProps, { getMembers, getPersonalOverview, getProfile })(Portfolio);
+export default connect(mapStateToProps, {
+  getMembers, 
+  getPersonalOverview, 
+  getProfile,
+  clearInviteLink
+})(Portfolio);

@@ -1,7 +1,8 @@
-import { GET_ALL_POSTS, GET_ALL_PINNED_POSTS } from '../actions/types'
+import { GET_ALL_POSTS, GET_ALL_PINNED_POSTS, GET_SINGLE_POST } from '../actions/types'
 const initialState = {
   allPosts: [],
-  pinnedPosts: []
+  pinnedPosts: [],
+  singlePost: {}
 }
 
 export default (state = initialState, action) => {
@@ -10,6 +11,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         allPosts: action.payload
+      }
+    }
+    case GET_SINGLE_POST: {
+      return {
+        ...state,
+        singlePost: action.payload
       }
     }
     case GET_ALL_PINNED_POSTS: {

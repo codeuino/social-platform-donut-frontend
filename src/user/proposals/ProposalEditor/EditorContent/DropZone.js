@@ -36,29 +36,23 @@ function StyledDropzone(props) {
   const [proposalId, setProposalId] = useState(props.idContent);
 
   const onDrop = useCallback((acceptedFiles) => {
-    if (proposalId === "new") {
-      toast.error(
-        "Please save the proposal as a draft before attaching images"
-      );
-    } else {
-      let formData = new FormData();
-      formData.append("file", acceptedFiles[0]);
-      const URL = `http://localhost:5000/proposal/attach/${props.idContent}`;
+    let formData = new FormData();
+    formData.append("file", acceptedFiles[0]);
+    const URL = `http://localhost:5000/proposal/attach/${props.idContent}`;
 
-      fetch(URL, {
-        method: "POST",
-        body: formData,
-        headers: {
-          Authorization: localStorage.getItem("jwtToken"),
-        },
+    fetch(URL, {
+      method: "POST",
+      body: formData,
+      headers: {
+        Authorization: localStorage.getItem("jwtToken"),
+      },
+    })
+      .then((res) => {
+        toast.success("Image successfully attached to proposal!");
       })
-        .then((res) => {
-          toast.success("Image successfully attached to proposal!");
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
   const {

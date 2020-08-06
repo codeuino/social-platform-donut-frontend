@@ -5,11 +5,12 @@ import { SET_ADMIN, GET_ADMIN } from './types'
 import { setAuthToken } from '../utils/setAuthToken'
 import jwt_decode from 'jwt-decode';
 import { setCurrentUser } from './authAction'
+import { BASE_URL } from './baseApi'
 
 
 export const createAdmin = (adminInfo) => async (dispatch) => {
   try {
-    const res = await axios.post('/user/', adminInfo)
+    const res = await axios.post(`${BASE_URL}/user/`, adminInfo)
     setRequestStatus(false)
     if (res.status === 201) {
       setRequestStatus(true)
@@ -25,14 +26,14 @@ export const createAdmin = (adminInfo) => async (dispatch) => {
 
 export const loginAdmin = (adminInfo, history) => async (dispatch) => {
   try {
-    const res = await axios.post('/auth/login/', adminInfo)
+    const res = await axios.post(`${BASE_URL}/auth/login/`, adminInfo)
    dispatch(setRequestStatus(false));
    if (res.status === 200) {
 
      const token = res.data.token;
      dispatch(setRequestStatus(true));
 
-     localStorage.setItem("jwtToken", JSON.stringify(token));
+     localStorage.setItem("jwtToken", (token));
      setAuthToken(token);
 
      // update state with user
