@@ -87,7 +87,7 @@ class Admins extends Component {
   copyToClipBoard = async (link) => {
     try {
       await navigator.clipboard.writeText(link);
-      if (this.state.inviteLink !== null) {
+      if (link) {
         toast.success('Link copied to clipboard!');
       }
     } catch (error) {
@@ -162,17 +162,20 @@ class Admins extends Component {
                   as="input"
                   defaultValue={inviteLink}
                   readOnly={true}
-                  onClick={this.copyToClipBoard.bind(this, inviteLink)}
                   placeholder="Get invite link"
                 ></Form.Control>
                 <Button
                   className="invite__btn"
-                  onClick={this.onGetInviteLink}
+                  onClick = {
+                    Boolean(inviteLink.length === 0) 
+                    ? this.onGetInviteLink 
+                    : this.copyToClipBoard.bind(this, inviteLink)
+                  }
                   disabled={Boolean(
                     whoCanSendInvite !== "ADMINS" || whoCanSendInvite !== "BOTH"
                   ) ? false : true }
                 >
-                  Get link
+                  {Boolean(inviteLink.length === 0) ? <>Get Link</> : <>Copy</>}
                 </Button>
               </div>
               {/* <div className="share__btn__container">

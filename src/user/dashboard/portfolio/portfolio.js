@@ -5,6 +5,7 @@ import Followers from "../../profile/popups/Followers";
 import Admins from "../../organization/popups/Admins";
 import { connect } from 'react-redux'
 import { getMembers, getPersonalOverview } from '../../../actions/insightAction'
+import { clearInviteLink } from '../../../actions/usersAction'
 import { getProfile } from '../../../actions/usersAction'
 
 class Portfolio extends Component {
@@ -56,6 +57,7 @@ class Portfolio extends Component {
   }
   closeMembersList = () => {
     this.setState({ membersList: false })
+    this.props.clearInviteLink()
   }
   showFollowersList = () => {
     this.setState({ followersList: true });
@@ -68,6 +70,7 @@ class Portfolio extends Component {
   }
   hideAdminLists = () => {
     this.setState({ adminList: false })
+    this.props.clearInviteLink()
   }
   render() {
     const { members, admins, personalInfo, followers, followings } = this.state
@@ -119,4 +122,9 @@ const mapStateToProps = (state) => ({
   user: state.user
 })
 
-export default connect(mapStateToProps, { getMembers, getPersonalOverview, getProfile })(Portfolio);
+export default connect(mapStateToProps, {
+  getMembers, 
+  getPersonalOverview, 
+  getProfile,
+  clearInviteLink
+})(Portfolio);

@@ -10,10 +10,10 @@ import EditProject from "../popups/edit-project";
 import DeleteIcon from "@material-ui/icons/Delete";
 import DeleteProject from "../popups/delete-project";
 import { makeStyles, Grid } from "@material-ui/core";
-// import { CardActionArea, CardActions, CardContent, CardMedia, Typography } from "@material-ui/core"
 import { connect } from 'react-redux'
 import { getProjectById } from '../../../actions/projectAction'
 import { checkDeleteRights } from '../../dashboard/utils/checkDeleteRights'
+import Moment from 'react-moment'
 
 
 class ProjInfo extends Component {
@@ -174,10 +174,20 @@ class ProjInfo extends Component {
                 </Row>
 
                 <p className="createAt">
-                  Created At: {projectInfo?.createdAt}{" "}
+                  Created At: 
+                    <Moment format="DD MMM YYYY">
+                      {projectInfo?.createdAt}
+                    </Moment>
+                  {" "}
                 </p>
-                <p className="place">Updated At: {projectInfo?.updatedAt}</p>
-                <p className="short_des">{projectInfo.description?.short || "Short description"}</p>
+                <p className="place">Updated At: 
+                  <Moment format="DD MMM YYYY">
+                    {projectInfo?.createdAt}
+                  </Moment>
+                </p>
+                <p className="short_des">
+                  {projectInfo.description?.short || "Short description"}
+                  </p>
               </div>
             </Col>
           </Row>

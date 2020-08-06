@@ -51,12 +51,7 @@ class Profile extends Component {
     console.log("profile nextProps ", nextProps);
     const { userEvents, userProjects, userPosts } = nextProps.user;
     const { pinnedPosts } = nextProps.posts
-    console.log("userEvents ", userEvents);
-    console.log("userProjects ", userProjects);
-    console.log("userPosts ", userPosts);
-    console.log("pinnedPosts ", pinnedPosts)
     let all = [...userEvents, ...userProjects, ...userPosts]
-    console.log("all ", all);
     this.setState({
       userProfile: nextProps.user?.userProfile,
       userEvents: userEvents,

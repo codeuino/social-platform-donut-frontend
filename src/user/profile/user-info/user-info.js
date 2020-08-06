@@ -19,7 +19,11 @@ class UserInfo extends Component {
       location: '',
       shortDesc: '',
       website: '',
-      userId: ''
+      userId: '',
+      github: '',
+      twitter: '',
+      linkedin: '',
+      facebook: ''
     }
   }
 
@@ -34,26 +38,38 @@ class UserInfo extends Component {
     console.log('userInfo nextProps ', nextProps.user.userProfile)
     const name = nextProps.user.userProfile?.name || "NA"
     const about = nextProps.user.userProfile?.info?.about;
+    const { socialMedia } = nextProps.userProfile
     this.setState({ 
       name: `${name?.firstName + " " + name?.lastName}`,
       designation: about?.designation,
       shortDesc: about?.shortDescription,
       location: about?.location,
       website: about?.website,
-      userId: nextProps.userProfile?._id
+      userId: nextProps.userProfile?._id,
+      github: socialMedia?.github,
+      twitter: socialMedia?.twitter,
+      linkedin: socialMedia?.linkedin,
+      facebook: socialMedia?.facebook
     })
   }
 
   onFbClick = () => {
     // this.props.history.push()
+    this.state.facebook 
+      ? window.open(`${this.state.facebook}`, '_blank')
+      : window.location.href = `/profile/${this.state.userId}`
   }
 
   onLinkedInClick = () => {
-
+    this.state.linkedin 
+      ? window.open(`${this.state.linkedin}`, '_blank')
+      : window.location.href = `/profile/${this.state.userId}`
   }
 
   onGithubClick = () => {
-    
+    this.state.github 
+      ? window.open(`${this.state.github}`, '_blank')
+      : window.location.href = `/profile/${this.state.userId}`
   }
 
   render() {

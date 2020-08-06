@@ -85,6 +85,15 @@ class LoginForm extends Component {
     });
   };
 
+   // toggle Popups
+  toggle = (toggler) => {
+    this.setState({
+      modalShow: !this.state.modalShow
+    }, () => {
+      console.log('toggler ', this.state);
+    })
+  }
+
   render() {
     const { error } = this.state
     return (
@@ -133,6 +142,7 @@ class LoginForm extends Component {
           option={this.state.option}
           optionValue={this.state.optionValue}
           modalShow={this.state.modalShow}
+          toggler={this.toggle}
         />
         {error ? (
            <ToastContainer

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Button, ButtonGroup } from 'react-bootstrap'
 import {
   List,
   Card,
@@ -13,7 +14,6 @@ import {
   CardMedia,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { Button, } from "react-bootstrap";
 import AddEventModal from "./popups/AddEventModal";
 import AddProjectModal from "./popups/AddProjectModal";
 import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
@@ -31,6 +31,7 @@ import eventImg2 from "../../../assets/svgs/event-img-2.svg";
 import parse from "html-react-parser";
 import { withRouter } from 'react-router-dom'
 import { rsvpYes } from '../../../actions/eventAction'
+import Moment from 'react-moment'
 
 const styles = makeStyles((theme) => ({
   root: {
@@ -188,7 +189,9 @@ function NewsFeed(props) {
                   >
                       {post?.userId?.name?.firstName + " " + post?.userId?.name?.lastName}
                   </h2>
-                  <small>{post?.createdAt}</small>
+                  <Moment format="DD MMM YYYY">
+                    {post?.createdAt}
+                  </Moment>
                 </ListItemText>
               </ListItem>
               <div className="post-details2">{parse(post?.content)}</div>
@@ -253,7 +256,7 @@ function NewsFeed(props) {
                                 >
                                   {project?.createdBy?.name?.firstName + " " + project?.createdBy?.name?.lastName}
                                 </h2>
-                                <small>{project?.createdAt}</small>
+                                <Moment format="DD MMM YYYY">{project?.createdAt}</Moment>
                             </ListItemText>
                         </ListItem>
                         <div className="post-details2">{project?.description?.short}</div>
@@ -289,14 +292,16 @@ function NewsFeed(props) {
                                 <div className="event-schedule">
                                     <div className="event-date">
                                         <div className="date-content">
-                                            <small>DATE</small>
-                                            <h4>{event?.eventDate}</h4>
+                                            <small>DATE</small><br/>
+                                            <Moment format="DD MMM YYYY">
+                                              {event?.eventDate}
+                                            </Moment>
                                         </div>
                                     </div>
                                     <div className="event-time">
                                         <div className="time-content">
                                             <small>Location</small>
-                                            <h4>{event?.location}</h4>
+                                            <h5>{event?.location}</h5>
                                         </div>
                                     </div>
                                 </div>
@@ -324,7 +329,7 @@ function NewsFeed(props) {
                                 >
                                   {event?.createdBy?.name?.firstName + " " + event?.createdBy?.name?.lastName}
                                 </h2>
-                                <small>{event?.createdAt}</small>
+                                <Moment format="DD MMM YYYY">{event?.createdAt}</Moment>
                             </ListItemText>
                         </ListItem>
                         <div className="post-details2">{event?.description?.shortDescription}</div>
