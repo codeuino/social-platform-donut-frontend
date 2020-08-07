@@ -4,7 +4,7 @@ import Like from "../../../../images/Like.png";
 import Happy from "../../../../images/Happy.png";
 import Heart from "../../../../images/Heart.png";
 import DonutReaction from "../../../../images/DonutReaction.png";
-import userIcon2 from "../../../../images/userIcon2.jpg";
+import userIcon2 from "../../../../assets/images/userIcon2.jpg";
 
 class PostReactionModal extends Component {
   constructor(props) {
