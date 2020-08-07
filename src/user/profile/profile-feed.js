@@ -1,11 +1,6 @@
 import React, { Component } from "react";
 import "./profile-feed.scss";
-import {
-  FaComments,
-  FaGlobe,
-  FaStickyNote,
-  FaCalendar,
-} from "react-icons/fa";
+import { FaComments, FaGlobe, FaStickyNote, FaCalendar } from "react-icons/fa";
 import { connect } from "react-redux";
 import {
   getProfile,
@@ -18,7 +13,7 @@ import { resetComments } from "../../actions/commentAction";
 import { Card, Image } from "react-bootstrap";
 import { Circle } from "react-shapes";
 import ReadMe from "./ReadMe";
-import userIcon2 from "../../images/userIcon2.jpg";
+import userIcon2 from "../../assets/images/userIcon2.jpg";
 import parse from "html-react-parser";
 import PostContent from "./content/PostContent";
 
@@ -60,7 +55,7 @@ class ProfileFeed extends Component {
         userEvents: userEvents,
         userProjects: userProjects,
         userPosts: userPosts,
-        longDescription: userProfile?.info?.about?.longDescription
+        longDescription: userProfile?.info?.about?.longDescription,
       },
       () => {
         console.log(this.state.longDescription);
@@ -128,8 +123,7 @@ class ProfileFeed extends Component {
       );
     });
 
-    const posts = 
-    userPosts.map((post, index) => {
+    const posts = userPosts.map((post, index) => {
       return (
         <div
           className="postItem"
@@ -157,7 +151,7 @@ class ProfileFeed extends Component {
     });
 
     const overviewContent = [...posts, ...events];
-    const {longDescription}= this.state
+    const { longDescription } = this.state;
 
     return (
       <div>
@@ -216,7 +210,7 @@ class ProfileFeed extends Component {
           </div>
         </div>
         <div className="postsContainer">
-          {type === "ReadMe" ? <ReadMe userProfile={userProfile}/> : null}
+          {type === "ReadMe" ? <ReadMe userProfile={userProfile} /> : null}
           <div className="gridContainer">
             {type === "All" ? overviewContent : null}
             {type === "Event" ? events : null}

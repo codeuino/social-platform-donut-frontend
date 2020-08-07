@@ -4,7 +4,7 @@ import "./PostContent.scss";
 import { connect } from "react-redux";
 import parse from "html-react-parser";
 import { getAllCommentsOfPost } from "../../../actions/commentAction";
-import userIcon2 from '../../../images/userIcon2.jpg'
+import userIcon2 from "../../../assets/images/userIcon2.jpg";
 
 class PostContent extends Component {
   constructor(props) {
@@ -55,10 +55,7 @@ class PostContent extends Component {
               <div className="content-card-header">
                 <div className="user-post-info">
                   <div className="user-thumb">
-                    <img
-                      src={userIcon2}
-                      className="img-responsive"
-                    />
+                    <img src={userIcon2} className="img-responsive" />
                   </div>
                   <div className="user-information">
                     <p>{`${post?.userId?.name.firstName} ${post?.userId?.name.lastName}`}</p>
@@ -100,10 +97,7 @@ class PostContent extends Component {
             <div className="content-card-comments">
               <div className="comment-input-holder">
                 <div className="user-thumb">
-                  <img
-                    src={userIcon2}
-                    className="img-responsive"
-                  />
+                  <img src={userIcon2} className="img-responsive" />
                 </div>
                 <div className="comment-input">
                   <div
