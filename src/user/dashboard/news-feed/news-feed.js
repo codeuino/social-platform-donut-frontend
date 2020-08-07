@@ -13,26 +13,51 @@ import {
   IconButton,
   CardMedia,
 } from "@material-ui/core";
+
 import { makeStyles } from "@material-ui/core/styles";
-import { Button } from "react-bootstrap";
+import { Button, Dropdown, FormControl } from "react-bootstrap";
 import AddEventModal from "./popups/AddEventModal";
 import AddProjectModal from "./popups/AddProjectModal";
+import PostReactionModal from "./popups/PostReactionsModal";
 import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
 import ChatBubbleIcon from "@material-ui/icons/ChatBubble";
 import "../../pinned-posts/posts/posts.scss";
 import "./news-feed.scss";
 import AddPostModal from "./popups/AddPostModal";
-import Comment  from "./popups/comment";
-import { connect } from 'react-redux'
-import { getAllCommentsOfPost } from '../../../actions/commentAction'
-import { upVotePost } from '../../../actions/postAction' 
-import profileImg from '../../../assets/svgs/evt-creator.svg';
-import eventImg from "../../../assets/svgs/event-img-1.svg";
-import eventImg2 from "../../../assets/svgs/event-img-2.svg";
+import Comment from "./popups/comment";
+import { connect } from "react-redux";
+import { getAllCommentsOfPost } from "../../../actions/commentAction";
+import { upVotePost } from "../../../actions/postAction";
+import profileImg from "../../../svgs/evt-creator.svg";
+import eventImg from "../../../svgs/event-img-1.svg";
+import eventImg2 from "../../../svgs/event-img-2.svg";
 import parse from "html-react-parser";
-import { withRouter } from 'react-router-dom'
-import { rsvpYes } from '../../../actions/eventAction'
+import { withRouter } from "react-router-dom";
+import { rsvpYes } from "../../../actions/eventAction";
+import { FaEllipsisH, FaThumbtack } from "react-icons/fa";
+import ReactionsElement from "./ReactionsElement";
 import Moment from 'react-moment'
+
+const reactionVariant = {
+  hover: {
+    scale: 1.3,
+    opacity: 0.9,
+    rotate: [0, 10, 0, -10, 0],
+  },
+};
+
+const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
+  <a
+    href=""
+    ref={ref}
+    onClick={(e) => {
+      e.preventDefault();
+      onClick(e);
+    }}
+  >
+    {children}
+  </a>
+));
 
 const styles = makeStyles((theme) => ({
   root: {
@@ -99,11 +124,16 @@ function NewsFeed(props) {
   const [showProject, setShowProject] = useState(false);
   const [showEvent, setShowEvent] = useState(false);
   const [writePost, showPostModal] = useState(false);
+  const [showReactions, setShowReactions] = useState(false);
   const [showComment, toggle] = useState(false);
   const [commentId, setCommentId] = useState("");
   const [events, setEvents] = useState([]);
   const [projects, setAllProjects] = useState([]);
   const [posts, setAllPosts] = useState([]);
+  const [votes, setVotes] = useState({});
+  const [displayReactionContainer, setDisplayReactioContainer] = useState(
+    false
+  );
 
   useEffect(() => {
     console.log("useEffect from news-feed ", props);
@@ -165,7 +195,55 @@ function NewsFeed(props) {
   let onViewProject = (projectId) => {
     console.log("Redirecting to project ", projectId);
     props.history.push(`/${projectId}/proj-info`);
-  }
+
+  let openReactionsModal = (votes) => {
+    console.log(localStorage.getItem("userId"));
+    setVotes(votes);
+  };
+
+  let closeReactionsModal = () => {
+    setVotes({});
+    setShowReactions(false);
+  };
+
+  useEffect(() => {
+    if (Object.keys(votes).length !== 0) {
+      setShowReactions(true);
+    }
+    console.log("use effect from votes");
+    console.log(votes);
+  }, [votes]);
+
+  let postContent = posts?.map((post, index) => {
+    const votes = post?.votes;
+    let reacted = "";
+    let reactionType = "";
+
+    if (post?.votes?.upVotes?.user.includes(localStorage.getItem("userId"))) {
+      reacted = true;
+      reactionType = "like";
+    } else if (
+      post?.votes?.heart?.user.includes(localStorage.getItem("userId"))
+    ) {
+      reacted = true;
+      reactionType = "heart";
+    } else if (
+      post?.votes?.happy?.user.includes(localStorage.getItem("userId"))
+    ) {
+      reacted = true;
+      reactionType = "happy";
+    } else if (
+      post?.votes?.donut?.user.includes(localStorage.getItem("userId"))
+    ) {
+      reacted = true;
+      reactionType = "donut";
+    }
+
+    const count =
+      votes.upVotes?.user.length +
+      votes.happy?.user.length +
+      votes.heart?.user.length +
+      votes.donut?.user.length;
 
   let navigateToProfile = (userId) => {
     console.log(`Navigating to user profile ${userId}`)
@@ -194,19 +272,47 @@ function NewsFeed(props) {
                     {post?.createdAt}
                   </Moment>
                 </ListItemText>
+                <FaThumbtack style={{ margin: "10px", width: "10px" }} />
+                <Dropdown>
+                  <Dropdown.Toggle
+                    as={CustomToggle}
+                    id="dropdown-custom-components"
+                  >
+                    <FaEllipsisH />
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu>
+                    <Dropdown.Item eventKey="1">Edit</Dropdown.Item>
+                    <Dropdown.Item eventKey="2">Share</Dropdown.Item>
+                    <Dropdown.Item eventKey="3">Delete</Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
               </ListItem>
               <div className="post-details2">{parse(post?.content)}</div>
               <ListItem>
+                {/* <IconButton 
                 <IconButton
                   className={classes.vote}
                   onClick={() => onUpvote(post._id)}
                 >
                   <ArrowDropUpIcon className="up-vote" />
                 </IconButton>
-                <span className="up-vote">
+                <span className="up-vote">{post?.votes?.upVotes?.user.length}</span>
+                <span className="space"></span> */}
+                <ReactionsElement
+                  reacted={reacted}
+                  count={count}
+                  votes={post.votes}
+                  openModal={openReactionsModal}
+                  postId={post._id}
+                  reactionType={reactionType}
+                />
+                {/* <span
+                  className="up-vote"
+                  onClick={() => openReactionsModal(post.votes)}
+                >
                   {post?.votes?.upVotes?.user.length}
-                </span>
-                <span className="space"></span>
+                </span> */}
+
                 <span className="com-btn">
                   <ChatBubbleIcon className={classes.chat} />
                   <Button
@@ -535,6 +641,11 @@ function NewsFeed(props) {
               {postContent}
               {eventsContent}
               {projectsContent}
+              <PostReactionModal
+                show={showReactions}
+                onHide={closeReactionsModal}
+                votes={votes}
+              />
             </>
           )}
         </div>

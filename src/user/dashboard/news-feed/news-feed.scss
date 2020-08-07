@@ -363,6 +363,14 @@
   color: #1eb025;
 }
 
+.reactions-container{
+  .reaction-element{
+    display: inline-block;
+    margin-right: 10px;
+    padding: 4px;
+  }
+}
+
 .down-vote small {
   color: #ff0000;
 }
