@@ -4,23 +4,30 @@ import { NavLink, Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import "./navigation.scss";
 import Logout from "../../profile/popups/Logout";
-import logo from "../../../svgs/logout.svg";
+import logo from "../../../assets/svgs/logout.svg";
 import {Info} from "../../integrations/NameForm";
-import JitsiMeets from '../../../images/jitsi.png'
+import JitsiMeets from '../../../assets/images/jitsi.png'
 import {
   DonutTitleSmall,
   DonutIconSmall,
 } from "../../../donutTitle/donutTitle";
-// import ComminytPng from "../../../images/community.png";
-// import CommunitySetting from "../Community/CommunitySetting";
 import { Desktop, Mobile } from "../../../utils/breakpoints";
 import SVGIcon from "../../../utils/SVGIcon";
+import { connect } from 'react-redux'
 
 class Navigation extends Component {
   state = { 
     logout: false,
-    org: false
+    org: false,
+    userId: ''
  };
+
+ componentWillReceiveProps(nextProps) {
+   console.log('nextProps from navigation', nextProps)
+   this.setState({
+     userId: nextProps.user.userProfile?._id
+   })
+ }
   render() {
     const ListItem = (props) => {
       const item = props.isMobile ? (
@@ -75,11 +82,11 @@ class Navigation extends Component {
               className={this.props.dashboard ? "active" : "inactive"}
               link="/dashboard"
             />
-            <ListItem
+            {/* <ListItem
               name="Pinned Posts"
               className={this.props.posts ? "active" : "inactive"}
               link="/pinned-posts"
-            />
+            /> */}
             <ListItem
               name="Organization"
               className={this.props.org ? "active" : "inactive"}
@@ -101,7 +108,7 @@ class Navigation extends Component {
             <ListItem
               name="Account"
               className={this.props.profile ? "active" : "inactive"}
-              link="/profile"
+              link={`/profile/${this.state.userId}`}
             />
             <ListItem
               name="Settings"
@@ -159,12 +166,12 @@ class Navigation extends Component {
               link="/dashboard"
               isMobile="true"
             />
-            <ListItem
+            {/* <ListItem
               name="Pinned Posts"
               className={this.props.posts ? "active" : "inactive"}
               link="/pinned-posts"
               isMobile="true"
-            />
+            /> */}
             <ListItem
               name="Organization"
               className={this.props.org ? "active" : "inactive"}
@@ -248,4 +255,8 @@ Navigation.propTypes = {
   logout: PropTypes.bool,
 };
 
-export default Navigation;
+const mapStateToProps = (state) => ({
+  user: state.user
+})
+
+export default connect(mapStateToProps)(Navigation);

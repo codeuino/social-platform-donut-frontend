@@ -1,16 +1,15 @@
-import { GET_USER_PROFILE, GET_ALL_MEMBERS, UPDATE_USER_PROFILE, GET_USER_EVENTS, GET_USER_PROJECTS, GET_USER_POSTS, GET_INVITE_LINK, PROCESS_INVITE_LINK, SET_ADMIN } from './types'
+import { GET_USER_PROFILE, GET_ALL_MEMBERS, UPDATE_USER_PROFILE, GET_USER_EVENTS, GET_USER_PROJECTS, GET_USER_POSTS, GET_INVITE_LINK, PROCESS_INVITE_LINK, SET_ADMIN, CLEAR_INVITE_LINK } from './types'
 import { errorHandler } from '../utils/errorHandler'
 import axios from 'axios'
 import { setRequestStatus } from '../utils/setRequestStatus'
 import { BASE_URL } from './baseApi'
 
 // GET USER PROFILE
-export const getProfile = () => async (dispatch)=> {
+export const getProfile = (id) => async (dispatch)=> {
   try {
-    const res = await axios.get(`${BASE_URL}/user/me`)
-    dispatch(setRequestStatus(false))
+    console.log('getProfile userId ',id)
+    const res = await axios.get(`${BASE_URL}/user/${id}`)
     if (res.status === 200) {
-      setRequestStatus(true)
       console.log('user profile ', res.data)
       dispatch({
         type: GET_USER_PROFILE,
@@ -95,13 +94,12 @@ export const removeUser = (userId) => async (dispatch) => {
 }
 
 // UPDATE USER PROFILE 
-export const updateProfile = (updatedInfo) => async (dispatch) => {
+export const updateProfile = (userId, updatedInfo) => async (dispatch) => {
   try {
+    console.log('updateProfile userId ', userId)
     console.log('updating ', updatedInfo)
-    const res = await axios.patch(`${BASE_URL}/user/me`, updatedInfo)
-    dispatch(setRequestStatus(false))
+    const res = await axios.patch(`${BASE_URL}/user/${userId}`, updatedInfo)
     if(res.status === 200) {
-      dispatch(setRequestStatus(true))
       console.log('user profile updated ', res.data)
       dispatch({
         type: UPDATE_USER_PROFILE,
@@ -114,9 +112,11 @@ export const updateProfile = (updatedInfo) => async (dispatch) => {
 }
 
 // GET EVENTS CREATED BY USER 
-export const getEventsCreatedByUser = (pagination = 10, page = 1) => async (dispatch) => {
+export const getEventsCreatedByUser = (userId, pagination = 10, page = 1) => async (dispatch) => {
   try { 
-    const res = await axios.get(`${BASE_URL}/event/me/all?pagination=${pagination}&page=${page}`);
+    console.log('getEvents userId ', userId)
+    const res = await axios
+      .get(`${BASE_URL}/event/${userId}/all?pagination=${pagination}&page=${page}`);
     dispatch(setRequestStatus(false))
     if(res.status === 200) {
       dispatch(setRequestStatus(true))
@@ -132,9 +132,11 @@ export const getEventsCreatedByUser = (pagination = 10, page = 1) => async (disp
 }
 
 // GET ALL PROJECT CREATED BY A USER 
-export const getProjectCreatedByUser = (pagination = 10, page = 1) => async (dispatch) => {
+export const getProjectCreatedByUser = (userId, pagination = 10, page = 1) => async (dispatch) => {
   try { 
-    const res = await axios.get(`${BASE_URL}/project/me/all?pagination=${pagination}&page=${page}`);
+    console.log('getProjects userId ', userId)
+    const res = await axios
+      .get(`${BASE_URL}/project/${userId}/all?pagination=${pagination}&page=${page}`);
     dispatch(setRequestStatus(false))
     if(res.status === 200) {
       dispatch(setRequestStatus(true))
@@ -150,9 +152,11 @@ export const getProjectCreatedByUser = (pagination = 10, page = 1) => async (dis
 }
 
 // GET POSTS CREATED BY USER 
-export const getPostsCreatedByUser = (pagination = 10, page = 1) => async (dispatch) => {
+export const getPostsCreatedByUser = (userId, pagination = 10, page = 1) => async (dispatch) => {
   try { 
-    const res = await axios.get(`${BASE_URL}/post/me/all?pagination=${pagination}&page=${page}`);
+    console.log('getPosts userId ', userId)
+    const res = await axios
+      .get(`${BASE_URL}/post/${userId}/all?pagination=${pagination}&page=${page}`);
     dispatch(setRequestStatus(false))
     if(res.status === 200) {
       dispatch(setRequestStatus(true))
@@ -201,6 +205,14 @@ export const processInviteToken = (token) => async (dispatch) => {
   } catch(error) {
     dispatch(errorHandler(error));
   }
+}
+
+// CLEAR INVITE LINK 
+export const clearInviteLink = () => async (dispatch) => {
+  dispatch({
+    type: CLEAR_INVITE_LINK,
+    payload: ''
+  })
 }
 
 // ACTIVATE DEACTIVATE TOGGLER 

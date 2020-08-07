@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./notifications.scss";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import donutIcon from '../../../svgs/donut-icon.svg'
+import donutIcon from '../../../assets/svgs/donut-icon.svg'
 import { initializeSockets } from '../utils/notification'
 import socket from '../utils/socket'
 import { withRouter } from "react-router-dom";

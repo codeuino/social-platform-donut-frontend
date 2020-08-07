@@ -25,43 +25,38 @@ class Profile extends Component {
       userProjects: [],
       userPosts: [],
       pinnedPosts: [],
+      userId: ''
     };
   }
 
   componentDidMount() {
     console.log("match", this.props.match?.path);
-    const path = this.props.match?.path;
-    if (path === "/profile") {
-      console.log("checking profile");
-      setTimeout(() => {
-        this.props.getProfile();
-        this.props.getOrgProfile();
-      });
-      setTimeout(() => {
-        this.props.getPostsCreatedByUser();
-      });
-      setTimeout(() => {
-        this.props.getEventsCreatedByUser();
-      });
-      setTimeout(() => {
-        this.props.getProjectCreatedByUser();
-      });
-      setTimeout(() => {
-        this.props.getAllPinnedPosts();
-      });
-    }
+    const { path, params } = this.props.match;
+    const userId = params.id
+    console.log("checking profile", userId);
+    this.props.getProfile(userId)
+    setTimeout(() => {
+      this.props.getOrgProfile();
+    })
+    setTimeout(() => {
+      this.props.getPostsCreatedByUser(userId);
+    })
+    setTimeout(() => {
+      this.props.getEventsCreatedByUser(userId);
+    });
+    setTimeout(() => {
+      this.props.getProjectCreatedByUser(userId);
+    });
+    setTimeout(() => {
+      this.props.getAllPinnedPosts()
+    })
   }
 
   componentWillReceiveProps(nextProps) {
     console.log("profile nextProps ", nextProps);
     const { userEvents, userProjects, userPosts } = nextProps.user;
-    const { pinnedPosts } = nextProps.posts;
-    console.log("userEvents ", userEvents);
-    console.log("userProjects ", userProjects);
-    console.log("userPosts ", userPosts);
-    console.log("pinnedPosts ", pinnedPosts);
-    let all = [...userEvents, ...userProjects, ...userPosts];
-    console.log("all ", all);
+    const { pinnedPosts } = nextProps.posts
+    let all = [...userEvents, ...userProjects, ...userPosts]
     this.setState({
       userProfile: nextProps.user?.userProfile,
       userEvents: userEvents,
@@ -69,6 +64,8 @@ class Profile extends Component {
       userPosts: userPosts,
       pinnedPosts: pinnedPosts,
       all: all,
+    }, () => {
+      console.log('setting profile ', this.state)
     });
   }
 

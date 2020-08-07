@@ -18,12 +18,13 @@ import { connect } from 'react-redux'
 import "./posts.scss";
 import Comment from '../../dashboard/news-feed/popups/comment';
 import { withRouter } from 'react-router-dom';
-import profileImg from '../../../svgs/evt-creator.svg';
-import eventImg from "../../../svgs/event-img-1.svg";
-import eventImg2 from "../../../svgs/event-img-2.svg";
+import profileImg from '../../../assets/svgs/evt-creator.svg';
+import eventImg from "../../../assets/svgs/event-img-1.svg";
+import eventImg2 from "../../../assets/svgs/event-img-2.svg";
 import { getAllPinnedPosts, upVotePost } from '../../../actions/postAction'
 import { getEventsCreatedByUser, getProjectCreatedByUser } from '../../../actions/usersAction'
 import { rsvpYes } from '../../../actions/eventAction'
+import Moment from 'react-moment'
 
 const styles = makeStyles((theme) => ({
     root: {
@@ -89,11 +90,12 @@ function PinPosts(props){
 
     useEffect(() => {
         console.log('props from PinPosts ', props)
-        if(props.match?.path === '/pinned-posts') {
+        let path = props.match?.path;
+        if(path === '/pinned-posts') {
             props.getAllPinnedPosts()
             setPosts(props.posts?.pinnedPosts);
         }
-        if(props.match?.path === '/profile'){
+        if(path === '/profile' || path === '/profile/:id'){
             setEvents(props.userEvents)
             setAllProjects(props.userProjects || [])
             setPosts(props.userPosts)
@@ -164,7 +166,11 @@ function PinPosts(props){
                             </ListItemAvatar>
                             <ListItemText className="main">
                                 <h2>{project?.createdBy?.name?.firstName + " " + project?.createdBy?.name?.lastName || "No Name"}</h2>
-                                <small>{project?.createdAt}</small>
+                                <small>
+                                  <Moment format="DD MMM YYYY">
+                                    {project?.createdAt}
+                                  </Moment>
+                                </small>
                             </ListItemText>
                         </ListItem>
                         <div className="post-details2">{project?.description?.short}</div>
@@ -201,7 +207,11 @@ function PinPosts(props){
                                     <div className="event-date">
                                         <div className="date-content">
                                             <small>DATE</small>
-                                            <h4>{event?.eventDate}</h4>
+                                            <h4>
+                                              <Moment format="DD MMM YYYY">
+                                                {event?.eventDate}
+                                              </Moment>
+                                            </h4>
                                         </div>
                                     </div>
                                     <div className="event-time">
@@ -229,7 +239,11 @@ function PinPosts(props){
                             </ListItemAvatar>
                             <ListItemText className="main">
                                  <h2>{event?.createdBy?.name?.firstName + " " + event?.createdBy?.name?.lastName}</h2>
-                                <small>{event?.createdAt}</small>
+                                <small>
+                                  <Moment format="DD MMM YYYY">
+                                    {event?.createdAt}
+                                  </Moment>
+                                </small>
                             </ListItemText>
                         </ListItem>
                         <div className="post-details2">{event?.description?.shortDescription}</div>
@@ -246,9 +260,6 @@ function PinPosts(props){
           <div className="grid" key={index}>
             <Paper elevation={1} className={classes.paper}>
               <Card className={classes.root}>
-                  {/* <CardMedia className="projimg"
-                    image={post?.image || eventImg } title="Post Image">
-                </CardMedia> */}
                 <List className={classes.listStyle}>
                   <ListItem className={classes.listStyle2}>
                     <ListItemAvatar>
@@ -258,7 +269,11 @@ function PinPosts(props){
                     </ListItemAvatar>
                     <ListItemText className="main">
                       <h2>{post?.userId?.name?.firstName + " " + post?.userId?.name?.lastName}</h2>
-                      <small>{post?.createdAt}</small>
+                      <small>
+                        <Moment format="DD MMM YYYY">
+                          {post?.createdAt}
+                        </Moment>
+                      </small>
                     </ListItemText>
                   </ListItem>
                   <div className="post-details2">{post?.content}</div>
@@ -308,38 +323,6 @@ function PinPosts(props){
         <div className="posts">
           <h1>Pinned Posts</h1>
           <div className="categories">
-            {/* <Button
-              active
-              variant="primary"
-              className="btn"
-              onClick={handleClick("All")}
-            >
-              <span className="btn-content">All</span>
-            </Button>
-            <span className="space"></span>
-            <Button
-              variant="primary"
-              className="btn"
-              onClick={handleClick("Post")}
-            >
-              <span className="btn-content">Posts</span>
-            </Button>
-            <span className="space"></span>
-            <Button
-              variant="primary"
-              className="btn"
-              onClick={handleClick("Event")}
-            >
-              <span className="btn-content">Events</span>
-            </Button>
-            <span className="space"></span>
-            <Button
-              variant="primary"
-              className="btn"
-              onClick={handleClick("Project")}
-            >
-              <span className="btn-content">Projects</span>
-            </Button> */}
             <div className="tab__container">
               <span className="nav__tab container">
                 <ul className="nav__list__container">

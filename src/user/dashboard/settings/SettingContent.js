@@ -31,7 +31,8 @@ class SettingContent extends Component {
 
   componentDidMount(){
     // here get the data from api and update the state 
-    this.props.getProfile();
+    const userId = localStorage.getItem('userId')
+    this.props.getProfile(userId);
     this.props.getOrgProfile();
   }
 

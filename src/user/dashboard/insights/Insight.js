@@ -3,22 +3,32 @@ import './insight.scss'
 import Navigation from '../navigation/navigation';
 import CommunityStats from './components/CommunityStats';
 import MemberInfo from './components/MemberInfo';
+import { connect } from 'react-redux' 
+import { getProfile } from '../../../actions/usersAction'
 
 class Insight extends Component {
   constructor(props) {
     super(props);
     this.state = {
       insight: true,
-      view: 'org'
+      view: 'org',
+      userId: ''
     };
   }
+
+  componentDidMount() {
+    const userId = localStorage.getItem('userId');
+    this.props.getProfile(userId)
+  }
+
   onTabChange = (name) => {
     this.setState({ view: name }, () => {
       console.log('State is ', this.state);
     })
   }
+
   render() {
-    const { view } = this.state;
+    const { view, userId } = this.state;
     let communityInfo = (
       <div className="right_view_container">
         <CommunityStats view={view} onTabChange={this.onTabChange.bind(this)} />
@@ -41,4 +51,10 @@ class Insight extends Component {
     );
   }
 }
-export default Insight;
+
+// map state to props 
+const mapStateToProps = (state) => ({
+  user: state.user
+})
+
+export default connect(mapStateToProps, { getProfile })(Insight);

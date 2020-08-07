@@ -2,17 +2,22 @@
   display: flex;
   flex-direction: row;
   border: solid 1px #dfe9f1;
-  height: 269px;
   align-items: center;
+  height: 268px;
+  min-width: 58%;
+  border-bottom: 1px solid #dfe9f1;
+  box-shadow: -1px 2px 2px -1px rgba(0, 0, 0, 0.1);
   .org-image {
-    flex: 0.5;
     text-align: center;
-    margin: 35px 0;
-    .useredit {
+    margin: 35px 10px;
+    .edit-option {
       margin-top: 10px;
-      // border-radius: 20px;
-      font-family: "Inter";
       font-size: 14px;
+
+      .useredit {
+        margin-top: 10px;
+        font-size: 14px;
+      }
     }
     .org-pic {
       display: inline-block;
@@ -78,6 +83,16 @@
         font-size: 0.8em;
         line-height: 17px;
         text-align: center;
+      }
+    }
+    .fa_icon__container {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: -10vh;
+      .fa__icon{
+        font-size: 30px;
+        padding: 3px;
+        cursor: pointer;
       }
     }
   }

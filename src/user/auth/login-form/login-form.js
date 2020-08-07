@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import Popups from "../../common/Popups";
+import Popups from "../../../common/Popups";
 import { Form, Button } from "react-bootstrap";
 import "./login-form.scss";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { loginUser } from "../../actions/authAction";
+import { loginUser } from "../../../actions/authAction";
+import { ToastContainer, toast } from 'react-toastify'
 
 class LoginForm extends Component {
   constructor(props) {
@@ -15,13 +16,22 @@ class LoginForm extends Component {
       modalShow: false,
       option: "",
       optionValue: "",
-      error: false,
+      error: '',
       isValidEmail: true,
       isValidForm: false,
     };
   }
   componentWillReceiveProps(nextProps) {
-    console.log('nextProps ', nextProps)
+    console.log('nextProps login-form', nextProps)
+    const error = nextProps.error
+    this.setState({
+      error: error?.msg
+    }, () => {
+      console.log('error state', this.state)
+      if(Boolean(this.state?.error?.length > 0)) {
+        toast.error(`${this.state.error}`)
+      }
+    })
   }
 
   onSubmit = (e) => {
@@ -67,15 +77,25 @@ class LoginForm extends Component {
     this.setState({ isValidForm: isValidEmail });
   };
 
-  render() {
-    const handleToggle = (e) => {
-      const targetName = e.target.name;
-      this.setState({
-        modalShow: true,
-        option: targetName,
-      });
-    };
+  handleToggle = (e) => {
+    const targetName = e.target.name;
+    this.setState({
+      modalShow: true,
+      option: targetName,
+    });
+  };
 
+   // toggle Popups
+  toggle = (toggler) => {
+    this.setState({
+      modalShow: !this.state.modalShow
+    }, () => {
+      console.log('toggler ', this.state);
+    })
+  }
+
+  render() {
+    const { error } = this.state
     return (
       <div className="login-details">
         <Form onSubmit={this.onSubmit}>
@@ -113,7 +133,7 @@ class LoginForm extends Component {
         <a
           className="forgot-password"
           href="javascript:void(0)"
-          onClick={handleToggle}
+          onClick={this.handleToggle}
           name="password"
         >
           Forgot Password?
@@ -122,7 +142,21 @@ class LoginForm extends Component {
           option={this.state.option}
           optionValue={this.state.optionValue}
           modalShow={this.state.modalShow}
+          toggler={this.toggle}
         />
+        {error ? (
+           <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+          />
+        ) : null}
       </div>
     );
   }

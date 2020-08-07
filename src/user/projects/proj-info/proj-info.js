@@ -5,15 +5,15 @@ import LanguageIcon from '@material-ui/icons/Language';
 import Navigation from "../../dashboard/navigation/navigation";
 import { Card, Button, Badge, Col, Row } from "react-bootstrap";
 import "./proj-info.scss";
-import proj_img from "../../../images/project.png";
+import proj_img from "../../../assets/images/project.png";
 import EditProject from "../popups/edit-project";
 import DeleteIcon from "@material-ui/icons/Delete";
 import DeleteProject from "../popups/delete-project";
 import { makeStyles, Grid } from "@material-ui/core";
-// import { CardActionArea, CardActions, CardContent, CardMedia, Typography } from "@material-ui/core"
 import { connect } from 'react-redux'
 import { getProjectById } from '../../../actions/projectAction'
 import { checkDeleteRights } from '../../dashboard/utils/checkDeleteRights'
+import Moment from 'react-moment'
 
 
 class ProjInfo extends Component {
@@ -174,10 +174,20 @@ class ProjInfo extends Component {
                 </Row>
 
                 <p className="createAt">
-                  Created At: {projectInfo?.createdAt}{" "}
+                  Created At: 
+                    <Moment format="DD MMM YYYY">
+                      {projectInfo?.createdAt}
+                    </Moment>
+                  {" "}
                 </p>
-                <p className="place">Updated At: {projectInfo?.updatedAt}</p>
-                <p className="short_des">{projectInfo.description?.short || "Short description"}</p>
+                <p className="place">Updated At: 
+                  <Moment format="DD MMM YYYY">
+                    {projectInfo?.createdAt}
+                  </Moment>
+                </p>
+                <p className="short_des">
+                  {projectInfo.description?.short || "Short description"}
+                  </p>
               </div>
             </Col>
           </Row>

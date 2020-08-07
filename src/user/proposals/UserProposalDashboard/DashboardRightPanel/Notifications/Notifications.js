@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./OtherIdeas.scss";
 import { ListGroup, Image } from "react-bootstrap";
-import userIcon2 from "../../../../../images/userIcon2.jpg";
+import userIcon2 from "../../../../../assets/images/userIcon2.jpg";
 import socket from "../../../../dashboard/utils/socket";
 import { connect } from "react-redux";
 import { getUserProposalNotifications } from "../../../../../actions/proposalActions";
