@@ -3,8 +3,9 @@ import { Form, Button, Row, Col } from "react-bootstrap";
 import "./signup-form.scss";
 import { makeStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
-import { registerUser } from "../../actions/authAction";
+import { registerUser } from "../../../actions/authAction";
 import { withRouter } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify'
 
 class SignUpForm extends Component {
   constructor(props) {
@@ -25,16 +26,6 @@ class SignUpForm extends Component {
       isMatched: true,
       isValidForm: false,
     };
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.error?.msg?.length > 0) {
-      this.setState({
-        error: {
-          msg: "Something went wrong, Please recheck the input!",
-        },
-      });
-    }
   }
 
   onChange = (e) => {
@@ -146,9 +137,7 @@ class SignUpForm extends Component {
       };
       this.props.registerUser(newUser, this.props.history);
     } else {
-      this.setState({
-        error: { msg: "Something went wrong, please check the input!" },
-      });
+      toast.error(`Something went wrong, please check the input!`)
     }
   };
 
@@ -171,8 +160,8 @@ class SignUpForm extends Component {
       isValidPhone,
       isValidDesc,
       // isMatched,
-      // isValidForm,
-      // error,
+      isValidForm,
+      error,
     } = this.state;
 
     return (
@@ -296,7 +285,17 @@ class SignUpForm extends Component {
               </Form.Group>
               <ul className="list-unstyled">
                 <li id="validation_msg">
-                  {/* {error?.msg.length > 0 ? error.msg : null} */}
+                  <ToastContainer
+                      position="top-right"
+                      autoClose={5000}
+                      hideProgressBar={false}
+                      newestOnTop={false}
+                      closeOnClick
+                      rtl={false}
+                      pauseOnFocusLoss
+                      draggable
+                      pauseOnHover
+                    />
                 </li>
               </ul>
             </Col>

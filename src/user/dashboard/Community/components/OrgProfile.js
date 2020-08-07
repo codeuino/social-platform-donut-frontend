@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Form, Button } from "react-bootstrap";
-import UploadImg from '../../../../images/upload.jpg'
+import UploadImg from '../../../../assets/images/upload.jpg'
 import { connect } from 'react-redux'
 import { getOrgProfile, updateOrgProfile, deactivateOrg } from '../../../../actions/orgAction'
 import './profile.scss'

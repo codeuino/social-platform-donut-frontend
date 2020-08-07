@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { removeUser, getInviteLink } from '../../../actions/usersAction'
 import { getMember } from '../../../actions/insightAction'
 import { getOrgProfile } from '../../../actions/orgAction'
-import logo from "../../../svgs/logo-image.jpg";
+import logo from "../../../assets/svgs/logo-image.jpg";
 import { checkRemoveRight } from '../../dashboard/utils/checkDeleteRights'
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -17,7 +17,7 @@ class Members extends Component {
       members: [],
       query: '',
       isAdmin: '',
-      inviteLink: null,
+      inviteLink: '',
       whoCanSendInvite: ''
     }
   }
@@ -74,7 +74,7 @@ class Members extends Component {
     this.setState({ 
       members: res, 
       isAdmin: nextProps.user?.userProfile?.isAdmin,
-      inviteLink: nextProps.user.inviteLink,
+      inviteLink: nextProps.user?.inviteLink,
       whoCanSendInvite: permissions?.sendInvite
     }, () => {
       console.log("members ", this.state);
@@ -99,7 +99,8 @@ class Members extends Component {
   copyToClipBoard = async (link) => {
     try {
       await navigator.clipboard.writeText(link);
-      if(this.state.inviteLink !== null){
+      console.log('link ', link.length)
+      if(link){
         toast.success('Link copied to clipboard!');
       }
     } catch (error) {
@@ -110,7 +111,7 @@ class Members extends Component {
 
   render() {
     const { onHide, show } = this.props
-    const { isAdmin, inviteLink } = this.state
+    const { isAdmin, inviteLink, whoCanSendInvite } = this.state
     const membersList = [ ...this.state.members] 
     let members = membersList.map((item) => (
       <Row className="modal__member" id="p1" key={item._id}>
@@ -182,14 +183,21 @@ class Members extends Component {
                   placeholder="Copy invite link to share"
                   defaultValue={inviteLink}
                   readOnly={true}
-                  onClick={this.copyToClipBoard.bind(this, inviteLink)}
                 ></Form.Control>
                 <Button 
                   className="invite__btn" 
-                  onClick={this.onGetInviteLink}
-                  // disabled={isAdmin === false || whoCanSendInvite !== "BOTH" || whoCanSendInvite !== "ADMINS" }
+                  onClick = {
+                    Boolean(inviteLink.length === 0) 
+                    ? this.onGetInviteLink 
+                    : this.copyToClipBoard.bind(this, inviteLink)
+                  }
+                  disabled={
+                    Boolean(isAdmin === false && whoCanSendInvite === "ADMINS") 
+                    ||
+                    Boolean(whoCanSendInvite === "NONE")
+                  }
                 >
-                  Get Link
+                  {Boolean(inviteLink.length === 0) ? <>Get Link</> : <>Copy</>}
                 </Button>
               </div>
               <div className="share__btn__container">
@@ -226,4 +234,9 @@ const mapStateToProps = (state) => ({
   org: state.org
 })
 
-export default connect(mapStateToProps, { removeUser, getMember, getInviteLink, getOrgProfile })(Members);
+export default connect(mapStateToProps, {
+  removeUser, 
+  getMember, 
+  getInviteLink, 
+  getOrgProfile, 
+ })(Members);

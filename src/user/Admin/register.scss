@@ -1,4 +1,6 @@
-
+body {
+  max-height: 90vh;
+}
 .main__container {
   left: 0%;
   right: 0%;
@@ -12,6 +14,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     margin: 50px;
+    max-height: 70vh;
     .donut__text__container {
       flex-grow: 1.8;
       flex-shrink: 1;
@@ -358,7 +361,7 @@
   .main__container {
     .main__footer {
       .stick__to__bottom {
-        margin-top: 19vh;
+        margin-top: 17vh;
       }
     }
   }

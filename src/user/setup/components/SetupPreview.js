@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { Form , Button } from 'react-bootstrap'
-import DonutPreview from '../../../images/preview.jpg'
-import UploadPreview from '../../../images/upload.jpg'
-import ShadowPreview from '../../../images/shadowDonut.png'
-import CommunityPreview from '../../../images/community.png'
+import DonutPreview from '../../../assets/images/preview.jpg'
+import UploadPreview from '../../../assets/images/upload.jpg'
+import ShadowPreview from '../../../assets/images/shadowDonut.png'
+import CommunityPreview from '../../../assets/images/community.png'
 import './preview.scss'
 let donutPreviewImage = DonutPreview
 

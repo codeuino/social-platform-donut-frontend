@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { createComment, getAllCommentsOfPost, deleteComment } from '../../../../actions/commentAction'
 import "./comment.scss";
 // import comments from "../../../../jsonData/comments";
-import profile_img from '../../../../svgs/profile-icon.svg'
+import profile_img from '../../../../assets/svgs/profile-icon.svg'
 import { MdDelete } from "react-icons/md";
 import { checkDeleteRights } from '../../../dashboard/utils/checkDeleteRights'
 
@@ -65,10 +65,14 @@ class Comment extends Component {
         </Col>
         <Col md={10}>
           <div className="contain">
-            <p className="user">{comment?.userId?.name?.firstName + " " + comment?.userId?.name?.lastName || "User name"}</p>
-            <p className="comment">{comment.content || "Comment content"}
-              {checkDeleteRights(comment.userId?._id) ? (<MdDelete size={20} className="delete__icon" onClick={this.onDelete.bind(this, comment._id)}
-              />) : null}
+            <p className="user">
+              {comment?.userId?.name?.firstName + " " + comment?.userId?.name?.lastName || "User name"}</p>
+            <p className="comment">
+              {comment.content || "Comment content"}
+              {checkDeleteRights(comment.userId?._id) 
+                ? (<MdDelete size={20} className="delete__icon" onClick={this.onDelete.bind(this, comment._id)}
+              />) 
+                : null}
             </p>
           </div>
         </Col>
