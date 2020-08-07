@@ -13,6 +13,7 @@ import {
   IconButton,
   CardMedia,
 } from "@material-ui/core";
+
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, Dropdown, FormControl } from "react-bootstrap";
 import AddEventModal from "./popups/AddEventModal";
@@ -289,9 +290,10 @@ function NewsFeed(props) {
               <div className="post-details2">{parse(post?.content)}</div>
               <ListItem>
                 {/* <IconButton 
+                <IconButton
                   className={classes.vote}
                   onClick={() => onUpvote(post._id)}
-                  >
+                >
                   <ArrowDropUpIcon className="up-vote" />
                 </IconButton>
                 <span className="up-vote">{post?.votes?.upVotes?.user.length}</span>
@@ -310,6 +312,7 @@ function NewsFeed(props) {
                 >
                   {post?.votes?.upVotes?.user.length}
                 </span> */}
+
                 <span className="com-btn">
                   <ChatBubbleIcon className={classes.chat} />
                   <Button

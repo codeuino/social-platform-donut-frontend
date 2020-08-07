@@ -3,11 +3,16 @@ import "./profile.scss";
 import Navigation from "../dashboard/navigation/navigation";
 import UserInfo from "./user-info/user-info";
 import Portfolio from "../dashboard/portfolio/portfolio";
-import PinPosts from "../pinned-posts/posts/pinPosts";
-import { connect } from 'react-redux'
-import { getProfile, getEventsCreatedByUser, getProjectCreatedByUser, getPostsCreatedByUser } from '../../actions/usersAction' 
-import { getAllPinnedPosts } from '../../actions/postAction'
-import { getOrgProfile } from '../../actions/orgAction'
+import { connect } from "react-redux";
+import {
+  getProfile,
+  getEventsCreatedByUser,
+  getProjectCreatedByUser,
+  getPostsCreatedByUser,
+} from "../../actions/usersAction";
+import { getAllPinnedPosts } from "../../actions/postAction";
+import { getOrgProfile } from "../../actions/orgAction";
+import ProfileFeed from "./profile-feed";
 
 class Profile extends Component {
   constructor(props) {
@@ -65,7 +70,14 @@ class Profile extends Component {
   }
 
   render() {
-    const { userProfile, all, userEvents, userProjects, userPosts, pinnedPosts } = this.state;
+    const {
+      userProfile,
+      all,
+      userEvents,
+      userProjects,
+      userPosts,
+      pinnedPosts,
+    } = this.state;
     return (
       <div className="profile">
         <div className="navigation">
@@ -78,15 +90,21 @@ class Profile extends Component {
           </div>
           <div className="two">
             <div className="posts-profile">
-              <PinPosts 
+              {/* <PinPosts 
                 all={all} 
                 userProjects={userProjects} 
                 userEvents={userEvents} 
                 userPosts={userPosts}
                 pinnedPosts={pinnedPosts}
+              /> */}
+              <ProfileFeed
+                all={all}
+                userProjects={userProjects}
+                userEvents={userEvents}
+                userPosts={userPosts}
+                pinnedPosts={pinnedPosts}
               />
             </div>
-            <div className="updat"></div>
           </div>
         </div>
       </div>
@@ -94,7 +112,7 @@ class Profile extends Component {
   }
 }
 
-// map state to props 
+// map state to props
 const mapStateToProps = (state) => ({
   auth: state.auth,
   error: state.error,
@@ -102,13 +120,13 @@ const mapStateToProps = (state) => ({
   posts: state.post,
   event: state.event,
   project: state.project,
-})
+});
 
-export default connect(mapStateToProps, { 
+export default connect(mapStateToProps, {
   getProfile,
-  getEventsCreatedByUser, 
+  getEventsCreatedByUser,
   getProjectCreatedByUser,
   getPostsCreatedByUser,
   getAllPinnedPosts,
-  getOrgProfile
+  getOrgProfile,
 })(Profile);
