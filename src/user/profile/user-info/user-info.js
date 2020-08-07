@@ -3,7 +3,7 @@ import "./user-info.scss";
 import { Button } from "react-bootstrap";
 import { Avatar } from "@material-ui/core";
 import EditProfile from "./../popups/EditProfile";
-import { FaFacebookSquare, FaGithubSquare, FaLinkedin } from 'react-icons/fa'
+import { FaFacebookSquare, FaGithubSquare, FaLinkedin, FaThumbtack, FaBook, FaComments } from 'react-icons/fa'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { getProfile } from '../../../actions/usersAction'

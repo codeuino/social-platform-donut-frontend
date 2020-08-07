@@ -1,19 +1,24 @@
-import { GET_COMMENTS_OF_A_POST } from '../actions/types'
+import { GET_COMMENTS_OF_A_POST, RESET_COMMENTS } from "../actions/types";
 
 const initialState = {
-  allComments: []
-}
+  allComments: [],
+};
 
 export default (state = initialState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case GET_COMMENTS_OF_A_POST: {
       return {
         ...state,
-        allComments: action.payload
-      }
+        allComments: action.payload,
+      };
+    }
+    case RESET_COMMENTS: {
+      return {
+        allComments: [],
+      };
     }
     default: {
-      return state
+      return state;
     }
   }
-}
+};
