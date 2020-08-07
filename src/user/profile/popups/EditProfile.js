@@ -20,7 +20,8 @@ class EditProfile extends Component {
       website: '',
       longDesc: '',
       canChangeName: '',
-      // canChangeEmail: ''
+      // canChangeEmail: '',
+      userId: ''
     }
   }
 
@@ -40,7 +41,8 @@ class EditProfile extends Component {
       longDesc,
       github,
       linkedin,
-      twitter
+      twitter,
+      userId
      } = this.state
     const info = {
       name: {
@@ -62,8 +64,9 @@ class EditProfile extends Component {
         twitter
       }
     }
+    let id = userId || localStorage.getItem('userId')
     console.log('Updating data!', this.state)
-    this.props.updateProfile(info)
+    this.props.updateProfile(id, info)
   }
 
   componentWillReceiveProps(nextProps) {
@@ -82,6 +85,7 @@ class EditProfile extends Component {
       location: about?.location,
       // canChangeEmail: permissions?.canChangeEmail,
       canChangeName: permissions?.canChangeName,
+      userId: userProfile?._id,
       github: socialMedia?.github,
       twitter: socialMedia?.twitter,
       linkedin: socialMedia?.linkedin

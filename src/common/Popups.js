@@ -24,13 +24,15 @@ class Popups extends Component {
       optionValue: "",
       newPass: "",
       cnfPass: "",
-      requested: false
+      requested: false,
+      userId: ''
     }
   }
   
   componentWillReceiveProps(nextProps){
     console.log('nextProps in common ', nextProps)
     this.setState({
+      userId: nextProps.user.userProfile?._id,
       show: nextProps.modalShow,
       option: nextProps.option,
       optionValue: nextProps.optionValue,
@@ -60,14 +62,15 @@ class Popups extends Component {
     e.preventDefault();
     // send request to server to update the data 
     if(option === "name") {
-      const { firstName, lastName } = this.state
+      const { firstName, lastName, userId } = this.state
       const info = {
         name: {
           firstName,
           lastName
         }
       }
-      this.props.updateProfile(info)
+      var id = userId || localStorage.getItem('userId')
+      this.props.updateProfile(id, info)
       this.props.toggler(false);
     }
 
@@ -76,7 +79,7 @@ class Popups extends Component {
       const info = {
         email: email
       }
-      this.props.updateProfile(info);
+      this.props.updateProfile(id, info);
       this.props.toggler(false);
     }
   }

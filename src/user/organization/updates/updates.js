@@ -1,7 +1,7 @@
 import React from "react";
 import "./updates.scss";
 import { makeStyles } from "@material-ui/core/styles";
-import gsoc from "../../../images/gsoc.png";
+import gsoc from "../../../assets/images/gsoc.png";
 import { ListItemText, List, ListItem, Divider } from "@material-ui/core";
 
 const styles = makeStyles((theme) => ({
@@ -9,7 +9,8 @@ const styles = makeStyles((theme) => ({
     paddingTop: "0px",
   },
 }));
-export default function Updates(props) {
+
+function Updates(props) {
   const classes = styles();
   var i;
   let upd = [];
@@ -35,3 +36,5 @@ export default function Updates(props) {
     </div>
   );
 }
+
+export default Updates;

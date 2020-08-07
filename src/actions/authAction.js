@@ -5,6 +5,7 @@ import jwt_decode from 'jwt-decode';
 import { errorHandler } from '../utils/errorHandler';
 import { setRequestStatus } from '../utils/setRequestStatus';
 import { BASE_URL } from './baseApi';
+import { customErrorHandler } from '../utils/customErrorHandler'
 let forgotPasswordToken = "";
 
 // to register user 
@@ -23,6 +24,7 @@ export const registerUser = (userInfo, history) => async (dispatch) => {
     }
 
   } catch(error) {
+      console.log('register error ', error)
       dispatch(errorHandler(error));
   }
 }
@@ -62,7 +64,8 @@ export const loginUser = (userInfo, history) => async (dispatch) => {
       history.push("/dashboard");
     }
   } catch(error) {
-      dispatch(errorHandler(error));
+      console.log('login error ', error?.response)
+      dispatch(customErrorHandler(error?.response?.data || ""));
   }
 }
 

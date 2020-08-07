@@ -4,9 +4,9 @@ import Navigation from "../dashboard/navigation/navigation";
 import OrgInfo from "./org-info/org-info";
 import Portfolio from "../dashboard/portfolio/portfolio";
 import { Card, CardContent } from "@material-ui/core";
-import Updates from "../dashboard/updates/updates.js";
+import Updates from "./updates/updates";
 import OrgContact from "./org-contact/OrgContact";
-import orginfo from "../../jsonData/orginfo";
+import orginfo from "../../assets/jsonData/orginfo";
 import topBarLoading from "../../placeholderLoading/topBarLoading/topBarLoading";
 import orgUpdatesLoading from "../../placeholderLoading/orgUpdatesLoading/orgUpdatesLoading";
 import contactLoading from "../../placeholderLoading/contactLoading/contactLoading";
@@ -71,12 +71,7 @@ class Organization extends Component {
               cardLoading()
             ) : (
               <div className="posts">
-                {/* <h2>Posts</h2> */}
                 <div className="categories">
-                  {/* <div className="category-type active">About Us</div>
-                  <div className="category-type">Donuts</div>
-                  <div className="category-type">Events</div>
-                  <div className="category-type">Projects</div> */}
                   <div className="ul__container">
                     <span className="nav__tab container">
                       <ul className="nav__list__container">
@@ -90,7 +85,7 @@ class Organization extends Component {
                         >
                           Overview
                         </li>
-                        <li
+                        {/* <li
                           className={
                             type === "Post"
                               ? "nav__single__tab selected"
@@ -119,7 +114,7 @@ class Organization extends Component {
                           onClick={this.handleClick.bind(this, "Project")}
                         >
                           Projects
-                        </li>
+                        </li> */}
                       </ul>
                     </span>
                   </div>

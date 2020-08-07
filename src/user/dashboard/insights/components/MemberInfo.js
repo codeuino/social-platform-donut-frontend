@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Button, OverlayTrigger, Popover } from 'react-bootstrap'
-import MemberIcon from '../../../../images/member.png'
+import MemberIcon from '../../../../assets/images/member.png'
 import './memberInfo.scss'
 import { connect } from 'react-redux'
 import { getMembers, getMember } from '../../../../actions/insightAction'
