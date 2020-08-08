@@ -4,10 +4,16 @@
   height: auto;
   font-family: Muli, sans-serif;
   .navigation {
+    background: #f5f5f5;;
     flex-grow: 1;
     border-right: solid 1px #dfe9f1;
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
   }
   .news {
+    margin-left: 10%;
     flex-grow: 4;
     .notify-user {
       display: flex;
