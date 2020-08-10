@@ -31,15 +31,12 @@ export const getProfile = (id) => async (dispatch)=> {
 // FOLLOW USER
 export const followUser = (userId) => async (dispatch) => {
   try {
-    let followObj = {
-      followId: userId
-    }
-    console.log('followObj ', followObj)
-    const res = await axios.patch(`${BASE_URL}/user/follow`, followObj)
+    console.log('followuser ', userId)
+    const res = await axios.patch(`${BASE_URL}/user/follow/${userId}`)
     dispatch(setRequestStatus(false))
     if (res.status === 200) {
       dispatch(setRequestStatus(true))
-      console.log('started following ', followObj)
+      console.log('started following ', userId)
       dispatch({
         type: GET_USER_PROFILE,
         payload: res.data.user,
@@ -53,15 +50,12 @@ export const followUser = (userId) => async (dispatch) => {
 // UnFOLLOW USER
 export const unFollowUser = (userId) => async (dispatch) => {
   try {
-    let unFollowObj = {
-      followId: userId
-    }
-    console.log('unfollowObj ', unFollowObj)
-    const res = await axios.patch(`${BASE_URL}/user/unfollow`, unFollowObj)
+    console.log('unfollowObj ', userId)
+    const res = await axios.patch(`${BASE_URL}/user/unfollow/${userId}`)
     dispatch(setRequestStatus(false))
     if (res.status === 200) {
       dispatch(setRequestStatus(true))
-      console.log('unfollowed ', unFollowObj)
+      console.log('unfollowed ', userId)
       dispatch({
         type: GET_USER_PROFILE,
         payload: res.data.user,
