@@ -45,6 +45,8 @@ const reactionVariant = {
   },
 };
 
+const navStyles = { position: 'fixed', width: '83%', top: '0', zIndex:1, background: '#fff', marginTop: '0px', marginBottom:'0px'}
+
 const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
   <a
     href=""
@@ -130,6 +132,7 @@ function NewsFeed(props) {
   const [projects, setAllProjects] = useState([]);
   const [posts, setAllPosts] = useState([]);
   const [votes, setVotes] = useState({});
+  const [isTop, setisTop] = useState(false);
   const [displayReactionContainer, setDisplayReactioContainer] = useState(
     false
   );
@@ -140,6 +143,13 @@ function NewsFeed(props) {
     setAllProjects(props?.allProjects);
     setAllPosts(props?.allPosts);
   }, [props.allEvents, props.allPosts, props.allProjects, props]);
+
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      const scrollAmount = window.scrollY;
+      scrollAmount > 369 ? setisTop(true) : setisTop(false)
+    });
+  }, [window]);
 
   let navigateToProfile = (userId) => {
     console.log(`Navigating to user profile ${userId}`);
@@ -541,58 +551,9 @@ function NewsFeed(props) {
         </div>
       </div>
       <div className="news__feed__container">
-        {/* <div className="posts">
-        <span className="category">
-          <span className="to-centre">
-            {first === "f" ? (
-              <Button
-                active
-                variant="primary"
-                className="category-btn"
-                onClick={handleClick("All")}
-              >
-                <span className="btn-content">All</span>
-              </Button>
-            ) : (
-              <Button
-                autoFocus
-                variant="primary"
-                className="category-btn"
-                onClick={handleClick("All")}
-              >
-                All
-              </Button>
-            )}
-            <span className="space"></span>
-            <Button
-              variant="primary"
-              className="category-btn"
-              onClick={handleClick("Post")}
-            >
-              <span className="btn-content">Posts</span>
-            </Button>
-            <span className="space"></span>
-            <Button
-              variant="primary"
-              className="category-btn"
-              onClick={handleClick("Event")}
-            >
-              <span className="btn-content">Events</span>
-            </Button>
-            <span className="space"></span>
-            <Button
-              variant="primary"
-              className="category-btn"
-              onClick={handleClick("Project")}
-            >
-              <span className="btn-content">Projects</span>
-            </Button>
-          </span>
-        </span>
-      </div> */}
-        <div className="tabs__container">
+        <div className="tabs__container" style={isTop? navStyles: {}}>
           <span className="nav__tab container">
-            <ul className="nav__list__container">
+            <ul className="nav__list__container" style={isTop ? {marginBottom: '0px'}: {}}>
               <li
                 className={
                   type === "All"

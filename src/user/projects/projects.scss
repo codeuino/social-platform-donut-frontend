@@ -5,6 +5,10 @@
     .navigation {
       flex: 0.5;
       border-right: solid 1px #dfe9f1;
+      position: fixed;
+      top: 0px;
+      bottom: 0px;
+      left: 0px;
     }
 
     .projects {
@@ -71,4 +75,5 @@
       }
 
     }
-  }  
+    margin-left: 10%;
+  }
