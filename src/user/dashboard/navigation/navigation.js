@@ -31,18 +31,18 @@ class Navigation extends Component {
   render() {
     const ListItem = (props) => {
       const item = props.isMobile ? (
-        <ListGroup.Item className={props.className}>
-          <NavLink to={props.link} className="link">
+        <NavLink to={props.link} className="link">
+          <ListGroup.Item className={props.className}>
             <SVGIcon name={props.name} isMobile={true} />
-          </NavLink>
-        </ListGroup.Item>
+          </ListGroup.Item>
+        </NavLink>
       ) : (
-        <ListGroup.Item className={props.className}>
-          <SVGIcon name={props.name} />
-          <NavLink to={props.link} className="link">
+        <NavLink to={props.link} className="link">
+          <ListGroup.Item className={props.className}>
+            <SVGIcon name={props.name} />
             <b>{props.name}</b>
-          </NavLink>
-        </ListGroup.Item>
+          </ListGroup.Item>
+        </NavLink>
       );
 
       return item;
