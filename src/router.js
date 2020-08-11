@@ -21,6 +21,7 @@ import CommunitySetting from "./user/dashboard/Community/CommunitySetting";
 import Insight from "./user/dashboard/insights/Insight";
 import AdminRoute from "./common/AdminRoute";
 import Activity from './user/Activity/Activity';
+import IntegrationsPage from './user/integrations/IntegrationsPage/IntegrationsPage'
 
 const Router = () => (
   <BrowserRouter>
@@ -52,6 +53,7 @@ const Router = () => (
       <AdminRoute exact path="/activity/:userId" component={Activity} />
       <PrivateRoute exact path="/insight" component={Insight} />
       <PrivateRoute exact path="/admin" component={Admin} />
+      <PrivateRoute exact path="/integrations" component={IntegrationsPage} />
       <Route component={NotFound} />
     </Switch>
   </BrowserRouter>

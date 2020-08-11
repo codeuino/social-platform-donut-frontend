@@ -1,0 +1,140 @@
+.feed-posts {
+  display: flex;
+  flex-direction: column;
+  width: 140%;
+  h1 {
+    font-size: 26px;
+    font-weight: bold;
+    margin: 0;
+    padding: 44px 0 0 27px;
+  }
+  .pinned-posts {
+    min-height: 30px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.categories {
+  display: flex;
+  margin: 10px 0px 10px 20px;
+  .tab__container {
+    width: 100%;
+    margin-left: 0px;
+    margin-top: 0px;
+    .nav__tab {
+      .nav__list__container {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        list-style: none;
+        border-bottom: 2px solid #eee;
+        transition: all 0.5s;
+        font-weight: 300;
+        color: #262727;
+
+        .nav__single__tab {
+          display: inline-block;
+          font-family: Inter;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 18px;
+          line-height: 22px;
+          padding-left: 11px;
+          padding-right: 15px;
+          padding-bottom: 5px;
+          margin-left: 19px;
+          text-align: center;
+          cursor: pointer;
+
+          &.selected {
+            border-bottom: 3px solid #337ab7;
+            color: #1a73e8;
+            .tab__icon {
+              margin-right: 5px;
+            }
+          }
+          .tab__icon {
+            margin-right: 5px;
+            font-size: 15px;
+          }
+        }
+      }
+    }
+  }
+}
+.postsContainer {
+  width: 83vw;
+  margin: 10px;
+  // height: 43vh;
+  // overflow: scroll;
+  // overflow-x: hidden;
+  margin-top: -10px;
+  .gridContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+    .postItem {
+      width: 100%;
+      margin-left: 10px;
+
+      .cardElement {
+        height: 100%;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        .cardTitle {
+          flex: 1;
+          display: flex;
+          .imageContainer {
+            flex: 1;
+            .userImage {
+              height: 40px;
+              width: 40px;
+            }
+          }
+          .titleDetails {
+            flex: 12;
+            .postTitle {
+              font-family: Inter;
+              font-style: normal;
+              font-weight: 600;
+              font-size: 18px;
+              line-height: 21px;
+              color: #000000;
+            }
+            .postDate {
+              font-family: Inter;
+              font-style: normal;
+              font-weight: normal;
+              font-size: 12px;
+              line-height: 15px;
+
+              color: rgba(29, 33, 41, 0.5);
+            }
+          }
+        }
+        .cardContent {
+          flex: 1;
+          font-family: Inter;
+          font-style: normal;
+          font-size: 14px;
+          font-weight: 300;
+          margin-top: 5px;
+          line-height: 21px;
+          color: #000000;
+        }
+
+        .cardTag {
+          font-family: Inter;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 12px;
+          line-height: 15px;
+          margin-top: 10px;
+        }
+      }
+    }
+  }
+}
