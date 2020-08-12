@@ -4,32 +4,39 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import "./popup.scss";
 import { deleteEvent } from '../../../actions/eventAction';
+import { ToastContainer, toast } from 'react-toastify'
 
 class DeleteEvent extends Component {
   constructor(props) {
     super(props);
     this.state = {
       eventId: '',
-      success: false
+      error: ''
     }
   }
 
   componentWillReceiveProps(nextProps){
     console.log('deleteEvent ', nextProps)
+    const error = nextProps.error
+    this.setState({
+      error: error?.msg
+    }, () => {
+      console.log('error state', this.state)
+      if(Boolean(this.state?.error?.length > 0)) {
+        toast.error(`${this.state.error}`)
+      }
+    })
   }
 
   deleteEventClick = () => {
     console.log("Clicked on delete event")
     this.props.deleteEvent(this.props.eventId);
-    if(this.props.status.success){
-      this.setState({ show: false, success: true })
-    } else {
-      console.log('Something went wrong!')
-    }
+    this.props.onHide()
   }
 
   render() {
     const { show, onHide } = this.props;
+    const { error } = this.state
     return (
       <div>
         <Modal
@@ -64,6 +71,19 @@ class DeleteEvent extends Component {
               </div>
             </Form>
           </Modal.Body>
+          {error ? (
+            <ToastContainer
+              position="top-right"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+            />
+        ) : null}
       </Modal>
     </div>
     )

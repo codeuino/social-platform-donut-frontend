@@ -1,8 +1,9 @@
-import { GET_ORG_PROFILE, UPDATE_ORG_PROFILE, DEACTIVATE_ORG, TRIGGER_MAINTENANCE } from '../actions/types'
+import { GET_ORG_PROFILE, UPDATE_ORG_PROFILE, DEACTIVATE_ORG, TRIGGER_MAINTENANCE, GET_LOGIN_OPTIONS } from '../actions/types'
 const initialState = {
   isDeactivated: false,
   isMaintenance: false,
-  org: {}
+  org: {},
+  loginOptions: {}
 }
 
 export default (state = initialState, action) => {
@@ -29,6 +30,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isDeactivated: action.payload
+      }
+    }
+    case GET_LOGIN_OPTIONS: {
+      return {
+        ...state,
+        loginOptions: action.payload
       }
     }
     default: {

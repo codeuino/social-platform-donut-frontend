@@ -6,7 +6,8 @@ import {
   UPDATE_ORG_PROFILE, 
   DEACTIVATE_ORG, 
   GET_ALL_MEMBERS, 
-  TRIGGER_MAINTENANCE
+  TRIGGER_MAINTENANCE,
+  GET_LOGIN_OPTIONS
  } from './types'
 
 import { BASE_URL } from './baseApi'
@@ -147,6 +148,22 @@ export const TriggerMaintenance = () => async (dispatch) => {
       })
     }
   } catch (error) {
+    dispatch(errorHandler(error))
+  }
+}
+
+// GET LOGIN OPTIONS 
+export const getLoginOptions = () => async (dispatch) => {
+  try {
+    const res = await axios.get(`${BASE_URL}/org/login/options`)
+    if(res.status === 200) {
+      console.log('fetched login options ', res.data)
+      dispatch({
+        type: GET_LOGIN_OPTIONS,
+        payload: res.data.methods
+      })
+    }
+  } catch(error) {
     dispatch(errorHandler(error))
   }
 }
