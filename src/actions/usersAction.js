@@ -3,6 +3,7 @@ import { errorHandler } from '../utils/errorHandler'
 import axios from 'axios'
 import { setRequestStatus } from '../utils/setRequestStatus'
 import { BASE_URL } from './baseApi'
+const userId = localStorage.getItem('userId')
 
 // GET USER PROFILE
 export const getProfile = (id) => async (dispatch)=> {
@@ -106,11 +107,11 @@ export const updateProfile = (userId, updatedInfo) => async (dispatch) => {
 }
 
 // GET EVENTS CREATED BY USER 
-export const getEventsCreatedByUser = (userId, pagination = 10, page = 1) => async (dispatch) => {
+export const getEventsCreatedByUser = (id = userId, pagination = 10, page = 1) => async (dispatch) => {
   try { 
-    console.log('getEvents userId ', userId)
+    console.log('getEvents userId ', id)
     const res = await axios
-      .get(`${BASE_URL}/event/${userId}/all?pagination=${pagination}&page=${page}`);
+      .get(`${BASE_URL}/event/${id}/all?pagination=${pagination}&page=${page}`);
     dispatch(setRequestStatus(false))
     if(res.status === 200) {
       dispatch(setRequestStatus(true))
@@ -126,11 +127,11 @@ export const getEventsCreatedByUser = (userId, pagination = 10, page = 1) => asy
 }
 
 // GET ALL PROJECT CREATED BY A USER 
-export const getProjectCreatedByUser = (userId, pagination = 10, page = 1) => async (dispatch) => {
+export const getProjectCreatedByUser = (id = userId, pagination = 10, page = 1) => async (dispatch) => {
   try { 
-    console.log('getProjects userId ', userId)
+    console.log('getProjects userId ', id)
     const res = await axios
-      .get(`${BASE_URL}/project/${userId}/all?pagination=${pagination}&page=${page}`);
+      .get(`${BASE_URL}/project/${id}/all?pagination=${pagination}&page=${page}`);
     dispatch(setRequestStatus(false))
     if(res.status === 200) {
       dispatch(setRequestStatus(true))
@@ -146,11 +147,11 @@ export const getProjectCreatedByUser = (userId, pagination = 10, page = 1) => as
 }
 
 // GET POSTS CREATED BY USER 
-export const getPostsCreatedByUser = (userId, pagination = 10, page = 1) => async (dispatch) => {
+export const getPostsCreatedByUser = (id = userId, pagination = 10, page = 1) => async (dispatch) => {
   try { 
-    console.log('getPosts userId ', userId)
+    console.log('getPosts userId ', id)
     const res = await axios
-      .get(`${BASE_URL}/post/${userId}/all?pagination=${pagination}&page=${page}`);
+      .get(`${BASE_URL}/post/${id}/all?pagination=${pagination}&page=${page}`);
     dispatch(setRequestStatus(false))
     if(res.status === 200) {
       dispatch(setRequestStatus(true))

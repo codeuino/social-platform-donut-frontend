@@ -32,10 +32,10 @@ class Profile extends Component {
   componentDidMount() {
     console.log("match", this.props.match?.path);
     const { path, params } = this.props.match;
-    const userId = params.id
+    const userId = params.id ? params.id : localStorage.getItem('userId')
     console.log("checking profile", userId);
-    this.props.getProfile(userId)
     setTimeout(() => {
+      this.props.getProfile(userId);
       this.props.getOrgProfile();
     })
     setTimeout(() => {
