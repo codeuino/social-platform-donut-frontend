@@ -18,7 +18,6 @@ import { Button, Dropdown, FormControl } from "react-bootstrap";
 import AddEventModal from "./popups/AddEventModal";
 import AddProjectModal from "./popups/AddProjectModal";
 import PostReactionModal from "./popups/PostReactionsModal";
-import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
 import ChatBubbleIcon from "@material-ui/icons/ChatBubble";
 import "../../pinned-posts/posts/posts.scss";
 import "./news-feed.scss";
@@ -36,6 +35,9 @@ import { rsvpYes } from "../../../actions/eventAction";
 import { FaEllipsisH, FaThumbtack } from "react-icons/fa";
 import ReactionsElement from "./ReactionsElement";
 import Moment from "react-moment";
+import EditPostModal from "./popups/EditPost";
+import DeletePostModal from "./popups/DeletePost";
+import SharePostModal from "./popups/SharePost";
 
 const reactionVariant = {
   hover: {
@@ -45,7 +47,15 @@ const reactionVariant = {
   },
 };
 
-const navStyles = { position: 'fixed', width: '83%', top: '0', zIndex:1, background: '#fff', marginTop: '0px', marginBottom:'0px'}
+const navStyles = {
+  position: "fixed",
+  width: "83%",
+  top: "0",
+  zIndex: 1,
+  background: "#fff",
+  marginTop: "0px",
+  marginBottom: "0px",
+};
 
 const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
   <a
@@ -136,18 +146,31 @@ function NewsFeed(props) {
   const [displayReactionContainer, setDisplayReactioContainer] = useState(
     false
   );
+  const [editPost, setShowEditPost] = useState(false);
+  const [sharePost, setShowSharePost] = useState(false);
+  const [deletePost, setShowDeletePost] = useState(false);
+  const [userId, setUserId] = useState(localStorage.getItem("userId"));
+  const [postInfo, setPostInfo] = useState({});
+  const [deletePostId, setDeletePostId] = useState("");
+  const [shareableContent, setSharableContent] = useState("");
 
   useEffect(() => {
     console.log("useEffect from news-feed ", props);
     setEvents(props?.allEvents);
     setAllProjects(props?.allProjects);
     setAllPosts(props?.allPosts);
-  }, [props.allEvents, props.allPosts, props.allProjects, props]);
+  }, [
+    props.allEvents,
+    props.allPosts,
+    props.allProjects,
+    props.singlePost,
+    props,
+  ]);
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
       const scrollAmount = window.scrollY;
-      scrollAmount > 369 ? setisTop(true) : setisTop(false)
+      scrollAmount > 369 ? setisTop(true) : setisTop(false);
     });
   }, [window]);
 
@@ -162,11 +185,14 @@ function NewsFeed(props) {
     // second("s");
   };
 
-  let handleShow = (modalName) => {
+  let handleShow = (modalName, post) => {
     if (modalName === "project") {
       setShowProject(true);
     } else if (modalName === "event") {
       setShowEvent(true);
+    } else if (modalName === "edit") {
+      setPostInfo(post);
+      setShowEditPost(true);
     }
   };
 
@@ -175,6 +201,12 @@ function NewsFeed(props) {
       setShowProject(false);
     } else if (modalName === "event") {
       setShowEvent(false);
+    } else if (modalName === "edit") {
+      setPostInfo({});
+      setShowEditPost(false);
+    } else if (modalName === "delete") {
+      setPostInfo({});
+      setShowDeletePost(false);
     }
   };
 
@@ -221,6 +253,26 @@ function NewsFeed(props) {
     setShowReactions(false);
   };
 
+  let showDeletePostModal = (postId) => {
+    setDeletePostId(postId);
+    setShowDeletePost(true);
+  };
+
+  let hideDeletePostModal = () => {
+    setDeletePostId("");
+    setShowDeletePost(false);
+  };
+
+  let showSharePostModal = (content) => {
+    setSharableContent(content);
+    setShowSharePost(true);
+  };
+
+  let hideSharePostModal = () => {
+    setSharableContent("");
+    setShowSharePost(false);
+  };
+
   useEffect(() => {
     if (Object.keys(votes).length !== 0) {
       setShowReactions(true);
@@ -261,7 +313,7 @@ function NewsFeed(props) {
       votes.donut?.user.length;
 
     return (
-      <div className="grid" key={post._id}>
+      <div className="grid" key={post?._id}>
         <Paper elevation={1} className={classes.paper}>
           <Card className={classes.root}>
             <List className={classes.listStyle}>
@@ -287,11 +339,45 @@ function NewsFeed(props) {
                   >
                     <FaEllipsisH />
                   </Dropdown.Toggle>
-                  <Dropdown.Menu>
-                    <Dropdown.Item eventKey="1">Edit</Dropdown.Item>
-                    <Dropdown.Item eventKey="2">Share</Dropdown.Item>
-                    <Dropdown.Item eventKey="3">Delete</Dropdown.Item>
-                  </Dropdown.Menu>
+                  {post?.userId?._id === userId ? (
+                    <Dropdown.Menu>
+                      <Dropdown.Item
+                        eventKey="1"
+                        onClick={() => handleShow("edit", post)}
+                      >
+                        Edit
+                      </Dropdown.Item>
+                      <Dropdown.Item
+                        eventKey="2"
+                        onClick={() =>
+                          showSharePostModal(
+                            post?.content.replace(/(<([^>]+)>)/gi, "")
+                          )
+                        }
+                      >
+                        Share
+                      </Dropdown.Item>
+                      <Dropdown.Item
+                        eventKey="3"
+                        onClick={() => showDeletePostModal(post._id)}
+                      >
+                        Delete
+                      </Dropdown.Item>
+                    </Dropdown.Menu>
+                  ) : (
+                    <Dropdown.Menu>
+                      <Dropdown.Item
+                        eventKey="2"
+                        onClick={() =>
+                          showSharePostModal(
+                            post?.content.replace(/(<([^>]+)>)/gi, "")
+                          )
+                        }
+                      >
+                        Share
+                      </Dropdown.Item>
+                    </Dropdown.Menu>
+                  )}
                 </Dropdown>
               </ListItem>
               <div className="post-details2">{parse(post?.content)}</div>
@@ -548,12 +634,36 @@ function NewsFeed(props) {
               handleClose("project");
             }}
           />
+          <EditPostModal
+            show={editPost}
+            handleClose={() => {
+              handleClose("edit");
+            }}
+            postInfo={postInfo}
+          />
+          <DeletePostModal
+            show={deletePost}
+            handleClose={() => {
+              hideDeletePostModal();
+            }}
+            postId={deletePostId}
+          />
+          <SharePostModal
+            show={sharePost}
+            handleClose={() => {
+              hideSharePostModal();
+            }}
+            sharableContent={shareableContent}
+          />
         </div>
       </div>
       <div className="news__feed__container">
-        <div className="tabs__container" style={isTop? navStyles: {}}>
+        <div className="tabs__container" style={isTop ? navStyles : {}}>
           <span className="nav__tab container">
-            <ul className="nav__list__container" style={isTop ? {marginBottom: '0px'}: {}}>
+            <ul
+              className="nav__list__container"
+              style={isTop ? { marginBottom: "0px" } : {}}
+            >
               <li
                 className={
                   type === "All"

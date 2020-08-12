@@ -81,7 +81,7 @@ export const updatePost = (postId, updatedInfo) => async (dispatch) => {
     console.log("updatedPostInfo ", updatedInfo);
     const res = await axios.patch(`${BASE_URL}/post/${postId}`, updatedInfo);
     if (res.status === 200) {
-      dispatch(getPostById(postId));
+      dispatch(getAllPosts());
     }
   } catch (error) {
     dispatch(errorHandler(error));
@@ -103,7 +103,10 @@ export const deletePost = (postId) => async (dispatch) => {
 // REMOVE REACTION
 export const removeReaction = (postId, type) => async (dispatch) => {
   try {
-    const res = await axios.patch(`${BASE_URL}/post/removereaction/${postId}`, type);
+    const res = await axios.patch(
+      `${BASE_URL}/post/removereaction/${postId}`,
+      type
+    );
     if (res.status === 200) {
       dispatch(getAllPosts());
     }
