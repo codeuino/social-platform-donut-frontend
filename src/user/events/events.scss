@@ -17,6 +17,7 @@
     padding: 20px;
     margin-top: 2vh;
     margin-left: 4vw;
+
     .event_header {
       font-family: Inter;
       font-style: normal;
@@ -31,6 +32,14 @@
     .MuiCard-root {
       overflow: hidden;
       height: 42vh;
+    }
+
+    .event__pagination__container {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      padding-top: 29px;
     }
   }
 }

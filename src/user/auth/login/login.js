@@ -6,6 +6,8 @@ import { DonutTitle } from "../../../donutTitle/donutTitle";
 import multipleDonuts from "../../../assets/images/extra-donuts.png";
 import GoogleLogin from "../../../assets/images/icons8-google-48.png";
 import { FaGithub } from 'react-icons/fa'
+import { connect } from 'react-redux';
+import { getLoginOptions } from '../../../actions/orgAction'
 import "./login.scss";
 
 class Login extends Component {
@@ -13,8 +15,23 @@ class Login extends Component {
     super(props);
     this.state = {
       activeForm: "login",
+      loginOptions: {}
     };
   }
+
+  // get login options 
+  componentDidMount() {
+    this.props.getLoginOptions()
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if(prevState.loginOptions != this.props.org?.loginOptions){
+      this.setState({
+        loginOptions: this.props.org?.loginOptions
+      })
+    }
+  }
+
   handleSelectorClick = (formItem) => {
     this.setState({
       activeForm: formItem,
@@ -22,6 +39,7 @@ class Login extends Component {
   };
 
   render() {
+    const { loginOptions } = this.state
     return (
       <div className="login-page">
         <div className="welcome-text">
@@ -58,7 +76,8 @@ class Login extends Component {
                 : "Or SignUp with"}
             </p>
             <Row>
-              <Col className = "button-column">
+              {Boolean(loginOptions?.google === true) ? (
+                <Col className = "button-column">
                 <a
                   href="http://localhost:5000/auth/google"
                   style={{ padding: "1vh" }}
@@ -76,7 +95,9 @@ class Login extends Component {
                   </Button>
                 </a>
               </Col>
-              <Col className="button-column" >
+              ) : null }
+              {Boolean(loginOptions?.github === true) ? (
+                <Col className="button-column" >
                 <a
                   href="http://localhost:5000/auth/google"
                   style={{ padding: "1vh" }}
@@ -94,6 +115,7 @@ class Login extends Component {
                   </Button>
                 </a>
               </Col>
+              ) : null }
             </Row>
             <p className="login-text-selector">
               {this.state.activeForm === "login"
@@ -123,4 +145,9 @@ class Login extends Component {
   }
 }
 
-export default Login;
+// map state to props 
+const mapStateToProps = (state) => ({
+  org: state.org
+})
+
+export default connect(mapStateToProps, { getLoginOptions })(Login);

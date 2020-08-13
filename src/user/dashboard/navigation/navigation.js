@@ -30,6 +30,7 @@ class Navigation extends Component {
       userId: nextProps.user.userProfile?._id,
     });
   }
+
   render() {
     const ListItem = (props) => {
       const item = props.isMobile ? (
@@ -120,7 +121,9 @@ class Navigation extends Component {
             <ListItem
               name="Account"
               className={this.props.profile ? "active" : "inactive"}
-              link={`/profile/${this.state.userId}`}
+              link={`/profile/${
+                this.state.userId || this.props.user.userProfile._id
+              }`}
             />
             <ListItem
               name="Settings"

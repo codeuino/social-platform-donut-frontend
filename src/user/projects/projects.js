@@ -5,6 +5,7 @@ import { makeStyles,Grid , Card, CardActionArea, CardActions, CardContent, CardM
 import { Button } from "react-bootstrap";
 import { connect } from 'react-redux'
 import { createProject, getAllProjects } from '../../actions/projectAction'
+import { Pagination } from 'antd'
 import projectImage from '../../assets/images/project.png'
 import { withRouter } from "react-router-dom";
 
@@ -19,7 +20,7 @@ class Projects extends Component {
   }
   componentDidMount() {
     setTimeout(() => {
-      this.props.getAllProjects();
+      this.props.getAllProjects(); // by default 6 projects per page
     })
   }
 
@@ -29,6 +30,16 @@ class Projects extends Component {
     this.setState({ allProjects: allProjects }, () => {
       console.log('projects state ', this.state)
     })
+  }
+
+  onShowSizeChange = (currentPage, pageSize) => {
+    console.log('currentPage pageSize ', currentPage, pageSize)
+    this.props.getAllProjects(pageSize, currentPage)
+  }
+
+  handlePagination = (pageNumber) => {
+    console.log('page number ', pageNumber);
+    this.props.getAllProjects(6, pageNumber)
   }
 
   render() {
@@ -93,6 +104,15 @@ class Projects extends Component {
             <Grid container spacing={3}>
               {Projects}
             </Grid>
+          </div>
+          <div className="project__pagination__container">
+            <Pagination
+              showSizeChanger
+              onShowSizeChange={this.onShowSizeChange}
+              defaultCurrent={1}
+              total={100}
+              onChange={this.handlePagination}
+            />
           </div>
         </div>
       </div>

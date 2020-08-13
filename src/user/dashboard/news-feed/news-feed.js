@@ -10,15 +10,15 @@ import {
   Avatar,
   ListItemText,
   // ListItemSecondaryAction,
-  IconButton,
+  // IconButton,
   CardMedia,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { Button, Dropdown, FormControl } from "react-bootstrap";
+import { Button, Dropdown } from "react-bootstrap";
 import AddEventModal from "./popups/AddEventModal";
 import AddProjectModal from "./popups/AddProjectModal";
 import PostReactionModal from "./popups/PostReactionsModal";
-import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
+// import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
 import ChatBubbleIcon from "@material-ui/icons/ChatBubble";
 import "../../pinned-posts/posts/posts.scss";
 import "./news-feed.scss";
@@ -35,15 +35,16 @@ import { withRouter } from "react-router-dom";
 import { rsvpYes } from "../../../actions/eventAction";
 import { FaEllipsisH, FaThumbtack } from "react-icons/fa";
 import ReactionsElement from "./ReactionsElement";
+import { pinPost } from '../../../actions/postAction'
 import Moment from "react-moment";
 
-const reactionVariant = {
-  hover: {
-    scale: 1.3,
-    opacity: 0.9,
-    rotate: [0, 10, 0, -10, 0],
-  },
-};
+// const reactionVariant = {
+//   hover: {
+//     scale: 1.3,
+//     opacity: 0.9,
+//     rotate: [0, 10, 0, -10, 0],
+//   },
+// };
 
 const navStyles = { position: 'fixed', width: '83%', top: '0', zIndex:1, background: '#fff', marginTop: '0px', marginBottom:'0px'}
 
@@ -193,10 +194,10 @@ function NewsFeed(props) {
     toggle(!showComment);
   };
 
-  let onUpvote = (postId) => {
-    console.log("upvote clicked!", postId);
-    props.upVotePost(postId);
-  };
+  // let onUpvote = (postId) => {
+  //   console.log("upvote clicked!", postId);
+  //   props.upVotePost(postId);
+  // };
 
   let onRsvpYes = (eventId) => {
     console.log("On rsvp yes ", eventId);
@@ -220,6 +221,11 @@ function NewsFeed(props) {
     setVotes({});
     setShowReactions(false);
   };
+
+  let onPinPost = (postId) => {
+    console.log('Pinning post ', postId)
+    props.pinPost(postId)
+  }
 
   useEffect(() => {
     if (Object.keys(votes).length !== 0) {
@@ -279,7 +285,10 @@ function NewsFeed(props) {
                   </h2>
                   <Moment format="DD MMM YYYY">{post?.createdAt}</Moment>
                 </ListItemText>
-                <FaThumbtack style={{ margin: "10px", width: "10px" }} />
+                <FaThumbtack 
+                  style={{ margin: "10px", width: "10px", cursor: "pointer" }} 
+                  onClick={() => onPinPost(post._id)}
+                />
                 <Dropdown>
                   <Dropdown.Toggle
                     as={CustomToggle}
@@ -631,5 +640,6 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   getAllCommentsOfPost,
   upVotePost,
+  pinPost,
   rsvpYes,
 })(withRouter(NewsFeed));

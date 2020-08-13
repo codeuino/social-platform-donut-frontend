@@ -29,21 +29,37 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  .activity__link {
-    color: #1a73ed;
-    font-family: "Inter";
-    font-size: 14px;
-    cursor: pointer;
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-  .joined__on {
-    margin-top: -14px;
-    color: #cccccc;
-  }
   .pagination__container {
     position: fixed;
     margin-top: 78vh;
+  }
+  .user__wrapper {
+    display: flex;
+    flex-direction: row;
+    max-height: 52px;
+    .user__image {
+      border-radius: 50%;
+      height: 37px;
+      width: 36px;
+    }
+    .name_wrapper {
+      .activity__link {
+        color: #1a73ed;
+        font-family: "Inter";
+        font-size: 14px;
+        cursor: pointer;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+      .joined__on {
+        color: #cccccc;
+        margin-top: -15px;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
   }
 }

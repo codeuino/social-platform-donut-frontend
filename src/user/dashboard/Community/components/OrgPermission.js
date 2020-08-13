@@ -24,7 +24,7 @@ class OrgPermission extends Component {
   }
 
   toggleRadio = (e) => {
-    this.setState({ [e.target.name]: e.target.checked }, () => {
+    this.setState({ [e.target.name]: !e.target.checked }, () => {
       console.log("state ", this.state);
     });
   };
@@ -124,7 +124,7 @@ class OrgPermission extends Component {
                 <Form.Check
                   type="checkbox"
                   label="Prevent users from changing their name"
-                  checked={canChangeName}
+                  checked={canChangeName === false}
                   name="canChangeName"
                   onChange={this.toggleRadio}
                 />
@@ -133,7 +133,7 @@ class OrgPermission extends Component {
                 <Form.Check
                   type="checkbox"
                   label="Prevent users from changing their email address "
-                  checked={canChangeEmail}
+                  checked={canChangeEmail === false}
                   name="canChangeEmail"
                   onChange={this.toggleRadio}
                 />

@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import Moment from 'react-moment'
 import { Pagination } from 'antd'
 import { withRouter } from 'react-router-dom'
+import Img from '../../assets/images/userIcon2.jpg'
 
 class Users extends Component {
   constructor(props) {
@@ -55,13 +56,18 @@ class Users extends Component {
                 key={index}
                 onClick={() => this.props.history.push(`/activity/${user._id}`)}
               >
-                <p className="activity__link">
-                  {user.name.firstName + " " + user.name.lastName}
-                </p>
-                <p className="joined__on">
-                  Joined on:{" "}
-                  <Moment format="DD MMM YYYY">{user.createdAt}</Moment>
-                </p>
+                <div className="user__wrapper">
+                  <img src={Img} alt="user_image" className="user__image mr-2"/>
+                  <div className="name_wrapper">
+                    <p className="activity__link">
+                      {user.name.firstName + " " + user.name.lastName}
+                    </p>
+                    <p className="joined__on">
+                      Joined on:{" "}
+                      <Moment format="DD MMM YYYY">{user.createdAt}</Moment>
+                    </p>
+                  </div>
+                </div>
               </Timeline.Item>
             ))}
           </Timeline>

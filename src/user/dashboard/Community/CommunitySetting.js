@@ -40,7 +40,7 @@ class CommunitySetting extends Component {
     return (
       <div className="overall_container">
         <div className="main_navigation">
-          <Navigation orgSettings={this.state.org} />
+          <Navigation orgSettings={this.state.org} user={this.props.user} />
         </div>
         <div className="org_settings_view">
           <div className="main_section">
@@ -71,6 +71,7 @@ class CommunitySetting extends Component {
 const mapStateToProps = (state) => ({
   auth: state.auth,
   error: state.error,
+  user: state.user,
   org: state.org
 })
 export default connect(mapStateToProps)(CommunitySetting);
