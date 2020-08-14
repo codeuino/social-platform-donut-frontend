@@ -154,11 +154,14 @@ function NewsFeed(props) {
   const [deletePostId, setDeletePostId] = useState("");
   const [shareableContent, setSharableContent] = useState("");
 
+  const FILTER_TAGS_REGEX = new RegExp(/(<([^>]+)>)/gi);
+
   useEffect(() => {
-    console.log("useEffect from news-feed ", props);
-    setEvents(props?.allEvents);
-    setAllProjects(props?.allProjects);
-    setAllPosts(props?.allPosts);
+    const { allEvents, allProjects, allPosts } = props;
+
+    setEvents(allEvents);
+    setAllProjects(allProjects);
+    setAllPosts(allPosts);
   }, [
     props.allEvents,
     props.allPosts,
@@ -351,7 +354,7 @@ function NewsFeed(props) {
                         eventKey="2"
                         onClick={() =>
                           showSharePostModal(
-                            post?.content.replace(/(<([^>]+)>)/gi, "")
+                            post?.content.replace(FILTER_TAGS_REGEX, "")
                           )
                         }
                       >
