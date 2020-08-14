@@ -39,7 +39,9 @@
       column-count: 2;
       width: 100%;
       counter-reset: item-counter;
+
       .individual-post {
+        break-inside: avoid-column;
         // position: relative;
         display: inline-block;
         counter-increment: item-counter;
@@ -363,8 +365,8 @@
   color: #1eb025;
 }
 
-.reactions-container{
-  .reaction-element{
+.reactions-container {
+  .reaction-element {
     display: inline-block;
     margin-right: 10px;
     padding: 4px;
@@ -376,7 +378,7 @@
 }
 .news__feed__container {
   .news-feed {
-    .post-article{
+    .post-article {
       .article {
         margin-left: auto;
         margin-right: auto;
@@ -426,11 +428,11 @@
 }
 
 .posts {
-   width: 140%;
+  width: 140%;
   //  margin-top: 25px;
-   margin-left: 20px;
-   margin-right: 10px;
-   margin-bottom: 24px;
+  margin-left: 20px;
+  margin-right: 10px;
+  margin-bottom: 24px;
   .category {
     .category-btn {
       background-color: white;
@@ -463,7 +465,7 @@
       align-items: center;
       list-style: none;
       border-bottom: 2px solid #eee;
-      transition: all .5s;
+      transition: all 0.5s;
       font-weight: 300;
       color: #262727;
 
@@ -496,7 +498,7 @@
     }
   }
   .show__comment__section {
-    .comment__input{
+    .comment__input {
       .comment__wrap {
         display: flex;
         .comment__img {
@@ -516,6 +518,7 @@
 }
 .post {
   .grid {
+    break-inside: avoid-column;
     .com-btn {
       .btn-primary {
         background-color: #ffffff;
@@ -526,6 +529,6 @@
     }
   }
 }
- .post .main h2 {
-   cursor: pointer;
- }
+.post .main h2 {
+  cursor: pointer;
+}
