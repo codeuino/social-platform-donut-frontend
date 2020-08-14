@@ -15,7 +15,8 @@ class Navigation extends Component {
       settings, 
       authentication, 
       maintenance,
-      activity
+      activity,
+      details
     } = this.props.data.option;
     return (
       <div className="settings__navigation">

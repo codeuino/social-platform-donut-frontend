@@ -59,7 +59,10 @@ class CommunitySetting extends Component {
               {view === "settings" ? <OrgSetting /> : null}
               {view === "authentication" ? <OrgAuth /> : null}
               {view === "maintenance" ? <OrgMaintenance /> : null}
-              {view === "activity" ? <Users /> : null }
+              {view === "activity" ? (
+                <Users 
+                  handleOption={{ changeOption: this.changeOption.bind(this) }}
+                />) : null }
             </div>
           </div>
         </div>
