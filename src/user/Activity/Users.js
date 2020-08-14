@@ -42,19 +42,24 @@ class Users extends Component {
     this.props.getMembers(10, pageNumber)
   }
 
+  handleViewOption = (name, userId) => {
+    this.props.history.push(`/activity/${userId}`);
+    this.props.handleOption.changeOption(name)
+  }
+
   render() {
     const { users } = this.state;
     return (
       <div className="activity__main__container">
         <div className="header__text">
-          <p className="activity__header">Users activity</p>
+          <p className="activity__header">Users List</p>
         </div>
         <div className="timeline__container">
           <Timeline>
             {users.map((user, index) => (
               <Timeline.Item 
                 key={index}
-                onClick={() => this.props.history.push(`/activity/${user._id}`)}
+                onClick={() => this.handleViewOption("details", user._id)}
               >
                 <div className="user__wrapper">
                   <img src={Img} alt="user_image" className="user__image mr-2"/>

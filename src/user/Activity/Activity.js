@@ -8,146 +8,81 @@ import { connect } from 'react-redux'
 import { getEventById } from '../../actions/eventAction'
 // import { getProjectById } from '../../actions/projectAction'
 import { getPostById } from '../../actions/postAction'
-import PostPopup from './Popups/PostPopup';
-import EventPopup from './Popups/EventPopup';
+import LeftNav from '../dashboard/Community/LeftNav'
+import OrgProfile from '../dashboard/Community/components/OrgProfile';
+import OrgPermission from '../dashboard/Community/components/OrgPermission';
+import OrgSettings from '../dashboard/Community/components/OrgSettings';
+import OrgAuth from '../dashboard/Community/components/OrgAuth';
+import OrgMaintenance from '../dashboard/Community/components/OrgMaintenance';
+import Users from './Users';
+import ActivityTimeline from './ActivityTimeline';
 
 class Activity extends Component {
   constructor(props) {
     super(props);
     this.state = {
       org: true,
-      showEvent: false,
-      showPost: false,
-      showProject: false,
-      eventId: '',
-      postId: ''
-    }
+      option: {
+        profile: false,
+        settings: false,
+        permission: false,
+        authentication: false,
+        maintenance: false,
+        activity: true,
+        details: true
+      },
+    };
   }
 
-  showPopup = (modalType, id) => {
-    console.log('type ', modalType, this.state)
-    
-    if (Boolean(modalType === "Event")) {
-      // CHANGE HARD CODED DATA TO ID
-      this.props.getEventById("5ef76594201b3f2dec2acf20");
-      this.setState({
-        showEvent: true,
-        eventId: '5ef76594201b3f2dec2acf20'
-      })
-    }
+  changeOption = (name) => {
+    const keys = Object.keys(this.state.option);
+    let item = keys.filter((k) => k === name);
+    console.log("changeOption items ", item);
+    this.setState({ option: { profile: false } });
+    this.setState({ option: { [name]: true } });
+    this.setState({ view: name });
+  };
 
-    if (Boolean(modalType === "Project")) {
-      // CHANGE HARD CODED DATA TO ID
-      this.props.history.push(`/5efca0d9081c631ed098944b/proj-info`)
-    }
-
-    if (Boolean(modalType === "Post")) {
-      // CHANGE HARD CODED DATA TO ID
-      this.props.getPostById("5efd836db08e9e369050cca1");
-      this.setState({
-        showEvent: false,
-        showPost: true,
-        postId: "5efd836db08e9e369050cca1",
-      });
-    }
-  }
-  
-  handleClose = () => {
-    this.setState({ 
-      showEvent: false, 
-      showPost: false
-    })
+  componentDidMount() {
+    this.setState({ view: 'details' })
   }
 
   render() {
-    const { showEvent, showPost, eventId, postId } = this.state
-    const activity = [
-      {
-        type: 'Post',
-        text: "User X created a post!",
-      },
-      {
-        type: 'Project',
-        text: "User X created a Project!",
-      },
-      {
-        type: 'Event',
-        text: "User X created an Event!",
-      },
-      {
-        type: 'Comment',
-        text: "User X commented on GSOC !",
-      },
-      {
-        type: 'Post',
-        text: "User X created a post!",
-      },
-      {
-        type: 'Event',
-        text: "User X created an Event!",
-      },
-      {
-        type: 'Comment',
-        text: "User X commented on GSOC !",
-      },
-      {
-        type: 'Post',
-        text: "User X created a post!",
-      },
-      {
-        type: 'Event',
-        text: "User X created an Event!",
-      },
-      {
-        type: 'Comment',
-        text: "User X commented on GSOC !",
-      },
-      {
-        type: 'Post',
-        text: "User X created a post!",
-      },
-      {
-        type: 'Event',
-        text: "User X created an Event!",
-      },
-      {
-        type: 'Comment',
-        text: "User X commented on GSOC !",
-      },
-    ];
+    const { view } = this.state
 
     return (
       <div className="overall_container">
         <div className="main_navigation">
-          <Navigation orgSettings={this.state.org} />
+          <Navigation orgSettings={this.state.org} user={this.props.user} />
         </div>
-        <div className="user_activity_view">
+        <div className="org_settings_view">
           <div className="main_section">
-            <div className="timelines__container">
-              <p className="activity__header">User activity</p>
-              <Timeline mode="alternate">
-                  {activity.map((act, index) => (
-                    <Timeline.Item 
-                      key={index}
-                      onClick={this.showPopup.bind(this, act.type, index)}
-                    >
-                      <p className="activity__link">{act.text}</p>
-                    </Timeline.Item>
-                  ))}
-              </Timeline>
+            <div className="left_nav">
+              <p className="header_text">Community Settings</p>
+              <LeftNav
+                data={{
+                  option: this.state.option,
+                  changeOption: this.changeOption.bind(this),
+                }}
+              />
+            </div>
+            <div className="right_section">
+              {view === "profile" ? <OrgProfile /> : null}
+              {view === "permission" ? <OrgPermission /> : null}
+              {view === "settings" ? <OrgSettings /> : null}
+              {view === "authentication" ? <OrgAuth /> : null}
+              {view === "maintenance" ? <OrgMaintenance /> : null}
+              {view === "activity" ? (
+                <Users
+                  handleOption={{ changeOption: this.changeOption.bind(this) }}
+                />
+              ) : null}
+              {view === "details" ? (
+                <ActivityTimeline />
+              ) : null}
             </div>
           </div>
         </div>
-        <EventPopup 
-          show={showEvent} 
-          onHide={this.handleClose} 
-          eventId={eventId}
-        />
-        <PostPopup 
-          show={showPost}
-          onHide={this.handleClose}
-          postId={postId}
-        />
       </div>
     );
   }

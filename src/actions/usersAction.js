@@ -222,3 +222,5 @@ export const activateDeactivateToggler = () => async (dispatch) => {
     dispatch(errorHandler(error))
   }
 }
+
+// GET USER'S ACTIVITY
