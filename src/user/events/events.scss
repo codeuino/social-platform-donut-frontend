@@ -3,49 +3,68 @@
   min-height: 100vh;
   height: auto;
   font-family: Muli, sans-serif;
-  .events {
-      margin-top: 2vh;
-      .container {
-        .event_header {
-          font-family: Inter;
-          font-style: normal;
-          font-weight: normal;
-          font-size: 1.5em;
-          line-height: 1.3em;
-          color: #2D2D2D;
-        }
-        .card__container {
-          max-width: 33.33%;
-        }
-        .MuiCard-root {
-          overflow: hidden;
-          height: 42vh;
-        }
-      }
+  .navigation {
+    background: #f5f5f5;
+    flex-grow: 1;
+    border-right: solid 1px #dfe9f1;
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    overflow-y: scroll;
   }
-} 
+  .events {
+    padding: 20px;
+    margin-top: 2vh;
+    margin-left: 4vw;
 
-.event-location1{
-  color:rgb(14, 19, 14);
+    .event_header {
+      font-family: Inter;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 1.5em;
+      line-height: 1.3em;
+      color: #2d2d2d;
+    }
+    .card__container {
+      max-width: 33.33%;
+    }
+    .MuiCard-root {
+      overflow: hidden;
+      height: 42vh;
+    }
+
+    .event__pagination__container {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      padding-top: 29px;
+    }
+  }
 }
 
-.event-location2{
-  color:rgb(91, 189, 91);
+.event-location1 {
+  color: rgb(14, 19, 14);
 }
 
-.timing3{
-  color:rgb(207, 37, 31);
+.event-location2 {
+  color: rgb(91, 189, 91);
 }
 
-.timing2{
-  color:rgb(14, 19, 14);
+.timing3 {
+  color: rgb(207, 37, 31);
 }
 
-.timing1{
-  color:rgb(91, 189, 91);
+.timing2 {
+  color: rgb(14, 19, 14);
 }
 
-.cancelled{
+.timing1 {
+  color: rgb(91, 189, 91);
+}
+
+.cancelled {
   background-color: rgb(207, 37, 31);
   width: 10px;
   margin: 1px;
@@ -54,67 +73,67 @@
   font-size: 30px;
 }
 
-  .div-upcoming {
-    background-color: rgb(91, 189, 91);
-    width: 10px;
-    margin: 1px;
-    text-align: center;
-    height: 100%;
-    font-size: 30px;
-  }
-
-  .div-past {
-    background-color: rgb(163, 161, 161);
-    width: 10px;
-    margin: 1px;
-    text-align: center;
-    height: 100%;
-    font-size: 30px;
-  }
-
-  .div2 {
-    background-color: #ffffff;
-    width: auto;
-    text-align: center;
-    font-size: 3rem;
-  }
-
-  .div3 {
-    background-color: #ffffff;
-    width: auto;
-    text-align: center;
-    font-size: 1.45rem;
-    margin-left: 7vw;
-    margin-right: -12vw;
-    .day{
-      font-weight: 25px;
-    }
-    .year{
-      color: #5d5d5d;
-    }
+.div-upcoming {
+  background-color: rgb(91, 189, 91);
+  width: 10px;
+  margin: 1px;
+  text-align: center;
+  height: 100%;
+  font-size: 30px;
 }
 
-.inside{
-    margin-right: 2vw;
-    margin-left: 2vw;
-  }
+.div-past {
+  background-color: rgb(163, 161, 161);
+  width: 10px;
+  margin: 1px;
+  text-align: center;
+  height: 100%;
+  font-size: 30px;
+}
 
-.number{
+.div2 {
+  background-color: #ffffff;
+  width: auto;
+  text-align: center;
+  font-size: 3rem;
+}
+
+.div3 {
+  background-color: #ffffff;
+  width: auto;
+  text-align: center;
+  font-size: 1.45rem;
+  margin-left: 7vw;
+  margin-right: -12vw;
+  .day {
+    font-weight: 25px;
+  }
+  .year {
+    color: #5d5d5d;
+  }
+}
+
+.inside {
+  margin-right: 2vw;
+  margin-left: 2vw;
+}
+
+.number {
   font-size: 30px;
 }
 .eventName {
   font-weight: bold;
-  color: #000000;;
+  color: #000000;
 }
 
-.short-des{
+.short-des {
   text-align: justify;
   font-family: Inter;
   font-style: normal;
   font-weight: normal;
   font-size: 1em;
   line-height: 1.3em;
-  color: #2D2D2D;
+  color: #2d2d2d;
   /* white-space: nowrap; */
   max-width: 259px;
   overflow: hidden;
@@ -122,17 +141,17 @@
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
-  }
+}
 
-.createdAt{
+.createdAt {
   text-align: center;
   font-size: 12px;
   font-weight: bold;
 }
-.event-card{
+.event-card {
   max-width: 345px;
   margin-top: 20px;
-} 
+}
 
 .footer__buttons {
   .disable__edit {

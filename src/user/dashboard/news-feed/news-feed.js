@@ -10,11 +10,11 @@ import {
   Avatar,
   ListItemText,
   // ListItemSecondaryAction,
-  IconButton,
+  // IconButton,
   CardMedia,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { Button, Dropdown, FormControl } from "react-bootstrap";
+import { Button, Dropdown } from "react-bootstrap";
 import AddEventModal from "./popups/AddEventModal";
 import AddProjectModal from "./popups/AddProjectModal";
 import PostReactionModal from "./popups/PostReactionsModal";
@@ -34,18 +34,19 @@ import { withRouter } from "react-router-dom";
 import { rsvpYes } from "../../../actions/eventAction";
 import { FaEllipsisH, FaThumbtack } from "react-icons/fa";
 import ReactionsElement from "./ReactionsElement";
+import { pinPost } from "../../../actions/postAction";
 import Moment from "react-moment";
 import EditPostModal from "./popups/EditPost";
 import DeletePostModal from "./popups/DeletePost";
 import SharePostModal from "./popups/SharePost";
 
-const reactionVariant = {
-  hover: {
-    scale: 1.3,
-    opacity: 0.9,
-    rotate: [0, 10, 0, -10, 0],
-  },
-};
+// const reactionVariant = {
+//   hover: {
+//     scale: 1.3,
+//     opacity: 0.9,
+//     rotate: [0, 10, 0, -10, 0],
+//   },
+// };
 
 const navStyles = {
   position: "fixed",
@@ -77,8 +78,6 @@ const styles = makeStyles((theme) => ({
   },
   listStyle: {
     background: "#ffffff",
-    border: "1px solid #cccccc",
-    boxShadow: "1px 2px 5px rgba(0, 0, 0, 0.1)",
     borderRadius: "5px",
   },
   listStyle2: {
@@ -228,10 +227,10 @@ function NewsFeed(props) {
     toggle(!showComment);
   };
 
-  let onUpvote = (postId) => {
-    console.log("upvote clicked!", postId);
-    props.upVotePost(postId);
-  };
+  // let onUpvote = (postId) => {
+  //   console.log("upvote clicked!", postId);
+  //   props.upVotePost(postId);
+  // };
 
   let onRsvpYes = (eventId) => {
     console.log("On rsvp yes ", eventId);
@@ -276,6 +275,11 @@ function NewsFeed(props) {
     setShowSharePost(false);
   };
 
+  let onPinPost = (postId) => {
+    console.log("Pinning post ", postId);
+    props.pinPost(postId);
+  };
+
   useEffect(() => {
     if (Object.keys(votes).length !== 0) {
       setShowReactions(true);
@@ -318,7 +322,7 @@ function NewsFeed(props) {
     return (
       <div className="grid" key={post?._id}>
         <Paper elevation={1} className={classes.paper}>
-          <Card className={classes.root}>
+          <Card className={classes.root} variant="outlined">
             <List className={classes.listStyle}>
               <ListItem className={classes.listStyle2}>
                 <ListItemAvatar>
@@ -334,7 +338,10 @@ function NewsFeed(props) {
                   </h2>
                   <Moment format="DD MMM YYYY">{post?.createdAt}</Moment>
                 </ListItemText>
-                <FaThumbtack style={{ margin: "10px", width: "10px" }} />
+                <FaThumbtack
+                  style={{ margin: "10px", width: "10px", cursor: "pointer" }}
+                  onClick={() => onPinPost(post._id)}
+                />
                 <Dropdown>
                   <Dropdown.Toggle
                     as={CustomToggle}
@@ -744,5 +751,6 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   getAllCommentsOfPost,
   upVotePost,
+  pinPost,
   rsvpYes,
 })(withRouter(NewsFeed));

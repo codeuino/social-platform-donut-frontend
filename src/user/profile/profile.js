@@ -25,22 +25,22 @@ class Profile extends Component {
       userProjects: [],
       userPosts: [],
       pinnedPosts: [],
-      userId: ''
+      userId: "",
     };
   }
 
   componentDidMount() {
     console.log("match", this.props.match?.path);
     const { path, params } = this.props.match;
-    const userId = params.id
+    const userId = params.id ? params.id : localStorage.getItem("userId");
     console.log("checking profile", userId);
-    this.props.getProfile(userId)
     setTimeout(() => {
+      this.props.getProfile(userId);
       this.props.getOrgProfile();
-    })
+    });
     setTimeout(() => {
       this.props.getPostsCreatedByUser(userId);
-    })
+    });
     setTimeout(() => {
       this.props.getEventsCreatedByUser(userId);
     });
@@ -48,25 +48,28 @@ class Profile extends Component {
       this.props.getProjectCreatedByUser(userId);
     });
     setTimeout(() => {
-      this.props.getAllPinnedPosts()
-    })
+      this.props.getAllPinnedPosts();
+    });
   }
 
   componentWillReceiveProps(nextProps) {
     console.log("profile nextProps ", nextProps);
     const { userEvents, userProjects, userPosts } = nextProps.user;
-    const { pinnedPosts } = nextProps.posts
-    let all = [...userEvents, ...userProjects, ...userPosts]
-    this.setState({
-      userProfile: nextProps.user?.userProfile,
-      userEvents: userEvents,
-      userProjects: userProjects,
-      userPosts: userPosts,
-      pinnedPosts: pinnedPosts,
-      all: all,
-    }, () => {
-      console.log('setting profile ', this.state)
-    });
+    const { pinnedPosts } = nextProps.posts;
+    let all = [...userEvents, ...userProjects, ...userPosts];
+    this.setState(
+      {
+        userProfile: nextProps.user?.userProfile,
+        userEvents: userEvents,
+        userProjects: userProjects,
+        userPosts: userPosts,
+        pinnedPosts: pinnedPosts,
+        all: all,
+      },
+      () => {
+        console.log("setting profile ", this.state);
+      }
+    );
   }
 
   render() {
@@ -80,7 +83,12 @@ class Profile extends Component {
     } = this.state;
     return (
       <div className="profile">
-        <div className="navigation">
+        <div
+          className="navigation"
+          style={{
+            background: "#f5f5f5",
+          }}
+        >
           <Navigation profile={this.state.profile}></Navigation>
         </div>
         <div className="news">

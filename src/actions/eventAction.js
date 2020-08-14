@@ -3,18 +3,20 @@ import { errorHandler } from '../utils/errorHandler';
 import { setRequestStatus } from '../utils/setRequestStatus';
 import { GET_ALL_EVENTS, GET_EVENT_BY_ID } from './types';
 import { BASE_URL } from './baseApi'
+import { customErrorHandler } from '../utils/customErrorHandler';
 
 // DELETE EVENT REQUEST 
 export const deleteEvent = (eventId) => async (dispatch) => {
   try {
     const res = await axios.delete(`${BASE_URL}/event/${eventId}`)
-    dispatch(setRequestStatus(false));
     if(res.status === 200){
-      dispatch(setRequestStatus(true));
       dispatch(getAllEvents())
     }
   } catch(error) {
-    dispatch(errorHandler(error))
+    const msg = {
+      error: error?.response?.msg
+    }
+    dispatch(customErrorHandler(msg))
   }
 }
 
@@ -47,7 +49,7 @@ export const createEvent = (eventInfo, history) => async (dispatch) => {
 }
 
 // GET ALL EVENTS 
-export const getAllEvents = (pagination = 10, page = 1) => async (dispatch) => {
+export const getAllEvents = (pagination = 6, page = 1) => async (dispatch) => {
   try {
     const res = await axios.get(`${BASE_URL}/event/all?pagination=${pagination}&page=${page}`)
     dispatch(setRequestStatus(false))

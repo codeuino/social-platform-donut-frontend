@@ -114,3 +114,16 @@ export const removeReaction = (postId, type) => async (dispatch) => {
     dispatch(errorHandler(error));
   }
 };
+
+// PIN POST BY ID
+export const pinPost = (postId) => async (dispatch) => {
+  try {
+    const res = await axios.patch(`${BASE_URL}/post/pin/${postId}`)
+    if (res.status === 200) {
+      console.log('post pinned ', res.data.post)
+      dispatch(getAllPinnedPosts(10, 1));
+    }
+  } catch(error) {
+    dispatch(errorHandler(error))
+  }
+}

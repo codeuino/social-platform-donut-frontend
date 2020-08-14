@@ -5,11 +5,14 @@
   font-family: Muli, sans-serif;
 
   .navigation {
-    left: -1px;
-    top: -1px;
-    height: 100vh;
-    border-right: 1px solid #CCCCCC;
-    box-sizing: border-box;
+    background: #f5f5f5;
+    flex-grow: 1;
+    border-right: solid 1px #dfe9f1;
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    overflow-y: scroll;
   }
   .setting-sidebar {
     border-left: solid 1px #dfe9f1;
@@ -17,6 +20,7 @@
 
   .settings-content {
     flex: 3;
+    margin-left: 13vw;
   }
   .options {
     color: rgba(0, 0, 0, 0.5);
