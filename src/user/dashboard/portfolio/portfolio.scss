@@ -3,9 +3,9 @@
   text-align: center;
   border-top-right-radius: 2%;
   border-bottom-right-radius: 2%;
-  height: 269px;
+  height: 270px;
   flex-direction: row;
-  border-bottom: 1px solid #dfe9f1;
+  // border-bottom: 1px solid #dfe9f1;
   box-shadow: -1px 2px 2px -1px rgba(0, 0, 0, 0.1);
   .items-list {
     padding: 40px 0px;
@@ -35,7 +35,7 @@
     .admins__list {
       cursor: pointer;
     }
-    .followers__pointer{
+    .followers__pointer {
       cursor: pointer;
     }
   }

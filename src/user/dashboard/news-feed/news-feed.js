@@ -35,7 +35,7 @@ import { withRouter } from "react-router-dom";
 import { rsvpYes } from "../../../actions/eventAction";
 import { FaEllipsisH, FaThumbtack } from "react-icons/fa";
 import ReactionsElement from "./ReactionsElement";
-import { pinPost } from '../../../actions/postAction'
+import { pinPost } from "../../../actions/postAction";
 import Moment from "react-moment";
 
 // const reactionVariant = {
@@ -46,7 +46,15 @@ import Moment from "react-moment";
 //   },
 // };
 
-const navStyles = { position: 'fixed', width: '83%', top: '0', zIndex:1, background: '#fff', marginTop: '0px', marginBottom:'0px'}
+const navStyles = {
+  position: "fixed",
+  width: "83%",
+  top: "0",
+  zIndex: 1,
+  background: "#fff",
+  marginTop: "0px",
+  marginBottom: "0px",
+};
 
 const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
   <a
@@ -68,8 +76,6 @@ const styles = makeStyles((theme) => ({
   },
   listStyle: {
     background: "#ffffff",
-    border: "1px solid #cccccc",
-    boxShadow: "1px 2px 5px rgba(0, 0, 0, 0.1)",
     borderRadius: "5px",
   },
   listStyle2: {
@@ -148,7 +154,7 @@ function NewsFeed(props) {
   useEffect(() => {
     window.addEventListener("scroll", () => {
       const scrollAmount = window.scrollY;
-      scrollAmount > 369 ? setisTop(true) : setisTop(false)
+      scrollAmount > 369 ? setisTop(true) : setisTop(false);
     });
   }, [window]);
 
@@ -223,9 +229,9 @@ function NewsFeed(props) {
   };
 
   let onPinPost = (postId) => {
-    console.log('Pinning post ', postId)
-    props.pinPost(postId)
-  }
+    console.log("Pinning post ", postId);
+    props.pinPost(postId);
+  };
 
   useEffect(() => {
     if (Object.keys(votes).length !== 0) {
@@ -269,7 +275,7 @@ function NewsFeed(props) {
     return (
       <div className="grid" key={post._id}>
         <Paper elevation={1} className={classes.paper}>
-          <Card className={classes.root}>
+          <Card className={classes.root} variant="outlined">
             <List className={classes.listStyle}>
               <ListItem className={classes.listStyle2}>
                 <ListItemAvatar>
@@ -285,8 +291,8 @@ function NewsFeed(props) {
                   </h2>
                   <Moment format="DD MMM YYYY">{post?.createdAt}</Moment>
                 </ListItemText>
-                <FaThumbtack 
-                  style={{ margin: "10px", width: "10px", cursor: "pointer" }} 
+                <FaThumbtack
+                  style={{ margin: "10px", width: "10px", cursor: "pointer" }}
                   onClick={() => onPinPost(post._id)}
                 />
                 <Dropdown>
@@ -560,9 +566,12 @@ function NewsFeed(props) {
         </div>
       </div>
       <div className="news__feed__container">
-        <div className="tabs__container" style={isTop? navStyles: {}}>
+        <div className="tabs__container" style={isTop ? navStyles : {}}>
           <span className="nav__tab container">
-            <ul className="nav__list__container" style={isTop ? {marginBottom: '0px'}: {}}>
+            <ul
+              className="nav__list__container"
+              style={isTop ? { marginBottom: "0px" } : {}}
+            >
               <li
                 className={
                   type === "All"
