@@ -1,0 +1,102 @@
+.ticket {
+  display: flex;
+  height: 100vh;
+
+  font-family: Muli, sans-serif;
+  .navigation {
+    background: #f5f5f5;
+    flex-grow: 1;
+    border-right: solid 1px #dfe9f1;
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    overflow-y: scroll;
+  }
+  .ticket-details {
+    flex: 1;
+    margin-left: 13vw;
+    .ticket-description {
+      display: flex;
+      flex-direction: column;
+      .dashboard-title {
+        font-family: Inter;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 36px;
+        line-height: 44px;
+        color: #000000;
+        margin: 15px;
+      }
+      .ticket-status {
+        flex: 1;
+        text-align: center;
+        .tabs__container {
+          width: 100%;
+
+          .nav__tab {
+            .nav__list__container {
+              display: flex;
+              // justify-content: center;
+              // align-items: center;
+              margin-left: -2rem;
+              list-style: none;
+              border-bottom: 2px solid #eee;
+              transition: all 0.5s;
+              font-weight: 300;
+              color: #262727;
+
+              .nav__single__tab {
+                display: inline-block;
+                font-family: Inter;
+                font-style: normal;
+                font-weight: 500;
+                font-size: 18px;
+                line-height: 22px;
+                padding-left: 11px;
+                padding-right: 15px;
+                padding-bottom: 5px;
+                margin-left: 19px;
+                text-align: center;
+                cursor: pointer;
+
+                &.selected {
+                  border-bottom: 3px solid #1a73e8;
+                  color: #1a73e8;
+                }
+              }
+            }
+          }
+        }
+        .ticket-status-text {
+          font-family: "Inter";
+          font-size: 1vw;
+          letter-spacing: 0.1px;
+          text-transform: uppercase;
+          color: rgba(0, 0, 0, 0.8);
+          font-weight: bold;
+        }
+      }
+      .ticket-content {
+        flex: 10;
+        // margin-top: 1vh;
+        // position: fixed;
+        // top: 9vh;
+        // bottom: 0px;
+        // left: 13vw;
+        // overflow-y: scroll;
+      }
+    }
+  }
+}
+
+.navigation::-webkit-scrollbar {
+  display: none;
+}
+
+.searchbar-container {
+  padding: 1rem;
+  .searchbar {
+    border-radius: 25px;
+  }
+}
