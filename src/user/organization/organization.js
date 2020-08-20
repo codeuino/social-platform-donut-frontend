@@ -15,6 +15,8 @@ import { connect } from "react-redux";
 import { getOrgProfile } from "../../actions/orgAction";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
+import NewTicket from "./popups/NewTicket";
+import FloatingActionButton from "./ticket/FloatingActionButton";
 
 class Organization extends Component {
   constructor(props) {
@@ -42,8 +44,8 @@ class Organization extends Component {
   }
 
   handleClick = (type) => {
-    this.setState({ type: type })
-  }
+    this.setState({ type: type });
+  };
 
   render() {
     const { orgProfile, type } = this.state;
@@ -54,6 +56,7 @@ class Organization extends Component {
     } = orgProfile;
     return (
       <div className="organization">
+        <FloatingActionButton />
         <div className="navigation">
           <Navigation org={this.state.org}></Navigation>
         </div>
