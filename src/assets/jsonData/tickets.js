@@ -4,7 +4,7 @@ export default [
     title: "Requirement of new Integration",
     year: "1988",
     runtime: "92",
-    genres: ["Comedy", "Fantasy"],
+    genres: ["Open"],
     director: "Tim Burton",
     actors: "Alec Baldwin, Geena Davis, Annie McEnroe, Maurice Page",
     plot:
@@ -17,7 +17,7 @@ export default [
     title: "The Cotton Club",
     year: "1984",
     runtime: "127",
-    genres: ["Crime", "Drama", "Music"],
+    genres: ["Open"],
     director: "Francis Ford Coppola",
     actors: "Richard Gere, Gregory Hines, Diane Lane, Lonette McKee",
     plot:
@@ -30,7 +30,7 @@ export default [
     title: "The Shawshank Redemption",
     year: "1994",
     runtime: "142",
-    genres: ["Crime", "Drama"],
+    genres: ["Solved"],
     director: "Frank Darabont",
     actors: "Tim Robbins, Morgan Freeman, Bob Gunton, William Sadler",
     plot:
@@ -43,7 +43,7 @@ export default [
     title: "Crocodile Dundee",
     year: "1986",
     runtime: "97",
-    genres: ["Adventure", "Comedy"],
+    genres: ["Pending"],
     director: "Peter Faiman",
     actors: "Paul Hogan, Linda Kozlowski, John Meillon, David Gulpilil",
     plot:
@@ -56,7 +56,7 @@ export default [
     title: "Valkyrie",
     year: "2008",
     runtime: "121",
-    genres: ["Drama", "History", "Thriller"],
+    genres: ["OnHold"],
     director: "Bryan Singer",
     actors: "Tom Cruise, Kenneth Branagh, Bill Nighy, Tom Wilkinson",
     plot:
@@ -69,7 +69,7 @@ export default [
     title: "Ratatouille",
     year: "2007",
     runtime: "111",
-    genres: ["Animation", "Comedy", "Family"],
+    genres: ["Open"],
     director: "Brad Bird, Jan Pinkava",
     actors: "Patton Oswalt, Ian Holm, Lou Romano, Brian Dennehy",
     plot:
@@ -82,7 +82,7 @@ export default [
     title: "City of God",
     year: "2002",
     runtime: "130",
-    genres: ["Crime", "Drama"],
+    genres: ["Solved"],
     director: "Fernando Meirelles, Kátia Lund",
     actors:
       "Alexandre Rodrigues, Leandro Firmino, Phellipe Haagensen, Douglas Silva",
@@ -96,7 +96,7 @@ export default [
     title: "Memento",
     year: "2000",
     runtime: "113",
-    genres: ["Mystery", "Thriller"],
+    genres: ["Solved"],
     director: "Christopher Nolan",
     actors: "Guy Pearce, Carrie-Anne Moss, Joe Pantoliano, Mark Boone Junior",
     plot:
@@ -109,7 +109,7 @@ export default [
     title: "The Intouchables",
     year: "2011",
     runtime: "112",
-    genres: ["Biography", "Comedy", "Drama"],
+    genres: ["Closed"],
     director: "Olivier Nakache, Eric Toledano",
     actors: "François Cluzet, Omar Sy, Anne Le Ny, Audrey Fleurot",
     plot:
@@ -122,7 +122,7 @@ export default [
     title: "The Intouchables",
     year: "2011",
     runtime: "112",
-    genres: ["Biography", "Comedy", "Drama"],
+    genres: ["Open"],
     director: "Olivier Nakache, Eric Toledano",
     actors: "François Cluzet, Omar Sy, Anne Le Ny, Audrey Fleurot",
     plot:
