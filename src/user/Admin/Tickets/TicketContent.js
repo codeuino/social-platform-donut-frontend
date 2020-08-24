@@ -4,11 +4,17 @@ import data from "../../../assets/jsonData/tickets";
 import "./TicketContent.scss";
 import userIcon2 from "../../../assets/images/userIcon2.jpg";
 import { Image, Badge } from "react-bootstrap";
+import { withRouter } from "react-router-dom";
 
 const BadgeElement = (props) => {
   return (
     <div>
-      {/* {props.ticketState === "Solved" && (
+      {props.ticketState === "Open" && (
+        <Badge pill variant="primary">
+          {props.ticketState}
+        </Badge>
+      )}
+      {props.ticketState === "Solved" && (
         <Badge pill variant="success">
           {props.ticketState}
         </Badge>
@@ -27,11 +33,11 @@ const BadgeElement = (props) => {
         <Badge pill variant="danger">
           {props.ticketState}
         </Badge>
-      )} */}
+      )}
 
-      <Badge pill variant="primary" style={{ fontSize: "12px" }}>
+      {/* <Badge pill variant="primary" style={{ fontSize: "12px" }}>
         {props.ticketState}
-      </Badge>
+      </Badge> */}
     </div>
   );
 };
@@ -40,11 +46,12 @@ const customStyles = {
   table: {
     style: {
       width: "87vw",
-      height: "75vh",
+      height: "60vh",
     },
   },
   header: {
     style: {
+      display: "none",
       fontFamily: "Inter",
       fontWeight: "bold",
       fontSize: "1.5rem",
@@ -60,7 +67,7 @@ const customStyles = {
       fontWeight: "normal",
     },
     highlightOnHoverStyle: {
-      backgroundColor: "rgba(26, 115, 232, 0.1)",
+      backgroundColor: "#F5F5F5",
     },
   },
   headCells: {
@@ -114,6 +121,11 @@ class TicketContent extends Component {
     }
     return null;
   }
+
+  handleRowClick = (e) => {
+    //Access data table elements using event
+    this.props.history.push("/ticketdiscussion");
+  };
 
   render() {
     const Button = () => <button type="button">Download</button>;
@@ -176,13 +188,14 @@ class TicketContent extends Component {
         data={this.state.displayData}
         customStyles={customStyles}
         pagination
-        paginationPerPage={Math.floor((window.innerHeight - 185) / 85)}
+        paginationPerPage={Math.floor((window.innerHeight - 220) / 85)}
         highlightOnHover={true}
         pointerOnHover={true}
         paginationRowsPerPageOptions={[]}
+        onRowClicked={this.handleRowClick}
       />
     );
   }
 }
 
-export default TicketContent;
+export default withRouter(TicketContent);

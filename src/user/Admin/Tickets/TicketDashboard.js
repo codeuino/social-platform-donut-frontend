@@ -2,12 +2,15 @@ import React, { Component } from "react";
 import "./TicketDashboard.scss";
 import Navigation from "../../dashboard/navigation/navigation";
 import TicketContent from "./TicketContent";
+import { Form } from "react-bootstrap";
 
 class TicketDashboard extends Component {
   constructor(props) {
     super(props);
-    this.state = { ticketState: "all", title: "", type: "All" };
+    this.state = { type: "All" };
   }
+
+  handleSearchBarChange = (e) => {};
 
   handleClick = (atrb) => {
     this.setState({
@@ -15,15 +18,25 @@ class TicketDashboard extends Component {
     });
   };
   render() {
-    const { ticketState, title, type } = this.state;
+    const { type } = this.state;
     return (
       <div className="ticket">
         <div className="navigation">
           <Navigation />
         </div>
         <div className="ticket-details">
-          <div className="ticket-sidebar"></div>
           <div className="ticket-description">
+            <div className="dashboard-title">Tickets</div>
+            <div className="searchbar-container">
+              <Form>
+                <Form.Control
+                  as="input"
+                  placeholder="Search Tickets"
+                  className="searchbar"
+                  onChange={this.handleSearchBarChange}
+                />
+              </Form>
+            </div>
             <div className="ticket-status">
               <div className="tabs__container">
                 <span className="nav__tab container">

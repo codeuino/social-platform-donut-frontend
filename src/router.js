@@ -24,6 +24,7 @@ import Activity from "./user/Activity/Activity";
 import IntegrationsPage from "./user/integrations/IntegrationsPage/IntegrationsPage";
 import UserIntegrations from "./user/integrations/UserIntegrations/UserIntegrations";
 import TicketDashboard from "../src/user/Admin/Tickets/TicketDashboard";
+import TicketDiscussion from "../src/user/Admin/Tickets/TicketDiscussions";
 
 const Router = () => (
   <BrowserRouter>
@@ -57,6 +58,11 @@ const Router = () => (
         exact
         path="/userintegrations"
         component={UserIntegrations}
+      />
+      <PrivateRoute
+        exact
+        path="/ticketdiscussion"
+        component={TicketDiscussion}
       />
       <Route component={NotFound} />
     </Switch>

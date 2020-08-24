@@ -19,19 +19,26 @@
     .ticket-description {
       display: flex;
       flex-direction: column;
+      .dashboard-title {
+        font-family: Inter;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 36px;
+        line-height: 44px;
+        color: #000000;
+        margin: 15px;
+      }
       .ticket-status {
-        height: 9vh;
+        flex: 1;
         text-align: center;
-        padding-top: 2vh;
         .tabs__container {
           width: 100%;
-          margin-top: 10px;
+
           .nav__tab {
             .nav__list__container {
               display: flex;
               // justify-content: center;
               // align-items: center;
-              margin-top: 3vh;
               margin-left: -2rem;
               list-style: none;
               border-bottom: 2px solid #eee;
@@ -71,13 +78,13 @@
         }
       }
       .ticket-content {
-        flex-grow: 10;
-        margin-top: 1vh;
-        position: fixed;
-        top: 9vh;
-        bottom: 0px;
-        left: 13vw;
-        overflow-y: scroll;
+        flex: 10;
+        // margin-top: 1vh;
+        // position: fixed;
+        // top: 9vh;
+        // bottom: 0px;
+        // left: 13vw;
+        // overflow-y: scroll;
       }
     }
   }
@@ -85,4 +92,11 @@
 
 .navigation::-webkit-scrollbar {
   display: none;
+}
+
+.searchbar-container {
+  padding: 1rem;
+  .searchbar {
+    border-radius: 25px;
+  }
 }
