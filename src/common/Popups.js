@@ -5,7 +5,7 @@ import { MdVerifiedUser } from 'react-icons/md';
 import { FaUserSlash } from 'react-icons/fa';
 import { connect } from 'react-redux';
 import { forgotPassword, changePassword } from '../actions/authAction';
-import { activateDeactivateToggler } from '../actions/usersAction';
+import { activateDeactivateToggler, updateProfile } from '../actions/usersAction';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
  
@@ -415,5 +415,6 @@ const mapStateToProps = (state) => {
 export default connect( mapStateToProps, { 
   forgotPassword, 
   changePassword, 
+  updateProfile,
   activateDeactivateToggler
  })(Popups);
