@@ -22,9 +22,9 @@ This platform also makes users introduce and develops various solutions in the f
 
 ### Frontend Technology Stack
 
-- CSS: Styling web pages, html files
+- SCSS: Styling web pages, html files
 - Javascript: Primary programing language
-- ReactJS: Javascript library for building User Interfaces
+- ReactJS v16.12: Javascript library for building User Interfaces
 - Bootstrap: Styling framework.
 
 Learn more about the donut platform at the [official donut documentation](https://docs.codeuino.org/donut-social-networking-platform/).
@@ -35,11 +35,11 @@ Learn more about the donut platform at the [official donut documentation](https:
 
 Few things are required before setting up the project locally,
 
-- **A Web Browser** - You can install any browser as per your preference e.g. Internet Explorer,Chrome, FireFox, Safari, Opera etc. JavaScript works on any web browser on any OS.
+- **A Web Browser** - You can install any browser as per your preference e.g. Google Chrome etc. JavaScript works on any web browser on any OS.
 - **An Editor**- We prefer an editor which has built-in features of IntelliSense support and syntax error highlighter for speedy development. Download Visual Studio Code from [here](https://code.visualstudio.com/download).
 - **Node and Node Package Manager(NPM)**
   Check if node and npm are already installed by running the following commands in the terminal
-  ` node -v npm -v `
+  `node -v npm -v`
   If the node and npm are installed
   If not, install it in,
 - **Windows & MacOS**
@@ -51,7 +51,7 @@ Few things are required before setting up the project locally,
 
 - **Ubuntu**
   The easiest way to install the most recent LTS version of Node 10.x is to use the [package manager](https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions) to get it from the Ubuntu _binary distributions_ repository. This can be done very simply by running the following two commands on your terminal:
-  ` curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash - sudo apt-get install -y nodejs `
+  `curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash - sudo apt-get install -y nodejs`
   **\***
 
 # Setting up the donut frontend potion locally.
@@ -80,7 +80,7 @@ Use the following command to begin a clone:
 git clone https://github.com/<your github username>/social-platform-donut-frontend.git
 ```
 
-Once the command completes you will have a new folder containing the cloned repository. We can validate this by running the “dir” command. We can then move into that directory using the "cd " command.
+Once the command completes you will have a new folder containing the cloned repository. We can validate this by running the “dir” command. We can then move into that directory using the "cd social-platform-donut-frontend" command.
 
 ![image of command line](https://i.imgur.com/QsQy4Sg.png)
 
@@ -112,6 +112,15 @@ npm start
 ```
 
 Now visit the [http://localhost:3000](http://localhost:3000) using your favorite browser to see your very own donut-frontend app in action!
+
+There are few last steps to follow however before you can start exploring the donut platform.
+To get most out of locally setup frotnend environment, we highly suggest to setup an instance of the donut backend as well. The backend repository could be found at [https://github.com/codeuino/social-platform-donut-backend](https://github.com/codeuino/social-platform-donut-backend)
+
+1. Once the backend environment is successfully setup, create a new Organization/Community by visiting the link [http://localhost:3000/setup](http://localhost:3000/setup). Follow the instructions and fill in the fields provided by the screen.
+2. The next step is sign up using a new admin account. This could be achieved by visiting the [http://localhost:3000/admin](http://localhost:3000/admin) and using the "Admin Account Signup card."
+3. Login using the newly created admin account.
+
+You are now all set to explore the donut platform!
 
 # Contributing to the donut frontend.
 
@@ -172,5 +181,6 @@ Now the changes we have made are pushed into our fork in GitHub. The final step 
 
 In order to make a pull request, visit the forked repository on github. On the top right hand side a button will now be there mentioning that a pull request is ready to be made.
 
+Prior to making the PR make sure to choose the base branch as development branch using the dropdown.
 ![enter image description here](https://i.imgur.com/bTN9On5.jpg)
 Click on the "compare and pull request" button to make the pull request!
