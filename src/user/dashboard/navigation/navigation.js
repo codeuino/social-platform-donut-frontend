@@ -105,7 +105,11 @@ class Navigation extends Component {
               className={this.props.org ? "active" : "inactive"}
               link="/organization"
             />
-
+            <ListItem
+              name="Wikis"
+              className={this.props.wikis ? "active" : "inactive"}
+              link="/wikis"
+            />
             <ListItem
               name="Events"
               className={this.props.event ? "active" : "inactive"}
@@ -200,7 +204,12 @@ class Navigation extends Component {
               link="/organization"
               isMobile="true"
             />
-
+            <ListItem
+              name="Wikis"
+              className={this.props.wikis ? "active" : "inactive"}
+              link="/wikis"
+              isMobile="true"
+            />
             <ListItem
               name="Events"
               className={this.props.event ? "active" : "inactive"}

@@ -14,6 +14,7 @@ import proposalReducer from "./proposalReducer";
 import adminReducers from "./adminReducers";
 import commentReducer from "./commentReducer";
 import analyticsReducer from './analyticsReducer';
+import wikisReducer from './wikisReducer';
 
 const rootReducer = combineReducers({
   auth: authReducers,
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
   notification: notificationReducer,
   error: errorReducer,
   dashboard: dashboardReducer,
+  wikis: wikisReducer,
   insight: insightReducer,
   org: orgReducer,
   event: eventReducer,
