@@ -24,7 +24,6 @@ import Activity from "./user/Activity/Activity";
 import IntegrationsPage from "./user/integrations/IntegrationsPage/IntegrationsPage";
 import UserIntegrations from "./user/integrations/UserIntegrations/UserIntegrations";
 import TicketDashboard from "../src/user/Admin/Tickets/TicketDashboard";
-import TicketDiscussion from "../src/user/Admin/Tickets/TicketDiscussions";
 
 const Router = () => (
   <BrowserRouter>
@@ -50,7 +49,6 @@ const Router = () => (
       <PrivateRoute exact path="/setup" component={Setup} />
       <AdminRoute exact path="/org-settings" component={CommunitySetting} />
       <AdminRoute exact path="/activity/:userId" component={Activity} />
-      <AdminRoute exact path="/tickets" component={TicketDashboard} />
       <PrivateRoute exact path="/insight" component={Insight} />
       <PrivateRoute exact path="/admin" component={Admin} />
       <PrivateRoute exact path="/integrations" component={IntegrationsPage} />
@@ -59,11 +57,7 @@ const Router = () => (
         path="/userintegrations"
         component={UserIntegrations}
       />
-      <PrivateRoute
-        exact
-        path="/ticketdiscussion"
-        component={TicketDiscussion}
-      />
+      <PrivateRoute exact path="/tickets" component={TicketDashboard} />
       <Route component={NotFound} />
     </Switch>
   </BrowserRouter>

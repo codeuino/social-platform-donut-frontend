@@ -32,6 +32,11 @@ class TicketDiscussions extends Component {
   scrollToBottom() {
     this.el.scrollIntoView({ behavior: "smooth" });
   }
+
+  handleBack = () => {
+    this.props.back(null)
+  }
+  
   render() {
     return (
       <>
@@ -42,41 +47,41 @@ class TicketDiscussions extends Component {
           <div className="ticket-discussion">
             <div className="discussion">
               <div className="discussion-title">
-                <Link to="/tickets">
-                  <div className="back-icon">
-                    <FaArrowLeft className="fa-icon" />
-                  </div>
-                </Link>
+                <div className="back-icon" onClick={this.handleBack}>
+                  <FaArrowLeft className="fa-icon" />
+                </div>
                 <div className="ticket-title">
                   <span className="title-text">Title of Ticket Here!</span>
                 </div>
               </div>
               <div className="discussion-comments">
                 <div className="discussions">
-                  {[1, 2, 3, 4].map((ele, index) => <div key={index} className="single-discussion">
-                    <div className="user-info">
-                      <div className="image">
-                        <Image src={userIcon2} alt="icon" rounded />
+                  {[1, 2, 3, 4].map((ele, index) => (
+                    <div key={index} className="single-discussion">
+                      <div className="user-info">
+                        <div className="image">
+                          <Image src={userIcon2} alt="icon" rounded />
+                        </div>
+                        <div className="img-desc">
+                          <h2>Devesh Verma</h2>
+                          <p className="discussion-date">2020-08-24</p>
+                        </div>
                       </div>
-                      <div className="img-desc">
-                        <h2>Devesh Verma</h2>
-                        <p className="discussion-date">2020-08-24</p>
+                      <div className="comment-content">
+                        <div className="comment-details">
+                          Lorem ipsum dolor sit amet, consectetur adipiscing
+                          elit, sed do eiusmod tempor incididunt ut labore et
+                          dolore magna aliqua. Ut enim ad minim veniam, quis
+                          nostrud exercitation ullamco laboris nisi ut aliquip
+                          ex ea commodo consequat. Duis aute irure dolor in
+                          reprehenderit in voluptate velit esse cillum dolore eu
+                          fugiat nulla pariatur. Excepteur sint occaecat
+                          cupidatat non proident, sunt in culpa qui officia
+                          deserunt mollit anim id est laborum.
+                        </div>
                       </div>
                     </div>
-                    <div className="comment-content">
-                      <div className="comment-details">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore
-                        magna aliqua. Ut enim ad minim veniam, quis nostrud
-                        exercitation ullamco laboris nisi ut aliquip ex ea
-                        commodo consequat. Duis aute irure dolor in
-                        reprehenderit in voluptate velit esse cillum dolore eu
-                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-                        non proident, sunt in culpa qui officia deserunt mollit
-                        anim id est laborum.
-                      </div>
-                    </div>
-                  </div>)}
+                  ))}
                 </div>
                 <div
                   ref={(el) => {
@@ -98,7 +103,7 @@ class TicketDiscussions extends Component {
                       "searchreplace visualblocks code fullscreen",
                       "insertdatetime media table paste code help wordcount",
                       "textpattern",
-                    ]
+                    ],
                   }}
                 />
               </div>

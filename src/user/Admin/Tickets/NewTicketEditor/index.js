@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import CancelButton from "@material-ui/icons/ClearOutlined";
 import SaveButton from "@material-ui/icons/SaveOutlined";
-import { ToastContainer, toast } from "react-toastify";
 import "react-mde/lib/styles/css/react-mde-all.css";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import * as Showdown from "showdown";
 import ReactMde from "react-mde";
 import "./Editor.scss";
+import { ToastContainer, toast } from "react-toastify";
 
 class Editor extends Component {
   constructor(props) {
@@ -20,18 +20,24 @@ class Editor extends Component {
     };
   }
 
-    // handleSave = () => {
-    //   const { title, content, shortDescription } = this.state;
-    //   const { save } = this.props;
-    //   save(
-    //     {
-    //       title,
-    //       content,
-    //       shortDescription,
-    //       status: "OPEN"
-    //     }
-    //   );
-    // };
+  handleSave = () => {
+    const { title, content, shortDescription } = this.state;
+    const { save } = this.props;
+    const newTicket = {
+      title,
+      content,
+      shortDescription,
+    };
+    if (newTicket.shortDescription.length < 10) {
+      toast.error("Short description should be atleast 10 characters long");
+    } else if (newTicket.content.length < 10) {
+      toast.error("Ticket content should be atleast 10 characters long");
+    } else if (newTicket.title.length < 10) {
+      toast.error("Title should be atleast 10 characters long");
+    } else {
+      save(newTicket);
+    }
+  };
 
   setContent = (content) => this.setState({ content });
 
@@ -67,47 +73,55 @@ class Editor extends Component {
           <Form.Label className="field-title">Title</Form.Label>
           <Form.Control
             as="input"
+            value={title}
+            maxLength="50"
+            required={true}
             name="ticketTitle"
             className="searchbar"
-            value={title}
             onChange={this.setTitle}
-            maxlength="50"
-            isInvalid={this.state.shortDescription.length >= 50}
+            isInvalid={this.state.title.length >= 50}
           />
         </Form>
         <Form>
           <Form.Label className="field-title">Description</Form.Label>
           <Form.Control
             as="textarea"
-            name="ticketDescription"
-            maxlength="100"
+            maxLength="100"
             className="searchbar"
+            name="ticketDescription"
             value={this.state.shortDescription}
             onChange={this.setShortDescription}
             isInvalid={this.state.shortDescription.length >= 100}
           />
         </Form>
-        <Form>
-        </Form>
+        <Form></Form>
         <ReactMde
-          onChange={this.setContent}
           value={content}
-          onTabChange={this.setSelectedTab}
           selectedTab={selectedTab}
+          onChange={this.setContent}
+          onTabChange={this.setSelectedTab}
           generateMarkdownPreview={(markdown) =>
             Promise.resolve(converter.makeHtml(markdown))
           }
         />
         <div className="top-controls">
-          <Button
-            // onClick={this.handleSave}
-            variant="primary"
-          >
+          <Button onClick={this.handleSave} variant="primary">
             <span className="vc">
               <SaveButton /> Save
             </span>
           </Button>
         </div>
+        <ToastContainer
+          draggable
+          rtl={false}
+          pauseOnHover
+          closeOnClick
+          autoClose={5000}
+          pauseOnFocusLoss
+          newestOnTop={false}
+          position="top-right"
+          hideProgressBar={false}
+        />
       </div>
     );
   }

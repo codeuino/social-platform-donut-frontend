@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./TicketContent.scss";
+import Moment from 'react-moment'
 import { Image } from "react-bootstrap";
 import BadgeElement from './BadgeElement';
 import { withRouter } from "react-router-dom";
@@ -9,6 +10,12 @@ import userIcon2 from "../../../../assets/images/userIcon2.jpg";
 
 class TicketContent extends Component {
   
+  handleRowClick = (arg1) => {
+    console.log("Row Clicked!")
+    console.log(arg1)
+    this.props.viewTicket(arg1._id)
+  }
+
   render() {
 
     const CustomTitle = ({ row }) => (
@@ -21,6 +28,7 @@ class TicketContent extends Component {
     const columns = [
       {
         name: "Title",
+        grow: 2,
         selector: "titler",
         sortable: true,
         maxWidth: "600px", // when using custom you should use width or maxWidth, otherwise, the table will default to flex grow behavior
@@ -32,19 +40,17 @@ class TicketContent extends Component {
         selector: "plot",
         wrap: true,
         sortable: true,
-        format: (row) => `${row.content.shortDescription.slice(0, 100)}...`,
+        format: (row) => `${row.shortDescription.slice(0, 100)}...`,
       },
       {
         name: "Status",
         grow: 1,
         // eslint-disable-next-line react/no-array-index-key
-        // cell: (row) => (
-        //   <div>
-        //     {row.genres.map((genre, i) => (
-        //       <BadgeElement ticketState={genre} />
-        //     ))}
-        //   </div>
-        // ),
+        cell: (row) => (
+          <div>
+            <BadgeElement ticketState={row.status} />
+          </div>
+        ),
       },
       {
         name: "User",
@@ -63,25 +69,35 @@ class TicketContent extends Component {
         // ),
       },
       {
-        name: "Created At"
+        name: "Created At",
+        cell: (row) => (
+          <div>
+            <Moment format="DD MMM YYYY">{row.createdAt}</Moment>
+          </div>
+        )
       },
       {
-        name: "Comments"
+        name: "Comments",
+        sortable: true,
+        cell: (row) => (
+          <div>
+            {row.comments}
+          </div>
+        )
       }
     ];
 
     return (
       <DataTable
-        // title={this.state.selectedState}
+        pagination
         columns={columns}
+        pointerOnHover={true}
+        highlightOnHover={true}
         data={this.props.tickets}
         customStyles={customStyles}
-        pagination
-        paginationPerPage={Math.floor((window.innerHeight - 220) / 85)}
-        highlightOnHover={true}
-        pointerOnHover={true}
         paginationRowsPerPageOptions={[]}
         onRowClicked={this.handleRowClick}
+        paginationPerPage={Math.floor((window.innerHeight - 220) / 85)}
       />
     );
   }

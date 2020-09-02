@@ -1,15 +1,16 @@
 import React, { Component } from "react";
 import "./TicketDashboard.scss";
+import Axios from "axios";
+import { connect } from "react-redux";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import NewTicketEditor from "./NewTicketEditor";
-import data from "../../../assets/jsonData/tickets";
+import { BASE_URL } from "../../../actions/baseApi";
+import TicketDisscussion from "./TicketDiscussions";
 import TicketContent from "./TicketContent/TicketContent";
+import { getTickets } from "../../../actions/ticketAction";
 import Navigation from "../../dashboard/navigation/navigation";
 import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
-import { connect } from "react-redux";
-import { getTickets } from "../../../actions/ticketAction";
-
 
 class TicketDashboard extends Component {
   constructor(props) {
@@ -23,35 +24,40 @@ class TicketDashboard extends Component {
       solved: [],
       closed: [],
       editorMode: false,
+      viewingTicket: null
     };
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps.tickets.tickets)
+    console.log(nextProps.tickets.tickets);
     this.setState({
-      all: nextProps.tickets.tickets
+      all: nextProps.tickets.tickets,
     });
   }
+
+  divideAsPerStatus = () => {
+    this.setState({
+      open: this.state.all.filter((ele) => ele.genres.indexOf("OPEN") !== -1),
+      pending: this.state.all.filter(
+        (ele) => ele.genres.indexOf("PENDING") !== -1
+      ),
+      onHold: this.state.all.filter(
+        (ele) => ele.genres.indexOf("ON_HOLD") !== -1
+      ),
+      solved: this.state.all.filter(
+        (ele) => ele.genres.indexOf("SOLVED") !== -1
+      ),
+      closed: this.state.all.filter(
+        (ele) => ele.genres.indexOf("CLOSED") !== -1
+      ),
+    });
+  };
 
   componentDidMount() {
     setTimeout(() => {
       this.props.getTickets();
     });
-    this.setState({
-      open: this.state.all.filter((ele) => ele.genres.indexOf("open") !== -1),
-      pending: this.state.all.filter(
-        (ele) => ele.genres.indexOf("pending") !== -1
-      ),
-      onHold: this.state.all.filter(
-        (ele) => ele.genres.indexOf("onHold") !== -1
-      ),
-      solved: this.state.all.filter(
-        (ele) => ele.genres.indexOf("solved") !== -1
-      ),
-      closed: this.state.all.filter(
-        (ele) => ele.genres.indexOf("closed") !== -1
-      ),
-    });
+    this.divideAsPerStatus();
   }
 
   handleSearchBarChange = (e) => {};
@@ -68,6 +74,17 @@ class TicketDashboard extends Component {
     });
   };
 
+  handleCreateNewTicket = async (newTicket) => {
+    console.log("EXECUTED!")
+    await Axios.post(`${BASE_URL}/ticket`, newTicket)
+  };
+
+  handleViewTicket = (id) => {
+    this.setState({
+      viewingTicket: id
+    })
+  }
+
   render() {
     const { view } = this.state;
     return (
@@ -78,7 +95,7 @@ class TicketDashboard extends Component {
         <div className="ticket-details">
           <div className="ticket-description">
             <div className="dashboard-title">Tickets</div>
-            {!this.state.editorMode && this.state.all.length && (
+            {!this.state.editorMode && this.state.all.length && !this.state.viewingTicket && (
               <React.Fragment>
                 <div className="searchbar-container">
                   <div className="searchbar">
@@ -93,7 +110,9 @@ class TicketDashboard extends Component {
                       />
                     </Form>
                   </div>
-                  <Button onClick={()=>this.toggleNewTicketEditor(true)}>New Ticket</Button>
+                  <Button onClick={() => this.toggleNewTicketEditor(true)}>
+                    New Ticket
+                  </Button>
                 </div>
                 <div className="ticket-status">
                   <div className="tabs__container">
@@ -124,11 +143,21 @@ class TicketDashboard extends Component {
                   </div>
                 </div>
                 <div className="ticket-content">
-                  <TicketContent tickets={this.state[this.state.view]} />
+                  <TicketContent 
+                    viewTicket={this.handleViewTicket}
+                    tickets={this.state[this.state.view]} />
                 </div>
               </React.Fragment>
             )}
-            {this.state.editorMode && <NewTicketEditor cancel={()=>this.toggleNewTicketEditor(false)} />}
+            {this.state.editorMode && !this.state.viewingTicket && (
+              <NewTicketEditor
+                save={this.handleCreateNewTicket}
+                cancel={() => this.toggleNewTicketEditor(false)}
+              />
+            )}
+            {this.state.viewingTicket && (
+              <TicketDisscussion back={this.handleViewTicket} />
+            )}
           </div>
         </div>
       </div>
