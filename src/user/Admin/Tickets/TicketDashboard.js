@@ -7,13 +7,16 @@ import data from "../../../assets/jsonData/tickets";
 import TicketContent from "./TicketContent/TicketContent";
 import Navigation from "../../dashboard/navigation/navigation";
 import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
+import { connect } from "react-redux";
+import { getTickets } from "../../../actions/ticketAction";
+
 
 class TicketDashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
       view: "all",
-      all: [...data],
+      all: [],
       open: [],
       pending: [],
       onHold: [],
@@ -23,7 +26,17 @@ class TicketDashboard extends Component {
     };
   }
 
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps.tickets.tickets)
+    this.setState({
+      all: nextProps.tickets.tickets
+    });
+  }
+
   componentDidMount() {
+    setTimeout(() => {
+      this.props.getTickets();
+    });
     this.setState({
       open: this.state.all.filter((ele) => ele.genres.indexOf("open") !== -1),
       pending: this.state.all.filter(
@@ -65,11 +78,11 @@ class TicketDashboard extends Component {
         <div className="ticket-details">
           <div className="ticket-description">
             <div className="dashboard-title">Tickets</div>
-            {!this.state.editorMode && (
+            {!this.state.editorMode && this.state.all.length && (
               <React.Fragment>
                 <div className="searchbar-container">
                   <div className="searchbar">
-                    <span class="searchbar-icon">
+                    <span className="searchbar-icon">
                       <SearchOutlinedIcon />
                     </span>
                     <Form>
@@ -123,4 +136,9 @@ class TicketDashboard extends Component {
   }
 }
 
-export default TicketDashboard;
+// map state to props
+const mapStateToProps = (state) => ({
+  tickets: state.tickets,
+});
+
+export default connect(mapStateToProps, { getTickets })(TicketDashboard);

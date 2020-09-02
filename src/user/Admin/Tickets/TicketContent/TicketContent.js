@@ -32,35 +32,35 @@ class TicketContent extends Component {
         selector: "plot",
         wrap: true,
         sortable: true,
-        format: (row) => `${row.plot.slice(0, 100)}...`,
+        format: (row) => `${row.content.shortDescription.slice(0, 100)}...`,
       },
       {
         name: "Status",
         grow: 1,
         // eslint-disable-next-line react/no-array-index-key
-        cell: (row) => (
-          <div>
-            {row.genres.map((genre, i) => (
-              <BadgeElement ticketState={genre} />
-            ))}
-          </div>
-        ),
+        // cell: (row) => (
+        //   <div>
+        //     {row.genres.map((genre, i) => (
+        //       <BadgeElement ticketState={genre} />
+        //     ))}
+        //   </div>
+        // ),
       },
       {
         name: "User",
         grow: 1,
-        cell: (row) => (
-          <div>
-            <Image
-              src={userIcon2}
-              alt="icon"
-              rounded
-              className="profile-img"
-              roundedCircle
-            />
-            <span className="profile-text">Devesh Verma</span>
-          </div>
-        ),
+        // cell: (row) => (
+        //   <div>
+        //     <Image
+        //       src={userIcon2}
+        //       alt="icon"
+        //       rounded
+        //       className="profile-img"
+        //       roundedCircle
+        //     />
+        //     <span className="profile-text">Devesh Verma</span>
+        //   </div>
+        // ),
       },
       {
         name: "Created At"
