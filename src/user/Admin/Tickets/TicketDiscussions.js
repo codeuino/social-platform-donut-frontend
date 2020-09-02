@@ -14,13 +14,13 @@ class TicketDiscussions extends Component {
   }
 
   componentDidMount() {
-    setTimeout(() => {
+    this.timeout = setTimeout(() => {
       this.scrollToBottom();
     }, 2000);
   }
 
   componentDidUpdate() {
-    setTimeout(() => {
+    this.timeout = setTimeout(() => {
       this.scrollToBottom();
     }, 2000);
   }
@@ -45,7 +45,6 @@ class TicketDiscussions extends Component {
                 <Link to="/tickets">
                   <div className="back-icon">
                     <FaArrowLeft className="fa-icon" />
-                    {/* <span className="back-text">Back</span> */}
                   </div>
                 </Link>
                 <div className="ticket-title">
@@ -54,7 +53,7 @@ class TicketDiscussions extends Component {
               </div>
               <div className="discussion-comments">
                 <div className="discussions">
-                  <div className="single-discussion">
+                  {[1, 2, 3, 4].map((ele, index) => <div key={index} className="single-discussion">
                     <div className="user-info">
                       <div className="image">
                         <Image src={userIcon2} alt="icon" rounded />
@@ -77,79 +76,7 @@ class TicketDiscussions extends Component {
                         anim id est laborum.
                       </div>
                     </div>
-                  </div>
-                  <div className="single-discussion">
-                    <div className="user-info">
-                      <div className="image">
-                        <Image src={userIcon2} alt="icon" rounded />
-                      </div>
-                      <div className="img-desc">
-                        <h2>Devesh Verma</h2>
-                        <p className="discussion-date">2020-08-24</p>
-                      </div>
-                    </div>
-                    <div className="comment-content">
-                      <div className="comment-details">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore
-                        magna aliqua. Ut enim ad minim veniam, quis nostrud
-                        exercitation ullamco laboris nisi ut aliquip ex ea
-                        commodo consequat. Duis aute irure dolor in
-                        reprehenderit in voluptate velit esse cillum dolore eu
-                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-                        non proident, sunt in culpa qui officia deserunt mollit
-                        anim id est laborum.
-                      </div>
-                    </div>
-                  </div>
-                  <div className="single-discussion">
-                    <div className="user-info">
-                      <div className="image">
-                        <Image src={userIcon2} alt="icon" rounded />
-                      </div>
-                      <div className="img-desc">
-                        <h2>Devesh Verma</h2>
-                        <p className="discussion-date">2020-08-24</p>
-                      </div>
-                    </div>
-                    <div className="comment-content">
-                      <div className="comment-details">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore
-                        magna aliqua. Ut enim ad minim veniam, quis nostrud
-                        exercitation ullamco laboris nisi ut aliquip ex ea
-                        commodo consequat. Duis aute irure dolor in
-                        reprehenderit in voluptate velit esse cillum dolore eu
-                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-                        non proident, sunt in culpa qui officia deserunt mollit
-                        anim id est laborum.
-                      </div>
-                    </div>
-                  </div>
-                  <div className="single-discussion">
-                    <div className="user-info">
-                      <div className="image">
-                        <Image src={userIcon2} alt="icon" rounded />
-                      </div>
-                      <div className="img-desc">
-                        <h2>Devesh Verma</h2>
-                        <p className="discussion-date">2020-08-24</p>
-                      </div>
-                    </div>
-                    <div className="comment-content">
-                      <div className="comment-details">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore
-                        magna aliqua. Ut enim ad minim veniam, quis nostrud
-                        exercitation ullamco laboris nisi ut aliquip ex ea
-                        commodo consequat. Duis aute irure dolor in
-                        reprehenderit in voluptate velit esse cillum dolore eu
-                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-                        non proident, sunt in culpa qui officia deserunt mollit
-                        anim id est laborum.
-                      </div>
-                    </div>
-                  </div>
+                  </div>)}
                 </div>
                 <div
                   ref={(el) => {
@@ -171,53 +98,8 @@ class TicketDiscussions extends Component {
                       "searchreplace visualblocks code fullscreen",
                       "insertdatetime media table paste code help wordcount",
                       "textpattern",
-                    ],
-                    textpattern_patterns: [
-                      { start: "#", format: "h1" },
-                      { start: "##", format: "h2" },
-                      { start: "###", format: "h3" },
-                      { start: "####", format: "h4" },
-                      { start: "#####", format: "h5" },
-                      { start: "######", format: "h6" },
-                      { start: "* ", cmd: "InsertUnorderedList" },
-                      { start: "- ", cmd: "InsertUnorderedList" },
-                      {
-                        start: "1. ",
-                        cmd: "InsertOrderedList",
-                        value: { "list-style-type": "decimal" },
-                      },
-                      {
-                        start: "1) ",
-                        cmd: "InsertOrderedList",
-                        value: { "list-style-type": "decimal" },
-                      },
-                      {
-                        start: "a. ",
-                        cmd: "InsertOrderedList",
-                        value: { "list-style-type": "lower-alpha" },
-                      },
-                      {
-                        start: "a) ",
-                        cmd: "InsertOrderedList",
-                        value: { "list-style-type": "lower-alpha" },
-                      },
-                      {
-                        start: "i. ",
-                        cmd: "InsertOrderedList",
-                        value: { "list-style-type": "lower-roman" },
-                      },
-                      {
-                        start: "i) ",
-                        cmd: "InsertOrderedList",
-                        value: { "list-style-type": "lower-roman" },
-                      },
-                    ],
-                    toolbar:
-                      "undo redo | formatselect | bold italic backcolor | \
-             alignleft aligncenter alignright alignjustify | \
-             bullist numlist outdent indent | removeformat | help",
+                    ]
                   }}
-                  //   onEditorChange={}
                 />
               </div>
             </div>

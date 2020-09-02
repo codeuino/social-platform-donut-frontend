@@ -1,13 +1,23 @@
 import React, { Component } from "react";
 import "./TicketDashboard.scss";
 import Navigation from "../../dashboard/navigation/navigation";
-import TicketContent from "./TicketContent";
-import { Form } from "react-bootstrap";
+import TicketContent from "./TicketContent/TicketContent";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
 
 class TicketDashboard extends Component {
   constructor(props) {
     super(props);
-    this.state = { type: "All" };
+    this.state = {
+      type: "All",
+      allTickets: [],
+      open: [],
+      pending: [],
+      onHold: [],
+      solved: [],
+      closed: [],
+    };
   }
 
   handleSearchBarChange = (e) => {};
@@ -28,79 +38,42 @@ class TicketDashboard extends Component {
           <div className="ticket-description">
             <div className="dashboard-title">Tickets</div>
             <div className="searchbar-container">
-              <Form>
-                <Form.Control
-                  as="input"
-                  placeholder="Search Tickets"
-                  className="searchbar"
-                  onChange={this.handleSearchBarChange}
-                />
-              </Form>
+              <div className="searchbar">
+                <span class="searchbar-icon">
+                  <SearchOutlinedIcon />
+                </span>
+                <Form>
+                  <Form.Control
+                    as="input"
+                    placeholder="Search Tickets"
+                    onChange={this.handleSearchBarChange}
+                  />
+                </Form>
+              </div>
+              <Button>New Ticket</Button>
             </div>
             <div className="ticket-status">
               <div className="tabs__container">
                 <span className="nav__tab container">
                   <ul className="nav__list__container">
-                    <li
-                      className={
-                        type === "All"
-                          ? "nav__single__tab selected"
-                          : "nav__single__tab"
-                      }
-                      onClick={() => this.handleClick("All")}
-                    >
-                      All Tickets
-                    </li>
-                    <li
-                      className={
-                        type === "Open"
-                          ? "nav__single__tab selected"
-                          : "nav__single__tab"
-                      }
-                      onClick={() => this.handleClick("Open")}
-                    >
-                      Open
-                    </li>
-                    <li
-                      className={
-                        type === "Pending"
-                          ? "nav__single__tab selected"
-                          : "nav__single__tab"
-                      }
-                      onClick={() => this.handleClick("Pending")}
-                    >
-                      Pending
-                    </li>
-                    <li
-                      className={
-                        type === "On Hold"
-                          ? "nav__single__tab selected"
-                          : "nav__single__tab"
-                      }
-                      onClick={() => this.handleClick("On Hold")}
-                    >
-                      On Hold
-                    </li>
-                    <li
-                      className={
-                        type === "Solved"
-                          ? "nav__single__tab selected"
-                          : "nav__single__tab"
-                      }
-                      onClick={() => this.handleClick("Solved")}
-                    >
-                      Solved
-                    </li>
-                    <li
-                      className={
-                        type === "Closed"
-                          ? "nav__single__tab selected"
-                          : "nav__single__tab"
-                      }
-                      onClick={() => this.handleClick("Closed")}
-                    >
-                      Closed
-                    </li>
+                    {[
+                      { type: "All", opt: "All Tickets" },
+                      { type: "Open", opt: "Open" },
+                      { type: "Pending", opt: "Pending" },
+                      { type: "On Hold", opt: "On Hold" },
+                      { type: "Solved", opt: "Solved" },
+                      { type: "Closed", opt: "Closed" }
+                    ].map((ele, index)=><li
+                    key={index}
+                    className={
+                      type === ele.type
+                        ? "nav__single__tab selected"
+                        : "nav__single__tab"
+                    }
+                    onClick={() => this.handleClick(ele.type)}
+                  >
+                    {ele.opt}
+                  </li>)}
                   </ul>
                 </span>
               </div>

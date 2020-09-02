@@ -37,8 +37,6 @@
           .nav__tab {
             .nav__list__container {
               display: flex;
-              // justify-content: center;
-              // align-items: center;
               margin-left: -2rem;
               list-style: none;
               border-bottom: 2px solid #eee;
@@ -79,12 +77,6 @@
       }
       .ticket-content {
         flex: 10;
-        // margin-top: 1vh;
-        // position: fixed;
-        // top: 9vh;
-        // bottom: 0px;
-        // left: 13vw;
-        // overflow-y: scroll;
       }
     }
   }
@@ -96,7 +88,28 @@
 
 .searchbar-container {
   padding: 1rem;
+  display: flex;
+  width: 100%;
   .searchbar {
+    position: relative;
+    flex-grow: 1;
     border-radius: 25px;
+    margin-right: 1rem;
+    .searchbar-icon {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      top: 50%;
+      left: 0;
+      width: 2rem;
+      transform: translateY(-50%);
+    }
+    input {
+      padding-left: 2rem;
+    }
+  }
+  .btn {
+    flex-grow: 0;
   }
 }
