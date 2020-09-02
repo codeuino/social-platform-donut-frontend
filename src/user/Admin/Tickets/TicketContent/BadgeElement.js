@@ -3,24 +3,30 @@ import Badge from "react-bootstrap/Badge";
 
 const BadgeElement = (props) => {
   let badgeVariant = null;
+  let text = null;
   switch (props.ticketState) {
-    case "Open":
+    case "open":
       badgeVariant = "primary";
+      text = "Open"
       break;
-    case "Solved":
+    case "solved":
       badgeVariant = "success";
+      text = "Solved"
       break;
-    case "OnHold":
+    case "onHold":
       badgeVariant = "secondary";
+      text = "On Hold"
       break;
-    case "Pending":
+    case "pending":
       badgeVariant = "warning";
+      text = "Pending"
       break;
-    case "Closed":
+    case "closed":
       badgeVariant = "danger";
+      text = "Closed"
       break;
     default:
-      badgeVariant = "Open";
+      badgeVariant = "primary";
   }
   return (
     <div>
