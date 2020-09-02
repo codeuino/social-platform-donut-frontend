@@ -142,3 +142,17 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, { getTickets })(TicketDashboard);
+
+// {
+//   id: 1,
+//   title: "Requirement of new Integration",
+//   year: "1988",
+//   runtime: "92",
+//   genres: ["open"],
+//   director: "Tim Burton",
+//   actors: "Alec Baldwin, Geena Davis, Annie McEnroe, Maurice Page",
+//   plot:
+//     "We require a new integration for slack. I would really appreciate it if some of the developers could look into this matter! Please feel free to reach out to me for more information regarding this!. I would be glad to help!",
+//   posterUrl:
+//     "https://images-na.ssl-images-amazon.com/images/M/MV5BMTUwODE3MDE0MV5BMl5BanBnXkFtZTgwNTk1MjI4MzE@._V1_SX300.jpg",
+// }
