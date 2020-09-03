@@ -50,6 +50,9 @@ export const loginUser = (userInfo, history) => async (dispatch) => {
       localStorage.setItem('userId', decodedData._id)
       dispatch(setCurrentUser(decodedData));
 
+      // Update user name in localStorage
+      localStorage.setItem('username', `${res.data.user.name.firstName} ${res.data.user.name.lastName}`)
+
       // update user role in localStorage
       localStorage.setItem('admin', res.data.user.isAdmin)
 

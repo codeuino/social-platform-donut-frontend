@@ -24,7 +24,7 @@ class TicketDashboard extends Component {
       solved: [],
       closed: [],
       editorMode: false,
-      viewingTicket: null
+      viewingTicket: null,
     };
   }
 
@@ -75,15 +75,15 @@ class TicketDashboard extends Component {
   };
 
   handleCreateNewTicket = async (newTicket) => {
-    console.log("EXECUTED!")
-    await Axios.post(`${BASE_URL}/ticket`, newTicket)
+    console.log("EXECUTED!");
+    await Axios.post(`${BASE_URL}/ticket`, newTicket);
   };
 
   handleViewTicket = (id) => {
     this.setState({
-      viewingTicket: id
-    })
-  }
+      viewingTicket: id,
+    });
+  };
 
   render() {
     const { view } = this.state;
@@ -95,60 +95,63 @@ class TicketDashboard extends Component {
         <div className="ticket-details">
           <div className="ticket-description">
             <div className="dashboard-title">Tickets</div>
-            {!this.state.editorMode && this.state.all.length && !this.state.viewingTicket && (
-              <React.Fragment>
-                <div className="searchbar-container">
-                  <div className="searchbar">
-                    <span className="searchbar-icon">
-                      <SearchOutlinedIcon />
-                    </span>
-                    <Form>
-                      <Form.Control
-                        as="input"
-                        placeholder="Search Tickets"
-                        onChange={this.handleSearchBarChange}
-                      />
-                    </Form>
+            {!this.state.editorMode &&
+              this.state.all.length &&
+              !this.state.viewingTicket && (
+                <React.Fragment>
+                  <div className="searchbar-container">
+                    <div className="searchbar">
+                      <span className="searchbar-icon">
+                        <SearchOutlinedIcon />
+                      </span>
+                      <Form>
+                        <Form.Control
+                          as="input"
+                          placeholder="Search Tickets"
+                          onChange={this.handleSearchBarChange}
+                        />
+                      </Form>
+                    </div>
+                    <Button onClick={() => this.toggleNewTicketEditor(true)}>
+                      New Ticket
+                    </Button>
                   </div>
-                  <Button onClick={() => this.toggleNewTicketEditor(true)}>
-                    New Ticket
-                  </Button>
-                </div>
-                <div className="ticket-status">
-                  <div className="tabs__container">
-                    <span className="nav__tab container">
-                      <ul className="nav__list__container">
-                        {[
-                          { view: "all", opt: "All Tickets" },
-                          { view: "open", opt: "Open" },
-                          { view: "pending", opt: "Pending" },
-                          { view: "onHold", opt: "On Hold" },
-                          { view: "solved", opt: "Solved" },
-                          { view: "closed", opt: "Closed" },
-                        ].map((ele, index) => (
-                          <li
-                            key={index}
-                            className={
-                              view === ele.view
-                                ? "nav__single__tab selected"
-                                : "nav__single__tab"
-                            }
-                            onClick={() => this.handleViewChange(ele.view)}
-                          >
-                            {ele.opt}
-                          </li>
-                        ))}
-                      </ul>
-                    </span>
+                  <div className="ticket-status">
+                    <div className="tabs__container">
+                      <span className="nav__tab container">
+                        <ul className="nav__list__container">
+                          {[
+                            { view: "all", opt: "All Tickets" },
+                            { view: "open", opt: "Open" },
+                            { view: "pending", opt: "Pending" },
+                            { view: "onHold", opt: "On Hold" },
+                            { view: "solved", opt: "Solved" },
+                            { view: "closed", opt: "Closed" },
+                          ].map((ele, index) => (
+                            <li
+                              key={index}
+                              className={
+                                view === ele.view
+                                  ? "nav__single__tab selected"
+                                  : "nav__single__tab"
+                              }
+                              onClick={() => this.handleViewChange(ele.view)}
+                            >
+                              {ele.opt}
+                            </li>
+                          ))}
+                        </ul>
+                      </span>
+                    </div>
                   </div>
-                </div>
-                <div className="ticket-content">
-                  <TicketContent 
-                    viewTicket={this.handleViewTicket}
-                    tickets={this.state[this.state.view]} />
-                </div>
-              </React.Fragment>
-            )}
+                  <div className="ticket-content">
+                    <TicketContent
+                      viewTicket={this.handleViewTicket}
+                      tickets={this.state[this.state.view]}
+                    />
+                  </div>
+                </React.Fragment>
+              )}
             {this.state.editorMode && !this.state.viewingTicket && (
               <NewTicketEditor
                 save={this.handleCreateNewTicket}
@@ -156,7 +159,11 @@ class TicketDashboard extends Component {
               />
             )}
             {this.state.viewingTicket && (
-              <TicketDisscussion back={this.handleViewTicket} />
+              <TicketDisscussion
+                currentUser={this.props.user}
+                ticketId={this.state.viewingTicket}
+                back={this.handleViewTicket}
+              />
             )}
           </div>
         </div>
@@ -168,6 +175,7 @@ class TicketDashboard extends Component {
 // map state to props
 const mapStateToProps = (state) => ({
   tickets: state.tickets,
+  user: state.user,
 });
 
 export default connect(mapStateToProps, { getTickets })(TicketDashboard);

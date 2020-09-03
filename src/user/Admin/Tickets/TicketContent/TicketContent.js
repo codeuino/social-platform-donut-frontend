@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./TicketContent.scss";
-import Moment from 'react-moment'
+import Moment from 'react-moment';
 import { Image } from "react-bootstrap";
 import BadgeElement from './BadgeElement';
 import { withRouter } from "react-router-dom";
@@ -55,18 +55,18 @@ class TicketContent extends Component {
       {
         name: "User",
         grow: 1,
-        // cell: (row) => (
-        //   <div>
-        //     <Image
-        //       src={userIcon2}
-        //       alt="icon"
-        //       rounded
-        //       className="profile-img"
-        //       roundedCircle
-        //     />
-        //     <span className="profile-text">Devesh Verma</span>
-        //   </div>
-        // ),
+        cell: (row) => (
+          <div>
+            <Image
+              src={userIcon2}
+              alt="icon"
+              rounded
+              className="profile-img"
+              roundedCircle
+            />
+            <span className="profile-text">{row.createdBy.name}</span>
+          </div>
+        ),
       },
       {
         name: "Created At",

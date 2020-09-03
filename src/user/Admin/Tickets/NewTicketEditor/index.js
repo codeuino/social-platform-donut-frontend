@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import CancelButton from "@material-ui/icons/ClearOutlined";
 import SaveButton from "@material-ui/icons/SaveOutlined";
+import { ToastContainer, toast } from "react-toastify";
 import "react-mde/lib/styles/css/react-mde-all.css";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import * as Showdown from "showdown";
 import ReactMde from "react-mde";
 import "./Editor.scss";
-import { ToastContainer, toast } from "react-toastify";
 
 class Editor extends Component {
   constructor(props) {
