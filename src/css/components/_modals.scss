@@ -35,14 +35,14 @@
         padding-top: 5px;
       }
       .search_btn {
-        width: 6vw;
-        height: 5vh;
         background: rgb(250, 251, 252);
         border-radius: 100px;
         color: #1a73e8;
         padding: 0.3em;
         margin-left: 1em;
-      }
+        overflow: visible;
+        
+        }
       .edit__post__option {
         float: right;
         margin-left: 12vw;
@@ -66,13 +66,15 @@
       box-sizing: border-box;
       border-radius: 5px;
       padding-left: 5px;
+      
     }
+    
     input::placeholder {
       font-family: Inter;
       font-style: normal;
       font-weight: normal;
       font-size: 15px;
-      line-height: 5px;
+      // line-height: 5px;
       color: #90949c;
       padding-top: 5px;
       padding-bottom: 5px;
