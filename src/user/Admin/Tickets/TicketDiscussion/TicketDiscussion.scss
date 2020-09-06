@@ -58,7 +58,6 @@
             font-size: 24px;
             color: #1a73e8;
           }
-          flex: 1;
           padding: 1rem;
           text-align: center;
           .back-text {
@@ -228,6 +227,12 @@
         font-family: "Inter";
         font-weight: 600;
         font-size: 17px;
+        display: flex;
+        justify-content: space-between;
+        svg {
+          color: rgba(0, 0, 0, 0.5);
+          cursor: pointer;
+        }
       }
       .info-details {
         font-family: "Muli";

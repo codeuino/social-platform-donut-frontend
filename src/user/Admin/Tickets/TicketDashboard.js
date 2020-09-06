@@ -9,11 +9,11 @@ import Button from "react-bootstrap/Button";
 import NewTicketEditor from "./NewTicketEditor";
 import socket from "../../dashboard/utils/socket";
 import { BASE_URL } from "../../../actions/baseApi";
-import TicketDisscussion from "./TicketDiscussions";
 import TicketContent from "./TicketContent/TicketContent";
 import { getTickets } from "../../../actions/ticketAction";
 import donutIcon from "../../../assets/svgs/donut-icon.svg";
 import Navigation from "../../dashboard/navigation/navigation";
+import TicketDisscussion from "./TicketDiscussion/TicketDiscussions";
 import { Drawer, List, ListItem, ListItemText } from "@material-ui/core";
 import NotificationsNoneOutlinedIcon from "@material-ui/icons/NotificationsNoneOutlined";
 
