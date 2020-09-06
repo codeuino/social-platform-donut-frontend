@@ -10,7 +10,7 @@ import { ToastContainer, toast } from 'react-toastify'
 let forgotPasswordToken = "";
 
 // to register user 
-export const registerUser = (userInfo, history) => async (dispatch) => {
+export const registerUser = (userInfo,activeForm) => async (dispatch) => {
   try {
     const res = await axios.post(`${BASE_URL}/user`, userInfo);
     dispatch(setRequestStatus(false));
@@ -22,7 +22,9 @@ export const registerUser = (userInfo, history) => async (dispatch) => {
         payload: res.data.user
       })
       toast.success(`Registration Succesful`)
-      history.push('/');
+      setTimeout(() => {
+        activeForm('login')
+      }, 2000)
     }
 
   } catch(error) {

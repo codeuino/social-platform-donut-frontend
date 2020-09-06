@@ -135,7 +135,7 @@ class SignUpForm extends Component {
           },
         },
       };
-      this.props.registerUser(newUser, this.props.history);
+      this.props.registerUser(newUser,this.props.onActiveChange);
     } else {
       toast.error(`Something went wrong, please check the input!`)
     }
