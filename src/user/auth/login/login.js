@@ -68,7 +68,7 @@ class Login extends Component {
               )}
             </p>
 
-            {this.state.activeForm === "login" ? <LoginForm /> : <SignUpForm />}
+            {this.state.activeForm === "login" ? <LoginForm /> : <SignUpForm activeForm={this.state.activeForm} onActiveChange={this.handleSelectorClick} />}
             <hr />
             <p style={{ textAlign: "center" }} className="login-text">
               {this.state.activeForm === "login"
