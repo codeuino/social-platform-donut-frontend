@@ -1,4 +1,4 @@
-import { SET_CURRENT_USER, GET_USER_PROFILE, PASSWORD_SUCCESSFULLY_CHANGED, PASSWORD_CHANGE_REQUEST_SUCCESS, SET_ADMIN } from './types';
+import {SET_CURRENT_USER, GET_USER_PROFILE, PASSWORD_SUCCESSFULLY_CHANGED, PASSWORD_CHANGE_REQUEST_SUCCESS, SET_ADMIN } from './types';
 import axios from 'axios';
 import { setAuthToken } from '../utils/setAuthToken';
 import jwt_decode from 'jwt-decode';
@@ -6,6 +6,7 @@ import { errorHandler } from '../utils/errorHandler';
 import { setRequestStatus } from '../utils/setRequestStatus';
 import { BASE_URL } from './baseApi';
 import { customErrorHandler } from '../utils/customErrorHandler'
+import { ToastContainer, toast } from 'react-toastify'
 let forgotPasswordToken = "";
 
 // to register user 
@@ -20,6 +21,7 @@ export const registerUser = (userInfo, history) => async (dispatch) => {
         type: GET_USER_PROFILE,
         payload: res.data.user
       })
+      toast.success(`Registration Succesful`)
       history.push('/');
     }
 
