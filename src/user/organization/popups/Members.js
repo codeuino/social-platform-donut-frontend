@@ -202,9 +202,9 @@ class Members extends Component {
               </div>
               <div className="share__btn__container">
                 <p className="share__text">or share invite on</p>
-                <Button className="invite__btn">Facebook</Button>
-                <Button className="invite__btn">LinkedIn</Button>
-                <Button className="invite__btn">Twitter</Button>
+                <Button className="invite__btn" target = "_blank" style={{"padding-top":"6px"}} href={"https://www.facebook.com/sharer/sharer.php?u=" + inviteLink}>Facebook</Button>
+                <Button className="invite__btn" target = "_blank" style={{"padding-top":"6px"}} href={"https://www.linkedin.com/sharing/share-offsite/?url=" + inviteLink + "&title=&summary=&source="}>LinkedIn</Button>
+                <Button className="invite__btn" target = "_blank" style={{"padding-top":"6px"}} href={"https://twitter.com/intent/tweet?url=" + inviteLink + "&text=Checkout%20Donut.%20It%27s%20awesome"}>Twitter</Button>
               </div>
             </div>
           </div>
