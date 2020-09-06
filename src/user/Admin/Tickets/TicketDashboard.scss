@@ -19,6 +19,8 @@
     .ticket-description {
       display: flex;
       flex-direction: column;
+      height: 100vh;
+      overflow-y: hidden;
       .dashboard-title {
         font-family: Inter;
         font-style: normal;

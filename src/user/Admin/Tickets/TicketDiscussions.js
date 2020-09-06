@@ -7,6 +7,7 @@ import * as Showdown from "showdown";
 import ReactMarkdown from "react-markdown";
 import Button from "react-bootstrap/Button";
 import { FaArrowLeft } from "react-icons/fa";
+import Dropdown from "react-bootstrap/Dropdown";
 import { BASE_URL } from "../../../actions/baseApi";
 import "react-mde/lib/styles/css/react-mde-all.css";
 import { Image, Card, Badge } from "react-bootstrap";
@@ -90,15 +91,27 @@ class TicketDiscussions extends Component {
   };
 
   handleUpdateTicket = async () => {
-    const newTicket = (
-      await Axios.put(`${BASE_URL}/ticket/${this.state.ticket._id}`, {
-        content: this.state.content,
-      })
-    ).data.ticket;
-    this.setState({
-      ticket: newTicket,
-      editer: "new",
-      content: "",
+    try {
+      const newTicket = (
+        await Axios.put(`${BASE_URL}/ticket/${this.state.ticket._id}`, {
+          content: this.state.content,
+        })
+      ).data.ticket;
+      this.setState({
+        ticket: newTicket,
+        editer: "new",
+        content: "",
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  setTicketContent = (content) => {
+    this.setState((state) => {
+      this.setState({
+        ticket: { ...state.ticket, content: content },
+      });
     });
   };
 
@@ -131,7 +144,7 @@ class TicketDiscussions extends Component {
                   </div>
                 </div>
 
-                <div className="discussions">
+                <div className="discussions" style={{height: this.state.editer === "ticket"? "80vh": "50vh"}}>
                   <div className={`single-discussion discussion-ticket`}>
                     <div
                       style={{
@@ -149,6 +162,24 @@ class TicketDiscussions extends Component {
                             <Moment format="DD MMM YYYY">
                               {this.state.ticket.createdAt}
                             </Moment>
+                            <Dropdown>
+                              <Dropdown.Toggle variant="light">
+                                Edits
+                              </Dropdown.Toggle>
+                              <Dropdown.Menu>
+                                {this.state.ticket.history.map((item) => (
+                                  <Dropdown.Item
+                                    onClick={() =>
+                                      this.setTicketContent(item.content)
+                                    }
+                                  >
+                                    <Moment format="DD MMM YYYY">
+                                      {item.editedAt}
+                                    </Moment>
+                                  </Dropdown.Item>
+                                ))}
+                              </Dropdown.Menu>
+                            </Dropdown>
                           </p>
                         </div>
                       </div>
@@ -229,44 +260,47 @@ class TicketDiscussions extends Component {
                       </div>
                     </div>
                   ))}
-                  {this.state.editer === "new" && (
-                    <div className={`single-discussion right`}>
-                      <div
-                        style={{
-                          display: "flex",
-                          justifyContent: "space-between",
-                        }}
-                      >
-                        <div className="user-info">
-                          <div className="image">
-                            <Image src={userIcon2} alt="icon" rounded />
-                          </div>
-                          <div className="img-desc">
-                            <h2>{currentUser.name}</h2>
-                          </div>
-                        </div>
-                        <Button
-                          onClick={this.sendComment}
-                          style={{ margin: "8px" }}
-                        >
-                          <SendOutlinedIcon />
-                          Send
-                        </Button>
-                      </div>
-                      <div className="comment-content">
-                        <ReactMde
-                          value={this.state.content}
-                          selectedTab={this.state.selectedTab}
-                          onChange={this.setContent}
-                          onTabChange={this.setSelectedTab}
-                          generateMarkdownPreview={(markdown) =>
-                            Promise.resolve(converter.makeHtml(markdown))
-                          }
-                        />
-                      </div>
-                    </div>
-                  )}
                 </div>
+                {this.state.editer === "new" && (
+                  <div
+                    className={`single-discussion discussion-ticket`}
+                    id="discussion-editor"
+                  >
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <div className="user-info">
+                        <div className="image">
+                          <Image src={userIcon2} alt="icon" rounded />
+                        </div>
+                        <div className="img-desc">
+                          <h2>{currentUser.name}</h2>
+                        </div>
+                      </div>
+                      <Button
+                        onClick={this.sendComment}
+                        style={{ margin: "8px" }}
+                      >
+                        <SendOutlinedIcon />
+                        Send
+                      </Button>
+                    </div>
+                    <div className="comment-content">
+                      <ReactMde
+                        value={this.state.content}
+                        selectedTab={this.state.selectedTab}
+                        onChange={this.setContent}
+                        onTabChange={this.setSelectedTab}
+                        generateMarkdownPreview={(markdown) =>
+                          Promise.resolve(converter.makeHtml(markdown))
+                        }
+                      />
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
 

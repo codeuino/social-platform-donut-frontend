@@ -51,122 +51,127 @@
       .discussions {
         display: flex;
         flex-direction: column;
-        .single-discussion.left {
-          margin-right: auto;
-        }
-        .single-discussion.right {
-          margin-left: auto;
-        }
-        .single-discussion.discussion-ticket {
-          width: 95%;
-          margin: auto;
-        }
-        .single-discussion {
-          width: 70%;
-          margin: 2rem;
-          display: inline-block;
-          counter-increment: item-counter;
-          width: 70%;
-          margin-bottom: 15px;
-          border: solid 1px #dfe9f1;
-          box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
-          border-radius: 5px;
-          .user-info {
-            display: flex;
-            padding: 8px;
-            padding-bottom: 0px;
+        overflow-y: scroll;
+        height: 50vh;
+      }
+      .single-discussion.left {
+        margin-right: auto;
+      }
+      .single-discussion.right {
+        margin-left: auto;
+      }
+      .single-discussion.discussion-ticket {
+        width: 95%;
+        margin: auto;
+      }
+      .discussion-editor {
+        padding: 0;
+      }
+      .single-discussion {
+        width: 70%;
+        margin: 2rem;
+        display: inline-block;
+        counter-increment: item-counter;
+        width: 70%;
+        margin-bottom: 15px;
+        border: solid 1px #dfe9f1;
+        box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+        .user-info {
+          display: flex;
+          padding: 8px;
+          padding-bottom: 0px;
 
-            .image {
-              width: 38px;
-              height: 38px;
-              img {
-                width: 100%;
-                height: 100%;
-                border-radius: 2px;
-              }
-            }
-            .img-desc {
-              margin-left: 10px;
-              h2 {
-                font-family: Inter;
-                font-style: normal;
-                font-weight: 600;
-                font-size: 18px;
-                line-height: 22px;
-                margin: 3px;
-                /* identical to box height */
-              }
-              small {
-                font-family: Inter;
-                font-style: normal;
-                font-weight: normal;
-                font-size: 12px;
-                line-height: 15px;
-                color: #90949c;
-                margin: 0;
-              }
-              .discussion-date {
-                font-family: Inter;
-                font-style: normal;
-                font-weight: normal;
-                font-size: 12px;
-                line-height: 15px;
-
-                color: #90949c;
-              }
-            }
-            .status-btn {
-              background-color: white;
-              padding: 4px 36px;
-              border: solid 1px #eb5757;
-              border-radius: 100px;
-              color: #eb5757;
-              margin: 0 5px;
-              height: 30px;
-              cursor: default;
+          .image {
+            width: 38px;
+            height: 38px;
+            img {
+              width: 100%;
+              height: 100%;
+              border-radius: 2px;
             }
           }
-          .comment-content {
-            display: flex;
-            .react-mde {
-              // padding: 10px;
-              width: 100%;
+          .img-desc {
+            margin-left: 10px;
+            h2 {
+              font-family: Inter;
+              font-style: normal;
+              font-weight: 600;
+              font-size: 18px;
+              line-height: 22px;
+              margin: 3px;
+              /* identical to box height */
             }
-            .comment-details {
-              flex: 3;
+            small {
               font-family: Inter;
               font-style: normal;
               font-weight: normal;
-              font-size: 14px;
-              line-height: 17px;
-              padding: 10px;
-              padding-top: 0px;
-
-              color: #1d2129;
+              font-size: 12px;
+              line-height: 15px;
+              color: #90949c;
+              margin: 0;
             }
-            .discussion-options {
-              flex: 1.5;
-              text-align: center;
-              padding: 20px;
-              .option-btn {
-                background-color: white;
-                color: #007bff;
-                padding: 4px 40px;
-                margin: 0 10px;
-                height: 30px;
-                cursor: pointer;
-                &.active {
-                  background: #007bff;
-                  color: white;
-                }
-                .option-text {
-                  font-family: Inter;
-                  font-style: normal;
-                  font-weight: 500;
-                  font-size: 14px;
-                  line-height: 22px;
-                  /* identical to box height */
-                }
+            .discussion-date {
+              font-family: Inter;
+              font-style: normal;
+              font-weight: normal;
+              font-size: 12px;
+              line-height: 15px;
+
+              color: #90949c;
+            }
+          }
+          .status-btn {
+            background-color: white;
+            padding: 4px 36px;
+            border: solid 1px #eb5757;
+            border-radius: 100px;
+            color: #eb5757;
+            margin: 0 5px;
+            height: 30px;
+            cursor: default;
+          }
+        }
+        .comment-content {
+          display: flex;
+          .react-mde {
+            // padding: 10px;
+            width: 100%;
+          }
+          .comment-details {
+            flex: 3;
+            font-family: Inter;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 17px;
+            padding: 10px;
+            padding-top: 0px;
+
+            color: #1d2129;
+          }
+          .discussion-options {
+            flex: 1.5;
+            text-align: center;
+            padding: 20px;
+            .option-btn {
+              background-color: white;
+              color: #007bff;
+              padding: 4px 40px;
+              margin: 0 10px;
+              height: 30px;
+              cursor: pointer;
+              &.active {
+                background: #007bff;
+                color: white;
+              }
+              .option-text {
+                font-family: Inter;
+                font-style: normal;
+                font-weight: 500;
+                font-size: 14px;
+                line-height: 22px;
+                /* identical to box height */
               }
             }
           }

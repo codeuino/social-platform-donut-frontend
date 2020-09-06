@@ -29,7 +29,7 @@ class TicketContent extends Component {
       {
         name: "Title",
         grow: 2,
-        selector: "titler",
+        selector: "title",
         sortable: true,
         maxWidth: "600px", // when using custom you should use width or maxWidth, otherwise, the table will default to flex grow behavior
         cell: (row) => <CustomTitle row={row} />,
@@ -37,7 +37,7 @@ class TicketContent extends Component {
       {
         name: "Description",
         grow: 3,
-        selector: "plot",
+        selector: "shortDescription",
         wrap: true,
         sortable: true,
         format: (row) => `${row.shortDescription.slice(0, 100)}...`,
@@ -55,6 +55,8 @@ class TicketContent extends Component {
       {
         name: "User",
         grow: 1,
+        sortable: true,
+        selector: 'createdBy.name',
         cell: (row) => (
           <div>
             <Image
@@ -70,6 +72,8 @@ class TicketContent extends Component {
       },
       {
         name: "Created At",
+        sortable: true,
+        selector: 'createdAt',
         cell: (row) => (
           <div>
             <Moment format="DD MMM YYYY">{row.createdAt}</Moment>
@@ -79,6 +83,7 @@ class TicketContent extends Component {
       {
         name: "Comments",
         sortable: true,
+        selector: 'comments',
         cell: (row) => (
           <div>
             {row.comments}

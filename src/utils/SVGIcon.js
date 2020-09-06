@@ -31,6 +31,8 @@ const getViewBox = (name) => {
       return "0 0 18 19";
     case "JitsiMeet":
       return "0 0 17 29";
+    case "Tickets":
+      return "0 0 1024 1024";
     default:
       return "0 0 32 32";
   }
@@ -172,6 +174,15 @@ const getPath = (name, props) => {
             className="path-name"
           />
         </>
+      );
+    case "Tickets":
+      return (
+        <path
+          d="M832 1024H192c-35.392 0-64-28.608-64-64V64c0-35.392 28.608-64 64-64h448l256 256v704c0 35.392-28.608 64-64 64zM576 320V128H256v768h512V320h-192z"
+          fill="black"
+          fill-opacity="0.6"
+          className="path-name"
+        />
       );
     default:
       return <path />;
