@@ -21,6 +21,7 @@ class TicketDiscussions extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      view: "discussions",
       ticket: null,
       selectedTab: "write",
       content: "",
@@ -37,24 +38,11 @@ class TicketDiscussions extends Component {
 
   componentDidMount() {
     this.getTicket();
-    // this.timeout = setTimeout(() => {
-    //   this.scrollToBottom();
-    // }, 2000);
   }
 
-  componentDidUpdate() {
-    // this.timeout = setTimeout(() => {
-    //   this.scrollToBottom();
-    // }, 2000);
-  }
+  componentDidUpdate() {}
 
-  componentWillUnmount() {
-    // clearTimeout(this.timeout);
-  }
-
-  // scrollToBottom() {
-  //   this.el.scrollIntoView({ behavior: "smooth" });
-  // }
+  componentWillUnmount() {}
 
   handleBack = () => {
     this.props.back(null);
@@ -115,6 +103,12 @@ class TicketDiscussions extends Component {
     });
   };
 
+  handleViewChange = (atrb) => {
+    this.setState({
+      view: atrb,
+    });
+  };
+
   render() {
     const converter = new Showdown.Converter({
       tables: true,
@@ -143,8 +137,34 @@ class TicketDiscussions extends Component {
                     </span>
                   </div>
                 </div>
-
-                <div className="discussions" style={{height: this.state.editer === "ticket"? "80vh": "50vh"}}>
+                <div className="ticket-tabs">
+                  <span className="nav__tab container">
+                    <ul className="nav__list__container">
+                      {[
+                        { view: "discussions", opt: "Discussions" },
+                        { view: "history", opt: "History" },
+                      ].map((ele, index) => (
+                        <li
+                          key={index}
+                          className={
+                            this.state.view === ele.view
+                              ? "nav__single__tab selected"
+                              : "nav__single__tab"
+                          }
+                          onClick={() => this.handleViewChange(ele.view)}
+                        >
+                          {ele.opt}
+                        </li>
+                      ))}
+                    </ul>
+                  </span>
+                </div>
+                <div
+                  className="discussions"
+                  style={{
+                    height: this.state.editer === "ticket" ? "80vh" : "50vh",
+                  }}
+                >
                   <div className={`single-discussion discussion-ticket`}>
                     <div
                       style={{
@@ -349,32 +369,7 @@ class TicketDiscussions extends Component {
                   </div>
                 </div>
               </Card>
-              <Card className="info-card">
-                <div className="info-title">Administrators</div>
-                <div className="info-details">
-                  <div className="data-element">
-                    <Image
-                      src={userIcon2}
-                      alt="icon"
-                      rounded
-                      className="profile-img"
-                      roundedCircle
-                    />
-                    <span className="data-desc">Jaskirat Singh</span>
-                  </div>
-                  <div className="data-element">
-                    <Image
-                      src={userIcon2}
-                      alt="icon"
-                      rounded
-                      className="profile-img"
-                      roundedCircle
-                    />
-                    <span className="data-desc">Vaibhav Aren</span>
-                  </div>
-                </div>
-              </Card>
-              <Card className="info-card">
+              {/* <Card className="info-card">
                 <div className="info-title">Requester's other tickets</div>
                 <div className="info-details">
                   <div className="data-element">
@@ -398,7 +393,7 @@ class TicketDiscussions extends Component {
                     </span>
                   </div>
                 </div>
-              </Card>
+              </Card> */}
             </div>
           </div>
         )}

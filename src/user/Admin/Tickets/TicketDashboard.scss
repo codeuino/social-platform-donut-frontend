@@ -33,49 +33,14 @@
       .ticket-status {
         flex: 1;
         text-align: center;
-        .tabs__container {
-          width: 100%;
-
-          .nav__tab {
-            .nav__list__container {
-              display: flex;
-              margin-left: -2rem;
-              list-style: none;
-              border-bottom: 2px solid #eee;
-              transition: all 0.5s;
-              font-weight: 300;
-              color: #262727;
-
-              .nav__single__tab {
-                display: inline-block;
-                font-family: Inter;
-                font-style: normal;
-                font-weight: 500;
-                font-size: 18px;
-                line-height: 22px;
-                padding-left: 11px;
-                padding-right: 15px;
-                padding-bottom: 5px;
-                margin-left: 19px;
-                text-align: center;
-                cursor: pointer;
-
-                &.selected {
-                  border-bottom: 3px solid #1a73e8;
-                  color: #1a73e8;
-                }
-              }
-            }
-          }
-        }
-        .ticket-status-text {
-          font-family: "Inter";
-          font-size: 1vw;
-          letter-spacing: 0.1px;
-          text-transform: uppercase;
-          color: rgba(0, 0, 0, 0.8);
-          font-weight: bold;
-        }
+      }
+      .ticket-status-text {
+        font-family: "Inter";
+        font-size: 1vw;
+        letter-spacing: 0.1px;
+        text-transform: uppercase;
+        color: rgba(0, 0, 0, 0.8);
+        font-weight: bold;
       }
       .ticket-content {
         flex: 10;

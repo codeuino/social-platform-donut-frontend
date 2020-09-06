@@ -5,23 +5,23 @@ const BadgeElement = (props) => {
   let badgeVariant = null;
   let text = null;
   switch (props.ticketState) {
-    case "open":
+    case "OPEN":
       badgeVariant = "primary";
       text = "Open"
       break;
-    case "solved":
+    case "SOLVED":
       badgeVariant = "success";
       text = "Solved"
       break;
-    case "onHold":
+    case "ON_HOLD":
       badgeVariant = "secondary";
       text = "On Hold"
       break;
-    case "pending":
+    case "PENDING":
       badgeVariant = "warning";
       text = "Pending"
       break;
-    case "closed":
+    case "CLOSED":
       badgeVariant = "danger";
       text = "Closed"
       break;

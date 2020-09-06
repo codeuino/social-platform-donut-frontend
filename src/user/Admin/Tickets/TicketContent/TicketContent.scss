@@ -7,3 +7,16 @@
 .profile-text {
   display: inline;
 }
+
+.Ticket-dashboard-ticket{
+  display: flex;
+  align-items: center;
+  .status {
+    margin-right: 18px;
+  }
+  .Ticket-dashboard-title {
+    font-weight: bold;
+    font-size: 1.1rem;
+    font-family: Inter;
+  }
+}

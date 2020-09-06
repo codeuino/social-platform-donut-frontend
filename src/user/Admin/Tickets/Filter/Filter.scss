@@ -1,0 +1,13 @@
+.tickets-dashboard-filter {
+  display: flex;
+  flex-direction: column;
+  .filters {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    .clear-filters {
+      cursor: pointer;
+      margin-right: 10px;
+    }
+  }
+}

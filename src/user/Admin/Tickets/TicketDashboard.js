@@ -4,7 +4,7 @@ import Axios from "axios";
 import Moment from "react-moment";
 import { connect } from "react-redux";
 import { setUpSocket } from "./socket";
-import Form from "react-bootstrap/Form";
+import TicketFilter from "./Filter/Filter";
 import Button from "react-bootstrap/Button";
 import NewTicketEditor from "./NewTicketEditor";
 import socket from "../../dashboard/utils/socket";
@@ -14,7 +14,6 @@ import TicketContent from "./TicketContent/TicketContent";
 import { getTickets } from "../../../actions/ticketAction";
 import donutIcon from "../../../assets/svgs/donut-icon.svg";
 import Navigation from "../../dashboard/navigation/navigation";
-import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
 import { Drawer, List, ListItem, ListItemText } from "@material-ui/core";
 import NotificationsNoneOutlinedIcon from "@material-ui/icons/NotificationsNoneOutlined";
 
@@ -25,11 +24,7 @@ class TicketDashboard extends Component {
       view: "all",
       ticket: true,
       all: [],
-      open: [],
-      pending: [],
-      onHold: [],
-      solved: [],
-      closed: [],
+      filtered: [],
       socket: socket,
       notifications: [],
       editorMode: false,
@@ -56,43 +51,29 @@ class TicketDashboard extends Component {
     console.log(nextProps.tickets.tickets);
     this.setState({
       all: nextProps.tickets.tickets,
+      filtered: nextProps.tickets.tickets,
     });
   }
 
-  divideAsPerStatus = () => {
+  setFilteredTickets = (tickets) => {
     this.setState({
-      open: this.state.all.filter((ele) => ele.genres.indexOf("OPEN") !== -1),
-      pending: this.state.all.filter(
-        (ele) => ele.genres.indexOf("PENDING") !== -1
-      ),
-      onHold: this.state.all.filter(
-        (ele) => ele.genres.indexOf("ON_HOLD") !== -1
-      ),
-      solved: this.state.all.filter(
-        (ele) => ele.genres.indexOf("SOLVED") !== -1
-      ),
-      closed: this.state.all.filter(
-        (ele) => ele.genres.indexOf("CLOSED") !== -1
-      ),
+      filtered: [...tickets],
     });
   };
+
+  clearFilters = () => {
+    this.setState({
+      filtered: [...this.state.all]
+    })
+  }
 
   componentDidMount() {
     setTimeout(() => {
       this.props.getTickets();
     });
-    this.divideAsPerStatus();
     this.getTicketNotifications();
     setUpSocket(this.state, donutIcon, this.addToNotification);
   }
-
-  handleSearchBarChange = (e) => {};
-
-  handleViewChange = (atrb) => {
-    this.setState({
-      view: atrb,
-    });
-  };
 
   toggleNewTicketEditor = (open) => {
     this.setState({
@@ -108,13 +89,11 @@ class TicketDashboard extends Component {
   };
 
   handleCreateNewTicket = async (newTicket) => {
-    console.log("EXECUTED!");
     const ticket = (await Axios.post(`${BASE_URL}/ticket`, newTicket)).data
       .ticket;
     ticket.comments = 0;
     this.setState({
       all: [...this.state.all, ticket],
-      open: [...this.state.open, ticket],
       editorMode: false,
     });
   };
@@ -127,7 +106,6 @@ class TicketDashboard extends Component {
 
   render() {
     console.log(this.state.notifications);
-    const { view } = this.state;
     return (
       <div className="ticket">
         <div className="navigation">
@@ -145,55 +123,18 @@ class TicketDashboard extends Component {
               this.state.all.length &&
               !this.state.viewingTicket && (
                 <React.Fragment>
-                  <div className="searchbar-container">
-                    <div className="searchbar">
-                      <span className="searchbar-icon">
-                        <SearchOutlinedIcon />
-                      </span>
-                      <Form>
-                        <Form.Control
-                          as="input"
-                          placeholder="Search Tickets"
-                          onChange={this.handleSearchBarChange}
-                        />
-                      </Form>
-                    </div>
-                    <Button onClick={() => this.toggleNewTicketEditor(true)}>
-                      New Ticket
-                    </Button>
-                  </div>
                   <div className="ticket-status">
-                    <div className="tabs__container">
-                      <span className="nav__tab container">
-                        <ul className="nav__list__container">
-                          {[
-                            { view: "all", opt: "All Tickets" },
-                            { view: "open", opt: "Open" },
-                            { view: "pending", opt: "Pending" },
-                            { view: "onHold", opt: "On Hold" },
-                            { view: "solved", opt: "Solved" },
-                            { view: "closed", opt: "Closed" },
-                          ].map((ele, index) => (
-                            <li
-                              key={index}
-                              className={
-                                view === ele.view
-                                  ? "nav__single__tab selected"
-                                  : "nav__single__tab"
-                              }
-                              onClick={() => this.handleViewChange(ele.view)}
-                            >
-                              {ele.opt}
-                            </li>
-                          ))}
-                        </ul>
-                      </span>
-                    </div>
+                    <TicketFilter
+                      tickets={this.state.all}
+                      filtered={this.state.filtered}
+                      clear={this.clearFilters}
+                      setFiltered={this.setFilteredTickets}
+                    />
                   </div>
                   <div className="ticket-content">
                     <TicketContent
                       viewTicket={this.handleViewTicket}
-                      tickets={this.state[this.state.view]}
+                      tickets={this.state.filtered}
                     />
                   </div>
                 </React.Fragment>
@@ -227,11 +168,17 @@ class TicketDashboard extends Component {
         >
           <List className="list">
             {this.state.notifications.map((notification) => (
-              <ListItem style={{display: "flex", flexDirection: "column", alignItems: "flex-start"}}>
+              <ListItem
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-start",
+                }}
+              >
                 <div>{notification.tag}</div>
                 <div>{notification.heading}</div>
                 <div>
-                  <Moment date={notification.createdAt} durationFromNow/>
+                  <Moment date={notification.createdAt} durationFromNow />
                 </div>
                 <div>{notification.content}</div>
                 <hr></hr>
@@ -251,17 +198,3 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, { getTickets })(TicketDashboard);
-
-// {
-//   id: 1,
-//   title: "Requirement of new Integration",
-//   year: "1988",
-//   runtime: "92",
-//   genres: ["open"],
-//   director: "Tim Burton",
-//   actors: "Alec Baldwin, Geena Davis, Annie McEnroe, Maurice Page",
-//   plot:
-//     "We require a new integration for slack. I would really appreciate it if some of the developers could look into this matter! Please feel free to reach out to me for more information regarding this!. I would be glad to help!",
-//   posterUrl:
-//     "https://images-na.ssl-images-amazon.com/images/M/MV5BMTUwODE3MDE0MV5BMl5BanBnXkFtZTgwNTk1MjI4MzE@._V1_SX300.jpg",
-// }

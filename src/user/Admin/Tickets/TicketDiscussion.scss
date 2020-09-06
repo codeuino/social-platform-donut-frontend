@@ -1,5 +1,38 @@
 .discussion {
   display: flex;
+  .ticket-tabs {
+    width: 100%;
+    .nav__tab {
+      .nav__list__container {
+        display: flex;
+        list-style: none;
+        border-bottom: 2px solid #eee;
+        transition: all 0.5s;
+        font-weight: 300;
+        color: #262727;
+
+        .nav__single__tab {
+          display: inline-block;
+          font-family: Inter;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 18px;
+          line-height: 22px;
+          padding-left: 11px;
+          padding-right: 15px;
+          padding-bottom: 5px;
+          margin-left: 19px;
+          text-align: center;
+          cursor: pointer;
+
+          &.selected {
+            border-bottom: 3px solid #1a73e8;
+            color: #1a73e8;
+          }
+        }
+      }
+    }
+  }
   .navigation {
     background: #f5f5f5;
     flex: 1;
