@@ -3,14 +3,14 @@ import { errorHandler } from '../utils/errorHandler'
 import axios from 'axios'
 import { setRequestStatus } from '../utils/setRequestStatus'
 import { BASE_URL } from './baseApi'
+const userId = localStorage.getItem('userId')
 
 // GET USER PROFILE
-export const getProfile = () => async (dispatch)=> {
+export const getProfile = (id) => async (dispatch)=> {
   try {
-    const res = await axios.get(`${BASE_URL}/user/me`)
-    dispatch(setRequestStatus(false))
+    console.log('getProfile userId ',id)
+    const res = await axios.get(`${BASE_URL}/user/${id}`)
     if (res.status === 200) {
-      setRequestStatus(true)
       console.log('user profile ', res.data)
       dispatch({
         type: GET_USER_PROFILE,
@@ -32,15 +32,12 @@ export const getProfile = () => async (dispatch)=> {
 // FOLLOW USER
 export const followUser = (userId) => async (dispatch) => {
   try {
-    let followObj = {
-      followId: userId
-    }
-    console.log('followObj ', followObj)
-    const res = await axios.patch(`${BASE_URL}/user/follow`, followObj)
+    console.log('followuser ', userId)
+    const res = await axios.patch(`${BASE_URL}/user/follow/${userId}`)
     dispatch(setRequestStatus(false))
     if (res.status === 200) {
       dispatch(setRequestStatus(true))
-      console.log('started following ', followObj)
+      console.log('started following ', userId)
       dispatch({
         type: GET_USER_PROFILE,
         payload: res.data.user,
@@ -54,15 +51,12 @@ export const followUser = (userId) => async (dispatch) => {
 // UnFOLLOW USER
 export const unFollowUser = (userId) => async (dispatch) => {
   try {
-    let unFollowObj = {
-      followId: userId
-    }
-    console.log('unfollowObj ', unFollowObj)
-    const res = await axios.patch(`${BASE_URL}/user/unfollow`, unFollowObj)
+    console.log('unfollowObj ', userId)
+    const res = await axios.patch(`${BASE_URL}/user/unfollow/${userId}`)
     dispatch(setRequestStatus(false))
     if (res.status === 200) {
       dispatch(setRequestStatus(true))
-      console.log('unfollowed ', unFollowObj)
+      console.log('unfollowed ', userId)
       dispatch({
         type: GET_USER_PROFILE,
         payload: res.data.user,
@@ -95,13 +89,12 @@ export const removeUser = (userId) => async (dispatch) => {
 }
 
 // UPDATE USER PROFILE 
-export const updateProfile = (updatedInfo) => async (dispatch) => {
+export const updateProfile = (userId, updatedInfo) => async (dispatch) => {
   try {
+    console.log('updateProfile userId ', userId)
     console.log('updating ', updatedInfo)
-    const res = await axios.patch(`${BASE_URL}/user/me`, updatedInfo)
-    dispatch(setRequestStatus(false))
+    const res = await axios.patch(`${BASE_URL}/user/${userId}`, updatedInfo)
     if(res.status === 200) {
-      dispatch(setRequestStatus(true))
       console.log('user profile updated ', res.data)
       dispatch({
         type: UPDATE_USER_PROFILE,
@@ -114,9 +107,11 @@ export const updateProfile = (updatedInfo) => async (dispatch) => {
 }
 
 // GET EVENTS CREATED BY USER 
-export const getEventsCreatedByUser = (pagination = 10, page = 1) => async (dispatch) => {
+export const getEventsCreatedByUser = (id = userId, pagination = 10, page = 1) => async (dispatch) => {
   try { 
-    const res = await axios.get(`${BASE_URL}/event/me/all?pagination=${pagination}&page=${page}`);
+    console.log('getEvents userId ', id)
+    const res = await axios
+      .get(`${BASE_URL}/event/${id}/all?pagination=${pagination}&page=${page}`);
     dispatch(setRequestStatus(false))
     if(res.status === 200) {
       dispatch(setRequestStatus(true))
@@ -132,9 +127,11 @@ export const getEventsCreatedByUser = (pagination = 10, page = 1) => async (disp
 }
 
 // GET ALL PROJECT CREATED BY A USER 
-export const getProjectCreatedByUser = (pagination = 10, page = 1) => async (dispatch) => {
+export const getProjectCreatedByUser = (id = userId, pagination = 10, page = 1) => async (dispatch) => {
   try { 
-    const res = await axios.get(`${BASE_URL}/project/me/all?pagination=${pagination}&page=${page}`);
+    console.log('getProjects userId ', id)
+    const res = await axios
+      .get(`${BASE_URL}/project/${id}/all?pagination=${pagination}&page=${page}`);
     dispatch(setRequestStatus(false))
     if(res.status === 200) {
       dispatch(setRequestStatus(true))
@@ -150,9 +147,11 @@ export const getProjectCreatedByUser = (pagination = 10, page = 1) => async (dis
 }
 
 // GET POSTS CREATED BY USER 
-export const getPostsCreatedByUser = (pagination = 10, page = 1) => async (dispatch) => {
+export const getPostsCreatedByUser = (id = userId, pagination = 10, page = 1) => async (dispatch) => {
   try { 
-    const res = await axios.get(`${BASE_URL}/post/me/all?pagination=${pagination}&page=${page}`);
+    console.log('getPosts userId ', id)
+    const res = await axios
+      .get(`${BASE_URL}/post/${id}/all?pagination=${pagination}&page=${page}`);
     dispatch(setRequestStatus(false))
     if(res.status === 200) {
       dispatch(setRequestStatus(true))
@@ -170,7 +169,7 @@ export const getPostsCreatedByUser = (pagination = 10, page = 1) => async (dispa
 // GET INVITE LINK 
 export const getInviteLink = (role) => async (dispatch) => {
   try {
-    const res = await axios.get(`${BASE_URL}/user/invite?role=${role}`)
+    const res = await axios.get(`${BASE_URL}/user/link/invite?role=${role}`)
     dispatch(setRequestStatus(false));
     if(res.status === 200) {
       dispatch(setRequestStatus(true));
@@ -217,9 +216,11 @@ export const activateDeactivateToggler = () => async (dispatch) => {
     const res = await axios.patch(`${BASE_URL}/user/deactivate/toggler`)
     if (res.status === 200) {
       console.log('Deactivation toggler', res.data);
-      dispatch(getProfile());
+      dispatch(getProfile(userId));
     }
   } catch (error) {
     dispatch(errorHandler(error))
   }
 }
+
+// GET USER'S ACTIVITY

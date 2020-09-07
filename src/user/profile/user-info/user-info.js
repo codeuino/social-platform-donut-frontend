@@ -3,8 +3,10 @@ import "./user-info.scss";
 import { Button } from "react-bootstrap";
 import { Avatar } from "@material-ui/core";
 import EditProfile from "./../popups/EditProfile";
-import { FaFacebookSquare, FaGithubSquare, FaLinkedin } from 'react-icons/fa'
+import { FaFacebookSquare, FaGithubSquare, FaLinkedin, FaThumbtack, FaBook, FaComments } from 'react-icons/fa'
 import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { getProfile } from '../../../actions/usersAction'
 
 class UserInfo extends Component {
   constructor(props) {
@@ -17,6 +19,7 @@ class UserInfo extends Component {
       location: '',
       shortDesc: '',
       website: '',
+      userId: '',
       github: '',
       twitter: '',
       linkedin: '',
@@ -24,10 +27,17 @@ class UserInfo extends Component {
     }
   }
 
+  componentDidMount() {
+    const userId = this.props.match.params.id;
+    console.log('user-info props ', userId)
+    this.props.getProfile(userId)
+  }
+
   componentWillReceiveProps(nextProps) {
-    console.log('nextProps ', nextProps.userProfile)
-    const name = nextProps.userProfile?.name || "NA"
-    const about = nextProps.userProfile?.info?.about;
+    // console.log('userId ', this.props.match.params.id)
+    console.log('userInfo nextProps ', nextProps.user.userProfile)
+    const name = nextProps.user.userProfile?.name || "NA"
+    const about = nextProps.user.userProfile?.info?.about;
     const { socialMedia } = nextProps.userProfile
     this.setState({ 
       name: `${name?.firstName + " " + name?.lastName}`,
@@ -35,6 +45,7 @@ class UserInfo extends Component {
       shortDesc: about?.shortDescription,
       location: about?.location,
       website: about?.website,
+      userId: nextProps.userProfile?._id,
       github: socialMedia?.github,
       twitter: socialMedia?.twitter,
       linkedin: socialMedia?.linkedin,
@@ -46,23 +57,23 @@ class UserInfo extends Component {
     // this.props.history.push()
     this.state.facebook 
       ? window.open(`${this.state.facebook}`, '_blank')
-      : window.location.href = '/profile'
+      : window.location.href = `/profile/${this.state.userId}`
   }
 
   onLinkedInClick = () => {
     this.state.linkedin 
       ? window.open(`${this.state.linkedin}`, '_blank')
-      : window.location.href = '/profile'
+      : window.location.href = `/profile/${this.state.userId}`
   }
 
   onGithubClick = () => {
     this.state.github 
       ? window.open(`${this.state.github}`, '_blank')
-      : window.location.href = '/profile'
+      : window.location.href = `/profile/${this.state.userId}`
   }
 
   render() {
-    const { designation, location, shortDesc, name } = this.state
+    const { designation, location, shortDesc, name, userId } = this.state
     let cancel = () =>
       this.setState({
         editProfile: false,
@@ -74,12 +85,15 @@ class UserInfo extends Component {
             <Avatar className="userpic"></Avatar>
           </div>
           <div className="edit-option">
-            <Button
-              className="useredit"
-              onClick={() => this.setState({ editProfile: true })}
-            >
-              User Edit
-            </Button>
+            {Boolean(userId === localStorage.getItem('userId')) 
+              ? (<Button
+                  className="useredit"
+                  onClick={() => this.setState({ editProfile: true })}
+                >
+                  User Edit
+                </Button>)
+              : null
+            }
             <EditProfile show={this.state.editProfile} onHide={cancel} />
           </div>
         </div>
@@ -113,9 +127,6 @@ class UserInfo extends Component {
             <p className="place">{location || "NA"}</p>
             <p className="desc">{shortDesc || "Short description"}</p>
             <div className="social-icons">
-              {/* <Button variant="primary">Facebook</Button> */}
-              {/* <Button variant="primary">Linkedin</Button> */}
-              {/* <Button variant="primary">Github</Button> */}
             </div>
           </div>
         </div>
@@ -123,5 +134,9 @@ class UserInfo extends Component {
     );
   }
 }
+// map state to props 
+const mapStateToProps = (state) => ({
+  user: state.user
+})
 
-export default withRouter(UserInfo);
+export default connect(mapStateToProps, { getProfile })(withRouter(UserInfo));

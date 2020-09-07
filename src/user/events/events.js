@@ -1,17 +1,18 @@
 import React, { Component } from "react";
 import Navigation from "../dashboard/navigation/navigation";
-import { Grid ,CardActions, Card } from "@material-ui/core";
+import { Grid, CardActions, Card } from "@material-ui/core";
 import { Row, Col, Button } from "react-bootstrap";
 import "./events.scss";
-import Popups from './popups/popups';
+import Popups from "./popups/popups";
 import DeleteEvent from "./popups/DeleteEvent";
 import EditEvent from "./popups/EditEvent";
-import { connect } from 'react-redux'
-import { getAllEvents } from '../../actions/eventAction'
-import { checkDeleteRights } from '../dashboard/utils/checkDeleteRights'
-import { getOrgProfile } from '../../actions/orgAction'
-import Moment from 'react-moment'
-import { canEditCheck } from '../projects/Utils/CanEdit'
+import { connect } from "react-redux";
+import { getAllEvents } from "../../actions/eventAction";
+import { checkDeleteRights } from "../dashboard/utils/checkDeleteRights";
+import { getOrgProfile } from "../../actions/orgAction";
+import { Pagination } from "antd";
+import Moment from "react-moment";
+import { canEditCheck } from "../projects/Utils/CanEdit";
 
 class Events extends Component {
   constructor(props) {
@@ -32,89 +33,105 @@ class Events extends Component {
 
   componentDidMount() {
     setTimeout(() => {
-      this.props.getAllEvents()
-      this.props.getOrgProfile()
-    })
+      this.props.getAllEvents(); // by default 6 events per page
+      this.props.getOrgProfile();
+    });
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('events nextProps', nextProps)
-    const { allEvents } = nextProps.event
-    this.setState({ 
-      allEvents: allEvents, 
-      isAdmin: nextProps.auth?.isAdmin,
-      editAllowed: nextProps.org.org?.options?.settings?.canEdit,
-      editingLimit: nextProps.org.org?.options?.settings?.editingLimit
-     }, () => {
-      console.log('updating all events ', this.state)
-    })
+    console.log("events nextProps", nextProps);
+    const { allEvents } = nextProps.event;
+    this.setState(
+      {
+        allEvents: allEvents,
+        isAdmin: nextProps.auth?.isAdmin,
+        editAllowed: nextProps.org.org?.options?.settings?.canEdit,
+        editingLimit: nextProps.org.org?.options?.settings?.editingLimit,
+      },
+      () => {
+        console.log("updating all events ", this.state);
+      }
+    );
   }
 
-  
+  onShowSizeChange = (currentPage, pageSize) => {
+    console.log("currentPage pageSize ", currentPage, pageSize);
+    this.props.getAllEvents(pageSize, currentPage);
+  };
+
+  handlePagination = (pageNumber) => {
+    console.log("page number ", pageNumber);
+    this.props.getAllEvents(6, pageNumber);
+  };
+
   render() {
-    const { allEvents, editingLimit } = this.state
+    const { allEvents, editingLimit } = this.state;
 
     const handleToggle = (eventId, event) => {
-      console.log("-handletoggel",eventId)
+      console.log("-handletoggel", eventId);
       this.setState({ modalShow: true, eventId: eventId, singleEvent: event });
-    }
+    };
 
     const editEvent = (eventId, eventInfo) => {
-      console.log('eventId ', eventId)
-      this.setState({ modalShow: false, edit: true, eventId:  eventId, singleEvent: eventInfo })
-    }
+      console.log("eventId ", eventId);
+      this.setState({
+        modalShow: false,
+        edit: true,
+        eventId: eventId,
+        singleEvent: eventInfo,
+      });
+    };
 
     const handleDelete = (eventId) => {
-      console.log('eventId ', eventId)
-      this.setState({ modalShow: false, delete: true, eventId: eventId })
-    }
+      console.log("eventId ", eventId);
+      this.setState({ modalShow: false, delete: true, eventId: eventId });
+    };
 
     const cancel = () => {
-      this.setState({ delete: false, edit: false })
-    }
+      this.setState({ delete: false, edit: false });
+    };
 
-    
-
-  const FooterOfEvents = ({ Item }) => {
-    return (
-      <div className="row">
-        <div className="footer__buttons col-md-6 col-sm-12 col-lg-6">
-          <span>
-            {checkDeleteRights(Item.createdBy._id) ? (
-            <div>
-              <span
-                className={
-                  !canEditCheck(editingLimit, Item.createdAt) 
-                  ? "disable__edit mr-3" 
-                  : "footer__btn mr-3"
-                }
-                onClick = {editEvent.bind(this, Item._id, Item)}
-                >Edit
-                </span>
-              <span
-                className="footer__btn"
-                onClick={handleDelete.bind(this, Item._id)}
-              >
-                Delete
-              </span>
-            </div>
-            ) : null }
+    const FooterOfEvents = ({ Item }) => {
+      return (
+        <div className="row">
+          <div className="footer__buttons col-md-6 col-sm-12 col-lg-6">
+            <span>
+              {checkDeleteRights(Item.createdBy._id) ? (
+                <div>
+                  <span
+                    className={
+                      !canEditCheck(editingLimit, Item.createdAt)
+                        ? "disable__edit mr-3"
+                        : "footer__btn mr-3"
+                    }
+                    onClick={editEvent.bind(this, Item._id, Item)}
+                  >
+                    Edit
+                  </span>
+                  <span
+                    className="footer__btn"
+                    onClick={handleDelete.bind(this, Item._id)}
+                  >
+                    Delete
+                  </span>
+                </div>
+              ) : null}
             </span>
-        </div>
-        <div className="col-md-6">
-          <Button
-            size="sm"
-            variant="light"
-            onClick={handleToggle.bind(this, Item._id, Item)} 
-            style={{float: "right"}} 
-            id={Item._id}
+          </div>
+          <div className="col-md-6">
+            <Button
+              size="sm"
+              variant="light"
+              onClick={handleToggle.bind(this, Item._id, Item)}
+              style={{ float: "right" }}
+              id={Item._id}
             >
-              <span style={{color: "#007bff"}}>See More</span>
-          </Button>
+              <span style={{ color: "#007bff" }}>See More</span>
+            </Button>
+          </div>
         </div>
-    </div>
-    )
-  }
+      );
+    };
 
     let Events = allEvents?.map((Item, index) => (
       <Grid item xs={6} sm={4} key={index} className="card__container">
@@ -259,12 +276,20 @@ class Events extends Component {
         <div className="navigation">
           <Navigation event={this.state.event}></Navigation>
         </div>
-        <div className="news events">
-          <div className="container">
-            <h1 className="event_header">All Events</h1>
-            <Grid container spacing={3} >
-              {Events}
-            </Grid>
+        <div className="events">
+          <h1 className="event_header">All Events</h1>
+          <Grid container spacing={3}>
+            {Events}
+          </Grid>
+
+          <div className="event__pagination__container">
+            <Pagination
+              showSizeChanger
+              onShowSizeChange={this.onShowSizeChange}
+              defaultCurrent={1}
+              total={100}
+              onChange={this.handlePagination}
+            />
           </div>
         </div>
         <Popups
@@ -288,12 +313,14 @@ class Events extends Component {
     );
   }
 }
-// map state to props 
+// map state to props
 const mapStateToProps = (state) => ({
   auth: state.auth,
   error: state.error,
   event: state.event,
-  org: state.org
-})
+  org: state.org,
+});
 
-export default connect(mapStateToProps, { getAllEvents, getOrgProfile })(Events);
+export default connect(mapStateToProps, { getAllEvents, getOrgProfile })(
+  Events
+);

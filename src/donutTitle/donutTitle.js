@@ -2,8 +2,8 @@ import React from "react";
 
 import "./donutTitle.scss";
 
-import logoText from "../images/donut-logo-text.png";
-import donut from "../images/donut.png";
+import logoText from "../assets/images/donut-logo-text.png";
+import donut from "../assets/images/donut.png";
 
 const rotateDonut = () => {
   const donut = document.querySelector(".rotateDonut");

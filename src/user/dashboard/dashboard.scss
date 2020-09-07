@@ -4,14 +4,21 @@
   height: auto;
   font-family: Muli, sans-serif;
   .navigation {
+    background: #f5f5f5;
     flex-grow: 1;
     border-right: solid 1px #dfe9f1;
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    overflow-y: scroll;
   }
   .news {
+    margin-left: 13vw;
     flex-grow: 4;
     .notify-user {
       display: flex;
-      padding: 20px 10px 20px 30px;
+      padding: 20px 0px 20px 30px;
     }
   }
   .promotions {
@@ -20,4 +27,8 @@
     flex-grow: 2;
     padding: 20px 12px 20px 0px;
   }
+}
+
+.navigation::-webkit-scrollbar {
+  display: none;
 }

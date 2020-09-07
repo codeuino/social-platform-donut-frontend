@@ -18,9 +18,9 @@ import { connect } from 'react-redux'
 import "./posts.scss";
 import Comment from '../../dashboard/news-feed/popups/comment';
 import { withRouter } from 'react-router-dom';
-import profileImg from '../../../svgs/evt-creator.svg';
-import eventImg from "../../../svgs/event-img-1.svg";
-import eventImg2 from "../../../svgs/event-img-2.svg";
+import profileImg from '../../../assets/svgs/evt-creator.svg';
+import eventImg from "../../../assets/svgs/event-img-1.svg";
+import eventImg2 from "../../../assets/svgs/event-img-2.svg";
 import { getAllPinnedPosts, upVotePost } from '../../../actions/postAction'
 import { getEventsCreatedByUser, getProjectCreatedByUser } from '../../../actions/usersAction'
 import { rsvpYes } from '../../../actions/eventAction'
@@ -90,11 +90,12 @@ function PinPosts(props){
 
     useEffect(() => {
         console.log('props from PinPosts ', props)
-        if(props.match?.path === '/pinned-posts') {
+        let path = props.match?.path;
+        if(path === '/pinned-posts') {
             props.getAllPinnedPosts()
             setPosts(props.posts?.pinnedPosts);
         }
-        if(props.match?.path === '/profile'){
+        if(path === '/profile' || path === '/profile/:id'){
             setEvents(props.userEvents)
             setAllProjects(props.userProjects || [])
             setPosts(props.userPosts)

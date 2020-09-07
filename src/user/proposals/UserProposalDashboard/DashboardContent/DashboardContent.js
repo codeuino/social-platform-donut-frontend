@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { Button, Form, Image } from "react-bootstrap";
+import { Button, Form, Image, Pagination } from "react-bootstrap";
 import "./DashboardContent.scss";
-import userIcon2 from "../../../../images/userIcon2.jpg";
+import userIcon2 from "../../../../assets/images/userIcon2.jpg";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import {
@@ -15,9 +15,13 @@ class DashboardContent extends Component {
     this.state = {
       userId: localStorage.getItem("userId"),
       proposals: [],
-      displayItems: [],
+      displayItems: [0],
       allProposals: [],
       userProposals: [],
+
+      pageCount: 0,
+      pageSize: 4,
+      currentPage: 0,
     };
   }
 
@@ -29,21 +33,25 @@ class DashboardContent extends Component {
   componentWillReceiveProps(nextProps) {
     const { allProposals, userProposals } = nextProps;
 
+    let pageCount = Math.ceil(allProposals.length / this.state.pageSize);
+
     this.setState({
       allProposals: allProposals,
       userProposals: userProposals,
       displayItems: allProposals,
+      pageCount: pageCount,
     });
   }
 
   handleSearchBarChange = (evt) => {
     const value = evt.target.value.toLowerCase();
-    const proposals = this.state.proposals;
+    const proposals = this.props.allProposals;
     let results = [];
 
     if (value.length === 0) {
       this.setState({
         displayItems: proposals,
+        pageCount: this.calculatePageCount(proposals.length),
       });
     } else {
       proposals.forEach((item) => {
@@ -54,8 +62,13 @@ class DashboardContent extends Component {
 
       this.setState({
         displayItems: results,
+        pageCount: this.calculatePageCount(results.length),
       });
     }
+  };
+
+  calculatePageCount = (length) => {
+    return Math.ceil(length / this.state.pageSize);
   };
 
   handleButtonClick = (name) => {
@@ -63,11 +76,13 @@ class DashboardContent extends Component {
     const allProposals = this.state.allProposals;
 
     let results = [];
+    let pageCount;
 
     switch (name) {
       case "All":
         this.setState({
           displayItems: allProposals,
+          pageCount: this.calculatePageCount(allProposals.length),
         });
         break;
       case "Accepted":
@@ -76,9 +91,7 @@ class DashboardContent extends Component {
             results.push(item);
           }
         });
-        this.setState({
-          displayItems: results,
-        });
+        this.handleStateChange(results)
         break;
       case "Submitted":
         proposals.forEach((item) => {
@@ -86,9 +99,7 @@ class DashboardContent extends Component {
             results.push(item);
           }
         });
-        this.setState({
-          displayItems: results,
-        });
+        this.handleStateChange(results)
         break;
       case "Draft":
         proposals.forEach((item) => {
@@ -96,9 +107,7 @@ class DashboardContent extends Component {
             results.push(item);
           }
         });
-        this.setState({
-          displayItems: results,
-        });
+        this.handleStateChange(results)
         break;
       case "Rejected":
         proposals.forEach((item) => {
@@ -106,21 +115,35 @@ class DashboardContent extends Component {
             results.push(item);
           }
         });
-        this.setState({
-          displayItems: results,
-        });
+        this.handleStateChange(results)
         break;
     }
   };
 
+  handleStateChange = (results)=> {
+    this.setState({
+      displayItems: results,
+      pageCount: this.calculatePageCount(results.length),
+    });
+  }
+
+  handlePaginationClick = (e, index) => {
+    e.preventDefault();
+
+    this.setState({
+      currentPage: index,
+    });
+  };
+
   render() {
+    const { currentPage, pageSize, displayItems } = this.state;
     return (
       <div className="dashboard-content">
         <div className="searchbar-container">
           <Form>
             <Form.Control
               as="input"
-              placeholder="search"
+              placeholder="Search"
               className="searchbar"
               onChange={this.handleSearchBarChange}
             />
@@ -178,90 +201,121 @@ class DashboardContent extends Component {
 
         <div className="proposal-container">
           <div className="proposals">
-            {this.state.displayItems.map((proposalItem, index) => {
-              return (
-                <div className="single-proposal" key={index}>
-                  <div className="user-info">
-                    <div className="image">
-                      <Image src={userIcon2} alt="icon" rounded />
+            {displayItems
+              .slice(currentPage * pageSize, (currentPage + 1) * pageSize)
+              .map((proposalItem, index) => {
+                return (
+                  <div className="single-proposal" key={index}>
+                    <div className="user-info">
+                      <div className="image">
+                        <Image src={userIcon2} alt="icon" rounded />
+                      </div>
+                      <div className="img-desc">
+                        <h2>{proposalItem.title}</h2>
+                        <p className="proposal-date">
+                          {proposalItem.createdAt}
+                        </p>
+                      </div>
+                      {proposalItem.proposalStatus === "DRAFT" ? (
+                        <Button
+                          variant="primary"
+                          className="status-btn"
+                          size="sm"
+                        >
+                          <span className="btn-content">
+                            {proposalItem.proposalStatus}
+                          </span>
+                        </Button>
+                      ) : (
+                        <Button
+                          variant="primary"
+                          className="status-btn-submitted"
+                          size="sm"
+                        >
+                          <span className="btn-content">
+                            {proposalItem.proposalStatus}
+                          </span>
+                        </Button>
+                      )}
                     </div>
-                    <div className="img-desc">
-                      <h2>{proposalItem.title}</h2>
-                      <p className="proposal-date">{proposalItem.createdAt}</p>
-                    </div>
-                    {proposalItem.proposalStatus === "DRAFT" ? (
-                      <Button
-                        variant="primary"
-                        className="status-btn"
-                        size="sm"
-                      >
-                        <span className="btn-content">
-                          {proposalItem.proposalStatus}
-                        </span>
-                      </Button>
-                    ) : (
-                      <Button
-                        variant="primary"
-                        className="status-btn-submitted"
-                        size="sm"
-                      >
-                        <span className="btn-content">
-                          {proposalItem.proposalStatus}
-                        </span>
-                      </Button>
-                    )}
-                  </div>
-                  <div className="proposal-content">
-                    <div className="proposal-details">
-                      {proposalItem.proposalDescription}
-                    </div>
-                    <div className="proposal-options">
-                      {proposalItem.creator === this.state.userId ? (
+                    <div className="proposal-content">
+                      <div className="proposal-details">
+                        {proposalItem.proposalDescription}
+                      </div>
+                      <div className="proposal-options">
+                        {proposalItem.creator === this.state.userId ? (
+                          <Link
+                            to={{
+                              pathname: "/proposaleditor",
+                              state: {
+                                proposalId: proposalItem._id,
+                              },
+                            }}
+                          >
+                            <Button
+                              variant="primary"
+                              className="option-btn"
+                              size="sm"
+                            >
+                              <span className="option-text">Edit</span>
+                            </Button>
+                          </Link>
+                        ) : null}
                         <Link
                           to={{
-                            pathname: "/proposaleditor",
+                            pathname: "/proposaldiscussion",
                             state: {
                               proposalId: proposalItem._id,
+                              isAdmin: false,
+                              userId: this.state.userId,
+                              isCreator:
+                                proposalItem.creator === this.state.userId,
                             },
                           }}
                         >
                           <Button
+                            active
                             variant="primary"
                             className="option-btn"
                             size="sm"
                           >
-                            <span className="option-text">Edit</span>
+                            <span className="option-text">View</span>
                           </Button>
                         </Link>
-                      ) : null}
-                      <Link
-                        to={{
-                          pathname: "/proposaldiscussion",
-                          state: {
-                            proposalId: proposalItem._id,
-                            isAdmin: false,
-                            userId: this.state.userId,
-                            isCreator:
-                              proposalItem.creator === this.state.userId,
-                          },
-                        }}
-                      >
-                        <Button
-                          active
-                          variant="primary"
-                          className="option-btn"
-                          size="sm"
-                        >
-                          <span className="option-text">View</span>
-                        </Button>
-                      </Link>
+                      </div>
                     </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
           </div>
         </div>
+        {this.state.pageCount !== 0 ? (
+          <div className="pagination-container">
+            <Pagination.Prev
+              disabled={currentPage <= 0}
+              onClick={(e) => this.handlePaginationClick(e, currentPage - 1)}
+              className="pagination-item"
+            />
+
+            {[...Array(this.state.pageCount)].map((page, index) => {
+              return (
+                <Pagination.Item
+                  className="pagination-item"
+                  active={index === currentPage}
+                  onClick={(e) => this.handlePaginationClick(e, index)}
+                >
+                  {index + 1}
+                </Pagination.Item>
+              );
+            })}
+
+            <Pagination.Next
+              disabled={currentPage >= this.state.pageCount - 1}
+              onClick={(e) => this.handlePaginationClick(e, currentPage + 1)}
+              className="pagination-item"
+            />
+          </div>
+        ) : null}
       </div>
     );
   }

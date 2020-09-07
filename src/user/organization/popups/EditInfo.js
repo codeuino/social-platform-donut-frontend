@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Modal, Form, Col } from "react-bootstrap";
 import PropTypes from "prop-types";
-import UploadImg from '../../../images/upload.jpg'
+import UploadImg from '../../../assets/images/upload.jpg'
 
 const EditInfo = (props) => {
   return (

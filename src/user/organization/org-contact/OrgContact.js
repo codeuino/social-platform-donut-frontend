@@ -26,7 +26,7 @@ class OrgContact extends Component {
                 <Card className="contact-us">
                     <CardContent>
                         <div className="email-content">
-                            <p className="initial">Email</p>
+                            <p className="initial">Email</p><br/>
                             <div className="email-info">
                                 {this.props.admins.map(i => { return <div className='info'> <Avatar className="avatar" alt='Random'>R</Avatar> <p>{i.email}</p> </div> })}
                             </div>

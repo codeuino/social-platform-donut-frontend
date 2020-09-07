@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { Modal, Button, Row, Col, Form } from "react-bootstrap";
 import { connect } from 'react-redux';
-import { createComment, getAllCommentsOfPost, deleteComment } from '../../../../actions/commentAction'
+import { createComment, deleteComment } from '../../../../actions/commentAction'
 import "./comment.scss";
 // import comments from "../../../../jsonData/comments";
-import profile_img from '../../../../svgs/profile-icon.svg'
+import profile_img from '../../../../assets/svgs/profile-icon.svg'
 import { MdDelete } from "react-icons/md";
 import { checkDeleteRights } from '../../../dashboard/utils/checkDeleteRights'
 
@@ -134,4 +134,4 @@ const mapStateToProps = (state) => ({
   post: state.post
 })
 
-export default connect(mapStateToProps, { getAllCommentsOfPost, createComment, deleteComment })(Comment);
+export default connect(mapStateToProps, {createComment, deleteComment })(Comment);
