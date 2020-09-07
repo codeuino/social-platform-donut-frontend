@@ -5,7 +5,7 @@ import * as Showdown from "showdown";
 import { Image } from "react-bootstrap";
 import ReactMarkdown from "react-markdown";
 import Button from "react-bootstrap/Button";
-import Dropdown from "react-bootstrap/Dropdown";
+// import Dropdown from "react-bootstrap/Dropdown";
 import SaveButton from "@material-ui/icons/SaveOutlined";
 import EditButton from "@material-ui/icons/EditOutlined";
 import CancelButton from "@material-ui/icons/ClearOutlined";
@@ -39,10 +39,6 @@ class Discussion extends Component {
       editer: "new",
     });
   };
-
-//   viewHistory = (content) => {
-//     this.props.setTicketContent(content)
-//   }
 
   handleUpdateTicket = () => {
     const content = this.state.content;
@@ -98,21 +94,6 @@ class Discussion extends Component {
                     <Moment format="DD MMM YYYY">
                       {this.props.ticket.createdAt}
                     </Moment>
-                    {/* <Dropdown>
-                      <Dropdown.Toggle variant="light">Edits</Dropdown.Toggle>
-                      <Dropdown.Menu>
-                        {this.props.ticket.history.map((item, index) => (
-                          <Dropdown.Item
-                            key={index}
-                            onClick={() => this.viewHistory(item.content)}
-                          >
-                            <Moment format="DD MMM YYYY">
-                              {item.editedAt}
-                            </Moment>
-                          </Dropdown.Item>
-                        ))}
-                      </Dropdown.Menu>
-                    </Dropdown> */}
                   </div>
                 </div>
               </div>

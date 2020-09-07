@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import "./TicketDiscussion.scss";
 import Axios from "axios";
-import Layout from "./Layout";
 import ReactMde from "react-mde";
 import Moment from "react-moment";
+import Layout from "./Layout/Layout";
 import * as Showdown from "showdown";
 import { Image } from "react-bootstrap";
 import ReactMarkdown from "react-markdown";
@@ -11,6 +11,7 @@ import Button from "react-bootstrap/Button";
 import Dropdown from "react-bootstrap/Dropdown";
 import Disscussion from "./Discussion/Discussion";
 import "react-mde/lib/styles/css/react-mde-all.css";
+import { ToastContainer, toast } from "react-toastify";
 import { BASE_URL } from "../../../../actions/baseApi";
 import SaveButton from "@material-ui/icons/SaveOutlined";
 import EditButton from "@material-ui/icons/EditOutlined";
@@ -76,6 +77,40 @@ class TicketDiscussions extends Component {
     }
   };
 
+  handleAddTag = async (tagName) => {
+    if (this.state.ticket.tags.indexOf(tagName) !== -1) {
+      toast.error("Tag already present");
+    } else if (tagName.length > 10) {
+      toast.error("Tag can have upto 10 characters only");
+    } else if ((this.state.ticket.tags || []).length >= 7) {
+      toast.error("Ticket can have upto 7 tags only");
+    } else {
+      try {
+        const newTicket = (
+          await Axios.post(`${BASE_URL}/ticket/${this.state.ticket._id}/tag/${tagName}`)
+        ).data.ticket;
+        this.setState({
+          ticket: newTicket,
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  }
+
+  handleDeleteTag = async (tagName) => {
+    try {
+      const newTicket = (
+        await Axios.delete(`${BASE_URL}/ticket/${this.state.ticket._id}/tag/${tagName}`)
+      ).data.ticket;
+      this.setState({
+        ticket: newTicket,
+      });
+    } catch (err) {
+      console.log(err);
+    } 
+  }
+
   handleViewChange = (atrb) => {
     this.setState({
       view: atrb,
@@ -90,8 +125,11 @@ class TicketDiscussions extends Component {
           <Layout
             ticket={this.state.ticket}
             view={this.state.view}
-            handleViewChange={this.handleViewChange}
+            addTag={this.handleAddTag}
             handleBack={this.handleBack}
+            removeTag={this.handleDeleteTag}
+            updateTicket={this.handleUpdateTicket}
+            handleViewChange={this.handleViewChange}
           >
             <Disscussion
               ticket={this.state.ticket}
@@ -101,6 +139,17 @@ class TicketDiscussions extends Component {
             />
           </Layout>
         )}
+        <ToastContainer
+          draggable
+          rtl={false}
+          pauseOnHover
+          closeOnClick
+          autoClose={5000}
+          pauseOnFocusLoss
+          newestOnTop={false}
+          position="top-right"
+          hideProgressBar={false}
+        />
       </>
     );
   }

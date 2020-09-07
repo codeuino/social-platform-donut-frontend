@@ -1,12 +1,27 @@
 import React, { Component } from "react";
+import Tags from "./Tags";
+import Form from "react-bootstrap/Form";
 import Card from "react-bootstrap/Card";
 import Badge from "react-bootstrap/Badge";
 import Image from "react-bootstrap/Image";
+import EditableCard from "./EditableCard";
+import Button from "react-bootstrap/Button";
 import { FaArrowLeft } from "react-icons/fa";
-import EditButton from "@material-ui/icons/EditOutlined";
-import userIcon2 from "../../../../assets/images/userIcon2.jpg";
+import userIcon2 from "../../../../../assets/images/userIcon2.jpg";
 
 class Layout extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      tagsEditor: false,
+      titleEditor: false,
+      summaryEditor: false,
+      tags: props.ticket.tags,
+      title: props.ticket.title,
+      summary: props.ticket.shortDescription,
+    };
+  }
+
   render() {
     return (
       <div className="discussion">
@@ -71,19 +86,12 @@ class Layout extends Component {
               </div>
             </div>
           </Card>
-          <Card className="info-card">
-            <div className="info-title">
-              <span>Ticket Summary</span>
-              <EditButton />
-            </div>
-            <div className="info-details">
-              <div className="data-element">
-                <span className="data-desc">
-                  {this.props.ticket.shortDescription}
-                </span>
-              </div>
-            </div>
-          </Card>
+          <EditableCard
+            Type="Summary"
+            heading="Ticket Summary"
+            updateTicket={this.props.updateTicket}
+            data={this.props.ticket.shortDescription}
+          />
           <Card className="info-card">
             <div className="info-title">Requester</div>
             <div className="info-details">
@@ -99,19 +107,11 @@ class Layout extends Component {
               </div>
             </div>
           </Card>
-          <Card className="info-card">
-            <div className="info-title">
-              <span>Tags</span>
-              <EditButton />
-            </div>
-            <div className="info-details">
-              <div className="data-element">
-                <span className="data-desc">
-                  {this.props.ticket.shortDescription}
-                </span>
-              </div>
-            </div>
-          </Card>
+          <Tags
+            addTag={this.props.addTag}
+            data={this.props.ticket.tags}
+            removeTag={this.props.removeTag}
+          />
           <Card className="info-card">
             <div className="info-title">Members</div>
             <div className="info-details">

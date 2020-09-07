@@ -162,9 +162,10 @@ class Filter extends Component {
           <div onClick={this.clearFilters} className="clear-filters">
             {this.state.search
               ? "Clear Search and Filters"
-              : !this.state.author ||
-                !this.state.tags.length ||
-                (!this.state.status && "Clear Filters")}
+              : (!this.state.author ||
+                  !this.state.tags.length ||
+                  !this.state.status.length) &&
+                "Clear Filters"}
           </div>
           <Dropdown size="sm" alignRight>
             <Dropdown.Toggle variant="light" id="dropdown-basic">
