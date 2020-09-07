@@ -59,6 +59,12 @@ class Filter extends Component {
         (ele) => this.state.status.indexOf(ele.status) !== -1
       );
     }
+    console.log(this.state.tags);
+    if (this.state.tags.length) {
+      filtered = filtered.filter((ele) =>
+        this.state.tags.some((tag) => ele.tags.indexOf(tag) !== -1)
+      );
+    }
     console.log(filtered);
     this.props.setFiltered(filtered);
   };
@@ -85,13 +91,19 @@ class Filter extends Component {
   handleTagsChange = (tag) => {
     // in not present then add if already present then clicking on it will remove it
     if (this.state.tags.indexOf(tag) === -1) {
-      this.setState({
-        tags: [...this.state.tags, tag],
-      });
+      this.setState(
+        {
+          tags: [...this.state.tags, tag],
+        },
+        this.filter
+      );
     } else {
-      this.setState({
-        tags: [...this.state.tags.filter((ele) => ele !== tag)],
-      });
+      this.setState(
+        {
+          tags: [...this.state.tags.filter((ele) => ele !== tag)],
+        },
+        this.filter
+      );
     }
   };
 
@@ -119,7 +131,8 @@ class Filter extends Component {
       {
         search: "",
         author: null,
-        status: ["OPEN", "CLOSED", "PENDING", "SOLVED", "ON_HOLD"],
+        status: [],
+        tags: [],
       },
       this.props.clear
     );
@@ -162,10 +175,12 @@ class Filter extends Component {
           <div onClick={this.clearFilters} className="clear-filters">
             {this.state.search
               ? "Clear Search and Filters"
-              : (!this.state.author ||
-                  !this.state.tags.length ||
-                  !this.state.status.length) &&
-                "Clear Filters"}
+              : this.state.author ||
+                this.state.tags.length ||
+                this.state.status.length ||
+                this.state.tags.length
+              ? "Clear Filters"
+              : ""}
           </div>
           <Dropdown size="sm" alignRight>
             <Dropdown.Toggle variant="light" id="dropdown-basic">
@@ -211,9 +226,7 @@ class Filter extends Component {
                   key={index}
                   onClick={() => this.handleTagsChange(ele)}
                 >
-                  {this.state.tags.indexOf(ele) !== -1 && (
-                    <CheckOutlinedIcon />
-                  )}
+                  {this.state.tags.indexOf(ele) !== -1 && <CheckOutlinedIcon />}
                   {ele}
                 </Dropdown.Item>
               ))}
