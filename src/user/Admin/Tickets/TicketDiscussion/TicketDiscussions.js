@@ -87,29 +87,35 @@ class TicketDiscussions extends Component {
     } else {
       try {
         const newTicket = (
-          await Axios.post(`${BASE_URL}/ticket/${this.state.ticket._id}/tag/${tagName}`)
+          await Axios.post(
+            `${BASE_URL}/ticket/${this.state.ticket._id}/tag/${tagName}`
+          )
         ).data.ticket;
         this.setState({
           ticket: newTicket,
         });
+        this.props.addTag(this.state.ticket._id, tagName);
       } catch (err) {
         console.log(err);
       }
     }
-  }
+  };
 
   handleDeleteTag = async (tagName) => {
     try {
       const newTicket = (
-        await Axios.delete(`${BASE_URL}/ticket/${this.state.ticket._id}/tag/${tagName}`)
+        await Axios.delete(
+          `${BASE_URL}/ticket/${this.state.ticket._id}/tag/${tagName}`
+        )
       ).data.ticket;
       this.setState({
         ticket: newTicket,
       });
+      this.props.removeTag(this.state.ticket._id, tagName)
     } catch (err) {
       console.log(err);
-    } 
-  }
+    }
+  };
 
   handleViewChange = (atrb) => {
     this.setState({

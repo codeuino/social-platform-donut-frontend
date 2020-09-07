@@ -77,7 +77,7 @@ class Discussion extends Component {
             height: this.state.editer === "ticket" ? "80vh" : "50vh",
           }}
         >
-          <div className={`single-discussion discussion-ticket`}>
+          <div className="single-discussion">
             <div
               style={{
                 display: "flex",
@@ -86,86 +86,93 @@ class Discussion extends Component {
             >
               <div className="user-info">
                 <div className="image">
-                  <Image src={userIcon2} alt="icon" rounded />
+                  <Image src={userIcon2} alt="icon" rounded roundedCircle />
                 </div>
                 <div className="img-desc">
-                  <h2>{this.props.ticket.createdBy.name}</h2>
-                  <div className="discussion-date">
-                    <Moment format="DD MMM YYYY">
-                      {this.props.ticket.createdAt}
-                    </Moment>
+                  <div style={{display: "flex", justifyContent: "space-between"}}>
+                    <div>
+                      <div style={{ display: "flex", alignItems: "center" }}>
+                        <h2>{this.props.ticket.createdBy.name}</h2>
+                        {this.state.editer === "new" && (
+                          <EditButton
+                            style={{
+                              color: "rgba(0,0,0,0.5)",
+                              fontSize: "18px",
+                            }}
+                            onClick={this.handleEditTicket}
+                          />
+                        )}
+                      </div>
+                      <div className="discussion-date">
+                        <Moment format="DD MMM YYYY">
+                          {this.props.ticket.createdAt}
+                        </Moment>
+                      </div>
+                    </div>
+                    {this.state.editer === "ticket" && (
+                      <div>
+                        <Button
+                          style={{ margin: "8px" }}
+                          variant="light"
+                          onClick={this.cancelEditTicket}
+                        >
+                          <CancelButton />
+                          Cancel
+                        </Button>
+                        <Button
+                          style={{ margin: "8px" }}
+                          onClick={this.handleUpdateTicket}
+                        >
+                          <SaveButton />
+                          Save
+                        </Button>
+                      </div>
+                    )}
+                  </div>
+                  <div className="comment-content">
+                    <div className="comment-details">
+                      {this.state.editer === "new" && (
+                        <ReactMarkdown source={this.props.ticket.content} />
+                      )}
+                      {this.state.editer === "ticket" && (
+                        <ReactMde
+                          value={this.state.content}
+                          selectedTab={this.state.selectedTab}
+                          onChange={this.setContent}
+                          onTabChange={this.setSelectedTab}
+                          generateMarkdownPreview={(markdown) =>
+                            Promise.resolve(converter.makeHtml(markdown))
+                          }
+                        />
+                      )}
+                    </div>
                   </div>
                 </div>
-              </div>
-              {this.state.editer === "new" && (
-                <Button
-                  onClick={this.handleEditTicket}
-                  style={{ margin: "8px" }}
-                  variant="light"
-                >
-                  <EditButton />
-                </Button>
-              )}
-              {this.state.editer === "ticket" && (
-                <div>
-                  <Button
-                    style={{ margin: "8px" }}
-                    variant="light"
-                    onClick={this.cancelEditTicket}
-                  >
-                    <CancelButton />
-                    Cancel
-                  </Button>
-                  <Button
-                    style={{ margin: "8px" }}
-                    onClick={this.handleUpdateTicket}
-                  >
-                    <SaveButton />
-                    Save
-                  </Button>
-                </div>
-              )}
-            </div>
-            <div className="comment-content">
-              <div className="comment-details">
-                {this.state.editer === "new" && (
-                  <ReactMarkdown source={this.props.ticket.content} />
-                )}
-                {this.state.editer === "ticket" && (
-                  <ReactMde
-                    value={this.state.content}
-                    selectedTab={this.state.selectedTab}
-                    onChange={this.setContent}
-                    onTabChange={this.setSelectedTab}
-                    generateMarkdownPreview={(markdown) =>
-                      Promise.resolve(converter.makeHtml(markdown))
-                    }
-                  />
-                )}
               </div>
             </div>
           </div>
           {this.props.ticket.comments.map((ele, index) => (
-            <div
-              key={index}
-              className={`single-discussion ${
-                ele.createdBy.userId === currentUser.id ? "right" : "left"
-              }`}
-            >
+            <div key={index} className={`single-discussion`}>
               <div className="user-info">
                 <div className="image">
-                  <Image src={userIcon2} alt="icon" rounded />
+                  <Image
+                    src={userIcon2}
+                    width="70px"
+                    alt="icon"
+                    rounded
+                    roundedCircle
+                  />
                 </div>
                 <div className="img-desc">
                   <h2>{ele.createdBy.name}</h2>
                   <p className="discussion-date">
                     <Moment format="DD MMM YYYY">{ele.createdAt}</Moment>
                   </p>
-                </div>
-              </div>
-              <div className="comment-content">
-                <div className="comment-details">
-                  <ReactMarkdown source={ele.content} />
+                  <div className="comment-content">
+                    <div className="comment-details">
+                      <ReactMarkdown source={ele.content} />
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -184,7 +191,7 @@ class Discussion extends Component {
             >
               <div className="user-info">
                 <div className="image">
-                  <Image src={userIcon2} alt="icon" rounded />
+                  <Image src={userIcon2} alt="icon" rounded roundedCircle />
                 </div>
                 <div className="img-desc">
                   <h2>{currentUser.name}</h2>

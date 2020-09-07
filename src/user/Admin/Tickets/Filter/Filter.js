@@ -90,7 +90,7 @@ class Filter extends Component {
       });
     } else {
       this.setState({
-        tags: [...this.state.tags.filter((ele) => ele === tag)],
+        tags: [...this.state.tags.filter((ele) => ele !== tag)],
       });
     }
   };
@@ -197,6 +197,24 @@ class Filter extends Component {
                     <CheckOutlinedIcon />
                   )}
                   {ele.label}
+                </Dropdown.Item>
+              ))}
+            </Dropdown.Menu>
+          </Dropdown>
+          <Dropdown size="sm" alignRight>
+            <Dropdown.Toggle variant="light" id="dropdown-basic">
+              Tags
+            </Dropdown.Toggle>
+            <Dropdown.Menu>
+              {this.state.allTags.map((ele, index) => (
+                <Dropdown.Item
+                  key={index}
+                  onClick={() => this.handleTagsChange(ele)}
+                >
+                  {this.state.tags.indexOf(ele) !== -1 && (
+                    <CheckOutlinedIcon />
+                  )}
+                  {ele}
                 </Dropdown.Item>
               ))}
             </Dropdown.Menu>

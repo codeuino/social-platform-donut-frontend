@@ -63,9 +63,9 @@ class TicketDashboard extends Component {
 
   clearFilters = () => {
     this.setState({
-      filtered: [...this.state.all]
-    })
-  }
+      filtered: [...this.state.all],
+    });
+  };
 
   componentDidMount() {
     setTimeout(() => {
@@ -98,8 +98,35 @@ class TicketDashboard extends Component {
     });
   };
 
+  handleAddTag = (id, tagName) => {
+    const tickets = [...this.state.all];
+    tickets.forEach((ele) => {
+      if (ele._id === id) {
+        ele.tags.push(tagName);
+      }
+    });
+    this.setState({
+      all: [...tickets],
+      filtered: [...tickets],
+    });
+  };
+
+  handleRemoveTag = async (id, tagName) => {
+    const tickets = [...this.state.all];
+    tickets.forEach((ele) => {
+      if (ele._id === id) {
+        ele.tags.splice(ele.tags.indexOf(tagName), 1);
+      }
+    });
+    this.setState({
+      all: [...tickets],
+      filtered: [...tickets],
+    });
+  };
+
   handleViewTicket = (id) => {
     this.setState({
+      filtered: [...this.state.all],
       viewingTicket: id,
     });
   };
@@ -147,9 +174,11 @@ class TicketDashboard extends Component {
             )}
             {this.state.viewingTicket && (
               <TicketDisscussion
-                currentUser={this.props.user}
-                ticketId={this.state.viewingTicket}
+                addTag={this.handleAddTag}
                 back={this.handleViewTicket}
+                currentUser={this.props.user}
+                removeTag={this.handleRemoveTag}
+                ticketId={this.state.viewingTicket}
               />
             )}
           </div>
