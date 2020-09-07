@@ -99,7 +99,7 @@ class Projects extends Component {
           <Navigation proj={this.state.proj}></Navigation>
         </div>
         <div className="news projects">
-          <p id="project__header">All Projects</p>
+          <p className="project__header">All Projects</p>
           <div className={useStyles.root}>
             <Grid container spacing={3}>
               {Projects}
