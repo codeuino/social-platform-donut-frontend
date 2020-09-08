@@ -1,0 +1,203 @@
+.discussion {
+  display: flex;
+  height: 100vh;
+
+  .navigation {
+    background: #f5f5f5;
+    flex: 1;
+    border-right: solid 1px #dfe9f1;
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    overflow-y: scroll;
+  }
+  .ticket-discussion {
+    margin-left: 13vw;
+    flex: 4;
+    border-right: solid 1px #dfe9f1;
+    .discussion {
+      display: flex;
+      flex-direction: column;
+      .discussion-title {
+        display: flex;
+        flex: 1;
+        border-bottom: solid 1px #dfe9f1;
+        .back-icon {
+          .fa-icon {
+            font-size: 24px;
+            color: #1a73e8;
+          }
+          flex: 1;
+          padding: 1rem;
+          text-align: center;
+          .back-text {
+            font-family: "Inter";
+            font-size: 18px;
+            padding: 1rem;
+            padding-bottom: 1.6rem;
+            text-decoration: none;
+          }
+        }
+        .ticket-title {
+          flex: 5;
+          text-align: center;
+          padding: 1rem;
+          .title-text {
+            font-family: "Inter";
+            font-size: 26px;
+            font-weight: 600;
+            padding-right: 2rem;
+          }
+        }
+      }
+      .discussion-comments {
+        flex: 6;
+        overflow-y: scroll;
+        .discussions {
+          .single-discussion {
+            margin: 2rem 0rem 2rem 8rem;
+            display: inline-block;
+            counter-increment: item-counter;
+            width: 70%;
+            margin-bottom: 15px;
+            border: solid 1px #dfe9f1;
+            box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            .user-info {
+              display: flex;
+              padding: 8px;
+              padding-bottom: 0px;
+
+              .image {
+                width: 38px;
+                height: 38px;
+                img {
+                  width: 100%;
+                  height: 100%;
+                  border-radius: 2px;
+                }
+              }
+              .img-desc {
+                margin-left: 10px;
+                h2 {
+                  font-family: Inter;
+                  font-style: normal;
+                  font-weight: 600;
+                  font-size: 18px;
+                  line-height: 22px;
+                  margin: 3px;
+                  /* identical to box height */
+                }
+                small {
+                  font-family: Inter;
+                  font-style: normal;
+                  font-weight: normal;
+                  font-size: 12px;
+                  line-height: 15px;
+                  color: #90949c;
+                  margin: 0;
+                }
+                .discussion-date {
+                  font-family: Inter;
+                  font-style: normal;
+                  font-weight: normal;
+                  font-size: 12px;
+                  line-height: 15px;
+
+                  color: #90949c;
+                }
+              }
+              .status-btn {
+                background-color: white;
+                padding: 4px 36px;
+                border: solid 1px #eb5757;
+                border-radius: 100px;
+                color: #eb5757;
+                margin: 0 5px;
+                height: 30px;
+                cursor: default;
+              }
+            }
+            .comment-content {
+              display: flex;
+              .comment-details {
+                flex: 3;
+                font-family: Inter;
+                font-style: normal;
+                font-weight: normal;
+                font-size: 14px;
+                line-height: 17px;
+                padding: 10px;
+                padding-top: 0px;
+
+                color: #1d2129;
+              }
+              .discussion-options {
+                flex: 1.5;
+                text-align: center;
+                padding: 20px;
+                .option-btn {
+                  background-color: white;
+                  color: #007bff;
+                  padding: 4px 40px;
+                  margin: 0 10px;
+                  height: 30px;
+                  cursor: pointer;
+                  &.active {
+                    background: #007bff;
+                    color: white;
+                  }
+                  .option-text {
+                    font-family: Inter;
+                    font-style: normal;
+                    font-weight: 500;
+                    font-size: 14px;
+                    line-height: 22px;
+                    /* identical to box height */
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      .discussion-editor {
+        margin-top: 10px;
+        flex: 3;
+        padding: 0rem 8rem;
+        padding-right: 10rem;
+      }
+    }
+  }
+  .ticket-info {
+    flex: 1.5;
+    background: #f5f5f5;
+    .info-card {
+      margin: 20px;
+      padding: 10px;
+      .info-title {
+        font-family: "Inter";
+        font-weight: 600;
+        font-size: 17px;
+      }
+      .info-details {
+        font-family: "Muli";
+        font-size: 14px;
+        .data-element {
+          margin-top: 5px;
+          .data-title {
+            font-size: 13px;
+            color: rgba(0, 0, 0, 0.5);
+          }
+          .data-desc {
+            margin-left: 4px;
+            font-size: 13px;
+            font-weight: 400;
+            // letter-spacing: -0.25px;
+          }
+        }
+      }
+    }
+  }
+}
