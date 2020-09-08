@@ -155,6 +155,7 @@ class TicketDashboard extends Component {
                       tickets={this.state.all}
                       filtered={this.state.filtered}
                       clear={this.clearFilters}
+                      toggleNewTicketEditor={this.toggleNewTicketEditor}
                       setFiltered={this.setFilteredTickets}
                     />
                   </div>

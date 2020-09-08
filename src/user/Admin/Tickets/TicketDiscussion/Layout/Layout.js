@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Tags from "./Tags";
+import Members from "./Members";
 import Form from "react-bootstrap/Form";
 import Card from "react-bootstrap/Card";
 import Badge from "react-bootstrap/Badge";
@@ -7,6 +8,7 @@ import Image from "react-bootstrap/Image";
 import EditableCard from "./EditableCard";
 import Button from "react-bootstrap/Button";
 import { FaArrowLeft } from "react-icons/fa";
+import Typography from "@material-ui/core/Typography";
 import userIcon2 from "../../../../../assets/images/userIcon2.jpg";
 
 class Layout extends Component {
@@ -112,16 +114,7 @@ class Layout extends Component {
             data={this.props.ticket.tags}
             removeTag={this.props.removeTag}
           />
-          <Card className="info-card">
-            <div className="info-title">Members</div>
-            <div className="info-details">
-              <div className="data-element">
-                <span className="data-desc">
-                  {this.props.ticket.shortDescription}
-                </span>
-              </div>
-            </div>
-          </Card>
+          <Members ticket={this.props.ticket} />
         </div>
       </div>
     );

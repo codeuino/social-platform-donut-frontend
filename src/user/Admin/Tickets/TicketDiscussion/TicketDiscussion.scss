@@ -245,10 +245,16 @@
             color: rgba(0, 0, 0, 0.5);
           }
           .data-desc {
-            margin-left: 4px;
+            // margin-left: 4px;
             font-size: 13px;
             font-weight: 400;
             // letter-spacing: -0.25px;
+            .more{
+              color: rgba(0, 0, 0, 0.7);
+              margin: 0 5px;
+              cursor: pointer;
+              text-decoration: underline;
+            }
           }
         }
       }

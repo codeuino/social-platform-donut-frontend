@@ -167,7 +167,7 @@ class Filter extends Component {
               />
             </Form>
           </div>
-          <Button onClick={() => this.toggleNewTicketEditor(true)}>
+          <Button onClick={() => this.props.toggleNewTicketEditor(true)}>
             New Ticket
           </Button>
         </div>
