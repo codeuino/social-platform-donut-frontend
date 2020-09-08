@@ -55,12 +55,18 @@ class Title extends Component {
                   {this.props.ticket.title}
                 </span>
               </dv>
-              <EditButton onClick={this.toggleEditor} />
+              {this.props.editsAllowed && (
+                <EditButton onClick={this.toggleEditor} />
+              )}
             </React.Fragment>
           )}
           {this.state.editor && (
             <Form style={{ display: "flex", width: "100%" }}>
-              <Form.Control type="text" onChange={this.setTitle} value={this.state.title} />
+              <Form.Control
+                type="text"
+                onChange={this.setTitle}
+                value={this.state.title}
+              />
               <Button
                 variant="light"
                 onClick={this.toggleEditor}

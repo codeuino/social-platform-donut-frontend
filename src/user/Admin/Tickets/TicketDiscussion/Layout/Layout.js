@@ -3,13 +3,9 @@ import Tags from "./Tags";
 import Title from "./Title";
 import TicketInfo from "./Info";
 import Members from "./Members";
-import Form from "react-bootstrap/Form";
 import Card from "react-bootstrap/Card";
-import Badge from "react-bootstrap/Badge";
 import Image from "react-bootstrap/Image";
 import EditableCard from "./EditableCard";
-import Button from "react-bootstrap/Button";
-import EditButton from "@material-ui/icons/EditOutlined";
 import userIcon2 from "../../../../../assets/images/userIcon2.jpg";
 
 class Layout extends Component {
@@ -33,6 +29,7 @@ class Layout extends Component {
             <Title
               ticket={this.props.ticket}
               handleBack={this.props.handleBack}
+              editsAllowed={this.props.editsAllowed}
               singleUpdate={this.props.singleUpdate}
               updateTicket={this.props.updateTicket}
             />
@@ -64,6 +61,7 @@ class Layout extends Component {
         <div className="ticket-info">
           <TicketInfo
             ticket={this.props.ticket}
+            editsAllowed={this.props.editsAllowed}
             singleUpdate={this.props.singleUpdate}
             updateTicket={this.props.updateTicket}
           />
@@ -71,6 +69,7 @@ class Layout extends Component {
             Type="Summary"
             heading="Ticket Summary"
             ticketId={this.props.ticket._id}
+            editsAllowed={this.props.editsAllowed}
             singleUpdate={this.props.singleUpdate}
             updateTicket={this.props.updateTicket}
             data={this.props.ticket.shortDescription}
@@ -94,6 +93,7 @@ class Layout extends Component {
             addTag={this.props.addTag}
             data={this.props.ticket.tags}
             removeTag={this.props.removeTag}
+            editsAllowed={this.props.editsAllowed}
           />
           <Members ticket={this.props.ticket} />
         </div>

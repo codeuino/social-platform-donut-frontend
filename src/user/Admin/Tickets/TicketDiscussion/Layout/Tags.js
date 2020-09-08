@@ -15,7 +15,7 @@ class Tags extends Component {
     evt.preventDefault();
     this.props.addTag(evt.target[0].value);
     console.log(evt.target[0].value);
-    evt.target[0].value = ""
+    evt.target[0].value = "";
   };
   render() {
     console.log(this.props.data);
@@ -28,25 +28,36 @@ class Tags extends Component {
           <div className="data-element">
             <span className="data-desc">
               {this.props.data.map((ele, index) => (
-                <Badge pill variant="info" style={{ fontSize: "13px", margin: "2px" }}>
+                <Badge
+                  pill
+                  variant="info"
+                  style={{ fontSize: "13px", margin: "2px" }}
+                >
                   <span style={{ verticalAlign: "middle" }}>{ele}</span>
-                  <CancelButton onClick={() => this.props.removeTag(ele)}/>
+                  {this.props.editsAllowed && (
+                    <CancelButton
+                      style={{ cursor: "pointer" }}
+                      onClick={() => this.props.removeTag(ele)}
+                    />
+                  )}
                 </Badge>
               ))}
             </span>
-            <span className="data-desc">
-              <Form
-                onSubmit={this.addTag}
-                style={{ display: "flex", marginTop: "10px" }}
-              >
-                <Form.Group>
-                  <Form.Control type="text" placeholder="Tag Name" />
-                </Form.Group>
-                <Button variant="light" type="submit">
-                  Add
-                </Button>
-              </Form>
-            </span>
+            {this.props.editsAllowed && (
+              <span className="data-desc">
+                <Form
+                  onSubmit={this.addTag}
+                  style={{ display: "flex", marginTop: "10px" }}
+                >
+                  <Form.Group>
+                    <Form.Control type="text" placeholder="Tag Name" />
+                  </Form.Group>
+                  <Button variant="light" type="submit">
+                    Add
+                  </Button>
+                </Form>
+              </span>
+            )}
           </div>
         </div>
       </Card>

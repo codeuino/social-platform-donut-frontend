@@ -47,7 +47,7 @@ class Discussion extends Component {
         editer: "new",
         content: "",
       },
-      async () => await this.props.updateTicket({type: "content", content })
+      async () => await this.props.updateTicket({ type: "content", content })
     );
   };
 
@@ -89,19 +89,22 @@ class Discussion extends Component {
                   <Image src={userIcon2} alt="icon" rounded roundedCircle />
                 </div>
                 <div className="img-desc">
-                  <div style={{display: "flex", justifyContent: "space-between"}}>
+                  <div
+                    style={{ display: "flex", justifyContent: "space-between" }}
+                  >
                     <div>
                       <div style={{ display: "flex", alignItems: "center" }}>
                         <h2>{this.props.ticket.createdBy.name}</h2>
-                        {this.state.editer === "new" && (
-                          <EditButton
-                            style={{
-                              color: "rgba(0,0,0,0.5)",
-                              fontSize: "18px",
-                            }}
-                            onClick={this.handleEditTicket}
-                          />
-                        )}
+                        {this.state.editer === "new" &&
+                          this.props.editsAllowed && (
+                            <EditButton
+                              style={{
+                                color: "rgba(0,0,0,0.5)",
+                                fontSize: "18px",
+                              }}
+                              onClick={this.handleEditTicket}
+                            />
+                          )}
                       </div>
                       <div className="discussion-date">
                         <Moment format="DD MMM YYYY">

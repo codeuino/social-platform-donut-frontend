@@ -14,7 +14,7 @@ export const setUpSocket = (state, donutIcon, addToNotification) => {
         addToNotification(notificationToAdd);
       }
     } else if (notification.for === "moderator") {
-      if (localStorage.getItem("moderator")?.toString() === "true") {
+      if (localStorage.getItem("ticketModerator").toString() === "true") {
         addToNotification(notificationToAdd);
       }
     } else {

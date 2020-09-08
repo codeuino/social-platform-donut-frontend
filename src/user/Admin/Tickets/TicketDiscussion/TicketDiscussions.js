@@ -32,8 +32,12 @@ class TicketDiscussions extends Component {
   getTicket = async () => {
     const ticket = (
       await Axios.get(`${BASE_URL}/ticket/${this.props.ticketId}`)
-    ).data;
-    this.setState({ ticket: ticket.ticket });
+    ).data.ticket;
+    this.editsAllowed =
+      localStorage.getItem("ticketModerator") === "true" ||
+      localStorage.getItem("admin") === "true" ||
+      localStorage.getItem("userId") === ticket.createdBy.id;
+    this.setState({ ticket: ticket });
   };
 
   componentDidMount() {
@@ -58,12 +62,6 @@ class TicketDiscussions extends Component {
       ticket: newTicket,
     });
   };
-
-  // setTicketContent = (content) => {
-  //   this.setState({
-  //     ticket: { ...this.state.ticket, content: content },
-  //   });
-  // };
 
   handleUpdateTicket = async (updates) => {
     try {
@@ -125,7 +123,6 @@ class TicketDiscussions extends Component {
   };
 
   render() {
-    // console.log(this.state.ticket);
     return (
       <>
         {this.state.ticket && (
@@ -135,6 +132,7 @@ class TicketDiscussions extends Component {
             addTag={this.handleAddTag}
             handleBack={this.handleBack}
             removeTag={this.handleDeleteTag}
+            editsAllowed={this.editsAllowed}
             updateTicket={this.handleUpdateTicket}
             singleUpdate={this.props.singleUpdate}
             handleViewChange={this.handleViewChange}
@@ -143,8 +141,8 @@ class TicketDiscussions extends Component {
               <Disscussion
                 ticket={this.state.ticket}
                 sendComment={this.sendComment}
+                editsAllowed={this.editsAllowed}
                 updateTicket={this.handleUpdateTicket}
-                // setTicketContent={this.setTicketContent}
               />
             )}
             {this.state.view === "history" && (

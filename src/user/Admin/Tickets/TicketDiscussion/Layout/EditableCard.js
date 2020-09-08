@@ -31,7 +31,9 @@ class EditableCard extends Component {
         type: "shortDescription",
         shortDescription: this.state.data,
       });
-      this.props.singleUpdate(this.props.ticketId, { shortDescription: this.state.data });
+      this.props.singleUpdate(this.props.ticketId, {
+        shortDescription: this.state.data,
+      });
     });
   };
 
@@ -40,7 +42,9 @@ class EditableCard extends Component {
       <Card className="info-card">
         <div className="info-title">
           <span>{this.props.heading}</span>
-          {!this.state.editor && <EditButton onClick={this.toggleEditor} />}
+          {!this.state.editor && this.props.editsAllowed && (
+            <EditButton onClick={this.toggleEditor} />
+          )}
           {this.state.editor && (
             <div className="buttons">
               <CancelButton

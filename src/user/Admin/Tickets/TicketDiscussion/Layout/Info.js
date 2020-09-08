@@ -78,33 +78,37 @@ class Info extends Component {
           <div className="data-element" style={{ display: "flex" }}>
             <span className="data-title">Status:</span>
             <span className="data-desc">
-              <DropdownButton
-                variant="light"
-                title={<BadgeElement ticketState={this.state.selected} />}
-                size="sm"
-              >
-                {["OPEN", "CLOSED", "PENDING", "SOLVED", "ON_HOLD"].map(
-                  (ele, index) => (
-                    <Dropdown.Item
-                      key={index}
-                      style={{ display: "flex" }}
-                      onClick={() => this.setSelected(ele)}
-                    >
-                      {
-                        <CheckOutlinedIcon
-                          style={{
-                            color:
-                              ele === this.state.selected
-                                ? "rgba(0, 0, 0, 0.5)"
-                                : "#ffffff",
-                          }}
-                        />
-                      }
-                      <BadgeElement ticketState={ele} />
-                    </Dropdown.Item>
-                  )
-                )}
-              </DropdownButton>
+              {this.props.editsAllowed ? (
+                <DropdownButton
+                  variant="light"
+                  title={<BadgeElement ticketState={this.state.selected} />}
+                  size="sm"
+                >
+                  {["OPEN", "CLOSED", "PENDING", "SOLVED", "ON_HOLD"].map(
+                    (ele, index) => (
+                      <Dropdown.Item
+                        key={index}
+                        style={{ display: "flex" }}
+                        onClick={() => this.setSelected(ele)}
+                      >
+                        {
+                          <CheckOutlinedIcon
+                            style={{
+                              color:
+                                ele === this.state.selected
+                                  ? "rgba(0, 0, 0, 0.5)"
+                                  : "#ffffff",
+                            }}
+                          />
+                        }
+                        <BadgeElement ticketState={ele} />
+                      </Dropdown.Item>
+                    )
+                  )}
+                </DropdownButton>
+              ) : (
+                <BadgeElement ticketState={this.props.ticket.status} />
+              )}
             </span>
           </div>
         </div>

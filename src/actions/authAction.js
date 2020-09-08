@@ -56,6 +56,9 @@ export const loginUser = (userInfo, history) => async (dispatch) => {
       // update user role in localStorage
       localStorage.setItem('admin', res.data.user.isAdmin)
 
+      // update user role in localStorage
+      localStorage.setItem('ticketModerator', res.data.user.isTicketsModerator)
+
       // store orgId in localStorage
       localStorage.setItem('orgId', res.data.user.orgId);
 
