@@ -240,6 +240,10 @@
           cursor: pointer;
         }
       }
+      .dropdown-toggle{
+        display: flex;
+        align-items: center;
+      }
       .info-details {
         font-family: "Muli";
         font-size: 14px;
@@ -247,6 +251,7 @@
           margin-top: 5px;
           .data-title {
             font-size: 13px;
+            padding-right: 5px;
             color: rgba(0, 0, 0, 0.5);
           }
           .data-desc {
@@ -254,7 +259,7 @@
             font-size: 13px;
             font-weight: 400;
             // letter-spacing: -0.25px;
-            .more{
+            .more {
               color: rgba(0, 0, 0, 0.7);
               margin: 0 5px;
               cursor: pointer;

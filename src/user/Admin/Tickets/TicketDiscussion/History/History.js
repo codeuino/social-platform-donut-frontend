@@ -4,6 +4,7 @@ import Moment from "react-moment";
 import Modal from "react-bootstrap/Modal";
 import Badge from "react-bootstrap/Badge";
 import ReactMarkdown from "react-markdown";
+import BadgeElement from "../../TicketContent/BadgeElement";
 
 class History extends Component {
   constructor(props) {
@@ -51,7 +52,7 @@ class History extends Component {
                       ""
                     )}
                     {ele.type === "add tag" ? (
-                      <soan>
+                      <span>
                         Assigned tag{" "}
                         <Badge
                           pill
@@ -62,12 +63,12 @@ class History extends Component {
                             {ele.tag}
                           </span>
                         </Badge>
-                      </soan>
+                      </span>
                     ) : (
                       ""
                     )}
                     {ele.type === "remove tag" ? (
-                      <soan>
+                      <span>
                         Removed tag{" "}
                         <Badge
                           pill
@@ -78,12 +79,20 @@ class History extends Component {
                             <del>{ele.tag}</del>
                           </span>
                         </Badge>
-                      </soan>
+                      </span>
+                    ) : (
+                      ""
+                    )}
+                    {ele.type === "status" ? (
+                      <span style={{display: "flex"}}>
+                        Changed status to{" "}
+                        <BadgeElement style={{ fontSize: "13px", margin: "2px" }} ticketState={ele.status} />
+                      </span>
                     ) : (
                       ""
                     )}
                     {ele.type === "shortDescription" ? (
-                      <soan>
+                      <span>
                         <span>
                           {"Ticket Summary Updated "}
                           <span
@@ -106,12 +115,12 @@ class History extends Component {
                             View Update
                           </span>
                         </span>
-                      </soan>
+                      </span>
                     ) : (
                       ""
                     )}
                     {ele.type === "content" ? (
-                      <soan>
+                      <span>
                         <span>
                           {"Ticket Content Updated "}
                           <span
@@ -134,7 +143,7 @@ class History extends Component {
                             View Update
                           </span>
                         </span>
-                      </soan>
+                      </span>
                     ) : (
                       ""
                     )}

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Tags from "./Tags";
 import Title from "./Title";
+import TicketInfo from "./Info";
 import Members from "./Members";
 import Form from "react-bootstrap/Form";
 import Card from "react-bootstrap/Card";
@@ -61,31 +62,11 @@ class Layout extends Component {
           </div>
         </div>
         <div className="ticket-info">
-          <Card className="info-card">
-            <div className="info-title">Ticket Info</div>
-            <div className="info-details">
-              <div className="data-element">
-                <span className="data-title">Ticket ID </span>
-                <span className="data-desc">9SUQb28020N</span>
-              </div>
-              <div className="data-element">
-                <span className="data-title">Created </span>
-                <span className="data-desc">23 Aug 2020</span>
-              </div>
-              <div className="data-element">
-                <span className="data-title">Last Message</span>
-                <span className="data-desc">24 Aug 2020</span>
-              </div>
-              <div className="data-element">
-                <span className="data-title">Status</span>
-                <span className="data-desc">
-                  <Badge pill variant="primary">
-                    Open
-                  </Badge>
-                </span>
-              </div>
-            </div>
-          </Card>
+          <TicketInfo
+            ticket={this.props.ticket}
+            singleUpdate={this.props.singleUpdate}
+            updateTicket={this.props.updateTicket}
+          />
           <EditableCard
             Type="Summary"
             heading="Ticket Summary"
