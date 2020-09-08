@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Tags from "./Tags";
+import Title from "./Title";
 import Members from "./Members";
 import Form from "react-bootstrap/Form";
 import Card from "react-bootstrap/Card";
@@ -7,8 +8,7 @@ import Badge from "react-bootstrap/Badge";
 import Image from "react-bootstrap/Image";
 import EditableCard from "./EditableCard";
 import Button from "react-bootstrap/Button";
-import { FaArrowLeft } from "react-icons/fa";
-import Typography from "@material-ui/core/Typography";
+import EditButton from "@material-ui/icons/EditOutlined";
 import userIcon2 from "../../../../../assets/images/userIcon2.jpg";
 
 class Layout extends Component {
@@ -29,14 +29,12 @@ class Layout extends Component {
       <div className="discussion">
         <div className="ticket-discussion">
           <div className="discussion">
-            <div className="discussion-title">
-              <div className="back-icon" onClick={this.props.handleBack}>
-                <FaArrowLeft className="fa-icon" />
-              </div>
-              <div className="ticket-title">
-                <span className="title-text">{this.props.ticket.title}</span>
-              </div>
-            </div>
+            <Title
+              ticket={this.props.ticket}
+              handleBack={this.props.handleBack}
+              singleUpdate={this.props.singleUpdate}
+              updateTicket={this.props.updateTicket}
+            />
             <div className="ticket-tabs">
               <span className="nav__tab container">
                 <ul className="nav__list__container">
@@ -91,6 +89,8 @@ class Layout extends Component {
           <EditableCard
             Type="Summary"
             heading="Ticket Summary"
+            ticketId={this.props.ticket._id}
+            singleUpdate={this.props.singleUpdate}
             updateTicket={this.props.updateTicket}
             data={this.props.ticket.shortDescription}
           />

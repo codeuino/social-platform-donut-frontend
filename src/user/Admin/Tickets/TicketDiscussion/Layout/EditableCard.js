@@ -11,36 +11,36 @@ class EditableCard extends Component {
     super(props);
     this.state = {
       data: props.data,
-      editor: false
+      editor: false,
     };
   }
 
   toggleEditor = () => {
     this.setState({
-      editor: !this.state.editor
-    })
-  }
+      editor: !this.state.editor,
+    });
+  };
 
   setData = (evt) => {
     this.setState({ data: evt.target.value });
   };
 
   save = () => {
-    this.setState(
-      { editor: false },
-      async () =>
-        await this.props.updateTicket({ shortDescription: this.state.data })
-    );
-  }
+    this.setState({ editor: false }, async () => {
+      await this.props.updateTicket({
+        type: "shortDescription",
+        shortDescription: this.state.data,
+      });
+      this.props.singleUpdate(this.props.ticketId, { shortDescription: this.state.data });
+    });
+  };
 
   render() {
     return (
       <Card className="info-card">
         <div className="info-title">
           <span>{this.props.heading}</span>
-          {!this.state.editor && (
-            <EditButton onClick={this.toggleEditor} />
-          )}
+          {!this.state.editor && <EditButton onClick={this.toggleEditor} />}
           {this.state.editor && (
             <div className="buttons">
               <CancelButton
@@ -48,9 +48,7 @@ class EditableCard extends Component {
                 onClick={this.toggleEditor}
               />
               <Button
-                disabled={
-                  this.props.data === this.state.data
-                }
+                disabled={this.props.data === this.state.data}
                 variant="light"
                 onClick={this.save}
               >

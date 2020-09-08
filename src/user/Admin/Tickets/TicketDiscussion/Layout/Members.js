@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Card from "react-bootstrap/Card";
 import Image from "react-bootstrap/Image";
 import Modal from "react-bootstrap/Modal";
-import Button from "react-bootstrap/Button";
 import Tooltip from "@material-ui/core/Tooltip";
 import { withStyles } from "@material-ui/core/styles";
 import userIcon2 from "../../../../../assets/images/userIcon2.jpg";

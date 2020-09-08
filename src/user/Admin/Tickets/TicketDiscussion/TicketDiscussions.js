@@ -18,6 +18,7 @@ import EditButton from "@material-ui/icons/EditOutlined";
 import CancelButton from "@material-ui/icons/ClearOutlined";
 import userIcon2 from "../../../../assets/images/userIcon2.jpg";
 import SendOutlinedIcon from "@material-ui/icons/SendOutlined";
+import History from "./History/History";
 
 class TicketDiscussions extends Component {
   constructor(props) {
@@ -111,7 +112,7 @@ class TicketDiscussions extends Component {
       this.setState({
         ticket: newTicket,
       });
-      this.props.removeTag(this.state.ticket._id, tagName)
+      this.props.removeTag(this.state.ticket._id, tagName);
     } catch (err) {
       console.log(err);
     }
@@ -135,14 +136,20 @@ class TicketDiscussions extends Component {
             handleBack={this.handleBack}
             removeTag={this.handleDeleteTag}
             updateTicket={this.handleUpdateTicket}
+            singleUpdate={this.props.singleUpdate}
             handleViewChange={this.handleViewChange}
           >
-            <Disscussion
-              ticket={this.state.ticket}
-              sendComment={this.sendComment}
-              updateTicket={this.handleUpdateTicket}
-              // setTicketContent={this.setTicketContent}
-            />
+            {this.state.view === "discussions" && (
+              <Disscussion
+                ticket={this.state.ticket}
+                sendComment={this.sendComment}
+                updateTicket={this.handleUpdateTicket}
+                // setTicketContent={this.setTicketContent}
+              />
+            )}
+            {this.state.view === "history" && (
+              <History ticket={this.state.ticket} />
+            )}
           </Layout>
         )}
         <ToastContainer

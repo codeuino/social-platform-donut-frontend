@@ -98,6 +98,21 @@ class TicketDashboard extends Component {
     });
   };
 
+  handleTicketSingleUpdate = (id, update) => {
+    console.log("Dashboard handle single update")
+    console.log(update)
+    const tickets = [...this.state.all];
+    tickets.forEach((ele) => {
+      if (ele._id === id) {
+        ele[Object.keys(update)[0]] = Object.values(update)[0]
+      }
+    });
+    this.setState({
+      all: [...tickets],
+      filtered: [...tickets],
+    });
+  }
+
   handleAddTag = (id, tagName) => {
     const tickets = [...this.state.all];
     tickets.forEach((ele) => {
@@ -180,6 +195,7 @@ class TicketDashboard extends Component {
                 currentUser={this.props.user}
                 removeTag={this.handleRemoveTag}
                 ticketId={this.state.viewingTicket}
+                singleUpdate={this.handleTicketSingleUpdate}
               />
             )}
           </div>

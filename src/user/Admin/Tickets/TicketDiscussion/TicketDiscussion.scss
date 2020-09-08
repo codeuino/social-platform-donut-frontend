@@ -54,6 +54,8 @@
         flex-grow: 0;
         border-bottom: solid 1px #dfe9f1;
         .back-icon {
+          display: flex;
+          align-items: center;
           .fa-icon {
             font-size: 24px;
             color: #1a73e8;
@@ -71,6 +73,9 @@
         .ticket-title {
           flex: 5;
           text-align: center;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
           padding: 1rem;
           .title-text {
             font-family: "Inter";

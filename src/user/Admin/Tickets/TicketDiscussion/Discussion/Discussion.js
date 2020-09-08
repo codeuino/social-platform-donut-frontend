@@ -47,7 +47,7 @@ class Discussion extends Component {
         editer: "new",
         content: "",
       },
-      async () => await this.props.updateTicket({ content })
+      async () => await this.props.updateTicket({type: "content", content })
     );
   };
 
