@@ -6,6 +6,7 @@ import EditButton from "@material-ui/icons/EditOutlined";
 import SaveButton from "@material-ui/icons/SaveOutlined";
 import BadgeElement from "../../TicketContent/BadgeElement";
 import CancelButton from "@material-ui/icons/ClearOutlined";
+import DeleteOutlineOutlinedIcon from "@material-ui/icons/DeleteOutlineOutlined";
 
 class Title extends Component {
   constructor(props) {
@@ -49,15 +50,24 @@ class Title extends Component {
         <div className="ticket-title">
           {!this.state.editor && (
             <React.Fragment>
-              <dv style={{ display: "flex", alignItems: "center" }}>
+              <div style={{ display: "flex", alignItems: "center" }}>
                 <BadgeElement ticketState={this.props.ticket.status} />
                 <span style={{ marginLeft: "16px" }} className="title-text">
                   {this.props.ticket.title}
                 </span>
-              </dv>
-              {this.props.editsAllowed && (
-                <EditButton onClick={this.toggleEditor} />
-              )}
+              </div>
+              <div>
+                {this.props.editsAllowed && (
+                  <EditButton onClick={this.toggleEditor} />
+                )}
+                {this.props.deleteAllowed && (
+                  <DeleteOutlineOutlinedIcon
+                    onClick={() =>
+                      this.props.deleteTicket(this.props.ticket._id)
+                    }
+                  />
+                )}
+              </div>
             </React.Fragment>
           )}
           {this.state.editor && (

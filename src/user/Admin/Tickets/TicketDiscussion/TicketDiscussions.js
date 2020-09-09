@@ -181,8 +181,10 @@ class TicketDiscussions extends Component {
             handleBack={this.handleBack}
             removeTag={this.handleDeleteTag}
             editsAllowed={this.editsAllowed}
+            deleteAllowed={this.deleteAllowed}
             updateTicket={this.handleUpdateTicket}
             singleUpdate={this.props.singleUpdate}
+            deleteTicket={this.props.deleteTicket}
             handleViewChange={this.handleViewChange}
           >
             {this.state.view === "discussions" && (

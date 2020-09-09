@@ -32,6 +32,8 @@ class Layout extends Component {
               editsAllowed={this.props.editsAllowed}
               singleUpdate={this.props.singleUpdate}
               updateTicket={this.props.updateTicket}
+              deleteTicket={this.props.deleteTicket}
+              deleteAllowed={this.props.deleteAllowed}
             />
             <div className="ticket-tabs">
               <span className="nav__tab container">

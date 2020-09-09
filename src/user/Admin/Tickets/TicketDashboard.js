@@ -146,6 +146,17 @@ class TicketDashboard extends Component {
     });
   };
 
+  deleteTicket = (id) => {
+    const newTickets = this.state.all.filter(ele => ele._id !== id)
+    this.setState({
+      all: [...newTickets],
+      viewingTicket: null,
+      filtered: [...newTickets],
+    }, async () => {
+      await Axios.delete(`${BASE_URL}/ticket/${id}`)
+    })
+  }
+
   render() {
     console.log(this.state.notifications);
     return (
@@ -194,6 +205,7 @@ class TicketDashboard extends Component {
                 back={this.handleViewTicket}
                 currentUser={this.props.user}
                 removeTag={this.handleRemoveTag}
+                deleteTicket={this.deleteTicket}
                 ticketId={this.state.viewingTicket}
                 singleUpdate={this.handleTicketSingleUpdate}
               />
@@ -213,7 +225,7 @@ class TicketDashboard extends Component {
           onClose={this.toggleDrawer}
         >
           <List className="list">
-            {this.state.notifications.map((notification) => (
+            {this.state.notifications && this.state.notifications.map((notification) => (
               <ListItem
                 style={{
                   display: "flex",
