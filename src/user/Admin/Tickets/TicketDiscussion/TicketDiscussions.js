@@ -37,6 +37,9 @@ class TicketDiscussions extends Component {
       localStorage.getItem("ticketModerator") === "true" ||
       localStorage.getItem("admin") === "true" ||
       localStorage.getItem("userId") === ticket.createdBy.id;
+    this.deleteAllowed =
+      localStorage.getItem("ticketModerator") === "true" ||
+      localStorage.getItem("admin") === "true";
     this.setState({ ticket: ticket });
   };
 
@@ -96,6 +99,21 @@ class TicketDiscussions extends Component {
       const newTicket = (
         await Axios.put(
           `${BASE_URL}/ticket/${this.state.ticket._id}/comment/${commentId}/downvote`
+        )
+      ).data.ticket;
+      this.setState({
+        ticket: newTicket,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  handleCommentDelete = async (commentId) => {
+    try {
+      const newTicket = (
+        await Axios.delete(
+          `${BASE_URL}/ticket/${this.state.ticket._id}/comment/${commentId}`
         )
       ).data.ticket;
       this.setState({
@@ -172,8 +190,10 @@ class TicketDiscussions extends Component {
                 ticket={this.state.ticket}
                 sendComment={this.sendComment}
                 editsAllowed={this.editsAllowed}
+                deleteAllowed={this.deleteAllowed}
                 updateTicket={this.handleUpdateTicket}
                 upVoteComment={this.handleCommentUpvote}
+                deleteComment={this.handleCommentDelete}
                 downVoteComment={this.handleCommentDownvote}
               />
             )}

@@ -13,6 +13,7 @@ import SendOutlinedIcon from "@material-ui/icons/SendOutlined";
 import userIcon2 from "../../../../../assets/images/userIcon2.jpg";
 import ThumbDownOutlinedIcon from "@material-ui/icons/ThumbDownOutlined";
 import ThumbUpAltOutlinedIcon from "@material-ui/icons/ThumbUpAltOutlined";
+import DeleteOutlineOutlinedIcon from "@material-ui/icons/DeleteOutlineOutlined";
 
 class Discussion extends Component {
   constructor(props) {
@@ -169,7 +170,17 @@ class Discussion extends Component {
                   />
                 </div>
                 <div className="img-desc">
-                  <h2>{ele.createdBy.name}</h2>
+                  <h2>
+                    {ele.createdBy.name}
+                    {this.props.deleteAllowed && <DeleteOutlineOutlinedIcon
+                      style={{
+                        color: "rgba(0,0,0,0.5)",
+                        fontSize: "18px",
+                        cursor: "pointer"
+                      }}
+                      onClick={() => this.props.deleteComment(ele._id)}
+                    />}
+                  </h2>
                   <p className="discussion-date">
                     <Moment format="DD MMM YYYY">{ele.createdAt}</Moment>
                   </p>
