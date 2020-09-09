@@ -13,7 +13,6 @@ import CheckOutlinedIcon from "@material-ui/icons/CheckOutlined";
 import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
 import LocationOnOutlinedIcon from "@material-ui/icons/LocationOnOutlined";
 
-
 // Author, tags and status are the three filters that we want
 // only one author can be selected at a time, clicking on a different authoir will unclick the first author
 // implement search bar in author filter
@@ -193,7 +192,7 @@ class Filter extends Component {
             roundedCircle
           />
           <div style={{ fontSize: "13px", fontFamily: "Inter" }}>
-            <strong>{ele.name.firstName}</strong>
+            <strong>{`${ele.name.firstName} ${ele.name.lastName}`}</strong>
             <div>{ele.info.about.designation}</div>
             <div>
               {ele.info.about.location && <LocationOnOutlinedIcon />}
@@ -344,6 +343,7 @@ class Filter extends Component {
                       <div className="moderator-modal-user">
                         {userInfo(ele)}
                         <Button
+                          style={{ marginLeft: "16px" }}
                           onClick={() => this.addModerator(ele._id.toString())}
                         >
                           Add
@@ -359,6 +359,7 @@ class Filter extends Component {
                       <div className="moderator-modal-user">
                         {userInfo(ele)}
                         <Button
+                          style={{ marginLeft: "16px" }}
                           onClick={() =>
                             this.removeModerator(ele._id.toString())
                           }
