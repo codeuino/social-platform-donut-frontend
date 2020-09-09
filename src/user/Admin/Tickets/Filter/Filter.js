@@ -1,10 +1,18 @@
 import React, { Component } from "react";
 import "./Filter.scss";
+import Axios from "axios";
 import Form from "react-bootstrap/Form";
+import Modal from "react-bootstrap/Modal";
+import Image from "react-bootstrap/Image";
 import Button from "react-bootstrap/Button";
 import Dropdown from "react-bootstrap/Dropdown";
+import { BASE_URL } from "../../../../actions/baseApi";
+import PeopleAltIcon from "@material-ui/icons/PeopleAlt";
+import userIcon2 from "../../../../assets/images/userIcon2.jpg";
 import CheckOutlinedIcon from "@material-ui/icons/CheckOutlined";
 import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
+import LocationOnOutlinedIcon from "@material-ui/icons/LocationOnOutlined";
+
 
 // Author, tags and status are the three filters that we want
 // only one author can be selected at a time, clicking on a different authoir will unclick the first author
@@ -16,6 +24,7 @@ class Filter extends Component {
     super(props);
     this.state = {
       author: null,
+      modal: null,
       status: [],
       tags: [],
       search: "",
@@ -138,11 +147,64 @@ class Filter extends Component {
     );
   };
 
+  toggleModal = () => {
+    this.setState({
+      modal: !this.state.modal,
+    });
+  };
+
+  getUsers = async () => {
+    const users = (await Axios.get(`${BASE_URL}/ticket/users/all`)).data.users;
+    this.setState({ users });
+  };
+
+  handleViewChange = (view) => {
+    this.setState({ modal: { view } });
+  };
+
   componentDidMount() {
-    // fetch all labels and all
+    if (localStorage.getItem("admin") === "true") {
+      this.getUsers();
+    }
   }
 
+  addModerator = async (userId) => {
+    const users = (await Axios.post(`${BASE_URL}/ticket/moderator/${userId}`))
+      .data.users;
+    this.setState({ users });
+  };
+
+  removeModerator = async (userId) => {
+    const users = (await Axios.delete(`${BASE_URL}/ticket/moderator/${userId}`))
+      .data.users;
+    this.setState({ users });
+  };
+
   render() {
+    const userInfo = (ele) => (
+      <div className="user-info">
+        <div style={{ display: "flex" }}>
+          <Image
+            style={{ margin: "10px" }}
+            src={userIcon2}
+            alt="icon"
+            rounded
+            className="profile-img"
+            roundedCircle
+          />
+          <div style={{ fontSize: "13px", fontFamily: "Inter" }}>
+            <strong>{ele.name.firstName}</strong>
+            <div>{ele.info.about.designation}</div>
+            <div>
+              {ele.info.about.location && <LocationOnOutlinedIcon />}
+              {ele.info.about.location}
+            </div>
+            <div>{ele.email}</div>
+            <div>{ele.info.about.shortDescription}</div>
+          </div>
+        </div>
+      </div>
+    );
     // console.log(this.state.allAuthors);
     const allStatus = [
       { label: "Open", status: "OPEN" },
@@ -151,6 +213,7 @@ class Filter extends Component {
       { label: "Solved", status: "SOLVED" },
       { label: "On Hold", status: "ON_HOLD" },
     ];
+    const isAdmin = localStorage.getItem("admin") === "true";
     return (
       <div className="tickets-dashboard-filter">
         <div className="searchbar-container">
@@ -170,6 +233,14 @@ class Filter extends Component {
           <Button onClick={() => this.props.toggleNewTicketEditor(true)}>
             New Ticket
           </Button>
+          {isAdmin && (
+            <Button
+              style={{ marginLeft: "1rem" }}
+              onClick={() => this.setState({ modal: { view: "add" } })}
+            >
+              <PeopleAltIcon />
+            </Button>
+          )}
         </div>
         <div className="filters">
           <div onClick={this.clearFilters} className="clear-filters">
@@ -233,6 +304,74 @@ class Filter extends Component {
             </Dropdown.Menu>
           </Dropdown>
         </div>
+        {this.state.modal && (
+          <Modal
+            centered
+            className="modal"
+            show={!!this.state.modal}
+            onHide={this.toggleModal}
+          >
+            <Modal.Header closeButton>
+              <Modal.Title>Manage Moderators</Modal.Title>
+            </Modal.Header>
+            <Modal.Body style={{ height: "500px", overflowY: "scroll" }}>
+              <div className="ticket-tabs">
+                <span className="nav__tab container">
+                  <ul className="nav__list__container">
+                    {[
+                      { view: "add", opt: "Add" },
+                      { view: "remove", opt: "Remove" },
+                    ].map((ele, index) => (
+                      <li
+                        key={index}
+                        className={
+                          this.state.modal.view === ele.view
+                            ? "nav__single__tab selected"
+                            : "nav__single__tab"
+                        }
+                        onClick={() => this.handleViewChange(ele.view)}
+                      >
+                        {ele.opt}
+                      </li>
+                    ))}
+                  </ul>
+                </span>
+              </div>
+              {this.state.modal.view === "add" &&
+                this.state.users.map((ele, index) => (
+                  <div key={index}>
+                    {!ele.isTicketsModerator && (
+                      <div className="moderator-modal-user">
+                        {userInfo(ele)}
+                        <Button
+                          onClick={() => this.addModerator(ele._id.toString())}
+                        >
+                          Add
+                        </Button>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              {this.state.modal.view === "remove" &&
+                this.state.users.map((ele, index) => (
+                  <div key={index}>
+                    {ele.isTicketsModerator && (
+                      <div className="moderator-modal-user">
+                        {userInfo(ele)}
+                        <Button
+                          onClick={() =>
+                            this.removeModerator(ele._id.toString())
+                          }
+                        >
+                          Remove
+                        </Button>
+                      </div>
+                    )}
+                  </div>
+                ))}
+            </Modal.Body>
+          </Modal>
+        )}
       </div>
     );
   }
