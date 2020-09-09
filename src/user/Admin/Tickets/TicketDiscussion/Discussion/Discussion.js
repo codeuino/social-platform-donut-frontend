@@ -128,6 +128,7 @@ class Discussion extends Component {
                         <Button
                           style={{ margin: "8px" }}
                           onClick={this.handleUpdateTicket}
+                          disabled={this.props.ticket.content === this.state.content}
                         >
                           <SaveButton />
                           Save

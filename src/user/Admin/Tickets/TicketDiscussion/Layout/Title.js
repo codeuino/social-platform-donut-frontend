@@ -75,7 +75,10 @@ class Title extends Component {
                 <CancelButton />
                 Cancel
               </Button>
-              <Button style={{ display: "flex" }}>
+              <Button
+                disabled={this.props.ticket.title === this.state.title}
+                style={{ display: "flex" }}
+              >
                 <SaveButton onClick={this.handleSave} />
                 Save
               </Button>
