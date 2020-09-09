@@ -140,6 +140,27 @@
               margin: 3px;
               /* identical to box height */
             }
+            .comment-footer {
+              display: flex;
+              div {
+                width: 50px;
+                height: 40px;
+                display: flex;
+                align-items: center;
+                span {
+                  margin-left: 5px;
+                }
+                svg {
+                  color: rgba(0,0,0,0.5);
+                }
+              }
+              .selected{
+                background-color: #F5F5F5;
+                svg {
+                  color: #1a73e8;
+                }
+              }
+            }
             small {
               font-family: Inter;
               font-style: normal;
@@ -240,7 +261,7 @@
           cursor: pointer;
         }
       }
-      .dropdown-toggle{
+      .dropdown-toggle {
         display: flex;
         align-items: center;
       }

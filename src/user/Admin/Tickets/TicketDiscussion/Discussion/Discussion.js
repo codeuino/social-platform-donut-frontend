@@ -11,6 +11,8 @@ import EditButton from "@material-ui/icons/EditOutlined";
 import CancelButton from "@material-ui/icons/ClearOutlined";
 import SendOutlinedIcon from "@material-ui/icons/SendOutlined";
 import userIcon2 from "../../../../../assets/images/userIcon2.jpg";
+import ThumbDownOutlinedIcon from "@material-ui/icons/ThumbDownOutlined";
+import ThumbUpAltOutlinedIcon from "@material-ui/icons/ThumbUpAltOutlined";
 
 class Discussion extends Component {
   constructor(props) {
@@ -174,6 +176,30 @@ class Discussion extends Component {
                   <div className="comment-content">
                     <div className="comment-details">
                       <ReactMarkdown source={ele.content} />
+                    </div>
+                  </div>
+                  <div className="comment-footer">
+                    <div
+                      className={
+                        ele.votes.upVotes.user.indexOf(currentUser.id) === -1
+                          ? ""
+                          : "selected"
+                      }
+                      onClick={() => this.props.upVoteComment(ele._id)}
+                    >
+                      <ThumbUpAltOutlinedIcon />
+                      <span>{ele.votes.upVotes.user.length}</span>
+                    </div>
+                    <div
+                      className={
+                        ele.votes.downVotes.user.indexOf(currentUser.id) === -1
+                          ? ""
+                          : "selected"
+                      }
+                      onClick={() => this.props.downVoteComment(ele._id)}
+                    >
+                      <ThumbDownOutlinedIcon />
+                      <span>{ele.votes.downVotes.user.length}</span>
                     </div>
                   </div>
                 </div>

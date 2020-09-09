@@ -76,6 +76,36 @@ class TicketDiscussions extends Component {
     }
   };
 
+  handleCommentUpvote = async (commentId) => {
+    try {
+      const newTicket = (
+        await Axios.put(
+          `${BASE_URL}/ticket/${this.state.ticket._id}/comment/${commentId}/upvote`
+        )
+      ).data.ticket;
+      this.setState({
+        ticket: newTicket,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  handleCommentDownvote = async (commentId) => {
+    try {
+      const newTicket = (
+        await Axios.put(
+          `${BASE_URL}/ticket/${this.state.ticket._id}/comment/${commentId}/downvote`
+        )
+      ).data.ticket;
+      this.setState({
+        ticket: newTicket,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   handleAddTag = async (tagName) => {
     if (this.state.ticket.tags.indexOf(tagName) !== -1) {
       toast.error("Tag already present");
@@ -143,6 +173,8 @@ class TicketDiscussions extends Component {
                 sendComment={this.sendComment}
                 editsAllowed={this.editsAllowed}
                 updateTicket={this.handleUpdateTicket}
+                upVoteComment={this.handleCommentUpvote}
+                downVoteComment={this.handleCommentDownvote}
               />
             )}
             {this.state.view === "history" && (
