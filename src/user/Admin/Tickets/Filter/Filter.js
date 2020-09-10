@@ -6,7 +6,10 @@ import Modal from "react-bootstrap/Modal";
 import Image from "react-bootstrap/Image";
 import Button from "react-bootstrap/Button";
 import Dropdown from "react-bootstrap/Dropdown";
+import LoadingOverlay from "react-loading-overlay";
+import ClockLoader from "react-spinners/ClockLoader";
 import { BASE_URL } from "../../../../actions/baseApi";
+import { ToastContainer, toast } from "react-toastify";
 import PeopleAltIcon from "@material-ui/icons/PeopleAlt";
 import userIcon2 from "../../../../assets/images/userIcon2.jpg";
 import CheckOutlinedIcon from "@material-ui/icons/CheckOutlined";
@@ -25,6 +28,7 @@ class Filter extends Component {
       author: null,
       modal: null,
       status: [],
+      spinner: "",
       tags: [],
       search: "",
       allTags: Array.from(
@@ -153,8 +157,13 @@ class Filter extends Component {
   };
 
   getUsers = async () => {
-    const users = (await Axios.get(`${BASE_URL}/ticket/users/all`)).data.users;
-    this.setState({ users });
+    try {
+      const users = (await Axios.get(`${BASE_URL}/ticket/users/all`)).data
+        .users;
+      this.setState({ users });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   handleViewChange = (view) => {
@@ -167,16 +176,47 @@ class Filter extends Component {
     }
   }
 
-  addModerator = async (userId) => {
-    const users = (await Axios.post(`${BASE_URL}/ticket/moderator/${userId}`))
-      .data.users;
-    this.setState({ users });
+  addModerator = (userId) => {
+    this.setState(
+      {
+        spinner: "Adding user as Moderator...",
+      },
+      async () => {
+        try {
+          this.setState({
+            users: (await Axios.post(`${BASE_URL}/ticket/moderator/${userId}`))
+              .data.users,
+            spinner: "",
+          });
+        } catch (err) {
+          console.log(err);
+          toast.error("Something went wrong! Could not add user as Moderator")
+          this.setState({spinner: ""})
+        }
+      }
+    );
   };
 
-  removeModerator = async (userId) => {
-    const users = (await Axios.delete(`${BASE_URL}/ticket/moderator/${userId}`))
-      .data.users;
-    this.setState({ users });
+  removeModerator = (userId) => {
+    this.setState(
+      {
+        spinner: "Adding user as Moderator...",
+      },
+      async () => {
+        try {
+          this.setState({
+            users: (
+              await Axios.delete(`${BASE_URL}/ticket/moderator/${userId}`)
+            ).data.users,
+            spinner: "",
+          });
+        } catch (err) {
+          console.log(err);
+          toast.error("Something went wrong! Could not remove user as Moderator")
+          this.setState({spinner: ""})
+        }
+      }
+    );
   };
 
   render() {
@@ -310,69 +350,98 @@ class Filter extends Component {
             show={!!this.state.modal}
             onHide={this.toggleModal}
           >
-            <Modal.Header closeButton>
-              <Modal.Title>Manage Moderators</Modal.Title>
-            </Modal.Header>
-            <Modal.Body style={{ height: "500px", overflowY: "scroll" }}>
-              <div className="ticket-tabs">
-                <span className="nav__tab container">
-                  <ul className="nav__list__container">
-                    {[
-                      { view: "add", opt: "Add" },
-                      { view: "remove", opt: "Remove" },
-                    ].map((ele, index) => (
-                      <li
-                        key={index}
-                        className={
-                          this.state.modal.view === ele.view
-                            ? "nav__single__tab selected"
-                            : "nav__single__tab"
-                        }
-                        onClick={() => this.handleViewChange(ele.view)}
-                      >
-                        {ele.opt}
-                      </li>
-                    ))}
-                  </ul>
-                </span>
-              </div>
-              {this.state.modal.view === "add" &&
-                this.state.users.map((ele, index) => (
-                  <div key={index}>
-                    {!ele.isTicketsModerator && (
-                      <div className="moderator-modal-user">
-                        {userInfo(ele)}
-                        <Button
-                          style={{ marginLeft: "16px" }}
-                          onClick={() => this.addModerator(ele._id.toString())}
-                        >
-                          Add
-                        </Button>
-                      </div>
-                    )}
-                  </div>
-                ))}
-              {this.state.modal.view === "remove" &&
-                this.state.users.map((ele, index) => (
-                  <div key={index}>
-                    {ele.isTicketsModerator && (
-                      <div className="moderator-modal-user">
-                        {userInfo(ele)}
-                        <Button
-                          style={{ marginLeft: "16px" }}
-                          onClick={() =>
-                            this.removeModerator(ele._id.toString())
+            <LoadingOverlay
+              className="discussion"
+              active={!!this.state.spinner}
+              text={this.state.spinner}
+              spinner={<ClockLoader color={"#1A73E8"} />}
+              styles={{
+                spinner: (base) => ({
+                  ...base,
+                  width: "100px",
+                  "& svg circle": {
+                    stroke: "rgba(26, 115, 232, 0.5)",
+                  },
+                }),
+              }}
+            >
+              <Modal.Header closeButton>
+                <Modal.Title>Manage Moderators</Modal.Title>
+              </Modal.Header>
+              <Modal.Body style={{ height: "500px", overflowY: "scroll" }}>
+                <div className="ticket-tabs">
+                  <span className="nav__tab container">
+                    <ul className="nav__list__container">
+                      {[
+                        { view: "add", opt: "Add" },
+                        { view: "remove", opt: "Remove" },
+                      ].map((ele, index) => (
+                        <li
+                          key={index}
+                          className={
+                            this.state.modal.view === ele.view
+                              ? "nav__single__tab selected"
+                              : "nav__single__tab"
                           }
+                          onClick={() => this.handleViewChange(ele.view)}
                         >
-                          Remove
-                        </Button>
+                          {ele.opt}
+                        </li>
+                      ))}
+                    </ul>
+                  </span>
+                </div>
+                {this.state.modal.view === "add" &&
+                  this.state.users
+                    ?.filter((ele) => !ele.isTicketsModerator)
+                    .map((ele, index) => (
+                      <div key={index}>
+                        <div className="moderator-modal-user">
+                          {userInfo(ele)}
+                          <Button
+                            style={{ marginLeft: "16px" }}
+                            onClick={() =>
+                              this.addModerator(ele._id.toString())
+                            }
+                          >
+                            Add
+                          </Button>
+                        </div>
                       </div>
-                    )}
-                  </div>
-                ))}
-            </Modal.Body>
+                    ))}
+                {this.state.modal.view === "remove" &&
+                  this.state.users?.map((ele, index) => (
+                    <div key={index}>
+                      {ele.isTicketsModerator && (
+                        <div className="moderator-modal-user">
+                          {userInfo(ele)}
+                          <Button
+                            style={{ marginLeft: "16px" }}
+                            onClick={() =>
+                              this.removeModerator(ele._id.toString())
+                            }
+                          >
+                            Remove
+                          </Button>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+              </Modal.Body>
+            </LoadingOverlay>
           </Modal>
         )}
+        <ToastContainer
+          draggable
+          rtl={false}
+          pauseOnHover
+          closeOnClick
+          autoClose={5000}
+          pauseOnFocusLoss
+          newestOnTop={false}
+          position="top-right"
+          hideProgressBar={false}
+        />
       </div>
     );
   }
