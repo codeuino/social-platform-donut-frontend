@@ -57,20 +57,20 @@ class Info extends Component {
         <div className="info-details">
           <div className="data-element">
             <span className="data-title">Ticket ID: </span>
-            <span className="data-desc">9SUQb28020N</span>
+            <span className="data-desc">{this.props.ticket.number}</span>
           </div>
           <div className="data-element">
             <span className="data-title">Created: </span>
             <span className="data-desc">
-              <Moment format="DD MMM YYYY">
+              <Moment format="DD MMM YYYY, h:mm a">
                 {this.props.ticket.createdAt}
               </Moment>
             </span>
           </div>
           <div className="data-element">
-            <span className="data-title">Last Message:</span>
+            <span className="data-title">Last Updated:</span>
             <span className="data-desc">
-              <Moment format="DD MMM YYYY">
+              <Moment format="DD MMM YYYY, h:mm a">
                 {this.props.ticket.updatedAt}
               </Moment>
             </span>

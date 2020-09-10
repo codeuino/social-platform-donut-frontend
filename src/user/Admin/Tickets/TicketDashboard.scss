@@ -14,6 +14,23 @@
     overflow-y: scroll;
   }
   .ticket-details {
+    ._loading_overlay_wrapper {
+      height: 100%;
+    }
+    ._loading_overlay_overlay {
+      height: 100vh;
+      color: black;
+      background-color: rgba(255, 255, 255, 0.7);
+    }
+    ._loading_overlay_content {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+      * {
+        margin: 10px;
+      }
+    }
     flex: 1;
     margin-left: 13vw;
     .ticket-description {

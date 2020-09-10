@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./TicketDashboard.scss";
-import Axios from "axios";
+import axios from "axios";
 import Moment from "react-moment";
 import { connect } from "react-redux";
 import { setUpSocket } from "./socket";
@@ -8,22 +8,26 @@ import TicketFilter from "./Filter/Filter";
 import Button from "react-bootstrap/Button";
 import NewTicketEditor from "./NewTicketEditor";
 import socket from "../../dashboard/utils/socket";
+import LoadingOverlay from "react-loading-overlay";
 import { BASE_URL } from "../../../actions/baseApi";
+import ClockLoader from "react-spinners/ClockLoader";
+import { ToastContainer, toast } from "react-toastify";
 import TicketContent from "./TicketContent/TicketContent";
 import { getTickets } from "../../../actions/ticketAction";
+import { Drawer, List, ListItem } from "@material-ui/core";
 import donutIcon from "../../../assets/svgs/donut-icon.svg";
 import Navigation from "../../dashboard/navigation/navigation";
 import TicketDisscussion from "./TicketDiscussion/TicketDiscussions";
-import { Drawer, List, ListItem, ListItemText } from "@material-ui/core";
 import NotificationsNoneOutlinedIcon from "@material-ui/icons/NotificationsNoneOutlined";
 
 class TicketDashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      view: "all",
-      ticket: true,
       all: [],
+      view: "all",
+      spinner: "",
+      ticket: true,
       filtered: [],
       socket: socket,
       notifications: [],
@@ -31,6 +35,7 @@ class TicketDashboard extends Component {
       viewingTicket: null,
       notificationDrawer: false,
     };
+    this.axiosCancel = axios.CancelToken.source();
   }
 
   toggleDrawer = () => {
@@ -48,7 +53,6 @@ class TicketDashboard extends Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps.tickets.tickets);
     this.setState({
       all: nextProps.tickets.tickets,
       filtered: nextProps.tickets.tickets,
@@ -75,6 +79,10 @@ class TicketDashboard extends Component {
     setUpSocket(this.state, donutIcon, this.addToNotification);
   }
 
+  componentWillUnmount() {
+    this.axiosCancel.cancel("axios request cancelled - Component Unmounted");
+  }
+
   toggleNewTicketEditor = (open) => {
     this.setState({
       editorMode: open,
@@ -82,36 +90,57 @@ class TicketDashboard extends Component {
   };
 
   getTicketNotifications = async () => {
-    const notifications = (
-      await Axios.get(`${BASE_URL}/notification/ticket/user/all`)
-    ).data.notifications;
-    this.setState({ notifications });
+    try {
+      const notifications = (
+        await axios.get(`${BASE_URL}/notification/ticket/user/all`, {
+          cancelToken: this.axiosCancel.token,
+        })
+      ).data.notifications;
+      this.setState({ notifications });
+    } catch (err) {
+      console.log(err)
+    }
   };
 
-  handleCreateNewTicket = async (newTicket) => {
-    const ticket = (await Axios.post(`${BASE_URL}/ticket`, newTicket)).data
-      .ticket;
-    ticket.comments = 0;
-    this.setState({
-      all: [...this.state.all, ticket],
-      editorMode: false,
-    });
+  handleCreateNewTicket = (newTicket) => {
+    this.setState(
+      {
+        spinner: "Creating new Ticket...",
+      },
+      async () => {
+        try {
+          const ticket = (await axios.post(`${BASE_URL}/ticket`, newTicket, {
+            cancelToken: this.axiosCancel.token,
+          }))
+            .data.ticket;
+          ticket.comments = 0;
+          this.setState({
+            all: [ticket, ...this.state.all],
+            filtered: [ticket, ...this.state.all],
+            editorMode: false,
+            spinner: "",
+          });
+        } catch (err) {
+          console.log(err);
+          toast.error("Something went wrong! could create Ticket");
+          this.setState({ spinner: "" });
+        }
+      }
+    );
   };
 
   handleTicketSingleUpdate = (id, update) => {
-    console.log("Dashboard handle single update")
-    console.log(update)
     const tickets = [...this.state.all];
     tickets.forEach((ele) => {
       if (ele._id === id) {
-        ele[Object.keys(update)[0]] = Object.values(update)[0]
+        ele[Object.keys(update)[0]] = Object.values(update)[0];
       }
     });
     this.setState({
       all: [...tickets],
       filtered: [...tickets],
     });
-  }
+  };
 
   handleAddTag = (id, tagName) => {
     const tickets = [...this.state.all];
@@ -147,34 +176,57 @@ class TicketDashboard extends Component {
   };
 
   deleteTicket = (id) => {
-    const newTickets = this.state.all.filter(ele => ele._id !== id)
-    this.setState({
-      all: [...newTickets],
-      viewingTicket: null,
-      filtered: [...newTickets],
-    }, async () => {
-      await Axios.delete(`${BASE_URL}/ticket/${id}`)
-    })
-  }
+    const newTickets = this.state.all.filter((ele) => ele._id !== id);
+    this.setState(
+      { spinner: "Deleting Ticket,,,", viewingTicket: null },
+      async () => {
+        try {
+          await axios.delete(`${BASE_URL}/ticket/${id}`, {
+            cancelToken: this.axiosCancel.token,
+          });
+          this.setState({
+            all: [...newTickets],
+            filtered: [...newTickets],
+            spinner: "",
+          });
+        } catch (err) {
+          console.log(err);
+          toast.error("Something went wrong! could not delete Ticket");
+          this.setState({ spinner: "" });
+        }
+      }
+    );
+  };
 
   render() {
-    console.log(this.state.notifications);
     return (
       <div className="ticket">
         <div className="navigation">
           <Navigation ticket={this.state.ticket} />
         </div>
         <div className="ticket-details" id="ticket-shadow">
-          <div className="ticket-description">
-            <div className="dashboard-title">
-              Tickets
-              <Button variant="light" onClick={this.toggleDrawer}>
-                <NotificationsNoneOutlinedIcon />
-              </Button>
-            </div>
-            {!this.state.editorMode &&
-              this.state.all.length &&
-              !this.state.viewingTicket && (
+          <LoadingOverlay
+            text={this.state.spinner}
+            active={!!this.state.spinner}
+            spinner={<ClockLoader color={"#1A73E8"} />}
+            styles={{
+              spinner: (base) => ({
+                ...base,
+                width: "100px",
+                "& svg circle": {
+                  stroke: "rgba(26, 115, 232, 0.5)",
+                },
+              }),
+            }}
+          >
+            <div className="ticket-description">
+              <div className="dashboard-title">
+                Tickets
+                <Button variant="light" onClick={this.toggleDrawer}>
+                  <NotificationsNoneOutlinedIcon />
+                </Button>
+              </div>
+              {!this.state.editorMode && !this.state.viewingTicket && (
                 <React.Fragment>
                   <div className="ticket-status">
                     <TicketFilter
@@ -185,65 +237,81 @@ class TicketDashboard extends Component {
                       setFiltered={this.setFilteredTickets}
                     />
                   </div>
-                  <div className="ticket-content">
-                    <TicketContent
-                      viewTicket={this.handleViewTicket}
-                      tickets={this.state.filtered}
-                    />
-                  </div>
+                  {!!this.state.all.length && (
+                    <div className="ticket-content">
+                      <TicketContent
+                        viewTicket={this.handleViewTicket}
+                        tickets={this.state.filtered}
+                      />
+                    </div>
+                  )}
                 </React.Fragment>
               )}
-            {this.state.editorMode && !this.state.viewingTicket && (
-              <NewTicketEditor
-                save={this.handleCreateNewTicket}
-                cancel={() => this.toggleNewTicketEditor(false)}
-              />
-            )}
-            {this.state.viewingTicket && (
-              <TicketDisscussion
-                addTag={this.handleAddTag}
-                back={this.handleViewTicket}
-                currentUser={this.props.user}
-                removeTag={this.handleRemoveTag}
-                deleteTicket={this.deleteTicket}
-                ticketId={this.state.viewingTicket}
-                singleUpdate={this.handleTicketSingleUpdate}
-              />
-            )}
-          </div>
+              {this.state.editorMode && !this.state.viewingTicket && (
+                <NewTicketEditor
+                  save={this.handleCreateNewTicket}
+                  cancel={() => this.toggleNewTicketEditor(false)}
+                />
+              )}
+              {this.state.viewingTicket && (
+                <TicketDisscussion
+                  addTag={this.handleAddTag}
+                  back={this.handleViewTicket}
+                  currentUser={this.props.user}
+                  removeTag={this.handleRemoveTag}
+                  deleteTicket={this.deleteTicket}
+                  ticketId={this.state.viewingTicket}
+                  singleUpdate={this.handleTicketSingleUpdate}
+                />
+              )}
+            </div>
+          </LoadingOverlay>
+          <Drawer
+            anchor={"right"}
+            open={this.state.notificationDrawer}
+            PaperProps={{ style: { position: "absolute", zIndex: "5000" } }}
+            BackdropProps={{ style: { position: "absolute", zIndex: "5000" } }}
+            ModalProps={{
+              container: document.getElementById("ticket-shadow"),
+              style: { position: "absolute", zIndex: "5000" },
+            }}
+            variant="temporary"
+            onClose={this.toggleDrawer}
+          >
+            <List className="list">
+              {this.state.notifications &&
+                this.state.notifications.map((notification, index) => (
+                  <ListItem
+                    key={index}
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "flex-start",
+                    }}
+                  >
+                    <div>{notification.tag}</div>
+                    <div>{notification.heading}</div>
+                    <div>
+                      <Moment date={notification.createdAt} durationFromNow />
+                    </div>
+                    <div>{notification.content}</div>
+                    <hr></hr>
+                  </ListItem>
+                ))}
+            </List>
+          </Drawer>
+          <ToastContainer
+            draggable
+            rtl={false}
+            pauseOnHover
+            closeOnClick
+            autoClose={5000}
+            pauseOnFocusLoss
+            newestOnTop={false}
+            position="top-right"
+            hideProgressBar={false}
+          />
         </div>
-        <Drawer
-          anchor={"right"}
-          open={this.state.notificationDrawer}
-          PaperProps={{ style: { position: "absolute", zIndex: "5000" } }}
-          BackdropProps={{ style: { position: "absolute", zIndex: "5000" } }}
-          ModalProps={{
-            container: document.getElementById("ticket-shadow"),
-            style: { position: "absolute", zIndex: "5000" },
-          }}
-          variant="temporary"
-          onClose={this.toggleDrawer}
-        >
-          <List className="list">
-            {this.state.notifications && this.state.notifications.map((notification) => (
-              <ListItem
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "flex-start",
-                }}
-              >
-                <div>{notification.tag}</div>
-                <div>{notification.heading}</div>
-                <div>
-                  <Moment date={notification.createdAt} durationFromNow />
-                </div>
-                <div>{notification.content}</div>
-                <hr></hr>
-              </ListItem>
-            ))}
-          </List>
-        </Drawer>
       </div>
     );
   }

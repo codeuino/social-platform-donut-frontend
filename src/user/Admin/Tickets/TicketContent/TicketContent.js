@@ -11,14 +11,11 @@ import ChatBubbleOutlinedIcon from "@material-ui/icons/ChatBubbleOutlined";
 
 class TicketContent extends Component {
   handleRowClick = (arg1) => {
-    console.log("Row Clicked!");
-    console.log(arg1);
     this.props.viewTicket(arg1._id);
   };
 
   render() {
     const CustomTitle = ({ row }) => {
-      console.log(row);
       return (
         <div className="Ticket-dashboard-ticket">
           <div className="status">
@@ -26,6 +23,9 @@ class TicketContent extends Component {
           </div>
           <div>
             <div className="Ticket-dashboard-title">
+              {"# "}
+              {row.number}
+              {"  "}
               {row.title}
             </div>
             <div className="Ticket-dashboard-shortDesciption">{`${row.shortDescription.slice(
@@ -46,15 +46,17 @@ class TicketContent extends Component {
       },
       {
         grow: 3,
-        cell: (row) => (row.tags.map((ele, index) => (
-          <Badge
-            pill
-            variant="info"
-            style={{ fontSize: "13px", margin: "2px" }}
-          >
-            <span style={{ verticalAlign: "middle" }}>{ele}</span>
-          </Badge>
-        )))
+        cell: (row) =>
+          row.tags.map((ele, index) => (
+            <Badge
+              pill
+              key={index}
+              variant="info"
+              style={{ fontSize: "13px", margin: "2px" }}
+            >
+              <span style={{ verticalAlign: "middle" }}>{ele}</span>
+            </Badge>
+          )),
       },
       {
         name: "Created",
@@ -69,9 +71,15 @@ class TicketContent extends Component {
               className="profile-img"
               roundedCircle
             />
-            <div style={{ display: "flex", flexDirection: "column", marginLeft: "10px" }}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                marginLeft: "10px",
+              }}
+            >
               <div className="profile-text">{row.createdBy.name}</div>
-              <Moment format="DD MMM YYYY">{row.createdAt}</Moment>
+              <Moment format="DD MMM YYYY, h:mm a">{row.createdAt}</Moment>
             </div>
           </div>
         ),
@@ -84,7 +92,9 @@ class TicketContent extends Component {
         cell: (row) => (
           <div>
             {row.comments}
-            <ChatBubbleOutlinedIcon style={{ marginLeft: "5px", color: "rgba(0,0,0,0.5)" }}/>
+            <ChatBubbleOutlinedIcon
+              style={{ marginLeft: "5px", color: "rgba(0,0,0,0.5)" }}
+            />
           </div>
         ),
       },
@@ -94,7 +104,6 @@ class TicketContent extends Component {
       <DataTable
         pagination
         columns={columns}
-        pointerOnHover={true}
         highlightOnHover={true}
         data={this.props.tickets}
         customStyles={customStyles}

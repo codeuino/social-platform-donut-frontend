@@ -35,7 +35,7 @@ class History extends Component {
                   <div className="line">
                     <h5>{ele.updatedBy.name}</h5>
                     <h5>
-                      <Moment format="DD MMM YYYY">{ele.updatedAt}</Moment>
+                      <Moment format="MMMM Do YYYY, h:mm:ss a">{ele.updatedAt}</Moment>
                     </h5>
                   </div>
                   <div>

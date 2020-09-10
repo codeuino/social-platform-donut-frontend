@@ -7,10 +7,9 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case GET_TICKETs: {
       console.log(`Action Recieved in reducer! ${action.type}`);
-      console.log(action.payload);
       return {
         ...state,
-        tickets: action.payload,
+        tickets: action.payload.reverse(),
       };
     }
     default: {

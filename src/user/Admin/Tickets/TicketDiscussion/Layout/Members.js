@@ -63,8 +63,8 @@ class Members extends Component {
             <Modal.Title>Members</Modal.Title>
           </Modal.Header>
           <Modal.Body style={{ height: "500px", overflowY: "scroll" }}>
-            {members.map((ele) => (
-              <div style={{ display: "flex" }}>
+            {members.map((ele, index) => (
+              <div key={index} style={{ display: "flex" }}>
                 <Image
                   style={{ margin: "10px" }}
                   src={userIcon2}
@@ -94,6 +94,7 @@ class Members extends Component {
               <span className="data-desc">
                 {members.slice(0, 5).map((ele, index) => (
                   <HtmlTooltip
+                    key={index}
                     placement="top-end"
                     title={
                       <React.Fragment>

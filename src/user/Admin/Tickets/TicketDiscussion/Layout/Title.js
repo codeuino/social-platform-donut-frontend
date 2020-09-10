@@ -54,6 +54,9 @@ class Title extends Component {
                 <BadgeElement ticketState={this.props.ticket.status} />
                 <span style={{ marginLeft: "16px" }} className="title-text">
                   {this.props.ticket.title}
+                  <span
+                    style={{ color: "rgba(0,0,0,0.5)", marginLeft: "5px" }}
+                  >{`#${this.props.ticket.number}`}</span>
                 </span>
               </div>
               <div>

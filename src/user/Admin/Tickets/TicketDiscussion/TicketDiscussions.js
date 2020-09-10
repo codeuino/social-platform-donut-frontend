@@ -1,127 +1,188 @@
 import React, { Component } from "react";
 import "./TicketDiscussion.scss";
-import Axios from "axios";
-import ReactMde from "react-mde";
-import Moment from "react-moment";
+import axios from "axios";
 import Layout from "./Layout/Layout";
-import * as Showdown from "showdown";
-import { Image } from "react-bootstrap";
-import ReactMarkdown from "react-markdown";
-import Button from "react-bootstrap/Button";
-import Dropdown from "react-bootstrap/Dropdown";
+import History from "./History/History";
 import Disscussion from "./Discussion/Discussion";
 import "react-mde/lib/styles/css/react-mde-all.css";
 import { ToastContainer, toast } from "react-toastify";
 import { BASE_URL } from "../../../../actions/baseApi";
-import SaveButton from "@material-ui/icons/SaveOutlined";
-import EditButton from "@material-ui/icons/EditOutlined";
-import CancelButton from "@material-ui/icons/ClearOutlined";
-import userIcon2 from "../../../../assets/images/userIcon2.jpg";
-import SendOutlinedIcon from "@material-ui/icons/SendOutlined";
-import History from "./History/History";
 
 class TicketDiscussions extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      view: "discussions",
       ticket: null,
+      view: "discussions",
+      spinner: "Loading",
     };
+    this.axiosCancel = axios.CancelToken.source();
   }
 
-  getTicket = async () => {
-    const ticket = (
-      await Axios.get(`${BASE_URL}/ticket/${this.props.ticketId}`)
-    ).data.ticket;
-    this.editsAllowed =
-      localStorage.getItem("ticketModerator") === "true" ||
-      localStorage.getItem("admin") === "true" ||
-      localStorage.getItem("userId") === ticket.createdBy.id;
-    this.deleteAllowed =
-      localStorage.getItem("ticketModerator") === "true" ||
-      localStorage.getItem("admin") === "true";
-    this.setState({ ticket: ticket });
+  getTicket = () => {
+    this.setState(
+      {
+        spinner: "Loading Ticket...",
+      },
+      async () => {
+        const ticket = (
+          await axios.get(`${BASE_URL}/ticket/${this.props.ticketId}`, {
+            cancelToken: this.axiosCancel.token,
+          })
+        ).data.ticket;
+        this.editsAllowed =
+          localStorage.getItem("ticketModerator") === "true" ||
+          localStorage.getItem("admin") === "true" ||
+          localStorage.getItem("userId") === ticket.createdBy.id;
+        this.deleteAllowed =
+          localStorage.getItem("ticketModerator") === "true" ||
+          localStorage.getItem("admin") === "true";
+        this.setState({ ticket: ticket, spinner: "" });
+      }
+    );
   };
 
   componentDidMount() {
     this.getTicket();
   }
 
-  componentDidUpdate() {}
-
-  componentWillUnmount() {}
+  componentWillUnmount() {
+    this.axiosCancel.cancel("axios request cancelled - Component Unmounted");
+  }
 
   handleBack = () => {
     this.props.back(null);
   };
 
-  sendComment = async (content) => {
-    const newTicket = (
-      await Axios.post(`${BASE_URL}/ticket/${this.state.ticket._id}/comment`, {
-        content,
-      })
-    ).data.ticket;
-    this.setState({
-      ticket: newTicket,
-    });
+  sendComment = (content) => {
+    this.setState(
+      {
+        spinner: "Adding comment...",
+      },
+      async () => {
+        try {
+          this.setState({
+            ticket: (
+              await axios.post(
+                `${BASE_URL}/ticket/${this.state.ticket._id}/comment`,
+                {
+                  content,
+                },
+                { cancelToken: this.axiosCancel.token }
+              )
+            ).data.ticket,
+            spinner: "",
+          });
+        } catch (err) {
+          console.log(err);
+          toast.error("Something went wrong! could not add comment");
+          this.setState({ spinner: "" });
+        }
+      }
+    );
   };
 
   handleUpdateTicket = async (updates) => {
-    try {
-      const newTicket = (
-        await Axios.put(`${BASE_URL}/ticket/${this.state.ticket._id}`, updates)
-      ).data.ticket;
-      this.setState({
-        ticket: newTicket,
-      });
-    } catch (err) {
-      console.log(err);
-    }
+    this.setState(
+      {
+        spinner: "Updating Ticket...",
+      },
+      async () => {
+        try {
+          this.setState({
+            ticket: (
+              await axios.put(
+                `${BASE_URL}/ticket/${this.state.ticket._id}`,
+                updates,
+                { cancelToken: this.axiosCancel.token }
+              )
+            ).data.ticket,
+            spinner: "",
+          });
+        } catch (err) {
+          console.log(err);
+          toast.error("Something went wrong! could not update Ticket");
+          this.setState({ spinner: "" });
+        }
+      }
+    );
   };
 
-  handleCommentUpvote = async (commentId) => {
-    try {
-      const newTicket = (
-        await Axios.put(
-          `${BASE_URL}/ticket/${this.state.ticket._id}/comment/${commentId}/upvote`
-        )
-      ).data.ticket;
-      this.setState({
-        ticket: newTicket,
-      });
-    } catch (err) {
-      console.log(err);
-    }
+  handleCommentUpvote = (commentId) => {
+    this.setState(
+      {
+        spinner: "Adding vote to comment...",
+      },
+      async () => {
+        try {
+          this.setState({
+            ticket: (
+              await axios.put(
+                `${BASE_URL}/ticket/${this.state.ticket._id}/comment/${commentId}/upvote`,
+                {},
+                { cancelToken: this.axiosCancel.token }
+              )
+            ).data.ticket,
+            spinner: "",
+          });
+        } catch (err) {
+          console.log(err);
+          toast.error("Something went wrong! could not upvote comment");
+          this.setState({ spinner: "" });
+        }
+      }
+    );
   };
 
   handleCommentDownvote = async (commentId) => {
-    try {
-      const newTicket = (
-        await Axios.put(
-          `${BASE_URL}/ticket/${this.state.ticket._id}/comment/${commentId}/downvote`
-        )
-      ).data.ticket;
-      this.setState({
-        ticket: newTicket,
-      });
-    } catch (err) {
-      console.log(err);
-    }
+    this.setState(
+      {
+        spinner: "Removing vote from comment...",
+      },
+      async () => {
+        try {
+          this.setState({
+            ticket: (
+              await axios.put(
+                `${BASE_URL}/ticket/${this.state.ticket._id}/comment/${commentId}/downvote`,
+                {},
+                { cancelToken: this.axiosCancel.token }
+              )
+            ).data.ticket,
+            spinner: "",
+          });
+        } catch (err) {
+          console.log(err);
+          toast.error("Something went wrong! could not downvote comment");
+          this.setState({ spinner: "" });
+        }
+      }
+    );
   };
 
   handleCommentDelete = async (commentId) => {
-    try {
-      const newTicket = (
-        await Axios.delete(
-          `${BASE_URL}/ticket/${this.state.ticket._id}/comment/${commentId}`
-        )
-      ).data.ticket;
-      this.setState({
-        ticket: newTicket,
-      });
-    } catch (err) {
-      console.log(err);
-    }
+    this.setState(
+      {
+        spinner: "Removig comment...",
+      },
+      async () => {
+        try {
+          this.setState({
+            ticket: (
+              await axios.delete(
+                `${BASE_URL}/ticket/${this.state.ticket._id}/comment/${commentId}`,
+                { cancelToken: this.axiosCancel.token }
+              )
+            ).data.ticket,
+            spinner: "",
+          });
+        } catch (err) {
+          console.log(err);
+          toast.error("Something went wrong! could not remove comment");
+          this.setState({ spinner: "" });
+        }
+      }
+    );
   };
 
   handleAddTag = async (tagName) => {
@@ -132,36 +193,57 @@ class TicketDiscussions extends Component {
     } else if ((this.state.ticket.tags || []).length >= 7) {
       toast.error("Ticket can have upto 7 tags only");
     } else {
-      try {
-        const newTicket = (
-          await Axios.post(
-            `${BASE_URL}/ticket/${this.state.ticket._id}/tag/${tagName}`
-          )
-        ).data.ticket;
-        this.setState({
-          ticket: newTicket,
-        });
-        this.props.addTag(this.state.ticket._id, tagName);
-      } catch (err) {
-        console.log(err);
-      }
+      this.setState(
+        {
+          spinner: "Adding Tag...",
+        },
+        async () => {
+          try {
+            this.setState({
+              ticket: (
+                await axios.post(
+                  `${BASE_URL}/ticket/${this.state.ticket._id}/tag/${tagName}`,
+                  {},
+                  { cancelToken: this.axiosCancel.token }
+                )
+              ).data.ticket,
+              spinner: "",
+            });
+            this.props.addTag(this.state.ticket._id, tagName);
+          } catch (err) {
+            console.log(err);
+            toast.error("Something went wrong! could not add tag");
+            this.setState({ spinner: "" });
+          }
+        }
+      );
     }
   };
 
   handleDeleteTag = async (tagName) => {
-    try {
-      const newTicket = (
-        await Axios.delete(
-          `${BASE_URL}/ticket/${this.state.ticket._id}/tag/${tagName}`
-        )
-      ).data.ticket;
-      this.setState({
-        ticket: newTicket,
-      });
-      this.props.removeTag(this.state.ticket._id, tagName);
-    } catch (err) {
-      console.log(err);
-    }
+    this.setState(
+      {
+        spinner: "Removing Tag...",
+      },
+      async () => {
+        try {
+          this.setState({
+            ticket: (
+              await axios.delete(
+                `${BASE_URL}/ticket/${this.state.ticket._id}/tag/${tagName}`,
+                { cancelToken: this.axiosCancel.token }
+              )
+            ).data.ticket,
+            spinner: "",
+          });
+          this.props.addTag(this.state.ticket._id, tagName);
+        } catch (err) {
+          console.log(err);
+          toast.error("Something went wrong! could not remove tag");
+          this.setState({ spinner: "" });
+        }
+      }
+    );
   };
 
   handleViewChange = (atrb) => {
@@ -173,37 +255,36 @@ class TicketDiscussions extends Component {
   render() {
     return (
       <>
-        {this.state.ticket && (
-          <Layout
-            ticket={this.state.ticket}
-            view={this.state.view}
-            addTag={this.handleAddTag}
-            handleBack={this.handleBack}
-            removeTag={this.handleDeleteTag}
-            editsAllowed={this.editsAllowed}
-            deleteAllowed={this.deleteAllowed}
-            updateTicket={this.handleUpdateTicket}
-            singleUpdate={this.props.singleUpdate}
-            deleteTicket={this.props.deleteTicket}
-            handleViewChange={this.handleViewChange}
-          >
-            {this.state.view === "discussions" && (
-              <Disscussion
-                ticket={this.state.ticket}
-                sendComment={this.sendComment}
-                editsAllowed={this.editsAllowed}
-                deleteAllowed={this.deleteAllowed}
-                updateTicket={this.handleUpdateTicket}
-                upVoteComment={this.handleCommentUpvote}
-                deleteComment={this.handleCommentDelete}
-                downVoteComment={this.handleCommentDownvote}
-              />
-            )}
-            {this.state.view === "history" && (
-              <History ticket={this.state.ticket} />
-            )}
-          </Layout>
-        )}
+        <Layout
+          ticket={this.state.ticket}
+          view={this.state.view}
+          addTag={this.handleAddTag}
+          handleBack={this.handleBack}
+          spinner={this.state.spinner}
+          removeTag={this.handleDeleteTag}
+          editsAllowed={this.editsAllowed}
+          deleteAllowed={this.deleteAllowed}
+          updateTicket={this.handleUpdateTicket}
+          singleUpdate={this.props.singleUpdate}
+          deleteTicket={this.props.deleteTicket}
+          handleViewChange={this.handleViewChange}
+        >
+          {this.state.view === "discussions" && (
+            <Disscussion
+              ticket={this.state.ticket}
+              sendComment={this.sendComment}
+              editsAllowed={this.editsAllowed}
+              deleteAllowed={this.deleteAllowed}
+              updateTicket={this.handleUpdateTicket}
+              upVoteComment={this.handleCommentUpvote}
+              deleteComment={this.handleCommentDelete}
+              downVoteComment={this.handleCommentDownvote}
+            />
+          )}
+          {this.state.view === "history" && (
+            <History ticket={this.state.ticket} />
+          )}
+        </Layout>
         <ToastContainer
           draggable
           rtl={false}
