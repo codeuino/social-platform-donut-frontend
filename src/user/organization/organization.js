@@ -24,6 +24,7 @@ class Organization extends Component {
       isLoading: true,
       orgProfile: {},
       type: "About",
+      sideBarOpen: true,
     };
   }
 
@@ -42,8 +43,12 @@ class Organization extends Component {
   }
 
   handleClick = (type) => {
-    this.setState({ type: type })
-  }
+    this.setState({ type: type });
+  };
+  handleViewSidebar = () => {
+    console.log(this.state.sideBarOpen);
+    this.setState({ sideBarOpen: !this.state.sideBarOpen });
+  };
 
   render() {
     const { orgProfile, type } = this.state;
@@ -52,11 +57,25 @@ class Organization extends Component {
       description,
       // contactInfo
     } = orgProfile;
+    var sideBarClass = this.state.sideBarOpen ? "sidebar-open" : "sidebar";
     return (
       <div className="organization">
-        <div className="navigation">
+        <div className={sideBarClass}>
           <Navigation org={this.state.org}></Navigation>
         </div>
+        <button
+          onClick={this.handleViewSidebar}
+          className="sidebar-toggle"
+          style={
+            sideBarClass === "sidebar-open"
+              ? { marginLeft: "1vw" }
+              : { marginLeft: "-12vw" }
+          }
+        >
+          <div />
+          <div />
+          <div />
+        </button>
         <div className="news">
           {this.state.isLoading ? (
             topBarLoading()

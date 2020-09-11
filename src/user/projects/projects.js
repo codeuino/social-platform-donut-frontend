@@ -1,12 +1,21 @@
 import React, { Component } from "react";
 import "./projects.scss";
 import Navigation from "../dashboard/navigation/navigation";
-import { makeStyles,Grid , Card, CardActionArea, CardActions, CardContent, CardMedia, Typography} from "@material-ui/core";
+import {
+  makeStyles,
+  Grid,
+  Card,
+  CardActionArea,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Typography,
+} from "@material-ui/core";
 import { Button } from "react-bootstrap";
-import { connect } from 'react-redux'
-import { createProject, getAllProjects } from '../../actions/projectAction'
-import { Pagination } from 'antd'
-import projectImage from '../../assets/images/project.png'
+import { connect } from "react-redux";
+import { createProject, getAllProjects } from "../../actions/projectAction";
+import { Pagination } from "antd";
+import projectImage from "../../assets/images/project.png";
 import { withRouter } from "react-router-dom";
 
 class Projects extends Component {
@@ -15,35 +24,40 @@ class Projects extends Component {
     this.state = {
       proj: true,
       deleteproject: false,
-      allProjects: []
+      allProjects: [],
+      sideBarOpen: true,
     };
   }
   componentDidMount() {
     setTimeout(() => {
       this.props.getAllProjects(); // by default 6 projects per page
-    })
+    });
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('project ', nextProps)
-    const { allProjects } = nextProps.project
+    console.log("project ", nextProps);
+    const { allProjects } = nextProps.project;
     this.setState({ allProjects: allProjects }, () => {
-      console.log('projects state ', this.state)
-    })
+      console.log("projects state ", this.state);
+    });
   }
 
   onShowSizeChange = (currentPage, pageSize) => {
-    console.log('currentPage pageSize ', currentPage, pageSize)
-    this.props.getAllProjects(pageSize, currentPage)
-  }
+    console.log("currentPage pageSize ", currentPage, pageSize);
+    this.props.getAllProjects(pageSize, currentPage);
+  };
 
   handlePagination = (pageNumber) => {
-    console.log('page number ', pageNumber);
-    this.props.getAllProjects(6, pageNumber)
-  }
-
+    console.log("page number ", pageNumber);
+    this.props.getAllProjects(6, pageNumber);
+  };
+  handleViewSidebar = () => {
+    console.log(this.state.sideBarOpen);
+    this.setState({ sideBarOpen: !this.state.sideBarOpen });
+  };
   render() {
-    const { allProjects } = this.state
+    const { allProjects } = this.state;
+    var sideBarClass = this.state.sideBarOpen ? "sidebar-open" : "sidebar";
     const useStyles = makeStyles((theme) => ({
       root: {
         flexGrow: 1,
@@ -63,7 +77,7 @@ class Projects extends Component {
     });
 
     let Projects = allProjects.map((Item, index) => (
-      <Grid item xs = {6} sm = {4} key={index} className="card__container">
+      <Grid item xs={6} sm={4} key={index} className="card__container">
         <Card className={useStyles2.root}>
           <CardActionArea>
             <CardMedia
@@ -75,14 +89,20 @@ class Projects extends Component {
               <Typography gutterBottom variant="h5" component="h2">
                 {Item.projectName || "Project Name"}
               </Typography>
-              <Typography variant="body2" color="textSecondary" component="p" className="short-des">
-                {Item.description?.shortDescription || "Short description of the project"}
+              <Typography
+                variant="body2"
+                color="textSecondary"
+                component="p"
+                className="short-des"
+              >
+                {Item.description?.shortDescription ||
+                  "Short description of the project"}
               </Typography>
             </CardContent>
           </CardActionArea>
           <CardActions>
-            <Button 
-              size="small" 
+            <Button
+              size="small"
               onClick={() => this.props.history.push(`/${Item._id}/proj-info`)}
               variant="light"
             >
@@ -95,9 +115,22 @@ class Projects extends Component {
 
     return (
       <div className="organization">
-        <div className="navigation">
+        <div className={sideBarClass}>
           <Navigation proj={this.state.proj}></Navigation>
         </div>
+        <button
+          onClick={this.handleViewSidebar}
+          className="sidebar-toggle"
+          style={
+            sideBarClass === "sidebar-open"
+              ? { marginLeft: "1vw" }
+              : { marginLeft: "-12vw" }
+          }
+        >
+          <div />
+          <div />
+          <div />
+        </button>
         <div className="news projects">
           <p id="project__header">All Projects</p>
           <div className={useStyles.root}>
@@ -120,14 +153,14 @@ class Projects extends Component {
   }
 }
 
-// map state to props 
+// map state to props
 const mapStateToProps = (state) => ({
   auth: state.auth,
   error: state.error,
-  project: state.project
-})
+  project: state.project,
+});
 
 export default connect(mapStateToProps, {
   createProject,
-  getAllProjects
+  getAllProjects,
 })(withRouter(Projects));

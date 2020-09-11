@@ -8,7 +8,7 @@ import NewsFeed from "./news-feed/news-feed";
 import notifyUsersLoading from "../../placeholderLoading/notifyUsersLoading/notifyUsersLoading";
 import portfolioLoading from "../../placeholderLoading/portfolioLoading/portfolioLoading";
 import newsFeedLoading from "../../placeholderLoading/newsFeedLoading/newsFeedLoading";
-import { connect } from 'react-redux'
+import { connect } from "react-redux";
 import { getAllEvents } from "../../actions/eventAction";
 import { getAllPosts } from "../../actions/postAction";
 import { getAllProjects } from "../../actions/projectAction";
@@ -22,46 +22,67 @@ class Dashboard extends Component {
       allPosts: [],
       allProjects: [],
       allEvents: [],
-      allMix: []
+      allMix: [],
+      sideBarOpen: true,
     };
   }
 
   componentDidMount() {
     setTimeout(() => {
       this.props.getAllEvents();
-    })
+    });
     setTimeout(() => {
-      this.props.getAllPosts()
-    })
+      this.props.getAllPosts();
+    });
     setTimeout(() => {
-      this.props.getAllProjects()
-    })
+      this.props.getAllProjects();
+    });
     setTimeout(() => {
       this.setState({ isLoading: false });
     }, 1000);
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('dashboard ', nextProps)
-    const { event, project, post } = nextProps
-    let all = [...event?.allEvents, ...post?.allPosts, ...project?.allProjects]
-    this.setState({
-      allEvents: event?.allEvents,
-      allPosts: post?.allPosts,
-      allProjects: project?.allProjects,
-      allMix: all
-    }, () => {
-      console.log('updated dashboard ', this.state)
-    })
+    console.log("dashboard ", nextProps);
+    const { event, project, post } = nextProps;
+    let all = [...event?.allEvents, ...post?.allPosts, ...project?.allProjects];
+    this.setState(
+      {
+        allEvents: event?.allEvents,
+        allPosts: post?.allPosts,
+        allProjects: project?.allProjects,
+        allMix: all,
+      },
+      () => {
+        console.log("updated dashboard ", this.state);
+      }
+    );
   }
-
+  handleViewSidebar = () => {
+    console.log(this.state.sideBarOpen);
+    this.setState({ sideBarOpen: !this.state.sideBarOpen });
+  };
   render() {
-    const { allMix, allEvents, allProjects, allPosts } = this.state
-    return ( 
+    const { allMix, allEvents, allProjects, allPosts } = this.state;
+    var sideBarClass = this.state.sideBarOpen ? "sidebar-open" : "sidebar";
+    return (
       <div className="dashboard">
-        <div className="navigation">
+        <div className={sideBarClass}>
           <Navigation dashboard={this.state.dashboard}></Navigation>
         </div>
+        <button
+          onClick={this.handleViewSidebar}
+          className="sidebar-toggle"
+          style={
+            sideBarClass === "sidebar-open"
+              ? { marginLeft: "13vw" }
+              : { marginLeft: 0 }
+          }
+        >
+          <div />
+          <div />
+          <div />
+        </button>
         <div className="news">
           {this.state.isLoading ? (
             notifyUsersLoading()
@@ -71,7 +92,16 @@ class Dashboard extends Component {
               <Notifications></Notifications>
             </div>
           )}
-          {this.state.isLoading ? newsFeedLoading() : <NewsFeed allMix={allMix} allProjects={allProjects} allPosts={allPosts} allEvents={allEvents}/>}
+          {this.state.isLoading ? (
+            newsFeedLoading()
+          ) : (
+            <NewsFeed
+              allMix={allMix}
+              allProjects={allProjects}
+              allPosts={allPosts}
+              allEvents={allEvents}
+            />
+          )}
         </div>
         <div className="promotions">
           {this.state.isLoading ? portfolioLoading() : <Portfolio />}
@@ -81,13 +111,17 @@ class Dashboard extends Component {
   }
 }
 
-// map state to props 
+// map state to props
 const mapStateToProps = (state) => ({
   auth: state.auth,
   error: state.error,
   event: state.event,
   post: state.post,
-  project: state.project
-})
+  project: state.project,
+});
 
-export default connect(mapStateToProps, { getAllEvents, getAllPosts, getAllProjects })(Dashboard);
+export default connect(mapStateToProps, {
+  getAllEvents,
+  getAllPosts,
+  getAllProjects,
+})(Dashboard);

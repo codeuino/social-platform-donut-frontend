@@ -26,6 +26,7 @@ class Profile extends Component {
       userPosts: [],
       pinnedPosts: [],
       userId: "",
+      sideBarOpen: true,
     };
   }
 
@@ -71,7 +72,10 @@ class Profile extends Component {
       }
     );
   }
-
+  handleViewSidebar = () => {
+    console.log(this.state.sideBarOpen);
+    this.setState({ sideBarOpen: !this.state.sideBarOpen });
+  };
   render() {
     const {
       userProfile,
@@ -81,16 +85,30 @@ class Profile extends Component {
       userPosts,
       pinnedPosts,
     } = this.state;
+    var sideBarClass = this.state.sideBarOpen ? "sidebar-open" : "sidebar";
     return (
       <div className="profile">
         <div
-          className="navigation"
+          className={sideBarClass}
           style={{
             background: "#f5f5f5",
           }}
         >
           <Navigation profile={this.state.profile}></Navigation>
         </div>
+        <button
+          onClick={this.handleViewSidebar}
+          className="sidebar-toggle"
+          style={
+            sideBarClass === "sidebar-open"
+              ? { marginLeft: "13vw" }
+              : { marginLeft: 0 }
+          }
+        >
+          <div />
+          <div />
+          <div />
+        </button>
         <div className="news">
           <div className="notify-user">
             <UserInfo userProfile={userProfile} />
