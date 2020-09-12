@@ -1,6 +1,7 @@
 .activity__timeline {
   margin-top: 4vh;
   margin-left: 7vw;
+  height: 100%;
   .activity__timeline__header__container {
     .activity__timeline__header {
       font-family: "Inter";
@@ -16,8 +17,7 @@
   .activities__list {
     max-height: 75vh;
     overflow-y: auto;
-    width: 75vw;
-    margin-top: 4px;
+    width: 50vw;
     overflow-x: hidden;
     margin-top: 27px;
     display: flex;
