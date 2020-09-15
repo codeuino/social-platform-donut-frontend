@@ -10,7 +10,7 @@ codeuino's open source social platform <br><br>
 
 </div>
 
-#### For frontend of this repo move to [this](https://github.com/codeuino/social-platform-donut-frontend) repository.
+#### For backend of this repo move to [this](https://github.com/codeuino/social-platform-donut-backend) repository.
 
 <div align='center'>
 <img style="border:1px black solid;" height=165px src="READMEassets/signup_community.png">
