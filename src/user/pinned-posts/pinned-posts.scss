@@ -1,17 +1,20 @@
+@import "../sidebarCommon";
+
 .pinned-posts {
   display: flex;
   min-height: 100vh;
   height: auto;
   font-family: Muli, sans-serif;
-  h1{
+  h1 {
     font-size: 26px;
     font-weight: bold;
     font-family: Muli, sans-serif;
   }
-  .navigation {
+  /*.navigation {
     flex: 0.5;
     border-right: solid 1px #dfe9f1;
-  }
+  }*/
+
   .news {
     flex: 2;
     .notify-user {
@@ -23,10 +26,10 @@
     flex: 1;
     margin: 20px 20px;
   }
-  .Pinned-post{
+  .Pinned-post {
     padding: 20px 12px 0px 30px;
   }
-  .organization-update{
+  .organization-update {
     padding: 20px 12px 0px 0px;
   }
 }

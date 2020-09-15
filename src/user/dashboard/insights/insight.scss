@@ -1,6 +1,8 @@
+@import "../../sidebarCommon";
+
 .insight_main_container {
   display: flex;
-  .insight_left_nav {
+  /*.insight_left_nav {
     border-right: solid 1px #dfe9f1;
     position: fixed;
     top: 0px;
@@ -8,10 +10,11 @@
     left: 0px;
     overflow-y: scroll;
     background: #f5f5f5;
-  }
+  }*/
+
   .right_view_container {
     .right_view {
-      margin-left: 13vw;
+      //margin-left: 13vw;
       margin-top: 10px;
       .right_view_header {
         font-family: Qanelas;

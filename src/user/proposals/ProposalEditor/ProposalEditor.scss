@@ -1,12 +1,15 @@
+@import "../../sidebarCommon";
+
 .editor {
   display: flex;
   min-height: 100vh;
   height: auto;
   font-family: Muli, sans-serif;
-  .editor__navigation {
+  /*.editor__navigation {
     flex: 1;
     border-right: solid 1px #dfe9f1;
-  }
+  }*/
+
   .editor__content {
     flex: 5.5;
   }

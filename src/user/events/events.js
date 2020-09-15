@@ -28,6 +28,7 @@ class Events extends Component {
       singleEvent: {},
       editAllowed: true,
       editingLimit: "",
+      sideBarOpen: true,
     };
   }
 
@@ -63,10 +64,14 @@ class Events extends Component {
     console.log("page number ", pageNumber);
     this.props.getAllEvents(6, pageNumber);
   };
+  handleViewSidebar = () => {
+    console.log(this.state.sideBarOpen);
+    this.setState({ sideBarOpen: !this.state.sideBarOpen });
+  };
 
   render() {
     const { allEvents, editingLimit } = this.state;
-
+    var sideBarClass = this.state.sideBarOpen ? "sidebar-open" : "sidebar";
     const handleToggle = (eventId, event) => {
       console.log("-handletoggel", eventId);
       this.setState({ modalShow: true, eventId: eventId, singleEvent: event });
@@ -273,9 +278,22 @@ class Events extends Component {
 
     return (
       <div className="organization">
-        <div className="navigation">
+        <div className={sideBarClass}>
           <Navigation event={this.state.event}></Navigation>
         </div>
+        <button
+          onClick={this.handleViewSidebar}
+          className="sidebar-toggle"
+          style={
+            sideBarClass === "sidebar-open"
+              ? { marginLeft: "1vw" }
+              : { marginLeft: "-12vw" }
+          }
+        >
+          <div />
+          <div />
+          <div />
+        </button>
         <div className="events">
           <h1 className="event_header">All Events</h1>
           <Grid container spacing={3}>

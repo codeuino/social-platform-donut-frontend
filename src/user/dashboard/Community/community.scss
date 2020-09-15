@@ -1,6 +1,8 @@
+@import "../../sidebarCommon";
+
 .overall_container {
   display: flex;
-  .main_navigation {
+  /*.main_navigation {
     background: #f5f5f5;
     flex-grow: 1;
     border-right: solid 1px #dfe9f1;
@@ -9,9 +11,10 @@
     bottom: 0px;
     left: 0px;
     overflow-y: scroll;
-  }
+  }*/
+
   .org_settings_view {
-    margin-left: 13vw;
+    //margin-left: 13vw;
     margin-top: 35px;
     .main_section {
       display: flex;

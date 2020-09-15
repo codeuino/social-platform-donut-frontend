@@ -3,11 +3,11 @@
   min-height: 100vh;
   height: auto;
   font-family: "Inter";
-  .navigation {
+  /*.navigation {
     flex: 0.5;
     border-right: solid 1px #dfe9f1;
     
-  }
+  }*/
   .integrations-content {
     width: 100%;
     flex: 3;
@@ -81,8 +81,8 @@
             text-align: center;
             border-radius: 25px;
             font-size: 15px;
-            color: #1A73E8;
-            background-color: #FFFFFF;
+            color: #1a73e8;
+            background-color: #ffffff;
             width: 60%;
           }
         }

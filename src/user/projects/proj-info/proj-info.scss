@@ -1,15 +1,15 @@
 .container {
   margin-top: 2vh;
-  .back{
-    position:fixed;
+  .back {
+    position: fixed;
     z-index: 2;
-    top:0;
-    left:15%;
+    top: 0;
+    left: 15%;
   }
 }
 
-.proj_img{
-  height:15rem;
+.proj_img {
+  height: 15rem;
   margin-left: 1vw;
   max-width: 23vw;
   max-height: 42vh;
@@ -20,30 +20,30 @@
   flex: 1;
   padding: 10px 14px;
   h1 {
-    color: #2D2D2D;
+    color: #2d2d2d;
     font-size: 40px;
     font-weight: 500;
     margin: 0;
     padding: 0;
   }
 
-  .createAt{
+  .createAt {
     font-family: Inter;
     font-style: normal;
     font-weight: normal;
-    color: #2D2D2D;
+    color: #2d2d2d;
     font-size: 12px;
     margin: 4px 0;
     padding: 0;
   }
-  .tech-stack{
+  .tech-stack {
     margin-top: 3vh;
   }
   .short_des {
     font-family: Inter;
     font-style: normal;
     font-weight: normal;
-    color: #2D2D2D;
+    color: #2d2d2d;
     font-size: 18px;
     font-weight: 500;
     margin: 4px 0;
@@ -56,7 +56,7 @@
     font-family: Inter;
     font-style: normal;
     font-weight: normal;
-    color: #2D2D2D;
+    color: #2d2d2d;
     font-size: 12px;
     margin: 4px 0;
     padding: 0;
@@ -68,17 +68,17 @@
     font-weight: normal;
     font-size: 1.5em;
     line-height: 1.3em;
-    color: #2D2D2D;
+    color: #2d2d2d;
     text-align: justify;
     max-width: 83%;
   }
 }
 
-.description{
-  h1{
+.description {
+  h1 {
     font-family: Inter;
     font-style: normal;
-    color: #2D2D2D;
+    color: #2d2d2d;
     font-size: 27px;
     margin: 0;
     font-weight: 500;
@@ -86,24 +86,23 @@
     text-align: left;
     margin-left: 2%;
   }
- 
+
   .desc {
     font-family: Inter;
     font-style: normal;
     font-weight: normal;
     font-size: 1.2em;
     line-height: 1.3em;
-    color: #2D2D2D;
+    color: #2d2d2d;
     margin-left: 2%;
     max-width: 83%;
   }
   margin-top: 5vh;
 }
 
-
-.maintainers{
-  h1{
-    color: #2D2D2D;
+.maintainers {
+  h1 {
+    color: #2d2d2d;
     font-size: 30px;
     font-weight: bold;
     margin: 0;
@@ -113,4 +112,3 @@
   margin-top: 2vh;
   margin-bottom: 1vh;
 }
-

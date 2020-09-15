@@ -15,7 +15,8 @@ class Projects extends Component {
     this.state = {
       proj: true,
       deleteproject: false,
-      allProjects: []
+      allProjects: [],
+      sideBarOpen: true,
     };
   }
   componentDidMount() {
@@ -40,10 +41,14 @@ class Projects extends Component {
   handlePagination = (pageNumber) => {
     console.log('page number ', pageNumber);
     this.props.getAllProjects(6, pageNumber)
-  }
-
+  };
+  handleViewSidebar = () => {
+    console.log(this.state.sideBarOpen);
+    this.setState({ sideBarOpen: !this.state.sideBarOpen });
+  };
   render() {
-    const { allProjects } = this.state
+    const { allProjects } = this.state;
+    var sideBarClass = this.state.sideBarOpen ? "sidebar-open" : "sidebar";
     const useStyles = makeStyles((theme) => ({
       root: {
         flexGrow: 1,
@@ -63,7 +68,7 @@ class Projects extends Component {
     });
 
     let Projects = allProjects.map((Item, index) => (
-      <Grid item xs = {6} sm = {4} key={index} className="card__container">
+      <Grid item xs={6} sm={4} key={index} className="card__container">
         <Card className={useStyles2.root}>
           <CardActionArea>
             <CardMedia
@@ -81,8 +86,8 @@ class Projects extends Component {
             </CardContent>
           </CardActionArea>
           <CardActions>
-            <Button 
-              size="small" 
+            <Button
+              size="small"
               onClick={() => this.props.history.push(`/${Item._id}/proj-info`)}
               variant="light"
             >
@@ -95,9 +100,22 @@ class Projects extends Component {
 
     return (
       <div className="organization">
-        <div className="navigation">
+        <div className={sideBarClass}>
           <Navigation proj={this.state.proj}></Navigation>
         </div>
+        <button
+          onClick={this.handleViewSidebar}
+          className="sidebar-toggle"
+          style={
+            sideBarClass === "sidebar-open"
+              ? { marginLeft: "1vw" }
+              : { marginLeft: "-12vw" }
+          }
+        >
+          <div />
+          <div />
+          <div />
+        </button>
         <div className="news projects">
           <p id="project__header">All Projects</p>
           <div className={useStyles.root}>
@@ -120,7 +138,7 @@ class Projects extends Component {
   }
 }
 
-// map state to props 
+// map state to props
 const mapStateToProps = (state) => ({
   auth: state.auth,
   error: state.error,

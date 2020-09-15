@@ -20,8 +20,9 @@ class CommunitySetting extends Component {
         settings: false,
         permission: false,
         authentication: false,
-        maintenance: false
-      }
+        maintenance: false,
+      },
+      sideBarOpen: true,
     };
   }
   componentDidMount() {
@@ -35,13 +36,32 @@ class CommunitySetting extends Component {
    this.setState({ option: { [name]: true }})
    this.setState({ view: name })
   }
+
+  handleViewSidebar = () => {
+    console.log(this.state.sideBarOpen);
+    this.setState({ sideBarOpen: !this.state.sideBarOpen });
+  };
   render() {
     const { view } = this.state;
+    var sideBarClass = this.state.sideBarOpen ? "sidebar-open" : "sidebar";
     return (
       <div className="overall_container">
-        <div className="main_navigation">
+        <div className={sideBarClass}>
           <Navigation orgSettings={this.state.org} user={this.props.user} />
         </div>
+        <button
+          onClick={this.handleViewSidebar}
+          className="sidebar-toggle"
+          style={
+            sideBarClass === "sidebar-open"
+              ? { marginLeft: "13vw" }
+              : { marginLeft: 0 }
+          }
+        >
+          <div />
+          <div />
+          <div />
+        </button>
         <div className="org_settings_view">
           <div className="main_section">
             <div className="left_nav">
@@ -60,7 +80,7 @@ class CommunitySetting extends Component {
               {view === "authentication" ? <OrgAuth /> : null}
               {view === "maintenance" ? <OrgMaintenance /> : null}
               {view === "activity" ? (
-                <Users 
+                <Users
                   handleOption={{ changeOption: this.changeOption.bind(this) }}
                 />) : null }
             </div>

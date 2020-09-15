@@ -15,7 +15,6 @@ import { getProjectById } from '../../../actions/projectAction'
 import { checkDeleteRights } from '../../dashboard/utils/checkDeleteRights'
 import Moment from 'react-moment'
 
-
 class ProjInfo extends Component {
   constructor(props) {
     super(props);
@@ -26,13 +25,14 @@ class ProjInfo extends Component {
       deleteProject: false,
       githubLink: '',
       bitBucketLink: '',
-      techStacks: []
+      techStacks: [],
+      sideBarOpen: true,
     };
   }
 
   componentDidMount() {
-    console.log('project info mounted ',this.props)
-    // fetch the data from db 
+    console.log('project info mounted ', this.props)
+    // fetch the data from db
     setTimeout(() => {
       this.props.getProjectById(this.props.match.params.id)
     })
@@ -47,7 +47,10 @@ class ProjInfo extends Component {
     const { links } = singleProject
     this.setState({ githubLink: links[0]?.githubLink, bitBucketLink: links[0]?.bitBucketLink })
   }
-
+  handleViewSidebar = () => {
+    console.log(this.state.sideBarOpen);
+    this.setState({ sideBarOpen: !this.state.sideBarOpen });
+  };
   render() {
     const { projectInfo, editProject, proj, deleteProject, githubLink, bitBucketLink, techStacks } = this.state
 
@@ -100,18 +103,39 @@ class ProjInfo extends Component {
     //   </Grid>
     // ));
 
-    let variant = ["primary", "secondary", "success", "danger", "warning", "light", "dark"]
+    let variant = [
+      "primary",
+      "secondary",
+      "success",
+      "danger",
+      "warning",
+      "light",
+      "dark",
+    ];
     const techBadge = techStacks?.map((techs, index) => (
       <React.Fragment key={index}>
         <Badge pill variant={variant[index]} key={index}>{techs}</Badge>{" "}
       </React.Fragment>
     ))
-
+    var sideBarClass = this.state.sideBarOpen ? "sidebar-open" : "sidebar";
     return (
       <div className="organization">
-        <div className="navigation">
+        <div className={sideBarClass}>
           <Navigation proj={proj}></Navigation>
         </div>
+        <button
+          onClick={this.handleViewSidebar}
+          className="sidebar-toggle"
+          style={
+            sideBarClass === "sidebar-open"
+              ? { marginLeft: "1vw" }
+              : { marginLeft: "-12vw" }
+          }
+        >
+          <div />
+          <div />
+          <div />
+        </button>
         <div className="news">
           <Row>
             <Col sm={4}>
@@ -161,11 +185,11 @@ class ProjInfo extends Component {
                         <DeleteIcon></DeleteIcon>
                       </Button>
                     ) : null}
-                  <DeleteProject
-                    show={deleteProject}
-                    onHide={cancel_del}
-                    projectId={this.props.match.params.id}
-                  />
+                    <DeleteProject
+                      show={deleteProject}
+                      onHide={cancel_del}
+                      projectId={this.props.match.params.id}
+                    />
                     <br></br>
                     <div className="tech-stack">
                       {techBadge}
@@ -174,10 +198,10 @@ class ProjInfo extends Component {
                 </Row>
 
                 <p className="createAt">
-                  Created At: 
-                    <Moment format="DD MMM YYYY">
-                      {projectInfo?.createdAt}
-                    </Moment>
+                  Created At:
+                  <Moment format="DD MMM YYYY">
+                    {projectInfo?.createdAt}
+                  </Moment>
                   {" "}
                 </p>
                 <p className="place">Updated At: 
@@ -187,7 +211,7 @@ class ProjInfo extends Component {
                 </p>
                 <p className="short_des">
                   {projectInfo.description?.short || "Short description"}
-                  </p>
+                </p>
               </div>
             </Col>
           </Row>
@@ -224,7 +248,7 @@ class ProjInfo extends Component {
   }
 }
 
-// map state to props 
+// map state to props
 const mapStateToProps = (state) => ({
   auth: state.auth,
   error: state.error,

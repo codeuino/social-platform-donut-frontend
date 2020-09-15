@@ -1,12 +1,15 @@
+@import "../../sidebarCommon";
+
 .integrations {
   display: flex;
   min-height: 100vh;
   height: auto;
   font-family: "Inter";
-  .navigation {
+  /*.navigation {
     flex: 0.5;
     border-right: solid 1px #dfe9f1;
-  }
+  }*/
+
   .integrations-content {
     width: 100%;
     flex: 3;

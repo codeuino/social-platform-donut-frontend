@@ -1,9 +1,11 @@
+@import "../sidebarCommon";
+
 .dashboard {
   display: flex;
   min-height: 100vh;
   height: auto;
   font-family: Muli, sans-serif;
-  .navigation {
+  /*.navigation {
     background: #f5f5f5;
     flex-grow: 1;
     border-right: solid 1px #dfe9f1;
@@ -12,9 +14,10 @@
     bottom: 0px;
     left: 0px;
     overflow-y: scroll;
-  }
+  }*/
+
   .news {
-    margin-left: 13vw;
+    //margin-left: 13vw;
     flex-grow: 4;
     .notify-user {
       display: flex;

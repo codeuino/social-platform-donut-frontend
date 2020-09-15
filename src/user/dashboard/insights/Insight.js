@@ -12,7 +12,8 @@ class Insight extends Component {
     this.state = {
       insight: true,
       view: 'org',
-      userId: ''
+      userId: '',
+      sideBarOpen: true,
     };
   }
 
@@ -26,9 +27,13 @@ class Insight extends Component {
       console.log('State is ', this.state);
     })
   }
-
+  handleViewSidebar = () => {
+    console.log(this.state.sideBarOpen);
+    this.setState({ sideBarOpen: !this.state.sideBarOpen });
+  };
   render() {
     const { view, userId } = this.state;
+    var sideBarClass = this.state.sideBarOpen ? "sidebar-open" : "sidebar";
     let communityInfo = (
       <div className="right_view_container">
         <CommunityStats view={view} onTabChange={this.onTabChange.bind(this)} />
@@ -41,9 +46,22 @@ class Insight extends Component {
     );
     return (
       <div className="insight_main_container">
-        <div className="insight_left_nav">
+        <div className={sideBarClass}>
           <Navigation insight={this.state.insight} />
         </div>
+        <button
+          onClick={this.handleViewSidebar}
+          className="sidebar-toggle"
+          style={
+            sideBarClass === "sidebar-open"
+              ? { marginLeft: "13vw" }
+              : { marginLeft: 0 }
+          }
+        >
+          <div />
+          <div />
+          <div />
+        </button>
         <div className="insight_content">
           {view === "org" ? communityInfo : memberInfo}
         </div>
@@ -52,7 +70,7 @@ class Insight extends Component {
   }
 }
 
-// map state to props 
+// map state to props
 const mapStateToProps = (state) => ({
   user: state.user
 })

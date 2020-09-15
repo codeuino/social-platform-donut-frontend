@@ -12,6 +12,7 @@ class UserIntegrations extends Component {
       integrations: true,
       integrationSelected: false,
       selectedIntegration: {},
+      sideBarOpen: true,
     };
   }
 
@@ -28,15 +29,31 @@ class UserIntegrations extends Component {
       integrationSelected: false,
     });
   };
-
+  handleViewSidebar = () => {
+    console.log(this.state.sideBarOpen);
+    this.setState({ sideBarOpen: !this.state.sideBarOpen });
+  };
   render() {
     const { integrationSelected, selectedIntegration } = this.state;
-
+    var sideBarClass = this.state.sideBarOpen ? "sidebar-open" : "sidebar";
     return (
       <div className="integrations">
-        <div className="navigation">
+        <div className={sideBarClass}>
           <Navigation org={this.state.org}></Navigation>
         </div>
+        <button
+          onClick={this.handleViewSidebar}
+          className="sidebar-toggle"
+          style={
+            sideBarClass === "sidebar-open"
+              ? { marginLeft: "13vw" }
+              : { marginLeft: 0 }
+          }
+        >
+          <div />
+          <div />
+          <div />
+        </button>
         {integrationSelected ? (
           <IntegrationDetails
             back={this.handleBackClick}

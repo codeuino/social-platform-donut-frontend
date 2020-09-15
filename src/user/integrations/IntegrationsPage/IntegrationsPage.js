@@ -18,19 +18,39 @@ import Jitsi from '../../../assets/integrations/Jitsi.png'
 import Trello from '../../../assets/integrations/Trello.png'
 import SimplePoll from '../../../assets/integrations/SimplePoll.png'
 
+
 class IntegrationsPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       integrations: true,
+      sideBarOpen: true,
     };
   }
+  handleViewSidebar = () => {
+    console.log(this.state.sideBarOpen);
+    this.setState({ sideBarOpen: !this.state.sideBarOpen });
+  };
   render() {
+    var sideBarClass = this.state.sideBarOpen ? "sidebar-open" : "sidebar";
     return (
       <div className="integrations">
-        <div className="navigation">
+        <div className={sideBarClass}>
           <Navigation org={this.state.org}></Navigation>
         </div>
+        <button
+          onClick={this.handleViewSidebar}
+          className="sidebar-toggle"
+          style={
+            sideBarClass === "sidebar-open"
+              ? { marginLeft: "13vw" }
+              : { marginLeft: 0 }
+          }
+        >
+          <div />
+          <div />
+          <div />
+        </button>
         <div className="integrations-content">
           <div className="title-content">
             <div className="integrations-title">Integrations</div>
@@ -48,146 +68,145 @@ class IntegrationsPage extends Component {
             </Form>
           </div>
           <div className="integration-content">
+            <Card className="integration-card">
+              <Card.Img
+                variant="top"
+                src={GoogleCalendar}
+                className="integration-card-image"
+              />
+              <Card.Body>
+                <div className="integration-card-body">
+                  <Card.Title className="integration-card-title">
+                    Google Calendar
+                  </Card.Title>
+                  <Card.Text className="integration-card-tag">
+                    Communication
+                  </Card.Text>
+                  <Button
+                    className="integration-card-button-remove"
+                  >
+                    Remove
+                  </Button>
+                </div>
+              </Card.Body>
+            </Card>
 
-                <Card className="integration-card">
-                  <Card.Img
-                    variant="top"
-                    src={GoogleCalendar}
-                    className="integration-card-image"
-                  />
-                  <Card.Body>
-                    <div className="integration-card-body">
-                      <Card.Title className="integration-card-title">
-                        Google Calendar
-                      </Card.Title>
-                      <Card.Text className="integration-card-tag">
-                        Communication
-                      </Card.Text>
-                      <Button
-                        className="integration-card-button-remove"
-                      >
-                        Remove
-                      </Button>
-                    </div>
-                  </Card.Body>
-                </Card>
-  
-                <Card className="integration-card">
-                  <Card.Img
-                    variant="top"
-                    src={GoogleDrive}
-                    className="integration-card-image"
-                  />
-                  <Card.Body>
-                    <div className="integration-card-body">
-                      <Card.Title className="integration-card-title">
-                        Google Drive
-                      </Card.Title>
-                      <Card.Text className="integration-card-tag">
-                        File Management
-                      </Card.Text>
-                      <Button
-                        variant="primary"
-                        className="integration-card-button"
-                      >
-                        Add to Donut
-                      </Button>
-                    </div>
-                  </Card.Body>
-                </Card>
+            <Card className="integration-card">
+              <Card.Img
+                variant="top"
+                src={GoogleDrive}
+                className="integration-card-image"
+              />
+              <Card.Body>
+                <div className="integration-card-body">
+                  <Card.Title className="integration-card-title">
+                    Google Drive
+                  </Card.Title>
+                  <Card.Text className="integration-card-tag">
+                    File Management
+                  </Card.Text>
+                  <Button
+                    variant="primary"
+                    className="integration-card-button"
+                  >
+                    Add to Donut
+                  </Button>
+                </div>
+              </Card.Body>
+            </Card>
 
-                <Card className="integration-card">
-                  <Card.Img
-                    variant="top"
-                    src={Github}
-                    className="integration-card-image"
-                  />
-                  <Card.Body>
-                    <div className="integration-card-body">
-                      <Card.Title className="integration-card-title">
-                        Github
-                      </Card.Title>
-                      <Card.Text className="integration-card-tag">
-                        Source Control
-                      </Card.Text>
-                      <Button
-                        variant="primary"
-                        className="integration-card-button"
-                      >
-                        Add to Donut
-                      </Button>
-                    </div>
-                  </Card.Body>
-                </Card>
-                <Card className="integration-card">
-                  <Card.Img
-                    variant="top"
-                    src={Jitsi}
-                    className="integration-card-image"
-                  />
-                  <Card.Body>
-                    <div className="integration-card-body">
-                      <Card.Title className="integration-card-title">
-                        Jitsi Meet
-                      </Card.Title>
-                      <Card.Text className="integration-card-tag">
-                        Communication
-                      </Card.Text>
-                      <Button
-                        variant="primary"
-                        className="integration-card-button"
-                      >
-                        Add to Donut
-                      </Button>
-                    </div>
-                  </Card.Body>
-                </Card>
+            <Card className="integration-card">
+              <Card.Img
+                variant="top"
+                src={Github}
+                className="integration-card-image"
+              />
+              <Card.Body>
+                <div className="integration-card-body">
+                  <Card.Title className="integration-card-title">
+                    Github
+                  </Card.Title>
+                  <Card.Text className="integration-card-tag">
+                    Source Control
+                  </Card.Text>
+                  <Button
+                    variant="primary"
+                    className="integration-card-button"
+                  >
+                    Add to Donut
+                  </Button>
+                </div>
+              </Card.Body>
+            </Card>
+            <Card className="integration-card">
+              <Card.Img
+                variant="top"
+                src={Jitsi}
+                className="integration-card-image"
+              />
+              <Card.Body>
+                <div className="integration-card-body">
+                  <Card.Title className="integration-card-title">
+                    Jitsi Meet
+                  </Card.Title>
+                  <Card.Text className="integration-card-tag">
+                    Communication
+                  </Card.Text>
+                  <Button
+                    variant="primary"
+                    className="integration-card-button"
+                  >
+                    Add to Donut
+                  </Button>
+                </div>
+              </Card.Body>
+            </Card>
 
-                <Card className="integration-card">
-                  <Card.Img
-                    variant="top"
-                    src={SimplePoll}
-                    className="integration-card-image"
-                  />
-                  <Card.Body>
-                    <div className="integration-card-body">
-                      <Card.Title className="integration-card-title">
-                        Simple Poll
-                      </Card.Title>
-                      <Card.Text className="integration-card-tag">
-                        Productivity
-                      </Card.Text>
-                      <Button
-                        className="integration-card-button-remove"
-                      >
-                        Remove
-                      </Button>
-                    </div>
-                  </Card.Body>
-                </Card>
-                <Card className="integration-card">
-                  <Card.Img
-                    variant="top"
-                    src={Trello}
-                    className="integration-card-image"
-                  />
-                  <Card.Body>
-                    <div className="integration-card-body">
-                      <Card.Title className="integration-card-title">
-                        Trello
-                      </Card.Title>
-                      <Card.Text className="integration-card-tag">
-                        Communication
-                      </Card.Text>
-                      <Button
-                        variant="primary"
-                        className="integration-card-button"
-                      >
-                        Add to Donut
-                      </Button>
-                    </div>
-                  </Card.Body>
-                </Card>
+            <Card className="integration-card">
+              <Card.Img
+                variant="top"
+                src={SimplePoll}
+                className="integration-card-image"
+              />
+              <Card.Body>
+                <div className="integration-card-body">
+                  <Card.Title className="integration-card-title">
+                    Simple Poll
+                  </Card.Title>
+                  <Card.Text className="integration-card-tag">
+                    Productivity
+                  </Card.Text>
+                  <Button
+                    className="integration-card-button-remove"
+                  >
+                    Remove
+                  </Button>
+                </div>
+              </Card.Body>
+            </Card>
+            <Card className="integration-card">
+              <Card.Img
+                variant="top"
+                src={Trello}
+                className="integration-card-image"
+              />
+              <Card.Body>
+                <div className="integration-card-body">
+                  <Card.Title className="integration-card-title">
+                    Trello
+                  </Card.Title>
+                  <Card.Text className="integration-card-tag">
+                    Communication
+                  </Card.Text>
+                  <Button
+                    variant="primary"
+                    className="integration-card-button"
+                  >
+                    Add to Donut
+                  </Button>
+                </div>
+              </Card.Body>
+            </Card>
           </div>
         </div>
       </div>
