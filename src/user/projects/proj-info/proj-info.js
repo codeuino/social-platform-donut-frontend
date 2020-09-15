@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import EditIcon from "@material-ui/icons/Edit";
-import GitHubIcon from "@material-ui/icons/GitHub";
-import LanguageIcon from "@material-ui/icons/Language";
+import EditIcon from '@material-ui/icons/Edit';
+import GitHubIcon from '@material-ui/icons/GitHub';
+import LanguageIcon from '@material-ui/icons/Language';
 import Navigation from "../../dashboard/navigation/navigation";
 import { Card, Button, Badge, Col, Row } from "react-bootstrap";
 import "./proj-info.scss";
@@ -10,10 +10,10 @@ import EditProject from "../popups/edit-project";
 import DeleteIcon from "@material-ui/icons/Delete";
 import DeleteProject from "../popups/delete-project";
 import { makeStyles, Grid } from "@material-ui/core";
-import { connect } from "react-redux";
-import { getProjectById } from "../../../actions/projectAction";
-import { checkDeleteRights } from "../../dashboard/utils/checkDeleteRights";
-import Moment from "react-moment";
+import { connect } from 'react-redux'
+import { getProjectById } from '../../../actions/projectAction'
+import { checkDeleteRights } from '../../dashboard/utils/checkDeleteRights'
+import Moment from 'react-moment'
 
 class ProjInfo extends Component {
   constructor(props) {
@@ -23,62 +23,48 @@ class ProjInfo extends Component {
       editProject: false,
       projectInfo: {},
       deleteProject: false,
-      githubLink: "",
-      bitBucketLink: "",
+      githubLink: '',
+      bitBucketLink: '',
       techStacks: [],
       sideBarOpen: true,
     };
   }
 
   componentDidMount() {
-    console.log("project info mounted ", this.props);
+    console.log('project info mounted ', this.props)
     // fetch the data from db
     setTimeout(() => {
-      this.props.getProjectById(this.props.match.params.id);
-    });
+      this.props.getProjectById(this.props.match.params.id)
+    })
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log("nextProps ", nextProps);
-    const { singleProject } = nextProps.project;
-    this.setState(
-      { projectInfo: singleProject, techStacks: singleProject.techStacks },
-      () => {
-        console.log("updating project info state ", this.state);
-      }
-    );
-    const { links } = singleProject;
-    this.setState({
-      githubLink: links[0]?.githubLink,
-      bitBucketLink: links[0]?.bitBucketLink,
-    });
+    console.log('nextProps ', nextProps)
+    const { singleProject } = nextProps.project
+    this.setState({ projectInfo: singleProject, techStacks: singleProject.techStacks }, () => {
+      console.log('updating project info state ', this.state)
+    })
+    const { links } = singleProject
+    this.setState({ githubLink: links[0]?.githubLink, bitBucketLink: links[0]?.bitBucketLink })
   }
   handleViewSidebar = () => {
     console.log(this.state.sideBarOpen);
     this.setState({ sideBarOpen: !this.state.sideBarOpen });
   };
   render() {
-    const {
-      projectInfo,
-      editProject,
-      proj,
-      deleteProject,
-      githubLink,
-      bitBucketLink,
-      techStacks,
-    } = this.state;
+    const { projectInfo, editProject, proj, deleteProject, githubLink, bitBucketLink, techStacks } = this.state
 
-    let cancel = () => {
+    let cancel = () =>{
       this.setState({
         editProject: false,
       });
-    };
+    }
 
     let cancel_del = () => {
       this.setState({
         deleteProject: false,
-      });
-    };
+      })
+    }
 
     const useStyles = makeStyles((theme) => ({
       root: {
@@ -128,11 +114,9 @@ class ProjInfo extends Component {
     ];
     const techBadge = techStacks?.map((techs, index) => (
       <React.Fragment key={index}>
-        <Badge pill variant={variant[index]} key={index}>
-          {techs}
-        </Badge>{" "}
+        <Badge pill variant={variant[index]} key={index}>{techs}</Badge>{" "}
       </React.Fragment>
-    ));
+    ))
     var sideBarClass = this.state.sideBarOpen ? "sidebar-open" : "sidebar";
     return (
       <div className="organization">
@@ -168,30 +152,26 @@ class ProjInfo extends Component {
                   </Col>
 
                   <Col sm={5}>
-                    <Button
-                      variant="light"
-                      onClick={() => {
-                        window.open(githubLink, "_blank");
-                      }}
-                    >
+                    <Button variant = "light" onClick = {() => {
+                        window.open(githubLink, '_blank')
+                      }
+                    } >
                       <GitHubIcon></GitHubIcon>
                     </Button>{" "}
-                    <Button
-                      variant="light"
-                      onClick={() => {
-                        window.open(bitBucketLink, "_blank");
-                      }}
-                    >
+                    <Button variant = "light" onClick = {() => {
+                          window.open(bitBucketLink, '_blank')
+                        } 
+                      }>
                       <LanguageIcon></LanguageIcon>
                     </Button>{" "}
                     {checkDeleteRights(projectInfo.createdBy?._id) ? (
                       <Button
                         variant="light"
-                        onClick={() => this.setState({ editProject: true })}
+                        onClick={() => this.setState({ editProject: true})}
                       >
                         <EditIcon></EditIcon>
                       </Button>
-                    ) : null}
+                    ) : null }
                     <EditProject
                       show={editProject}
                       data={projectInfo}
@@ -211,7 +191,9 @@ class ProjInfo extends Component {
                       projectId={this.props.match.params.id}
                     />
                     <br></br>
-                    <div className="tech-stack">{techBadge}</div>
+                    <div className="tech-stack">
+                      {techBadge}
+                    </div>
                   </Col>
                 </Row>
 
@@ -219,11 +201,13 @@ class ProjInfo extends Component {
                   Created At:
                   <Moment format="DD MMM YYYY">
                     {projectInfo?.createdAt}
-                  </Moment>{" "}
+                  </Moment>
+                  {" "}
                 </p>
-                <p className="place">
-                  Updated At:
-                  <Moment format="DD MMM YYYY">{projectInfo?.createdAt}</Moment>
+                <p className="place">Updated At: 
+                  <Moment format="DD MMM YYYY">
+                    {projectInfo?.createdAt}
+                  </Moment>
                 </p>
                 <p className="short_des">
                   {projectInfo.description?.short || "Short description"}
@@ -268,7 +252,7 @@ class ProjInfo extends Component {
 const mapStateToProps = (state) => ({
   auth: state.auth,
   error: state.error,
-  project: state.project,
-});
+  project: state.project
+})
 
 export default connect(mapStateToProps, { getProjectById })(ProjInfo);

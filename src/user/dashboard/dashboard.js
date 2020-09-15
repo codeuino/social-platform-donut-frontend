@@ -8,7 +8,7 @@ import NewsFeed from "./news-feed/news-feed";
 import notifyUsersLoading from "../../placeholderLoading/notifyUsersLoading/notifyUsersLoading";
 import portfolioLoading from "../../placeholderLoading/portfolioLoading/portfolioLoading";
 import newsFeedLoading from "../../placeholderLoading/newsFeedLoading/newsFeedLoading";
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 import { getAllEvents } from "../../actions/eventAction";
 import { getAllPosts } from "../../actions/postAction";
 import { getAllProjects } from "../../actions/projectAction";
@@ -30,40 +30,37 @@ class Dashboard extends Component {
   componentDidMount() {
     setTimeout(() => {
       this.props.getAllEvents();
-    });
+    })
     setTimeout(() => {
       this.props.getAllPosts();
-    });
+    })
     setTimeout(() => {
       this.props.getAllProjects();
     });
     setTimeout(() => {
       this.setState({ isLoading: false });
-    }, 1000);
+    }, 1000)
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log("dashboard ", nextProps);
-    const { event, project, post } = nextProps;
-    let all = [...event?.allEvents, ...post?.allPosts, ...project?.allProjects];
-    this.setState(
-      {
-        allEvents: event?.allEvents,
-        allPosts: post?.allPosts,
-        allProjects: project?.allProjects,
-        allMix: all,
-      },
-      () => {
-        console.log("updated dashboard ", this.state);
-      }
-    );
+    console.log('dashboard ', nextProps)
+    const { event, project, post } = nextProps
+    let all = [...event?.allEvents, ...post?.allPosts, ...project?.allProjects]
+    this.setState({
+      allEvents: event?.allEvents,
+      allPosts: post?.allPosts,
+      allProjects: project?.allProjects,
+      allMix: all
+    }, () => {
+      console.log('updated dashboard ', this.state)
+    })
   }
   handleViewSidebar = () => {
     console.log(this.state.sideBarOpen);
     this.setState({ sideBarOpen: !this.state.sideBarOpen });
   };
   render() {
-    const { allMix, allEvents, allProjects, allPosts } = this.state;
+    const { allMix, allEvents, allProjects, allPosts } = this.state
     var sideBarClass = this.state.sideBarOpen ? "sidebar-open" : "sidebar";
     return (
       <div className="dashboard">
@@ -92,16 +89,7 @@ class Dashboard extends Component {
               <Notifications></Notifications>
             </div>
           )}
-          {this.state.isLoading ? (
-            newsFeedLoading()
-          ) : (
-            <NewsFeed
-              allMix={allMix}
-              allProjects={allProjects}
-              allPosts={allPosts}
-              allEvents={allEvents}
-            />
-          )}
+          {this.state.isLoading ? newsFeedLoading() : <NewsFeed allMix={allMix} allProjects={allProjects} allPosts={allPosts} allEvents={allEvents}/>}
         </div>
         <div className="promotions">
           {this.state.isLoading ? portfolioLoading() : <Portfolio />}
@@ -117,11 +105,7 @@ const mapStateToProps = (state) => ({
   error: state.error,
   event: state.event,
   post: state.post,
-  project: state.project,
-});
+  project: state.project
+})
 
-export default connect(mapStateToProps, {
-  getAllEvents,
-  getAllPosts,
-  getAllProjects,
-})(Dashboard);
+export default connect(mapStateToProps, { getAllEvents, getAllPosts, getAllProjects })(Dashboard);

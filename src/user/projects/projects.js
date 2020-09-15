@@ -1,21 +1,12 @@
 import React, { Component } from "react";
 import "./projects.scss";
 import Navigation from "../dashboard/navigation/navigation";
-import {
-  makeStyles,
-  Grid,
-  Card,
-  CardActionArea,
-  CardActions,
-  CardContent,
-  CardMedia,
-  Typography,
-} from "@material-ui/core";
+import { makeStyles,Grid , Card, CardActionArea, CardActions, CardContent, CardMedia, Typography} from "@material-ui/core";
 import { Button } from "react-bootstrap";
-import { connect } from "react-redux";
-import { createProject, getAllProjects } from "../../actions/projectAction";
-import { Pagination } from "antd";
-import projectImage from "../../assets/images/project.png";
+import { connect } from 'react-redux'
+import { createProject, getAllProjects } from '../../actions/projectAction'
+import { Pagination } from 'antd'
+import projectImage from '../../assets/images/project.png'
 import { withRouter } from "react-router-dom";
 
 class Projects extends Component {
@@ -31,25 +22,25 @@ class Projects extends Component {
   componentDidMount() {
     setTimeout(() => {
       this.props.getAllProjects(); // by default 6 projects per page
-    });
+    })
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log("project ", nextProps);
-    const { allProjects } = nextProps.project;
+    console.log('project ', nextProps)
+    const { allProjects } = nextProps.project
     this.setState({ allProjects: allProjects }, () => {
-      console.log("projects state ", this.state);
-    });
+      console.log('projects state ', this.state)
+    })
   }
 
   onShowSizeChange = (currentPage, pageSize) => {
-    console.log("currentPage pageSize ", currentPage, pageSize);
-    this.props.getAllProjects(pageSize, currentPage);
-  };
+    console.log('currentPage pageSize ', currentPage, pageSize)
+    this.props.getAllProjects(pageSize, currentPage)
+  }
 
   handlePagination = (pageNumber) => {
-    console.log("page number ", pageNumber);
-    this.props.getAllProjects(6, pageNumber);
+    console.log('page number ', pageNumber);
+    this.props.getAllProjects(6, pageNumber)
   };
   handleViewSidebar = () => {
     console.log(this.state.sideBarOpen);
@@ -89,14 +80,8 @@ class Projects extends Component {
               <Typography gutterBottom variant="h5" component="h2">
                 {Item.projectName || "Project Name"}
               </Typography>
-              <Typography
-                variant="body2"
-                color="textSecondary"
-                component="p"
-                className="short-des"
-              >
-                {Item.description?.shortDescription ||
-                  "Short description of the project"}
+              <Typography variant="body2" color="textSecondary" component="p" className="short-des">
+                {Item.description?.shortDescription || "Short description of the project"}
               </Typography>
             </CardContent>
           </CardActionArea>
@@ -157,10 +142,10 @@ class Projects extends Component {
 const mapStateToProps = (state) => ({
   auth: state.auth,
   error: state.error,
-  project: state.project,
-});
+  project: state.project
+})
 
 export default connect(mapStateToProps, {
   createProject,
-  getAllProjects,
+  getAllProjects
 })(withRouter(Projects));

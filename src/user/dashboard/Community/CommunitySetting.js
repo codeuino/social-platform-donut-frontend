@@ -1,14 +1,14 @@
-import React, { Component } from "react";
-import LeftNav from "./LeftNav";
-import "./community.scss";
-import OrgProfile from "./components/OrgProfile";
-import OrgPermission from "./components/OrgPermission";
-import OrgSetting from "./components/OrgSettings";
-import OrgAuth from "./components/OrgAuth";
-import Navigation from "../navigation/navigation";
-import { connect } from "react-redux";
-import OrgMaintenance from "./components/OrgMaintenance";
-import Users from "../../Activity/Users";
+import React, { Component } from 'react'
+import LeftNav from './LeftNav'
+import './community.scss'
+import OrgProfile from './components/OrgProfile';
+import OrgPermission from './components/OrgPermission'
+import OrgSetting from './components/OrgSettings'
+import OrgAuth from './components/OrgAuth'
+import Navigation from '../navigation/navigation'
+import { connect } from 'react-redux'
+import OrgMaintenance from './components/OrgMaintenance';
+import Users from '../../Activity/Users'
 
 class CommunitySetting extends Component {
   constructor(props) {
@@ -26,16 +26,17 @@ class CommunitySetting extends Component {
     };
   }
   componentDidMount() {
-    this.setState({ view: "profile" });
+    this.setState({ view: 'profile' })
   }
   changeOption = (name) => {
-    const keys = Object.keys(this.state.option);
-    let item = keys.filter((k) => k === name);
-    console.log("item ", item);
-    this.setState({ option: { profile: false } });
-    this.setState({ option: { [name]: true } });
-    this.setState({ view: name });
-  };
+   const keys = Object.keys(this.state.option)
+   let item = keys.filter(k => k === name)
+   console.log('item ', item)
+   this.setState({ option: { profile: false }})
+   this.setState({ option: { [name]: true }})
+   this.setState({ view: name })
+  }
+
   handleViewSidebar = () => {
     console.log(this.state.sideBarOpen);
     this.setState({ sideBarOpen: !this.state.sideBarOpen });
@@ -81,8 +82,7 @@ class CommunitySetting extends Component {
               {view === "activity" ? (
                 <Users
                   handleOption={{ changeOption: this.changeOption.bind(this) }}
-                />
-              ) : null}
+                />) : null }
             </div>
           </div>
         </div>
@@ -95,6 +95,6 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
   error: state.error,
   user: state.user,
-  org: state.org,
-});
+  org: state.org
+})
 export default connect(mapStateToProps)(CommunitySetting);

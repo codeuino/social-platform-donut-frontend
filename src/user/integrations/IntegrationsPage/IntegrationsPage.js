@@ -12,11 +12,12 @@ import {
   Col,
 } from "react-bootstrap";
 import GoogleCalendar from "../../../assets/integrations/Calendar.png";
-import GoogleDrive from "../../../assets/integrations/Drive.png";
-import Github from "../../../assets/integrations/Github.png";
-import Jitsi from "../../../assets/integrations/Jitsi.png";
-import Trello from "../../../assets/integrations/Trello.png";
-import SimplePoll from "../../../assets/integrations/SimplePoll.png";
+import GoogleDrive from '../../../assets/integrations/Drive.png'
+import Github from '../../../assets/integrations/Github.png'
+import Jitsi from '../../../assets/integrations/Jitsi.png'
+import Trello from '../../../assets/integrations/Trello.png'
+import SimplePoll from '../../../assets/integrations/SimplePoll.png'
+
 
 class IntegrationsPage extends Component {
   constructor(props) {
@@ -81,7 +82,9 @@ class IntegrationsPage extends Component {
                   <Card.Text className="integration-card-tag">
                     Communication
                   </Card.Text>
-                  <Button className="integration-card-button-remove">
+                  <Button
+                    className="integration-card-button-remove"
+                  >
                     Remove
                   </Button>
                 </div>
@@ -102,7 +105,10 @@ class IntegrationsPage extends Component {
                   <Card.Text className="integration-card-tag">
                     File Management
                   </Card.Text>
-                  <Button variant="primary" className="integration-card-button">
+                  <Button
+                    variant="primary"
+                    className="integration-card-button"
+                  >
                     Add to Donut
                   </Button>
                 </div>
@@ -123,7 +129,10 @@ class IntegrationsPage extends Component {
                   <Card.Text className="integration-card-tag">
                     Source Control
                   </Card.Text>
-                  <Button variant="primary" className="integration-card-button">
+                  <Button
+                    variant="primary"
+                    className="integration-card-button"
+                  >
                     Add to Donut
                   </Button>
                 </div>
@@ -143,7 +152,10 @@ class IntegrationsPage extends Component {
                   <Card.Text className="integration-card-tag">
                     Communication
                   </Card.Text>
-                  <Button variant="primary" className="integration-card-button">
+                  <Button
+                    variant="primary"
+                    className="integration-card-button"
+                  >
                     Add to Donut
                   </Button>
                 </div>
@@ -164,7 +176,9 @@ class IntegrationsPage extends Component {
                   <Card.Text className="integration-card-tag">
                     Productivity
                   </Card.Text>
-                  <Button className="integration-card-button-remove">
+                  <Button
+                    className="integration-card-button-remove"
+                  >
                     Remove
                   </Button>
                 </div>
@@ -184,7 +198,10 @@ class IntegrationsPage extends Component {
                   <Card.Text className="integration-card-tag">
                     Communication
                   </Card.Text>
-                  <Button variant="primary" className="integration-card-button">
+                  <Button
+                    variant="primary"
+                    className="integration-card-button"
+                  >
                     Add to Donut
                   </Button>
                 </div>

@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import Navigation from "../navigation/navigation";
-import SettingContent from "./SettingContent";
-import "./styles/settings.scss";
+import React, { Component } from 'react'
+import Navigation from '../navigation/navigation';
+import SettingContent from './SettingContent';
+import './styles/settings.scss';
 
 class Settings extends Component {
-  constructor(props) {
+  constructor(props){
     super(props);
     this.state = {
       settings: true,
@@ -39,7 +39,7 @@ class Settings extends Component {
           <SettingContent />
         </div>
       </div>
-    );
+    )
   }
 }
 export default Settings;
