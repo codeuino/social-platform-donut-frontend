@@ -1,0 +1,169 @@
+.integrations {
+  display: flex;
+  min-height: 100vh;
+  height: auto;
+  font-family: "Inter";
+  .navigation {
+    flex: 0.5;
+    border-right: solid 1px #dfe9f1;
+  }
+  .integrations-content {
+    width: 100%;
+    flex: 3;
+    flex-direction: column;
+    .title-content {
+      display: inline-block;
+      flex: 1;
+      padding: 10px;
+      .integrations-title {
+        text-align: left;
+        font-family: Inter;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 36px;
+        letter-spacing: normal;
+        line-height: 44px;
+        color: #000000;
+      }
+      .integrations-subtitle {
+        margin-top: 10px;
+        text-align: left;
+        font-family: Inter;
+        font-style: normal;
+        font-size: 16px;
+        line-height: 44px;
+        color: #2d2d2d;
+        .integration-name {
+          display: inline;
+          margin-left: 10px;
+          font-family: Inter;
+          font-size: 24px;
+          font-weight: bold;
+        }
+        .integration-backicon {
+          font-size: 24px;
+          color: #90949c;
+        }
+        .integration-backtext {
+          margin: 15px;
+          display: inline;
+          font-size: 26px;
+          font-family: Inter;
+          font-weight: bold;
+          color: #1a73e8;
+        }
+      }
+      .searchbar {
+        border-radius: 25px;
+      }
+    }
+    .integration-content {
+      flex: 5;
+      .details-card {
+        margin: 20px;
+        width: 95%;
+        height: fit-content;
+        display: flex;
+        flex-direction: column;
+        .details-top {
+          flex: 1;
+          display: flex;
+          img {
+            height: 14vh;
+            margin: 10px;
+            border-radius: 25%;
+            border: solid 1px #dfe9f1;
+          }
+          .details-name {
+            font-family: Qanelas;
+            font-weight: 800;
+            font-size: 32px;
+            margin: 10px;
+          }
+          .button-container {
+            height: 4vh;
+            .details-button {
+              margin: 12px;
+              border-radius: 25px;
+              font-size: 13px;
+              font-family: Inter;
+              width: 150px;
+            }
+            .details-button-back {
+              margin: 12px;
+              border-radius: 25px;
+              font-size: 13px;
+              font-family: Inter;
+              width: 150px;
+              color: #1a73e8;
+              background-color: #ffffff;
+            }
+          }
+        }
+        .details-bottom {
+          flex: 3;
+          display: flex;
+          flex-direction: column;
+          .details-usage {
+            margin: 10px;
+            font-family: Inter;
+            font-size: 20px;
+            font-weight: bold;
+          }
+          .details-usagetext {
+            margin: 10px;
+            font-family: Inter;
+            font-size: 14px;
+            line-height: 20px;
+            white-space: pre-wrap;
+          }
+        }
+      }
+
+      margin-top: 30px;
+      .integration-card {
+        text-align: center;
+        display: inline-block;
+        margin: 15px;
+        padding: 10px;
+        border-radius: 0.5rem;
+        width: 18rem;
+        border: 1px solid #dfe9f1;
+        min-height: 300px;
+        box-shadow: none;
+        .integration-card-image {
+          height: 128px;
+          width: 128px;
+          margin: 0 auto;
+        }
+        .integration-card-body {
+          text-align: center;
+          .integration-card-title {
+            font-family: Qanelas;
+            font-size: 20px;
+            font-weight: 600;
+          }
+          .integration-card-tag {
+            font-family: Inter;
+            font-size: 14px;
+            font-weight: 300;
+          }
+          .integration-card-button {
+            text-align: center;
+            border-radius: 25px;
+            font-size: 15px;
+            width: 60%;
+          }
+          .integration-card-button-remove {
+            text-align: center;
+            border-radius: 25px;
+            font-size: 15px;
+            color: #1a73e8;
+            background-color: #ffffff;
+            width: 60%;
+          }
+        }
+      }
+    }
+  }
+}

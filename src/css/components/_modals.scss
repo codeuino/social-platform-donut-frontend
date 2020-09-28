@@ -124,6 +124,9 @@
         }
       }
     }
+    .modal__body-sharebutton {
+      margin-right: 8px;
+    }
     .modal__mini-title {
       font-family: $font-family-Inter;
       font-style: normal;
@@ -479,26 +482,26 @@
 }
 
 .modal__body {
-   .modal__setting__btn__container {
-     .modal__save {
-       background: $color-modal-button-active;
-       box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
-       // border-radius: 34px;
-       width: 80px;
-       height: 38.5px;
-       margin-right: 20px;
-       margin-bottom: 10px;
+  .modal__setting__btn__container {
+    .modal__save {
+      background: $color-modal-button-active;
+      box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
+      // border-radius: 34px;
+      width: 80px;
+      height: 38.5px;
+      margin-right: 20px;
+      margin-bottom: 10px;
 
-       .modal__buttontext {
-         font-family: $font-family-Inter;
-         font-style: normal;
-         font-weight: bold;
-         font-size: 14px;
-         line-height: 22px;
-         /* identical to box height */
+      .modal__buttontext {
+        font-family: $font-family-Inter;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 14px;
+        line-height: 22px;
+        /* identical to box height */
 
-         color: #ffffff;
-       }
-     }
-   }
+        color: #ffffff;
+      }
+    }
+  }
 }

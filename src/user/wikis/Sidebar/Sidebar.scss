@@ -1,0 +1,30 @@
+.wiki-sidebar {
+  margin-right: 3vw;
+  .wiki-sidebar-navigator {
+    .wiki-sidebar-page-link {
+      cursor: pointer;
+      transition: transform 0.3s ease-out;
+    }
+    .wiki-sidebar-page-link:hover {
+      color: #1a73e8;
+    }
+    .edit-button {
+      margin-left: auto;
+      cursor: pointer;
+    }
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    border: solid 1px #dfe9f1;
+    background-color: #ffffff;
+    padding: 30px;
+    margin-top: 50px;
+    margin-left: 40px;
+    margin-bottom: 50px;
+    border-radius: 5px;
+    width: 400px;
+    ul {
+      margin-left: 20px;
+    }
+  }
+}

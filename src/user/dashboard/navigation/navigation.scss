@@ -1,20 +1,68 @@
 .main-navigation {
+  width: 13vw;
   .list-group {
+    background-color: #f5f5f5;
     .list-group-item {
+      background-color: #f5f5f5;
       white-space: nowrap;
       cursor: pointer;
       border: none;
       font-style: normal;
       font-family: "Inter";
-      font-size: 14px;
-      line-height: 21px;
+      font-size: 0.729vw;
       letter-spacing: 0.1px;
       text-decoration: none;
       span {
-        font-weight: bold;
-        font-size: 25px;
-        vertical-align: middle;
+        font-style: normal;
+        font-family: "Inter";
+        font-size: 0.729vw;
+        letter-spacing: 0.1px;
+        text-decoration: none;
+        margin-left: 1.4vw;
       }
+    }
+  }
+  .list-group-integrations {
+    background-color: #f5f5f5;
+    .list-group-item {
+      background-color: #f5f5f5;
+      white-space: nowrap;
+      cursor: pointer;
+      border: none;
+      font-style: normal;
+      font-family: "Inter";
+      font-size: 0.729vw;
+      letter-spacing: 0.1px;
+      text-decoration: none;
+      span {
+        font-style: normal;
+        font-family: "Inter";
+        font-size: 0.729vw;
+        letter-spacing: 0.1px;
+        text-decoration: none;
+        margin-left: 1.4vw;
+      }
+      .integration-text {
+        font-family: Inter;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 0.729vw;
+        line-height: 21px;
+        .integration-add {
+          margin-left: 3.9vw;
+        }
+      }
+    }
+  }
+  .codeuino {
+    .codeuino-text {
+      text-align: center;
+      font-family: Inter;
+      font-style: normal;
+      font-size: 12px;
+      line-height: 21px;
+      letter-spacing: 3.6px;
+      color: rgba(0, 0, 0, 0.5);
     }
   }
 }
@@ -25,17 +73,19 @@
 
 .main-navigation {
   .list-group {
-    .active {
+    .link {
+      text-decoration: none;
       background-color: rgba(26, 115, 232, 0.1);
-      .link {
+      .active {
         color: #1a73e8;
         background-color: transparent;
+        font-weight: bold;
       }
     }
     span {
-      .active {
+      .link {
         background-color: rgba(26, 115, 232, 0.1);
-        .link {
+        .active {
           color: #1a73e8;
           background-color: transparent;
         }
@@ -46,15 +96,15 @@
 
 .main-navigation {
   .list-group {
-    .inactive {
-      .link {
+    .link {
+      .inactive {
         color: rgba(0, 0, 0, 0.5);
       }
     }
     span {
-      .active {
-        background-color: rgba(26, 115, 232, 0.1);
-        .link {
+      .link {
+        .active {
+          background-color: rgba(26, 115, 232, 0.1);
           color: #1a73e8;
           background-color: transparent;
         }
@@ -87,20 +137,8 @@
   height: 20px;
 }
 
-.jitsi {
-  display: flex;
-  color: rgba(0, 0, 0, 0.5);
-  padding: 0px 10px 0px 10px;
-}
-
 .community {
   padding: 0px 10px 0px 10px;
-}
-.jitsi-meet {
-  height: 21px;
-  width: 21px;
-  color: rgba(0, 0, 0, 0.5);
-  margin-right: 4px;
 }
 
 .main-navigation {

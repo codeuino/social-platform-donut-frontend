@@ -30,21 +30,6 @@ class ProfileFeed extends Component {
       displayingPost: 0,
     };
   }
-  componentDidMount() {
-    console.log(this.props);
-    setTimeout(() => {
-      this.props.getProfile();
-    });
-    setTimeout(() => {
-      this.props.getPostsCreatedByUser();
-    });
-    setTimeout(() => {
-      this.props.getEventsCreatedByUser();
-    });
-    setTimeout(() => {
-      this.props.getProjectCreatedByUser();
-    });
-  }
 
   componentWillReceiveProps(nextProps) {
     const { userEvents, userProjects, userPosts, userProfile } = nextProps.user;

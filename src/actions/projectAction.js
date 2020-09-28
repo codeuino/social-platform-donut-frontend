@@ -20,7 +20,7 @@ export const createProject = (projectInfo) => async (dispatch) => {
 }
 
 // GET ALL PROJECTS 
-export const getAllProjects = (pagination = 10, page = 1) => async (dispatch) => {
+export const getAllProjects = (pagination = 6, page = 1) => async (dispatch) => {
   try {
     const res = await axios.get(`${BASE_URL}/project/?pagination=${pagination}&page=${page}`)
     dispatch(setRequestStatus(false))

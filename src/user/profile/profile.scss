@@ -6,24 +6,30 @@
   .navigation {
     flex: 0.5;
     border-right: solid 1px #dfe9f1;
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    overflow-y: scroll;
   }
   h2 {
     font-size: 22px;
     font-weight: 650;
   }
   .news {
+    margin-left: 13vw;
     flex: 3;
     .notify-user {
       display: flex;
       padding: 20px 10px 20px 30px;
     }
   }
-  .two{
+  .two {
     display: flex;
     .posts-profile {
       flex: 2;
     }
-    .updat{
+    .updat {
       flex: 1;
     }
   }
@@ -49,4 +55,8 @@
       }
     }
   }
+}
+
+.navigation::-webkit-scrollbar {
+  display: none;
 }

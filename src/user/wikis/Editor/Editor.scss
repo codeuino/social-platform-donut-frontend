@@ -1,0 +1,50 @@
+.wiki-editor {
+  padding: 50px 50px;
+  .wikis-top-controls {
+    display: flex;
+    margin-bottom: 50px;
+    justify-content: flex-end;
+    .vc {
+      display: flex;
+      align-items: center;
+    }
+    * {
+      margin: 0 5px;
+      display: flex;
+      align-items: center;
+    }
+    .btn {
+      padding-left: 0.25rem;
+    }
+  }
+  form {
+    display: flex;
+    align-items: center;
+    label {
+      margin: 0;
+      height: 100%;
+      width: 150px;
+      display: flex;
+      align-items: center;
+    }
+    margin-bottom: 50px;
+  }
+  .react-mde {
+    margin-bottom: 50px;
+    .mde-header {
+      .mde-tabs {
+        * {
+          padding: 0 10px;
+          margin-bottom: 0;
+        }
+        .selected {
+          border: none;
+          background-color: #ffffff;
+        }
+      }
+      .mde-tabs:active {
+        border: none;
+      }
+    }
+  }
+}
