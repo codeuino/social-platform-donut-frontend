@@ -60,7 +60,7 @@ To get this project running locally on your machine follows the steps below in o
 
 1. fork this repo
 2. clone the forked repo from your GitHub 
-using the command `git clone https://github.com/username/Social-Platform-Donut.git` don't forget to replace the username in the URL
+using the command `git clone https://github.com/username/social-platform-donut-frontend.git` don't forget to replace the username in the URL
 
     ![fork-and-clone](READMEassets/forking-the-repo.gif)
 
