@@ -19,6 +19,8 @@ class SignUpForm extends Component {
       cnfPassword: "",
       error: { msg: "" },
       isValidEmail: true,
+      isValidFirstName: true,
+      isValidLastName: true,
       isValidPassword: true,
       isValidPhone: true,
       isValidDesc: true,
@@ -50,6 +52,8 @@ class SignUpForm extends Component {
       isValidDesc,
       isValidEmail,
       isValidPassword,
+      isValidFirstName,
+      isValidLastName,
       isValidPhone,
     } = this.state;
 
@@ -58,8 +62,18 @@ class SignUpForm extends Component {
     let validDesc = isValidDesc;
     let validPhone = isValidPhone;
     let matched = isMatched;
+    let validFirstName = isValidFirstName;
+    let validLastName = isValidLastName;
 
     switch (fieldName) {
+      case "firstName": {
+        validFirstname = (value.match(/^[a-z][a-z]+[ ]{1}[a-z]*$/i) && value.length<15) ;
+      break;
+      }
+      case "LastName": {
+        validLastname = value.length<15 && value.match(/^[a-z]+/);
+      break;
+      }
       case "email": {
         validEmail = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
         break;
@@ -69,11 +83,11 @@ class SignUpForm extends Component {
         break;
       }
       case "phone": {
-        validPhone = value.length === 10;
+        validPhone = value.match(/^*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?*$/);
         break;
       }
       case "shortDescription": {
-        validDesc = value.length >= 10;
+        validDesc = value.length >= 10 && value<=250;
         break;
       }
       case "cnfPassword": {
@@ -91,6 +105,8 @@ class SignUpForm extends Component {
         isValidDesc: validDesc,
         isValidPassword: validPass,
         isValidPhone: validPhone,
+        isValidFirstName :ValidFirstName,
+        isvalidLastName  :ValidLastName
       },
       this.validateForm
     );
@@ -103,6 +119,8 @@ class SignUpForm extends Component {
       isValidEmail,
       isValidPassword,
       isValidPhone,
+      isValidLastName,
+      isValidFirstName
     } = this.state;
 
     if (
@@ -110,6 +128,8 @@ class SignUpForm extends Component {
       isValidDesc &&
       isValidEmail &&
       isValidPassword &&
+      isValidFirstName &&
+      isValidLastName &&
       isValidPhone
     ) {
       this.setState({ isValidForm: true });
@@ -167,6 +187,8 @@ class SignUpForm extends Component {
       password,
       cnfPassword,
       isValidPassword,
+      isValidFirstName,
+      isValidLastName,
       isValidEmail,
       isValidPhone,
       isValidDesc,
@@ -190,6 +212,11 @@ class SignUpForm extends Component {
                   onChange={this.onChange}
                   required
                 />
+                <ul className="list-unstyled">
+                  <li id="validation_msg">
+                    {!isValidFirstName ? "Invalid Name!" : null}
+                  </li>
+                </ul>
               </Form.Group>
             </Col>
             <Col>
@@ -203,6 +230,11 @@ class SignUpForm extends Component {
                   onChange={this.onChange}
                   required
                 />
+                <ul className="list-unstyled">
+                  <li id="validation_msg">
+                    {!isValidLastName ? "Invalid Name!" : null}
+                  </li>
+                </ul>
               </Form.Group>
             </Col>
           </Row>
@@ -229,7 +261,7 @@ class SignUpForm extends Component {
               <Form.Group>
                 <Form.Label>Phone Number</Form.Label>
                 <Form.Control
-                  type="number"
+                  type="text"
                   placeholder="Phone"
                   name="phone"
                   value={phone}
@@ -256,7 +288,7 @@ class SignUpForm extends Component {
             />
             <ul className="list-unstyled">
               <li id="validation_msg">
-                {!isValidDesc ? "Should be at least 10 characters long!" : null}
+                {!isValidDesc ? "Should be at least 10 characters long and less then 250 charecters!" : null}
               </li>
             </ul>
           </Form.Group>
