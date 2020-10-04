@@ -1,0 +1,62 @@
+.wikis {
+  height: auto;
+  height: 100vh;
+  display: flex;
+  overflow: hidden;
+  min-height: 100vh;
+  font-family: "Inter";
+  .navigation {
+    border-right: solid 1px #dfe9f1;
+    background-color: #F5F5F5;
+  }
+  #wikis {
+    flex: 3;
+    position: relative;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    .wikis-heading {
+      color: #2d2d2d;
+      font-size: 1.5em;
+      padding-top: 5vh;
+      padding-left: 3vw;
+      font-family: Inter;
+      line-height: 1.3em;
+      font-style: normal;
+      font-weight: normal;
+    }
+    ._loading_overlay_wrapper {
+      height: 100%;
+      .wikis-not-found {
+        top: 50%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        position: absolute;
+        justify-content: center;
+        transform: translateY(-50%);
+        .btn {
+          display: flex;
+          align-items: center;
+          padding-left: 0.25rem;
+          * {
+            margin: 10px;
+          }
+        }
+      }
+    }
+    ._loading_overlay_overlay {
+      height: 100vh;
+      color: black;
+      background-color: rgba(255, 255, 255, 0.7);
+    }
+    ._loading_overlay_content {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+      * {
+        margin: 10px;
+      }
+    }
+  }
+}
