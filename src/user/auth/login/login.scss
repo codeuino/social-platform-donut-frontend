@@ -3,61 +3,141 @@ body {
 }
 .login-page {
   display: flex;
-  flex-direction: row;
-  margin: 50px;
-  .welcome-text {
-    flex: 1.8;
-    margin: 140px 0 0 0;
-    .logo {
-      padding-bottom: 20px;
-      h2 {
-        padding: 34px 10px 0 20px;
-        color: #2d2d2d;
-        font-size: 34px;
+  flex-direction: column;
+  min-height: 100vh;
+  .container-wrapper {
+    flex: 1 0 auto;
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    .section-home {
+      display: flex;
+      flex-direction: row;
+      margin: 50px;
+      .welcome-text {
+        flex: 1.8;
+        margin: 140px 0 0 0;
+        .logo {
+          padding-bottom: 20px;
+          h2 {
+            padding: 34px 10px 0 20px;
+            color: #2d2d2d;
+            font-size: 34px;
+          }
+        }
+        
+        .tagline {
+          h1 {
+            font-family: "Playfair Display", serif;
+            color: #000000;
+            font-size: 50px;
+            font-style: normal;
+            font-weight: bold;
+            padding-bottom: 20px;
+            line-height: 100px;
+          }
+        }
+        .description {
+          p {
+            color: #90949c;
+            font-size: 20px;
+            font-weight: normal;
+            padding-right: 30px;
+            font-family: "Inter";
+          }
+        }
+        
+        .login-btn {
+          a {
+            display: none;
+          }
+        }
       }
-    }
-    .extra-donuts {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      img {
-        height: 109px;
+      .user-details {
+        flex: 1;
+        .user-data {
+          padding: 30px;
+          box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.1);
+          min-height: 380px;
+          height: auto;
+          font-family: "Inter";
+        }
       }
-    }
-    h1 {
-      font-family: "Playfair Display", serif;
-      color: #000000;
-      font-size: 50px;
-      font-style: normal;
-      font-weight: bold;
-      padding-bottom: 20px;
-      line-height: 100px;
-    }
-    p {
-      color: #90949c;
-      font-size: 20px;
-      font-weight: normal;
-      padding-right: 30px;
-      font-family: "Inter";
+      
     }
   }
-  .user-details {
-    flex: 1;
-    .user-data {
-      padding: 30px;
-      box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.1);
-      min-height: 380px;
-      height: auto;
-      font-family: "Inter";
+  .extra-donuts {
+    flex-shrink: 0;
+    img {
+      height: 109px;
     }
   }
   @media (min-width: 320px) and (max-width: 640px) {
-    flex-direction: column;
-    margin: 20px;
-    .welcome-text {
-      margin: 20px 0 0 0;
-      .extra-donuts {
-        display: none;
+    .container-wrapper{
+      .section-home {
+        flex-direction: column;
+        margin: 0px;
+        .welcome-text {
+          margin: 0 1rem 0 1.5rem;
+          min-height: 100vh;
+          padding-top: 4rem;
+          .tagline {
+            padding-bottom: 2rem;
+            text-align: center;
+            h1 {
+              font-size: 2rem;
+              line-height: 3rem;
+              padding-bottom: 0.5rem;
+            }
+          }
+          .description {
+            padding: 0 0 1rem 0;
+            margin-top: 0;
+            text-align: center;
+            p {
+              font-size: 1.2rem;
+              line-height: 2rem;
+              padding: 0;
+            }
+          }
+          .logo {
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+            .main-donut-logo {
+              text-align: center;
+              img {
+                height: 3.5rem;
+              }
+            }
+          } 
+          .login-btn {
+            text-align: center;
+
+            a {
+              color: white;
+              cursor: pointer;
+              text-decoration:none;
+              padding:0.5rem 3rem;
+              background: #1A73E8;
+              border-radius: 100px;
+              display:inline-block;
+              &:hover {
+                background-color: #1864c9;
+              }
+            }
+          }
+        }
+        .user-details {
+          .user-data {
+            box-shadow: none;
+          }
+        }
+      } 
+    }
+    .extra-donuts {
+      flex-shrink: 0;
+      img {
+        height: 2rem;
       }
     }
   }
