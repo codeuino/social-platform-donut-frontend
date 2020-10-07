@@ -67,11 +67,11 @@ class SignUpForm extends Component {
 
     switch (fieldName) {
       case "firstName": {
-        validFirstname = (value.match(/^[a-z][a-z]+[ ]{1}[a-z]*$/i) && value.length<15) ;
+        validFirstName = (value.match(/^[a-z][a-z]+[ ]{1}[a-z]*$/i) && value.length<15) ;
       break;
       }
       case "LastName": {
-        validLastname = value.length<15 && value.match(/^[a-z]+/);
+        validLastName = value.length<15 && value.match(/^[a-z]+/);
       break;
       }
       case "email": {
@@ -105,8 +105,8 @@ class SignUpForm extends Component {
         isValidDesc: validDesc,
         isValidPassword: validPass,
         isValidPhone: validPhone,
-        isValidFirstName :ValidFirstName,
-        isvalidLastName  :ValidLastName
+        isValidFirstName :validFirstName,
+        isvalidLastName  :validLastName
       },
       this.validateForm
     );
