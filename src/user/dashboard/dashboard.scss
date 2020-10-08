@@ -1,18 +1,8 @@
-.dashboard {
+.content-container {
   display: flex;
   min-height: 100vh;
   height: auto;
   font-family: Muli, sans-serif;
-  .navigation {
-    background: #f5f5f5;
-    flex-grow: 1;
-    border-right: solid 1px #dfe9f1;
-    position: fixed;
-    top: 0px;
-    bottom: 0px;
-    left: 0px;
-    overflow-y: scroll;
-  }
   .news {
     margin-left: 13vw;
     flex-grow: 4;
@@ -27,8 +17,12 @@
     flex-grow: 2;
     padding: 20px 12px 20px 0px;
   }
-}
-
-.navigation::-webkit-scrollbar {
-  display: none;
+  @media (min-width: 320px) and (max-width: 640px){
+    .promotions {
+      display: none;
+    }
+  }
+  @media (min-width: 640) and (max-width: 1024){
+    
+  }
 }

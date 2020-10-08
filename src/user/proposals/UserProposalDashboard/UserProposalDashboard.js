@@ -14,14 +14,14 @@ class UserProposalDashboard extends Component {
   }
   render() {
     return (
-      <div className="dashboard">
-        <div className="dashboard__navigation">
+      <div className="proposal-dashboard">
+        <div className="proposal-dashboard__navigation">
           <Navigation dashboard={this.state.dashboard} />
         </div>
-        <div className="dashboard__content">
+        <div className="proposal-dashboard__content">
           <DashboardContent />
         </div>
-        <div className="dashboard__rightpanel">
+        <div className="proposal-dashboard__rightpanel">
           <DashboardRightPanel />
         </div>
       </div>

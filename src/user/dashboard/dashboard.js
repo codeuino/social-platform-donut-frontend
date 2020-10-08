@@ -59,22 +59,22 @@ class Dashboard extends Component {
     const { allMix, allEvents, allProjects, allPosts } = this.state
     return ( 
       <div className="dashboard">
-        <div className="navigation">
-          <Navigation dashboard={this.state.dashboard}></Navigation>
-        </div>
-        <div className="news">
-          {this.state.isLoading ? (
-            notifyUsersLoading()
-          ) : (
-            <div className="notify-user">
-              <UpcomingEvents></UpcomingEvents>
-              <Notifications></Notifications>
-            </div>
-          )}
-          {this.state.isLoading ? newsFeedLoading() : <NewsFeed allMix={allMix} allProjects={allProjects} allPosts={allPosts} allEvents={allEvents}/>}
-        </div>
-        <div className="promotions">
-          {this.state.isLoading ? portfolioLoading() : <Portfolio />}
+        <Navigation dashboard={this.state.dashboard} />
+        <div className="content-container">
+          <div className="news">
+            {this.state.isLoading ? (
+              notifyUsersLoading()
+            ) : (
+              <div className="notify-user">
+                <UpcomingEvents></UpcomingEvents>
+                <Notifications></Notifications>
+              </div>
+            )}
+            {this.state.isLoading ? newsFeedLoading() : <NewsFeed allMix={allMix} allProjects={allProjects} allPosts={allPosts} allEvents={allEvents}/>}
+          </div>
+          <div className="promotions">
+            {this.state.isLoading ? portfolioLoading() : <Portfolio />}
+          </div>
         </div>
       </div>
     );

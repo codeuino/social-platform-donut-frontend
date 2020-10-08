@@ -9,13 +9,13 @@
       border: none;
       font-style: normal;
       font-family: "Inter";
-      font-size: 0.729vw;
+      font-size: 0.8rem;
       letter-spacing: 0.1px;
       text-decoration: none;
       span {
         font-style: normal;
         font-family: "Inter";
-        font-size: 0.729vw;
+        font-size: 0.8rem;
         letter-spacing: 0.1px;
         text-decoration: none;
         margin-left: 1.4vw;
@@ -31,13 +31,13 @@
       border: none;
       font-style: normal;
       font-family: "Inter";
-      font-size: 0.729vw;
+      font-size: 0.8rem;
       letter-spacing: 0.1px;
       text-decoration: none;
       span {
         font-style: normal;
         font-family: "Inter";
-        font-size: 0.729vw;
+        font-size: 0.8rem;
         letter-spacing: 0.1px;
         text-decoration: none;
         margin-left: 1.4vw;
@@ -46,7 +46,7 @@
         font-family: Inter;
         font-style: normal;
         font-weight: 600;
-        font-size: 0.729vw;
+        font-size: 0.8rem;
         line-height: 21px;
         .integration-add {
           margin-left: 3.9vw;
@@ -173,4 +173,61 @@
   hr {
     margin-bottom: 0;
   }
+}
+
+.nav-bar {
+  background: #FFFFFF;
+  box-shadow: 0px 3px 10px rgba(115, 143, 147, 0.3);
+}
+
+.navigation::-webkit-scrollbar {
+  display: none;
+}
+
+.navigation {
+  background: #f5f5f5;
+  flex-grow: 1;
+  border-right: solid 1px #dfe9f1;
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  overflow-y: scroll;
+}
+
+.mobile-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.mobile-nav {
+  background: #f5f5f5;
+  flex-grow: 1;
+  border-right: solid 1px #dfe9f1;
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  overflow-y: scroll;
+  max-width: 80vw;
+  min-width: 70vw;
+  transition: 0.5s;
+  .main-navigation {
+    width: 100%;
+  }
+
+}
+
+.hide-nav {
+  transform: translateX(-105%);
+}
+
+.nav-collection {
+  width: 100%;
+  .nav-row {
+    align-items: center;
+  }
+}
+
+.icon-container {
+  display: inline-block;
 }
