@@ -12,6 +12,7 @@ import { connect } from 'react-redux'
 import { getAllEvents } from "../../actions/eventAction";
 import { getAllPosts } from "../../actions/postAction";
 import { getAllProjects } from "../../actions/projectAction";
+import Backdrop from '../../utils/Backdrop';
 
 class Dashboard extends Component {
   constructor(props) {
@@ -22,7 +23,8 @@ class Dashboard extends Component {
       allPosts: [],
       allProjects: [],
       allEvents: [],
-      allMix: []
+      allMix: [],
+      backdrop: false
     };
   }
 
@@ -57,9 +59,16 @@ class Dashboard extends Component {
 
   render() {
     const { allMix, allEvents, allProjects, allPosts } = this.state
+    const setBackdrop = (set = false) => {
+      this.setState({
+        backdrop: set
+      })
+    }
     return ( 
+      
       <div className="dashboard">
-        <Navigation dashboard={this.state.dashboard} />
+        <Backdrop show={this.state.backdrop} />
+        <Navigation backdrop={this.state.backdrop} setBackdrop={setBackdrop} dashboard={this.state.dashboard} />
         <div className="content-container">
           <div className="news">
             {this.state.isLoading ? (

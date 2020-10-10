@@ -59,6 +59,7 @@ class Navigation extends Component {
       this.setState({
         sidebar: false
       })
+      this.props.setBackdrop();
     } else {
       return;
     }
@@ -114,6 +115,7 @@ class Navigation extends Component {
       this.setState({
         sidebar: true
       })
+      this.props.setBackdrop(true);
     }
     const { logout } = this.props;
     return (

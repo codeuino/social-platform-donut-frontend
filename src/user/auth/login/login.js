@@ -57,7 +57,7 @@ class Login extends Component {
                 Organisations and Open Source aspirants
               </p>
             </div>
-            <div class="login-btn">
+            <div className="login-btn">
               <a href="#login">
                 Sign In
               </a>
