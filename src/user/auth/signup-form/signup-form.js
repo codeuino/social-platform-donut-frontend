@@ -302,7 +302,6 @@ class SignUpForm extends Component {
           </Row>
           <div className="cta-signup">
             <Button
-              className="signupbtn"
               type="submit"
               variant="primary"
               color="primary"

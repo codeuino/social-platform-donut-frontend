@@ -12,6 +12,7 @@ import { connect } from 'react-redux'
 import { getAllEvents } from "../../actions/eventAction";
 import { getAllPosts } from "../../actions/postAction";
 import { getAllProjects } from "../../actions/projectAction";
+import { Desktop } from '../../utils/breakpoints';
 
 class Dashboard extends Component {
   constructor(props) {
@@ -67,10 +68,12 @@ class Dashboard extends Component {
             {this.state.isLoading ? (
               notifyUsersLoading()
             ) : (
-              <div className="notify-user">
-                <UpcomingEvents></UpcomingEvents>
-                <Notifications></Notifications>
-              </div>
+              <Desktop>
+                <div className="notify-user">
+                  <UpcomingEvents></UpcomingEvents>
+                  <Notifications></Notifications>
+                </div>
+              </Desktop>
             )}
             {this.state.isLoading ? newsFeedLoading() : <NewsFeed allMix={allMix} allProjects={allProjects} allPosts={allPosts} allEvents={allEvents}/>}
           </div>

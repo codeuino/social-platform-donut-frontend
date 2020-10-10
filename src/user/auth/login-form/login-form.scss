@@ -14,7 +14,7 @@
     button {
       width: 104px;
       background-color: #1a73e8;
-      // border-radius: 30px;
+      border-radius: 100px;
     }
   }
 }
@@ -29,10 +29,6 @@
 #validation_msg {
   color: rgb(247, 134, 134);
   font-size: 15px;
-}
-
-.loginbtn {
-  border-radius: 100px !important;
 }
 
 .loginbtn-text {
