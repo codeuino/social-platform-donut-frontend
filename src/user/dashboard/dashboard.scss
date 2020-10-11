@@ -17,16 +17,12 @@
     flex-grow: 2;
     padding: 20px 12px 20px 0px;
   }
-  @media (min-width: 320px) and (max-width: 640px){
+  @media (min-width: 320px) and (max-width: 1024px){
     .promotions {
       display: none;
     }
     .news {
       margin-left: 0;
-      margin-top: 1rem;
     }
-  }
-  @media (min-width: 640) and (max-width: 1024){
-    
   }
 }
