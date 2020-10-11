@@ -1,16 +1,16 @@
-.proposal-dashboard {
+.proposal_dashboard {
   // display: flex;
   min-height: 100vh;
   height: auto;
   font-family: Muli, sans-serif;
-  .proposal-dashboard__navigation {
+  .proposal_dashboard__navigation {
     flex: 1;
     border-right: solid 1px #dfe9f1;
   }
-  .proposal-dashboard__content {
+  .proposal_dashboard__content {
     flex: 4;
   }
-  .proposal-dashboard__rightpanel {
+  .proposal_dashboard__rightpanel {
     flex: 2;
   }
 }

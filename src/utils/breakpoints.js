@@ -1,19 +1,25 @@
 import { useMediaQuery } from "react-responsive";
 
+const DesktopMinWidth = 1024;
+const TabletMaxWidth = 1024;
+const TabletMinWidth = 640;
+const MobileMaxWidth = 640;
+const DefaultMaxWidth = 768;
+
 const Desktop = ({ children }) => {
-  const isDesktop = useMediaQuery({ minWidth: 1024 });
+  const isDesktop = useMediaQuery({ minWidth: DesktopMinWidth });
   return isDesktop ? children : null;
 };
 const Tablet = ({ children }) => {
-  const isTablet = useMediaQuery({ minWidth: 640, maxWidth: 1024 });
+  const isTablet = useMediaQuery({ minWidth: TabletMinWidth, maxWidth: TabletMaxWidth });
   return isTablet ? children : null;
 };
 const Mobile = ({ children }) => {
-  const isMobile = useMediaQuery({ maxWidth: 640 });
+  const isMobile = useMediaQuery({ maxWidth: MobileMaxWidth });
   return isMobile ? children : null;
 };
 const Default = ({ children }) => {
-  const isNotMobile = useMediaQuery({ minWidth: 768 });
+  const isNotMobile = useMediaQuery({ minWidth: DefaultMaxWidth });
   return isNotMobile ? children : null;
 };
 
