@@ -16,11 +16,6 @@ import CheckOutlinedIcon from "@material-ui/icons/CheckOutlined";
 import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
 import LocationOnOutlinedIcon from "@material-ui/icons/LocationOnOutlined";
 
-// Author, tags and status are the three filters that we want
-// only one author can be selected at a time, clicking on a different authoir will unclick the first author
-// implement search bar in author filter
-// implement
-
 class Filter extends Component {
   constructor(props) {
     super(props);
@@ -101,7 +96,6 @@ class Filter extends Component {
   };
 
   handleTagsChange = (tag) => {
-    // in not present then add if already present then clicking on it will remove it
     if (this.state.tags.indexOf(tag) === -1) {
       this.setState(
         {
@@ -120,7 +114,6 @@ class Filter extends Component {
   };
 
   handleStatusChange = (status) => {
-    // in not present then add if already present then clicking on it will remove it
     if (this.state.status.indexOf(status) === -1) {
       this.setState(
         {
