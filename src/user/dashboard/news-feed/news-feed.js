@@ -686,7 +686,7 @@ function NewsFeed(props) {
       </Desktop>
       <div className="news__feed__container">
         <div className="tabs__container" style={isTop ? navStyles : {}}>
-          <div className="nav__tab container">
+          <div className="nav__tab">
             <ul
               className="nav__list__container"
               style={isTop ? { marginBottom: "0px" } : {}}

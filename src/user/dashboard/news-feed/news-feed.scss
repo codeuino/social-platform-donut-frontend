@@ -463,6 +463,12 @@
   margin-left: 27px;
   margin-top: 10px;
   .nav__tab {
+      width: 100%;
+      padding-right: 15px;
+      padding-left: 15px;
+      margin-right: auto;
+      margin-left: auto;
+      margin-top: 2vh;
     .nav__list__container {
       display: flex;
       justify-content: center;
@@ -571,6 +577,7 @@
     width: 100%;
     margin: 0;
     .nav__tab {
+      padding: 0;
       .nav__list__container {
         justify-content: space-between;
         padding: 15px 10px 0px 10px;
