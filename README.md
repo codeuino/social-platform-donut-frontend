@@ -86,7 +86,15 @@ Once the command completes you will have a new folder containing the cloned repo
 
 **Setting up a remote upstream**
 
+<<<<<<< HEAD
 The next step is to set up a remote. Remotes simply represent paths or URLs to other versions of your repository. In our case, as we cloned from our fork on GitHub a default remote will have been setup for us called origin. This origin allows us to push and pull code from our forked repository hosted on GitHub. We can list the currently configured remotes on our machine using the “git remote” command.
+=======
+    ```shell
+    npm install
+    or 
+    yarn global add
+    ```
+>>>>>>> master
 
 Pushing and pulling from your own fork is very useful and this will be how you will work with the project most often. However, when working on that code, you’ll want to be starting from the most recent version of the code from the main donut-frontend repository. That code may have been updated and changed since you first made your fork. In order to get access to that latest code, we’ll setup a second remote which points to the main donut-frontend repository. We will not have commit rights there, so we cannot push changes, however, we will be able to fetch the latest commits that have occurred.
 
@@ -107,9 +115,16 @@ npm install
 The npm install command will install all the project dependencies mentioned in the package.json file.  
 Once all the dependencies are completely installed the final step is to run our local instance using the following command.
 
+<<<<<<< HEAD
 ```
 npm start
 ```
+=======
+Adding yarn support for the packages just type `yarn`in the cli and hit enter.
+
+Setting Up Database
+------------
+>>>>>>> master
 
 Now visit the [http://localhost:3000](http://localhost:3000) using your favorite browser to see your very own donut-frontend app in action!
 
@@ -145,7 +160,15 @@ This command allows us to specify a name for our new branch and immediately chec
 git checkout -b 223
 ```
 
+<<<<<<< HEAD
 Once we are on our new branch we can make changes to the code which address the issue. When we have made the required changes that address a particular issue, we need to commit that code to our branch. We can use the “git status” command to view the changes since our last commit.
+=======
+* 💬 Join the community on [Slack](https://slack.codeuino.org/)
+* 📣 Stay up to date on new features and announcements on the following:
+  - [@Mailing List](mailto:codeuino-devel@googlegroups.com).
+  - [@Discussion Portal](https://groups.google.com/d/forum/codeuino-devel).
+  - [@Codeuino Wiki](https://docs.codeuino.org/).
+>>>>>>> master
 
 ```
 git status

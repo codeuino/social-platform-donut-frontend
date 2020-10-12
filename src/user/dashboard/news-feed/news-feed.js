@@ -4,7 +4,6 @@ import {
   Card,
   Paper,
   InputBase,
-  ButtonGroup,
   ListItem,
   ListItemAvatar,
   Avatar,
@@ -14,7 +13,7 @@ import {
   CardMedia,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { Button, Dropdown } from "react-bootstrap";
+import { Button, Dropdown, ButtonGroup } from "react-bootstrap";
 import AddEventModal from "./popups/AddEventModal";
 import AddProjectModal from "./popups/AddProjectModal";
 import PostReactionModal from "./popups/PostReactionsModal";
