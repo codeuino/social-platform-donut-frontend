@@ -5,6 +5,7 @@ import Dashboard from "./user/dashboard/dashboard";
 import PinnedPosts from "./user/pinned-posts/pinned-posts";
 import Profile from "./user/profile/profile";
 import Organization from "./user/organization/organization";
+import Wikis from "./user/wikis/Wikis";
 import NotFound from "./404/notFound";
 import Settings from "./user/dashboard/settings/Settings";
 import Projects from "./user/projects/projects";
@@ -36,6 +37,7 @@ const Router = () => (
       <PrivateRoute exact path="/profile/:id" component={Profile} />
       <PrivateRoute exact path="/:id/proj-info" component={ProjInfo} />
       <PrivateRoute exact path="/organization" component={Organization} />
+      <PrivateRoute exact path="/wikis" component={Wikis} />
       <PrivateRoute exact path="/settings" component={Settings} />
       <PrivateRoute exact path="/projects" component={Projects} />
       <PrivateRoute exact path="/events" component={Events} />

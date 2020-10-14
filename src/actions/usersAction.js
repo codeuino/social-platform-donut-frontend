@@ -216,7 +216,7 @@ export const activateDeactivateToggler = () => async (dispatch) => {
     const res = await axios.patch(`${BASE_URL}/user/deactivate/toggler`)
     if (res.status === 200) {
       console.log('Deactivation toggler', res.data);
-      dispatch(getProfile());
+      dispatch(getProfile(userId));
     }
   } catch (error) {
     dispatch(errorHandler(error))
