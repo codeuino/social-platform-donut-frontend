@@ -63,8 +63,8 @@ class Dashboard extends Component {
       
       <div className="dashboard">
         <Navigation dashboard={this.state.dashboard} />
-        <div className="content-container">
-          <div className="news">
+        <div className="dashboard__container">
+          <div className="dashboard__container__news">
             {this.state.isLoading ? (
               notifyUsersLoading()
             ) : (
@@ -77,7 +77,7 @@ class Dashboard extends Component {
             )}
             {this.state.isLoading ? newsFeedLoading() : <NewsFeed allMix={allMix} allProjects={allProjects} allPosts={allPosts} allEvents={allEvents}/>}
           </div>
-          <div className="promotions">
+          <div className="dashboard__promotions">
             {this.state.isLoading ? portfolioLoading() : <Portfolio />}
           </div>
         </div>

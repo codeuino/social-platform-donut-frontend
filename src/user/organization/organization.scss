@@ -1,18 +1,9 @@
-.organization {
+.organization__container {
   display: flex;
   min-height: 100vh;
   height: auto;
   font-family: "Inter";
-  .navigation {
-    overflow-y: scroll;
-    background: #f5f5f5;
-    flex: 0.5;
-    border-right: solid 1px #dfe9f1;
-    position: fixed;
-    top: 0px;
-    bottom: 0px;
-    left: 0px;
-  }
+  margin-left: 10%;
   h2 {
     font-size: 20px;
     font-weight: bold;
@@ -40,7 +31,7 @@
     display: flex;
     flex-direction: row;
     padding-right: 10px;
-    .posts {
+    .details {
       flex-grow: 2;
       margin-top: -1rem;
       h2 {
@@ -144,7 +135,7 @@
       font-weight: 600;
       font-size: 16px;
       line-height: 27px;
-
+      border-radius: 100px;
       color: #ffffff;
     }
   }
@@ -162,4 +153,60 @@
 
 .navigation::-webkit-scrollbar {
   display: none;
+}
+
+.details {
+  .tabs__container {
+    width: 100%;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 1024px){
+  .organization__container {
+    margin-left: 0;
+    .news {
+      margin: 2vh 0 0 0;
+      .notify-user {
+        padding: 0;
+        justify-content: center;
+      }
+      .org-info {
+        padding: 0;
+        margin: 2vh 2vw;
+        .proposal-btn {
+          margin-left: 0;
+          width: 100%;
+        }
+        .about-us {
+          margin: 0 auto;
+        }
+      }
+    }
+    .details__content {
+      margin-top: 20px;
+    }
+    .contact {
+      h2 {
+        display: none;
+      }
+    }
+    .updates {
+      h1 {
+        display: none;
+      }
+    }
+    .details__proposal {
+      width: 100%;
+      margin: 10px 0;
+      display: flex;
+      .details__proposal_btn {
+        margin: 0 auto;
+        .proposal-btn {
+          border-radius: 100px;
+        }
+      }
+    }
+  }
+  
+  
 }

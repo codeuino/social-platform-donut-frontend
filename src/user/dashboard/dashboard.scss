@@ -1,9 +1,9 @@
-.content-container {
+.dashboard__container {
   display: flex;
   min-height: 100vh;
   height: auto;
   font-family: Muli, sans-serif;
-  .news {
+  .dashboard__container__news {
     margin-left: 13vw;
     flex-grow: 4;
     .notify-user {
@@ -11,17 +11,17 @@
       padding: 20px 0px 20px 30px;
     }
   }
-  .promotions {
+  .dashboard__promotions {
     height: 256px;
     flex-direction: row;
     flex-grow: 2;
     padding: 20px 12px 20px 0px;
   }
   @media (min-width: 320px) and (max-width: 1024px){
-    .promotions {
+    .dashboard__promotions {
       display: none;
     }
-    .news {
+    .dashboard__container__news {
       margin-left: 0;
     }
   }
