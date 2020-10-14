@@ -6,7 +6,7 @@ import History from "./History/History";
 import Disscussion from "./Discussion/Discussion";
 import "react-mde/lib/styles/css/react-mde-all.css";
 import { ToastContainer, toast } from "react-toastify";
-import { BASE_URL } from "../../../../actions/baseApi";
+import { getTicket, createCommnet, updateTicket, upvoteComment, downvoteComment, deleteComment, addTag, deleteTag } from "../../../../utils/ticket";
 
 class TicketDiscussions extends Component {
   constructor(props) {
@@ -24,21 +24,7 @@ class TicketDiscussions extends Component {
       {
         spinner: "Loading Ticket...",
       },
-      async () => {
-        const ticket = (
-          await axios.get(`${BASE_URL}/ticket/${this.props.ticketId}`, {
-            cancelToken: this.axiosCancel.token,
-          })
-        ).data.ticket;
-        this.editsAllowed =
-          localStorage.getItem("ticketModerator") === "true" ||
-          localStorage.getItem("admin") === "true" ||
-          localStorage.getItem("userId") === ticket.createdBy.id;
-        this.deleteAllowed =
-          localStorage.getItem("ticketModerator") === "true" ||
-          localStorage.getItem("admin") === "true";
-        this.setState({ ticket: ticket, spinner: "" });
-      }
+      getTicket.bind(this)
     );
   };
 
@@ -59,52 +45,16 @@ class TicketDiscussions extends Component {
       {
         spinner: "Adding comment...",
       },
-      async () => {
-        try {
-          this.setState({
-            ticket: (
-              await axios.post(
-                `${BASE_URL}/ticket/${this.state.ticket._id}/comment`,
-                {
-                  content,
-                },
-                { cancelToken: this.axiosCancel.token }
-              )
-            ).data.ticket,
-            spinner: "",
-          });
-        } catch (err) {
-          console.log(err);
-          toast.error("Something went wrong! could not add comment");
-          this.setState({ spinner: "" });
-        }
-      }
+      createCommnet.bind(this, content)
     );
   };
 
-  handleUpdateTicket = async (updates) => {
+  handleUpdateTicket = (updates) => {
     this.setState(
       {
         spinner: "Updating Ticket...",
       },
-      async () => {
-        try {
-          this.setState({
-            ticket: (
-              await axios.put(
-                `${BASE_URL}/ticket/${this.state.ticket._id}`,
-                updates,
-                { cancelToken: this.axiosCancel.token }
-              )
-            ).data.ticket,
-            spinner: "",
-          });
-        } catch (err) {
-          console.log(err);
-          toast.error("Something went wrong! could not update Ticket");
-          this.setState({ spinner: "" });
-        }
-      }
+      updateTicket.bind(this, updates)
     );
   };
 
@@ -113,79 +63,29 @@ class TicketDiscussions extends Component {
       {
         spinner: "Adding vote to comment...",
       },
-      async () => {
-        try {
-          this.setState({
-            ticket: (
-              await axios.put(
-                `${BASE_URL}/ticket/${this.state.ticket._id}/comment/${commentId}/upvote`,
-                {},
-                { cancelToken: this.axiosCancel.token }
-              )
-            ).data.ticket,
-            spinner: "",
-          });
-        } catch (err) {
-          console.log(err);
-          toast.error("Something went wrong! could not upvote comment");
-          this.setState({ spinner: "" });
-        }
-      }
+      upvoteComment.bind(this, commentId)
     );
   };
 
-  handleCommentDownvote = async (commentId) => {
+  handleCommentDownvote = (commentId) => {
     this.setState(
       {
         spinner: "Removing vote from comment...",
       },
-      async () => {
-        try {
-          this.setState({
-            ticket: (
-              await axios.put(
-                `${BASE_URL}/ticket/${this.state.ticket._id}/comment/${commentId}/downvote`,
-                {},
-                { cancelToken: this.axiosCancel.token }
-              )
-            ).data.ticket,
-            spinner: "",
-          });
-        } catch (err) {
-          console.log(err);
-          toast.error("Something went wrong! could not downvote comment");
-          this.setState({ spinner: "" });
-        }
-      }
+      downvoteComment.bind(this, commentId)
     );
   };
 
-  handleCommentDelete = async (commentId) => {
+  handleCommentDelete = (commentId) => {
     this.setState(
       {
         spinner: "Removig comment...",
       },
-      async () => {
-        try {
-          this.setState({
-            ticket: (
-              await axios.delete(
-                `${BASE_URL}/ticket/${this.state.ticket._id}/comment/${commentId}`,
-                { cancelToken: this.axiosCancel.token }
-              )
-            ).data.ticket,
-            spinner: "",
-          });
-        } catch (err) {
-          console.log(err);
-          toast.error("Something went wrong! could not remove comment");
-          this.setState({ spinner: "" });
-        }
-      }
+      deleteComment.bind(this, commentId)
     );
   };
 
-  handleAddTag = async (tagName) => {
+  handleAddTag = (tagName) => {
     if (this.state.ticket.tags.indexOf(tagName) !== -1) {
       toast.error("Tag already present");
     } else if (tagName.length > 10) {
@@ -197,52 +97,17 @@ class TicketDiscussions extends Component {
         {
           spinner: "Adding Tag...",
         },
-        async () => {
-          try {
-            this.setState({
-              ticket: (
-                await axios.post(
-                  `${BASE_URL}/ticket/${this.state.ticket._id}/tag/${tagName}`,
-                  {},
-                  { cancelToken: this.axiosCancel.token }
-                )
-              ).data.ticket,
-              spinner: "",
-            });
-            this.props.addTag(this.state.ticket._id, tagName);
-          } catch (err) {
-            console.log(err);
-            toast.error("Something went wrong! could not add tag");
-            this.setState({ spinner: "" });
-          }
-        }
+        addTag.bind(this, tagName)
       );
     }
   };
 
-  handleDeleteTag = async (tagName) => {
+  handleDeleteTag = (tagName) => {
     this.setState(
       {
         spinner: "Removing Tag...",
       },
-      async () => {
-        try {
-          this.setState({
-            ticket: (
-              await axios.delete(
-                `${BASE_URL}/ticket/${this.state.ticket._id}/tag/${tagName}`,
-                { cancelToken: this.axiosCancel.token }
-              )
-            ).data.ticket,
-            spinner: "",
-          });
-          this.props.addTag(this.state.ticket._id, tagName);
-        } catch (err) {
-          console.log(err);
-          toast.error("Something went wrong! could not remove tag");
-          this.setState({ spinner: "" });
-        }
-      }
+      deleteTag.bind(this, tagName)
     );
   };
 

@@ -18,6 +18,7 @@ import { Drawer, List, ListItem } from "@material-ui/core";
 import donutIcon from "../../../assets/svgs/donut-icon.svg";
 import Navigation from "../../dashboard/navigation/navigation";
 import TicketDisscussion from "./TicketDiscussion/TicketDiscussions";
+import { createNewTicket, deleteTicket } from "../../../utils/ticket";
 import NotificationsNoneOutlinedIcon from "@material-ui/icons/NotificationsNoneOutlined";
 
 class TicketDashboard extends Component {
@@ -98,7 +99,7 @@ class TicketDashboard extends Component {
       ).data.notifications;
       this.setState({ notifications });
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
   };
 
@@ -107,25 +108,7 @@ class TicketDashboard extends Component {
       {
         spinner: "Creating new Ticket...",
       },
-      async () => {
-        try {
-          const ticket = (await axios.post(`${BASE_URL}/ticket`, newTicket, {
-            cancelToken: this.axiosCancel.token,
-          }))
-            .data.ticket;
-          ticket.comments = 0;
-          this.setState({
-            all: [ticket, ...this.state.all],
-            filtered: [ticket, ...this.state.all],
-            editorMode: false,
-            spinner: "",
-          });
-        } catch (err) {
-          console.log(err);
-          toast.error("Something went wrong! could create Ticket");
-          this.setState({ spinner: "" });
-        }
-      }
+      createNewTicket.bind(this, newTicket)
     );
   };
 
@@ -176,25 +159,9 @@ class TicketDashboard extends Component {
   };
 
   deleteTicket = (id) => {
-    const newTickets = this.state.all.filter((ele) => ele._id !== id);
     this.setState(
       { spinner: "Deleting Ticket,,,", viewingTicket: null },
-      async () => {
-        try {
-          await axios.delete(`${BASE_URL}/ticket/${id}`, {
-            cancelToken: this.axiosCancel.token,
-          });
-          this.setState({
-            all: [...newTickets],
-            filtered: [...newTickets],
-            spinner: "",
-          });
-        } catch (err) {
-          console.log(err);
-          toast.error("Something went wrong! could not delete Ticket");
-          this.setState({ spinner: "" });
-        }
-      }
+      deleteTicket.bind(this, id)
     );
   };
 

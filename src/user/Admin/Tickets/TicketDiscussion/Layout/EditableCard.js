@@ -5,6 +5,7 @@ import Button from "react-bootstrap/Button";
 import SaveButton from "@material-ui/icons/SaveOutlined";
 import EditButton from "@material-ui/icons/EditOutlined";
 import CancelButton from "@material-ui/icons/ClearOutlined";
+import { saveTicketSummary } from '../../../../../utils/ticket';
 
 class EditableCard extends Component {
   constructor(props) {
@@ -26,15 +27,7 @@ class EditableCard extends Component {
   };
 
   save = () => {
-    this.setState({ editor: false }, async () => {
-      await this.props.updateTicket({
-        type: "shortDescription",
-        shortDescription: this.state.data,
-      });
-      this.props.singleUpdate(this.props.ticketId, {
-        shortDescription: this.state.data,
-      });
-    });
+    this.setState({ editor: false }, saveTicketSummary.bind(this));
   };
 
   render() {

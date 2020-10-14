@@ -6,6 +6,7 @@ import EditButton from "@material-ui/icons/EditOutlined";
 import SaveButton from "@material-ui/icons/SaveOutlined";
 import BadgeElement from "../../TicketContent/BadgeElement";
 import CancelButton from "@material-ui/icons/ClearOutlined";
+import { saveTicketTitle } from "../../../../../utils/ticket";
 import DeleteOutlineOutlinedIcon from "@material-ui/icons/DeleteOutlineOutlined";
 
 class Title extends Component {
@@ -30,15 +31,7 @@ class Title extends Component {
   };
 
   handleSave = () => {
-    this.setState({ editor: false }, async () => {
-      await this.props.updateTicket({
-        type: "title",
-        title: this.state.title,
-      });
-      this.props.singleUpdate(this.props.ticket._id, {
-        title: this.state.title,
-      });
-    });
+    this.setState({ editor: false }, saveTicketTitle.bind(this));
   };
 
   render() {
