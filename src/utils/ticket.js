@@ -102,7 +102,7 @@ export const updateTicket = async function (updates) {
   try {
     this.setState({
       ticket: (
-        await axios.put(
+        await axios.patch(
           `${BASE_URL}/ticket/${this.state.ticket._id}`,
           updates,
           { cancelToken: this.axiosCancel.token }
@@ -121,7 +121,7 @@ export const upvoteComment = async function (commentId) {
   try {
     this.setState({
       ticket: (
-        await axios.put(
+        await axios.patch(
           `${BASE_URL}/ticket/${this.state.ticket._id}/comment/${commentId}/upvote`,
           {},
           { cancelToken: this.axiosCancel.token }
@@ -140,7 +140,7 @@ export const downvoteComment = async function (commentId) {
   try {
     this.setState({
       ticket: (
-        await axios.put(
+        await axios.patch(
           `${BASE_URL}/ticket/${this.state.ticket._id}/comment/${commentId}/downvote`,
           {},
           { cancelToken: this.axiosCancel.token }
