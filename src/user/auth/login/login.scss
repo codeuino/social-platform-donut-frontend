@@ -141,6 +141,75 @@ body {
       }
     }
   }
+  @media (min-width: 640px) and (max-width: 1024px) {
+    .container-wrapper{
+      .section-home {
+        flex-direction: column;
+        margin: 0px;
+        .welcome-text {
+          margin: 0 1rem 0 1.5rem;
+          min-height: 50vh;
+          padding-top: 4rem;
+          .tagline {
+            padding-bottom: 2rem;
+            text-align: center;
+            h1 {
+              font-size: 2rem;
+              line-height: 3rem;
+              padding-bottom: 0.5rem;
+            }
+          }
+          .description {
+            padding: 0 0 1rem 0;
+            margin-top: 0;
+            text-align: center;
+            p {
+              font-size: 1.2rem;
+              line-height: 2rem;
+              padding: 0;
+            }
+          }
+          .logo {
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+            .main-donut-logo {
+              text-align: center;
+              img {
+                height: 3.5rem;
+              }
+            }
+          } 
+          .login-btn {
+            text-align: center;
+
+            a {
+              color: white;
+              cursor: pointer;
+              text-decoration:none;
+              padding:0.5rem 3rem;
+              background: #1A73E8;
+              border-radius: 100px;
+              display:inline-block;
+              &:hover {
+                background-color: #1864c9;
+              }
+            }
+          }
+        }
+        .user-details {
+          .user-data {
+            box-shadow: none;
+          }
+        }
+      } 
+    }
+    .extra-donuts {
+      flex-shrink: 0;
+      img {
+        height: 2rem;
+      }
+    }
+  }
 }
 
 .login-text {
