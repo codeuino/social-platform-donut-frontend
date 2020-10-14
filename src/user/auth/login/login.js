@@ -8,6 +8,7 @@ import GoogleLogin from "../../../assets/images/icons8-google-48.png";
 import { FaGithub } from 'react-icons/fa'
 import { connect } from 'react-redux';
 import { getLoginOptions } from '../../../actions/orgAction'
+import { HashLink } from 'react-router-hash-link';
 import "./login.scss";
 
 class Login extends Component {
@@ -58,9 +59,7 @@ class Login extends Component {
               </p>
             </div>
             <div className="login-btn">
-              <a href="#login">
-                Sign In
-              </a>
+              <HashLink smooth to="#login">Sign In</HashLink>
             </div>
           </div>
           <div id="login" className="user-details">
