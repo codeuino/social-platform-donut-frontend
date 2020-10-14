@@ -321,7 +321,7 @@ function NewsFeed(props) {
       votes.donut?.user.length;
 
     return (
-      <Col xs={12} md={6}>
+      <Col xs={12} lg={6}>
         <div className="grid" key={post?._id}>
           <Paper elevation={1} className={classes.paper}>
             <Card className={classes.root} variant="outlined">
@@ -496,7 +496,7 @@ function NewsFeed(props) {
 
   let eventsContent = events?.map((event) => {
     return (
-      <Col xs={12} md={6}>
+      <Col xs={12} lg={6}>
         <div className="grid" key={event._id}>
           <Paper elevation={1} className={classes.paper}>
             <Card className={classes.root}>
@@ -567,7 +567,7 @@ function NewsFeed(props) {
         <div className="post-article">
           <div className="article">
             <Row>
-              <Col xs={12} md={8}>
+              <Col xs={12} lg={8}>
                 <Paper
                   component="form"
                   className="post-input"
@@ -577,7 +577,7 @@ function NewsFeed(props) {
                 </Paper>
               </Col>
               <AddPostModal show={writePost} onHide={closePostModal} />
-              <Col xs={12} md={4}>
+              <Col xs={12} lg={4}>
                 <div className="cta">
                   <ButtonGroup
                     variant="outlined"
@@ -685,55 +685,107 @@ function NewsFeed(props) {
         {createPost}
       </Desktop>
       <div className="news__feed__container">
-        <div className="tabs__container" style={isTop ? navStyles : {}}>
-          <div className="nav__tab">
-            <ul
-              className="nav__list__container"
-              style={isTop ? { marginBottom: "0px" } : {}}
-            >
-              <li
-                className={
-                  type === "All"
-                    ? "nav__single__tab selected"
-                    : "nav__single__tab"
-                }
-                onClick={handleClick("All")}
+        <Mobile>
+          <div className="tabs__container">
+            <div className="nav__tab">
+              <ul
+                className="nav__list__container"
               >
-                All
-              </li>
-              <li
-                className={
-                  type === "Post"
-                    ? "nav__single__tab selected"
-                    : "nav__single__tab"
-                }
-                onClick={handleClick("Post")}
-              >
-                Posts
-              </li>
-              <li
-                className={
-                  type === "Event"
-                    ? "nav__single__tab selected"
-                    : "nav__single__tab"
-                }
-                onClick={handleClick("Event")}
-              >
-                Events
-              </li>
-              <li
-                className={
-                  type === "Project"
-                    ? "nav__single__tab selected"
-                    : "nav__single__tab"
-                }
-                onClick={handleClick("Project")}
-              >
-                Projects
-              </li>
-            </ul>
+                <li
+                  className={
+                    type === "All"
+                      ? "nav__single__tab selected"
+                      : "nav__single__tab"
+                  }
+                  onClick={handleClick("All")}
+                >
+                  All
+                </li>
+                <li
+                  className={
+                    type === "Post"
+                      ? "nav__single__tab selected"
+                      : "nav__single__tab"
+                  }
+                  onClick={handleClick("Post")}
+                >
+                  Posts
+                </li>
+                <li
+                  className={
+                    type === "Event"
+                      ? "nav__single__tab selected"
+                      : "nav__single__tab"
+                  }
+                  onClick={handleClick("Event")}
+                >
+                  Events
+                </li>
+                <li
+                  className={
+                    type === "Project"
+                      ? "nav__single__tab selected"
+                      : "nav__single__tab"
+                  }
+                  onClick={handleClick("Project")}
+                >
+                  Projects
+                </li>
+              </ul>
+            </div>
           </div>
-        </div>
+        </Mobile>
+        <Desktop>
+          <div className="tabs__container" style={isTop ? navStyles : {}}>
+            <div className="nav__tab">
+              <ul
+                className="nav__list__container"
+                style={isTop ? { marginBottom: "0px" } : {}}
+              >
+                <li
+                  className={
+                    type === "All"
+                      ? "nav__single__tab selected"
+                      : "nav__single__tab"
+                  }
+                  onClick={handleClick("All")}
+                >
+                  All
+                </li>
+                <li
+                  className={
+                    type === "Post"
+                      ? "nav__single__tab selected"
+                      : "nav__single__tab"
+                  }
+                  onClick={handleClick("Post")}
+                >
+                  Posts
+                </li>
+                <li
+                  className={
+                    type === "Event"
+                      ? "nav__single__tab selected"
+                      : "nav__single__tab"
+                  }
+                  onClick={handleClick("Event")}
+                >
+                  Events
+                </li>
+                <li
+                  className={
+                    type === "Project"
+                      ? "nav__single__tab selected"
+                      : "nav__single__tab"
+                  }
+                  onClick={handleClick("Project")}
+                >
+                  Projects
+                </li>
+              </ul>
+            </div>
+          </div>
+        </Desktop>
         <Row className="post">
           <Col xs={12}>
             <Mobile>

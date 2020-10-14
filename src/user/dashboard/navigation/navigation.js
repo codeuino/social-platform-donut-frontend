@@ -224,7 +224,7 @@ class Navigation extends Component {
            </div>
           </Desktop>
 
-          <Tablet>
+          {/* <Tablet>
             <div className="navigation">
               <div className="main-navigation">
                 <ListGroup className="list-group">
@@ -241,12 +241,12 @@ class Navigation extends Component {
                     link="/dashboard"
                     isMobile="true"
                   />
-                  {/* <ListItem
+                  <ListItem
                     name="Pinned Posts"
                     className={this.props.posts ? "active" : "inactive"}
                     link="/pinned-posts"
                     isMobile="true"
-                  /> */}
+                  />
                   <ListItem
                     name="Organization"
                     className={this.props.org ? "active" : "inactive"}
@@ -321,7 +321,7 @@ class Navigation extends Component {
                 </ListGroup>
               </div>
             </div>
-          </Tablet>
+          </Tablet> */}
           
           <Mobile>
             <Navbar className="nav-bar" sticky="top" expand="lg">

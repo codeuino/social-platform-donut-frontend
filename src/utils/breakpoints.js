@@ -1,6 +1,6 @@
 import { useMediaQuery } from "react-responsive";
 
-const DesktopMinWidth = 1024;
+const DesktopMinWidth = 1025;
 const TabletMaxWidth = 1024;
 const TabletMinWidth = 640;
 const MobileMaxWidth = 640;
@@ -15,7 +15,7 @@ const Tablet = ({ children }) => {
   return isTablet ? children : null;
 };
 const Mobile = ({ children }) => {
-  const isMobile = useMediaQuery({ maxWidth: MobileMaxWidth });
+  const isMobile = useMediaQuery({ maxWidth: TabletMaxWidth });
   return isMobile ? children : null;
 };
 const Default = ({ children }) => {
