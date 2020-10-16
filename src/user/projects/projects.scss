@@ -2,17 +2,9 @@
     display: flex;
     min-height: 100vh;
     font-family: Muli, sans-serif;
-    .navigation {
-      flex: 0.5;
-      border-right: solid 1px #dfe9f1;
-      position: fixed;
-      top: 0px;
-      bottom: 0px;
-      left: 0px;
-    }
-
     .projects {
-        margin-top: 1vh;
+        width: 100%;
+        padding: 20px;
         margin-left: 4vw;
         margin-right: 6vw;
         p {
@@ -31,20 +23,12 @@
           line-height: 1.3em;
           color: #2D2D2D;
         }
-
-        .card__container{
-          max-width: 33.33%;
-        }
-
         .MuiCard-root {
           overflow: hidden;
-          height: 42vh;
         }
 
         img{
-          height: 10rem;
-          width:auto;
-          object-fit: cover;
+          height: 15rem;
         }
       .create{
         position:fixed;
@@ -85,3 +69,19 @@
     }
     margin-left: 10%;
   }
+
+  @media (min-width: 320px) and (max-width: 1024px){
+    .organization {
+      margin-left: 0;
+      .projects {
+        margin: 0;
+        #projects_header {
+          text-align: center;
+        }
+        .card__container {
+          max-width: 100%;
+        }
+      }
+    }
+  }
+  
