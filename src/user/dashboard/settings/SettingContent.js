@@ -6,6 +6,8 @@ import { connect } from 'react-redux';
 import { getProfile } from '../../../actions/usersAction'
 import { getOrgProfile } from '../../../actions/orgAction'
 import './styles/SettingSidebar.scss';
+import { Mobile, Desktop } from '../../../utils/breakpoints';
+import { Accordion, Button } from 'react-bootstrap'; 
 
 class SettingContent extends Component {
   constructor(props){
@@ -25,8 +27,10 @@ class SettingContent extends Component {
       option: "",
       optionValue: "",
       canChangeName: false,
-      canChangeEmail: false
+      canChangeEmail: false,
+      sidebarOpen: false
     }
+    this.leftSidebar = React.createRef();
   }
 
   componentDidMount(){
@@ -90,10 +94,29 @@ class SettingContent extends Component {
         console.log('toggler ', this.state);
       })
     }
+    const toggleSidebar = () => {
+      this.setState((prevState) => {
+        return {
+          sidebarOpen: !prevState.sidebarOpen
+        }
+      })
+    }
     return (
       <div className="settings__right__container">
         <div className="settings__left__nav">
-          <SettingSidebar />
+          <Desktop>
+            <SettingSidebar />
+          </Desktop>
+          <Mobile>
+            <Accordion>
+                <Accordion.Toggle onClick={() => toggleSidebar()} variant="outline-secondary" size="sm" as={Button} eventKey="0">
+                  {this.state.sidebarOpen?"Close Menu":"Setting Menu"}
+                </Accordion.Toggle>
+                <Accordion.Collapse eventKey="0">
+                  <SettingSidebar />
+                </Accordion.Collapse>
+            </Accordion>
+          </Mobile>
         </div>
         <div className="settings__right__content">
           <div className="settings__header">
