@@ -25,7 +25,7 @@ export const getOrgOverview = () => async (dispatch) => {
 // GET PERSONAL OVERVIEW
 export const getPersonalOverview = () => async (dispatch) => {
   try {
-    const res = await axios.get(`${BASE_URL}/user/overview`)
+    const res = await axios.get(`${BASE_URL}/user/me/overview`)
     dispatch(setRequestStatus(false))
     if (res.status === 200) {
       dispatch(setRequestStatus(true))

@@ -12,6 +12,11 @@
       width: 60%;
       .form-container {
         margin-top: 10px;
+        .field-title {
+          font-weight: bold;
+          margin-top: 15px;
+          margin-bottom: 0px;
+        }
       }
       .title-text {
         font-family: Inter;
@@ -54,7 +59,7 @@
     }
   }
   .proposal-bottompanel {
-    flex-grow: 5;
+    flex-grow: 12;
     display: flex;
   }
 

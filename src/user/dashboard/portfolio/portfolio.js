@@ -24,14 +24,13 @@ class Portfolio extends Component {
   }
 
   componentDidMount() {
+    const userId = localStorage.getItem('userId')
+    this.props.getProfile(userId);
     setTimeout(() => {
       this.props.getMembers();
     })
     setTimeout(() => {
        this.props.getPersonalOverview();
-    })
-    setTimeout(() => {
-       this.props.getProfile();
     })
   }
 

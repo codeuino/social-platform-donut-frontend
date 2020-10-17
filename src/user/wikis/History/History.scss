@@ -1,0 +1,20 @@
+#wikis {
+  .history {
+    .history-item {
+      .line {
+        display: flex;
+        cursor: pointer;
+        font-family: Inter;
+        align-items: center;
+        justify-content: space-between;
+        * {
+          margin: 0px 10px;
+          text-align: justify;
+        }
+      }
+    }
+    .history-item:hover {
+      background-color: rgba(26, 115, 232, 0.1);
+    }
+  }
+}

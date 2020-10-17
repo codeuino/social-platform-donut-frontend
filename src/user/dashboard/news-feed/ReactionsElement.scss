@@ -1,0 +1,25 @@
+.reactions-container {
+  .reaction-element {
+    display: inline-block;
+    margin-right: 5px;
+    padding: 4px;
+  }
+  .reactions-holder {
+    .reaction-element {
+      display: inline-block;
+      margin-right: 5px;
+      padding: 4px;
+    }
+  }
+}
+
+.reaction-text {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  color: #65676b;
+  cursor: pointer;
+  margin-left: 4px;
+}

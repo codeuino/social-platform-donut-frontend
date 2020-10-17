@@ -5,10 +5,14 @@
     .navigation {
       flex: 0.5;
       border-right: solid 1px #dfe9f1;
+      position: fixed;
+      top: 0px;
+      bottom: 0px;
+      left: 0px;
     }
 
     .projects {
-        margin-top: 5vh;
+        margin-top: 1vh;
         margin-left: 4vw;
         margin-right: 6vw;
         p {
@@ -70,5 +74,14 @@
         -webkit-box-orient: vertical;
       }
 
+      .project__pagination__container {
+        display: flex;
+        padding-top: 20px;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+      }
+
     }
-  }  
+    margin-left: 10%;
+  }

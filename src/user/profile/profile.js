@@ -3,11 +3,16 @@ import "./profile.scss";
 import Navigation from "../dashboard/navigation/navigation";
 import UserInfo from "./user-info/user-info";
 import Portfolio from "../dashboard/portfolio/portfolio";
-import PinPosts from "../pinned-posts/posts/pinPosts";
-import { connect } from 'react-redux'
-import { getProfile, getEventsCreatedByUser, getProjectCreatedByUser, getPostsCreatedByUser } from '../../actions/usersAction' 
-import { getAllPinnedPosts } from '../../actions/postAction'
-import { getOrgProfile } from '../../actions/orgAction'
+import { connect } from "react-redux";
+import {
+  getProfile,
+  getEventsCreatedByUser,
+  getProjectCreatedByUser,
+  getPostsCreatedByUser,
+} from "../../actions/usersAction";
+import { getAllPinnedPosts } from "../../actions/postAction";
+import { getOrgProfile } from "../../actions/orgAction";
+import ProfileFeed from "./profile-feed";
 
 class Profile extends Component {
   constructor(props) {
@@ -19,54 +24,71 @@ class Profile extends Component {
       userEvents: [],
       userProjects: [],
       userPosts: [],
-      pinnedPosts: []
+      pinnedPosts: [],
+      userId: "",
     };
   }
 
   componentDidMount() {
     console.log("match", this.props.match?.path);
-    const path = this.props.match?.path;
-    if (path === "/profile") {
-      console.log("checking profile");
-      setTimeout(() => {
-         this.props.getProfile();
-         this.props.getOrgProfile();
-      })
-      setTimeout(() => {
-        this.props.getPostsCreatedByUser();
-      })
-      setTimeout(() => {
-        this.props.getEventsCreatedByUser();
-      });
-      setTimeout(() => {
-        this.props.getProjectCreatedByUser();
-      });
-      setTimeout(() => {
-        this.props.getAllPinnedPosts()
-      })
-    }
+    const { path, params } = this.props.match;
+    const userId = params.id ? params.id : localStorage.getItem("userId");
+    console.log("checking profile", userId);
+    setTimeout(() => {
+      this.props.getProfile(userId);
+      this.props.getOrgProfile();
+    });
+    setTimeout(() => {
+      this.props.getPostsCreatedByUser(userId);
+    });
+    setTimeout(() => {
+      this.props.getEventsCreatedByUser(userId);
+    });
+    setTimeout(() => {
+      this.props.getProjectCreatedByUser(userId);
+    });
+    setTimeout(() => {
+      this.props.getAllPinnedPosts();
+    });
   }
 
   componentWillReceiveProps(nextProps) {
     console.log("profile nextProps ", nextProps);
     const { userEvents, userProjects, userPosts } = nextProps.user;
-    const { pinnedPosts } = nextProps.posts
-    let all = [...userEvents, ...userProjects, ...userPosts]
-    this.setState({
-      userProfile: nextProps.user?.userProfile,
-      userEvents: userEvents,
-      userProjects: userProjects,
-      userPosts: userPosts,
-      pinnedPosts: pinnedPosts,
-      all: all,
-    });
+    const { pinnedPosts } = nextProps.posts;
+    let all = [...userEvents, ...userProjects, ...userPosts];
+    this.setState(
+      {
+        userProfile: nextProps.user?.userProfile,
+        userEvents: userEvents,
+        userProjects: userProjects,
+        userPosts: userPosts,
+        pinnedPosts: pinnedPosts,
+        all: all,
+      },
+      () => {
+        console.log("setting profile ", this.state);
+      }
+    );
   }
 
   render() {
-    const { userProfile, all, userEvents, userProjects, userPosts, pinnedPosts } = this.state;
+    const {
+      userProfile,
+      all,
+      userEvents,
+      userProjects,
+      userPosts,
+      pinnedPosts,
+    } = this.state;
     return (
       <div className="profile">
-        <div className="navigation">
+        <div
+          className="navigation"
+          style={{
+            background: "#f5f5f5",
+          }}
+        >
           <Navigation profile={this.state.profile}></Navigation>
         </div>
         <div className="news">
@@ -76,15 +98,21 @@ class Profile extends Component {
           </div>
           <div className="two">
             <div className="posts-profile">
-              <PinPosts 
+              {/* <PinPosts 
                 all={all} 
                 userProjects={userProjects} 
                 userEvents={userEvents} 
                 userPosts={userPosts}
                 pinnedPosts={pinnedPosts}
+              /> */}
+              <ProfileFeed
+                all={all}
+                userProjects={userProjects}
+                userEvents={userEvents}
+                userPosts={userPosts}
+                pinnedPosts={pinnedPosts}
               />
             </div>
-            <div className="updat"></div>
           </div>
         </div>
       </div>
@@ -92,7 +120,7 @@ class Profile extends Component {
   }
 }
 
-// map state to props 
+// map state to props
 const mapStateToProps = (state) => ({
   auth: state.auth,
   error: state.error,
@@ -100,13 +128,13 @@ const mapStateToProps = (state) => ({
   posts: state.post,
   event: state.event,
   project: state.project,
-})
+});
 
-export default connect(mapStateToProps, { 
+export default connect(mapStateToProps, {
   getProfile,
-  getEventsCreatedByUser, 
+  getEventsCreatedByUser,
   getProjectCreatedByUser,
   getPostsCreatedByUser,
   getAllPinnedPosts,
-  getOrgProfile
+  getOrgProfile,
 })(Profile);

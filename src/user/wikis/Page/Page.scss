@@ -1,0 +1,36 @@
+#wikis {
+  .page {
+    width: 100%;
+    padding-left: 3vw;
+    padding-bottom: 50px;
+    .page-header {
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid #dfe9f1;
+      .wikis-top-controls {
+        display: flex;
+        justify-content: flex-end;
+        * {
+          margin: 0 5px;
+          display: flex;
+          align-items: center;
+        }
+        .btn {
+          display: flex;
+          align-items: center;
+          padding-left: 0.25rem;
+        }
+      }
+      .last-edited {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .btn {
+          span {
+            padding-left: 0.25rem;
+          }
+        }
+      }
+    }
+  }
+}

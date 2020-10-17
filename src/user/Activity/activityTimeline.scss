@@ -1,0 +1,31 @@
+.activity__timeline {
+  margin-top: 4vh;
+  margin-left: 7vw;
+  .activity__timeline__header__container {
+    .activity__timeline__header {
+      font-family: "Inter";
+      font-style: normal;
+      font-weight: 500;
+      font-size: 1.3em;
+      line-height: 21px;
+      letter-spacing: 0.25px;
+      color: #2D2D2D;
+      padding-bottom: 7px;
+    }
+  }
+  .activities__list {
+    max-height: 75vh;
+    overflow-y: auto;
+    width: 75vw;
+    margin-top: 4px;
+    overflow-x: hidden;
+    margin-top: 27px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    .pagination__container {
+      position: fixed;
+      margin-top: 78vh;
+    }
+  }
+}

@@ -1,0 +1,92 @@
+.integrations {
+  display: flex;
+  min-height: 100vh;
+  height: auto;
+  font-family: "Inter";
+  .navigation {
+    flex: 0.5;
+    border-right: solid 1px #dfe9f1;
+    
+  }
+  .integrations-content {
+    width: 100%;
+    flex: 3;
+    flex-direction: column;
+    .title-content {
+      display: inline-block;
+      flex: 1;
+      padding: 10px;
+      .integrations-title {
+        text-align: left;
+        font-family: Inter;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 36px;
+        letter-spacing: normal;
+        line-height: 44px;
+        color: #000000;
+      }
+      .integrations-subtitle {
+        margin-top: 10px;
+        text-align: left;
+        font-family: Inter;
+        font-style: normal;
+        font-size: 16px;
+        line-height: 44px;
+        color: #2d2d2d;
+      }
+      .searchbar {
+        border-radius: 25px;
+      }
+    }
+    .integration-content {
+      flex: 5;
+
+      margin-top: 30px;
+      .integration-card {
+        text-align: center;
+        display: inline-block;
+        margin: 15px;
+        padding: 10px;
+        border-radius: 0.5rem;
+        width: 18rem;
+        border: 1px solid #f0f0f0;
+        min-height: 300px;
+        box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1),
+          0 5px 15px rgba(0, 0, 0, 0.07);
+        .integration-card-image {
+          height: 128px;
+          width: 128px;
+          margin: 0 auto;
+        }
+        .integration-card-body {
+          text-align: center;
+          .integration-card-title {
+            font-family: Qanelas;
+            font-size: 20px;
+            font-weight: 600;
+          }
+          .integration-card-tag {
+            font-family: Inter;
+            font-size: 14px;
+            font-weight: 300;
+          }
+          .integration-card-button {
+            text-align: center;
+            border-radius: 25px;
+            font-size: 15px;
+            width: 60%;
+          }
+          .integration-card-button-remove {
+            text-align: center;
+            border-radius: 25px;
+            font-size: 15px;
+            color: #1A73E8;
+            background-color: #FFFFFF;
+            width: 60%;
+          }
+        }
+      }
+    }
+  }
+}
