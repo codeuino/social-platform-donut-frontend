@@ -3,15 +3,6 @@
   min-height: 100vh;
   height: auto;
   font-family: Muli, sans-serif;
-  .navigation {
-    flex: 0.5;
-    border-right: solid 1px #dfe9f1;
-    position: fixed;
-    top: 0px;
-    bottom: 0px;
-    left: 0px;
-    overflow-y: scroll;
-  }
   h2 {
     font-size: 22px;
     font-weight: 650;
@@ -59,4 +50,29 @@
 
 .navigation::-webkit-scrollbar {
   display: none;
+}
+
+@media (min-width: 320px) and (max-width: 1024px){
+  .profile {
+    margin: 0;
+    .news {
+      margin-left: 0;
+      width: 100vw;
+      .notify-user {
+        display: flex;
+        justify-content: center;
+        padding: 0;
+        padding-top: 2.5vh;
+        margin: 2.5vh 2.5vw;
+        .user-detail {
+          width: 100%;
+        }
+      }
+    }
+  }
+  .two {
+    .posts-profile {
+      max-width: 100vw;
+    }
+  }
 }

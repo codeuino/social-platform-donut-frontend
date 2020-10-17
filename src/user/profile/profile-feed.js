@@ -143,7 +143,7 @@ class ProfileFeed extends Component {
         <div className="feed-posts">
           <div className="categories">
             <div className="tab__container">
-              <span className="nav__tab container">
+              <div className="nav__tab container">
                 <ul className="nav__list__container">
                   <li
                     className={
@@ -190,7 +190,7 @@ class ProfileFeed extends Component {
                     Read Me
                   </li>
                 </ul>
-              </span>
+              </div>
             </div>
           </div>
         </div>
