@@ -81,7 +81,7 @@ class Users extends Component {
               showSizeChanger
               onShowSizeChange={this.onShowSizeChange}
               defaultCurrent={1}
-              total={500}
+              total={users.length}
               onChange={this.handlePagination}
             />
           </div>

@@ -34,3 +34,11 @@
     }
   }
 }
+
+@media (min-width: 320px) and (max-width: 1024px){
+  .main__maintenance__container {
+    .description__container {
+      margin: 0;
+    }
+  }
+}

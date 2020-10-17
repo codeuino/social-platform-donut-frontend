@@ -1,15 +1,5 @@
 .overall_container {
   display: flex;
-  .main_navigation {
-    background: #f5f5f5;
-    flex-grow: 1;
-    border-right: solid 1px #dfe9f1;
-    position: fixed;
-    top: 0px;
-    bottom: 0px;
-    left: 0px;
-    overflow-y: scroll;
-  }
   .org_settings_view {
     margin-left: 13vw;
     margin-top: 35px;
@@ -44,47 +34,34 @@
     }
   }
 }
-// mobile
-@media screen and (max-width: 768px) {
-  .overall_container {
-    .org_settings_view {
-      .main_section {
-        .left_nav {
-          .navigation {
-            .list-group {
-              .link {
-                display: none;
-              }
-              .header_text {
-                font-size: 10px;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
 
-// tablet
-@media screen and (min-width: 768px) and (max-width: 1023px) {
-  .overall_container {
-    .org_settings_view {
-      .main_section {
-        .left_nav {
-          .navigation {
-            .list-group {
-              .link {
-                font-size: 5px;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
+
 
 .main_navigation::-webkit-scrollbar {
   display: none;
+}
+
+@media (min-width: 320px) and (max-width: 1024px){
+  .overall_container {
+    display: flex;
+    padding: 2.5vh 2.5vw;
+    .org_settings_view {
+      margin: 0;
+      width: 100%;
+      .main_section {
+        flex-direction: column;
+        margin-top: 0;
+        .left_nav {
+          max-width: 100%;
+          height: auto;
+          margin: 0;
+        }
+        .right_section {
+          width: 100%;
+          max-width: 100%;
+          margin-top: 0;
+        }
+      }
+    }
+  }
 }

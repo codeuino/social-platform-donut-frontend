@@ -1,5 +1,5 @@
 .activity__main__container {
-  margin-left: 18vw;
+  margin-left: 15vw;
   .main-navigation {
     border-right: 1px solid #cccccc;
   }
@@ -29,9 +29,9 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  padding-top: 20px;
   .pagination__container {
-    position: fixed;
-    margin-top: 78vh;
+   width: 100%;
   }
   .user__wrapper {
     display: flex;
@@ -60,6 +60,30 @@
           text-decoration: underline;
         }
       }
+    }
+  }
+}
+
+
+@media (min-width: 320px) and (max-width: 1024px){
+  .activity__main__container {
+    margin: 0;
+    .header__text {
+      margin: 20px 0 0 0;
+    }
+  }
+  .timeline__container {
+    max-width: 100%;
+    margin: 0;
+    width: 100%;
+    padding: 20px;
+    max-height: 100%;
+    ul {
+      width: 100%;
+    }
+    .pagination__container {
+      margin-top: 0;
+      width: 100%;
     }
   }
 }
