@@ -4,25 +4,23 @@
   height: auto;
   font-family: Muli, sans-serif;
 
-  .navigation {
-    background: #f5f5f5;
-    flex-grow: 1;
-    border-right: solid 1px #dfe9f1;
-    position: fixed;
-    top: 0px;
-    bottom: 0px;
-    left: 0px;
-    overflow-y: scroll;
-  }
-  .setting-sidebar {
+  .setting__sidebar {
     border-left: solid 1px #dfe9f1;
   }
 
-  .settings-content {
+  .settings__content {
     flex: 3;
     margin-left: 13vw;
   }
   .options {
     color: rgba(0, 0, 0, 0.5);
+  }
+}
+
+@media (min-width: 320px) and (max-width: 1024px){
+  .settings {
+    .settings__content {
+      margin-left: 0;
+    }
   }
 }

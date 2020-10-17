@@ -12,14 +12,14 @@ class Settings extends Component {
   }
   render() {
     return (
-      <div className="settings">
-        <div className="navigation">
-            <Navigation settings={this.state.settings}></Navigation>
+      <>
+          <Navigation settings={this.state.settings}></Navigation>
+          <div className="settings">
+            <div className="settings__content">
+              <SettingContent />
+            </div>
           </div>
-          <div className="settings-content">
-            <SettingContent />
-          </div>
-      </div>
+      </>
     )
   }
 }
