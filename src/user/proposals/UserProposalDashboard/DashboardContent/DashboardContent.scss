@@ -177,3 +177,36 @@
     }
   }
 }
+
+@media (min-width: 320px) and (max-width: 1024px){
+  .dashboard-content {
+    padding: 0;
+    height: 100%;
+    .searchbar-container {
+      .button-container {
+        .posts {
+          width: 100%;
+          .category {
+            text-align: center;
+            button {
+              margin: 5px;
+            }
+          }
+        }
+      }
+    }
+    .proposal-container{
+      .proposals {
+        .single-proposal {
+          .proposal-content {
+            .proposal-options {
+              .option-btn {
+                  margin-top: 5px;
+              }
+            }
+          }
+        }
+      }
+    } 
+  }
+}
