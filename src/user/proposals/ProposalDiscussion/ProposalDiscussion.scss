@@ -3,11 +3,14 @@
   min-height: 100vh;
   height: auto;
   font-family: Muli, sans-serif;
-  .discussion__navigation {
-    flex: 1;
-    border-right: solid 1px #dfe9f1;
-  }
+  margin-left: 13%;
   .discussion__content {
     flex: 5.5;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 1024px){
+  .discussion {
+    margin-left: 0;
   }
 }

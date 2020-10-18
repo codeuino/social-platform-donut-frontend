@@ -91,3 +91,26 @@
     }
   }
 }
+
+
+@media (min-width: 320px) and (max-width: 1024px){
+  .discussion-content {
+    padding: 2.5vh 2.5vw;
+    height: 100%;
+    .discussion-toppanel {
+      width: 100%;
+      flex-direction: column;
+      margin: 2.5vh 0;
+      align-items: center;
+    }
+    .discussion-bottompanel {
+      flex-direction: column;
+      .proposal-preview {
+        min-height: 50vh;
+      }
+      .comments {
+        padding: 0;
+      }
+    }  
+  }
+}
