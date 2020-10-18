@@ -17,8 +17,8 @@ class Tags extends Component {
     console.log(evt.target[0].value);
     evt.target[0].value = "";
   };
+  
   render() {
-    console.log(this.props.data);
     return (
       <Card className="info-card">
         <div className="info-title">

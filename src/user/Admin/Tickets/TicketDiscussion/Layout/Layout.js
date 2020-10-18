@@ -36,11 +36,25 @@ class Layout extends Component {
         border: "1px solid #dadde9",
       },
     }))(Tooltip);
+    const {
+      view,
+      addTag,
+      ticket,
+      spinner,
+      removeTag,
+      handleBack,
+      editsAllowed,
+      singleUpdate,
+      updateTicket,
+      deleteTicket,
+      deleteAllowed,
+      handleViewChange,
+    } = this.props;
     return (
       <LoadingOverlay
         className="discussion"
-        active={!!this.props.spinner}
-        text={this.props.spinner}
+        active={!!spinner}
+        text={spinner}
         spinner={<ClockLoader color={"#1A73E8"} />}
         styles={{
           spinner: (base) => ({
@@ -52,18 +66,18 @@ class Layout extends Component {
           }),
         }}
       >
-        {this.props.ticket && (
+        {ticket && (
           <React.Fragment>
             <div className="ticket-discussion">
               <div className="discussion">
                 <Title
-                  ticket={this.props.ticket}
-                  handleBack={this.props.handleBack}
-                  editsAllowed={this.props.editsAllowed}
-                  singleUpdate={this.props.singleUpdate}
-                  updateTicket={this.props.updateTicket}
-                  deleteTicket={this.props.deleteTicket}
-                  deleteAllowed={this.props.deleteAllowed}
+                  ticket={ticket}
+                  handleBack={handleBack}
+                  editsAllowed={editsAllowed}
+                  singleUpdate={singleUpdate}
+                  updateTicket={updateTicket}
+                  deleteTicket={deleteTicket}
+                  deleteAllowed={deleteAllowed}
                 />
                 <div className="ticket-tabs">
                   <span className="nav__tab container">
@@ -75,11 +89,11 @@ class Layout extends Component {
                         <li
                           key={index}
                           className={
-                            this.props.view === ele.view
+                            view === ele.view
                               ? "nav__single__tab selected"
                               : "nav__single__tab"
                           }
-                          onClick={() => this.props.handleViewChange(ele.view)}
+                          onClick={() => handleViewChange(ele.view)}
                         >
                           {ele.opt}
                         </li>
@@ -92,19 +106,19 @@ class Layout extends Component {
             </div>
             <div className="ticket-info">
               <TicketInfo
-                ticket={this.props.ticket}
-                editsAllowed={this.props.editsAllowed}
-                singleUpdate={this.props.singleUpdate}
-                updateTicket={this.props.updateTicket}
+                ticket={ticket}
+                editsAllowed={editsAllowed}
+                singleUpdate={singleUpdate}
+                updateTicket={updateTicket}
               />
               <EditableCard
                 Type="Summary"
                 heading="Ticket Summary"
-                ticketId={this.props.ticket._id}
-                editsAllowed={this.props.editsAllowed}
-                singleUpdate={this.props.singleUpdate}
-                updateTicket={this.props.updateTicket}
-                data={this.props.ticket.shortDescription}
+                ticketId={ticket._id}
+                editsAllowed={editsAllowed}
+                singleUpdate={singleUpdate}
+                updateTicket={updateTicket}
+                data={ticket.shortDescription}
               />
               <Card className="info-card">
                 <div className="info-title">Requester</div>
@@ -129,22 +143,16 @@ class Layout extends Component {
                                 fontFamily: "Inter",
                               }}
                             >
-                              <strong>
-                                {this.props.ticket.createdBy.name}
-                              </strong>
+                              <strong>{ticket.createdBy.name}</strong>
+                              <div>{ticket.createdBy.designation}</div>
                               <div>
-                                {this.props.ticket.createdBy.designation}
-                              </div>
-                              <div>
-                                {this.props.ticket.createdBy.location && (
+                                {ticket.createdBy.location && (
                                   <LocationOnOutlinedIcon />
                                 )}
-                                {this.props.ticket.createdBy.location}
+                                {ticket.createdBy.location}
                               </div>
-                              <div>{this.props.ticket.createdBy.email}</div>
-                              <div>
-                                {this.props.ticket.createdBy.shortDescription}
-                              </div>
+                              <div>{ticket.createdBy.email}</div>
+                              <div>{ticket.createdBy.shortDescription}</div>
                             </div>
                           </div>
                         </React.Fragment>
@@ -158,19 +166,17 @@ class Layout extends Component {
                         roundedCircle
                       />
                     </HtmlTooltip>
-                    <span className="data-desc">
-                      {this.props.ticket.createdBy.name}
-                    </span>
+                    <span className="data-desc">{ticket.createdBy.name}</span>
                   </div>
                 </div>
               </Card>
               <Tags
-                addTag={this.props.addTag}
-                data={this.props.ticket.tags}
-                removeTag={this.props.removeTag}
-                editsAllowed={this.props.editsAllowed}
+                addTag={addTag}
+                data={ticket.tags}
+                removeTag={removeTag}
+                editsAllowed={editsAllowed}
               />
-              <Members ticket={this.props.ticket} />
+              <Members ticket={ticket} />
             </div>
           </React.Fragment>
         )}
