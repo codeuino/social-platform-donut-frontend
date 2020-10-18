@@ -16,6 +16,8 @@ import OrgAuth from '../dashboard/Community/components/OrgAuth';
 import OrgMaintenance from '../dashboard/Community/components/OrgMaintenance';
 import Users from './Users';
 import ActivityTimeline from './ActivityTimeline';
+import { Mobile, Desktop } from '../../utils/breakpoints';
+import { Accordion, Button } from 'react-bootstrap'; 
 
 class Activity extends Component {
   constructor(props) {
@@ -29,7 +31,8 @@ class Activity extends Component {
         authentication: false,
         maintenance: false,
         activity: true,
-        details: true
+        details: true,
+        sidebarOpen: false
       },
     };
   }
@@ -49,41 +52,64 @@ class Activity extends Component {
 
   render() {
     const { view } = this.state
-
+    const toggleSidebar = () => {
+      this.setState((prevState) => {
+        return {
+          sidebarOpen: !prevState.sidebarOpen
+        }
+      })
+    }
     return (
-      <div className="overall_container">
-        <div className="main_navigation">
-          <Navigation orgSettings={this.state.org} user={this.props.user} />
-        </div>
-        <div className="org_settings_view">
-          <div className="main_section">
-            <div className="left_nav">
-              <p className="header_text">Community Settings</p>
-              <LeftNav
-                data={{
-                  option: this.state.option,
-                  changeOption: this.changeOption.bind(this),
-                }}
-              />
-            </div>
-            <div className="right_section">
-              {view === "profile" ? <OrgProfile /> : null}
-              {view === "permission" ? <OrgPermission /> : null}
-              {view === "settings" ? <OrgSettings /> : null}
-              {view === "authentication" ? <OrgAuth /> : null}
-              {view === "maintenance" ? <OrgMaintenance /> : null}
-              {view === "activity" ? (
-                <Users
-                  handleOption={{ changeOption: this.changeOption.bind(this) }}
-                />
-              ) : null}
-              {view === "details" ? (
-                <ActivityTimeline />
-              ) : null}
+      <>
+        <Navigation orgSettings={this.state.org} user={this.props.user} />
+        <div className="overall_container">
+          <div className="org_settings_view">
+            <div className="main_section">
+              <div className="left_nav">
+                <p className="header_text">Community Settings</p>
+                <Desktop>
+                  <LeftNav
+                    data={{
+                      option: this.state.option,
+                      changeOption: this.changeOption.bind(this),
+                    }}
+                  />
+                </Desktop>
+                <Mobile>
+                  <Accordion>
+                      <Accordion.Toggle onClick={() => toggleSidebar()} variant="outline-secondary" size="sm" as={Button} eventKey="0">
+                        {this.state.sidebarOpen?"Close Menu":"Setting Menu"}
+                      </Accordion.Toggle>
+                      <Accordion.Collapse eventKey="0">
+                        <LeftNav
+                          data={{
+                            option: this.state.option,
+                            changeOption: this.changeOption.bind(this),
+                          }}
+                        />
+                      </Accordion.Collapse>
+                  </Accordion>
+                </Mobile>
+              </div>
+              <div className="right_section">
+                {view === "profile" ? <OrgProfile /> : null}
+                {view === "permission" ? <OrgPermission /> : null}
+                {view === "settings" ? <OrgSettings /> : null}
+                {view === "authentication" ? <OrgAuth /> : null}
+                {view === "maintenance" ? <OrgMaintenance /> : null}
+                {view === "activity" ? (
+                  <Users
+                    handleOption={{ changeOption: this.changeOption.bind(this) }}
+                  />
+                ) : null}
+                {view === "details" ? (
+                  <ActivityTimeline />
+                ) : null}
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </>
     );
   }
 }

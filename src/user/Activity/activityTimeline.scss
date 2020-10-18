@@ -14,8 +14,8 @@
     }
   }
   .activities__list {
-    max-height: 75vh;
-    overflow-y: auto;
+    max-height: 100%;
+    overflow-y: hidden;
     width: 75vw;
     margin-top: 4px;
     overflow-x: hidden;
@@ -23,9 +23,26 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    padding-top: 1rem;
     .pagination__container {
-      position: fixed;
-      margin-top: 78vh;
+      width: 100%;
+    }
+  }
+}
+
+@media (min-width: 320px) and (max-width: 1024px){
+  .activity__timeline {
+    margin: 0;
+    padding-top: 2.5vh;
+    .activities__list {
+      max-height: 100%;
+      overflow: hidden;
+      width: 75vw;
+      padding: 2.5vh 0 0 0;
+      margin: 0 auto;
+      .pagination__container {
+        width: 100%;
+      }
     }
   }
 }
