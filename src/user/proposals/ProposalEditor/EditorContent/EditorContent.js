@@ -225,6 +225,7 @@ class EditorContent extends Component {
             </div>
           </div>
           <div className="editor-buttons">
+            <div className="editor-buttons__container">
             {this.state.newProposal ? (
               <Button
                 variant="primary"
@@ -263,7 +264,7 @@ class EditorContent extends Component {
                 <span className="option-text">Submit</span>
               </Button>
             ) : null}
-
+            </div>
             <div>
               {!this.state.newProposal ? (
                 <StyledDropzone

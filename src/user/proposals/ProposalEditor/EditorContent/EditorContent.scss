@@ -105,8 +105,16 @@
         width: 100%;
       }
       .editor-buttons {
-        // text-align: center;
         margin: 20px auto;
+        width: 100%;
+        .editor-buttons__container {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          .option-btn {
+            padding: 0 0.5rem;
+          }
+        }
       }
     }
   }
