@@ -30,6 +30,8 @@ class Editor extends Component {
     };
     if (newTicket.shortDescription.length < 10) {
       toast.error("Short description should be atleast 10 characters long");
+    } else if (newTicket.shortDescription.length > 100) {
+      toast.error("Short description should not be more than 100 characters long");
     } else if (newTicket.content.length < 10) {
       toast.error("Ticket content should be atleast 10 characters long");
     } else if (newTicket.title.length < 10) {

@@ -53,11 +53,21 @@ class TicketDashboard extends Component {
     });
   };
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      all: nextProps.tickets.tickets,
-      filtered: nextProps.tickets.tickets,
-    });
+  // componentWillReceiveProps(nextProps) {
+  //   this.setState({
+  //     all: nextProps.tickets.tickets,
+  //     filtered: nextProps.tickets.tickets,
+  //   });
+  // }
+
+  componentDidUpdate(prevProps) {
+    const { tickets } = this.props;
+    if (JSON.stringify(prevProps.tickets.tickets) !== JSON.stringify(tickets.tickets)){
+      this.setState({
+        all: tickets.tickets,
+        filtered: tickets.tickets,
+      })
+    }
   }
 
   setFilteredTickets = (tickets) => {
@@ -138,7 +148,7 @@ class TicketDashboard extends Component {
     });
   };
 
-  handleRemoveTag = async (id, tagName) => {
+  handleRemoveTag = (id, tagName) => {
     const tickets = [...this.state.all];
     tickets.forEach((ele) => {
       if (ele._id === id) {
@@ -166,7 +176,48 @@ class TicketDashboard extends Component {
   };
 
   render() {
-    const { spinner, editorMode, viewingTicket, ticket, all, filtered, notificationDrawer, notifications } = this.state;
+    const {
+      spinner,
+      editorMode,
+      viewingTicket,
+      ticket,
+      all,
+      filtered,
+      notificationDrawer,
+      notifications,
+    } = this.state;
+    const ticketDashboard = (
+      <React.Fragment>
+        <div className="ticket-status">
+          <TicketFilter
+            tickets={all}
+            filtered={filtered}
+            clear={this.clearFilters}
+            toggleNewTicketEditor={this.toggleNewTicketEditor}
+            setFiltered={this.setFilteredTickets}
+          />
+        </div>
+        {!!all.length && (
+          <div className="ticket-content">
+            <TicketContent
+              viewTicket={this.handleViewTicket}
+              tickets={filtered}
+            />
+          </div>
+        )}
+      </React.Fragment>
+    );
+    const ticeketDiscussion = (
+      <TicketDisscussion
+        addTag={this.handleAddTag}
+        back={this.handleViewTicket}
+        currentUser={this.props.user}
+        removeTag={this.handleRemoveTag}
+        deleteTicket={this.deleteTicket}
+        ticketId={viewingTicket}
+        singleUpdate={this.handleTicketSingleUpdate}
+      />
+    );
     return (
       <div className="ticket">
         <div className="navigation">
@@ -194,44 +245,14 @@ class TicketDashboard extends Component {
                   <NotificationsNoneOutlinedIcon />
                 </Button>
               </div>
-              {!editorMode && !viewingTicket && (
-                <React.Fragment>
-                  <div className="ticket-status">
-                    <TicketFilter
-                      tickets={all}
-                      filtered={filtered}
-                      clear={this.clearFilters}
-                      toggleNewTicketEditor={this.toggleNewTicketEditor}
-                      setFiltered={this.setFilteredTickets}
-                    />
-                  </div>
-                  {!!all.length && (
-                    <div className="ticket-content">
-                      <TicketContent
-                        viewTicket={this.handleViewTicket}
-                        tickets={filtered}
-                      />
-                    </div>
-                  )}
-                </React.Fragment>
-              )}
+              {!editorMode && !viewingTicket && ticketDashboard}
               {editorMode && !viewingTicket && (
                 <NewTicketEditor
                   save={this.handleCreateNewTicket}
                   cancel={() => this.toggleNewTicketEditor(false)}
                 />
               )}
-              {viewingTicket && (
-                <TicketDisscussion
-                  addTag={this.handleAddTag}
-                  back={this.handleViewTicket}
-                  currentUser={this.props.user}
-                  removeTag={this.handleRemoveTag}
-                  deleteTicket={this.deleteTicket}
-                  ticketId={viewingTicket}
-                  singleUpdate={this.handleTicketSingleUpdate}
-                />
-              )}
+              {viewingTicket && ticeketDiscussion}
             </div>
           </LoadingOverlay>
           <Drawer

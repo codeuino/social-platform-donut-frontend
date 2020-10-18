@@ -98,7 +98,7 @@ class Discussion extends Component {
                   >
                     <div>
                       <div style={{ display: "flex", alignItems: "center" }}>
-                        <h2>{ticket.createdBy.name}</h2>
+                        <h2>{ticket.createdBy.name? ticket.createdBy.name : "Anonymous"}</h2>
                         {editor === "new" &&
                           editsAllowed && (
                             <EditButton

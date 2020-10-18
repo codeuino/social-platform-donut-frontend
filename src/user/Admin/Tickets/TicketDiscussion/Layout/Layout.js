@@ -17,13 +17,22 @@ class Layout extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      tags: [],
+      title: '',
+      summary: '',
       tagsEditor: false,
       titleEditor: false,
       summaryEditor: false,
-      tags: props.ticket?.tags,
-      title: props.ticket?.title,
-      summary: props.ticket?.shortDescription,
     };
+  }
+
+  componentDidMount() {
+    const { ticket } = this.props;
+    this.setState({
+      tags: ticket?.tags,
+      title: ticket?.title,
+      summary: ticket?.shortDescription,
+    })
   }
 
   render() {

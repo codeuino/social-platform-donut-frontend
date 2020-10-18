@@ -47,7 +47,9 @@ export const loginUser = (userInfo, history) => async (dispatch) => {
       
       // update state with user
       const decodedData = await jwt_decode(token);
-      localStorage.setItem('userId', decodedData._id)
+      console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! PRINTING RES.DATA.USER !!!!!!!!!!!!!!1");
+      console.log(res.data.user);
+      localStorage.setItem('userId', res.data.user._id)
       dispatch(setCurrentUser(decodedData));
 
       // Update user name in localStorage

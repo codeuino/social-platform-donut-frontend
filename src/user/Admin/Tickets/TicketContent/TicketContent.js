@@ -28,10 +28,7 @@ class TicketContent extends Component {
               {"  "}
               {row.title}
             </div>
-            <div className="Ticket-dashboard-shortDesciption">{`${row.shortDescription.slice(
-              0,
-              100
-            )}...`}</div>
+            <div className="Ticket-dashboard-shortDesciption">{row.shortDescription}</div>
           </div>
         </div>
       );
@@ -78,7 +75,7 @@ class TicketContent extends Component {
                 marginLeft: "10px",
               }}
             >
-              <div className="profile-text">{row.createdBy.name}</div>
+              <div className="profile-text">{row.createdBy.name ? row.createdBy.name : "Anonymous"}</div>
               <Moment format="DD MMM YYYY, h:mm a">{row.createdAt}</Moment>
             </div>
           </div>

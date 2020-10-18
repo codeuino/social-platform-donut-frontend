@@ -50,7 +50,6 @@
     "react-share": "^4.2.1",
     "react-spinners": "^0.8.3",
     "react-switch": "^5.0.1",
-    "react-tiny-fab": "^3.5.0",
     "react-toastify": "^6.0.5",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
