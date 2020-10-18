@@ -31,21 +31,22 @@ class EditableCard extends Component {
   };
 
   render() {
+    const { editor, data } = this.state;
     return (
       <Card className="info-card">
         <div className="info-title">
           <span>{this.props.heading}</span>
-          {!this.state.editor && this.props.editsAllowed && (
+          {!editor && this.props.editsAllowed && (
             <EditButton onClick={this.toggleEditor} />
           )}
-          {this.state.editor && (
+          {editor && (
             <div className="buttons">
               <CancelButton
                 style={{ marginRight: "10px" }}
                 onClick={this.toggleEditor}
               />
               <Button
-                disabled={this.props.data === this.state.data}
+                disabled={this.props.data === data}
                 variant="light"
                 onClick={this.save}
               >
@@ -57,16 +58,16 @@ class EditableCard extends Component {
         <div className="info-details">
           <div className="data-element">
             <span className="data-desc">
-              {!this.state.editor && this.props.data}
-              {this.state.editor && (
+              {!editor && this.props.data}
+              {editor && (
                 <Form.Group>
                   <Form.Control
                     as="textarea"
                     rows="3"
                     maxLength="100"
-                    value={this.state.data}
+                    value={data}
                     onChange={this.setData}
-                    isInvalid={this.state.data.length >= 100}
+                    isInvalid={data.length >= 100}
                   />
                 </Form.Group>
               )}

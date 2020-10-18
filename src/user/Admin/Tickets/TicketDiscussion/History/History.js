@@ -23,6 +23,7 @@ class History extends Component {
   view = () => {};
 
   render() {
+    const { modal } = this.state;
     return (
       <div
         style={{ padding: "10px 2rem", overflowY: "scroll", height: "75vh" }}
@@ -153,25 +154,25 @@ class History extends Component {
             );
           })}
         </Timeline>
-        {this.state.modal && (
+        {modal && (
           <Modal
             centered
             className="modal"
-            show={this.state.modal}
+            show={modal}
             onHide={this.handleClose}
           >
             <Modal.Header closeButton>
-              <Modal.Title>{this.state.modal.title}</Modal.Title>
+              <Modal.Title>{modal.title}</Modal.Title>
             </Modal.Header>
             <Modal.Body
               style={
-                this.state.modal.type === "content"
+                modal.type === "content"
                   ? { height: "500px", overflowY: "scroll", padding: "0 30px" }
                   : {}
               }
             >
-              <h5>{this.state.modal.bodyTitle}</h5>
-              <ReactMarkdown source={this.state.modal.bodyContent}/>
+              <h5>{modal.bodyTitle}</h5>
+              <ReactMarkdown source={modal.bodyContent}/>
             </Modal.Body>
           </Modal>
         )}

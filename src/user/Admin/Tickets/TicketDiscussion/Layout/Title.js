@@ -35,43 +35,45 @@ class Title extends Component {
   };
 
   render() {
+    const { editor, title } = this.state;
+    const { ticket, handleBack, editsAllowed, deleteAllowed, deleteTicket } = this.props;
     return (
       <div className="discussion-title">
-        <div className="back-icon" onClick={this.props.handleBack}>
+        <div className="back-icon" onClick={handleBack}>
           <FaArrowLeft className="fa-icon" />
         </div>
         <div className="ticket-title">
-          {!this.state.editor && (
+          {!editor && (
             <React.Fragment>
               <div style={{ display: "flex", alignItems: "center" }}>
-                <BadgeElement ticketState={this.props.ticket.status} />
+                <BadgeElement ticketState={ticket.status} />
                 <span style={{ marginLeft: "16px" }} className="title-text">
-                  {this.props.ticket.title}
+                  {ticket.title}
                   <span
                     style={{ color: "rgba(0,0,0,0.5)", marginLeft: "5px" }}
-                  >{`#${this.props.ticket.number}`}</span>
+                  >{`#${ticket.number}`}</span>
                 </span>
               </div>
               <div>
-                {this.props.editsAllowed && (
+                {editsAllowed && (
                   <EditButton onClick={this.toggleEditor} />
                 )}
-                {this.props.deleteAllowed && (
+                {deleteAllowed && (
                   <DeleteOutlineOutlinedIcon
                     onClick={() =>
-                      this.props.deleteTicket(this.props.ticket._id)
+                      deleteTicket(ticket._id)
                     }
                   />
                 )}
               </div>
             </React.Fragment>
           )}
-          {this.state.editor && (
+          {editor && (
             <Form style={{ display: "flex", width: "100%" }}>
               <Form.Control
                 type="text"
                 onChange={this.setTitle}
-                value={this.state.title}
+                value={title}
               />
               <Button
                 variant="light"
@@ -82,7 +84,7 @@ class Title extends Component {
                 Cancel
               </Button>
               <Button
-                disabled={this.props.ticket.title === this.state.title}
+                disabled={ticket.title === title}
                 style={{ display: "flex" }}
               >
                 <SaveButton onClick={this.handleSave} />

@@ -42,22 +42,24 @@ export const deleteTicket = async function (id) {
 };
 
 export const saveTicketTitle = async function () {
+  const { title } = this.state;
   await this.props.updateTicket({
     type: "title",
-    title: this.state.title,
+    title
   });
   this.props.singleUpdate(this.props.ticket._id, {
-    title: this.state.title,
+    title
   });
 };
 
 export const saveTicketSummary = async function () {
+  const { data } = this.state;
   await this.props.updateTicket({
     type: "shortDescription",
-    shortDescription: this.state.data,
+    shortDescription: data,
   });
   this.props.singleUpdate(this.props.ticketId, {
-    shortDescription: this.state.data,
+    shortDescription: data,
   });
 };
 

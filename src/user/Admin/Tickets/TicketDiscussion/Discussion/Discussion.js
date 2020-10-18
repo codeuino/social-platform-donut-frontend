@@ -5,7 +5,6 @@ import * as Showdown from "showdown";
 import { Image } from "react-bootstrap";
 import ReactMarkdown from "react-markdown";
 import Button from "react-bootstrap/Button";
-// import Dropdown from "react-bootstrap/Dropdown";
 import SaveButton from "@material-ui/icons/SaveOutlined";
 import EditButton from "@material-ui/icons/EditOutlined";
 import CancelButton from "@material-ui/icons/ClearOutlined";
@@ -19,7 +18,7 @@ class Discussion extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      editer: "new",
+      editor: "new",
       content: "",
       selectedTab: "write",
     };
@@ -32,14 +31,14 @@ class Discussion extends Component {
   handleEditTicket = () => {
     this.setState({
       content: this.props.ticket.content,
-      editer: "ticket",
+      editor: "ticket",
     });
   };
 
   cancelEditTicket = () => {
     this.setState({
       content: "",
-      editer: "new",
+      editor: "new",
     });
   };
 
@@ -47,7 +46,7 @@ class Discussion extends Component {
     const content = this.state.content;
     this.setState(
       {
-        editer: "new",
+        editor: "new",
         content: "",
       },
       async () => await this.props.updateTicket({ type: "content", content })
@@ -72,12 +71,14 @@ class Discussion extends Component {
       strikethrough: true,
       simplifiedAutoLink: true,
     });
+    const { editor, content, selectedTab } = this.state;
+    const { ticket, editsAllowed, deleteAllowed, deleteComment, upVoteComment, downVoteComment} = this.props;
     return (
       <React.Fragment>
         <div
           className="discussions"
           style={{
-            height: this.state.editer === "ticket" ? "80vh" : "50vh",
+            height: editor === "ticket" ? "80vh" : "50vh",
           }}
         >
           <div className="single-discussion">
@@ -97,9 +98,9 @@ class Discussion extends Component {
                   >
                     <div>
                       <div style={{ display: "flex", alignItems: "center" }}>
-                        <h2>{this.props.ticket.createdBy.name}</h2>
-                        {this.state.editer === "new" &&
-                          this.props.editsAllowed && (
+                        <h2>{ticket.createdBy.name}</h2>
+                        {editor === "new" &&
+                          editsAllowed && (
                             <EditButton
                               style={{
                                 color: "rgba(0,0,0,0.5)",
@@ -111,11 +112,11 @@ class Discussion extends Component {
                       </div>
                       <div className="discussion-date">
                         <Moment format="DD MMM YYYY">
-                          {this.props.ticket.createdAt}
+                          {ticket.createdAt}
                         </Moment>
                       </div>
                     </div>
-                    {this.state.editer === "ticket" && (
+                    {editor === "ticket" && (
                       <div>
                         <Button
                           style={{ margin: "8px" }}
@@ -128,7 +129,7 @@ class Discussion extends Component {
                         <Button
                           style={{ margin: "8px" }}
                           onClick={this.handleUpdateTicket}
-                          disabled={this.props.ticket.content === this.state.content}
+                          disabled={ticket.content === content}
                         >
                           <SaveButton />
                           Save
@@ -138,13 +139,13 @@ class Discussion extends Component {
                   </div>
                   <div className="comment-content">
                     <div className="comment-details">
-                      {this.state.editer === "new" && (
-                        <ReactMarkdown source={this.props.ticket.content} />
+                      {editor === "new" && (
+                        <ReactMarkdown source={ticket.content} />
                       )}
-                      {this.state.editer === "ticket" && (
+                      {editor === "ticket" && (
                         <ReactMde
-                          value={this.state.content}
-                          selectedTab={this.state.selectedTab}
+                          value={content}
+                          selectedTab={selectedTab}
                           onChange={this.setContent}
                           onTabChange={this.setSelectedTab}
                           generateMarkdownPreview={(markdown) =>
@@ -158,7 +159,7 @@ class Discussion extends Component {
               </div>
             </div>
           </div>
-          {this.props.ticket.comments.map((ele, index) => (
+          {ticket.comments.map((ele, index) => (
             <div key={index} className={`single-discussion`}>
               <div className="user-info">
                 <div className="image">
@@ -173,13 +174,13 @@ class Discussion extends Component {
                 <div className="img-desc">
                   <h2>
                     {ele.createdBy.name}
-                    {this.props.deleteAllowed && <DeleteOutlineOutlinedIcon
+                    {deleteAllowed && <DeleteOutlineOutlinedIcon
                       style={{
                         color: "rgba(0,0,0,0.5)",
                         fontSize: "18px",
                         cursor: "pointer"
                       }}
-                      onClick={() => this.props.deleteComment(ele._id)}
+                      onClick={() => deleteComment(ele._id)}
                     />}
                   </h2>
                   <p className="discussion-date">
@@ -197,7 +198,7 @@ class Discussion extends Component {
                           ? ""
                           : "selected"
                       }
-                      onClick={() => this.props.upVoteComment(ele._id)}
+                      onClick={() => upVoteComment(ele._id)}
                     >
                       <ThumbUpAltOutlinedIcon />
                       <span>{ele.votes.upVotes.user.length}</span>
@@ -208,7 +209,7 @@ class Discussion extends Component {
                           ? ""
                           : "selected"
                       }
-                      onClick={() => this.props.downVoteComment(ele._id)}
+                      onClick={() => downVoteComment(ele._id)}
                     >
                       <ThumbDownOutlinedIcon />
                       <span>{ele.votes.downVotes.user.length}</span>
@@ -219,7 +220,7 @@ class Discussion extends Component {
             </div>
           ))}
         </div>
-        {this.state.editer === "new" && (
+        {editor === "new" && (
           <div
             className={`single-discussion discussion-ticket`}
             id="discussion-editor"
@@ -245,8 +246,8 @@ class Discussion extends Component {
             </div>
             <div className="comment-content">
               <ReactMde
-                value={this.state.content}
-                selectedTab={this.state.selectedTab}
+                value={content}
+                selectedTab={selectedTab}
                 onChange={this.setContent}
                 onTabChange={this.setSelectedTab}
                 generateMarkdownPreview={(markdown) =>

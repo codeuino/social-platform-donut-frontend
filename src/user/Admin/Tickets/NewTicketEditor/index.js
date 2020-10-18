@@ -57,7 +57,7 @@ class Editor extends Component {
       strikethrough: true,
       simplifiedAutoLink: true,
     });
-    const { title, content, selectedTab } = this.state;
+    const { title, content, selectedTab, shortDescription } = this.state;
     const { cancel } = this.props;
     return (
       <div className="new-ticket-editor">
@@ -79,7 +79,7 @@ class Editor extends Component {
             name="ticketTitle"
             className="searchbar"
             onChange={this.setTitle}
-            isInvalid={this.state.title.length >= 50}
+            isInvalid={title.length >= 50}
           />
         </Form>
         <Form>
@@ -89,9 +89,9 @@ class Editor extends Component {
             maxLength="100"
             className="searchbar"
             name="ticketDescription"
-            value={this.state.shortDescription}
+            value={shortDescription}
             onChange={this.setShortDescription}
-            isInvalid={this.state.shortDescription.length >= 100}
+            isInvalid={shortDescription.length >= 100}
           />
         </Form>
         <Form></Form>

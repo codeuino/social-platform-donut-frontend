@@ -30,21 +30,23 @@ class Info extends Component {
   };
 
   save = async () => {
+    const { selected } = this.state;
     await this.props.updateTicket({
       type: "status",
-      status: this.state.selected,
+      status: selected,
     });
     this.props.singleUpdate(this.props.ticket._id, {
-      status: this.state.selected,
+      status: selected,
     });
   };
 
   render() {
+    const { selected } = this.state;
     return (
       <Card className="info-card">
         <div className="info-title">
           <span>Ticket Info</span>
-          {this.state.selected !== this.props.ticket.status && (
+          {selected !== this.props.ticket.status && (
             <div className="buttons">
               <CancelButton
                 style={{ marginRight: "10px" }}
@@ -81,7 +83,7 @@ class Info extends Component {
               {this.props.editsAllowed ? (
                 <DropdownButton
                   variant="light"
-                  title={<BadgeElement ticketState={this.state.selected} />}
+                  title={<BadgeElement ticketState={selected} />}
                   size="sm"
                 >
                   {["OPEN", "CLOSED", "PENDING", "SOLVED", "ON_HOLD"].map(
@@ -95,7 +97,7 @@ class Info extends Component {
                           <CheckOutlinedIcon
                             style={{
                               color:
-                                ele === this.state.selected
+                                ele === selected
                                   ? "rgba(0, 0, 0, 0.5)"
                                   : "#ffffff",
                             }}

@@ -166,15 +166,16 @@ class TicketDashboard extends Component {
   };
 
   render() {
+    const { spinner, editorMode, viewingTicket, ticket, all, filtered, notificationDrawer, notifications } = this.state;
     return (
       <div className="ticket">
         <div className="navigation">
-          <Navigation ticket={this.state.ticket} />
+          <Navigation ticket={ticket} />
         </div>
         <div className="ticket-details" id="ticket-shadow">
           <LoadingOverlay
-            text={this.state.spinner}
-            active={!!this.state.spinner}
+            text={spinner}
+            active={!!spinner}
             spinner={<ClockLoader color={"#1A73E8"} />}
             styles={{
               spinner: (base) => ({
@@ -193,41 +194,41 @@ class TicketDashboard extends Component {
                   <NotificationsNoneOutlinedIcon />
                 </Button>
               </div>
-              {!this.state.editorMode && !this.state.viewingTicket && (
+              {!editorMode && !viewingTicket && (
                 <React.Fragment>
                   <div className="ticket-status">
                     <TicketFilter
-                      tickets={this.state.all}
-                      filtered={this.state.filtered}
+                      tickets={all}
+                      filtered={filtered}
                       clear={this.clearFilters}
                       toggleNewTicketEditor={this.toggleNewTicketEditor}
                       setFiltered={this.setFilteredTickets}
                     />
                   </div>
-                  {!!this.state.all.length && (
+                  {!!all.length && (
                     <div className="ticket-content">
                       <TicketContent
                         viewTicket={this.handleViewTicket}
-                        tickets={this.state.filtered}
+                        tickets={filtered}
                       />
                     </div>
                   )}
                 </React.Fragment>
               )}
-              {this.state.editorMode && !this.state.viewingTicket && (
+              {editorMode && !viewingTicket && (
                 <NewTicketEditor
                   save={this.handleCreateNewTicket}
                   cancel={() => this.toggleNewTicketEditor(false)}
                 />
               )}
-              {this.state.viewingTicket && (
+              {viewingTicket && (
                 <TicketDisscussion
                   addTag={this.handleAddTag}
                   back={this.handleViewTicket}
                   currentUser={this.props.user}
                   removeTag={this.handleRemoveTag}
                   deleteTicket={this.deleteTicket}
-                  ticketId={this.state.viewingTicket}
+                  ticketId={viewingTicket}
                   singleUpdate={this.handleTicketSingleUpdate}
                 />
               )}
@@ -235,7 +236,7 @@ class TicketDashboard extends Component {
           </LoadingOverlay>
           <Drawer
             anchor={"right"}
-            open={this.state.notificationDrawer}
+            open={notificationDrawer}
             PaperProps={{ style: { position: "absolute", zIndex: "5000" } }}
             BackdropProps={{ style: { position: "absolute", zIndex: "5000" } }}
             ModalProps={{
@@ -246,8 +247,8 @@ class TicketDashboard extends Component {
             onClose={this.toggleDrawer}
           >
             <List className="list">
-              {this.state.notifications &&
-                this.state.notifications.map((notification, index) => (
+              {notifications &&
+                notifications.map((notification, index) => (
                   <ListItem
                     key={index}
                     style={{

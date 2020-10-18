@@ -118,25 +118,27 @@ class TicketDiscussions extends Component {
   };
 
   render() {
+    const { ticket, view, spinner } = this.state;
+    const { singleUpdate, deleteTicket } = this.props;
     return (
       <>
         <Layout
-          ticket={this.state.ticket}
-          view={this.state.view}
+          view={view}
+          ticket={ticket}
+          spinner={spinner}
           addTag={this.handleAddTag}
+          singleUpdate={singleUpdate}
+          deleteTicket={deleteTicket}
           handleBack={this.handleBack}
-          spinner={this.state.spinner}
           removeTag={this.handleDeleteTag}
           editsAllowed={this.editsAllowed}
           deleteAllowed={this.deleteAllowed}
           updateTicket={this.handleUpdateTicket}
-          singleUpdate={this.props.singleUpdate}
-          deleteTicket={this.props.deleteTicket}
           handleViewChange={this.handleViewChange}
         >
-          {this.state.view === "discussions" && (
+          {view === "discussions" && (
             <Disscussion
-              ticket={this.state.ticket}
+              ticket={ticket}
               sendComment={this.sendComment}
               editsAllowed={this.editsAllowed}
               deleteAllowed={this.deleteAllowed}
@@ -146,8 +148,8 @@ class TicketDiscussions extends Component {
               downVoteComment={this.handleCommentDownvote}
             />
           )}
-          {this.state.view === "history" && (
-            <History ticket={this.state.ticket} />
+          {view === "history" && (
+            <History ticket={ticket} />
           )}
         </Layout>
         <ToastContainer
