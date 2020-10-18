@@ -436,61 +436,63 @@ function NewsFeed(props) {
 
   let projectsContent = projects?.map((project) => {
     return (
-      <div className="grid" key={project?._id}>
-        <Paper elevation={1} className={classes.paper}>
-          <Card className={classes.root}>
-            <CardMedia
-              className="projimg"
-              image={project?.eventImage || eventImg}
-              title="Project Image"
-            >
-              <Paper className={classes.info}>
-                <div className="project-details">
-                  <h3>{project?.projectName}</h3>
-                  <p>By {project?.projectOwner || "CODEUINO"}</p>
-                  <div className="view-project">
-                    <Button
-                      className="view-project-btn"
-                      onClick={() => onViewProject(project._id)}
-                    >
-                      View Project
-                    </Button>
+      <Col xs={12} lg={6}>
+        <div className="grid" key={project?._id}>
+          <Paper elevation={1} className={classes.paper}>
+            <Card className={classes.root}>
+              <CardMedia
+                className="projimg"
+                image={project?.eventImage || eventImg}
+                title="Project Image"
+              >
+                <Paper className={classes.info}>
+                  <div className="project-details">
+                    <h3>{project?.projectName}</h3>
+                    <p>By {project?.projectOwner || "CODEUINO"}</p>
+                    <div className="view-project">
+                      <Button
+                        className="view-project-btn"
+                        onClick={() => onViewProject(project._id)}
+                      >
+                        View Project
+                      </Button>
+                    </div>
                   </div>
-                </div>
-              </Paper>
-            </CardMedia>
-            <List className={classes.listStyle}>
-              <ListItem className={classes.listStyle2}>
-                <ListItemAvatar>
-                  <Avatar variant="square">
-                    <img src={project?.img || profileImg} alt="I" />
-                  </Avatar>
-                </ListItemAvatar>
-                <ListItemText className="main">
-                  <h2 onClick={() => navigateToProfile(project.createdBy?._id)}>
-                    {project?.createdBy?.name?.firstName +
-                      " " +
-                      project?.createdBy?.name?.lastName}
-                  </h2>
-                  <Moment format="DD MMM YYYY">{project?.createdAt}</Moment>
-                </ListItemText>
-              </ListItem>
-              <div className="post-details2">{project?.description?.short}</div>
-              <ListItem>
-                <span className="com-btn">
-                  <ChatBubbleIcon className={classes.chat} />
-                  <Button
-                    className="comment-btn"
-                    onClick={commentToggle.bind(this, project._id)}
-                  >
-                    <span className="comment">Comment</span>
-                  </Button>
-                </span>
-              </ListItem>
-            </List>
-          </Card>
-        </Paper>
-      </div>
+                </Paper>
+              </CardMedia>
+              <List className={classes.listStyle}>
+                <ListItem className={classes.listStyle2}>
+                  <ListItemAvatar>
+                    <Avatar variant="square">
+                      <img src={project?.img || profileImg} alt="I" />
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText className="main">
+                    <h2 onClick={() => navigateToProfile(project.createdBy?._id)}>
+                      {project?.createdBy?.name?.firstName +
+                        " " +
+                        project?.createdBy?.name?.lastName}
+                    </h2>
+                    <Moment format="DD MMM YYYY">{project?.createdAt}</Moment>
+                  </ListItemText>
+                </ListItem>
+                <div className="post-details2">{project?.description?.short}</div>
+                <ListItem>
+                  <span className="com-btn">
+                    <ChatBubbleIcon className={classes.chat} />
+                    <Button
+                      className="comment-btn"
+                      onClick={commentToggle.bind(this, project._id)}
+                    >
+                      <span className="comment">Comment</span>
+                    </Button>
+                  </span>
+                </ListItem>
+              </List>
+            </Card>
+          </Paper>
+        </div>
+      </Col>
     );
   });
 
