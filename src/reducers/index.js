@@ -14,6 +14,7 @@ import proposalReducer from "./proposalReducer";
 import adminReducers from "./adminReducers";
 import commentReducer from "./commentReducer";
 import analyticsReducer from './analyticsReducer';
+import ticketReducer from './ticketReducer';
 import wikisReducer from './wikisReducer';
 
 const rootReducer = combineReducers({
@@ -32,7 +33,8 @@ const rootReducer = combineReducers({
   proposal: proposalReducer,
   admin: adminReducers,
   comment: commentReducer,
-  analytics: analyticsReducer
+  analytics: analyticsReducer,
+  tickets: ticketReducer
 });
 
 export default rootReducer;

@@ -130,6 +130,11 @@ class Navigation extends Component {
               }`}
             />
             <ListItem
+              name="Tickets"
+              className={this.props.ticket ? "active" : "inactive"}
+              link="/tickets"
+            />
+            <ListItem
               name="Settings"
               className={this.props.settings ? "active" : "inactive"}
               link="/settings"
@@ -228,6 +233,12 @@ class Navigation extends Component {
               name="Account"
               className={this.props.profile ? "active" : "inactive"}
               link="/profile"
+              isMobile="true"
+            />
+            <ListItem
+              name="Tickets"
+              className={this.props.ticket ? "active" : "inactive"}
+              link="/tickets"
               isMobile="true"
             />
             <ListItem

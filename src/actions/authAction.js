@@ -47,11 +47,19 @@ export const loginUser = (userInfo, history) => async (dispatch) => {
       
       // update state with user
       const decodedData = await jwt_decode(token);
-      localStorage.setItem('userId', decodedData._id)
+      console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! PRINTING RES.DATA.USER !!!!!!!!!!!!!!1");
+      console.log(res.data.user);
+      localStorage.setItem('userId', res.data.user._id)
       dispatch(setCurrentUser(decodedData));
+
+      // Update user name in localStorage
+      localStorage.setItem('username', `${res.data.user.name.firstName} ${res.data.user.name.lastName}`)
 
       // update user role in localStorage
       localStorage.setItem('admin', res.data.user.isAdmin)
+
+      // update user role in localStorage
+      localStorage.setItem('ticketModerator', res.data.user.isTicketsModerator)
 
       // store orgId in localStorage
       localStorage.setItem('orgId', res.data.user.orgId);
