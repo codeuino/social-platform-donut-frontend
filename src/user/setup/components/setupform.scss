@@ -90,3 +90,41 @@
      color: #C9C9C9;
   }
 }
+
+
+@media (min-width: 320px) and (max-width: 1024px){
+  .setup_form_main_content {
+    padding: 2.5vh 2.5vw;
+    box-shadow: 1px 3px 18px rgba(0, 0, 0, 0.1);
+    .setup_header {
+      width: 100%;
+      align-items: center;
+      .community_text {
+        flex: 3;
+      }
+      p {
+        flex: 1;
+      }
+    }
+    .switch_step {
+      width: 100%;
+      display: flex;
+      .next_btn {
+        width: 100%;
+        height: 100%;
+        background: #1A73E8;
+        // border-radius: 100px;
+        flex: 1;
+      }
+      .prev_btn {
+        width: 100%;
+        height: 100%;
+        background: rgb(250, 251, 252);
+        // border-radius: 100px;
+        color: #1A73E8;
+        margin-right: 1em;
+        flex: 1;
+      }
+    }
+  }
+}

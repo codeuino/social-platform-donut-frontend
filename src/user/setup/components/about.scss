@@ -70,3 +70,39 @@
     }
   }
 }
+
+@media (min-width: 320px) and (max-width: 1024px){
+  .about_main_content {
+    padding: 2.5vh 2.5vw;
+    box-shadow: 1px 3px 18px rgba(0, 0, 0, 0.1);
+    .about_header {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+    .donut_text {
+      flex: 2;
+    }
+    p {
+      flex: 1;
+    }
+    .about_content {
+      .about_content_text {
+        width: 100%;
+      }
+    }
+    .feature_content {
+      .feature_content_text {
+        width: 100%;
+      }
+    }
+    .switch_step {
+      .next_btn {
+        height: auto;
+        width: auto;
+      }
+    }
+  }
+}
