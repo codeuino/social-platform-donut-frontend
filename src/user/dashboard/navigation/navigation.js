@@ -419,24 +419,11 @@ class Navigation extends Component {
                     link="/projects"
                   />
                   <ListItem
-                    name="Account"
-                    className={this.props.profile ? "active" : "inactive"}
-                    link="/profile"
-                    isMobile="true"
-                  />
-                  <ListItem
                     name="Tickets"
                     className={this.props.ticket ? "active" : "inactive"}
                     link="/tickets"
                     isMobile="true"
                   />
-                  <ListItem
-                    name="Settings"
-                    className={this.props.settings ? "active" : "inactive"}
-                    link="/settings"
-                    isMobile="true"
-                  />
-
                   <ListItem
                     name="Account"
                     className={this.props.profile ? "active" : "inactive"}
