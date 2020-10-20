@@ -422,7 +422,6 @@ class Navigation extends Component {
                     name="Tickets"
                     className={this.props.ticket ? "active" : "inactive"}
                     link="/tickets"
-                    isMobile="true"
                   />
                   <ListItem
                     name="Account"
