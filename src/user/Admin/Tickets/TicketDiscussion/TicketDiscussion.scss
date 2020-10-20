@@ -1,0 +1,312 @@
+.discussion {
+  display: flex;
+  ._loading_overlay_wrapper {
+    height: 100%;
+  }
+  ._loading_overlay_overlay {
+    height: 100vh;
+    color: black;
+    background-color: rgba(255, 255, 255, 0.7);
+  }
+  ._loading_overlay_content {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    * {
+      margin: 10px;
+    }
+  }
+  .ticket-tabs {
+    width: 100%;
+    .nav__tab {
+      .nav__list__container {
+        display: flex;
+        list-style: none;
+        border-bottom: 2px solid #eee;
+        transition: all 0.5s;
+        font-weight: 300;
+        color: #262727;
+
+        .nav__single__tab {
+          display: inline-block;
+          font-family: Inter;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 18px;
+          line-height: 22px;
+          padding-left: 11px;
+          padding-right: 15px;
+          padding-bottom: 5px;
+          margin-left: 19px;
+          text-align: center;
+          cursor: pointer;
+
+          &.selected {
+            border-bottom: 3px solid #1a73e8;
+            color: #1a73e8;
+          }
+        }
+      }
+    }
+  }
+  .navigation {
+    background: #f5f5f5;
+    flex: 1;
+    border-right: solid 1px #dfe9f1;
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    overflow-y: scroll;
+  }
+  .ticket-discussion {
+    flex: 4;
+    border-right: solid 1px #dfe9f1;
+    .discussion {
+      display: flex;
+      flex-direction: column;
+      .discussion-title {
+        display: flex;
+        flex-grow: 0;
+        border-bottom: solid 1px #dfe9f1;
+        .back-icon {
+          display: flex;
+          align-items: center;
+          .fa-icon {
+            font-size: 24px;
+            color: #1a73e8;
+          }
+          padding: 1rem;
+          text-align: center;
+          .back-text {
+            font-family: "Inter";
+            font-size: 18px;
+            padding: 1rem;
+            padding-bottom: 1.6rem;
+            text-decoration: none;
+          }
+        }
+        .ticket-title {
+          flex: 5;
+          text-align: center;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 1rem;
+          .title-text {
+            font-family: "Inter";
+            font-size: 26px;
+            font-weight: 600;
+            padding-right: 2rem;
+          }
+        }
+      }
+      .discussions {
+        display: flex;
+        flex-direction: column;
+        overflow-y: scroll;
+        height: 50vh;
+      }
+      #discussion-editor {
+        padding: 0;
+        width: 95%;
+        margin: 10px 2rem;
+        .image {
+          width: 38px;
+          height: 38px;
+        }
+        .user-info {
+          width: auto;
+        }
+      }
+      .single-discussion {
+        width: 95% !important;
+        margin: 0 2rem 15px 2rem;
+        display: inline-block;
+        counter-increment: item-counter;
+        width: 70%;
+        // margin-bottom: 15px;
+        border-bottom: solid 1px #dfe9f1;
+        // box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
+        // border-radius: 5px;
+        .user-info {
+          display: flex;
+          padding: 8px;
+          padding-bottom: 0px;
+          width: 100%;
+          .image {
+            flex-shrink: 0;
+            width: 70px;
+            height: 70px;
+            img {
+              width: 100%;
+              height: 100%;
+              border-radius: 2px;
+            }
+          }
+          .img-desc {
+            margin-left: 10px;
+            width: 100%;
+            h2 {
+              font-family: Inter;
+              font-style: normal;
+              font-weight: 600;
+              font-size: 18px;
+              line-height: 22px;
+              margin: 3px;
+              /* identical to box height */
+            }
+            .comment-footer {
+              display: flex;
+              div {
+                width: 50px;
+                height: 40px;
+                display: flex;
+                cursor: pointer;
+                align-items: center;
+                span {
+                  margin-left: 5px;
+                }
+                svg {
+                  color: rgba(0,0,0,0.5);
+                }
+              }
+              .selected{
+                background-color: #F5F5F5;
+                svg {
+                  color: #1a73e8;
+                }
+              }
+            }
+            small {
+              font-family: Inter;
+              font-style: normal;
+              font-weight: normal;
+              font-size: 12px;
+              line-height: 15px;
+              color: #90949c;
+              margin: 0;
+            }
+            .discussion-date {
+              font-family: Inter;
+              font-style: normal;
+              font-weight: normal;
+              font-size: 12px;
+              line-height: 15px;
+              margin-bottom: 1rem;
+              color: #90949c;
+            }
+          }
+          .status-btn {
+            background-color: white;
+            padding: 4px 36px;
+            border: solid 1px #eb5757;
+            border-radius: 100px;
+            color: #eb5757;
+            margin: 0 5px;
+            height: 30px;
+            cursor: default;
+          }
+        }
+        .comment-content {
+          display: flex;
+          .react-mde {
+            // padding: 10px;
+            width: 100%;
+          }
+          .comment-details {
+            flex: 3;
+            font-family: Inter;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 17px;
+            // padding: 10px;
+            padding-top: 0px;
+
+            color: #1d2129;
+          }
+          .discussion-options {
+            flex: 1.5;
+            text-align: center;
+            padding: 20px;
+            .option-btn {
+              background-color: white;
+              color: #007bff;
+              padding: 4px 40px;
+              margin: 0 10px;
+              height: 30px;
+              cursor: pointer;
+              &.active {
+                background: #007bff;
+                color: white;
+              }
+              .option-text {
+                font-family: Inter;
+                font-style: normal;
+                font-weight: 500;
+                font-size: 14px;
+                line-height: 22px;
+                /* identical to box height */
+              }
+            }
+          }
+        }
+      }
+      .discussion-editor {
+        margin-top: 10px;
+        flex: 3;
+        padding: 0rem 8rem;
+        padding-right: 10rem;
+      }
+    }
+  }
+  .ticket-info {
+    flex: 1.5;
+    background: #f5f5f5;
+    .info-card {
+      margin: 20px;
+      padding: 10px;
+      .info-title {
+        font-family: "Inter";
+        font-weight: 600;
+        font-size: 17px;
+        display: flex;
+        justify-content: space-between;
+        svg {
+          color: rgba(0, 0, 0, 0.5);
+          cursor: pointer;
+        }
+      }
+      .dropdown-toggle {
+        display: flex;
+        align-items: center;
+      }
+      .info-details {
+        font-family: "Muli";
+        font-size: 14px;
+        .data-element {
+          margin-top: 5px;
+          .data-title {
+            font-size: 13px;
+            padding-right: 5px;
+            color: rgba(0, 0, 0, 0.5);
+          }
+          .data-desc {
+            // margin-left: 4px;
+            font-size: 13px;
+            font-weight: 400;
+            // letter-spacing: -0.25px;
+            .more {
+              color: rgba(0, 0, 0, 0.7);
+              margin: 0 5px;
+              cursor: pointer;
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -174,6 +174,11 @@ class Navigation extends Component {
                   this.state.userId || this.props.user.userProfile._id
                 }`}
               />
+               <ListItem
+                name="Tickets"
+                className={this.props.ticket ? "active" : "inactive"}
+                link="/tickets"
+              />
               <ListItem
                 name="Settings"
                 className={this.props.settings ? "active" : "inactive"}
@@ -273,18 +278,48 @@ class Navigation extends Component {
                     isMobile="true"
                   />
 
-                  <ListItem
-                    name="Account"
-                    className={this.props.profile ? "active" : "inactive"}
-                    link="/profile"
-                    isMobile="true"
-                  />
-                  <ListItem
-                    name="Settings"
-                    className={this.props.settings ? "active" : "inactive"}
-                    link="/settings"
-                    isMobile="true"
-                  />
+            <ListItem
+              name="Account"
+              className={this.props.profile ? "active" : "inactive"}
+              link={`/profile/${
+                this.state.userId || this.props.user.userProfile._id
+              }`}
+            />
+            <ListItem
+              name="Tickets"
+              className={this.props.ticket ? "active" : "inactive"}
+              link="/tickets"
+            />
+            <ListItem
+              name="Settings"
+              className={this.props.settings ? "active" : "inactive"}
+              link="/settings"
+            />
+            <ListItem
+              className={this.props.orgSettings ? "active" : "inactive"}
+              link="/org-settings"
+              name="Org settings"
+            />
+          </ListGroup>
+          <hr />
+          <ListGroup className="list-group-integrations">
+            <ListGroup.Item>
+              <div className="integration-text">
+                Your Integrations
+                <img
+                  src={Plus}
+                  alt="add integration"
+                  className="integration-add"
+                ></img>
+              </div>
+            </ListGroup.Item>
+            <ListGroup.Item
+              className="inactive"
+              onClick={() => this.setState({ open: true })}
+            >
+              <SVGIcon name="JitsiMeet" />
+              <span style={{ color: "rgba(0, 0, 0, 0.5)" }}>Jitsi Meet</span>
+            </ListGroup.Item>
 
                   <ListGroup.Item
                     style={divStyle2}
@@ -382,6 +417,24 @@ class Navigation extends Component {
                     name="Projects"
                     className={this.props.proj ? "active" : "inactive"}
                     link="/projects"
+                  />
+                  <ListItem
+                    name="Account"
+                    className={this.props.profile ? "active" : "inactive"}
+                    link="/profile"
+                    isMobile="true"
+                  />
+                  <ListItem
+                    name="Tickets"
+                    className={this.props.ticket ? "active" : "inactive"}
+                    link="/tickets"
+                    isMobile="true"
+                  />
+                  <ListItem
+                    name="Settings"
+                    className={this.props.settings ? "active" : "inactive"}
+                    link="/settings"
+                    isMobile="true"
                   />
 
                   <ListItem

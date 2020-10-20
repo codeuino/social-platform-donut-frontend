@@ -16,6 +16,7 @@ import { getOrgProfile } from "../../actions/orgAction";
 import { Link } from "react-router-dom";
 import { Button, Card } from "react-bootstrap";
 import { Mobile, Desktop } from '../../utils/breakpoints';
+import NewTicket from "./popups/NewTicket";
 
 class Organization extends Component {
   constructor(props) {
@@ -41,6 +42,10 @@ class Organization extends Component {
     console.log("organization ", nextProps);
     this.setState({ orgProfile: nextProps.org?.org });
   }
+
+  handleClick = (type) => {
+    this.setState({ type: type });
+  };
 
   render() {
     const { orgProfile, type } = this.state;

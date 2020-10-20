@@ -1,0 +1,99 @@
+.ticket {
+  display: flex;
+  height: 100vh;
+
+  font-family: Muli, sans-serif;
+  .navigation {
+    background: #f5f5f5;
+    flex-grow: 1;
+    border-right: solid 1px #dfe9f1;
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    overflow-y: scroll;
+  }
+  .ticket-details {
+    ._loading_overlay_wrapper {
+      height: 100%;
+    }
+    ._loading_overlay_overlay {
+      height: 100vh;
+      color: black;
+      background-color: rgba(255, 255, 255, 0.7);
+    }
+    ._loading_overlay_content {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+      * {
+        margin: 10px;
+      }
+    }
+    flex: 1;
+    margin-left: 13vw;
+    .ticket-description {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow-y: hidden;
+      .dashboard-title {
+        font-family: Inter;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 36px;
+        line-height: 44px;
+        color: #000000;
+        margin: 15px;
+      }
+      .ticket-status {
+        flex: 1;
+        text-align: center;
+      }
+      .ticket-status-text {
+        font-family: "Inter";
+        font-size: 1vw;
+        letter-spacing: 0.1px;
+        text-transform: uppercase;
+        color: rgba(0, 0, 0, 0.8);
+        font-weight: bold;
+      }
+      .ticket-content {
+        flex: 10;
+      }
+    }
+  }
+}
+
+.navigation::-webkit-scrollbar {
+  display: none;
+}
+
+.searchbar-container {
+  padding: 1rem;
+  display: flex;
+  width: 100%;
+  .searchbar {
+    position: relative;
+    flex-grow: 1;
+    border-radius: 25px;
+    margin-right: 1rem;
+    .searchbar-icon {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      top: 50%;
+      left: 0;
+      width: 2rem;
+      transform: translateY(-50%);
+    }
+    input {
+      padding-left: 2rem;
+    }
+  }
+  .btn {
+    flex-grow: 0;
+  }
+}
