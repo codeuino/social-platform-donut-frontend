@@ -6,6 +6,7 @@
 
   .searchbar-container {
     flex-grow: 0.5;
+    flex-direction: column;
     .searchbar {
       border-radius: 25px;
     }

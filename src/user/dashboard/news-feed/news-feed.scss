@@ -11,7 +11,7 @@
         max-height: 55px;
         max-width: 1500px;
       }
-      .row {
+      .article__row, .content__row{
         width: 100%;
       }
     }
@@ -551,8 +551,8 @@
       width: 100vw;
       margin-bottom: 17px;
 
-      [class^=col-] {
-        .row {
+      [class^="col-"] {
+        .content__row {
           width: 100vw;
           margin: 0 auto;
         }

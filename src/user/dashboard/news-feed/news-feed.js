@@ -568,7 +568,7 @@ function NewsFeed(props) {
       <div className="news-feed">
         <div className="post-article">
           <div className="article">
-            <Row>
+            <Row className="content__row">
               <Col xs={12} lg={8}>
                 <Paper
                   component="form"
@@ -796,7 +796,7 @@ function NewsFeed(props) {
             </Mobile>
           </Col>
           <Col xs={12}>
-            <Row>
+            <Row className="content__row">
               {Boolean(type !== "All") ? (
                 content
               ) : (

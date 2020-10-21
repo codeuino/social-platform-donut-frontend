@@ -124,9 +124,9 @@ class Organization extends Component {
               topBarLoading()
             ) : (
               <div className="notify-user">
-                <OrgInfo></OrgInfo>
+                <OrgInfo />
                 <Desktop>
-                  <Portfolio></Portfolio>
+                  <Portfolio />
                 </Desktop>
               </div>
             )}
@@ -135,9 +135,84 @@ class Organization extends Component {
                 cardLoading()
               ) : (
                 <>
-                       <Mobile>
-                  <div className="details">
-                    <div className="details__proposal">
+                  <Mobile>
+                    <div className="details">
+                      <div className="details__proposal">
+                        <Link
+                          to={{
+                            pathname: "/proposaleditor",
+                            state: {
+                              proposalId: "new",
+                            },
+                          }}
+                          className="details__proposal_btn"
+                        >
+                          <Button className="proposal-btn">Propose an Idea</Button>
+                        </Link>
+                      </div>
+                      <div className="tabs__container">
+                          <div className="nav__tab">
+                            <ul className="nav__list__container">
+                              <li
+                                className={
+                                  type === "About"
+                                    ? "nav__single__tab selected"
+                                    : "nav__single__tab"
+                                }
+                                onClick={() =>handleClick("About")}
+                              >
+                                About
+                              </li>
+                              <li
+                                className={
+                                  type === "Updates"
+                                    ? "nav__single__tab selected"
+                                    : "nav__single__tab"
+                                }
+                                onClick={() =>handleClick("Updates")}
+                              >
+                                Updates
+                              </li>
+                              <li
+                                className={
+                                  type === "Contact"
+                                    ? "nav__single__tab selected"
+                                    : "nav__single__tab"
+                                }
+                                onClick={() =>handleClick("Contact")}
+                              >
+                                Contact
+                              </li>
+                            </ul>
+                          </div>
+                      </div>
+                      <div className="details__content">
+                        {content}
+                      </div>
+                    </div>
+                  </Mobile>
+                  
+                  <Desktop>
+                    <div className="details">
+                    <div className="tabs__container">
+                            <div className="nav__tab">
+                              <ul className="nav__list__container">
+                                <li
+                                  className={
+                                    type === "Overview"
+                                      ? "nav__single__tab selected"
+                                      : "nav__single__tab"
+                                  }
+                                  onClick={() =>handleClick("Overview")}
+                                >
+                                  Overview
+                                </li>
+                              </ul>
+                            </div>
+                        </div>
+                      {aboutContent}
+                    </div>
+                    <div className="sideinfo">
                       <Link
                         to={{
                           pathname: "/proposaleditor",
@@ -145,88 +220,13 @@ class Organization extends Component {
                             proposalId: "new",
                           },
                         }}
-                        className="details__proposal_btn"
                       >
                         <Button className="proposal-btn">Propose an Idea</Button>
                       </Link>
+                      {updatesContent}
+                      {contactContent}
                     </div>
-                    <div className="tabs__container">
-                        <div className="nav__tab">
-                          <ul className="nav__list__container">
-                            <li
-                              className={
-                                type === "About"
-                                  ? "nav__single__tab selected"
-                                  : "nav__single__tab"
-                              }
-                              onClick={() =>handleClick("About")}
-                            >
-                              About
-                            </li>
-                            <li
-                              className={
-                                type === "Updates"
-                                  ? "nav__single__tab selected"
-                                  : "nav__single__tab"
-                              }
-                              onClick={() =>handleClick("Updates")}
-                            >
-                              Updates
-                            </li>
-                            <li
-                              className={
-                                type === "Contact"
-                                  ? "nav__single__tab selected"
-                                  : "nav__single__tab"
-                              }
-                              onClick={() =>handleClick("Contact")}
-                            >
-                              Contact
-                            </li>
-                          </ul>
-                        </div>
-                    </div>
-                    <div className="details__content">
-                      {content}
-                    </div>
-                  </div>
-                  
-              </Mobile>
-              <Desktop>
-                <div className="details">
-                <div className="tabs__container">
-                        <div className="nav__tab">
-                          <ul className="nav__list__container">
-                            <li
-                              className={
-                                type === "Overview"
-                                  ? "nav__single__tab selected"
-                                  : "nav__single__tab"
-                              }
-                              onClick={() =>handleClick("Overview")}
-                            >
-                              Overview
-                            </li>
-                          </ul>
-                        </div>
-                    </div>
-                  {aboutContent}
-                </div>
-                <div className="sideinfo">
-                  <Link
-                    to={{
-                      pathname: "/proposaleditor",
-                      state: {
-                        proposalId: "new",
-                      },
-                    }}
-                  >
-                    <Button className="proposal-btn">Propose an Idea</Button>
-                  </Link>
-                  {updatesContent}
-                  {contactContent}
-                </div>
-              </Desktop>
+                  </Desktop>
                 </>
               )}
          

@@ -17,10 +17,7 @@
     padding: 2.5vh 2.5vw;
     margin-left: 0;
     flex-direction: column;
-    .proposal_dashboard__content {
-      flex: 1;
-    }
-    .proposal_dashboard__rightpanel {
+    .proposal_dashboard__content, .proposal_dashboard__rightpanel {
       flex: 1;
     }
   }

@@ -62,8 +62,6 @@ class Activity extends Component {
     return (
       <>
         <Navigation orgSettings={this.state.org} user={this.props.user} />
-        <div className="overall_container">
-          <div className="org_settings_view">
             <div className="main_section">
               <div className="left_nav">
                 <p className="header_text">Community Settings</p>
@@ -107,8 +105,6 @@ class Activity extends Component {
                 ) : null}
               </div>
             </div>
-          </div>
-        </div>
       </>
     );
   }
