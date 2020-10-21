@@ -1,5 +1,13 @@
-.main-navigation {
+.navigation {
   width: 13vw;
+  background: #f5f5f5;
+  flex-grow: 1;
+  border-right: solid 1px #dfe9f1;
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  overflow-y: scroll;
   .list-group {
     background-color: #f5f5f5;
     .list-group-item {
@@ -71,7 +79,7 @@
   width: 50px;
 }
 
-.main-navigation {
+.navigation {
   .list-group {
     .link {
       text-decoration: none;
@@ -94,7 +102,7 @@
   }
 }
 
-.main-navigation {
+.navigation {
   .list-group {
     .link {
       .inactive {
@@ -113,7 +121,7 @@
   }
 }
 
-.main-navigation {
+.navigation {
   .list-group {
     .list-group-item {
       svg {
@@ -141,7 +149,7 @@
   padding: 0px 10px 0px 10px;
 }
 
-.main-navigation {
+.navigation {
   .list-group {
     .active {
       .icon {
@@ -169,7 +177,7 @@
   color: rgba(0, 0, 0, 0.5);
   bottom: 2em;
 }
-.main-navigation {
+.navigation {
   hr {
     margin-bottom: 0;
   }
@@ -182,17 +190,6 @@
 
 .navigation::-webkit-scrollbar {
   display: none;
-}
-
-.navigation {
-  background: #f5f5f5;
-  flex-grow: 1;
-  border-right: solid 1px #dfe9f1;
-  position: fixed;
-  top: 0px;
-  bottom: 0px;
-  left: 0px;
-  overflow-y: scroll;
 }
 
 .mobile-nav::-webkit-scrollbar {
@@ -212,10 +209,6 @@
   min-width: 70vw;
   transition: 0.5s;
   z-index: 1022;
-  .main-navigation {
-    width: 100%;
-  }
-
 }
 
 .hide-nav {

@@ -25,8 +25,7 @@ class Navigation extends Component {
       logout: false,
       org: false,
       userId: "",
-      sidebar: false,
-      backdrop: false
+      sidebar: false
     };
     this.setWrapperRef = this.setWrapperRef.bind(this);
     this.setMenuRef = this.setMenuRef.bind(this);
@@ -59,7 +58,6 @@ class Navigation extends Component {
     if (this.wrapperRef && !this.wrapperRef.contains(event.target) && this.menuRef && !this.menuRef.contains(event.target)) {
       this.setState({
         sidebar: false,
-        backdrop: false
       })
     } else {
       return;
@@ -115,16 +113,14 @@ class Navigation extends Component {
     const handleSidebarClick = () => {
       this.setState({
         sidebar: true,
-        backdrop: true
       })
     }
     const { logout } = this.props;
     return (
       <>
-      <Backdrop show={this.state.backdrop} />
-      <Desktop>
-        <div className="navigation">
-          <div className="main-navigation">
+      <Backdrop show={this.state.sidebar} />
+        <Desktop>
+          <div className="navigation">
             <ListGroup className="list-group">
               <ListGroup.Item style={{ marginLeft: "15px" }}>
                 <NavLink to="/dashboard">
@@ -189,44 +185,43 @@ class Navigation extends Component {
                 link="/org-settings"
                 name="Org settings"
               />
-            </ListGroup>
-            <hr />
-            <ListGroup className="list-group-integrations">
-              <ListGroup.Item>
-                <div className="integration-text">
-                  Your Integrations
-                  <img
-                    src={Plus}
-                    alt="add integration"
-                    className="integration-add"
-                  ></img>
-                </div>
-              </ListGroup.Item>
-              <ListGroup.Item
-                className="inactive"
-                onClick={() => this.setState({ open: true })}
-              >
-                <SVGIcon name="JitsiMeet" />
-                <span style={{ color: "rgba(0, 0, 0, 0.5)" }}>Jitsi Meet</span>
-              </ListGroup.Item>
+              </ListGroup>
+              <hr />
+              <ListGroup className="list-group-integrations">
+                <ListGroup.Item>
+                  <div className="integration-text">
+                    Your Integrations
+                    <img
+                      src={Plus}
+                      alt="add integration"
+                      className="integration-add"
+                    ></img>
+                  </div>
+                </ListGroup.Item>
+                <ListGroup.Item
+                  className="inactive"
+                  onClick={() => this.setState({ open: true })}
+                >
+                  <SVGIcon name="JitsiMeet" />
+                  <span style={{ color: "rgba(0, 0, 0, 0.5)" }}>Jitsi Meet</span>
+                </ListGroup.Item>
 
-              {this.state.open ? (
-                <Info show={this.state.open} onHide={close} />
-              ) : null}
-            </ListGroup>
-            <hr />
-            <ListGroup>
-              <LogoutButton />
-              <Logout show={this.state.logout} handleClose={cancel} />
-            </ListGroup>
-            <hr />
-            <ListGroup className="codeuino">
-              <ListGroup.Item>
-                <div className="codeuino-text">CODEUINO</div>
-              </ListGroup.Item>
-            </ListGroup>
+                {this.state.open ? (
+                  <Info show={this.state.open} onHide={close} />
+                ) : null}
+              </ListGroup>
+              <hr />
+              <ListGroup>
+                <LogoutButton />
+                <Logout show={this.state.logout} handleClose={cancel} />
+              </ListGroup>
+              <hr />
+              <ListGroup className="codeuino">
+                <ListGroup.Item>
+                  <div className="codeuino-text">CODEUINO</div>
+                </ListGroup.Item>
+              </ListGroup>
             </div>
-           </div>
           </Desktop>
 
           {/* <Tablet>
@@ -375,109 +370,107 @@ class Navigation extends Component {
                 </Row>
               </Nav>
             </Navbar>
-            <div ref={this.setWrapperRef} className={this.state.sidebar?"mobile-nav":"mobile-nav hide-nav"}>
-              <div className="main-navigation">
-                <ListGroup className="list-group">
-                  <ListGroup.Item style={{ marginLeft: "15px" }}>
-                    <NavLink to="/dashboard">
-                      <div className="donut-title">
-                        <DonutTitleSmall />
-                      </div>
-                    </NavLink>
-                  </ListGroup.Item>
-                  <hr />
-
-                  <ListItem
-                    name="Dashboard"
-                    className={this.props.dashboard ? "active" : "inactive"}
-                    link="/dashboard"
-                  />
-                  {/* <ListItem
-                    name="Pinned Posts"
-                    className={this.props.posts ? "active" : "inactive"}
-                    link="/pinned-posts"
-                  /> */}
-                  <ListItem
-                    name="Organization"
-                    className={this.props.org ? "active" : "inactive"}
-                    link="/organization"
-                  />
-                  <ListItem
-                    name="Wikis"
-                    className={this.props.wikis ? "active" : "inactive"}
-                    link="/wikis"
-                  />
-                  <ListItem
-                    name="Events"
-                    className={this.props.event ? "active" : "inactive"}
-                    link="/events"
-                  />
-
-                  <ListItem
-                    name="Projects"
-                    className={this.props.proj ? "active" : "inactive"}
-                    link="/projects"
-                  />
-                  <ListItem
-                    name="Tickets"
-                    className={this.props.ticket ? "active" : "inactive"}
-                    link="/tickets"
-                  />
-                  <ListItem
-                    name="Account"
-                    className={this.props.profile ? "active" : "inactive"}
-                    link={`/profile/${
-                      this.state.userId || this.props.user.userProfile._id
-                    }`}
-                  />
-                  <ListItem
-                    name="Settings"
-                    className={this.props.settings ? "active" : "inactive"}
-                    link="/settings"
-                  />
-                  <ListItem
-                    className={this.props.orgSettings ? "active" : "inactive"}
-                    link="/org-settings"
-                    name="Org settings"
-                  />
-                </ListGroup>
-                <hr />
-                <ListGroup className="list-group-integrations">
-                  <ListGroup.Item>
-                    <div className="integration-text">
-                      Your Integrations
-                      <img
-                        src={Plus}
-                        alt="add integration"
-                        className="integration-add"
-                      ></img>
+            <div ref={this.setWrapperRef} className={this.state.sidebar?"navigation mobile-nav":"navigation mobile-nav hide-nav"}>
+              <ListGroup className="list-group">
+                <ListGroup.Item style={{ marginLeft: "15px" }}>
+                  <NavLink to="/dashboard">
+                    <div className="donut-title">
+                      <DonutTitleSmall />
                     </div>
-                  </ListGroup.Item>
-                  <ListGroup.Item
-                    className="inactive"
-                    onClick={() => this.setState({ open: true })}
-                  >
-                    <SVGIcon name="JitsiMeet" />
-                    <span style={{ color: "rgba(0, 0, 0, 0.5)" }}>Jitsi Meet</span>
-                  </ListGroup.Item>
+                  </NavLink>
+                </ListGroup.Item>
+                <hr />
 
-                  {this.state.open ? (
-                    <Info show={this.state.open} onHide={close} />
-                  ) : null}
-                </ListGroup>
-                <hr />
-                <ListGroup>
-                  <LogoutButton />
-                  <Logout show={this.state.logout} handleClose={cancel} />
-                </ListGroup>
-                <hr />
-                <ListGroup className="codeuino">
-                  <ListGroup.Item>
-                    <div className="codeuino-text">CODEUINO</div>
-                  </ListGroup.Item>
-                </ListGroup>
-              </div>
-            </div>
+                <ListItem
+                  name="Dashboard"
+                  className={this.props.dashboard ? "active" : "inactive"}
+                  link="/dashboard"
+                />
+                {/* <ListItem
+                  name="Pinned Posts"
+                  className={this.props.posts ? "active" : "inactive"}
+                  link="/pinned-posts"
+                /> */}
+                <ListItem
+                  name="Organization"
+                  className={this.props.org ? "active" : "inactive"}
+                  link="/organization"
+                />
+                <ListItem
+                  name="Wikis"
+                  className={this.props.wikis ? "active" : "inactive"}
+                  link="/wikis"
+                />
+                <ListItem
+                  name="Events"
+                  className={this.props.event ? "active" : "inactive"}
+                  link="/events"
+                />
+
+                <ListItem
+                  name="Projects"
+                  className={this.props.proj ? "active" : "inactive"}
+                  link="/projects"
+                />
+                <ListItem
+                  name="Tickets"
+                  className={this.props.ticket ? "active" : "inactive"}
+                  link="/tickets"
+                />
+                <ListItem
+                  name="Account"
+                  className={this.props.profile ? "active" : "inactive"}
+                  link={`/profile/${
+                    this.state.userId || this.props.user.userProfile._id
+                  }`}
+                />
+                <ListItem
+                  name="Settings"
+                  className={this.props.settings ? "active" : "inactive"}
+                  link="/settings"
+                />
+                <ListItem
+                  className={this.props.orgSettings ? "active" : "inactive"}
+                  link="/org-settings"
+                  name="Org settings"
+                />
+              </ListGroup>
+              <hr />
+              <ListGroup className="list-group-integrations">
+                <ListGroup.Item>
+                  <div className="integration-text">
+                    Your Integrations
+                    <img
+                      src={Plus}
+                      alt="add integration"
+                      className="integration-add"
+                    ></img>
+                  </div>
+                </ListGroup.Item>
+                <ListGroup.Item
+                  className="inactive"
+                  onClick={() => this.setState({ open: true })}
+                >
+                  <SVGIcon name="JitsiMeet" />
+                  <span style={{ color: "rgba(0, 0, 0, 0.5)" }}>Jitsi Meet</span>
+                </ListGroup.Item>
+
+                {this.state.open ? (
+                  <Info show={this.state.open} onHide={close} />
+                ) : null}
+              </ListGroup>
+              <hr />
+              <ListGroup>
+                <LogoutButton />
+                <Logout show={this.state.logout} handleClose={cancel} />
+              </ListGroup>
+              <hr />
+              <ListGroup className="codeuino">
+                <ListGroup.Item>
+                  <div className="codeuino-text">CODEUINO</div>
+                </ListGroup.Item>
+              </ListGroup>
+          </div>
         </Mobile>
       </>
     );
