@@ -1,39 +1,33 @@
-.overall_container {
+.main_section {
   display: flex;
-  .org_settings_view {
-    margin-left: 13vw;
-    margin-top: 35px;
-    .main_section {
-      display: flex;
-      flex-direction: row;
-      justify-items: center;
-      flex-wrap: wrap;
-      margin-top: -1.3em;
-      .left_nav {
-        max-width: 20%;
-        height: 50%;
-        margin-top: 16px;
-        margin-left: 10px;
-        .header_text {
-          font-family: Inter;
-          font-style: normal;
-          font-weight: 500;
-          font-size: 18px;
-          line-height: 21px;
-          letter-spacing: 0.25px;
-          color: #9e9e9e;
-        }
-      }
-
-      .right_section {
-        width: 80vw;
-        max-width: 75%;
-        // overflow-y: auto;
-        margin-top: -0.7em;
-      }
+  flex-direction: row;
+  justify-items: center;
+  flex-wrap: wrap;
+  margin: 35px auto auto 15vw;
+  .left_nav {
+    max-width: 20%;
+    height: 50%;
+    margin-top: 16px;
+    margin-left: 10px;
+    .header_text {
+      font-family: Inter;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 21px;
+      letter-spacing: 0.25px;
+      color: #9e9e9e;
     }
   }
+
+  .right_section_content {
+    width: 80vw;
+    max-width: 75%;
+    // overflow-y: auto;
+    margin-top: -0.7em;
+  }
 }
+
 
 
 
@@ -42,26 +36,20 @@
 }
 
 @media (min-width: 320px) and (max-width: 1024px){
-  .overall_container {
-    display: flex;
+  .main_section {
+    width: 100%;
+    margin: 0;
     padding: 2.5vh 2.5vw;
-    .org_settings_view {
-      margin: 0;
+    flex-direction: column;
+    .left_nav {
       width: 100%;
-      .main_section {
-        flex-direction: column;
-        margin-top: 0;
-        .left_nav {
-          max-width: 100%;
-          height: auto;
-          margin: 0;
-        }
-        .right_section {
-          width: 100%;
-          max-width: 100%;
-          margin-top: 0;
-        }
-      }
+      max-width: 100%;
+      margin: 10px auto;
+    }
+    .right_section_content {
+      width: 100%;
+      max-width: 100%;
+      margin-top: 0;
     }
   }
 }

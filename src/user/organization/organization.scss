@@ -135,7 +135,6 @@
       font-weight: 600;
       font-size: 16px;
       line-height: 27px;
-      border-radius: 100px;
       color: #ffffff;
     }
   }
@@ -201,12 +200,7 @@
       display: flex;
       .details__proposal_btn {
         margin: 0 auto;
-        .proposal-btn {
-          border-radius: 100px;
-        }
       }
     }
   }
-  
-  
 }

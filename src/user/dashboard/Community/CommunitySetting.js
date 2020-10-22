@@ -51,47 +51,43 @@ class CommunitySetting extends Component {
     return (
       <>
         <Navigation orgSettings={this.state.org} user={this.props.user} />
-        <div className="overall_container">
-          <div className="org_settings_view">
-            <div className="main_section">
-              <div className="left_nav">
-                <p className="header_text">Community Settings</p>
-                <Desktop>
-                  <LeftNav
-                    data={{
-                      option: this.state.option,
-                      changeOption: this.changeOption.bind(this),
-                    }}
-                  />
-                </Desktop>
-                <Mobile>
-                  <Accordion>
-                      <Accordion.Toggle onClick={() => toggleSidebar()} variant="outline-secondary" size="sm" as={Button} eventKey="0">
-                        {this.state.sidebarOpen?"Close Menu":"Setting Menu"}
-                      </Accordion.Toggle>
-                      <Accordion.Collapse eventKey="0">
-                        <LeftNav
-                          data={{
-                            option: this.state.option,
-                            changeOption: this.changeOption.bind(this),
-                          }}
-                        />
-                      </Accordion.Collapse>
-                  </Accordion>
-                </Mobile>
-              </div>
-              <div className="right_section">
-                {view === "profile" ? <OrgProfile /> : null}
-                {view === "permission" ? <OrgPermission /> : null}
-                {view === "settings" ? <OrgSetting /> : null}
-                {view === "authentication" ? <OrgAuth /> : null}
-                {view === "maintenance" ? <OrgMaintenance /> : null}
-                {view === "activity" ? (
-                  <Users 
-                    handleOption={{ changeOption: this.changeOption.bind(this) }}
-                  />) : null }
-              </div>
-            </div>
+        <div className="main_section">
+          <div className="left_nav">
+            <p className="header_text">Community Settings</p>
+            <Desktop>
+              <LeftNav
+                data={{
+                  option: this.state.option,
+                  changeOption: this.changeOption.bind(this),
+                }}
+              />
+            </Desktop>
+            <Mobile>
+              <Accordion>
+                  <Accordion.Toggle onClick={() => toggleSidebar()} variant="outline-secondary" size="sm" as={Button} eventKey="0">
+                    {this.state.sidebarOpen?"Close Menu":"Setting Menu"}
+                  </Accordion.Toggle>
+                  <Accordion.Collapse eventKey="0">
+                    <LeftNav
+                      data={{
+                        option: this.state.option,
+                        changeOption: this.changeOption.bind(this),
+                      }}
+                    />
+                  </Accordion.Collapse>
+              </Accordion>
+            </Mobile>
+          </div>
+          <div className="right_section_content">
+            {view === "profile" ? <OrgProfile /> : null}
+            {view === "permission" ? <OrgPermission /> : null}
+            {view === "settings" ? <OrgSetting /> : null}
+            {view === "authentication" ? <OrgAuth /> : null}
+            {view === "maintenance" ? <OrgMaintenance /> : null}
+            {view === "activity" ? (
+              <Users 
+                handleOption={{ changeOption: this.changeOption.bind(this) }}
+              />) : null }
           </div>
         </div>
       </>
