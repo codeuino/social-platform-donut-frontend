@@ -89,7 +89,7 @@ export default function ActivityTimeline() {
               showSizeChanger
               onShowSizeChange={onShowSizeChange}
               defaultCurrent={1}
-              total={activity.length}
+              total={activity.length || 0}
               onChange={handlePagination}
             />
           </div>

@@ -288,7 +288,7 @@ class Events extends Component {
                 showSizeChanger
                 onShowSizeChange={this.onShowSizeChange}
                 defaultCurrent={1}
-                total={allEvents.length}
+                total={allEvents.length || 0}
                 onChange={this.handlePagination}
               />
             </div>

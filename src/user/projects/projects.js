@@ -90,7 +90,7 @@ class Projects extends Component {
                 showSizeChanger
                 onShowSizeChange={this.onShowSizeChange}
                 defaultCurrent={1}
-                total={allProjects.length}
+                total={allProjects.length || 0}
                 onChange={this.handlePagination}
               />
             </div>
