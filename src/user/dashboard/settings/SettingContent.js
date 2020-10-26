@@ -104,19 +104,17 @@ class SettingContent extends Component {
     return (
       <div className="settings__right__container">
         <div className="settings__left__nav">
-          <Desktop>
+          <div className="settings__left__nav__container">
             <SettingSidebar />
-          </Desktop>
-          <Mobile>
-            <Accordion>
-                <Accordion.Toggle onClick={() => toggleSidebar()} variant="outline-secondary" size="sm" as={Button} eventKey="0">
-                  {this.state.sidebarOpen?"Close Menu":"Setting Menu"}
-                </Accordion.Toggle>
-                <Accordion.Collapse eventKey="0">
-                  <SettingSidebar />
-                </Accordion.Collapse>
-            </Accordion>
-          </Mobile>
+          </div>
+          <Accordion className="settings__left__nav__accordion">
+              <Accordion.Toggle onClick={() => toggleSidebar()} variant="outline-secondary" size="sm" as={Button} eventKey="0">
+                {this.state.sidebarOpen?"Close Menu":"Setting Menu"}
+              </Accordion.Toggle>
+              <Accordion.Collapse eventKey="0">
+                <SettingSidebar />
+              </Accordion.Collapse>
+          </Accordion>
         </div>
         <div className="settings__right__content">
           <div className="settings__header">
