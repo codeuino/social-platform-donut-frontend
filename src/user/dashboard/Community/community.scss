@@ -29,7 +29,9 @@
 }
 
 
-
+.community_accordion {
+  display: none;
+}
 
 .main_navigation::-webkit-scrollbar {
   display: none;
@@ -45,6 +47,12 @@
       width: 100%;
       max-width: 100%;
       margin: 10px auto;
+      .community_accordion {
+        display: block;
+      }
+      .left_nav_container {
+        display: none;
+      }
     }
     .right_section_content {
       width: 100%;
