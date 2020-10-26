@@ -12,9 +12,9 @@
     }
 
     .projects {
-        margin-top: 1vh;
-        margin-left: 4vw;
-        margin-right: 6vw;
+      padding: 20px;
+      margin-top: 2vh;
+      margin-left: 4vw;
         p {
           font-family: Inter;
           font-style: normal;
@@ -23,7 +23,7 @@
           line-height: 1.3em;
           color: #2D2D2D;
         }
-        #project_header {
+        .project__header {
           font-family: Inter;
           font-style: normal;
           font-weight: normal;

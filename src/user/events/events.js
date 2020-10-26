@@ -276,13 +276,13 @@ class Events extends Component {
         <div className="navigation">
           <Navigation event={this.state.event}></Navigation>
         </div>
-        <div className="events">
-          <h1 className="event_header">All Events</h1>
+        <div className="news projects">
+          <p className="event_header">All Events</p>
           <Grid container spacing={3}>
             {Events}
           </Grid>
 
-          <div className="event__pagination__container">
+          <div className="project__pagination__container">
             <Pagination
               showSizeChanger
               onShowSizeChange={this.onShowSizeChange}
