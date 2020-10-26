@@ -65,29 +65,27 @@ class Activity extends Component {
             <div className="main_section">
               <div className="left_nav">
                 <p className="header_text">Community Settings</p>
-                <Desktop>
+                <div className="left_nav_container">
                   <LeftNav
-                    data={{
-                      option: this.state.option,
-                      changeOption: this.changeOption.bind(this),
-                    }}
-                  />
-                </Desktop>
-                <Mobile>
-                  <Accordion>
-                      <Accordion.Toggle onClick={() => toggleSidebar()} variant="outline-secondary" size="sm" as={Button} eventKey="0">
-                        {this.state.sidebarOpen?"Close Menu":"Setting Menu"}
-                      </Accordion.Toggle>
-                      <Accordion.Collapse eventKey="0">
-                        <LeftNav
-                          data={{
-                            option: this.state.option,
-                            changeOption: this.changeOption.bind(this),
-                          }}
-                        />
-                      </Accordion.Collapse>
-                  </Accordion>
-                </Mobile>
+                      data={{
+                        option: this.state.option,
+                        changeOption: this.changeOption.bind(this),
+                      }}
+                    />
+                </div>
+                <Accordion className="activity_accordion">
+                    <Accordion.Toggle onClick={() => toggleSidebar()} variant="outline-secondary" size="sm" as={Button} eventKey="0">
+                      {this.state.sidebarOpen?"Close Menu":"Setting Menu"}
+                    </Accordion.Toggle>
+                    <Accordion.Collapse eventKey="0">
+                      <LeftNav
+                        data={{
+                          option: this.state.option,
+                          changeOption: this.changeOption.bind(this),
+                        }}
+                      />
+                    </Accordion.Collapse>
+                </Accordion>
               </div>
               <div className="right_section">
                 {view === "profile" ? <OrgProfile /> : null}
