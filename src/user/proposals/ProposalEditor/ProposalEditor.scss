@@ -4,8 +4,9 @@
   height: auto;
   font-family: Muli, sans-serif;
   .editor__navigation {
-    flex: 1;
+    flex: 0.5;
     border-right: solid 1px #dfe9f1;
+    background: #f5f5f5;
   }
   .editor__content {
     flex: 5.5;

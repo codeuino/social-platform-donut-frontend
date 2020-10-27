@@ -6,13 +6,15 @@ import "./ProposalEditor.scss";
 class ProposalEditor extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      org: true
+    };
   }
   render() {
     return (
       <div className="editor">
         <div className="editor__navigation">
-          <Navigation dashboard={this.state.dashboard} />
+          <Navigation org={this.state.org} />
         </div>
         <div className="editor__content">
           <EditorContent />
