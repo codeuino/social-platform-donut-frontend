@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import { getProfile } from '../../../actions/usersAction'
 import { getOrgProfile } from '../../../actions/orgAction'
 import './styles/SettingSidebar.scss';
-import { Mobile, Desktop } from '../../../utils/breakpoints';
 import { Accordion, Button } from 'react-bootstrap'; 
 
 class SettingContent extends Component {

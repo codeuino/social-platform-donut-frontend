@@ -9,7 +9,6 @@ import Navigation from '../navigation/navigation'
 import { connect } from 'react-redux'
 import OrgMaintenance from './components/OrgMaintenance';
 import Users from '../../Activity/Users'
-import { Mobile, Desktop } from '../../../utils/breakpoints';
 import { Accordion, Button } from 'react-bootstrap'; 
 
 class CommunitySetting extends Component {

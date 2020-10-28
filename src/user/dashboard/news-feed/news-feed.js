@@ -39,7 +39,6 @@ import Moment from "react-moment";
 import EditPostModal from "./popups/EditPost";
 import DeletePostModal from "./popups/DeletePost";
 import SharePostModal from "./popups/SharePost";
-import { Desktop, Mobile } from '../../../utils/breakpoints';
 
 // const reactionVariant = {
 //   hover: {
@@ -683,61 +682,8 @@ function NewsFeed(props) {
 
   return (
     <>
-      <Desktop>
-        {createPost}
-      </Desktop>
       <div className="news__feed__container">
-        <Mobile>
-          <div className="tabs__container">
-            <div className="nav__tab">
-              <ul
-                className="nav__list__container"
-              >
-                <li
-                  className={
-                    type === "All"
-                      ? "nav__single__tab selected"
-                      : "nav__single__tab"
-                  }
-                  onClick={handleClick("All")}
-                >
-                  All
-                </li>
-                <li
-                  className={
-                    type === "Post"
-                      ? "nav__single__tab selected"
-                      : "nav__single__tab"
-                  }
-                  onClick={handleClick("Post")}
-                >
-                  Posts
-                </li>
-                <li
-                  className={
-                    type === "Event"
-                      ? "nav__single__tab selected"
-                      : "nav__single__tab"
-                  }
-                  onClick={handleClick("Event")}
-                >
-                  Events
-                </li>
-                <li
-                  className={
-                    type === "Project"
-                      ? "nav__single__tab selected"
-                      : "nav__single__tab"
-                  }
-                  onClick={handleClick("Project")}
-                >
-                  Projects
-                </li>
-              </ul>
-            </div>
-          </div>
-        </Mobile>
-        <Desktop>
+          {createPost}
           <div className="tabs__container" style={isTop ? navStyles : {}}>
             <div className="nav__tab">
               <ul
@@ -787,13 +733,8 @@ function NewsFeed(props) {
               </ul>
             </div>
           </div>
-        </Desktop>
         <Row className="post">
           <Col xs={12}>
-            <Mobile>
-              {createPost}
-              <br />
-            </Mobile>
           </Col>
           <Col xs={12}>
             <Row className="content__row">

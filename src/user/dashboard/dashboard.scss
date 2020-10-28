@@ -6,7 +6,7 @@
   .dashboard__container__news {
     margin-left: 13vw;
     flex-grow: 4;
-    .notify-user {
+    .dashboard__container__news__notify {
       display: flex;
       padding: 20px 0px 20px 30px;
     }
@@ -23,6 +23,9 @@
     }
     .dashboard__container__news {
       margin-left: 0;
+      .dashboard__container__news__notify {
+        display: none;
+      }
     }
   }
 }

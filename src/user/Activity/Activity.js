@@ -16,7 +16,6 @@ import OrgAuth from '../dashboard/Community/components/OrgAuth';
 import OrgMaintenance from '../dashboard/Community/components/OrgMaintenance';
 import Users from './Users';
 import ActivityTimeline from './ActivityTimeline';
-import { Mobile, Desktop } from '../../utils/breakpoints';
 import { Accordion, Button } from 'react-bootstrap'; 
 
 class Activity extends Component {

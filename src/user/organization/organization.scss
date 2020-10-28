@@ -165,34 +165,39 @@
     margin-left: 0;
     .news {
       margin: 2vh 0 0 0;
+      width: 100%;
       .notify-user {
         padding: 0;
         justify-content: center;
+        .notify-user-portfolio {
+          display: none;
+        }
       }
       .org-info {
         padding: 0;
         margin: 2vh 2vw;
+        flex-direction: column;
+        .details {
+          flex: 1;
+          margin-bottom: 20px;
+        }
         .proposal-btn {
           margin-left: 0;
           width: 100%;
         }
         .about-us {
-          margin: 0 auto;
+          margin: 5px auto;
+          width: 100%;
+        }
+        .sideinfo {
+          .org-updates {
+            margin: 20px auto;
+          }
         }
       }
     }
     .details__content {
       margin-top: 20px;
-    }
-    .contact {
-      h2 {
-        display: none;
-      }
-    }
-    .updates {
-      h1 {
-        display: none;
-      }
     }
     .details__proposal {
       width: 100%;

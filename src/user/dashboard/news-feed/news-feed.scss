@@ -563,6 +563,10 @@
       padding: 0;
       .post-article {
         height: auto;
+        .article {
+          justify-content: center;
+          margin-top: 20px;
+        }
       }
     }
     .cta {
@@ -570,7 +574,6 @@
       text-align: center;
       button {
         padding: 0 1rem;
-        border-radius: 100px;
       }
     }
   }

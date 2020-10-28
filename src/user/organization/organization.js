@@ -15,7 +15,6 @@ import { connect } from "react-redux";
 import { getOrgProfile } from "../../actions/orgAction";
 import { Link } from "react-router-dom";
 import { Button, Card } from "react-bootstrap";
-import { Mobile, Desktop } from '../../utils/breakpoints';
 import NewTicket from "./popups/NewTicket";
 
 class Organization extends Component {
@@ -125,108 +124,49 @@ class Organization extends Component {
             ) : (
               <div className="notify-user">
                 <OrgInfo />
-                <Desktop>
+                <div className="notify-user-portfolio">
                   <Portfolio />
-                </Desktop>
+                </div>
               </div>
             )}
             <div className="org-info">
               {this.state.isLoading ? (
                 cardLoading()
               ) : (
-                <>
-                  <Mobile>
-                    <div className="details">
-                      <div className="details__proposal">
-                        <Link
-                          to={{
-                            pathname: "/proposaleditor",
-                            state: {
-                              proposalId: "new",
-                            },
-                          }}
-                          className="details__proposal_btn"
-                        >
-                          <Button className="proposal-btn">Propose an Idea</Button>
-                        </Link>
-                      </div>
-                      <div className="tabs__container">
+              <>
+                <div className="details">
+                  <div className="tabs__container">
                           <div className="nav__tab">
                             <ul className="nav__list__container">
                               <li
                                 className={
-                                  type === "About"
+                                  type === "Overview"
                                     ? "nav__single__tab selected"
                                     : "nav__single__tab"
                                 }
-                                onClick={() =>handleClick("About")}
+                                onClick={() =>handleClick("Overview")}
                               >
-                                About
-                              </li>
-                              <li
-                                className={
-                                  type === "Updates"
-                                    ? "nav__single__tab selected"
-                                    : "nav__single__tab"
-                                }
-                                onClick={() =>handleClick("Updates")}
-                              >
-                                Updates
-                              </li>
-                              <li
-                                className={
-                                  type === "Contact"
-                                    ? "nav__single__tab selected"
-                                    : "nav__single__tab"
-                                }
-                                onClick={() =>handleClick("Contact")}
-                              >
-                                Contact
+                                Overview
                               </li>
                             </ul>
                           </div>
                       </div>
-                      <div className="details__content">
-                        {content}
-                      </div>
-                    </div>
-                  </Mobile>
-                  
-                  <Desktop>
-                    <div className="details">
-                    <div className="tabs__container">
-                            <div className="nav__tab">
-                              <ul className="nav__list__container">
-                                <li
-                                  className={
-                                    type === "Overview"
-                                      ? "nav__single__tab selected"
-                                      : "nav__single__tab"
-                                  }
-                                  onClick={() =>handleClick("Overview")}
-                                >
-                                  Overview
-                                </li>
-                              </ul>
-                            </div>
-                        </div>
-                      {aboutContent}
-                    </div>
-                    <div className="sideinfo">
-                      <Link
-                        to={{
-                          pathname: "/proposaleditor",
-                          state: {
-                            proposalId: "new",
-                          },
-                        }}
-                      >
-                        <Button className="proposal-btn">Propose an Idea</Button>
-                      </Link>
-                      {updatesContent}
-                      {contactContent}
-                    </div>
-                  </Desktop>
+                    {aboutContent}
+                  </div>
+                  <div className="sideinfo">
+                    <Link
+                      to={{
+                        pathname: "/proposaleditor",
+                        state: {
+                          proposalId: "new",
+                        },
+                      }}
+                    >
+                      <Button className="proposal-btn">Propose an Idea</Button>
+                    </Link>
+                    {updatesContent}
+                    {contactContent}
+                  </div>
                 </>
               )}
          

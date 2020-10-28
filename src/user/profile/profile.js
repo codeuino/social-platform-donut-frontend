@@ -13,7 +13,6 @@ import {
 import { getAllPinnedPosts } from "../../actions/postAction";
 import { getOrgProfile } from "../../actions/orgAction";
 import ProfileFeed from "./profile-feed";
-import { Desktop } from '../../utils/breakpoints';
 
 class Profile extends Component {
   constructor(props) {
@@ -89,9 +88,9 @@ class Profile extends Component {
           <div className="news">
             <div className="notify-user">
               <UserInfo userProfile={userProfile} />
-              <Desktop>
+              <div className="notify-user-portfolio">
                 <Portfolio />
-              </Desktop>
+              </div>
             </div>
             <div className="two">
               <div className="posts-profile">
