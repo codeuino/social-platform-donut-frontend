@@ -65,3 +65,16 @@
     }
   }
 }
+
+@media (min-width: 320px) and (max-width: 1024px){
+  .searchbar-container {
+    flex-direction: column;;
+    .searchbar {
+      flex: 1;
+      margin: 0 0 10px 0;
+    }
+    .searchbar-action {
+      flex: 1;
+    }
+  }
+}

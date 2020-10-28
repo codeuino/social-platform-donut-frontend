@@ -262,17 +262,19 @@ class Filter extends Component {
               />
             </Form>
           </div>
-          <Button onClick={() => this.props.toggleNewTicketEditor(true)}>
-            New Ticket
-          </Button>
-          {isAdmin && (
-            <Button
-              style={{ marginLeft: "1rem" }}
-              onClick={() => this.setState({ modal: { view: "add" } })}
-            >
-              <PeopleAltIcon />
+          <div className="searchbar-action">
+            <Button onClick={() => this.props.toggleNewTicketEditor(true)}>
+              New Ticket
             </Button>
-          )}
+            {isAdmin && (
+              <Button
+                style={{ marginLeft: "1rem" }}
+                onClick={() => this.setState({ modal: { view: "add" } })}
+              >
+                <PeopleAltIcon />
+              </Button>
+            )}
+          </div>
         </div>
         <div className="filters">
           <div onClick={this.clearFilters} className="clear-filters">
