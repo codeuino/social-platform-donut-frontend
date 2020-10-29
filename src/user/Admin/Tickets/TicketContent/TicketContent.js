@@ -36,13 +36,14 @@ class TicketContent extends Component {
 
     const columns = [
       {
-        name: "",
         grow: 5,
         selector: "title",
+        minWidth: '150px',
         cell: (row) => <CustomTitle row={row} />,
       },
       {
         grow: 3,
+        minWidth: '100px',
         cell: (row) =>
           row.tags.map((ele, index) => (
             <Badge
@@ -59,6 +60,7 @@ class TicketContent extends Component {
         name: "Created",
         sortable: true,
         selector: "createdAt",
+        minWidth: '200px',
         cell: (row) => (
           <div style={{ display: "flex", alignItems: "center" }}>
             <Image
@@ -99,6 +101,7 @@ class TicketContent extends Component {
 
     return (
       <DataTable
+        responsive
         pagination
         columns={columns}
         highlightOnHover={true}

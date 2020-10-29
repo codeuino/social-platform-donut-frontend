@@ -61,7 +61,7 @@ class Layout extends Component {
     } = this.props;
     return (
       <LoadingOverlay
-        className="discussion"
+        className="discussion_container"
         active={!!spinner}
         text={spinner}
         spinner={<ClockLoader color={"#1A73E8"} />}
