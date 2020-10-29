@@ -121,7 +121,6 @@ class LoginForm extends Component {
           </Form.Group>
           <div className="cta-login">
             <Button
-              className="loginbtn"
               type="submit"
               variant="primary"
               color="primary"

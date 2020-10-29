@@ -3,11 +3,24 @@
   min-height: 100vh;
   height: auto;
   font-family: Muli, sans-serif;
+  margin-left: 13%;
   .editor__navigation {
     flex: 1;
     border-right: solid 1px #dfe9f1;
   }
   .editor__content {
     flex: 5.5;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 1024px){
+  .editor {
+    padding: 2vh 2.5vw;
+    width: 100%;
+    margin-left: 0;
+    .editor__content {
+      padding: 0;
+      width: 100%;
+    }
   }
 }

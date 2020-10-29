@@ -44,27 +44,10 @@ class Projects extends Component {
 
   render() {
     const { allProjects } = this.state
-    const useStyles = makeStyles((theme) => ({
-      root: {
-        flexGrow: 1,
-      },
-      paper: {
-        padding: theme.spacing(2),
-        textAlign: "center",
-        color: theme.palette.text.secondary,
-      },
-    }));
-
-    const useStyles2 = makeStyles({
-      root: {
-        maxWidth: 345,
-        marginTop: "20px",
-      },
-    });
 
     let Projects = allProjects.map((Item, index) => (
-      <Grid item xs = {6} sm = {4} key={index} className="card__container">
-        <Card className={useStyles2.root}>
+      <Grid item xs={12} sm={6} md={4} key={index}>
+        <Card>
           <CardActionArea>
             <CardMedia
               component="img"
@@ -94,28 +77,26 @@ class Projects extends Component {
     ));
 
     return (
-      <div className="organization">
-        <div className="navigation">
-          <Navigation proj={this.state.proj}></Navigation>
-        </div>
-        <div className="news projects">
-          <p id="project__header">All Projects</p>
-          <div className={useStyles.root}>
+      <>
+        <Navigation proj={this.state.proj}/>
+        <div className="organization">
+          <div className="projects">
+            <p id="projects__header">All Projects</p>
             <Grid container spacing={3}>
               {Projects}
             </Grid>
-          </div>
-          <div className="project__pagination__container">
-            <Pagination
-              showSizeChanger
-              onShowSizeChange={this.onShowSizeChange}
-              defaultCurrent={1}
-              total={100}
-              onChange={this.handlePagination}
-            />
+            <div className="project__pagination__container">
+              <Pagination
+                showSizeChanger
+                onShowSizeChange={this.onShowSizeChange}
+                defaultCurrent={1}
+                total={allProjects.length || 0}
+                onChange={this.handlePagination}
+              />
+            </div>
           </div>
         </div>
-      </div>
+      </>
     );
   }
 }

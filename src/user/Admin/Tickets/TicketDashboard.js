@@ -219,89 +219,89 @@ class TicketDashboard extends Component {
       />
     );
     return (
-      <div className="ticket">
-        <div className="navigation">
-          <Navigation ticket={ticket} />
-        </div>
-        <div className="ticket-details" id="ticket-shadow">
-          <LoadingOverlay
-            text={spinner}
-            active={!!spinner}
-            spinner={<ClockLoader color={"#1A73E8"} />}
-            styles={{
-              spinner: (base) => ({
-                ...base,
-                width: "100px",
-                "& svg circle": {
-                  stroke: "rgba(26, 115, 232, 0.5)",
-                },
-              }),
-            }}
-          >
-            <div className="ticket-description">
-              <div className="dashboard-title">
-                Tickets
-                <Button variant="light" onClick={this.toggleDrawer}>
-                  <NotificationsNoneOutlinedIcon />
-                </Button>
+      <>
+        <Navigation ticket={ticket} />
+        <div className="ticket">
+          <div className="ticket-details" id="ticket-shadow">
+            <LoadingOverlay
+              text={spinner}
+              active={!!spinner}
+              spinner={<ClockLoader color={"#1A73E8"} />}
+              styles={{
+                spinner: (base) => ({
+                  ...base,
+                  width: "100px",
+                  "& svg circle": {
+                    stroke: "rgba(26, 115, 232, 0.5)",
+                  },
+                }),
+              }}
+            >
+              <div className="ticket-description">
+                <div className="dashboard-title">
+                  Tickets
+                  <Button variant="light" onClick={this.toggleDrawer}>
+                    <NotificationsNoneOutlinedIcon />
+                  </Button>
+                </div>
+                {!editorMode && !viewingTicket && ticketDashboard}
+                {editorMode && !viewingTicket && (
+                  <NewTicketEditor
+                    save={this.handleCreateNewTicket}
+                    cancel={() => this.toggleNewTicketEditor(false)}
+                  />
+                )}
+                {viewingTicket && ticeketDiscussion}
               </div>
-              {!editorMode && !viewingTicket && ticketDashboard}
-              {editorMode && !viewingTicket && (
-                <NewTicketEditor
-                  save={this.handleCreateNewTicket}
-                  cancel={() => this.toggleNewTicketEditor(false)}
-                />
-              )}
-              {viewingTicket && ticeketDiscussion}
-            </div>
-          </LoadingOverlay>
-          <Drawer
-            anchor={"right"}
-            open={notificationDrawer}
-            PaperProps={{ style: { position: "absolute", zIndex: "5000" } }}
-            BackdropProps={{ style: { position: "absolute", zIndex: "5000" } }}
-            ModalProps={{
-              container: document.getElementById("ticket-shadow"),
-              style: { position: "absolute", zIndex: "5000" },
-            }}
-            variant="temporary"
-            onClose={this.toggleDrawer}
-          >
-            <List className="list">
-              {notifications &&
-                notifications.map((notification, index) => (
-                  <ListItem
-                    key={index}
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "flex-start",
-                    }}
-                  >
-                    <div>{notification.tag}</div>
-                    <div>{notification.heading}</div>
-                    <div>
-                      <Moment date={notification.createdAt} durationFromNow />
-                    </div>
-                    <div>{notification.content}</div>
-                    <hr></hr>
-                  </ListItem>
-                ))}
-            </List>
-          </Drawer>
-          <ToastContainer
-            draggable
-            rtl={false}
-            pauseOnHover
-            closeOnClick
-            autoClose={5000}
-            pauseOnFocusLoss
-            newestOnTop={false}
-            position="top-right"
-            hideProgressBar={false}
-          />
+            </LoadingOverlay>
+            <Drawer
+              anchor={"right"}
+              open={notificationDrawer}
+              PaperProps={{ style: { position: "absolute", zIndex: "5000" } }}
+              BackdropProps={{ style: { position: "absolute", zIndex: "5000" } }}
+              ModalProps={{
+                container: document.getElementById("ticket-shadow"),
+                style: { position: "absolute", zIndex: "5000" },
+              }}
+              variant="temporary"
+              onClose={this.toggleDrawer}
+            >
+              <List className="list">
+                {notifications &&
+                  notifications.map((notification, index) => (
+                    <ListItem
+                      key={index}
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "flex-start",
+                      }}
+                    >
+                      <div>{notification.tag}</div>
+                      <div>{notification.heading}</div>
+                      <div>
+                        <Moment date={notification.createdAt} durationFromNow />
+                      </div>
+                      <div>{notification.content}</div>
+                      <hr></hr>
+                    </ListItem>
+                  ))}
+              </List>
+            </Drawer>
+            <ToastContainer
+              draggable
+              rtl={false}
+              pauseOnHover
+              closeOnClick
+              autoClose={5000}
+              pauseOnFocusLoss
+              newestOnTop={false}
+              position="top-right"
+              hideProgressBar={false}
+            />
+          </div>
         </div>
-      </div>
+      </>
     );
   }
 }

@@ -168,7 +168,7 @@ class SignUpForm extends Component {
       <div className="signup-details">
         <Form className={useStyles.root} onSubmit={this.onSubmit}>
           <Row>
-            <Col>
+            <Col xs={12} md={6}>
               <Form.Group>
                 <Form.Label>First Name</Form.Label>
                 <Form.Control
@@ -181,7 +181,7 @@ class SignUpForm extends Component {
                 />
               </Form.Group>
             </Col>
-            <Col>
+            <Col xs={12} md={6}>
               <Form.Group>
                 <Form.Label>Last Name</Form.Label>
                 <Form.Control
@@ -196,7 +196,7 @@ class SignUpForm extends Component {
             </Col>
           </Row>
           <Row>
-            <Col>
+            <Col xs={12} md={6}>
               <Form.Group>
                 <Form.Label>Email</Form.Label>
                 <Form.Control
@@ -214,7 +214,7 @@ class SignUpForm extends Component {
                 </ul>
               </Form.Group>
             </Col>
-            <Col>
+            <Col xs={12} md={6}>
               <Form.Group>
                 <Form.Label>Phone Number</Form.Label>
                 <Form.Control
@@ -251,7 +251,7 @@ class SignUpForm extends Component {
           </Form.Group>
 
           <Row>
-            <Col>
+            <Col xs={12} md={6}>
               <Form.Group>
                 <Form.Label>Password</Form.Label>
                 <Form.Control
@@ -271,7 +271,7 @@ class SignUpForm extends Component {
                 </li>
               </ul>
             </Col>
-            <Col>
+            <Col xs={12} md={6}>
               <Form.Group>
                 <Form.Label>Confirm Password</Form.Label>
                 <Form.Control
@@ -302,7 +302,6 @@ class SignUpForm extends Component {
           </Row>
           <div className="cta-signup">
             <Button
-              className="signupbtn"
               type="submit"
               variant="primary"
               color="primary"

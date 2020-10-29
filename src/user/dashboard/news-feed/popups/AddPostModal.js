@@ -82,7 +82,7 @@ const AddPostModal = (props) => {
           </span>
         </div>
         {type === "Write" ? (
-          <Form className="modal__form" style={{ marginTop: "-20px" }}>
+          <Form className="modal__form">
             <Form.Row className="modal__row">
               <Form.Group
                 as={Col}
@@ -157,7 +157,7 @@ const AddPostModal = (props) => {
           <></>
         )}
         {type === "Preview" ? (
-          <Form className="modal__form" style={{ marginTop: "-20px" }}>
+          <Form className="modal__form">
             <Form.Row className="modal__row">
               <Form.Group
                 as={Col}

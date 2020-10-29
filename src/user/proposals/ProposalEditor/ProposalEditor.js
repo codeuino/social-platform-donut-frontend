@@ -10,14 +10,14 @@ class ProposalEditor extends Component {
   }
   render() {
     return (
-      <div className="editor">
-        <div className="editor__navigation">
-          <Navigation dashboard={this.state.dashboard} />
+      <>
+        <Navigation dashboard={this.state.dashboard} />
+        <div className="editor">
+          <div className="editor__content">
+            <EditorContent />
+          </div>
         </div>
-        <div className="editor__content">
-          <EditorContent />
-        </div>
-      </div>
+      </>
     );
   }
 }

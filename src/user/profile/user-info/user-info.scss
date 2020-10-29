@@ -125,3 +125,26 @@
   }
 }
 
+
+@media (min-width: 320px) and (max-width: 1024px){
+  .user-detail {
+    padding: 5px;
+    .user-image {
+      text-align: center;
+      margin: 0;
+      .edit-option {
+        .useredit {
+          border-radius: 100px;
+          font-size: 14px;
+        }
+      }
+      .user-pic {
+        display: inline-block;
+        .userpic {
+          width: 120px;
+          height: 120px;
+        }
+      }
+    }
+  }
+}

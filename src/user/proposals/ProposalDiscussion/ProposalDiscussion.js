@@ -10,14 +10,14 @@ class ProposalDiscussion extends Component {
   }
   render() {
     return (
-      <div className="discussion">
-        <div className="discussion__navigation">
-          <Navigation dashboard={this.state.dashboard} />
+      <>
+        <Navigation dashboard={this.state.dashboard} />
+        <div className="discussion">
+          <div className="discussion__content">
+            <DiscussionContent />
+          </div>
         </div>
-        <div className="discussion__content">
-          <DiscussionContent />
-        </div>
-      </div>
+      </>
     );
   }
 }

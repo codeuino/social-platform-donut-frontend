@@ -82,40 +82,37 @@ class Profile extends Component {
       pinnedPosts,
     } = this.state;
     return (
-      <div className="profile">
-        <div
-          className="navigation"
-          style={{
-            background: "#f5f5f5",
-          }}
-        >
-          <Navigation profile={this.state.profile}></Navigation>
-        </div>
-        <div className="news">
-          <div className="notify-user">
-            <UserInfo userProfile={userProfile} />
-            <Portfolio />
-          </div>
-          <div className="two">
-            <div className="posts-profile">
-              {/* <PinPosts 
-                all={all} 
-                userProjects={userProjects} 
-                userEvents={userEvents} 
-                userPosts={userPosts}
-                pinnedPosts={pinnedPosts}
-              /> */}
-              <ProfileFeed
-                all={all}
-                userProjects={userProjects}
-                userEvents={userEvents}
-                userPosts={userPosts}
-                pinnedPosts={pinnedPosts}
-              />
+      <>
+        <Navigation profile={this.state.profile}></Navigation>
+        <div className="profile">
+          <div className="news">
+            <div className="notify-user">
+              <UserInfo userProfile={userProfile} />
+              <div className="notify-user-portfolio">
+                <Portfolio />
+              </div>
+            </div>
+            <div className="two">
+              <div className="posts-profile">
+                {/* <PinPosts 
+                  all={all} 
+                  userProjects={userProjects} 
+                  userEvents={userEvents} 
+                  userPosts={userPosts}
+                  pinnedPosts={pinnedPosts}
+                /> */}
+                <ProfileFeed
+                  all={all}
+                  userProjects={userProjects}
+                  userEvents={userEvents}
+                  userPosts={userPosts}
+                  pinnedPosts={pinnedPosts}
+                />
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </>
     );
   }
 }

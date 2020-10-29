@@ -104,3 +104,28 @@
     }
   }
 }
+
+@media (min-width: 320px) and (max-width: 640px){
+  .profile_content {
+    .container{
+      .form {
+        .upload_img {
+          width: 50%;
+        }
+      }
+    }
+  }
+}
+
+
+@media (min-width: 641px) and (max-width: 1024px){
+  .profile_content {
+    .container{
+      .form {
+        .upload_img {
+          width: 33%;
+        }
+      }
+    }
+  }
+}

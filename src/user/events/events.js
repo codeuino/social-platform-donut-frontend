@@ -134,30 +134,32 @@ class Events extends Component {
     };
 
     let Events = allEvents?.map((Item, index) => (
-      <Grid item xs={6} sm={4} key={index} className="card__container">
+      <Grid item xs={12} sm={6} md={4} key={index} className="card__container">
         {Date.parse(Item.eventDate) >= Date.parse(new Date()) ? (
           <Card>
             <CardActions>
               <Grid container spacing={1}>
-                <Row>
-                  <Col xs={1}>
-                    {Item.isCancelled ? (
-                      <div className="cancelled">{""}</div>
-                    ) : (
-                      <div className="div-upcoming">{""}</div>
-                    )}
-                  </Col>
-                  <Col sm={3} xs={12}>
-                    <Moment className="div2" format="D" withTitle>
-                      {Item?.eventDate}
-                    </Moment>
-                  </Col>
-                  <Col sm={5} xs={12}>
-                    <div className="div3">
-                      <Moment format="ddd, MMM YYYY">{Item?.eventDate}</Moment>
-                    </div>
-                  </Col>
-                </Row>
+                <Grid item xs={12}>
+                  <Row>
+                    <Col sm={1}>
+                      {Item.isCancelled ? (
+                        <div className="cancelled">{""}</div>
+                      ) : (
+                        <div className="div-upcoming">{""}</div>
+                      )}
+                    </Col>
+                    <Col md={3} xs={5}>
+                      <Moment className="div2" format="D" withTitle>
+                        {Item?.eventDate}
+                      </Moment>
+                    </Col>
+                    <Col md={5} xs={5}>
+                      <div className="div3">
+                        <Moment format="ddd, MMM YYYY">{Item?.eventDate}</Moment>
+                      </div>
+                    </Col>
+                  </Row>
+                </Grid>
                 <div className="inside">
                   <Grid item xs={12}>
                     <p className="eventName">{Item?.eventName}</p>
@@ -205,25 +207,25 @@ class Events extends Component {
           <Card>
             <CardActions>
               <Grid container spacing={1}>
-                <Row>
-                  <Col xs={1}>
-                    {Item.isCancelled ? (
-                      <div className="cancelled">{""}</div>
-                    ) : (
-                      <div className="div-past">{""}</div>
-                    )}
-                  </Col>
-                  <Col sm={3} xs={12}>
-                    <Moment className="div2" format="D" withTitle>
-                      {Item?.eventDate}
-                    </Moment>
-                  </Col>
-                  <Col sm={5} xs={12}>
-                    <div className="div3">
-                      <Moment format="ddd, MMM YYYY">{Item?.eventDate}</Moment>
-                    </div>
-                  </Col>
-                </Row>
+                <Grid item xs={12}>
+                  <Row>
+                    <Col xs={1}>
+                      {Item.isCancelled ? (
+                        <div className="cancelled">{""}</div>
+                      ) : (
+                        <div className="div-past">{""}</div>
+                      )}
+                    </Col>
+                    <Col md={3} xs={3}>
+                      <Moment className="div2" format="D" withTitle>
+                        {Item?.eventDate}
+                      </Moment>
+                    </Col>
+                    <Col className="date" md={5} xs={7}>
+                        <Moment format="ddd, MMM YYYY">{Item?.eventDate}</Moment>
+                    </Col>
+                  </Row>
+                </Grid>
                 <div className="inside">
                   <Grid item xs={12}>
                     <p className="eventName">{Item.eventName}</p>
@@ -272,24 +274,24 @@ class Events extends Component {
     ));
 
     return (
-      <div className="organization">
-        <div className="navigation">
-          <Navigation event={this.state.event}></Navigation>
-        </div>
-        <div className="events">
-          <h1 className="event_header">All Events</h1>
-          <Grid container spacing={3}>
-            {Events}
-          </Grid>
+      <>
+        <Navigation event={this.state.event}></Navigation>
+        <div className="organization">
+          <div className="events">
+            <h1 className="event_header">All Events</h1>
+            <Grid container spacing={3}>
+              {Events}
+            </Grid>
 
-          <div className="event__pagination__container">
-            <Pagination
-              showSizeChanger
-              onShowSizeChange={this.onShowSizeChange}
-              defaultCurrent={1}
-              total={100}
-              onChange={this.handlePagination}
-            />
+            <div className="event__pagination__container">
+              <Pagination
+                showSizeChanger
+                onShowSizeChange={this.onShowSizeChange}
+                defaultCurrent={1}
+                total={allEvents.length || 0}
+                onChange={this.handlePagination}
+              />
+            </div>
           </div>
         </div>
         <Popups
@@ -309,7 +311,7 @@ class Events extends Component {
           eventId={this.state.eventId}
           eventInfo={this.state.singleEvent}
         />
-      </div>
+      </>
     );
   }
 }

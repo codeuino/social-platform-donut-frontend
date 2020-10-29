@@ -6,33 +6,38 @@
         border: solid 1px #dfe9f1;
         overflow: auto;
         margin-bottom: 5px;
-        .email-content {
+        .contact__content {
             display: flex;
             flex-direction: row;
-            justify-content: space-between;
+            margin-bottom: 1vh;
             .designation {
-                text-align: right;
                 color: rgba(0, 0, 0, 0.5);
-                font-weight: 650;
+                font-weight: bold;
             }
             .initial {
                 color: rgba(0, 0, 0, 0.5);
                 font-weight: 550;
+                flex: 1;
+            }
+            .data_container {
+                flex: 2;
+            }
+            .data {
+                display: block;
             }
             .hidden {
                 visibility: hidden;
             }
-            .email-info {
+            .contact__content__collection {
+                flex: 3;
+            }
+            .contact_item {
                 display: flex;
-                flex-direction: column;
-                .info {
-                    display: flex;
-                    flex-direction: row;
-                    .avatar {
-                        width: 25px;
-                        height: 25px;
-                        margin-right: 5px;
-                    }
+                padding: 0;
+                border: 0;
+                margin-bottom: 1rem;
+                div {
+                    margin-right: 10px;
                 }
             }
         }

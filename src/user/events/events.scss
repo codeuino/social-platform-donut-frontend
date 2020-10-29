@@ -3,16 +3,6 @@
   min-height: 100vh;
   height: auto;
   font-family: Muli, sans-serif;
-  .navigation {
-    background: #f5f5f5;
-    flex-grow: 1;
-    border-right: solid 1px #dfe9f1;
-    position: fixed;
-    top: 0px;
-    bottom: 0px;
-    left: 0px;
-    overflow-y: scroll;
-  }
   .events {
     padding: 20px;
     margin-top: 2vh;
@@ -31,9 +21,7 @@
     }
     .MuiCard-root {
       overflow: hidden;
-      height: 42vh;
     }
-
     .event__pagination__container {
       display: flex;
       flex-direction: row;
@@ -98,13 +86,13 @@
   font-size: 3rem;
 }
 
-.div3 {
+.date {
   background-color: #ffffff;
   width: auto;
   text-align: center;
   font-size: 1.45rem;
-  margin-left: 7vw;
-  margin-right: -12vw;
+  display: flex;
+  align-items: center;
   .day {
     font-weight: 25px;
   }
@@ -114,6 +102,7 @@
 }
 
 .inside {
+  width: 100%;
   margin-right: 2vw;
   margin-left: 2vw;
 }
@@ -161,5 +150,20 @@
     text-decoration: underline;
     cursor: pointer;
     color: #1a73ed;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 1024px){
+  .organization {
+    margin-left: 0;
+    .events {
+      margin: 0;
+      .event_header {
+        text-align: center;
+      }
+      .card__container {
+        max-width: 100%;
+      }
+    }
   }
 }

@@ -11,6 +11,9 @@
         max-height: 55px;
         max-width: 1500px;
       }
+      .article__row, .content__row{
+        width: 100%;
+      }
     }
     .cta {
       // padding: 5px 8px;
@@ -377,6 +380,7 @@
   color: #ff0000;
 }
 .news__feed__container {
+  padding: 0 30px;
   .news-feed {
     .post-article {
       .article {
@@ -456,9 +460,15 @@
 }
 .tabs__container {
   width: 140%;
-  margin-left: 27px;
+  // margin-left: 27px;
   margin-top: 10px;
   .nav__tab {
+      width: 100%;
+      padding-right: 15px;
+      padding-left: 15px;
+      margin-right: auto;
+      margin-left: auto;
+      margin-top: 2vh;
     .nav__list__container {
       display: flex;
       justify-content: center;
@@ -531,4 +541,57 @@
 }
 .post .main h2 {
   cursor: pointer;
+}
+
+@media (min-width: 320px) and (max-width: 1024px){
+  .news__feed__container {
+    margin-bottom: 0px;
+    padding: 0px;
+    .post {
+      width: 100vw;
+      margin-bottom: 17px;
+
+      [class^="col-"] {
+        .content__row {
+          width: 100vw;
+          margin: 0 auto;
+        }
+      }
+    }
+    .news-feed {
+      width: 100vw;
+      padding: 0;
+      .post-article {
+        height: auto;
+        .article {
+          justify-content: center;
+          margin-top: 20px;
+        }
+      }
+    }
+    .cta {
+      padding-top: 10px;
+      text-align: center;
+      button {
+        padding: 0 1rem;
+      }
+    }
+  }
+  .tabs__container {
+    width: 100%;
+    margin: 0;
+    .nav__tab {
+      padding: 0;
+      .nav__list__container {
+        justify-content: space-between;
+        padding: 15px 10px 0px 10px;
+        margin-top: 10px;
+        margin-bottom: 0px;
+        .nav__single__tab {
+          padding: 0;
+          margin: 0;
+        }
+      }
+    }
+  }
 }

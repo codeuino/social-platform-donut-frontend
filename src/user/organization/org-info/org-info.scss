@@ -120,3 +120,29 @@
 .org-followbtn {
   margin: 10px;
 }
+
+@media (min-width: 320px) and (max-width: 1024px){
+  
+  .org-details {
+    width: 100%;
+    margin: auto 2vw;
+    .org-image {
+      width: 100%;
+      flex: 1;
+      .org-pic {
+        .orgpic {
+          width: 120px;
+          height: 120px;
+        }
+      }
+    }
+    .org-data {
+      width: 100%;
+      flex: 2;
+      .fa_icon__container {
+        margin-top: 0;
+      }
+    }
+  }
+
+}

@@ -1,10 +1,14 @@
 .settings__right__container {
   display: flex;
  .settings__left__nav {
-  max-width: 17%;
-  height: 50%;
   margin-top: 38px;
   margin-left: 10px;
+  .settings__left__nav__container {
+    display: block;
+  }
+  .settings__left__nav__accordion {
+    display: none;
+  }
  }
  .settings__right__content {
   width: 80vw;
@@ -40,4 +44,36 @@
     }
   }
  }
+}
+
+@media (min-width: 320px) and (max-width: 1024px){
+  .settings__right__container {
+    flex-flow: column;
+    padding: 2.5vh 2.5vw;
+   .settings__left__nav {
+     flex: 1;
+     margin: 0;
+     padding: 0;
+     .settings__left__nav__container {
+      display: none;
+    }
+    .settings__left__nav__accordion {
+      display: block;
+    }
+   }
+   .settings__right__content {
+    flex: 3;
+    margin: 4vh 0;
+    padding: 0;
+    width: 100%;
+    max-width: 100%;
+    .right__setting__option__content {
+      width: 100%;
+      .row {
+        margin: 0;
+        padding: 0;
+      }
+    }
+   }
+  }
 }

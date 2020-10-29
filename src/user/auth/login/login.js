@@ -8,6 +8,7 @@ import GoogleLogin from "../../../assets/images/icons8-google-48.png";
 import { FaGithub } from 'react-icons/fa'
 import { connect } from 'react-redux';
 import { getLoginOptions } from '../../../actions/orgAction'
+import { HashLink } from 'react-router-hash-link';
 import "./login.scss";
 
 class Login extends Component {
@@ -42,20 +43,26 @@ class Login extends Component {
     const { loginOptions } = this.state
     return (
       <div className="login-page">
-        <div className="welcome-text">
-          <div className="logo">
-            <DonutTitle />
+        <div className="container-wrapper">
+          <div className="section-home">
+          <div className="welcome-text">
+            <div className="logo">
+              <DonutTitle />
+            </div>
+            <div className="tagline">
+              <h1>One place for meeting everyone.</h1>
+            </div>
+            <div className="description">
+              <p>
+                An Open Source Social networking bridge between Developers,
+                Organisations and Open Source aspirants
+              </p>
+            </div>
+            <div className="login-btn">
+              <HashLink smooth to="#login">Sign In</HashLink>
+            </div>
           </div>
-          <h1>One place for meeting everyone.</h1>
-          <p>
-            An Open Source Social networking bridge between Developers,
-            Organisations and Open Source aspirants
-          </p>
-          <div className="extra-donuts">
-            <img src={multipleDonuts} alt="donut logo" />
-          </div>
-        </div>
-        <div className="user-details">
+          <div id="login" className="user-details">
           {/* <div className="background-donut">
             <img src={backGroundDonut} alt="donut logo" />
           </div> */}
@@ -139,6 +146,11 @@ class Login extends Component {
               )}
             </p>
           </div>
+        </div>
+          </div>
+        </div>
+        <div className="extra-donuts">
+              <img src={multipleDonuts} alt="donut logo" />
         </div>
       </div>
     );

@@ -1,24 +1,9 @@
-.overall_container{
-  display: flex;
-  .main_navigation {
-    left: -1px;
-    top: -1px;
-    height: 100vh;
-    border: 1px solid #CCCCCC;
-    box-sizing: border-box;
-  }
-  .user_activity_view {
-    margin-top: 35px;
-    margin-left: 15vw;
-     margin-left: auto;
-     margin-right: auto;
-    .main_section {
+ .main_section {
+      margin: 35px auto auto 15vw;
       display: flex;
       flex-direction: row;
       justify-items: center;
       flex-wrap: wrap;
-      margin-top: -1.3em;
-      margin-left: -2vw;
       .left_nav {
         max-width: 20%;
         height: 50%;
@@ -74,45 +59,67 @@
         }
       }
     }
-  }
-}
 // mobile 
+.activity_accordion {
+  display: none;
+}
+
 @media screen and (max-width: 768px) {
-  .overall_container{
-    .org_settings_view {
-     .main_section {
-       .left_nav {
-         .navigation {
-           .list-group {
-             .link {
-               display: none;
-             }
-             .header_text {
-               font-size: 10px;
-             }
-           }
-         }
-       }
-     }
+.main_section {
+  width: 100%;
+  margin: 0;
+  padding: 2.5vh 2.5vw;
+  flex-direction: column;
+  .left_nav {
+    width: 100%;
+    max-width: 100%;
+    margin: 10px auto;
+    .activity_accordion {
+      display: block;
+    }
+    .left_nav_container {
+      display: none;
+    }
+    .navigation {
+      .list-group {
+        .link {
+          display: none;
+        }
+        .header_text {
+          font-size: 10px;
+        }
+      }
     }
   }
 }
+}
 
 // tablet 
-@media screen and (min-width: 768px) and (max-width: 1023px) {
-  .overall_container {
-    .org_settings_view {
-      .main_section {
-        .left_nav {
-          .navigation {
-            .list-group {
-              .link {
-                font-size: 5px;
-              }
-            }
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+
+  .main_section {
+    width: 100%;
+    margin: 0;
+    padding: 2.5vh 2.5vw;
+    flex-direction: column;
+    .left_nav {
+      width: 100%;
+      max-width: 100%;
+      margin: 10px auto;
+      .activity_accordion {
+        display: block;
+      }
+      .left_nav_container {
+        display: none;
+      }
+      .navigation {
+        .list-group {
+          .link {
+            font-size: 5px;
           }
         }
       }
     }
   }
 }
+

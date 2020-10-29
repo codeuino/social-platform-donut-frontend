@@ -1,3 +1,6 @@
+.project {
+  margin-left: 13vw;
+}
 .container {
   margin-top: 2vh;
   .back{
@@ -10,10 +13,7 @@
 
 .proj_img{
   height:15rem;
-  margin-left: 1vw;
-  max-width: 23vw;
-  max-height: 42vh;
-  height: 39vh;
+  max-width: 100%;
 }
 
 .project-info {
@@ -48,8 +48,8 @@
     font-weight: 500;
     margin: 4px 0;
     padding: 0;
-    text-align: justify;
-    max-width: 80%;
+    text-align: left;
+    max-width: 100%
   }
 
   .place {
@@ -114,3 +114,12 @@
   margin-bottom: 1vh;
 }
 
+@media (min-width: 320px) and (max-width: 1024px){
+  .project {
+    margin: 0;
+    width: 100vw;
+    .project__row {
+      margin: 0;
+    }
+  }
+}

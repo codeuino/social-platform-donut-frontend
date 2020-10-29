@@ -1,16 +1,24 @@
-.dashboard {
+.proposal_dashboard {
   display: flex;
   min-height: 100vh;
   height: auto;
   font-family: Muli, sans-serif;
-  .dashboard__navigation {
-    flex: 1;
-    border-right: solid 1px #dfe9f1;
-  }
-  .dashboard__content {
+  margin-left: 13%;
+  .proposal_dashboard__content {
     flex: 4;
   }
-  .dashboard__rightpanel {
+  .proposal_dashboard__rightpanel {
     flex: 2;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 1024px){
+  .proposal_dashboard {
+    padding: 2.5vh 2.5vw;
+    margin-left: 0;
+    flex-direction: column;
+    .proposal_dashboard__content, .proposal_dashboard__rightpanel {
+      flex: 1;
+    }
   }
 }

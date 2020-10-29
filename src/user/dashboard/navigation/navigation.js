@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { ListGroup, Button } from "react-bootstrap";
+import { ListGroup, Button, Nav, Navbar, Row, Col } from "react-bootstrap";
 import { NavLink, Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import "./navigation.scss";
@@ -8,27 +8,58 @@ import logo from "../../../assets/svgs/logout.svg";
 import Plus from "../../../assets/svgs/NavigationIcons/Plus.svg";
 import JitsiMeet from "../../../assets/svgs/NavigationIcons/JitsiMeet.svg";
 import { Info } from "../../integrations/NameForm";
-
+import Backdrop from '../../../utils/Backdrop';  
 import {
   DonutTitleSmall,
   DonutIconSmall,
 } from "../../../donutTitle/donutTitle";
-import { Desktop, Mobile } from "../../../utils/breakpoints";
 import SVGIcon from "../../../utils/SVGIcon";
 import { connect } from "react-redux";
 
 class Navigation extends Component {
-  state = {
-    logout: false,
-    org: false,
-    userId: "",
-  };
-
+  constructor(props) {
+    super(props);
+    this.state = {
+      logout: false,
+      org: false,
+      userId: "",
+      sidebar: false
+    };
+    this.setWrapperRef = this.setWrapperRef.bind(this);
+    this.setMenuRef = this.setMenuRef.bind(this);
+    this.handleClickSidebarMenu = this.handleClickSidebarMenu.bind(this);
+  }
+  
   componentWillReceiveProps(nextProps) {
     console.log("nextProps from navigation", nextProps);
     this.setState({
       userId: nextProps.user.userProfile?._id,
     });
+  }
+  componentDidMount() {
+    document.addEventListener('click', this.handleClickSidebarMenu);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('click', this.handleClickSidebarMenu);
+  }
+
+  setWrapperRef(node) {
+    this.wrapperRef = node;
+  }
+
+  setMenuRef(node) {
+    this.menuRef = node;
+  }
+
+  handleClickSidebarMenu(event) {
+    if (this.wrapperRef && !this.wrapperRef.contains(event.target) && this.menuRef && !this.menuRef.contains(event.target)) {
+      this.setState({
+        sidebar: false,
+      })
+    } else {
+      return;
+    }
   }
 
   render() {
@@ -76,10 +107,35 @@ class Navigation extends Component {
       position: "fixed",
       bottom: "2em",
     };
+
+    const handleSidebarClick = () => {
+      this.setState({
+        sidebar: true,
+      })
+    }
     const { logout } = this.props;
     return (
-      <div className="main-navigation">
-        <Desktop>
+      <>
+        <Backdrop show={this.state.sidebar} />
+        <div className="nav-container">
+          <Navbar className="nav-bar" sticky="top" expand="lg">
+            <Nav className="nav-collection">
+              <Row className="nav-row">
+                <Col xs={4} >
+                  <div ref={this.setMenuRef} className="icon-container" onClick={handleSidebarClick}>
+                    <SVGIcon name="DashboardMenu" />
+                  </div>
+                </Col>
+                <Col xs={8}>
+                  <div className="donut-title">
+                    <DonutTitleSmall />
+                  </div>
+                </Col>
+              </Row>
+            </Nav>
+          </Navbar>
+        </div>
+        <div ref={this.setWrapperRef} className={this.state.sidebar?"navigation":"navigation hide-nav"}>
           <ListGroup className="list-group">
             <ListGroup.Item style={{ marginLeft: "15px" }}>
               <NavLink to="/dashboard">
@@ -121,18 +177,17 @@ class Navigation extends Component {
               className={this.props.proj ? "active" : "inactive"}
               link="/projects"
             />
-
+            <ListItem
+              name="Tickets"
+              className={this.props.ticket ? "active" : "inactive"}
+              link="/tickets"
+            />
             <ListItem
               name="Account"
               className={this.props.profile ? "active" : "inactive"}
               link={`/profile/${
                 this.state.userId || this.props.user.userProfile._id
               }`}
-            />
-            <ListItem
-              name="Tickets"
-              className={this.props.ticket ? "active" : "inactive"}
-              link="/tickets"
             />
             <ListItem
               name="Settings"
@@ -180,109 +235,8 @@ class Navigation extends Component {
               <div className="codeuino-text">CODEUINO</div>
             </ListGroup.Item>
           </ListGroup>
-        </Desktop>
-
-        <Mobile>
-          <ListGroup className="list-group">
-            <ListGroup.Item>
-              <Link to="/dashboard">
-                <div className="donut-title">
-                  <DonutIconSmall />
-                </div>
-              </Link>
-            </ListGroup.Item>
-            <ListItem
-              name="Dashboard"
-              className={this.props.dashboard ? "active" : "inactive"}
-              link="/dashboard"
-              isMobile="true"
-            />
-            {/* <ListItem
-              name="Pinned Posts"
-              className={this.props.posts ? "active" : "inactive"}
-              link="/pinned-posts"
-              isMobile="true"
-            /> */}
-            <ListItem
-              name="Organization"
-              className={this.props.org ? "active" : "inactive"}
-              link="/organization"
-              isMobile="true"
-            />
-            <ListItem
-              name="Wikis"
-              className={this.props.wikis ? "active" : "inactive"}
-              link="/wikis"
-              isMobile="true"
-            />
-            <ListItem
-              name="Events"
-              className={this.props.event ? "active" : "inactive"}
-              link="/events"
-              isMobile="true"
-            />
-
-            <ListItem
-              name="Projects"
-              className={this.props.proj ? "active" : "inactive"}
-              link="/projects"
-              isMobile="true"
-            />
-
-            <ListItem
-              name="Account"
-              className={this.props.profile ? "active" : "inactive"}
-              link="/profile"
-              isMobile="true"
-            />
-            <ListItem
-              name="Tickets"
-              className={this.props.ticket ? "active" : "inactive"}
-              link="/tickets"
-              isMobile="true"
-            />
-            <ListItem
-              name="Settings"
-              className={this.props.settings ? "active" : "inactive"}
-              link="/settings"
-              isMobile="true"
-            />
-
-            <ListGroup.Item
-              style={divStyle2}
-              className={logout ? "active" : "inactive"}
-            >
-              <Button
-                variant="link"
-                size="sm"
-                className="log-button link"
-                onClick={() => this.setState({ logout: true })}
-              >
-                <img className="logout" src={logo} alt="L"></img>
-              </Button>
-              <Logout show={this.state.logout} handleClose={cancel} />
-            </ListGroup.Item>
-
-            <ListGroup.Item>
-              <div
-                className="jitsi"
-                onClick={() => this.setState({ open: true })}
-              >
-                <img src={JitsiMeet} alt="jitsi" className="jitsi-meet link" />
-              </div>
-              {this.state.open ? (
-                <Info show={this.state.open} onHide={close} />
-              ) : null}
-            </ListGroup.Item>
-            <ListItem
-              className={this.props.orgSettings ? "active" : "inactive"}
-              link="/org-settings"
-              name="Org settings"
-              isMobile={true}
-            />
-          </ListGroup>
-        </Mobile>
-      </div>
+        </div>
+      </>
     );
   }
 }
