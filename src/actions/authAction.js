@@ -1,12 +1,47 @@
 import { SET_CURRENT_USER, GET_USER_PROFILE, PASSWORD_SUCCESSFULLY_CHANGED, PASSWORD_CHANGE_REQUEST_SUCCESS, SET_ADMIN } from './types';
 import axios from 'axios';
 import { setAuthToken } from '../utils/setAuthToken';
-import jwt_decode from 'jwt-decode';
 import { errorHandler } from '../utils/errorHandler';
 import { setRequestStatus } from '../utils/setRequestStatus';
 import { BASE_URL } from './baseApi';
 import { customErrorHandler } from '../utils/customErrorHandler'
 let forgotPasswordToken = "";
+
+// load user
+export const loadUser = () => async(dispatch) => {
+  try {
+    const res = await axios.get(`${BASE_URL}/user/load_user`);
+
+    if(res.status === 200){
+      dispatch(setRequestStatus(true));
+      localStorage.setItem('userId', res.data.user._id)
+
+      dispatch(setCurrentUser(Object.assign({}, res.data.user._id)));
+
+      // Update user name in localStorage
+      localStorage.setItem('username', `${res.data.user.name.firstName} ${res.data.user.name.lastName}`)
+
+      // update user role in localStorage
+      localStorage.setItem('admin', res.data.user.isAdmin)
+
+      // update user role in localStorage
+      localStorage.setItem('ticketModerator', res.data.user.isTicketsModerator)
+
+      // store orgId in localStorage
+      localStorage.setItem('orgId', res.data.user.orgId);
+
+      // if user is admin update admin in store 
+      dispatch({
+        type: SET_ADMIN,
+        payload: res.data.user.isAdmin
+      })
+      // window.location.href='/dashboard'
+    }
+  } catch(error) {
+    console.log('user loading', error)
+    dispatch(errorHandler(error));
+}
+}
 
 // to register user 
 export const registerUser = (userInfo, history) => async (dispatch) => {
@@ -39,18 +74,11 @@ export const loginUser = (userInfo, history) => async (dispatch) => {
     dispatch(setRequestStatus(false));
     if(res.status === 200){
 
-      const token = res.data.token;
       dispatch(setRequestStatus(true));
-      
-      localStorage.setItem("jwtToken", (token));
-      setAuthToken(token);
-      
-      // update state with user
-      const decodedData = await jwt_decode(token);
       console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! PRINTING RES.DATA.USER !!!!!!!!!!!!!!1");
       console.log(res.data.user);
       localStorage.setItem('userId', res.data.user._id)
-      dispatch(setCurrentUser(decodedData));
+      dispatch(setCurrentUser(res.data.user._id));
 
       // Update user name in localStorage
       localStorage.setItem('username', `${res.data.user.name.firstName} ${res.data.user.name.lastName}`)

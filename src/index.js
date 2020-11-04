@@ -3,10 +3,13 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
+import axios from 'axios';
 
 if (process.env.NODE_ENV !== "development") {
   console.log = () => {};
 }
+
+axios.defaults.withCredentials = true;
 
 ReactDOM.render(<App />, document.getElementById("root"));
 

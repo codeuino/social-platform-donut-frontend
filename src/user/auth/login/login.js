@@ -86,7 +86,7 @@ class Login extends Component {
               {Boolean(loginOptions?.google === true) ? (
                 <Col className = "button-column">
                 <a
-                  href="http://localhost:5000/auth/google"
+                  href="http://localhost:5000/user/auth/google"
                   style={{ padding: "1vh" }}
                 >
                   <Button
