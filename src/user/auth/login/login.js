@@ -106,7 +106,7 @@ class Login extends Component {
               {Boolean(loginOptions?.github === true) ? (
                 <Col className="button-column" >
                 <a
-                  href="http://localhost:5000/auth/google"
+                  href="http://localhost:5000/user/auth/github"
                   style={{ padding: "1vh" }}
                 >
                   <Button
