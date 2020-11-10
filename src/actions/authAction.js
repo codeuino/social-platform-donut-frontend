@@ -16,7 +16,7 @@ export const loadUser = () => async(dispatch) => {
       dispatch(setRequestStatus(true));
       localStorage.setItem('userId', res.data.user._id)
 
-      dispatch(setCurrentUser(Object.assign({}, res.data.user._id)));
+      dispatch(setCurrentUser(res.data.user._id));
 
       // Update user name in localStorage
       localStorage.setItem('username', `${res.data.user.name.firstName} ${res.data.user.name.lastName}`)

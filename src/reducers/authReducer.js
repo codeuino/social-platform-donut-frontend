@@ -8,7 +8,7 @@ const initialState = {
   isRemoved: false,
   resetPassReq: null,
   passUpdated: false,
-  user: {},
+  user: null,
   response_msg: "",
 };
 
@@ -17,7 +17,7 @@ export default (state = initialState, action) => {
     case SET_CURRENT_USER: {
       return {
         ...state,
-        isAuthenticated: action.payload.length !== 0,
+        isAuthenticated: Boolean(action.payload.length !== 0 && action.payload!==undefined && typeof action.payload === 'string'),
         user: action.payload
       }
     }
