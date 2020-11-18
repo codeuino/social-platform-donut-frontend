@@ -7,7 +7,6 @@ import { BASE_URL } from './baseApi';
 import { customErrorHandler } from '../utils/customErrorHandler'
 let forgotPasswordToken = "";
 
-// load user
 export const loadUser = () => async(dispatch) => {
   try {
     const res = await axios.get(`${BASE_URL}/user/load_user`);
@@ -16,29 +15,22 @@ export const loadUser = () => async(dispatch) => {
       dispatch(setRequestStatus(true));
       localStorage.setItem('userId', res.data.user._id)
 
-      dispatch(setCurrentUser(res.data.user._id));
+      dispatch(setCurrentUser(res.data.user._id))
 
-      // Update user name in localStorage
+      // Update user name, role, orgId in localStorage
       localStorage.setItem('username', `${res.data.user.name.firstName} ${res.data.user.name.lastName}`)
-
-      // update user role in localStorage
       localStorage.setItem('admin', res.data.user.isAdmin)
-
-      // update user role in localStorage
       localStorage.setItem('ticketModerator', res.data.user.isTicketsModerator)
-
-      // store orgId in localStorage
-      localStorage.setItem('orgId', res.data.user.orgId);
+      localStorage.setItem('orgId', res.data.user.orgId)
 
       // if user is admin update admin in store 
       dispatch({
         type: SET_ADMIN,
         payload: res.data.user.isAdmin
       })
-      // window.location.href='/dashboard'
     }
   } catch(error) {
-    console.log('user loading', error)
+    console.log('error while loading user from localstorage', error)
     dispatch(errorHandler(error));
 }
 }
@@ -75,21 +67,13 @@ export const loginUser = (userInfo, history) => async (dispatch) => {
     if(res.status === 200){
 
       dispatch(setRequestStatus(true));
-      console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! PRINTING RES.DATA.USER !!!!!!!!!!!!!!1");
-      console.log(res.data.user);
       localStorage.setItem('userId', res.data.user._id)
       dispatch(setCurrentUser(res.data.user._id));
 
-      // Update user name in localStorage
+      // Update user name, role, orgId in localStorage
       localStorage.setItem('username', `${res.data.user.name.firstName} ${res.data.user.name.lastName}`)
-
-      // update user role in localStorage
       localStorage.setItem('admin', res.data.user.isAdmin)
-
-      // update user role in localStorage
       localStorage.setItem('ticketModerator', res.data.user.isTicketsModerator)
-
-      // store orgId in localStorage
       localStorage.setItem('orgId', res.data.user.orgId);
 
       // if user is admin update admin in store 
