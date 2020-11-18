@@ -1,8 +1,8 @@
 const customStyles = {
   table: {
     style: {
-      width: "87vw",
-      height: "60vh",
+      width: "auto",
+      height: "auto",
     },
   },
   header: {

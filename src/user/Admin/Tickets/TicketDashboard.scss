@@ -52,6 +52,9 @@
       .ticket-content {
         flex: 10;
       }
+      .discussion {
+        margin-left: 0;
+      }
     }
   }
 }
@@ -91,7 +94,17 @@
 @media (min-width: 320px) and (max-width: 1024px){
   .ticket{ 
     .ticket-details {
+      width: 100%;
       margin-left: 0;
+      padding: 2.5vh 2.5vw;
+      .ticket-description {
+        .discussion_container {
+          flex-direction: column;
+        }
+        .ticket-content {
+          width: 100%;
+        }
+      }
     }
   }
 }

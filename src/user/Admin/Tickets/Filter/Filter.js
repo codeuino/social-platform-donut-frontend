@@ -346,7 +346,7 @@ class Filter extends Component {
             onHide={this.toggleModal}
           >
             <LoadingOverlay
-              className="discussion"
+              className="discussion_container"
               active={!!this.state.spinner}
               text={this.state.spinner}
               spinner={<ClockLoader color={"#1A73E8"} />}

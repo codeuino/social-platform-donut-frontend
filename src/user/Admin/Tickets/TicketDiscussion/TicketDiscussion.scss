@@ -1,4 +1,4 @@
-.discussion {
+.discussion_container {
   display: flex;
   ._loading_overlay_wrapper {
     height: 100%;
@@ -50,22 +50,13 @@
       }
     }
   }
-  .navigation {
-    background: #f5f5f5;
-    flex: 1;
-    border-right: solid 1px #dfe9f1;
-    position: fixed;
-    top: 0px;
-    bottom: 0px;
-    left: 0px;
-    overflow-y: scroll;
-  }
   .ticket-discussion {
     flex: 4;
     border-right: solid 1px #dfe9f1;
     .discussion {
       display: flex;
       flex-direction: column;
+      margin-left: 0;
       .discussion-title {
         display: flex;
         flex-grow: 0;
@@ -307,6 +298,32 @@
           }
         }
       }
+    }
+  }
+}
+
+
+@media (min-width: 320px) and (max-width: 1024px){
+  .discussion_container {
+    .ticket-discussion {
+      border-right: none;
+      .discussion {
+        flex-direction: column;
+        #discussion-editor { 
+          margin: 2rem auto;
+        }
+        .discussion-title {
+          .ticket-title {
+            padding: 0;
+          } 
+        }
+        .single-discussion {
+          margin: 0;
+        }
+      }
+    }
+    .ticket-info {
+      margin-bottom:1rem;
     }
   }
 }
