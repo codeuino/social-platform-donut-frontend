@@ -12,6 +12,7 @@ import ReactGA from "react-ga";
 function App() {
   useEffect(() => {
     ReactGA.initialize("UA-173245995-1");
+    setAuthToken()
   });
   return (
     <Provider store={store}>
