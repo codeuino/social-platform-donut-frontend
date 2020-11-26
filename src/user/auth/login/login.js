@@ -10,6 +10,10 @@ import { connect } from 'react-redux';
 import { getLoginOptions } from '../../../actions/orgAction'
 import { HashLink } from 'react-router-hash-link';
 import "./login.scss";
+import { BASE_URL } from '../../../actions/baseApi'
+
+const GITHUB_OAUTH_URL =  BASE_URL + '/user/auth/github' || "http://localhost:5000/user/auth/github"
+const GOOGLE_OAUTH_URL =  BASE_URL + '/user/auth/google' || "http://localhost:5000/user/auth/google"
 
 class Login extends Component {
   constructor(props) {
@@ -86,7 +90,7 @@ class Login extends Component {
               {Boolean(loginOptions?.google === true) ? (
                 <Col className = "button-column">
                 <a
-                  href="http://localhost:5000/auth/google"
+                  href={GOOGLE_OAUTH_URL}
                   style={{ padding: "1vh" }}
                 >
                   <Button
@@ -106,7 +110,7 @@ class Login extends Component {
               {Boolean(loginOptions?.github === true) ? (
                 <Col className="button-column" >
                 <a
-                  href="http://localhost:5000/auth/google"
+                  href={GITHUB_OAUTH_URL}
                   style={{ padding: "1vh" }}
                 >
                   <Button

@@ -1,5 +1,5 @@
-import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import React, {useEffect} from "react";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import Login from "./user/auth/login/login";
 import Dashboard from "./user/dashboard/dashboard";
 import PinnedPosts from "./user/pinned-posts/pinned-posts";
@@ -25,44 +25,58 @@ import Activity from "./user/Activity/Activity";
 import IntegrationsPage from "./user/integrations/IntegrationsPage/IntegrationsPage";
 import UserIntegrations from "./user/integrations/UserIntegrations/UserIntegrations";
 import TicketDashboard from "../src/user/Admin/Tickets/TicketDashboard";
+import { loadUser } from './actions/authAction';
+import { connect } from 'react-redux';
 
-const Router = () => (
-  <BrowserRouter>
-    <Switch>
-      <Route exact path="/" component={Login} />
-      <Route exact path="/login" component={Login} />
-      <Route exact path="/maintenance" component={Maintenance}></Route>
-      <PrivateRoute exact path="/dashboard" component={Dashboard} />
-      <PrivateRoute exact path="/pinned-posts" component={PinnedPosts} />
-      <PrivateRoute exact path="/profile/:id" component={Profile} />
-      <PrivateRoute exact path="/:id/proj-info" component={ProjInfo} />
-      <PrivateRoute exact path="/organization" component={Organization} />
-      <PrivateRoute exact path="/wikis" component={Wikis} />
-      <PrivateRoute exact path="/settings" component={Settings} />
-      <PrivateRoute exact path="/projects" component={Projects} />
-      <PrivateRoute exact path="/events" component={Events} />
-      <PrivateRoute exact path="/proposal" component={UserProposalDashboard} />
-      <PrivateRoute
-        exact
-        path="/proposaldiscussion"
-        component={ProposalDiscussion}
-      />
-      <PrivateRoute exact path="/proposaleditor" component={ProposalEditor} />
-      <PrivateRoute exact path="/setup" component={Setup} />
-      <AdminRoute exact path="/org-settings" component={CommunitySetting} />
-      <AdminRoute exact path="/activity/:userId" component={Activity} />
-      <PrivateRoute exact path="/insight" component={Insight} />
-      <PrivateRoute exact path="/admin" component={Admin} />
-      <PrivateRoute exact path="/integrations" component={IntegrationsPage} />
-      <PrivateRoute
-        exact
-        path="/userintegrations"
-        component={UserIntegrations}
-      />
-      <PrivateRoute exact path="/tickets" component={TicketDashboard} />
-      <Route component={NotFound} />
-    </Switch>
-  </BrowserRouter>
-);
+const Router = ({loadUser, auth}) => {
+  useEffect(() => {
+    loadUser();
+  }, [])
+  return (
+    <BrowserRouter>
+        {auth && auth.isAuthenticated?<Redirect to="/dashboard"/>:null}
+      <Switch>
+        <Route exact path="/" component={Login} />
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/maintenance" component={Maintenance}></Route>
+        <PrivateRoute exact path="/dashboard" component={Dashboard} />
+        <PrivateRoute exact path="/pinned-posts" component={PinnedPosts} />
+        <PrivateRoute exact path="/profile/:id" component={Profile} />
+        <PrivateRoute exact path="/:id/proj-info" component={ProjInfo} />
+        <PrivateRoute exact path="/organization" component={Organization} />
+        <PrivateRoute exact path="/wikis" component={Wikis} />
+        <PrivateRoute exact path="/settings" component={Settings} />
+        <PrivateRoute exact path="/projects" component={Projects} />
+        <PrivateRoute exact path="/events" component={Events} />
+        <PrivateRoute exact path="/proposal" component={UserProposalDashboard} />
+        <PrivateRoute
+          exact
+          path="/proposaldiscussion"
+          component={ProposalDiscussion}
+        />
+        <PrivateRoute exact path="/proposaleditor" component={ProposalEditor} />
+        <PrivateRoute exact path="/setup" component={Setup} />
+        <AdminRoute exact path="/org-settings" component={CommunitySetting} />
+        <AdminRoute exact path="/activity/:userId" component={Activity} />
+        <PrivateRoute exact path="/insight" component={Insight} />
+        <PrivateRoute exact path="/admin" component={Admin} />
+        <PrivateRoute exact path="/integrations" component={IntegrationsPage} />
+        <PrivateRoute
+          exact
+          path="/userintegrations"
+          component={UserIntegrations}
+        />
+        <PrivateRoute exact path="/tickets" component={TicketDashboard} />
+        <Route component={NotFound} />
+      </Switch>
+    </BrowserRouter>
+  )
+};
 
-export default Router;
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth
+  }
+}
+
+export default connect(mapStateToProps, {loadUser})(Router);

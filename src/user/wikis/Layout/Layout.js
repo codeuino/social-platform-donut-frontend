@@ -10,9 +10,6 @@ const Layout = (props) => {
   const { wikis, spinner, allWikis, isAdmin, oauthCheck, children } = props;
   return (
     <React.Fragment>
-      <div className="navigation">
-        <Navigation wikis={wikis}></Navigation>
-      </div>
       <div id="wikis">
         <LoadingOverlay
           active={!!spinner}

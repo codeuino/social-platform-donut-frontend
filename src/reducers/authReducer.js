@@ -2,13 +2,13 @@ import { SET_CURRENT_USER, RESPONSE_MSG, SET_ADMIN, BLOCK_USER, UNBLOCK_USER, RE
 
 const initialState = {
   // make it false later, default is set to true so that contributors don't need to login for test
-  isAuthenticated: true, // localStorage.getItem("jwtToken").length > 1
+  isAuthenticated: false, // localStorage.getItem("jwtToken").length > 1
   isAdmin: false,
   isBlocked: false,
   isRemoved: false,
   resetPassReq: null,
   passUpdated: false,
-  user: {},
+  user: null,
   response_msg: "",
 };
 
@@ -17,7 +17,7 @@ export default (state = initialState, action) => {
     case SET_CURRENT_USER: {
       return {
         ...state,
-        isAuthenticated: Boolean(typeof action.payload === 'object' && Object.keys(action.payload).length !== 0),
+        isAuthenticated: Boolean(action.payload.length !== 0 && action.payload!==undefined && typeof action.payload === 'string'),
         user: action.payload
       }
     }
