@@ -2,7 +2,6 @@ import axios from 'axios'
 import { errorHandler } from '../utils/errorHandler'
 import { setRequestStatus } from '../utils/setRequestStatus'
 import { SET_ADMIN, GET_ADMIN } from './types'
-import { setAuthToken } from '../utils/setAuthToken'
 import jwt_decode from 'jwt-decode';
 import { setCurrentUser } from './authAction'
 import { BASE_URL } from './baseApi'
@@ -27,29 +26,25 @@ export const createAdmin = (adminInfo) => async (dispatch) => {
 export const loginAdmin = (adminInfo, history) => async (dispatch) => {
   try {
     const res = await axios.post(`${BASE_URL}/auth/login/`, adminInfo)
-   dispatch(setRequestStatus(false));
-   if (res.status === 200) {
+    dispatch(setRequestStatus(false));
+    if (res.status === 200) {
+      dispatch(setRequestStatus(true));
 
-     const token = res.data.token;
-     dispatch(setRequestStatus(true));
+      // update state with user
+      localStorage.setItem('userId', res.data.user)
+      dispatch(setCurrentUser(res.data.user._id));
 
-     localStorage.setItem("jwtToken", (token));
-     setAuthToken(token);
+      // update localStorage with admin status 
+      localStorage.setItem('username', `${res.data.user.name.firstName} ${res.data.user.name.lastName}`)
+      localStorage.setItem('admin', res.data.user.isAdmin)
+      localStorage.setItem('ticketModerator', res.data.user.isTicketsModerator)
+      localStorage.setItem('orgId', res.data.user.orgId);
 
-     // update state with user
-     const decodedData = await jwt_decode(token);
-     localStorage.setItem('userId', decodedData._id)
-     dispatch(setCurrentUser(decodedData));
-
-     // update localStorage with admin status 
-     localStorage.setItem('admin', true)
-
-     dispatch({
-       type: SET_ADMIN,
-       payload: true
-     })
-     
-     history.push("/dashboard");
+      dispatch({
+        type: SET_ADMIN,
+        payload: res.data.user.isAdmin
+      })
+    history.push("/dashboard");
    }
   } catch (error) {
     dispatch(errorHandler(error))

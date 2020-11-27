@@ -4,15 +4,17 @@ import "./App.css";
 import { Provider } from "react-redux";
 import store from "./store";
 import jwt_decode from "jwt-decode";
-import { setAuthToken } from "./utils/setAuthToken";
+import { allowCredentialsInHeader } from "./utils/allowCredentialsInHeader";
 import { setCurrentUser, logoutUser } from "./actions/authAction";
 import "./css/main.scss";
 import ReactGA from "react-ga";
 
+allowCredentialsInHeader()
+
 function App() {
   useEffect(() => {
     ReactGA.initialize("UA-173245995-1");
-    setAuthToken()
+    
   });
   return (
     <Provider store={store}>
