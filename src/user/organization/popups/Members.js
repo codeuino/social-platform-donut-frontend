@@ -83,7 +83,7 @@ class Members extends Component {
 
   mapHelper = (allMembers) => {
     let membersInfo = [] 
-    if(allMembers.length > 0) {
+    if(allMembers && allMembers.length > 0) {
       allMembers.forEach((member) => {
         membersInfo.push({ 
           name: member.name.firstName + ' ' + member.name.lastName,

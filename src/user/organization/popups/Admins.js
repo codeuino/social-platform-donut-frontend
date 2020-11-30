@@ -56,7 +56,7 @@ class Admins extends Component {
 
    mapHelper = (allAdmins) => {
      let adminInfo = []
-     if (allAdmins.length > 0) {
+     if (allAdmins && allAdmins.length > 0) {
       allAdmins.forEach((admin) => {
         adminInfo.push({ name: admin.name.firstName + ' ' + admin.name.lastName, desc: admin.info.about?.designation, _id: admin._id, isRemoved: admin?.isRemoved || false })
       })
