@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback, useState } from "react";
+import React, { useMemo, useCallback, useState, useEffect } from "react";
 import { useDropzone } from "react-dropzone";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -33,7 +33,11 @@ const rejectStyle = {
 };
 
 function StyledDropzone(props) {
-  const [proposalId, setProposalId] = useState(props.idContent);
+  const [proposalId, setProposalId] = useState(null);
+
+  useEffect(() => {
+    setProposalId(props.idContent)
+  }, [props.idContent])
 
   const onDrop = useCallback((acceptedFiles) => {
     let formData = new FormData();
@@ -53,7 +57,7 @@ function StyledDropzone(props) {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [proposalId]);
 
   const {
     getRootProps,
