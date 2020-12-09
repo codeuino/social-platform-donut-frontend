@@ -21,6 +21,7 @@ function ToggleSwitch(props) {
 
   let handleClose = () => {
     console.log('close clicked!')
+    setCheck(!checked)
     setModalShow(false)
   }
 

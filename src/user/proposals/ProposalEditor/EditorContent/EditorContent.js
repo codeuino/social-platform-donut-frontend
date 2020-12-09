@@ -268,7 +268,7 @@ class EditorContent extends Component {
             <div>
               {!this.state.newProposal ? (
                 <StyledDropzone
-                  idContent={this.props.location.state.proposalId}
+                  idContent={this.state.proposalId}
                 />
               ) : (
                 <div></div>

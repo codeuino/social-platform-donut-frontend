@@ -1,6 +1,5 @@
 import { SET_CURRENT_USER, GET_USER_PROFILE, PASSWORD_SUCCESSFULLY_CHANGED, PASSWORD_CHANGE_REQUEST_SUCCESS, SET_ADMIN } from './types';
 import axios from 'axios';
-import { setAuthToken } from '../utils/setAuthToken';
 import { errorHandler } from '../utils/errorHandler';
 import { setRequestStatus } from '../utils/setRequestStatus';
 import { BASE_URL } from './baseApi';
@@ -146,8 +145,6 @@ export const logoutUser = () => async (dispatch) => {
       const orgId = localStorage.getItem('orgId');
       localStorage.clear()
       localStorage.setItem('orgId', orgId)
-      // delete authorization from the header 
-      setAuthToken(false);
       // set user to {}
       setCurrentUser({});
       // move to home 
