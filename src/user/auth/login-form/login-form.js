@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import Popups from "../../../common/Popups";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Row, Col } from "react-bootstrap";
 import "./login-form.scss";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { loginUser } from "../../../actions/authAction";
 import { ToastContainer, toast } from 'react-toastify'
+import IconButton from '@material-ui/core/IconButton';
+import VisibilityIcon from '@material-ui/icons/Visibility';
 
 class LoginForm extends Component {
   constructor(props) {
@@ -20,6 +22,7 @@ class LoginForm extends Component {
       isValidEmail: true,
       isValidForm: false,
     };
+    this.passwordForm=React.createRef();
   }
   componentWillReceiveProps(nextProps) {
     console.log('nextProps login-form', nextProps)
@@ -94,6 +97,13 @@ class LoginForm extends Component {
     })
   }
 
+  showPassword=()=>{
+    if(this.passwordForm.current.type==="password")
+    this.passwordForm.current.type="text";
+    else
+    this.passwordForm.current.type="password"
+  };
+
   render() {
     const { error } = this.state
     return (
@@ -111,13 +121,23 @@ class LoginForm extends Component {
           </Form.Group>
           <Form.Group controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
+            <Row>
+              <Col lg={11} md={11} sm={11} xs={11} style={{paddingRight:"0px"}}>
             <Form.Control
               required
               type="password"
               placeholder="***********"
               name="password"
               onChange={this.onChange}
+              ref={this.passwordForm}
             />
+            </Col>
+            <Col lg={1} md={1} sm={1} xs={1} style={{paddingLeft:"0px"}}>
+            <IconButton onClick={this.showPassword} edge="end">
+              <VisibilityIcon />
+            </IconButton>
+            </Col>
+            </Row>
           </Form.Group>
           <div className="cta-login">
             <Button
