@@ -89,7 +89,7 @@ class SetupPreview extends Component {
                     onChange={this.onChangeColor}
                     style={{ color: this.state.color }}
                   >
-                    <option value="aqua">
+                    <option value="aqua" style={{ color: "aqua" }}>
                       Blue
                     </option>
                     <option value="red" style={{ color: "red" }}>
