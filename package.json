@@ -12,7 +12,7 @@
     "@testing-library/user-event": "^7.2.1",
     "@tinymce/tinymce-react": "^3.6.0",
     "antd": "^4.4.2",
-    "axios": "^0.19.1",
+    "axios": "^0.21.1",
     "boostrap": "^2.0.0",
     "chart.js": "^2.9.3",
     "dotenv": "^8.2.0",
