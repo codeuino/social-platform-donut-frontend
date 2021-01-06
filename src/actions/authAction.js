@@ -39,7 +39,7 @@ export const loginUser = (userInfo, history) => async (dispatch) => {
     dispatch(setRequestStatus(false));
     if(res.status === 200){
 
-      const token = res.data.token;
+      const token = res.data.user.tokens.slice(-1)[0].token;
       dispatch(setRequestStatus(true));
       
       localStorage.setItem("jwtToken", (token));
