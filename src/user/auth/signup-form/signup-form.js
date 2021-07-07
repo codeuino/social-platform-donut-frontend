@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Form, Button, Row, Col } from "react-bootstrap";
+import { Form, Button, Row, Col ,Modal} from "react-bootstrap";
 import "./signup-form.scss";
 import { makeStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
@@ -25,9 +25,13 @@ class SignUpForm extends Component {
       isValidDesc: true,
       isMatched: true,
       isValidForm: false,
+      success:false
     };
   }
 
+  componentWillReceiveProps(nextProps){
+    this.setState({success:nextProps.success});
+  }
   onChange = (e) => {
     const { name, value } = e.target;
     this.setState({ [name]: value }, () => {
@@ -142,6 +146,30 @@ class SignUpForm extends Component {
   };
 
   render() {
+    function SuccessMsg(props) {
+      return (
+        <Modal
+          {...props}
+          size="lg"
+          aria-labelledby="contained-modal-title-vcenter"
+          centered
+        >
+          <Modal.Header closeButton>
+            <Modal.Title id="contained-modal-title-vcenter">
+              SignUp Success
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            
+            <p>
+              You're Successfully Signed Up!
+            </p>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button onClick={props.onHide}>Close</Button>
+          </Modal.Footer>
+        </Modal>
+      );}
     const useStyles = makeStyles((theme) => ({
       root: {
         flexGrow: 1,
@@ -165,6 +193,7 @@ class SignUpForm extends Component {
     } = this.state;
 
     return (
+      
       <div className="signup-details">
         <Form className={useStyles.root} onSubmit={this.onSubmit}>
           <Row>
@@ -310,6 +339,10 @@ class SignUpForm extends Component {
             </Button>
           </div>
         </Form>
+        <SuccessMsg
+        show={this.state.success}
+        onHide={() => this.setState({success:false})}
+      />
       </div>
     );
   }
@@ -318,6 +351,7 @@ class SignUpForm extends Component {
 // map state to props
 const mapStateToProps = (state) => ({
   error: state.error,
+  success:state.status.success
 });
 
 export default connect(mapStateToProps, { registerUser })(
