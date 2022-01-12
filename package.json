@@ -21,7 +21,7 @@
     "html-react-parser": "^0.13.0",
     "http-proxy-middleware": "^1.0.5",
     "jwt-decode": "^2.2.0",
-    "markdown-it": "^11.0.0",
+    "markdown-it": "^12.3.2",
     "moment": "^2.27.0",
     "node-sass": "^4.13.0",
     "react": "^16.12.0",
