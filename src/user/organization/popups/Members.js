@@ -112,7 +112,11 @@ class Members extends Component {
   render() {
     const { onHide, show } = this.props
     const { isAdmin, inviteLink, whoCanSendInvite } = this.state
-    const membersList = [ ...this.state.members] 
+    const membersList = [ ...this.state.members]
+    const clear = () => {
+      this.setState({ query: "" })
+      onHide()
+    }
     let members = membersList.map((item) => (
       <Row className="modal__member" id="p1" key={item._id}>
         <div className="member__image">
@@ -142,7 +146,7 @@ class Members extends Component {
     )); 
     return (
       <Modal
-        onHide={onHide}
+        onHide={clear}
         show={show}
         size="md"
         aria-labelledby="contained-modal-title-vcenter"

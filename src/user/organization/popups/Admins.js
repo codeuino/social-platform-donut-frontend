@@ -100,6 +100,10 @@ class Admins extends Component {
     const { onHide, show } = this.props
     const { inviteLink, whoCanSendInvite } = this.state
     const adminList = [...this.state.admins] 
+    const clear = () => {
+      this.setState({query: "" })
+      onHide()
+    }
     let admins = adminList.map((item) => (
       <Row className="modal__member" id="p1" key={item._id}>
         <div className="member__image">
@@ -123,7 +127,7 @@ class Admins extends Component {
     )); 
     return (
       <Modal
-        onHide={onHide}
+        onHide={clear}
         show={show}
         size="md"
         aria-labelledby="contained-modal-title-vcenter"
